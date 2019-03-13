@@ -1,5 +1,3 @@
-option explicit
-
 !INC Local Scripts.EAConstants-VBScript
 !INC NVDB._felles
 !INC NVDB._parametre
@@ -69,7 +67,7 @@ sub updateClassProperties()
 				kjorefelt = tagVal.Value
 			Case "SOSI_datatype"
 				'NVDB-datatype - konverteres til SOSI-datatype (kun kodelister)
-
+				' ****** Her gjenstår det noe, må løses for kodelister ******
 			Case "TOTAL_FELTLENGDE"
 				'Feltlengde - tas vare på for SOSI-realisering (kun kodelister)
 				set newTV = element.TaggedValues.AddNew("SOSI_lengde", "tagVal.Value")
