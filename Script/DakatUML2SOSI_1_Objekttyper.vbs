@@ -21,6 +21,8 @@ end sub
 
 sub updatePackage()
 'Oppdaterer pakke med tilhørende klasser
+	geomPunkt = False
+	geomKurve = False
 	
 	'Oppdaterer properties på pakken
 	pkOT.Name = pkOT_NVDB.Name
@@ -191,6 +193,35 @@ sub updateClassProperties()
 		newTV.Update()
 		set newTV = element.TaggedValues.AddNew("codeList", strTargetNamespace & element.Name)
 		newTV.Update()
+		
+		'SOSI_Datatype for kodelisten
+		'Søk etter NVDB-objekttypen, attributt tilhørende kodelisten og dennes datatype
+		dim elVOT as EA.Element
+		set elVOT = getElementByAlias(pkOT_NVDB, pkOT_NVDB.Alias)
+		If not elVOT is Nothing then
+			Dim aVET as EA.Attribute
+			set aVET = getAttributeByAlias(elVOT, element.Alias)
+			if not aVET is Nothing then
+				'Finn datatype-element
+				Set elementDT = Nothing
+				Set elementDT = Repository.GetElementByID(aVET.ClassifierID)
+				If not elementDT is Nothing then
+					'Sett SOSI-tag for SOSI_datatype
+					Select Case elementDT.Alias
+						Case 30
+							set newTV = element.TaggedValues.AddNew("SOSI_datatype", "T")
+						Case 31
+							If aVET.Precision = 0 Then
+								set newTV = element.TaggedValues.AddNew("SOSI_datatype", "H")
+							Else
+								set newTV = element.TaggedValues.AddNew("SOSI_datatype", "D")
+							End If
+					End Select
+					newTV.Update
+					Repository.WriteOutput "SOSI", Now & " Kodeliste: " & element.stereotype & " " & element.Name &  " SOSI_datatype " & newTV.Value, 0 
+				end if
+			end if
+		end if
 	End If
 					
 	element.TaggedValues.Refresh()
@@ -227,7 +258,17 @@ sub updateClassProperties()
 			'Eksisterer i SOSI
 			Repository.WriteOutput "Script", Now & " NVDB-egenskapstype/kodelisteverdi funnet i SOSI-modellregister: " & eAttrNVDB.Name &  " (" & eAttrNVDB.Alias & ")", 0 
 		end if
-	Next	
+	Next
+	
+	if UCase(element.stereotype) = "FEATURETYPE" then
+	
+	'Stedfestingsegenskaper (geometri og lr)
+	'Retning
+	'Kjørefelt
+	'Svingerestriksjoner...
+	
+	end if
+	
 	
 end sub
 
@@ -246,7 +287,9 @@ sub updateAttributeProperties()
 	eAttributt.Notes = eAttrNVDB.Notes
 	eAttributt.LowerBound = eAttrNVDB.LowerBound
 	eAttributt.UpperBound = eAttrNVDB.UpperBound
+	eAttributt.Precision = eAttrNVDB.Precision
 	eAttributt.Pos = eAttrNVDB.Pos
+	if UCase(element.stereotype) = "CODELIST" and eAttrNVDB.Default <> "" then eAttributt.Default = eAttrNVDB.Default
 	eAttributt.Update
 	
 	'Fjerner alle tagged values på attributten og legger til på nytt
@@ -285,12 +328,99 @@ sub updateAttributeProperties()
 				'Feltlengde - tas vare på for SOSI-realisering
 				set newATag = eAttributt.TaggedValues.AddNew("SOSI_lengde", aTag.Value)
 				newATag.Update()
-
-			'SOSI_datatype
-			
+			'SOSI_datatype: Egen prosess
 		end select
 	next
 	eAttributt.TaggedValues.Refresh
+	
+	'Datatype: Blank for kodelisteverdier
+	If UCase(element.stereotype) = "CODELIST" then
+		eAttributt.ClassifierID = 0
+		eAttributt.Type = ""
+	else
+		'Sett datatype
+		Set elementDT = Nothing
+		Set elementDT = Repository.GetElementByID(eAttrNVDB.ClassifierID)
+		If not elementDT is Nothing then
+			if elementDT.Alias = 30 or elementDT.Alias = 31 then
+				'Kodeliste
+				'Bruk egenskapen sin alias til å finne selve kodelisten, og sett den som datatype
+				set elementCL= getElementByAlias(pkOT, eAttributt.Alias)
+				if not elementCL is Nothing then
+					eAttributt.Type = elementCL.Name
+					eAttributt.ClassifierID = elementCL.ElementID
+					'Sett SOSI-tag for defaultcodespace 
+					set aTag = eAttributt.TaggedValues.AddNew("defaultCodespace", strTargetNamespace & elementCL.Name & ".xml")
+					'Sett SOSI-tag for SOSI_datatype
+					Select Case elementDT.Alias
+						Case 30
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "T")
+						Case 31
+							If eAttributt.Precision = 0 Then
+								set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "H")
+							Else
+								set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "D")
+							End If
+					End Select
+					aTag.Update
+					eAttributt.TaggedValues.Refresh
+					eAttributt.Update
+					Repository.WriteOutput "SOSI", Now & " Datatype og SOSI-tag for " & element.stereotype & " " & element.Name &  "." & eAttributt.Name & ": " & eAttributt.Type & " SOSI_datatype " & aTag.Value, 0 
+				end if
+			else
+				'Simpel datatype, mappes til SOSI-datatyper
+				set tagVal = Nothing
+				set tagVal = elementDT.TaggedValues.GetByName("SOSI_type")
+				if not tagVal is nothing then
+					eAttributt.Type = tagVal.Value
+					'Finner ID for aktuell SOSI-datatype. Tilpasser navn på geometriegenskaper, og registrerer om objekttypen har påkrevde geometriegenskaper
+					Dim guidDT 
+					guidDT  = "0"
+					Select Case eAttributt.Type
+						Case "CharacterString"
+							guidDT = guidCharacterString
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "T")
+						Case "Real"
+							If eAttributt.Precision = 0 Then
+								'Endrer til Integer
+								guidDT = guidInteger
+								eAttributt.Type = "Integer"
+								set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "H")
+							Else
+								guidDT = guidReal
+								set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "D")
+							End If
+						Case "Date"
+							guidDT = guidDate
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "DATO")
+						Case "Boolean"
+							guidDT = guidBoolean
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "Boolsk")
+						Case "Punkt"
+							guidDT = guidPunkt
+							eAttributt.Name = "posisjon"
+							geomPunkt = True
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "PUNKT")
+						Case "Kurve"
+							guidDT = guidKurve
+							eAttributt.Name = "senterlinje"
+							geomKurve = True
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "KURVE")
+						Case "Flate"
+							guidDT = guidFlate
+							eAttributt.Name = "område"
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "FLATE")
+					End Select
+					aTag.Update
+					if not guidDT = "0" then
+						set elementB = Repository.GetElementByGuid(guidDT)
+						eAttributt.ClassifierID = elementB.ElementID
+						Repository.WriteOutput "SOSI", Now & " Datatype og SOSI-tag for " & element.stereotype & " " & element.Name &  "." & eAttributt.Name & ": " & eAttributt.Type & " SOSI_datatype " & aTag.Value, 0 
+					End If
+				end if
+			end if
+		end if
+	end if
 	eAttributt.Update
 	
 end sub
