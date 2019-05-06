@@ -242,6 +242,10 @@ sub updateClassProperties()
 				updateAttributeProperties
 			end if 
 		else
+			if UCase(element.stereotype)="CODELIST" then 
+				element.Attributes.DeleteAt idxA, False
+				Repository.WriteOutput "Script", Now & " SOSI-Kodelisteverdi har ikke alias, slettes: " & element.Name &  "." & eAttributt.Name & " (" & eAttributt.Alias & ")", 0 
+			end if	
 			'egen håndtering av SOSI-attributter uten alias (lineærPosisjon mm)
 		end if	
 	Next
@@ -261,12 +265,13 @@ sub updateClassProperties()
 	Next
 	
 	if UCase(element.stereotype) = "FEATURETYPE" then
-	
-	'Stedfestingsegenskaper (geometri og lr)
-	'Retning
-	'Kjørefelt
-	'Svingerestriksjoner...
-	
+		'Stedfestingsegenskaper (geometri og lr)
+		
+		
+		
+		'Retning
+		'Kjørefelt
+		'Svingerestriksjoner...
 	end if
 	
 	
@@ -285,7 +290,7 @@ sub updateAttributeProperties()
 'Oppdaterer properties på egenskapstyper
 
 	eAttributt.Notes = eAttrNVDB.Notes
-	eAttributt.LowerBound = eAttrNVDB.LowerBound
+	eAttributt.LowerBound = 0
 	eAttributt.UpperBound = eAttrNVDB.UpperBound
 	eAttributt.Precision = eAttrNVDB.Precision
 	eAttributt.Pos = eAttrNVDB.Pos
@@ -328,6 +333,13 @@ sub updateAttributeProperties()
 				'Feltlengde - tas vare på for SOSI-realisering
 				set newATag = eAttributt.TaggedValues.AddNew("SOSI_lengde", aTag.Value)
 				newATag.Update()
+			Case "Viktighet"
+				'Settes som påkrevd kun dersom påkrevd i database
+				If aTag.Value = "Påkrevd i database" then
+					eAttributt.LowerBound = 1
+				else
+					eAttributt.LowerBound = 0
+				end if	
 			'SOSI_datatype: Egen prosess
 		end select
 	next
@@ -381,7 +393,7 @@ sub updateAttributeProperties()
 							guidDT = guidCharacterString
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "T")
 						Case "Real"
-							If eAttributt.Precision = 0 Then
+							If eAttributt.Precision = "0" Then
 								'Endrer til Integer
 								guidDT = guidInteger
 								eAttributt.Type = "Integer"
@@ -476,7 +488,7 @@ sub updatePackagesAndClasses()
 		else
 			'Eksisterer ikke i SOSI, legges til
 			Repository.WriteOutput "Endringer", Now & " NVDB-Pakken finnes ikke i SOSI-modellregiser, legges til: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
-			createPackageAndFeatureType
+			createPackage
 		end if 
 	Next	
 	
