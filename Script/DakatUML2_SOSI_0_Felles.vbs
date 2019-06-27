@@ -1,10 +1,7 @@
-option explicit
 
 !INC Local Scripts.EAConstants-VBScript
-									   
 !INC NVDB._felles
 !INC NVDB._parametre
-								 
 
 ' Script Name: DakatUML2SOSI_1_Objekttyper
 ' Author: Knut Jetlund
@@ -25,8 +22,7 @@ sub updatePackage()
 'Oppdaterer pakke med tilhørende klasser
 	geomPunkt = False
 	geomKurve = False
-	lrAttr = False
-		
+	
 	'Oppdaterer properties på pakken
 	pkOT.Name = pkOT_NVDB.Name
 	pkOT.Notes = pkOT_NVDB.Notes
@@ -234,7 +230,6 @@ sub updateClassProperties()
 	'Løkke for attributter i SOSI-modellen, sjekker om de finnes i NVDB Datakatalogen
 	For idxA = 0 to element.Attributes.Count - 1
 		Set eAttributt = element.Attributes.GetAt(idxA)
-		if eAttributt.Name = "lineærPosisjon" then lrAttr = true
 		'Repository.WriteOutput "Script", Now & " Egenskapstype: " & element.Name &  "." & eAttributt.Name, 0 
 		if not eAttributt.Alias = "" then
 			set eAttrNVDB = getAttributeByAlias(elNVDB, eAttributt.Alias)
@@ -246,10 +241,6 @@ sub updateClassProperties()
 				updateAttributeProperties
 			end if 
 		else
-			if UCase(element.stereotype)="CODELIST" then 
-				element.Attributes.DeleteAt idxA, False
-				Repository.WriteOutput "Script", Now & " SOSI-Kodelisteverdi har ikke alias, slettes: " & element.Name &  "." & eAttributt.Name & " (" & eAttributt.Alias & ")", 0 
-			end if	
 			'egen håndtering av SOSI-attributter uten alias (lineærPosisjon mm)
 		end if	
 	Next
@@ -270,101 +261,8 @@ sub updateClassProperties()
 	
 	if UCase(element.stereotype) = "FEATURETYPE" then
 		'Stedfestingsegenskaper (geometri og lr)
-		Select Case strStedfesting
-			Case "strekning"
-				If Not geomKurve Then
-					'Legger til manglende egenskap for kurvegeometri
-					Repository.WriteOutput "SOSI", Now & " Legger til geometriegenskap senterlinje på " & element.Name, 0
-					set eAttributt = element.Attributes.AddNew("senterlinje", "")
-					eAttributt.Pos = 99998
-					eAttributt.Type = "Kurve"
-					eAttributt.LowerBound = 0
-					eAttributt.UpperBound = 1
-					eAttributt.Notes = "Angivelse av objektets posisjon"							
-					eAttributt.Visibility = "Public"							
-					set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", "SENTERLINJE")
-					aTag.Update()
-					set elementB = Nothing
-					'Finner kobling til riktig datatype
-					set elementB = Repository.GetElementByGuid(guidKurve)
-					If not elementB is Nothing then
-						eAttributt.ClassifierID = elementB.ElementID
-					end if 	
-					eAttributt.Update()
-				End If
-
-				If not lrAttr Then
-					'Legger til lr-posisjon for strekning
-					Repository.WriteOutput "SOSI", Now & " Legger til egenskap lineærPosisjon (strekning) på " & element.Name, 0
-					set eAttributt = element.Attributes.AddNew("lineærPosisjon", "")
-					eAttributt.Pos = 99999
-					eAttributt.Type = "LineærPosisjonStrekning"
-					eAttributt.LowerBound = 0
-					eAttributt.UpperBound = "*"
-					eAttributt.Notes = "Angivelse av posisjon på det lineære objektet."
-					eAttributt.Visibility = "Public"
-					set constraint = element.Constraints.AddNew("Må ha minst en av stedfestingene lineærPosisjon og senterlinje", "OCL")
-					constraint.Notes = "inv:count(self.senterlinje)+count(self.lineærposisjon)>0"
-					constraint.Weight = 100
-					constraint.Update()
-					set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", "LRSTREKNING")
-					aTag.Update()
-					set elementB = Nothing
-					'Finner kobling til riktig datatype
-					set elementB = Repository.GetElementByGuid(guidLRStrekning)
-					If not elementB is Nothing then
-						eAttributt.ClassifierID = elementB.ElementID
-					End if	
-					eAttributt.Update()
-				End if	
-					
-			Case "punkt"
-				If Not geomPunkt Then
-					'Legger til manglende egenskap for punktgeometri
-					Repository.WriteOutput "SOSI", Now & " Legger til geometriegenskap posisjon på " & element.Name, 0
-					set eAttributt = element.Attributes.AddNew("posisjon", "")
-					eAttributt.Pos = 99998
-					eAttributt.Type = "Punkt"
-					eAttributt.LowerBound = 0
-					eAttributt.UpperBound = 1
-					eAttributt.Notes = "Angivelse av objektets posisjon"							
-					eAttributt.Visibility = "Public"							
-					set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", "POSISJON")
-					aTag.Update()
-					set elementB = Nothing
-					'Finner kobling til riktig datatype
-					set elementB = Repository.GetElementByGuid(guidKurve)
-					if not elementB is Nothing then
-						eAttributt.ClassifierID = elementB.ElementID
-					End if	
-					eAttributt.Update()
-				End If
-
-				If not lrAttr Then
-					'Legger til lr-posisjon for punkt
-					Repository.WriteOutput "SOSI", Now & " Legger til egenskap lineærPosisjon (punkt) på " & element.Name, 0
-					set eAttributt = element.Attributes.AddNew("lineærPosisjon", "")
-					eAttributt.Pos = 99999
-					eAttributt.Type = "LineærPosisjonPunkt"
-					eAttributt.LowerBound = 0
-					eAttributt.UpperBound = "*"
-					eAttributt.Notes = "Angivelse av posisjon på det lineære objektet."
-					eAttributt.Visibility = "Public"
-					set constraint = element.Constraints.AddNew("Må ha minst en av stedfestingene lineærPosisjon og posisjon", "OCL")
-					constraint.Notes = "inv:count(self.posisjon)+count(self.lineærPosisjon)>0"
-					constraint.Weight = 100
-					constraint.Update()
-					set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", "LRPUNKT")
-					aTag.Update()
-					set elementB = Nothing
-					'Finner kobling til riktig datatype								
-					set elementB = Repository.GetElementByGuid(guidLRPunkt)
-					if not elementB is Nothing then
-						eAttributt.ClassifierID = elementB.ElementID
-					End If
-					eAttributt.Update()
-				End if
-		End Select
+		
+		
 		
 		'Retning
 		'Kjørefelt
@@ -387,7 +285,7 @@ sub updateAttributeProperties()
 'Oppdaterer properties på egenskapstyper
 
 	eAttributt.Notes = eAttrNVDB.Notes
-	eAttributt.LowerBound = 0
+	eAttributt.LowerBound = eAttrNVDB.LowerBound
 	eAttributt.UpperBound = eAttrNVDB.UpperBound
 	eAttributt.Precision = eAttrNVDB.Precision
 	eAttributt.Pos = eAttrNVDB.Pos
@@ -430,13 +328,6 @@ sub updateAttributeProperties()
 				'Feltlengde - tas vare på for SOSI-realisering
 				set newATag = eAttributt.TaggedValues.AddNew("SOSI_lengde", aTag.Value)
 				newATag.Update()
-			Case "Viktighet"
-				'Settes som påkrevd kun dersom påkrevd i database
-				If aTag.Value = "Påkrevd i database" then
-					eAttributt.LowerBound = 1
-				else
-					eAttributt.LowerBound = 0
-				end if	
 			'SOSI_datatype: Egen prosess
 		end select
 	next
@@ -533,103 +424,3 @@ sub updateAttributeProperties()
 	eAttributt.Update
 	
 end sub
-
-
-
-sub updatePackagesAndClasses()
-	'Oppdatering av pakker og klasser (vegobjekttyper og kodelister) 
-	'Setter opp kobling til modeller og databasetabell
-	dim connect 
-	connect = connect2UMLmodels()
-	If not connect then exit sub
-			  
- 
-			  
-				  
-																					   
-		  
-																						  
-		   
-  
-	
-															
-							 
-													 
-  
-								  
-			  
-							   
-							  
-  
-	Repository.WriteOutput "Script", Now & " Oppdatering av vegobjekttyper i SOSI-modellregister", 0 
-	Repository.WriteOutput "Script", Now & " ", 0 
-	
-    'Lag liste med Datakatalogpakker med NVDB-ID og GUID
-	Set lstNVDBpck = CreateObject("System.Collections.SortedList")
-	Repository.WriteOutput "Script", Now & " Lager liste over alle vegobjekttyper i NVDB Datakatalogen", 0 
-	For each pkOT in pkObjekttyper.Packages
-		Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
-		lstNVDBpck.Add pkOT.Alias,pkOT.packageGUID
-	Next
-	
-	'Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen
-	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
-	Repository.WriteOutput "Script", Now & " Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen", 0 
-	For idxP = 0 to pkSOSINVDB.Packages.Count - 1
-		set pkOT = pkSOSINVDB.Packages.GetAt(idxP)
-		if lstNVDBpck.Contains(pkOT.Alias) then 
-			'Eksisterer i NVDB, legges til i liste og oppdateres
-			Repository.WriteOutput "Script", Now & " SOSI-Pakke funnet i NVDB, oppdateres: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
-			lstSOSIpck.Add pkOT.Alias,pkOT.packageGUID
-			'Henter NVDB-pakke vha listeinformasjon
-			dim keyIndex
-			keyIndex = lstNVDBpck.IndexofKey(pkOT.Alias)
-			dim guid
-			guid = lstNVDBpck.GetByIndex(keyIndex)
-			set pkOT_NVDB = Repository.GetPackageByGuid(guid)
-			updatePackage
-		else
-			'Eksisterer ikke i NVDB, slettes
-			Repository.WriteOutput "Endringer", Now & " SOSI-Pakken finnes ikke i NVDB, fjernes: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
-			pkSOSINVDB.Packages.DeleteAt idxP, False
-		end if 
-	Next
-	pkSOSINVDB.Packages.Refresh
-	
-	'Spoler gjennom alle vegobjekttyper og sjekker om de finnes i SOSI-modellregister
-	Repository.WriteOutput "Script", Now & " Spoler gjennom alle vegobjekttyper og sjekker om de finnes i SOSI-modellregister", 0 
-	For each pkOT_NVDB in pkObjekttyper.Packages
-		if lstSOSIpck.Contains(pkOT_NVDB.Alias) then 
-			'Eksisterer i SOSI
-			Repository.WriteOutput "Script", Now & " NVDB-Pakke funnet i SOSI-modellregister: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
-		else
-			'Eksisterer ikke i SOSI, legges til
-			Repository.WriteOutput "Endringer", Now & " NVDB-Pakken finnes ikke i SOSI-modellregiser, legges til: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
-			createPackage
-		end if 
-	Next	
-	
-	'Sorter pakker
-	Repository.WriteOutput "Script", Now & " Sorterer pakker etter navn, bygger liste...",0
-	pkSOSINVDB.Packages.Refresh()
-	dim lstPck
-	set lstPck = CreateObject("System.Collections.Sortedlist")
-	For each pkOT in pkSOSINVDB.Packages
-		lstPck.Add pkOT.Name, pkOT.PackageGUID
-	Next 
-	
-	dim i
-	for i = 0 To lstPck.Count - 1
-		set pkOT = Repository.GetPackageByGuid(lstPck.GetByIndex(i))
-		pkOT.TreePos=i+1
-		pkOT.Update			
-		Repository.WriteOutput "Script", Now & " Ny posisjon " & i & " for pakke " & pkOT.Name ,0
-	next	
-	
-	Repository.RefreshModelView (pkObjekttyper.PackageID)
-	
-	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
-	Repository.EnsureOutputVisible "Script"
-end sub
-
-updatePackagesAndClasses()
