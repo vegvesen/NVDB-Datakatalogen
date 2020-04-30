@@ -6,10 +6,10 @@ option explicit
 !INC NVDB._parametre
 								 
 
-' Script Name: DakatUML2SOSI_1_Objekttyper
+' Script Name: DakatUML2SOSI_Komplett
 ' Author: Knut Jetlund
-' Purpose: Oppdater SOSI-UML for objekttyper og pakker ut fra oppdatert NVDB-UML
-' Date: 2019-02-09
+' Purpose: Oppdater SOSI-UML for pakker, objekttyper, attributter, kodelister og kodelisteverdier og  ut fra oppdatert NVDB-UML
+' Date: 2020-04-28
 
 sub createPackage()
 'Lager ny pakke som kopi av NVDB-pakke 
@@ -22,7 +22,7 @@ sub createPackage()
 end sub
 
 sub updatePackage()
-'Oppdaterer pakke med tilhørende klasser
+'Oppdaterer SOSI-pakke med tilhørende klasser
 	geomPunkt = False
 	geomKurve = False
 	lrAttr = False
@@ -67,6 +67,7 @@ sub updatePackage()
 	set tagVal = element.TaggedValues.AddNew("xsdEncodingRule", "sosi")
 	tagVal.Update()
 
+	'Oppdaterer klasser
 	updateClasses
 
 end sub
@@ -80,7 +81,7 @@ sub updateClasses()
 		'Søk etter NVDB-objekttypen
 		set elNVDB = getElementByAlias(pkOT_NVDB, element.Alias)
 		if elNVDB is nothing then
-			Repository.WriteOutput "Endringer", Now & " SOSI-Klassen finnes ikke i NVDB, fjernes: " & element.stereotype & " " & element.Name &  " (" & element.Alias & ")", 0 
+			Repository.WriteOutput "Endringer", Now & " SOSI-Klassen finnes ikke i NVDB, fjernes: " & element.stereotype & " " & pkOT.Name & "." & element.Name &  " (" & element.Alias & ")", 0 
 			pkOT.Elements.DeleteAt idxE, False
 		else
 			'Oppdaterer properties på feature typen
@@ -94,7 +95,7 @@ sub updateClasses()
 		set element = getElementByAlias(pkOT, elNVDB.Alias)
 		if element is nothing then
 			'Eksisterer ikke i SOSI, legges til
-			Repository.WriteOutput "Endringer", Now & " NVDB-klassen finnes ikke i SOSI-modellregister, legges til: " & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
+			Repository.WriteOutput "Endringer", Now & " NVDB-klassen finnes ikke i SOSI-modellregister, legges til: " & pkOT_NVDB.Name & "." & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
 			createClass
 		else
 			'Eksisterer i SOSI
@@ -136,7 +137,7 @@ sub updateClassProperties()
 	kjorefelt = 0
 	
 	dim newTV as EA.TaggedValue
-	'Kører gjennom alle tagged values på NVDB-pakken og overører informasjon
+	'Kører gjennom alle tagged values på NVDB-klassen og overfører informasjon
 	For idxT = 0 To elNVDB.TaggedValues.Count - 1
 		set tagVal = elNVDB.TaggedValues.GetAt(idxT)
 		Select Case tagVal.Name
@@ -145,7 +146,7 @@ sub updateClassProperties()
 				Repository.WriteOutput "SOSI", Now & " Klassen " & element.Name & " (" & element.Alias & ") oppdateres til " & element.Stereotype & " " & tagVal.Value,0
 				'Endrer navn på klassen til SOSI-modellnavn
 				element.Name = tagVal.Value
-				'Lager ny tagged value pÃ¥ SOSI-elementet for SOSI-formatnavn (NVDB_ & Uppercase(element.Name))
+				'Lager ny tagged value på SOSI-elementet for SOSI-formatnavn (NVDB_ & Uppercase(element.Name))
 				'Unntak: De som allerede har prefix "NVDB_" skal kun ha uppercase, ikke ny prefix
 				set newTV = element.TaggedValues.AddNew("SOSI_navn", "")
 				If Not Mid(element.Name, 1, 5) = "NVDB_" Then
@@ -267,6 +268,12 @@ sub updateClassProperties()
 			Repository.WriteOutput "Script", Now & " NVDB-egenskapstype/kodelisteverdi funnet i SOSI-modellregister: " & eAttrNVDB.Name &  " (" & eAttrNVDB.Alias & ")", 0 
 		end if
 	Next
+	
+	'Løkke for assosiasjoner i SOSI-modellen, sjekker om de finnes i NVDB Datakatalogen
+	
+	'Løkke for assosiasjoner i NVDB Datakatalogen, sjekker om de finnes i NVDB Datakatalogen
+	
+	
 	
 	if UCase(element.stereotype) = "FEATURETYPE" then
 		'Stedfestingsegenskaper (geometri og lr)
@@ -541,25 +548,7 @@ sub updatePackagesAndClasses()
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub
-			  
- 
-			  
-				  
-																					   
-		  
-																						  
-		   
-  
-	
-															
-							 
-													 
-  
-								  
-			  
-							   
-							  
+	If not connect then exit sub			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av vegobjekttyper i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -571,7 +560,7 @@ sub updatePackagesAndClasses()
 		Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 		lstNVDBpck.Add pkOT.Alias,pkOT.packageGUID
 	Next
-	
+
 	'Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen
 	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
 	Repository.WriteOutput "Script", Now & " Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen", 0 
@@ -595,7 +584,7 @@ sub updatePackagesAndClasses()
 		end if 
 	Next
 	pkSOSINVDB.Packages.Refresh
-	
+			
 	'Spoler gjennom alle vegobjekttyper og sjekker om de finnes i SOSI-modellregister
 	Repository.WriteOutput "Script", Now & " Spoler gjennom alle vegobjekttyper og sjekker om de finnes i SOSI-modellregister", 0 
 	For each pkOT_NVDB in pkObjekttyper.Packages
@@ -604,7 +593,7 @@ sub updatePackagesAndClasses()
 			Repository.WriteOutput "Script", Now & " NVDB-Pakke funnet i SOSI-modellregister: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
 		else
 			'Eksisterer ikke i SOSI, legges til
-			Repository.WriteOutput "Endringer", Now & " NVDB-Pakken finnes ikke i SOSI-modellregiser, legges til: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
+			Repository.WriteOutput "Endringer", Now & " NVDB-Pakken finnes ikke i SOSI-modellregister, legges til: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
 			createPackage
 		end if 
 	Next	

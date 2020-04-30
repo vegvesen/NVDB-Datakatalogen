@@ -28,6 +28,7 @@ dim ftSOSIfelles as EA.Element
 dim tagVal as EA.TaggedValue
 dim aTag as EA.AttributeTag
 dim con as EA.Connector
+dim conNVDB as EA.Connector
 dim eDiagram As EA.Diagram
 Dim eBDiagram As EA.Diagram
 Dim eTVDiagram As EA.Diagram
@@ -44,6 +45,7 @@ dim rsKodelister
 dim rsSammenhenger
 dim geomPunkt
 dim geomKurve
+dim lrAttr
 
 dim i
 dim id 
@@ -74,7 +76,7 @@ function connect2UMLmodels()
 	Repository.WriteOutput "Script", Now & " Kobler til modeller ", 0 
 	set pkObjekttyper = Repository.GetPackageByGuid(guidNVDBVegobjekttyper)
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
-	if pkObjekttyper is nothing and pkSOSINVDB is nothing then 
+	if pkObjekttyper is nothing or pkSOSINVDB is nothing then 
 		connect2UMLmodels = false
 		Repository.WriteOutput "Script", Now & " Feil ved tilkobling til modeller", 0 
 	else
@@ -119,11 +121,11 @@ function connect2models()
 	Repository.WriteOutput "Script", Now & " Pakke med NVDB-datatyper: " & pkDatatyper.Name,0
     set pkSOSIFelles = modDakat.Packages.GetByName(strSOSIFelles)
 	Repository.WriteOutput "Script", Now & " Pakke med SOSI Fellesegenskaper: " & pkSOSIFelles.Name,0   
-	set pkNVDBSOSImain = modDakat.Packages.GetByName(strNVDBSOSIPakke)
-	Repository.WriteOutput "Script", Now & " Pakke med NVDB-SOSI-modeller: " & pkNVDBSOSImain.Name,0
+	'set pkNVDBSOSImain = modDakat.Packages.GetByName(strNVDBSOSIPakke)
+	'Repository.WriteOutput "Script", Now & " Pakke med NVDB-SOSI-modeller: " & pkNVDBSOSImain.Name,0
 
-	set modSOSI = Repository.Models.GetByName(strSOSIModell)
-	Repository.WriteOutput "Script", Now & " Hovedmodell for SOSI: " & modSOSI.Name,0
+	'set modSOSI = Repository.Models.GetByName(strSOSIModell)
+	'Repository.WriteOutput "Script", Now & " Hovedmodell for SOSI: " & modSOSI.Name,0
 	Repository.WriteOutput "Script", Now, 0 
 	'dbDakat.Close
 end function
@@ -146,6 +148,18 @@ Sub setSize(eDobj, h, w)
 	eDobj.right = eDobj.left + w
 	eDobj.Update()
 End Sub
+
+function getPackageByAlias(pck, strAlias)
+'Finner et angitt element i en pakke, ut fra alias
+	Dim idx 
+	set getPackageByAlias = Nothing
+	For idx = 0 To pck.Packages.Count - 1
+		If (pck.Packages.GetAt(idx).Alias = strAlias) Then
+			set getPackageByAlias = pck.Packages.GetAt(idx)
+			idx = pck.Packages.Count - 1
+		End If
+	Next
+End Function
 
 function getElementByAlias(pck, strAlias)
 'Finner et angitt element i en pakke, ut fra alias

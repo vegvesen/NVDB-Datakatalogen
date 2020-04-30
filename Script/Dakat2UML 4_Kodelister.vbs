@@ -60,8 +60,13 @@ Sub updateProperties_Kodelister()
 		tagVal.Update()
 	End If
 
-	set tagVal = element.TaggedValues.AddNew("SOSINVDB_navn", rsEgenskapstyper.Fields("SOSINVDB_navn").Value)
-	tagVal.Update()
+	'If Not IsNull(rsEgenskapstyper.Fields("SOSI_navn").Value) Then '
+	'	set tagVal = element.TaggedValues.AddNew("SOSI_navn", rsEgenskapstyper.Fields("SOSI_navn").Value)
+	'Else
+	'	set tagVal = element.TaggedValues.AddNew("SOSI_navn", createSOSInavn(rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value, "Upper", 255, ""))
+	'End If
+	'tagVal.Update()
+	
 	'SOSI-navn - skal være unikt. Hentes fra tilhørende egenskap i modellen 
 	Dim el as EA.Element
 	For Each el In pkOT_Sub.Elements

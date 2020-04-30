@@ -7,6 +7,12 @@ option explicit
 'Oppdaterer egenskaper på en objekttype i EA ut i fra Dakat
 Sub updateProperties_Objekttyper()
 
+	'Dim response
+	'response = MsgBox(rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value, vbOKCancel+vbInformation)
+	'If response = vbCancel Then
+	'	Exit Sub
+	'End If
+
 	element.Name = rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value
 	If Not IsNull(rsObjekttyper.Fields("BSKR_VOBJ_TYPE").Value) Then
 		element.Notes = rsObjekttyper.Fields("BSKR_VOBJ_TYPE").Value
@@ -68,6 +74,7 @@ Sub updateProperties_Objekttyper()
 		tagVal.Update()
 	end if	
 	element.TaggedValues.Refresh()
+	
 End Sub
 
 sub updateObjekttyper()
@@ -129,8 +136,8 @@ sub updateObjekttyper()
 			pkOT_Sub.Element.Alias = rsObjekttyper.Fields("ID_VOBJ_TYPE").Value
 			pkOT_Sub.Update()
 
-			Repository.WriteOutput "Endringer", Now & " Setter opp versjonshåndtering for " & pkOT_Sub.Name,0
-			pkOT_Sub.VersionControlAdd "Datakatalogen", "Vegobjekttyper\" & pkOT_Sub.Alias & ".xml", "Initiell versjonering", True
+			'Repository.WriteOutput "Endringer", Now & " Setter opp versjonshåndtering for " & pkOT_Sub.Name,0
+			'pkOT_Sub.VersionControlAdd "Datakatalogen", "Vegobjekttyper\" & pkOT_Sub.Alias & ".xml", "Initiell versjonering", True
 			set	element = pkOT_Sub.Elements.AddNew(rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value, "Class")
 			element.Update()
 			updateProperties_Objekttyper()

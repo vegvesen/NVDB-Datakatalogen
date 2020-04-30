@@ -1,13 +1,15 @@
 'Datakatalogversjon
-const FC_version = "2.09"
-const FC_db = "C:\DATA\GitHub\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V209.mdb"
+const FC_version = "2.20"
+const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V220.mdb"
 
-const svnSOSINVDBPath = "C:\DATA\Standardisering\SOSI\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
+const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
 
 'Parametre for konvertering til SOSI
-const txtSOSIpakke = "NVDB Datakatalogen"
+
+const txtSOSIpakke = "NVDB Dokumentasjon"
+
 const txtShortName = ""
-const strPakker = "Alle"
+const strPakker = "NVDB Dokumentasjon"
 'Eksempler på pakkestrenger:
 '"Vegreferanse" '"Antenne;Armeringsnett" '"Alle"
 'Pakker i GLA: Belysningspunkt og Kabel + assosierte
@@ -24,6 +26,7 @@ const blnBetinget = False                                                 '"Beti
 const blnAsDictionary = False                                            'Angir om kodelister skal være i GML-skjemafilene eller eksternt
 const strTargetNamespace = "https://raw.githubusercontent.com/jetgeo/NVDBGML/master/XSD/NVDB"
 const blnIndividualAS = True                                             'Angir om det skal genereres separate xsd-filer for hver pakke
+
 const strSOSIVersjon = "4.5"
 
 
@@ -40,6 +43,10 @@ const strSOSIFelles = "SOSI Fellesegenskaper"
 const strSOSIModell = "SOSI Modell"
 const strSOSIGK = "SOSI Generelle konsepter"
 const strSOSIGO = "SOSI Generell objektkatalog"
+
+'GUID-er for pakker mm
+const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML
+const guidSOSIDatakatalog = "{E7F57FAF-DB3F-4129-BB30-C903F137F599}" 'Pakken NVDB Datakatalog i SOSI-modellregister
 
 ' GUID for SOSI-datatyper
 const guidCharacterString = "{453EB6B1-D543-4f3d-BC53-E79283F6736C}"

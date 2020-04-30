@@ -42,8 +42,11 @@ Sub updateProperties_Kodelisteverdier()
 		set aTag = eAttributt.TaggedValues.AddNew("Offisell kortverdi", "true")
 	end if 
 
-	'Genererer SOSI-navn
-	set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", createSOSInavn(rsKodelister.Fields("NAVN_TILLATT_VERDI").Value, "Lower", 255, ""))
+	If Not IsNull(rsKodelister.Fields("SOSI_navn").Value) Then '
+		set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", rsKodelister.Fields("SOSI_navn").Value)
+	Else
+		set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", createSOSInavn(rsKodelister.Fields("NAVN_TILLATT_VERDI").Value, "Lower", 255, ""))
+	End If
 	aTag.Update()
 
 	eAttributt.TaggedValues.Refresh()
