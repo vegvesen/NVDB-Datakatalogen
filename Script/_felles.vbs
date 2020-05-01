@@ -35,6 +35,7 @@ Dim eTVDiagram As EA.Diagram
 Dim eASDiagram As EA.Diagram
 Dim eHovedskjema As EA.Diagram
 Dim diagramObjekt as EA.DiagramObject
+Dim diagramObject as EA.DiagramObject
 Dim diagramLenke as EA.DiagramLink
 
 dim dbDakat
@@ -73,6 +74,8 @@ Dim kjorefelt
 
 function connect2UMLmodels()
 	outputTabs
+	set ePIF = Repository.GetProjectInterface
+
 	Repository.WriteOutput "Script", Now & " Kobler til modeller ", 0 
 	set pkObjekttyper = Repository.GetPackageByGuid(guidNVDBVegobjekttyper)
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)

@@ -63,8 +63,8 @@ sub updateAssociations()
 	For each pkOT in pkSOSINVDB.Packages
 		Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 		for each element in pkOT.Elements
-			if element.Stereotype = "featuretype" then
-				lstSOSI.Add element.Alias, element.packageGUID
+			if UCase(element.Stereotype) = "FEATURETYPE" then
+				lstSOSI.Add element.Alias, element.ElementGUID
 			end if	
 		Next	
 	Next
@@ -89,7 +89,7 @@ sub updateAssociations()
 		end if
 
 		For each element in pkOT.Elements
-			If element.Stereotype = "featureType" then
+			If UCase(element.Stereotype) = "FEATURETYPE" then
 				'Finner tilsvarende objekttype i NVDB
 				set elNVDB = getElementByAlias(pkOT_NVDB, element.Alias)
 				'Lag liste over alle relaterte alias i NVDB
@@ -140,10 +140,12 @@ sub updateAssociations()
 						set elementB = Repository.GetElementByID(conNVDB.ClientID)
 						if lstAlias.Contains(elementB.Alias) then 
 							'Finnes: Ingen tiltak
+							Repository.WriteOutput "Script", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes i SOSI", 0 
 						else	
 							'Finnes ikke: Oppretter og oppdaterer properties
 							Repository.WriteOutput "Endringer", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes ikke i SOSI, oppretter", 0 
 							if lstSOSI.Contains(elementB.Alias) then 
+								'Repository.WriteOutput "Endringer", Now & " Noen hjemme?", 0 
 								set con = element.Connectors.AddNew("", conNVDB.Type)
 								con.SupplierID = element.ElementID
 								'Finn SOSI-element som skal assosieres ut i fra alias i lstSOSI
@@ -151,6 +153,7 @@ sub updateAssociations()
 								guid = lstSOSI.GetByIndex(keyIndex)
 								set elementB = Repository.GetElementByGuid(guid)
 								con.ClientID = elementB.ElementID
+								con.Update
 								updateAssociationProperties
 							end if						
 						end if

@@ -6,7 +6,7 @@ option explicit
 !INC NVDB._parametre
 								 
 
-' Script Name: DakatUML2SOSI_Komplett
+' Script Name: DakatUML2SOSI_24_Klasser
 ' Author: Knut Jetlund
 ' Purpose: Oppdater SOSI-UML for objekttyper og kodelister fra oppdatert NVDB-UML
 ' Date: 2020-04-28
