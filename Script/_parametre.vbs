@@ -24,7 +24,7 @@ const blnPkrvd = True                                                           
 const blnPkrvdNyreg = False                                               '"Påkrevd ved nyregistrering" medfører påkrevd i modellen
 const blnBetinget = False                                                 '"Betinget" medfører påkrevd i modellen
 const blnAsDictionary = False                                            'Angir om kodelister skal være i GML-skjemafilene eller eksternt
-const strTargetNamespace = "https://raw.githubusercontent.com/jetgeo/NVDBGML/master/XSD/NVDB"
+const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB"
 const blnIndividualAS = True                                             'Angir om det skal genereres separate xsd-filer for hver pakke
 
 const strSOSIVersjon = "4.5"
