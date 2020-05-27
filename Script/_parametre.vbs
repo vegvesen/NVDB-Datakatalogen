@@ -1,8 +1,15 @@
 'Datakatalogversjon
 const FC_version = "2.20"
 const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V220.mdb"
+const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB"
 
 const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
+const strSOSIVersjon = "4.5"
+
+const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
+const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
+const scProject = "SC_NVDB.eap"
+
 
 'Parametre for konvertering til SOSI
 
@@ -24,11 +31,7 @@ const blnPkrvd = True                                                           
 const blnPkrvdNyreg = False                                               '"Påkrevd ved nyregistrering" medfører påkrevd i modellen
 const blnBetinget = False                                                 '"Betinget" medfører påkrevd i modellen
 const blnAsDictionary = False                                            'Angir om kodelister skal være i GML-skjemafilene eller eksternt
-const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB"
 const blnIndividualAS = True                                             'Angir om det skal genereres separate xsd-filer for hver pakke
-
-const strSOSIVersjon = "4.5"
-
 
 'Arbeidsområde
 const strMainPath = "C:\DATA\tmp"

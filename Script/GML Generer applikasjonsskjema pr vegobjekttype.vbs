@@ -167,6 +167,7 @@ sub main()
 							Repository.WriteOutput "Script", Now & " Elementet Fellesegenskaper funnet (" & ftSOSIfelles.ElementGUID & ")", 0 
 							dim scSubPck as EA.Package
 							for each scSubPck in scPck.Packages
+								'Fjern applicationSchema-stereotype
 								if scSubPck.PackageGUID <> pkSOSIfelles.PackageGUID then
 									dim scEl as EA.Element
 									for each scEl In scSubPck.elements

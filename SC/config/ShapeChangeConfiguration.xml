@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<ShapeChangeConfiguration xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sc="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1"
+    xsi:schemaLocation="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd"
+    xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1">
+    <input>
+        <parameter name="inputModelType" value="EA7"/>
+        <parameter name="inputFile" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\SC_NVDB.eap"/>
+        <parameter name="loadDiagrams" value="true"/>
+        <parameter name="tmpDirectory" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\tmp"/>
+        <parameter name="packageDiagramRegex" value="^(.*[\W]+)?Overview([\W]+.*)?$"/>
+        <parameter name="classDiagramRegex" value="^(.*[\W]+)?NAME([\W]+.*)?$"/>
+        <parameter name="appSchemaName" value="NVDB"/>
+        <parameter name="addTaggedValues" value="SOSI_navn,NVDB_ID"/>
+        <parameter name="representTaggedValues"
+            value="alwaysVoid,neverVoid,Code,lastChange,appliesTo,SOSI_navn,NVDB_ID"/>
+        <xi:include href="http://shapechange.net/resources/config/StandardAliases.xml"/>
+    </input>
+    <log>
+        <parameter name="reportLevel" value="INFO"/>
+        <parameter name="logFile" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\log.xml"/>
+    </log>
+    <targets>
+        <TargetXmlSchema class="de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema"
+            mode="enabled">
+            <targetParameter name="outputDirectory" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\XSD"/>
+            <targetParameter name="defaultEncodingRule" value="iso19136_2007"/>
+            <xi:include href="http://www.arkitektum.no/files/sosi/StandardRules.xml"/>
+            <xi:include href="http://shapechange.net/resources/config/StandardNamespaces.xml"/>
+            <xi:include href="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\StandardMapEntries.xml"/>
+        </TargetXmlSchema>
+    </targets>
+</ShapeChangeConfiguration>
