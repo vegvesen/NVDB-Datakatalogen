@@ -16,13 +16,29 @@ Sub updateAssociationProperties()
 	con.Type = conNVDB.Type
 	con.Subtype = conNVDB.Subtype
 
-	'Angi kardinaliteter
+	'Angi kardinaliteter 
 	con.ClientEnd.Visibility = conNVDB.ClientEnd.Visibility
-	con.ClientEnd.Role = conNVDB.ClientEnd.Role
 	con.ClientEnd.Cardinality = conNVDB.ClientEnd.Cardinality
 	con.SupplierEnd.Visibility = conNVDB.SupplierEnd.Visibility
-	con.SupplierEnd.Role = conNVDB.SupplierEnd.Role
 	con.SupplierEnd.Cardinality = conNVDB.SupplierEnd.Cardinality
+
+	'Rollenavn og tagged values på assosiasjonen
+	Dim conTV As EA.ConnectorTag
+	If con.ClientID = element.ElementID Then
+		con.ClientEnd.Role = "assosiert" & element.Name
+		set conTV = con.TaggedValues.AddNew("NVDB_ClientID", element.Alias)
+		conTV.Update()
+		con.SupplierEnd.Role = "assosiert" & elementB.Name
+		set conTV = con.TaggedValues.AddNew("NVDB_SupplierID", elementB.Alias)
+		conTV.Update()
+	Else
+		con.ClientEnd.Role = "assosiert" & elementB.Name
+		set	conTV = con.TaggedValues.AddNew("NVDB_ClientID", elementB.Alias)
+		conTV.Update()
+		con.SupplierEnd.Role = "assosiert" & element.Name
+		set conTV = con.TaggedValues.AddNew("NVDB_SupplierID", element.Alias)
+		conTV.Update()
+	End If
 	con.Update()
 
 	'Fjerner alle tagged values og legger til på nytt
@@ -36,6 +52,40 @@ Sub updateAssociationProperties()
 		cTag.Update()
 	next	
 	con.TaggedValues.Refresh()
+	
+	'GML-tagged values på assosiasjonsendene
+	Dim rTag As EA.RoleTag
+	dim rTagFound
+	rTagFound = false
+	for each rTag in con.ClientEnd.TaggedValues
+		if rTag.Tag = "inlineOrByReference" then
+			rTag.Value = "ByReference"
+			rTag.Update
+			rTagFound = true
+		end  if
+	next
+	if not rTagfound then 
+		set rTag = con.ClientEnd.TaggedValues.AddNew("inlineOrByReference", "ByReference")
+		rTag.Update()
+	end if	
+	con.ClientEnd.TaggedValues.Refresh()
+	con.ClientEnd.Update()
+	
+	rTagFound = false
+	for each rTag in con.SupplierEnd.TaggedValues
+		if rTag.Tag = "inlineOrByReference" then
+			rTag.Value = "ByReference"
+			rTag.Update
+			rTagFound = true
+		end  if
+	next
+	if not rTagfound then 
+		set rTag = con.SupplierEnd.TaggedValues.AddNew("inlineOrByReference", "ByReference")
+		rTag.Update()
+	end if	
+	con.SupplierEnd.TaggedValues.Refresh()
+	con.SupplierEnd.Update()
+	
 End Sub
 
 

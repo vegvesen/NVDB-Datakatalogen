@@ -33,7 +33,7 @@ sub updatePackage()
 	pkOT.Version = FC_version
 	pkOT.Update
 	set element = pkOt.Element
-	element.stereotype="applicationSchema"
+	'element.stereotype="applicationSchema"
 	element.Update
 	
 	'Fjerner alle tagged values på pakken og legger til på nytt
@@ -45,7 +45,7 @@ sub updatePackage()
 	tagVal.Update()
 	set tagVal = element.TaggedValues.AddNew("SOSI_langnavn", "NVDB " & pkOT.Name)
 	tagVal.Update()
-	set tagVal = element.TaggedValues.AddNew("SOSI_organsasjon", "Statens vegvesen")
+	set tagVal = element.TaggedValues.AddNew("SOSI_organisasjon", "Statens vegvesen")
 	tagVal.Update()
 	set tagVal = element.TaggedValues.AddNew("SOSI_produktgruppe", "NVDB")
 	tagVal.Update()
@@ -56,8 +56,8 @@ sub updatePackage()
 	set tagVal = element.TaggedValues.AddNew("SOSI_versjon", strSOSIVersjon)
 	tagVal.Update()
 	'GML-tagger 
-	set tagVal = element.TaggedValues.AddNew("targetNamespace", strTargetNamespace)
-	tagVal.Update()
+	'set tagVal = element.TaggedValues.AddNew("targetNamespace", strTargetNamespace)
+	'tagVal.Update()
 	set tagVal = element.TaggedValues.AddNew("version", pkOT.Version)
 	tagVal.Update()
 	set tagVal = element.TaggedValues.AddNew("xmlns", "nvdb")
