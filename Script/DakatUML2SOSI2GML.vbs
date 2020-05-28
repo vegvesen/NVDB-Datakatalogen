@@ -72,20 +72,20 @@ sub main()
 			'Setter GML-tagger på hovedpakka
 			dim j
 			dim el as EA.Element
-			dim nvn 
-			nvn = "nvdb"
+			'dim nvn 
+			'nvn = "nvdb"
 			'Finner selve objekttypen og endrer norske tegn i navnet, for bruk i xsd-fil		
 			for j = 0 to pck.Elements.Count -1
 				set el = pck.Elements.GetAt(j)
 				if el.Stereotype="featureType" then
-					nvn = el.Name
-					nvn= Replace(nvn, "æ","ae")
-					nvn= Replace(nvn, "Æ","Ae")
-					nvn= Replace(nvn, "ø","oe")
-					nvn= Replace(nvn, "Ø","Oe")
-					nvn= Replace(nvn, "å","aa")
-					nvn= Replace(nvn, "Å","Aa")
-					Repository.WriteOutput "Script", Now & " Vegobjekttype " & el.Name & " - xsd-navn " & nvn, 0 
+			'		nvn = el.Name
+			'		nvn= Replace(nvn, "æ","ae")
+			'		nvn= Replace(nvn, "Æ","Ae")
+			'		nvn= Replace(nvn, "ø","oe")
+			'		nvn= Replace(nvn, "Ø","Oe")
+			'		nvn= Replace(nvn, "å","aa")
+			'		nvn= Replace(nvn, "Å","Aa")
+					Repository.WriteOutput "Script", Now & " Vegobjekttype " & el.Name, 0 
 					'Går ut av løkka, ettersom objekttypen er funnet. 
 					j = pck.Elements.Count -1
 				end if
@@ -97,7 +97,7 @@ sub main()
 			lstTags.Add "targetNamespace", strTargetNamespace
 			lstTags.Add "version", FC_version
 			lstTags.Add "xmlns", "nvdb"
-			lstTags.Add "xsdDocument", nvn & ".xsd"
+			lstTags.Add "xsdDocument", pck.Alias & ".xsd"
 			
 			dim tagVal as EA.TaggedValue
 			dim tagFound
@@ -177,7 +177,7 @@ sub main()
 			'scMod.Update
 			scPck.Packages.Refresh
 
-			'Legger til arv fra SOSI Fellesegenskaper for alle objekttyper
+			'Legger til arv fra SOSI Fellesegenskaper for alle objekttyper og rydder i tagger
 			dim ftSOSIfelles as EA.Element
 			set ftSOSIfelles = pkSOSIfelles.Elements.GetByName("Fellesegenskaper")
 
@@ -189,8 +189,13 @@ sub main()
 					for idxT = 0 to scSubPck.Element.TaggedValues.Count -1
 						set tagVal = scSubPck.Element.TaggedValues.GetAt(idxT)
 						if tagVal.Name = "targetNamespace" or tagVal.Value = "" then 
-							Repository.WriteOutput "Script", Now & " Sletter tagged value " & tagVal.Name & " = " & tagVal.Value, 0 
+							Repository.WriteOutput "Script", Now & " Sletter tagged value " & scSubPck.Alias & "." & tagVal.Name & " = " & tagVal.Value, 0 
 							scSubPck.Element.TaggedValues.DeleteAt idxT,false
+						end if
+						if scSubPck.Alias = pck.Alias then
+							'Fjerner alle tagged values på objekttypen sin pakke, den skal inngå i hovedpakken direkte.
+							Repository.WriteOutput "Script", Now & " Sletter tagged value " & scSubPck.Alias & "." & tagVal.Name & " = " & tagVal.Value, 0 
+							scSubPck.Element.TaggedValues.DeleteAt idxT,false				
 						end if
 					next
 					 scSubPck.Element.TaggedValues.Refresh
@@ -255,9 +260,35 @@ sub main()
 				scRep.Exit
 				exit sub
 			end if		
-	
 
-			
+			'Rediger C:\DATA\GitHub\NVDBGML\runshapechange.bat
+			Repository.WriteOutput "Script", Now & " Rediger runshapechange.bat", 0 
+			dim objFS
+			Set objFS = CreateObject("Scripting.FileSystemObject")
+			dim strFile
+			strFile = scPath & "\runshapechange.bat"
+			dim objFile
+			Set objFile = objFS.OpenTextFile(strFile)
+			dim strLine
+			'Leser første linje og skriver den uendra til ny fil
+			strLine = objFile.ReadLine
+			objFile.Close
+			Set objFile = objFS.CreateTextFile(strFile, true)
+			objFile.WriteLine(strLine)
+			'Linjer for kopiering av skjema til rikitg mappe
+			objFile.WriteLine("Mkdir " & gmlPath)
+			objFile.WriteLine("Move " & scPath & "\XSD\INPUT\" & pck.Alias & ".xsd " & gmlPath & "\")
+			objFile.WriteLine("Del /Q " & scPath & "\XSD\INPUT\*.*")
+			objFile.WriteLine("Pause")
+			'Close the file.
+			objFile.Close
+			Set objFile = Nothing
+			'Kjør runshapechange.bat, vent på fullføring 		
+			Repository.WriteOutput "Script", Now & " Kjører ShapeChange og flytter filer til riktig område...", 0 
+			dim shell
+			set shell=createobject("wscript.shell") 
+			'shell.run strFile, 1, true
+			set shell=nothing	
 			
 			'Hopp ut av løkka etter første pakke - fjernes når scriptet er ferdig.
 			scRep.CloseFile
