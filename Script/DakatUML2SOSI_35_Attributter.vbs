@@ -83,6 +83,9 @@ sub updateAttributeProperties()
 	If UCase(element.stereotype) = "CODELIST" then
 		eAttributt.ClassifierID = 0
 		eAttributt.Type = ""
+		eAttributt.LowerBound = 1
+		eAttributt.UpperBound = 1
+
 	else
 		'Sett datatype
 		Set elementDT = Nothing
