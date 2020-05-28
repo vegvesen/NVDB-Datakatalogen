@@ -261,34 +261,40 @@ sub main()
 				exit sub
 			end if		
 
-			'Rediger C:\DATA\GitHub\NVDBGML\runshapechange.bat
-			Repository.WriteOutput "Script", Now & " Rediger runshapechange.bat", 0 
-			dim objFS
-			Set objFS = CreateObject("Scripting.FileSystemObject")
-			dim strFile
-			strFile = scPath & "\runshapechange.bat"
-			dim objFile
-			Set objFile = objFS.OpenTextFile(strFile)
+			'Kjører ShapeChange, venter på fullføring
+			Repository.WriteOutput "Script", Now & " Kjører ShapeChange...", 0 
 			dim strLine
-			'Leser første linje og skriver den uendra til ny fil
-			strLine = objFile.ReadLine
-			objFile.Close
-			Set objFile = objFS.CreateTextFile(strFile, true)
-			objFile.WriteLine(strLine)
-			'Linjer for kopiering av skjema til rikitg mappe
-			objFile.WriteLine("Mkdir " & gmlPath)
-			objFile.WriteLine("Move " & scPath & "\XSD\INPUT\" & pck.Alias & ".xsd " & gmlPath & "\")
-			objFile.WriteLine("Del /Q " & scPath & "\XSD\INPUT\*.*")
-			objFile.WriteLine("Pause")
-			'Close the file.
-			objFile.Close
-			Set objFile = Nothing
-			'Kjør runshapechange.bat, vent på fullføring 		
-			Repository.WriteOutput "Script", Now & " Kjører ShapeChange og flytter filer til riktig område...", 0 
+			strLine = """C:\Program Files (x86)\AdoptOpenJDK\jre-14.0.1.7-hotspot\bin\java.exe"" -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar "
+			strLine = strLine & """C:\DATA\Programvare\ShapeChange-2.9.1\ShapeChange-2.9.1.jar"" -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
 			dim shell
 			set shell=createobject("wscript.shell") 
-			'shell.run strFile, 1, true
+			shell.run strLine, 1, true
 			set shell=nothing	
+			
+			
+			'Flytter filer til riktig område
+			Repository.WriteOutput "Script", Now & " Flytter filer til riktig område", 0 
+			dim objFS
+			Set objFS = CreateObject("Scripting.FileSystemObject")
+			if not objFS.FolderExists(gmlPath & "\") then
+				Repository.WriteOutput "Script", Now & " GML-mappen finnes ikke, oppretter", 0 
+				objFS.CreateFolder gmlPath & "\"
+			else
+				'Repository.WriteOutput "Script", Now & " Mappen finnes ", 0 
+			end if
+			
+			if objFS.FileExists(gmlPath & "\" & pck.Alias & ".xsd") then
+				Repository.WriteOutput "Script", Now & " Skjemafilen " & pck.Alias & ".xsd finnes i GML-mappen fra før, slettes", 0 
+				objFS.DeleteFile gmlPath & "\" & pck.Alias & ".xsd"
+			else
+				'Repository.WriteOutput "Script", Now & " Filen finnes ikke fra før", 0 
+			end if
+			If objFS.FileExists(scPath & "\XSD\INPUT\" & pck.Alias & ".xsd") then
+				Repository.WriteOutput "Script", Now & " Flytter skjemafilen " & pck.Alias & ".xsd", 0 
+				objFS.MoveFile scPath & "\XSD\INPUT\" & pck.Alias & ".xsd", gmlPath & "\"
+			else
+				Repository.WriteOutput "Error", Now & " Skjemafilen " & pck.Alias & ".xsd finnes ikke", 0 			
+			end if
 			
 			'Hopp ut av løkka etter første pakke - fjernes når scriptet er ferdig.
 			scRep.CloseFile
@@ -297,7 +303,23 @@ sub main()
 			exit sub
 
 		next
-				
+		
+		'Flytter SOSIFelles.xsd til riktig område
+		Repository.WriteOutput "Script", Now & " Flytter skjemafil for fellesegenskaper til riktig område", 0 
+		
+		if objFS.FileExists(gmlPath & "\SOSIFelles.xsd") then
+			Repository.WriteOutput "Script", Now & " Skjemafilen finnes i GML-mappen fra før slettes", 0 
+			objFS.DeleteFile gmlPath & "\SOSIFelles.xsd"
+		else
+			'Repository.WriteOutput "Script", Now & " Filen finnes ikke fra før", 0 
+		end if
+		if objFS.FileExists(scPath & "\XSD\INPUT\SOSIFelles.xsd") then
+			Repository.WriteOutput "Script", Now & " Flytter skjemafilen SOSIFelles.xsd", 0 
+			objFS.MoveFile scPath & "\XSD\INPUT\SOSIFelles.xsd", gmlPath & "\"
+		else
+			Repository.WriteOutput "Error", Now & " Skjemafilen SOSIFelles.xsd finnes ikke", 0 
+		end if
+
 		Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		Repository.EnsureOutputVisible "Script"
 		scRep.CloseFile
