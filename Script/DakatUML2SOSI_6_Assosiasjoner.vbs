@@ -19,8 +19,10 @@ Sub updateAssociationProperties()
 	'Angi kardinaliteter 
 	con.ClientEnd.Visibility = conNVDB.ClientEnd.Visibility
 	con.ClientEnd.Cardinality = conNVDB.ClientEnd.Cardinality
+	con.ClientEnd.Navigable = conNVDB.ClientEnd.Navigable
 	con.SupplierEnd.Visibility = conNVDB.SupplierEnd.Visibility
 	con.SupplierEnd.Cardinality = conNVDB.SupplierEnd.Cardinality
+	con.SupplierEnd.Navigable = conNVDB.SupplierEnd.Navigable
 
 	'Rollenavn og tagged values på assosiasjonen
 	Dim conTV As EA.ConnectorTag

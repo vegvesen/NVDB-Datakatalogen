@@ -1,0 +1,3623 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="nvdb.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdskilteLøpType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADSKILTELØP</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:AdskilteLøpEnumerationType nvdb:AdskilteLøpOtherType"/>
+  </simpleType>
+  <simpleType name="AdskilteLøpEnumerationType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADSKILTELØP</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="med">
+        <annotation>
+          <documentation>19035: Medstrekning for adskilte løp der kjøreretning er med metreringsretning.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19035</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="mot">
+        <annotation>
+          <documentation>19091: Motstrekning for adskilte løp der kjøreretning er mot metreringsretning.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19091</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdskilteLøpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Endringsflagg" substitutionGroup="gml:AbstractObject" type="nvdb:EndringsflaggType">
+    <annotation>
+      <documentation>endringsinformasjon om et objekt
+
+Merknad: 
+Inntil videre vil hele objektet merkes med endringsflagget.
+I det videre arbeidet (framtidige versjoner) vil denne kunne utvides, f.eks ved å angi om endringen er knyttet til geometrien, egenskapene eller relasjoner</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ENDRINGSFLAGG</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="EndringsflaggType">
+    <sequence>
+      <element name="typeEndring" type="nvdb:TypeEndringType">
+        <annotation>
+          <documentation>endringsstatus for objektet</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/TypeEndring.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="tidspunktEndring" type="date">
+        <annotation>
+          <documentation>tidspunkt for endring av objektet</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ENDRET_TID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="EndringsflaggPropertyType">
+    <sequence>
+      <element ref="nvdb:Endringsflagg"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="nvdb:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper
+
+Merknad:
+Spesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="identifikasjon" type="nvdb:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>unik identifikasjon av et objekt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="endringsflagg" type="nvdb:EndringsflaggPropertyType">
+            <annotation>
+              <documentation>endringsinformasjon om et objekt 
+
+Merknad: 
+Reglene knyttet til bruken av endringsflagg er for denne versjonen ikke avklart. Utdypes nærmere i produktspesifikasjonen basert på 4.0.
+
+Merknad: 
+Endringsflagg kan benyttes til å merke slettede "objekter".
+
+Eksempel: 
+Dersom en eiendomsgrense endres skal endringsflagg også legges inn på eiendomsteigen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget
+
+Merknad: I mange tilfeller er denne forskjellig fra Oppdateringsdato, da registrerte endringer kan bufres i en kortere eller lengre periode før disse legges inn i databasen.
+Ved førstegangsregistrering settes Datafangstdato lik førsteDatafangstdato.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DATAFANGSTDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="date">
+            <annotation>
+              <documentation>dato for siste endring på objektetdataene 
+
+Merknad: 
+Oppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).
+
+-Definition-
+Date and time at which this version of the spatial object was inserted or changed in the spatial data set.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">OPPDATERINGSDATO</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="nvdb:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene
+
+Merknad:
+Prosesshistorie vil kunne inneholde informasjon om transformasjoner. Hva slags informasjon som angis er ofte gitt i andre standarder, f.eks kvalitet og kvalitetsikring.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">PROSESS_HISTORIE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydereferanse" type="nvdb:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Høydereferanse.xml</defaultCodeSpace>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kommunenummer" type="nvdb:KommunenummerType">
+            <annotation>
+              <documentation>nummerering av kommunen i henhold til Statistisk sentralbyrå sin offisielle liste
+
+Merknad: Det presiseres at kommune alltid skal ha 4 siffer, dvs. eventuelt med ledende null. Kommune benyttes for kopling mot en rekke andre registre som også benytter 4 siffer.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMM</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sideposisjon" type="nvdb:SideposisjonType">
+            <annotation>
+              <documentation>Angir sideposisjon i for vegobjekt i forhold til vegens metreringsretning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegsystemreferanse" type="nvdb:VegsystemreferansePropertyType">
+            <annotation>
+              <documentation>sammensatt identifikator for vegreferanse</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSYSTEMREFERANSE</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="HøydereferanseType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:HøydereferanseEnumerationType nvdb:HøydereferanseOtherType"/>
+  </simpleType>
+  <simpleType name="HøydereferanseEnumerationType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">HREF</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="topp">
+        <annotation>
+          <documentation>Høyden målt til toppen av objektet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fot">
+        <annotation>
+          <documentation>Høyden målt til  foten av objektet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HøydereferanseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="nvdb:IdentifikasjonType">
+    <annotation>
+      <documentation>Identification: Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet. 
+
+NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer. 
+
+NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av objektets levetid.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">IDENT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>localId: lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.
+
+NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LOKALID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>namespace: navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  ("_") dersom data produsenten ikke er assosiert med bare et land.
+
+NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i "INSPIRE external  Object Identifier Namespaces Register"
+
+Eksempel: NO for Norge.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NAVNEROM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>versionId: identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. 
+
+NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  "2007-02-12T12:12:12+05:30" som versjonId.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VERSJONID</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="nvdb:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <simpleType name="KommunenummerType">
+    <annotation>
+      <documentation>nummerering av kommuner i henhold til Statistisk sentralbyrå sin offisielle liste samt et utvalg av utgåtte numre
+
+Merknad: Det presiseres at kommune alltid skal ha 4 sifre, dvs. eventuelt med ledende null. Kommune benyttes for kopling mot en rekke andre registre som også benytter 4 sifre.
+
+Merknad 2: Modelleringsverktøyet Enterprise Architect håndterer ikke samiske tegn eller tankestrek. Det betyr at det vil forekomme avvik mellom definisjonene i denne lista i SOSI modellregister og definisjonene i offisielt standarddokument.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMMUNENUMMER</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:KommunenummerEnumerationType nvdb:KommunenummerOtherType"/>
+  </simpleType>
+  <simpleType name="KommunenummerEnumerationType">
+    <annotation>
+      <documentation>nummerering av kommuner i henhold til Statistisk sentralbyrå sin offisielle liste samt et utvalg av utgåtte numre
+
+Merknad: Det presiseres at kommune alltid skal ha 4 sifre, dvs. eventuelt med ledende null. Kommune benyttes for kopling mot en rekke andre registre som også benytter 4 sifre.
+
+Merknad 2: Modelleringsverktøyet Enterprise Architect håndterer ikke samiske tegn eller tankestrek. Det betyr at det vil forekomme avvik mellom definisjonene i denne lista i SOSI modellregister og definisjonene i offisielt standarddokument.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KOMMUNENUMMER</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0101">
+        <annotation>
+          <documentation>Halden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0102">
+        <annotation>
+          <documentation>Sarpsborg (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0103">
+        <annotation>
+          <documentation>Fredrikstad (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0104">
+        <annotation>
+          <documentation>Moss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0105">
+        <annotation>
+          <documentation>Sarpsborg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0106">
+        <annotation>
+          <documentation>Fredrikstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0111">
+        <annotation>
+          <documentation>Hvaler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0113">
+        <annotation>
+          <documentation>Borge (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0114">
+        <annotation>
+          <documentation>Varteig (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0115">
+        <annotation>
+          <documentation>Skjeberg (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0118">
+        <annotation>
+          <documentation>Aremark</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0119">
+        <annotation>
+          <documentation>Marker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0121">
+        <annotation>
+          <documentation>Rømskog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0122">
+        <annotation>
+          <documentation>Trøgstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0123">
+        <annotation>
+          <documentation>Spydeberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0124">
+        <annotation>
+          <documentation>Askim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0125">
+        <annotation>
+          <documentation>Eidsberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0127">
+        <annotation>
+          <documentation>Skiptvet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0128">
+        <annotation>
+          <documentation>Rakkestad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0130">
+        <annotation>
+          <documentation>Tune (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0131">
+        <annotation>
+          <documentation>Rolvsøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0133">
+        <annotation>
+          <documentation>Kråkerøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0134">
+        <annotation>
+          <documentation>Onsøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0135">
+        <annotation>
+          <documentation>Råde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0136">
+        <annotation>
+          <documentation>Rygge</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0137">
+        <annotation>
+          <documentation>Våler i Østfold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0138">
+        <annotation>
+          <documentation>Hobøl</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0211">
+        <annotation>
+          <documentation>Vestby</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0213">
+        <annotation>
+          <documentation>Ski</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0214">
+        <annotation>
+          <documentation>Ås</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0215">
+        <annotation>
+          <documentation>Frogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0216">
+        <annotation>
+          <documentation>Nesodden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0217">
+        <annotation>
+          <documentation>Oppegård</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0219">
+        <annotation>
+          <documentation>Bærum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0220">
+        <annotation>
+          <documentation>Asker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0221">
+        <annotation>
+          <documentation>Aurskog-Høland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0226">
+        <annotation>
+          <documentation>Sørum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0227">
+        <annotation>
+          <documentation>Fet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0228">
+        <annotation>
+          <documentation>Rælingen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0229">
+        <annotation>
+          <documentation>Enebakk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0230">
+        <annotation>
+          <documentation>Lørenskog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0231">
+        <annotation>
+          <documentation>Skedsmo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0233">
+        <annotation>
+          <documentation>Nittedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0234">
+        <annotation>
+          <documentation>Gjerdrum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0235">
+        <annotation>
+          <documentation>Ullensaker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0236">
+        <annotation>
+          <documentation>Nes i Akershus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0237">
+        <annotation>
+          <documentation>Eidsvoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0238">
+        <annotation>
+          <documentation>Nannestad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0239">
+        <annotation>
+          <documentation>Hurdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0301">
+        <annotation>
+          <documentation>Oslo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0401">
+        <annotation>
+          <documentation>Hamar (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0402">
+        <annotation>
+          <documentation>Kongsvinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0403">
+        <annotation>
+          <documentation>Hamar</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0412">
+        <annotation>
+          <documentation>Ringsaker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0414">
+        <annotation>
+          <documentation>Vang (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0415">
+        <annotation>
+          <documentation>Løten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0417">
+        <annotation>
+          <documentation>Stange</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0418">
+        <annotation>
+          <documentation>Nord-Odal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0419">
+        <annotation>
+          <documentation>Sør-Odal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0420">
+        <annotation>
+          <documentation>Eidskog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0423">
+        <annotation>
+          <documentation>Grue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0425">
+        <annotation>
+          <documentation>Åsnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0426">
+        <annotation>
+          <documentation>Våler i Hedmark</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0427">
+        <annotation>
+          <documentation>Elverum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0428">
+        <annotation>
+          <documentation>Trysil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0429">
+        <annotation>
+          <documentation>Åmot</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0430">
+        <annotation>
+          <documentation>Stor-Elvdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0432">
+        <annotation>
+          <documentation>Rendalen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0434">
+        <annotation>
+          <documentation>Engerdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0436">
+        <annotation>
+          <documentation>Tolga</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0437">
+        <annotation>
+          <documentation>Tynset</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0438">
+        <annotation>
+          <documentation>Alvdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0439">
+        <annotation>
+          <documentation>Folldal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0441">
+        <annotation>
+          <documentation>Os i Hedmark</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0501">
+        <annotation>
+          <documentation>Lillehammer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0502">
+        <annotation>
+          <documentation>Gjøvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0511">
+        <annotation>
+          <documentation>Dovre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0512">
+        <annotation>
+          <documentation>Lesja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0513">
+        <annotation>
+          <documentation>Skjåk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0514">
+        <annotation>
+          <documentation>Lom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0515">
+        <annotation>
+          <documentation>Vågå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0516">
+        <annotation>
+          <documentation>Nord-Fron</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0517">
+        <annotation>
+          <documentation>Sel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0519">
+        <annotation>
+          <documentation>Sør-Fron</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0520">
+        <annotation>
+          <documentation>Ringebu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0521">
+        <annotation>
+          <documentation>Øyer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0522">
+        <annotation>
+          <documentation>Gausdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0528">
+        <annotation>
+          <documentation>Østre Toten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0529">
+        <annotation>
+          <documentation>Vestre Toten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0532">
+        <annotation>
+          <documentation>Jevnaker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0533">
+        <annotation>
+          <documentation>Lunner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0534">
+        <annotation>
+          <documentation>Gran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0536">
+        <annotation>
+          <documentation>Søndre Land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0538">
+        <annotation>
+          <documentation>Nordre Land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0540">
+        <annotation>
+          <documentation>Sør-Aurdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0541">
+        <annotation>
+          <documentation>Etnedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0542">
+        <annotation>
+          <documentation>Nord-Aurdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0543">
+        <annotation>
+          <documentation>Vestre Slidre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0544">
+        <annotation>
+          <documentation>Øystre Slidre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0545">
+        <annotation>
+          <documentation>Vang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0602">
+        <annotation>
+          <documentation>Drammen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0604">
+        <annotation>
+          <documentation>Kongsberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0605">
+        <annotation>
+          <documentation>Ringerike</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0612">
+        <annotation>
+          <documentation>Hole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0615">
+        <annotation>
+          <documentation>Flå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0616">
+        <annotation>
+          <documentation>Nes i Buskerud</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0617">
+        <annotation>
+          <documentation>Gol</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0618">
+        <annotation>
+          <documentation>Hemsedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0619">
+        <annotation>
+          <documentation>Ål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0620">
+        <annotation>
+          <documentation>Hol</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0621">
+        <annotation>
+          <documentation>Sigdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0622">
+        <annotation>
+          <documentation>Krødsherad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0623">
+        <annotation>
+          <documentation>Modum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0624">
+        <annotation>
+          <documentation>Øvre Eiker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0625">
+        <annotation>
+          <documentation>Nedre Eiker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0626">
+        <annotation>
+          <documentation>Lier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0627">
+        <annotation>
+          <documentation>Røyken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0628">
+        <annotation>
+          <documentation>Hurum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0631">
+        <annotation>
+          <documentation>Flesberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0632">
+        <annotation>
+          <documentation>Rollag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0633">
+        <annotation>
+          <documentation>Nore og Uvdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0701">
+        <annotation>
+          <documentation>Horten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0702">
+        <annotation>
+          <documentation>Holmestrand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0703">
+        <annotation>
+          <documentation>Horten (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0704">
+        <annotation>
+          <documentation>Tønsberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0705">
+        <annotation>
+          <documentation>Tønsberg (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0706">
+        <annotation>
+          <documentation>Sandefjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0707">
+        <annotation>
+          <documentation>Larvik (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0708">
+        <annotation>
+          <documentation>Stavern (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0709">
+        <annotation>
+          <documentation>Larvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0711">
+        <annotation>
+          <documentation>Svelvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0713">
+        <annotation>
+          <documentation>Sande i Vestfold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0714">
+        <annotation>
+          <documentation>Hof</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0716">
+        <annotation>
+          <documentation>Re</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0717">
+        <annotation>
+          <documentation>Borre (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0718">
+        <annotation>
+          <documentation>Ramnes (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0719">
+        <annotation>
+          <documentation>Andebu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0720">
+        <annotation>
+          <documentation>Stokke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0721">
+        <annotation>
+          <documentation>Sem (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0722">
+        <annotation>
+          <documentation>Nøtterøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0723">
+        <annotation>
+          <documentation>Tjøme</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0725">
+        <annotation>
+          <documentation>Tjølling (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0726">
+        <annotation>
+          <documentation>Brunlanes (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0727">
+        <annotation>
+          <documentation>Hedrum (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0728">
+        <annotation>
+          <documentation>Lardal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0805">
+        <annotation>
+          <documentation>Porsgrunn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0806">
+        <annotation>
+          <documentation>Skien</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0807">
+        <annotation>
+          <documentation>Notodden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0811">
+        <annotation>
+          <documentation>Siljan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0814">
+        <annotation>
+          <documentation>Bamble</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0815">
+        <annotation>
+          <documentation>Kragerø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0817">
+        <annotation>
+          <documentation>Drangedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0819">
+        <annotation>
+          <documentation>Nome</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0821">
+        <annotation>
+          <documentation>Bø i Telemark</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0822">
+        <annotation>
+          <documentation>Sauherad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0826">
+        <annotation>
+          <documentation>Tinn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0827">
+        <annotation>
+          <documentation>Hjartdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0828">
+        <annotation>
+          <documentation>Seljord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0829">
+        <annotation>
+          <documentation>Kviteseid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0830">
+        <annotation>
+          <documentation>Nissedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0831">
+        <annotation>
+          <documentation>Fyresdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0833">
+        <annotation>
+          <documentation>Tokke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0834">
+        <annotation>
+          <documentation>Vinje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0901">
+        <annotation>
+          <documentation>Risør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0903">
+        <annotation>
+          <documentation>Arendal (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0904">
+        <annotation>
+          <documentation>Grimstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0906">
+        <annotation>
+          <documentation>Arendal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0911">
+        <annotation>
+          <documentation>Gjerstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0912">
+        <annotation>
+          <documentation>Vegårshei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0914">
+        <annotation>
+          <documentation>Tvedestrand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0918">
+        <annotation>
+          <documentation>Moland (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0919">
+        <annotation>
+          <documentation>Froland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0920">
+        <annotation>
+          <documentation>Øyestad (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0921">
+        <annotation>
+          <documentation>Tromøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0922">
+        <annotation>
+          <documentation>Hisøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0926">
+        <annotation>
+          <documentation>Lillesand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0928">
+        <annotation>
+          <documentation>Birkenes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0929">
+        <annotation>
+          <documentation>Åmli</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0935">
+        <annotation>
+          <documentation>Iveland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0937">
+        <annotation>
+          <documentation>Evje og Hornnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0938">
+        <annotation>
+          <documentation>Bygland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0940">
+        <annotation>
+          <documentation>Valle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="0941">
+        <annotation>
+          <documentation>Bykle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1001">
+        <annotation>
+          <documentation>Kristiansand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1002">
+        <annotation>
+          <documentation>Mandal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1003">
+        <annotation>
+          <documentation>Farsund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1004">
+        <annotation>
+          <documentation>Flekkefjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1014">
+        <annotation>
+          <documentation>Vennesla</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1017">
+        <annotation>
+          <documentation>Songdalen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1018">
+        <annotation>
+          <documentation>Søgne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1021">
+        <annotation>
+          <documentation>Marnardal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1026">
+        <annotation>
+          <documentation>Åseral</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1027">
+        <annotation>
+          <documentation>Audnedal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1029">
+        <annotation>
+          <documentation>Lindesnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1032">
+        <annotation>
+          <documentation>Lyngdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1034">
+        <annotation>
+          <documentation>Hægebostad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1037">
+        <annotation>
+          <documentation>Kvinesdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1046">
+        <annotation>
+          <documentation>Sirdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1101">
+        <annotation>
+          <documentation>Eigersund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1102">
+        <annotation>
+          <documentation>Sandnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1103">
+        <annotation>
+          <documentation>Stavanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1106">
+        <annotation>
+          <documentation>Haugesund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1111">
+        <annotation>
+          <documentation>Sokndal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1112">
+        <annotation>
+          <documentation>Lund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1114">
+        <annotation>
+          <documentation>Bjerkreim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1119">
+        <annotation>
+          <documentation>Hå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1120">
+        <annotation>
+          <documentation>Klepp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1121">
+        <annotation>
+          <documentation>Time</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1122">
+        <annotation>
+          <documentation>Gjesdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1124">
+        <annotation>
+          <documentation>Sola</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1127">
+        <annotation>
+          <documentation>Randaberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1129">
+        <annotation>
+          <documentation>Forsand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1130">
+        <annotation>
+          <documentation>Strand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1133">
+        <annotation>
+          <documentation>Hjelmeland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1134">
+        <annotation>
+          <documentation>Suldal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1135">
+        <annotation>
+          <documentation>Sauda</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1141">
+        <annotation>
+          <documentation>Finnøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1142">
+        <annotation>
+          <documentation>Rennesøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1144">
+        <annotation>
+          <documentation>Kvitsøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1145">
+        <annotation>
+          <documentation>Bokn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1146">
+        <annotation>
+          <documentation>Tysvær</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1149">
+        <annotation>
+          <documentation>Karmøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1151">
+        <annotation>
+          <documentation>Utsira</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1154">
+        <annotation>
+          <documentation>Vindafjord ((utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1159">
+        <annotation>
+          <documentation>Ølen (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1160">
+        <annotation>
+          <documentation>Vindafjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1201">
+        <annotation>
+          <documentation>Bergen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1211">
+        <annotation>
+          <documentation>Etne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1214">
+        <annotation>
+          <documentation>Ølen (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1216">
+        <annotation>
+          <documentation>Sveio</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1219">
+        <annotation>
+          <documentation>Bømlo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1221">
+        <annotation>
+          <documentation>Stord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1222">
+        <annotation>
+          <documentation>Fitjar</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1223">
+        <annotation>
+          <documentation>Tysnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1224">
+        <annotation>
+          <documentation>Kvinnherad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1227">
+        <annotation>
+          <documentation>Jondal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1228">
+        <annotation>
+          <documentation>Odda</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1231">
+        <annotation>
+          <documentation>Ullensvang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1232">
+        <annotation>
+          <documentation>Eidfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1233">
+        <annotation>
+          <documentation>Ulvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1234">
+        <annotation>
+          <documentation>Granvin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1235">
+        <annotation>
+          <documentation>Voss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1238">
+        <annotation>
+          <documentation>Kvam</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1241">
+        <annotation>
+          <documentation>Fusa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1242">
+        <annotation>
+          <documentation>Samnanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1243">
+        <annotation>
+          <documentation>Os i Hordaland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1244">
+        <annotation>
+          <documentation>Austevoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1245">
+        <annotation>
+          <documentation>Sund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1246">
+        <annotation>
+          <documentation>Fjell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1247">
+        <annotation>
+          <documentation>Askøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1251">
+        <annotation>
+          <documentation>Vaksdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1252">
+        <annotation>
+          <documentation>Modalen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1253">
+        <annotation>
+          <documentation>Osterøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1256">
+        <annotation>
+          <documentation>Meland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1259">
+        <annotation>
+          <documentation>Øygarden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1260">
+        <annotation>
+          <documentation>Radøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1263">
+        <annotation>
+          <documentation>Lindås</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1264">
+        <annotation>
+          <documentation>Austrheim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1265">
+        <annotation>
+          <documentation>Fedje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1266">
+        <annotation>
+          <documentation>Masfjorden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1401">
+        <annotation>
+          <documentation>Flora</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1411">
+        <annotation>
+          <documentation>Gulen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1412">
+        <annotation>
+          <documentation>Solund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1413">
+        <annotation>
+          <documentation>Hyllestad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1416">
+        <annotation>
+          <documentation>Høyanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1417">
+        <annotation>
+          <documentation>Vik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1418">
+        <annotation>
+          <documentation>Balestrand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1419">
+        <annotation>
+          <documentation>Leikanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1420">
+        <annotation>
+          <documentation>Sogndal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1421">
+        <annotation>
+          <documentation>Aurland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1422">
+        <annotation>
+          <documentation>Lærdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1424">
+        <annotation>
+          <documentation>Årdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1426">
+        <annotation>
+          <documentation>Luster</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1428">
+        <annotation>
+          <documentation>Askvoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1429">
+        <annotation>
+          <documentation>Fjaler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1430">
+        <annotation>
+          <documentation>Gaular</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1431">
+        <annotation>
+          <documentation>Jølster</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1432">
+        <annotation>
+          <documentation>Førde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1433">
+        <annotation>
+          <documentation>Naustdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1438">
+        <annotation>
+          <documentation>Bremanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1439">
+        <annotation>
+          <documentation>Vågsøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1441">
+        <annotation>
+          <documentation>Selje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1443">
+        <annotation>
+          <documentation>Eid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1444">
+        <annotation>
+          <documentation>Hornindal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1445">
+        <annotation>
+          <documentation>Gloppen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1449">
+        <annotation>
+          <documentation>Stryn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1502">
+        <annotation>
+          <documentation>Molde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1504">
+        <annotation>
+          <documentation>Ålesund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1505">
+        <annotation>
+          <documentation>Kristiansund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1511">
+        <annotation>
+          <documentation>Vanylven</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1514">
+        <annotation>
+          <documentation>Sande i Møre og Romsdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1515">
+        <annotation>
+          <documentation>Herøy i  Møre og Romsdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1516">
+        <annotation>
+          <documentation>Ulstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1517">
+        <annotation>
+          <documentation>Hareid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1519">
+        <annotation>
+          <documentation>Volda</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1520">
+        <annotation>
+          <documentation>Ørsta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1523">
+        <annotation>
+          <documentation>Ørskog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1524">
+        <annotation>
+          <documentation>Norddal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1525">
+        <annotation>
+          <documentation>Stranda</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1526">
+        <annotation>
+          <documentation>Stordal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1528">
+        <annotation>
+          <documentation>Sykkylven</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1529">
+        <annotation>
+          <documentation>Skodje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1531">
+        <annotation>
+          <documentation>Sula</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1532">
+        <annotation>
+          <documentation>Giske</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1534">
+        <annotation>
+          <documentation>Haram</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1535">
+        <annotation>
+          <documentation>Vestnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1537">
+        <annotation>
+          <documentation>Rindal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1539">
+        <annotation>
+          <documentation>Rauma</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1543">
+        <annotation>
+          <documentation>Nesset</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1545">
+        <annotation>
+          <documentation>Midsund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1546">
+        <annotation>
+          <documentation>Sandøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1547">
+        <annotation>
+          <documentation>Aukra</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1548">
+        <annotation>
+          <documentation>Fræna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1551">
+        <annotation>
+          <documentation>Eide</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1554">
+        <annotation>
+          <documentation>Averøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1557">
+        <annotation>
+          <documentation>Gjemnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1560">
+        <annotation>
+          <documentation>Tingvoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1563">
+        <annotation>
+          <documentation>Sunndal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1566">
+        <annotation>
+          <documentation>Surnadal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1567">
+        <annotation>
+          <documentation>Rindal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1569">
+        <annotation>
+          <documentation>Aure (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1571">
+        <annotation>
+          <documentation>Halsa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1572">
+        <annotation>
+          <documentation>Tustna (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1573">
+        <annotation>
+          <documentation>Smøla</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1576">
+        <annotation>
+          <documentation>Aure</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1601">
+        <annotation>
+          <documentation>Trondheim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1612">
+        <annotation>
+          <documentation>Hemne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1613">
+        <annotation>
+          <documentation>Snillfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1617">
+        <annotation>
+          <documentation>Hitra</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1620">
+        <annotation>
+          <documentation>Frøya</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1621">
+        <annotation>
+          <documentation>Ørland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1622">
+        <annotation>
+          <documentation>Agdenes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1624">
+        <annotation>
+          <documentation>Rissa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1627">
+        <annotation>
+          <documentation>Bjugn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1630">
+        <annotation>
+          <documentation>Åfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1632">
+        <annotation>
+          <documentation>Roan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1633">
+        <annotation>
+          <documentation>Osen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1634">
+        <annotation>
+          <documentation>Oppdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1635">
+        <annotation>
+          <documentation>Rennebu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1636">
+        <annotation>
+          <documentation>Meldal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1638">
+        <annotation>
+          <documentation>Orkdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1640">
+        <annotation>
+          <documentation>Røros</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1644">
+        <annotation>
+          <documentation>Holtålen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1648">
+        <annotation>
+          <documentation>Midtre Gauldal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1653">
+        <annotation>
+          <documentation>Melhus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1657">
+        <annotation>
+          <documentation>Skaun</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1662">
+        <annotation>
+          <documentation>Klæbu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1663">
+        <annotation>
+          <documentation>Malvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1664">
+        <annotation>
+          <documentation>Selbu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1665">
+        <annotation>
+          <documentation>Tydal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1702">
+        <annotation>
+          <documentation>Steinkjer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1703">
+        <annotation>
+          <documentation>Namsos</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1711">
+        <annotation>
+          <documentation>Meråker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1714">
+        <annotation>
+          <documentation>Stjørdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1717">
+        <annotation>
+          <documentation>Frosta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1718">
+        <annotation>
+          <documentation>Leksvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1719">
+        <annotation>
+          <documentation>Levanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1721">
+        <annotation>
+          <documentation>Verdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1723">
+        <annotation>
+          <documentation>Mosvik (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1724">
+        <annotation>
+          <documentation>Verran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1725">
+        <annotation>
+          <documentation>Namdalseid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1729">
+        <annotation>
+          <documentation>Inderøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1736">
+        <annotation>
+          <documentation>Snåase - Snåsa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1738">
+        <annotation>
+          <documentation>Lierne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1739">
+        <annotation>
+          <documentation>Røyrvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1740">
+        <annotation>
+          <documentation>Namsskogan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1742">
+        <annotation>
+          <documentation>Grong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1743">
+        <annotation>
+          <documentation>Høylandet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1744">
+        <annotation>
+          <documentation>Overhalla</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1748">
+        <annotation>
+          <documentation>Fosnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1749">
+        <annotation>
+          <documentation>Flatanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1750">
+        <annotation>
+          <documentation>Vikna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1751">
+        <annotation>
+          <documentation>Nærøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1755">
+        <annotation>
+          <documentation>Leka</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1756">
+        <annotation>
+          <documentation>Inderøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1804">
+        <annotation>
+          <documentation>Bodø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1805">
+        <annotation>
+          <documentation>Narvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1811">
+        <annotation>
+          <documentation>Bindal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1812">
+        <annotation>
+          <documentation>Sømna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1813">
+        <annotation>
+          <documentation>Brønnøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1815">
+        <annotation>
+          <documentation>Vega</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1816">
+        <annotation>
+          <documentation>Vevelstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1818">
+        <annotation>
+          <documentation>Herøy i Nordland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1820">
+        <annotation>
+          <documentation>Alstahaug</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1822">
+        <annotation>
+          <documentation>Leirfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1824">
+        <annotation>
+          <documentation>Vefsn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1825">
+        <annotation>
+          <documentation>Grane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1826">
+        <annotation>
+          <documentation>Hattfjelldal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1827">
+        <annotation>
+          <documentation>Dønna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1828">
+        <annotation>
+          <documentation>Nesna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1832">
+        <annotation>
+          <documentation>Hemnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1833">
+        <annotation>
+          <documentation>Rana</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1834">
+        <annotation>
+          <documentation>Lurøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1835">
+        <annotation>
+          <documentation>Træna</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1836">
+        <annotation>
+          <documentation>Rødøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1837">
+        <annotation>
+          <documentation>Meløy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1838">
+        <annotation>
+          <documentation>Gildeskål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1839">
+        <annotation>
+          <documentation>Beiarn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1840">
+        <annotation>
+          <documentation>Saltdal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1841">
+        <annotation>
+          <documentation>Fauske</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1842">
+        <annotation>
+          <documentation>Skjerstad (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1845">
+        <annotation>
+          <documentation>Sørfold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1848">
+        <annotation>
+          <documentation>Steigen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1849">
+        <annotation>
+          <documentation>Hamarøy - Hábmer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1850">
+        <annotation>
+          <documentation>Divtasvuodna - Tysfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1851">
+        <annotation>
+          <documentation>Lødingen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1852">
+        <annotation>
+          <documentation>Tjeldsund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1853">
+        <annotation>
+          <documentation>Evenes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1854">
+        <annotation>
+          <documentation>Ballangen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1856">
+        <annotation>
+          <documentation>Røst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1857">
+        <annotation>
+          <documentation>Værøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1859">
+        <annotation>
+          <documentation>Flakstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1860">
+        <annotation>
+          <documentation>Vestvågøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1865">
+        <annotation>
+          <documentation>Vågan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1866">
+        <annotation>
+          <documentation>Hadsel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1867">
+        <annotation>
+          <documentation>Bø i Nordland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1868">
+        <annotation>
+          <documentation>Øksnes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1870">
+        <annotation>
+          <documentation>Sortland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1871">
+        <annotation>
+          <documentation>Andøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1874">
+        <annotation>
+          <documentation>Moskenes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1901">
+        <annotation>
+          <documentation>Harstad (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1902">
+        <annotation>
+          <documentation>Tromsø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1903">
+        <annotation>
+          <documentation>Harstad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1911">
+        <annotation>
+          <documentation>Kvæfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1913">
+        <annotation>
+          <documentation>Skånland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1915">
+        <annotation>
+          <documentation>Bjarkøy (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1917">
+        <annotation>
+          <documentation>Ibestad</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1919">
+        <annotation>
+          <documentation>Gratangen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1920">
+        <annotation>
+          <documentation>Lavangen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1922">
+        <annotation>
+          <documentation>Bardu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1923">
+        <annotation>
+          <documentation>Salangen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1924">
+        <annotation>
+          <documentation>Målselv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1925">
+        <annotation>
+          <documentation>Sørreisa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1926">
+        <annotation>
+          <documentation>Dyrøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1927">
+        <annotation>
+          <documentation>Tranøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1928">
+        <annotation>
+          <documentation>Torsken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1929">
+        <annotation>
+          <documentation>Berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1931">
+        <annotation>
+          <documentation>Lenvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1933">
+        <annotation>
+          <documentation>Balsfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1936">
+        <annotation>
+          <documentation>Karlsøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1938">
+        <annotation>
+          <documentation>Lyngen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1939">
+        <annotation>
+          <documentation>Storfjord - Omasvuotna - Omasvuono</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1940">
+        <annotation>
+          <documentation>Gáivuotna - Kåfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1941">
+        <annotation>
+          <documentation>Skjervøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1942">
+        <annotation>
+          <documentation>Nordreisa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1943">
+        <annotation>
+          <documentation>Kvænangen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2001">
+        <annotation>
+          <documentation>Hammerfest (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2002">
+        <annotation>
+          <documentation>Vardø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2003">
+        <annotation>
+          <documentation>Vadsø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2004">
+        <annotation>
+          <documentation>Hammerfest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2011">
+        <annotation>
+          <documentation>Guovdageaidnu - Kautokeino</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2012">
+        <annotation>
+          <documentation>Alta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2014">
+        <annotation>
+          <documentation>Loppa</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2015">
+        <annotation>
+          <documentation>Hasvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2016">
+        <annotation>
+          <documentation>Sørøysund (utgått)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2017">
+        <annotation>
+          <documentation>Kvalsund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2018">
+        <annotation>
+          <documentation>Måsøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2019">
+        <annotation>
+          <documentation>Nordkapp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2020">
+        <annotation>
+          <documentation>Porsá?gu - Porsanger - Porsanki</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2021">
+        <annotation>
+          <documentation>Kárášjohka - Karasjok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2022">
+        <annotation>
+          <documentation>Lebesby</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2023">
+        <annotation>
+          <documentation>Gamvik</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2024">
+        <annotation>
+          <documentation>Berlevåg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2025">
+        <annotation>
+          <documentation>Deatnu - Tana</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2027">
+        <annotation>
+          <documentation>Unjárga - Nesseby</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2028">
+        <annotation>
+          <documentation>Båtsfjord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2030">
+        <annotation>
+          <documentation>Sør-Varanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2111">
+        <annotation>
+          <documentation>Spitsbergen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2121">
+        <annotation>
+          <documentation>Bjørnøya</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2131">
+        <annotation>
+          <documentation>Hopen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2211">
+        <annotation>
+          <documentation>Jan Mayen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2311">
+        <annotation>
+          <documentation>Sokkelen sør for 62 grader Nord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2321">
+        <annotation>
+          <documentation>Sokkelen nord for 62 grader Nord</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KommunenummerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kryssystem" substitutionGroup="gml:AbstractObject" type="nvdb:KryssystemType">
+    <annotation>
+      <documentation>917: Angir hvilke deler av et kryss som forvaltningsmessig sett hører sammen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">917</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KRYSSYSTEM</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="KryssystemType">
+    <sequence>
+      <element name="kryssdel" type="integer">
+        <annotation>
+          <documentation>11286: Nummer for den enkelte del av kryssystemet</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11286</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KRYSSDEL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start kryssdel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERFRA</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt kryssdel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERTIL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="KryssystemPropertyType">
+    <sequence>
+      <element ref="nvdb:Kryssystem"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="LineærPosisjon" substitutionGroup="gml:AbstractObject" type="nvdb:LineærPosisjonType">
+    <annotation>
+      <documentation>Angivelse av en posisjon langs et nettverkselement
+
+Realisering av ISO19148: LE_EventLocation</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRPOSISJON</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="LineærPosisjonType">
+    <sequence>
+      <element minOccurs="0" name="lineærReferanseMetode" type="nvdb:LineærReferanseMetodeType">
+        <annotation>
+          <documentation>metode som er brukt for å angi lineære referanser
+
+Merknad: Dersom verdi er angitt overstyrer denne standard metode for det refererte nettverkselementet. 
+
+ISO19148: overridingLRM</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="retning" type="nvdb:RetningskodeType">
+        <annotation>
+          <documentation>Posisjonens retning i forhold til nettverkselementet sin retning</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">RETNING</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="avstandSide" type="double">
+        <annotation>
+          <documentation>Forskyvning til side for nettverkselementet. Positivt tall betyr høyre side, negativt tall betyr venstre side.
+ISO19148: offsetLateralDistance</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRAVSTANDSIDE</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="nettverkselement" type="nvdb:NettverkselementPropertyType">
+        <annotation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LROBJREF</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="LineærPosisjonPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjon"/>
+    </sequence>
+  </complexType>
+  <element name="LineærPosisjonPunkt" substitutionGroup="nvdb:LineærPosisjon" type="nvdb:LineærPosisjonPunktType">
+    <annotation>
+      <documentation>lineær posisjon som et punkt
+
+Merknad:
+Dette er en forenkling i forhold til ISO19148, der posisjonsangivelsene er en egen datatype LR_DistanceExpression som har igjen egenskapen DistanceAlong.
+LR_DistanceExpression har også en subtype LRO_LateralOffsetDistanceExpression, som inneholder egenskapen offsetLateralDistance (avstandSide).
+
+Realisering av ISO19148: LE_AtLocation</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRPUNKT</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="LineærPosisjonPunktType">
+    <complexContent>
+      <extension base="nvdb:LineærPosisjonType">
+        <sequence>
+          <element name="posisjon" type="double">
+            <annotation>
+              <documentation>posisjon langs nettverkselementet, i henhold til referansemetoden 
+
+Merknad: Ref ISO19148: atPosition -  distanceAlong</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRPUNKTPOSISJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LineærPosisjonPunktPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjonPunkt"/>
+    </sequence>
+  </complexType>
+  <element name="LineærPosisjonStrekning" substitutionGroup="nvdb:LineærPosisjon" type="nvdb:LineærPosisjonStrekningType">
+    <annotation>
+      <documentation>lineær posisjon som en strekning
+
+Merknad: 
+Dette er en forenkling i forhold til ISO19148, der posisjonsangivelsene er en egen datatype LR_DistanceExpression som har igjen egenskapen DistanceAlong.
+LR_DistanceExpression har også en subtype LRO_LateralOffsetDistanceExpression, som inneholder egenskapen offsetLateralDistance (avstandSide).
+
+Realisering av ISO19148: LE_FromToLocation</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRSTREKNING</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="LineærPosisjonStrekningType">
+    <complexContent>
+      <extension base="nvdb:LineærPosisjonType">
+        <sequence>
+          <element name="fraPosisjon" type="double">
+            <annotation>
+              <documentation>startposisjon langs nettverkselementet, i henhold til referansemetoden 
+
+Merknad: Ref ISO19148: fromPosition -  distanceAlong</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRFRAPOSISJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="tilPosisjon" type="double">
+            <annotation>
+              <documentation>sluttposisjon langs nettverkselementet, i henhold til referansemetoden
+
+Merknad: Ref ISO19148: toPosition -  distanceAlong</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRTILPOSISJON</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LineærPosisjonStrekningPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjonStrekning"/>
+    </sequence>
+  </complexType>
+  <simpleType name="LineærReferanseMetodeType">
+    <annotation>
+      <documentation>Metode brukt for lineære referanser
+
+Merknad:
+
+Dersom offset er i bruk så angis også positiv offsetretning til side (høyre eller venstre) og vertikalt (opp/ned). 
+Felles for alle metoder i Norge:
+	- offsetUnits: "meter" 
+	- positiveLateralOffsetDirection: "right" 
+positiveVerticalOffsetDirection: "up"
+
+Dette er en kodeliste basert på en forenkling av ISO19148: LR_LinearReferencingMethod, som benytter 4 attributter
+	- navn 
+	- type (absolutt, relativ eller interpolert) 
+	- måleenhet 
+	- restriksjoner/regler (constraints)</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRLRM</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:LineærReferanseMetodeEnumerationType nvdb:LineærReferanseMetodeOtherType"/>
+  </simpleType>
+  <simpleType name="LineærReferanseMetodeEnumerationType">
+    <annotation>
+      <documentation>Metode brukt for lineære referanser
+
+Merknad:
+
+Dersom offset er i bruk så angis også positiv offsetretning til side (høyre eller venstre) og vertikalt (opp/ned). 
+Felles for alle metoder i Norge:
+	- offsetUnits: "meter" 
+	- positiveLateralOffsetDirection: "right" 
+positiveVerticalOffsetDirection: "up"
+
+Dette er en kodeliste basert på en forenkling av ISO19148: LR_LinearReferencingMethod, som benytter 4 attributter
+	- navn 
+	- type (absolutt, relativ eller interpolert) 
+	- måleenhet 
+	- restriksjoner/regler (constraints)</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LRLRM</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="metrering">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet (lenken), angitt i meter
+
+Merknad: Kan ta utgangspunkt i en angitt startverdi for nettverkselementet.
+
+ISO19148: LR_LinearReferencingMethod:
+	- type: "absolute"  
+	- units: "meter"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kilometrering">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt i kilometer. 
+
+Merknad: Kan ta utgangspunkt i en angitt startverdi for nettverkselementet (lenken).
+
+ISO19148: LR_LinearReferencingMethod:
+	- type: "absolute" 
+	- units: "kilometer"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="normalisert">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt som et desimaltall mellom 0 og 1, i forhold til start (0) og slutt (1) på nettverkselementet (lenken)
+
+Merknad: 
+ISO19148: LR_LinearReferencingMethod:
+	- type: "Interpolative"  
+	- units: "0..1"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="prosent">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt i prosent av lengden på nettverkselementet (lenken)
+
+Merknad: 
+ISO19148: LR_LinearReferencingMethod:
+	- type: "Interpolative"  
+	- units: "percent"</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LineærReferanseMetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Link" substitutionGroup="gml:AbstractObject" type="nvdb:LinkType">
+    <annotation>
+      <documentation>referanse  til et informasjonselement, enten lokalt eller globalt
+
+Eksempel:
+Som lokal : //skrisrv2/tjenester/sosiforv/web/welcome.htm
+Som global: http://www.statkart.no/standard/sosi/ACCESS/welcome.htm</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">LINK</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="LinkType">
+    <sequence/>
+  </complexType>
+  <complexType name="LinkPropertyType">
+    <sequence>
+      <element ref="nvdb:Link"/>
+    </sequence>
+  </complexType>
+  <simpleType name="MålemetodeType">
+    <annotation>
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:MålemetodeEnumerationType nvdb:MålemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeEnumerationType">
+    <annotation>
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Measured in terrain: Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>Directly input on screen: Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>GPS phase measurement RTK: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:MålemetodeHøydeEnumerationType nvdb:MålemetodeHøydeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-MÅLEMETODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10"/>
+      <enumeration value="96"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element abstract="true" name="Nettverkselement" substitutionGroup="gml:AbstractFeature" type="nvdb:NettverkselementType">
+    <annotation>
+      <documentation>Abstrakt objekttype som representerer et element i et nettverk, med generelle egenskaper som muliggjør lineære referanser til elementene, 
+Realisering av INSPIRE Network:NetworkElement og ISO19148 LR_Feature.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="NettverkselementType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="standardLRM" type="nvdb:LineærReferanseMetodeType">
+            <annotation>
+              <documentation>STANDARDLRM: Standard metode som brukes for å angi lineære referanser til nettverkselementet
+
+Merknad: Kan overstyres for den enkelte posisjonsangivelse. 
+
+ISO19148: LR_ILinearElement ::defaultLRM() : LR_LinearReferencingMethod</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NettverkselementPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Nettverkselement"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="nvdb:PosisjonskvalitetType">
+    <annotation>
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KVALITET</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="nvdb:MålemetodeType">
+        <annotation>
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Målemetode.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer
+
+Merknad:
+Oppgitt i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="synbarhet" type="nvdb:SynbarhetType">
+        <annotation>
+          <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Synbarhet.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetodeHøyde" type="nvdb:MålemetodeHøydeType">
+        <annotation>
+          <documentation>metode for å måle høyden</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/MålemetodeHøyde.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighetHøyde" type="integer">
+        <annotation>
+          <documentation>nøyaktighet for høyden i cm</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">H-NØYAKTIGHET</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="maksimaltAvvik" type="integer">
+        <annotation>
+          <documentation>absolutt toleranse for geometriske avvik</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">MAX-AVVIK</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="nvdb:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <simpleType name="RetningskodeType">
+    <annotation>
+      <documentation>Kodeliste for å angi retning i forrhold til nettverkselementets geometri.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">RETNINGSKODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:RetningskodeEnumerationType nvdb:RetningskodeOtherType"/>
+  </simpleType>
+  <simpleType name="RetningskodeEnumerationType">
+    <annotation>
+      <documentation>Kodeliste for å angi retning i forrhold til nettverkselementets geometri.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">RETNINGSKODE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="med">
+        <annotation>
+          <documentation>Retning med geometrien</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mot">
+        <annotation>
+          <documentation>Retning mot geometrien</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningskodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Sideanlegg" substitutionGroup="gml:AbstractObject" type="nvdb:SideanleggType">
+    <annotation>
+      <documentation>919: Sideanlegg som trenger egne referanselenker forvaltningsmessig sett fordi disse ikke er en del av vegen for øvrig</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">919</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SIDEANLEGG</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="SideanleggType">
+    <sequence>
+      <element name="sideanleggsdel" type="integer">
+        <annotation>
+          <documentation>11288: Nummer for den enkelte del av sidealegget</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11288</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SIDEANLEGGSDEL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start sideanleggsdel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERFRA</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt sideanleggsdel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERTIL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="SideanleggPropertyType">
+    <sequence>
+      <element ref="nvdb:Sideanlegg"/>
+    </sequence>
+  </complexType>
+  <simpleType name="SideposisjonType">
+    <annotation>
+      <documentation>Angir sideposisjon for vegobjekt, i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SideposisjonEnumerationType nvdb:SideposisjonOtherType"/>
+  </simpleType>
+  <simpleType name="SideposisjonEnumerationType">
+    <annotation>
+      <documentation>Angir sideposisjon for vegobjekt, i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V"/>
+      <enumeration value="H"/>
+      <enumeration value="B"/>
+      <enumeration value="M"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SideposisjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:SynbarhetEnumerationType nvdb:SynbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="SynbarhetEnumerationType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SYNBARHET</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Default</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Forøvrig grei å innmåle. (Benyttes bl.a. for innmåling av ledninger på lukket grøft)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ENDRET_TYPE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TypeEndringEnumerationType nvdb:TypeEndringOtherType"/>
+  </simpleType>
+  <simpleType name="TypeEndringEnumerationType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ENDRET_TYPE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E"/>
+      <enumeration value="N"/>
+      <enumeration value="S"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegfaseType">
+    <annotation>
+      <documentation>11278: Angir vegens fase i livet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGFASE</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VegfaseEnumerationType nvdb:VegfaseOtherType"/>
+  </simpleType>
+  <simpleType name="VegfaseEnumerationType">
+    <annotation>
+      <documentation>11278: Angir vegens fase i livet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGFASE</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="P">
+        <annotation>
+          <documentation>19030: Planlagt veg, vedtatt trasé.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19030</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="A">
+        <annotation>
+          <documentation>19031: Veg under bygging</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19031</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>19032: Veg som er del av operativt vegnett</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19032</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegfaseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGKATEGORI</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VegkategoriEnumerationType nvdb:VegkategoriOtherType"/>
+  </simpleType>
+  <simpleType name="VegkategoriEnumerationType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGKATEGORI</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E">
+        <annotation>
+          <documentation>19024: SVV er vegmyndighet. Unik nummerering iht. europeisk avtale om internasjonale trafikkårer, AGR</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19024</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>19025: SVV er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19025</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>19026: Fylkeskommunen er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19026</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19027: Kommunen er vegmyndighet. Unik nummerering innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19027</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>19028: Private veger. Evt. nummerering er unik innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19028</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>19029: Private landbruksveger som brukes til skogbruksformål. Nummerering iht. landbruksforvaltningens fagsystem ØKS</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19029</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegstrekning" substitutionGroup="gml:AbstractObject" type="nvdb:VegstrekningType">
+    <annotation>
+      <documentation>916: Deler inn vegsystemet i praktisk håndterbare størrelser nummerert i stigende rekkefølge i vegens retning</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">916</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSTREKNING</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="VegstrekningType">
+    <sequence>
+      <element name="strekningNummer" type="integer">
+        <annotation>
+          <documentation>11281: Nummer for den enkelte strekning i et vegsystem</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11281</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">STREKNINGNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="delstrekningNummer" type="integer">
+        <annotation>
+          <documentation>11284: Inndeling av Strekning i forhold til delstrekningens funksjon, f.eks. hovedløp, armer, gang- og sykkelveger. Nummeret er unikt innenfor strekningen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11284</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">DELSTREKNINGNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start veglenke</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERFRA</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt veglenke</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">METERTIL</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="adskilteLøp" type="nvdb:AdskilteLøpType">
+        <annotation>
+          <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADSKILTELØP</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="adskilteLøpNummer" type="string">
+        <annotation>
+          <documentation>11314: Unik nummerering innenfor strekningen for adskilte løp som hører sammen, f.eks. 1-1, 1-2.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11314</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">ADSKILTELØPNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VegstrekningPropertyType">
+    <sequence>
+      <element ref="nvdb:Vegstrekning"/>
+    </sequence>
+  </complexType>
+  <element name="Vegsystem" substitutionGroup="gml:AbstractObject" type="nvdb:VegsystemType">
+    <annotation>
+      <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">915</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSYSTEM</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="VegsystemType">
+    <sequence>
+      <element name="vegkategori" type="nvdb:VegkategoriType">
+        <annotation>
+          <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGKATEGORI</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="vegfase" type="nvdb:VegfaseType">
+        <annotation>
+          <documentation>11278: Angir vegens fase i livet.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGFASE</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegnummer" type="integer">
+        <annotation>
+          <documentation>11277: Angir hvilke deler av vegnettet som rutemessig hører sammen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11277</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGNUMMER</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VegsystemPropertyType">
+    <sequence>
+      <element ref="nvdb:Vegsystem"/>
+    </sequence>
+  </complexType>
+  <element name="Vegsystemreferanse" substitutionGroup="gml:AbstractObject" type="nvdb:VegsystemreferanseType">
+    <annotation>
+      <documentation>sammensatt identifikator for vegsystemreferanse</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VREF</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="VegsystemreferanseType">
+    <sequence>
+      <element name="vegsystem" type="nvdb:VegsystemPropertyType">
+        <annotation>
+          <documentation>hvilke deler av vegnettet som forvaltningsmessig hører sammen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSYSTEM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegstrekning" type="nvdb:VegstrekningPropertyType">
+        <annotation>
+          <documentation>deler inn vegsystemet i praktisk håndterbare størrelser nummerert i stigende rekkefølge i vegens retning</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VEGSTREKNING</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="sideanlegg" type="nvdb:SideanleggPropertyType">
+        <annotation>
+          <documentation>sideanlegg som trenger egne referanselenker forvaltningsmessig sett fordi disse ikke er en del av vegen for øvrig</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">SIDEANLEGG</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="kryssystem" type="nvdb:KryssystemPropertyType">
+        <annotation>
+          <documentation>angir hvilke deler av et kryss som forvaltningsmessig sett hører sammen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">KRYSSYSTEM</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegsystemreferanseFraDato" type="date">
+        <annotation>
+          <documentation>gyldighetsdato fra for vegsystemreferanse (startdato)</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VFRADATO</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegsystemreferanseTilDato" type="date">
+        <annotation>
+          <documentation>gyldighetsdato til for vegsystemreferanse (avslutningsdato)</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">VTILDATO</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="referanseretning" type="nvdb:RetningskodeType">
+        <annotation>
+          <documentation>retning for metrering, med eller mot koordinatrekkefølgen. Merknad: Egenskapen finnes ikke i NVDB, men avledes ut fra stedfesting og lenkenes geometri.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="SOSI_navn">REFERANSERETNING</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VegsystemreferansePropertyType">
+    <sequence>
+      <element ref="nvdb:Vegsystemreferanse"/>
+    </sequence>
+  </complexType>
+</schema>

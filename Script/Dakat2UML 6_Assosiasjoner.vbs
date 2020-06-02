@@ -72,6 +72,7 @@ Sub updateProperties_Assosiasjoner()
 	Dim client As EA.ConnectorEnd
 	set client = con.ClientEnd
 	client.Visibility = "Public"
+	con.ClientEnd.Navigable = "Navigable"
 	client.Role = sr
 	client.Cardinality = sourceCard
 	'client.update
@@ -79,6 +80,7 @@ Sub updateProperties_Assosiasjoner()
 	Dim supplier As EA.ConnectorEnd
 	set supplier = con.SupplierEnd
 	supplier.Visibility = "Public"
+	con.SupplierEnd.Navigable = "Navigable"
 	supplier.Role = dr
 	supplier.Cardinality = destCard
 	'supplier.update
