@@ -11,6 +11,24 @@ const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
 const scProject = "SC_NVDB.eap"
 
+'GUID-er for pakker mm
+const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML
+const guidSOSIDatakatalog = "{E7F57FAF-DB3F-4129-BB30-C903F137F599}" 'Pakken NVDB Datakatalog i SOSI-modellregister
+const guidAbstrakteKlasser = "{B758BAF9-4870-4811-9AEB-28366B6CAB4D}" 'Pakken _AbstrakteKlasser i NVDB Datakatalog-hovedpakken i SOSI-modellregister
+
+' GUID for SOSI-datatyper
+const guidCharacterString = "{453EB6B1-D543-4f3d-BC53-E79283F6736C}"
+const guidInteger = "{992C4B6C-785C-48a4-81A2-5F957E9C8A6B}"
+const guidReal = "{281080FD-4373-4bf1-8F9E-606805BF9A0D}"
+const guidDate = "{6B9D362B-ECF1-4605-800F-67219652B71E}"
+const guidBoolean = "{B037C92D-03AE-4421-A554-7FDA5A49C381}"
+const guidPunkt = "{BE6CCEB8-342A-4a44-BD46-8E5CBFDA9A91}"
+const guidKurve = "{0708BC74-CF46-4cfe-93BE-878EC504768D}"
+const guidFlate = "{46B26A69-F04C-4d11-B363-F3490340F5B7}"
+const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
+const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
+
+
 
 'Parametre for konvertering til SOSI
 
@@ -48,18 +66,3 @@ const strSOSIModell = "SOSI Modell"
 const strSOSIGK = "SOSI Generelle konsepter"
 const strSOSIGO = "SOSI Generell objektkatalog"
 
-'GUID-er for pakker mm
-const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML
-const guidSOSIDatakatalog = "{E7F57FAF-DB3F-4129-BB30-C903F137F599}" 'Pakken NVDB Datakatalog i SOSI-modellregister
-
-' GUID for SOSI-datatyper
-const guidCharacterString = "{453EB6B1-D543-4f3d-BC53-E79283F6736C}"
-const guidInteger = "{992C4B6C-785C-48a4-81A2-5F957E9C8A6B}"
-const guidReal = "{281080FD-4373-4bf1-8F9E-606805BF9A0D}"
-const guidDate = "{6B9D362B-ECF1-4605-800F-67219652B71E}"
-const guidBoolean = "{B037C92D-03AE-4421-A554-7FDA5A49C381}"
-const guidPunkt = "{BE6CCEB8-342A-4a44-BD46-8E5CBFDA9A91}"
-const guidKurve = "{0708BC74-CF46-4cfe-93BE-878EC504768D}"
-const guidFlate = "{46B26A69-F04C-4d11-B363-F3490340F5B7}"
-const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
-const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"

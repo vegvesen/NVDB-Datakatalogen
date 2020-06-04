@@ -29,11 +29,11 @@ sub exportPackages()
 		dim pI as EA.Project					
 		set pI = Repository.GetProjectInterface()
 		'Eksporterer alle pakker 
-		for each pck in thePackage.Packages			
-			'pck.StereotypeEx = ""
-			'pck.Update
-			Repository.WriteOutput "Script", Now & " Eksporter filen " & sosiPath & "\" & pck.Alias & ".xml", 0 
-			pI.ExportPackageXMI pck.PackageGUID, 12, 1, -1, 1, 0, sosiPath & "\" & pck.Alias & ".xml"				
+		for each pck in thePackage.Packages	
+			if pck.PackageGUID <> guidAbstrakteKlasser then 
+				Repository.WriteOutput "Script", Now & " Eksporter filen " & sosiPath & "\" & pck.Alias & ".xml", 0 
+				pI.ExportPackageXMI pck.PackageGUID, 12, 1, -1, 1, 0, sosiPath & "\" & pck.Alias & ".xml"		
+			end if		
 		next
 	
 		Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
