@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Kurvatur_Horisontalelement" substitutionGroup="nvdb:AbstraktKurvatur_Horisontalelement" type="nvdb:Kurvatur_HorisontalelementType">
+    <annotation>
+      <documentation>639: Del av vegens horisontalkurvatur.  Sirkelbue, rettlinje eller klotoide.  Rettlinje har radius 99999</documentation>
+    </annotation>
+  </element>
+  <complexType name="Kurvatur_HorisontalelementType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKurvatur_HorisontalelementType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeKurvatur_HorisontalelementType">
+            <annotation>
+              <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+            </annotation>
+          </element>
+          <element name="radius" type="integer">
+            <annotation>
+              <documentation>5827: Angir elementets radius.  Negativ radius når krumming mot venstre, positiv når krumming mot høyre sett i metreringsretning.  Rettlinje har radius 0. Verdier med radius større enn 9999 eller mindre enn -9999 blir regnet som rettlinje og radius settes til 0
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klotoideparameter" type="integer">
+            <annotation>
+              <documentation>5829: Angir klotoideparameter for elementet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beregningsinfo" type="string">
+            <annotation>
+              <documentation>9961: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6898: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Kurvatur_HorisontalelementPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kurvatur_Horisontalelement"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeKurvatur_HorisontalelementType">
+    <annotation>
+      <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKurvatur_HorisontalelementEnumerationType nvdb:TypeKurvatur_HorisontalelementOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKurvatur_HorisontalelementEnumerationType">
+    <annotation>
+      <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rettlinje">
+        <annotation>
+          <documentation>8315: Rettlinje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sirkelbue">
+        <annotation>
+          <documentation>8316: Sirkelbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="klotoide">
+        <annotation>
+          <documentation>8317: Klotoide</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKurvatur_HorisontalelementOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

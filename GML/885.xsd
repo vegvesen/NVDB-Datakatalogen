@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierSanntidsinformasjon_KollektivtrafikkType">
+    <annotation>
+      <documentation>10687: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSanntidsinformasjon_KollektivtrafikkEnumerationType nvdb:EierSanntidsinformasjon_KollektivtrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="EierSanntidsinformasjon_KollektivtrafikkEnumerationType">
+    <annotation>
+      <documentation>10687: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17259: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18627: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17260: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17261: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17262: Privat</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSanntidsinformasjon_KollektivtrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkType">
+    <annotation>
+      <documentation>10691: Angir hvilken type oppsettingsutstyr som er benyttet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkEnumerationType nvdb:OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkEnumerationType">
+    <annotation>
+      <documentation>10691: Angir hvilken type oppsettingsutstyr som er benyttet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="egetOppsettingsutstyr">
+        <annotation>
+          <documentation>17265: Skjerm er festet på eget oppsettingsutstyr, f.eks egen stolpe,</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="leskur">
+        <annotation>
+          <documentation>17264: Skjerm er fetet på leskur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="veggMur">
+        <annotation>
+          <documentation>17266: Skjerm er festet på mur eller vegg/bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenStolpe">
+        <annotation>
+          <documentation>17267: Skjerm er festet på Skiltstolpe/lysmast etc</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Sanntidsinformasjon_Kollektivtrafikk" substitutionGroup="nvdb:AbstraktSanntidsinformasjon_Kollektivtrafikk" type="nvdb:Sanntidsinformasjon_KollektivtrafikkType">
+    <annotation>
+      <documentation>885: Elektronisk skjerm som viser sanntidsinformajson knyttet til kollektivtrafikk.Kan f.eks være informasjon om avgangstider, forsinkelser, mm.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Sanntidsinformasjon_KollektivtrafikkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSanntidsinformasjon_KollektivtrafikkType">
+        <sequence>
+          <element minOccurs="0" name="oppsettingsutstyr" type="nvdb:OppsettingsutstyrSanntidsinformasjon_KollektivtrafikkType">
+            <annotation>
+              <documentation>10691: Angir hvilken type oppsettingsutstyr som er benyttet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>10690: Høyde fra bakkenivå til nedre kant av skjerm
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10733: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>10689: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11651: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11177: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSanntidsinformasjon_KollektivtrafikkType">
+            <annotation>
+              <documentation>10687: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkType">
+            <annotation>
+              <documentation>10688: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>10692: Punkt som representerer vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Sanntidsinformasjon_KollektivtrafikkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Sanntidsinformasjon_Kollektivtrafikk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkType">
+    <annotation>
+      <documentation>10688: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkEnumerationType nvdb:VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkEnumerationType">
+    <annotation>
+      <documentation>10688: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>17263: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18668: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20004: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18797: Selskap som inngår i Offentlig Privat Samarbeid - avtale</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17257: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17258: Privat</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSanntidsinformasjon_KollektivtrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

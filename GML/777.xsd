@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="StatusTuristvegType">
+    <annotation>
+      <documentation>8128: Angir hvilken status turistvegen har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StatusTuristvegEnumerationType nvdb:StatusTuristvegOtherType"/>
+  </simpleType>
+  <simpleType name="StatusTuristvegEnumerationType">
+    <annotation>
+      <documentation>8128: Angir hvilken status turistvegen har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nasjonalTuristveg">
+        <annotation>
+          <documentation>10681: Nasjonal turistveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="framtidigTuristveg">
+        <annotation>
+          <documentation>10682: Framtidig turistveg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusTuristvegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Turistveg" substitutionGroup="nvdb:AbstraktTuristveg" type="nvdb:TuristvegType">
+    <annotation>
+      <documentation>777: Strekning der vegen har status "Turistveg" eller det er planlagt at den skal få denne statusen.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TuristvegType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTuristvegType">
+        <sequence>
+          <element minOccurs="0" name="linkTuristveg" type="string">
+            <annotation>
+              <documentation>8130: Gir webadresse til informasjon om turistvegen på internett.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string"/>
+          <element minOccurs="0" name="status" type="nvdb:StatusTuristvegType">
+            <annotation>
+              <documentation>8128: Angir hvilken status turistvegen har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8131: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TuristvegPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Turistveg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

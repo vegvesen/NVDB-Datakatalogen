@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Oppdrag_Fagdata" substitutionGroup="nvdb:AbstraktOppdrag_Fagdata" type="nvdb:Oppdrag_FagdataType">
+    <annotation>
+      <documentation>618: Ett sett med oppgaver som skal gjøres med et utvalg av fagdata for en gitt strekning</documentation>
+    </annotation>
+  </element>
+  <complexType name="Oppdrag_FagdataType">
+    <complexContent>
+      <extension base="nvdb:AbstraktOppdrag_FagdataType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeOppdrag_FagdataType">
+            <annotation>
+              <documentation>5600: Angir hvilken type oppdrag det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>5559: Angir navn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="definertDato" type="date">
+            <annotation>
+              <documentation>5563: Angir dato for opprettelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdragsgiver" type="string"/>
+          <element minOccurs="0" name="initialer_definert_av" type="string">
+            <annotation>
+              <documentation>5568: Angir initialer til den som har definert oppdrag</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="frist" type="date">
+            <annotation>
+              <documentation>5570: Angir frist for når oppdrag skal være ferdig</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5576: Kan gi fast merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnad" type="integer">
+            <annotation>
+              <documentation>5580: Gir kostnad til vegobjektet
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="string"/>
+          <element minOccurs="0" name="ledetekstID" type="integer">
+            <annotation>
+              <documentation>5625: LedetekstID</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Oppdrag_FagdataPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Oppdrag_Fagdata"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeOppdrag_FagdataType">
+    <annotation>
+      <documentation>5600: Angir hvilken type oppdrag det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeOppdrag_FagdataEnumerationType nvdb:TypeOppdrag_FagdataOtherType"/>
+  </simpleType>
+  <simpleType name="TypeOppdrag_FagdataEnumerationType">
+    <annotation>
+      <documentation>5600: Angir hvilken type oppdrag det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nyregistrering">
+        <annotation>
+          <documentation>7882: Nyregistrering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sporOgJevnhetsmåling">
+        <annotation>
+          <documentation>7883: Spor og jevnhetsmåling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kvalitetskontroll">
+        <annotation>
+          <documentation>7881: Kvalitetskontroll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ajourhold">
+        <annotation>
+          <documentation>7884: Ajourhold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rapportgenerering">
+        <annotation>
+          <documentation>7885: Rapportgenerering</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeOppdrag_FagdataOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

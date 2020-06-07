@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="Fargeliste_TV_tekstType">
+    <annotation>
+      <documentation>8727: Test av liste med farger hvor det er predefinerte verdier for farge</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Fargeliste_TV_tekstEnumerationType nvdb:Fargeliste_TV_tekstOtherType"/>
+  </simpleType>
+  <simpleType name="Fargeliste_TV_tekstEnumerationType">
+    <annotation>
+      <documentation>8727: Test av liste med farger hvor det er predefinerte verdier for farge</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gul">
+        <annotation>
+          <documentation>11551: Gul</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="blå">
+        <annotation>
+          <documentation>11552: Blå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grå">
+        <annotation>
+          <documentation>11553: Grå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rød">
+        <annotation>
+          <documentation>11554: Rød</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Fargeliste_TV_tekstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Fargelistenr_TV_tallType">
+    <union memberTypes="nvdb:Fargelistenr_TV_tallEnumerationType nvdb:Fargelistenr_TV_tallOtherType"/>
+  </simpleType>
+  <simpleType name="Fargelistenr_TV_tallEnumerationType">
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>11813: 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>11814: 2</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Fargelistenr_TV_tallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Testobjekttype" substitutionGroup="nvdb:AbstraktTestobjekttype" type="nvdb:TestobjekttypeType">
+    <annotation>
+      <documentation>562: Denne objekttypen benyttes ifbm testing av NVDB</documentation>
+    </annotation>
+  </element>
+  <complexType name="TestobjekttypeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTestobjekttypeType">
+        <sequence>
+          <element minOccurs="0" name="test_bilde">
+            <annotation>
+              <documentation>7046: Egenskapstype til test av bilde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_lyd">
+            <annotation>
+              <documentation>7047: Egenskapstype for test av lyd</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_video">
+            <annotation>
+              <documentation>7048: Egenskapstype for test av video</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_TSF">
+            <annotation>
+              <documentation>7049: Egenskapstype for test av TSF_skiltinfo</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_tekstblob">
+            <annotation>
+              <documentation>7050: Egenskapstype for test av tekstblob</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_bildeserie">
+            <annotation>
+              <documentation>7051: Egenskapstype for test av bilder</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_struct_liste_mbilde">
+            <annotation>
+              <documentation>7052: Egenskapstype til test av liste av "structer".  Liste innholder et sett av bilder med tilhørende bildetekst.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="farge_liste" type="string">
+            <annotation>
+              <documentation>4701: Angir alle farger som er brukt (for testformål)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fargeliste_TV_tekst" type="nvdb:Fargeliste_TV_tekstType">
+            <annotation>
+              <documentation>8727: Test av liste med farger hvor det er predefinerte verdier for farge</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fargelistenr_TV_tall" type="nvdb:Fargelistenr_TV_tallType"/>
+          <element minOccurs="0" name="test_dato" type="date">
+            <annotation>
+              <documentation>8802: Test av dato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_dato_liste" type="date">
+            <annotation>
+              <documentation>8803: Test liste med dato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ansvarlig_strukt">
+            <annotation>
+              <documentation>4700: Angir person som er ansvarlig (for testformål)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_binær">
+            <annotation>
+              <documentation>4702: Angir binær data (for testformål)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>8843: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TestobjekttypePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Testobjekttype"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

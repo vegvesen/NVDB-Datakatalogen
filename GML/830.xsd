@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Siktklasse" substitutionGroup="nvdb:AbstraktSiktklasse" type="nvdb:SiktklasseType">
+    <annotation>
+      <documentation>830: Angir hvilken versjon av vegnormalene som ligger til grunn for utforming av gitt vegstrekning med tanke på sikt. Benyttes i forbindelse med drift og vedlikehold</documentation>
+    </annotation>
+  </element>
+  <complexType name="SiktklasseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSiktklasseType">
+        <sequence>
+          <element minOccurs="0" name="siktklasse" type="nvdb:SiktklasseSiktklasseType">
+            <annotation>
+              <documentation>9420: Angir hvilken siktklasse som gjelder på denne strekningen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SiktklassePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Siktklasse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SiktklasseSiktklasseType">
+    <annotation>
+      <documentation>9420: Angir hvilken siktklasse som gjelder på denne strekningen.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SiktklasseSiktklasseEnumerationType nvdb:SiktklasseSiktklasseOtherType"/>
+  </simpleType>
+  <simpleType name="SiktklasseSiktklasseEnumerationType">
+    <annotation>
+      <documentation>9420: Angir hvilken siktklasse som gjelder på denne strekningen.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="siktklasse1">
+        <annotation>
+          <documentation>13269: Vegstrekninger bygd i henhold til normaler for veg- og gateutforming fra før 1992 og vegstrekninger med svært varierende geometrisk standard.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="siktklasse2">
+        <annotation>
+          <documentation>13270: Vegstrekninger som i hovedsak er bygd i henhold til vegnormal Statens vegvesen håndbok N100 (017) Veg- og gateutforming (1992/1993)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="siktklasse3">
+        <annotation>
+          <documentation>13271: Vegstrekninger som i hovedsak er bygd i henhold til vegnormal Statens vegvesen håndbok N100 (017) Veg- og gateutforming (2008)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SiktklasseSiktklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

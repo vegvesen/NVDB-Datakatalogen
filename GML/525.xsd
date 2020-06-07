@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="JevnhetsformålType">
+    <annotation>
+      <documentation>4473: Angir formal med spormåling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:JevnhetsformålEnumerationType nvdb:JevnhetsformålOtherType"/>
+  </simpleType>
+  <simpleType name="JevnhetsformålEnumerationType">
+    <annotation>
+      <documentation>4473: Angir formal med spormåling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="G">
+        <annotation>
+          <documentation>5205: Generelle målinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R1">
+        <annotation>
+          <documentation>5206: Referanse-1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R2">
+        <annotation>
+          <documentation>19486: Referanse-2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R3">
+        <annotation>
+          <documentation>19487: Referanse-3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>5207: Forsøksmålinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>5784: Teleløsning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>10131: Initiell-1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>10132: Initiell-2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>10133: Initiell-3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="a">
+        <annotation>
+          <documentation>13044: Måleserie a</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="b">
+        <annotation>
+          <documentation>13045: Måleserie b</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="c">
+        <annotation>
+          <documentation>13046: Måleserie c</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="d">
+        <annotation>
+          <documentation>13047: Måleserie d</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="JevnhetsformålOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Jevnhetsmåling_AvledaPr20M" substitutionGroup="nvdb:AbstraktJevnhetsmåling_AvledaPr20M" type="nvdb:Jevnhetsmåling_AvledaPr20MType">
+    <annotation>
+      <documentation>525: Resulterende jevnhetsmåling for en 20-metersstrekning</documentation>
+    </annotation>
+  </element>
+  <complexType name="Jevnhetsmåling_AvledaPr20MType">
+    <complexContent>
+      <extension base="nvdb:AbstraktJevnhetsmåling_AvledaPr20MType">
+        <sequence>
+          <element name="måledato" type="date">
+            <annotation>
+              <documentation>4471: Angir måledato</documentation>
+            </annotation>
+          </element>
+          <element name="jevnhetsformål" type="nvdb:JevnhetsformålType">
+            <annotation>
+              <documentation>4473: Angir formal med spormåling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utstyrsnummer" type="string">
+            <annotation>
+              <documentation>4476: Angir hvilket utstyr som er benytta</documentation>
+            </annotation>
+          </element>
+          <element name="spor_Laser" type="nvdb:Spor_LaserJevnhetsmåling_AvledaPr20MType">
+            <annotation>
+              <documentation>4472: Angir hvilket spor dataene gjelder</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="IRI_Beregningslengde" type="integer">
+            <annotation>
+              <documentation>4475: Angir IRI-Beregningslengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element name="IRI_Jevnhetsindeks" type="double">
+            <annotation>
+              <documentation>4474: Angir IRI-Jevnhetsindeks
+Enhet: Millimeter/meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="MPD_Middelverdi" type="integer">
+            <annotation>
+              <documentation>5907: Midlere profilhøyde
+Enhet: Millimeter x 100</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="MPD_Standardavvik" type="integer">
+            <annotation>
+              <documentation>5908: Midlere profilhøyde, standardavvik
+Enhet: Millimeter x 100</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="HV_Median" type="integer">
+            <annotation>
+              <documentation>5909: Helningsvinkel
+Enhet: Millimeter x 100</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="HV_IQR" type="integer">
+            <annotation>
+              <documentation>5910: Helningsvinkel, IQR (Inter-quartile range)  Innenfor 25-75%
+Enhet: Millimeter x 100</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rosita_id" type="string">
+            <annotation>
+              <documentation>8942: Gir id for måledatafil/profil i Rosita</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5025: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Jevnhetsmåling_AvledaPr20MPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Jevnhetsmåling_AvledaPr20M"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="Spor_LaserJevnhetsmåling_AvledaPr20MType">
+    <annotation>
+      <documentation>4472: Angir hvilket spor dataene gjelder</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Spor_LaserJevnhetsmåling_AvledaPr20MEnumerationType nvdb:Spor_LaserJevnhetsmåling_AvledaPr20MOtherType"/>
+  </simpleType>
+  <simpleType name="Spor_LaserJevnhetsmåling_AvledaPr20MEnumerationType">
+    <annotation>
+      <documentation>4472: Angir hvilket spor dataene gjelder</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="i">
+        <annotation>
+          <documentation>5202: Indre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="m">
+        <annotation>
+          <documentation>5203: Mellom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="y">
+        <annotation>
+          <documentation>5204: Ytre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Spor_LaserJevnhetsmåling_AvledaPr20MOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

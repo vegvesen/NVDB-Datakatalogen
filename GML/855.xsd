@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeGjerdeportType">
+    <annotation>
+      <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeGjerdeportEnumerationType nvdb:BruksområdeGjerdeportOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeGjerdeportEnumerationType">
+    <annotation>
+      <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gjennomgangForGåendeSyklende">
+        <annotation>
+          <documentation>15907: Gjennomgang for gående/syklende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilgangLandbruksareal">
+        <annotation>
+          <documentation>15908: Tilgang landbruksareal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilkomstTilAvkjørsel">
+        <annotation>
+          <documentation>15909: Tilkomst til avkjørsel</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeGjerdeportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierGjerdeportType">
+    <annotation>
+      <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierGjerdeportEnumerationType nvdb:EierGjerdeportOtherType"/>
+  </simpleType>
+  <simpleType name="EierGjerdeportEnumerationType">
+    <annotation>
+      <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>15910: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18615: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>15911: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>15912: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>15913: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17624: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierGjerdeportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Gjerdeport" substitutionGroup="nvdb:AbstraktGjerdeport" type="nvdb:GjerdeportType">
+    <annotation>
+      <documentation>855: Passasje i gjerder eller skjermer</documentation>
+    </annotation>
+  </element>
+  <complexType name="GjerdeportType">
+    <complexContent>
+      <extension base="nvdb:AbstraktGjerdeportType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeGjerdeportType">
+            <annotation>
+              <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materiale" type="nvdb:MaterialeGjerdeportType">
+            <annotation>
+              <documentation>9778: Angir materiale</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>9772: Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>9777: Angir egenhøyde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utforming" type="nvdb:UtformingType">
+            <annotation>
+              <documentation>9781: Angir hvilken utforming grinda har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="normalStilling" type="nvdb:NormalStillingType">
+            <annotation>
+              <documentation>9780: Angir hva som er normal stilling for dør</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10302: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11645: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11170: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierGjerdeportType">
+            <annotation>
+              <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligGjerdeportType">
+            <annotation>
+              <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>9776: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GjerdeportPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Gjerdeport"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaterialeGjerdeportType">
+    <annotation>
+      <documentation>9778: Angir materiale</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeGjerdeportEnumerationType nvdb:MaterialeGjerdeportOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeGjerdeportEnumerationType">
+    <annotation>
+      <documentation>9778: Angir materiale</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="aluminium">
+        <annotation>
+          <documentation>15914: Aluminium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stål">
+        <annotation>
+          <documentation>15915: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>15916: Tre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeGjerdeportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="NormalStillingType">
+    <annotation>
+      <documentation>9780: Angir hva som er normal stilling for dør</documentation>
+    </annotation>
+    <union memberTypes="nvdb:NormalStillingEnumerationType nvdb:NormalStillingOtherType"/>
+  </simpleType>
+  <simpleType name="NormalStillingEnumerationType">
+    <annotation>
+      <documentation>9780: Angir hva som er normal stilling for dør</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="lukka_Låst">
+        <annotation>
+          <documentation>15917: Lukka, låst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lukka_Ulåst">
+        <annotation>
+          <documentation>15918: Lukka, ulåst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="åpen">
+        <annotation>
+          <documentation>15919: Åpen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="NormalStillingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingType">
+    <annotation>
+      <documentation>9781: Angir hvilken utforming grinda har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtformingEnumerationType nvdb:UtformingOtherType"/>
+  </simpleType>
+  <simpleType name="UtformingEnumerationType">
+    <annotation>
+      <documentation>9781: Angir hvilken utforming grinda har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="enkel">
+        <annotation>
+          <documentation>15920: Enkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="todelt">
+        <annotation>
+          <documentation>15921: Todelt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGjerdeportType">
+    <annotation>
+      <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligGjerdeportEnumerationType nvdb:VedlikeholdsansvarligGjerdeportOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGjerdeportEnumerationType">
+    <annotation>
+      <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>15926: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18677: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19994: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18806: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>15927: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>15928: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17778: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGjerdeportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

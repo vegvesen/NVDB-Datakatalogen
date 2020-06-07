@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BortkjøringType">
+    <annotation>
+      <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BortkjøringEnumerationType nvdb:BortkjøringOtherType"/>
+  </simpleType>
+  <simpleType name="BortkjøringEnumerationType">
+    <annotation>
+      <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17903: Snø/is må normalt lastes over på annet kjøretøy og kjøres bort fra stedet da det ikke er tilstrekkelig opplagringsplass i umiddelbar nærhet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17904: Det er plass til opplagring av snø i nærheten slik at snø kan flyttes uten omlasting til annet kjøretøy for bortkjøring.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17905: Informasjon om hvorvidt det er behov for bortkjøring er ikke innhentet.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BortkjøringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="SnøIsrydding" substitutionGroup="nvdb:AbstraktSnøIsrydding" type="nvdb:SnøIsryddingType">
+    <annotation>
+      <documentation>318: Sted/område hvor det er behov for å snø-/isrydding utover det som tas med brøytekjøretøy</documentation>
+    </annotation>
+  </element>
+  <complexType name="SnøIsryddingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSnøIsryddingType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeSnøIsryddingType">
+            <annotation>
+              <documentation>2224: Angir hvilken type snørydding det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>10719: Tilleggsbeskrivelse. Kan f.eks være bakgrunn for snøryddingsbehov, om snø må kjøres bort, Hvor stort omffang snørydding har osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bortkjøring" type="nvdb:BortkjøringType">
+            <annotation>
+              <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="hyppighet" type="integer">
+            <annotation>
+              <documentation>10864: Angir anslag for hvor ofte det er behov for å foreta rydding per vintersesong</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="makshøydeIs" type="integer">
+            <annotation>
+              <documentation>10865: Angir hvor høyt over veg det er nødvendig med isrensk.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>10866: Angir areal av område som skal snø-/isryddes.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4909: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SnøIsryddingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:SnøIsrydding"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSnøIsryddingType">
+    <annotation>
+      <documentation>2224: Angir hvilken type snørydding det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSnøIsryddingEnumerationType nvdb:TypeSnøIsryddingOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSnøIsryddingEnumerationType">
+    <annotation>
+      <documentation>2224: Angir hvilken type snørydding det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="snørydding">
+        <annotation>
+          <documentation>4075: Benyttes om ikke annen verdi passer. Skal suppleres med informasjon under «Beskrivelse»</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_ManglendeSnøopplager">
+        <annotation>
+          <documentation>17899: Snørydding pga manglende snøopplager generelt. Eksempel  bysenter.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Sikt">
+        <annotation>
+          <documentation>9840: Snørydding for å opprettholde tilstrekkelige siktforhold. Gjelder kryss, rekkverk, kurver mm.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_TrafikkdelerØy">
+        <annotation>
+          <documentation>9831: Ekstra snørydding i tilknytning til trafikkdelere og trafikkøyer. Kan være både fysiske og malte.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Fortau">
+        <annotation>
+          <documentation>9830: Snørydding i tilknytning til fortau. Kan være parti med smale passasjer eller manglende snøopplager.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Leskur">
+        <annotation>
+          <documentation>9834: Snørydding i tilknytning til leskur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Trafikklomme">
+        <annotation>
+          <documentation>9832: Snørydding i tilknytning til trafikklommer. F.eks ved manglende plass til snøopplager.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_SideanleggNaboeiendom">
+        <annotation>
+          <documentation>17900: Snørydding i tilknytning til sideanlegg, naboeiendom, mot annen vegholder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_SkjæringMur">
+        <annotation>
+          <documentation>9839: Snørydding i forbindelse med skjæringer/murer for å sikre plass til snø fra kommende brøyting og hindre at det raser snø fra skråning ut i kjørebanen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_NedfresingAvBrøytekanter">
+        <annotation>
+          <documentation>17902: Strekning hvor det erfaringsmessig er behov for å frese ned brøytekanter for å få plass til å brøyte bort ny snø.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Fokksnø">
+        <annotation>
+          <documentation>17901: Snørydding på strekning som er spesielt utsatt for at det bygger seg opp snøfonner ved bestemte værforhold.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snørydding_Fresefelt">
+        <annotation>
+          <documentation>9833: Strekning hvor det freses bort snø i en viss bredde ved siden av vegen undervegs i vintersesongen for å gi plass til store snømengder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="isrenskIBergskjæringSkråning">
+        <annotation>
+          <documentation>5483: Bergskjæringer eller bratte skråninger/fjellsider hvor det erfaringsmessig må fjernes is for å hindre at det raser ned på vegen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="isrenskITunnel">
+        <annotation>
+          <documentation>5484: Sted hvor det erfaringsmessig må foretas isrensk i tunnel.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSnøIsryddingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

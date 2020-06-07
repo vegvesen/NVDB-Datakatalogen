@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="TypeUndergrunnType">
+    <annotation>
+      <documentation>1245: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeUndergrunnEnumerationType nvdb:TypeUndergrunnOtherType"/>
+  </simpleType>
+  <simpleType name="TypeUndergrunnEnumerationType">
+    <annotation>
+      <documentation>1245: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="fjell">
+        <annotation>
+          <documentation>2330: Fjell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="steinFjell_Sprengt">
+        <annotation>
+          <documentation>2260: Stein/fjell, sprengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="løsmasse">
+        <annotation>
+          <documentation>2285: Løsmasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jord">
+        <annotation>
+          <documentation>2292: Jord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="leire">
+        <annotation>
+          <documentation>2294: Leire</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="siltSand">
+        <annotation>
+          <documentation>2299: Silt/sand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sand">
+        <annotation>
+          <documentation>2301: Sand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sandGrus">
+        <annotation>
+          <documentation>2303: Sand/grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grus">
+        <annotation>
+          <documentation>2306: Grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="morenejord">
+        <annotation>
+          <documentation>2319: Morenejord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="myr">
+        <annotation>
+          <documentation>3931: Myr</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bru">
+        <annotation>
+          <documentation>2762: Bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pælerPlater">
+        <annotation>
+          <documentation>3961: Pæler/plater</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeUndergrunnOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Undergrunn" substitutionGroup="nvdb:AbstraktUndergrunn" type="nvdb:UndergrunnType">
+    <annotation>
+      <documentation>303: Angir hvilken undergrunn vegen hviler på</documentation>
+    </annotation>
+  </element>
+  <complexType name="UndergrunnType">
+    <complexContent>
+      <extension base="nvdb:AbstraktUndergrunnType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeUndergrunnType">
+            <annotation>
+              <documentation>1245: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11601: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11114: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4900: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8908: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="UndergrunnPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Undergrunn"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

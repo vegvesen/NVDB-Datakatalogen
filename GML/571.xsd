@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BevegelseType">
+    <union memberTypes="nvdb:BevegelseEnumerationType nvdb:BevegelseOtherType"/>
+  </simpleType>
+  <simpleType name="BevegelseEnumerationType">
+    <restriction base="string">
+      <enumeration value="rettFram">
+        <annotation>
+          <documentation>6554: Rett fram</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="USvingTilVenstre">
+        <annotation>
+          <documentation>6555: U sving til venstre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="USvingTilHøyre">
+        <annotation>
+          <documentation>6556: U sving til høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="svingTilVenstre">
+        <annotation>
+          <documentation>6557: Sving til venstre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="svingTilHøyre">
+        <annotation>
+          <documentation>6558: Sving til høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbikjøringFeltbytteTilVenstre">
+        <annotation>
+          <documentation>6559: Forbikjøring/feltbytte til venstre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbikjøringFeltbytteTilHøyre">
+        <annotation>
+          <documentation>6560: Forbikjøring/feltbytte til høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uteAvKontroll">
+        <annotation>
+          <documentation>6561: Ute av kontroll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="startFraStillestående">
+        <annotation>
+          <documentation>6562: Start fra stillestående</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="akselerasjon">
+        <annotation>
+          <documentation>6563: Akselerasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bremsendeIRoPgaTrafikk">
+        <annotation>
+          <documentation>6564: Bremsende/i ro pga trafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stansetForVenstresving">
+        <annotation>
+          <documentation>6565: Stanset for venstresving</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stansetForHøyresving">
+        <annotation>
+          <documentation>6566: Stanset for høyresving</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ryggende">
+        <annotation>
+          <documentation>6567: Ryggende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkertStillestående">
+        <annotation>
+          <documentation>6568: Parkert / stillestående</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annet">
+        <annotation>
+          <documentation>6569: annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6570: ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BevegelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DekktypeType">
+    <annotation>
+      <documentation>5106: Type dekk på enhet i STRAKS</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DekktypeEnumerationType nvdb:DekktypeOtherType"/>
+  </simpleType>
+  <simpleType name="DekktypeEnumerationType">
+    <annotation>
+      <documentation>5106: Type dekk på enhet i STRAKS</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sommerdekk">
+        <annotation>
+          <documentation>6648: Sommerdekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vinterdekkUtenPigger">
+        <annotation>
+          <documentation>6649: Vinterdekk uten pigger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vinterdekkMedPigger">
+        <annotation>
+          <documentation>6650: Vinterdekk med pigger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annet">
+        <annotation>
+          <documentation>6651: Annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6652: ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DekktypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnhetsbokstavType">
+    <annotation>
+      <documentation>5089: Hver enhet i en ulykke kodes med en enhetsbokstav fra A til Z (fortløpende).</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EnhetsbokstavEnumerationType nvdb:EnhetsbokstavOtherType"/>
+  </simpleType>
+  <simpleType name="EnhetsbokstavEnumerationType">
+    <annotation>
+      <documentation>5089: Hver enhet i en ulykke kodes med en enhetsbokstav fra A til Z (fortløpende).</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="A">
+        <annotation>
+          <documentation>6987: A</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>6988: B</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="C">
+        <annotation>
+          <documentation>6989: C</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="D">
+        <annotation>
+          <documentation>6990: D</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="E">
+        <annotation>
+          <documentation>6991: E</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>6992: F</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="G">
+        <annotation>
+          <documentation>6993: G</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H">
+        <annotation>
+          <documentation>6994: H</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="I">
+        <annotation>
+          <documentation>6995: I</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="J">
+        <annotation>
+          <documentation>6996: J</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>6997: K</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L">
+        <annotation>
+          <documentation>6998: L</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="M">
+        <annotation>
+          <documentation>6999: M</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="N">
+        <annotation>
+          <documentation>7000: N</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="O">
+        <annotation>
+          <documentation>7001: O</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>7002: P</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Q">
+        <annotation>
+          <documentation>7003: Q</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>7004: R</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>7005: S</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>7006: T</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="U">
+        <annotation>
+          <documentation>7007: U</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>7008: V</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="W">
+        <annotation>
+          <documentation>7009: W</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="X">
+        <annotation>
+          <documentation>7010: X</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Y">
+        <annotation>
+          <documentation>7011: Y</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Z">
+        <annotation>
+          <documentation>7012: Z</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="A">
+        <annotation>
+          <documentation>8957: a</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>8958: b</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="C">
+        <annotation>
+          <documentation>8959: c</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="D">
+        <annotation>
+          <documentation>8960: d</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="E">
+        <annotation>
+          <documentation>8961: e</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>8962: f</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="G">
+        <annotation>
+          <documentation>8963: g</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H">
+        <annotation>
+          <documentation>8964: h</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="I">
+        <annotation>
+          <documentation>8965: i</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="J">
+        <annotation>
+          <documentation>8966: j</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>8967: k</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L">
+        <annotation>
+          <documentation>8968: l</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="M">
+        <annotation>
+          <documentation>8969: m</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="N">
+        <annotation>
+          <documentation>8970: n</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="O">
+        <annotation>
+          <documentation>8971: o</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>8972: p</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Q">
+        <annotation>
+          <documentation>8973: q</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>8974: r</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>8975: s</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>8976: t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="U">
+        <annotation>
+          <documentation>8977: u</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>8978: v</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="W">
+        <annotation>
+          <documentation>8979: w</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="X">
+        <annotation>
+          <documentation>8980: x</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Y">
+        <annotation>
+          <documentation>8981: y</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Z">
+        <annotation>
+          <documentation>8982: z</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnhetsbokstavOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FerdselsformålType">
+    <union memberTypes="nvdb:FerdselsformålEnumerationType nvdb:FerdselsformålOtherType"/>
+  </simpleType>
+  <simpleType name="FerdselsformålEnumerationType">
+    <restriction base="string">
+      <enumeration value="tilFraArbeid">
+        <annotation>
+          <documentation>6574: Til/fra arbeid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iArbeid">
+        <annotation>
+          <documentation>6575: I arbeid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFraSkole">
+        <annotation>
+          <documentation>6576: Til/fra skole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fritidsreise">
+        <annotation>
+          <documentation>6578: Fritidsreise</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="øvelseskjøring">
+        <annotation>
+          <documentation>6579: Øvelseskjøring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetFormål">
+        <annotation>
+          <documentation>6583: Annet formål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6584: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FerdselsformålOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FørsteBerøringspunktType">
+    <annotation>
+      <documentation>5101: Det punkt på kjøretøyet hvor det anslagsvis ble truffet først</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FørsteBerøringspunktEnumerationType nvdb:FørsteBerøringspunktOtherType"/>
+  </simpleType>
+  <simpleType name="FørsteBerøringspunktEnumerationType">
+    <annotation>
+      <documentation>5101: Det punkt på kjøretøyet hvor det anslagsvis ble truffet først</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="takHode">
+        <annotation>
+          <documentation>9850: Tak/hode</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreForan">
+        <annotation>
+          <documentation>9852: Høyre foran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreSideForan">
+        <annotation>
+          <documentation>9853: Høyre side foran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreSide">
+        <annotation>
+          <documentation>9854: Høyre side</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreSideBak">
+        <annotation>
+          <documentation>9855: Høyre side bak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreBak">
+        <annotation>
+          <documentation>9856: Høyre bak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rettBak">
+        <annotation>
+          <documentation>9857: Rett bak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreBak">
+        <annotation>
+          <documentation>9858: Venstre bak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreSideBak">
+        <annotation>
+          <documentation>9859: Venstre side bak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreSide">
+        <annotation>
+          <documentation>9860: Venstre side</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreSideForan">
+        <annotation>
+          <documentation>9861: Venstre side foran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreForan">
+        <annotation>
+          <documentation>9862: Venstre foran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rettForan">
+        <annotation>
+          <documentation>9863: Rett foran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>9864: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FørsteBerøringspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="HinderTypeType">
+    <union memberTypes="nvdb:HinderTypeEnumerationType nvdb:HinderTypeOtherType"/>
+  </simpleType>
+  <simpleType name="HinderTypeEnumerationType">
+    <restriction base="string">
+      <enumeration value="intetHinderPåkjørt">
+        <annotation>
+          <documentation>6626: Intet hinder påkjørt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltstolpe">
+        <annotation>
+          <documentation>6627: Skiltstolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalstolpe">
+        <annotation>
+          <documentation>6628: Signalstolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysmastAvTre">
+        <annotation>
+          <documentation>6629: Lysmast av tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysmastAvStål">
+        <annotation>
+          <documentation>6630: Lysmast av stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenMastStolpe">
+        <annotation>
+          <documentation>6631: Annen mast / stolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>6632: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjerde_Rekkverk">
+        <annotation>
+          <documentation>6633: Gjerde, rekkverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mur_Bygning">
+        <annotation>
+          <documentation>6634: Mur, bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein_Fjellvegg">
+        <annotation>
+          <documentation>6635: Stein, fjellvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kantstein">
+        <annotation>
+          <documentation>6636: Kantstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkertKjøretøy">
+        <annotation>
+          <documentation>6637: Parkert kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenGjenstandIKjørebanen">
+        <annotation>
+          <documentation>6638: Annen gjenstand i kjørebanen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="størreTamdyr_KuMm">
+        <annotation>
+          <documentation>6639: Større tamdyr (ku mm.)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mindreTamdyr_KattMm">
+        <annotation>
+          <documentation>6640: Mindre tamdyr ( katt mm.)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elg">
+        <annotation>
+          <documentation>6641: Elg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rein">
+        <annotation>
+          <documentation>6642: Rein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rådyr_Hjort">
+        <annotation>
+          <documentation>6643: Rådyr, hjort</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetVilt">
+        <annotation>
+          <documentation>6644: Annet vilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjentDyr">
+        <annotation>
+          <documentation>6645: Ukjent dyr</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annet">
+        <annotation>
+          <documentation>6646: annet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6647: ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HinderTypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjøreretningType">
+    <annotation>
+      <documentation>5757: Angir hvilken retning kjøretøyet beveget seg i forhold til metreringsretning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KjøreretningEnumerationType nvdb:KjøreretningOtherType"/>
+  </simpleType>
+  <simpleType name="KjøreretningEnumerationType">
+    <annotation>
+      <documentation>5757: Angir hvilken retning kjøretøyet beveget seg i forhold til metreringsretning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="medMetreringsretning">
+        <annotation>
+          <documentation>7995: Med metreringsretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motMetreringsretning">
+        <annotation>
+          <documentation>7996: Mot metreringsretning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjøreretningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjøretøytypeUlykkesinvolvertEnhetType">
+    <annotation>
+      <documentation>5090: Alle kjøretøy er gitt sin egen kode fra 01 til 99.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KjøretøytypeUlykkesinvolvertEnhetEnumerationType nvdb:KjøretøytypeUlykkesinvolvertEnhetOtherType"/>
+  </simpleType>
+  <simpleType name="KjøretøytypeUlykkesinvolvertEnhetEnumerationType">
+    <annotation>
+      <documentation>5090: Alle kjøretøy er gitt sin egen kode fra 01 til 99.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="fotgjenger">
+        <annotation>
+          <documentation>6499: Fotgjenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="akende">
+        <annotation>
+          <documentation>6500: Akende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ski">
+        <annotation>
+          <documentation>6501: Ski</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rulleski_Rulleskøyter_Rullebrett">
+        <annotation>
+          <documentation>6502: Rulleski, rulleskøyter, rullebrett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sparkstøtting_Rullesparkstøtting">
+        <annotation>
+          <documentation>6503: Sparkstøtting, rullesparkstøtting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sykkel">
+        <annotation>
+          <documentation>6504: Sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hestMedRytter">
+        <annotation>
+          <documentation>6505: Hest med rytter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hestMedVogn_Hestekjøretøy">
+        <annotation>
+          <documentation>6506: Hest med vogn, hestekjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="moped">
+        <annotation>
+          <documentation>6507: Moped</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lettMotorsykkel">
+        <annotation>
+          <documentation>6508: Lett motorsykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tungMotorsykkel">
+        <annotation>
+          <documentation>6509: Tung motorsykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motorsykkelMedSidevogn">
+        <annotation>
+          <documentation>6510: Motorsykkel med sidevogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snøscooter">
+        <annotation>
+          <documentation>6511: Snøscooter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rullestol_ElektriskDrevetRullestolSykkel">
+        <annotation>
+          <documentation>6512: Rullestol, elektrisk drevet rullestol/sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ATV_Åpen3Eller4_HjulsMC_MopedEllerTraktor">
+        <annotation>
+          <documentation>9561: ATV (åpen 3- eller 4-hjuls MC, moped eller traktor)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="el_Bil">
+        <annotation>
+          <documentation>9562: El-bil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lukket3Eller4_HjulsMC_MopedEllerTraktor">
+        <annotation>
+          <documentation>13463: Lukket 3- eller 4-hjuls MC, moped eller traktor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="personbil_Stasjonsvogn">
+        <annotation>
+          <documentation>6513: Personbil, stasjonsvogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="drosje_OgsåMinibuss">
+        <annotation>
+          <documentation>6514: Drosje (også minibuss)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bussMinibussIRute">
+        <annotation>
+          <documentation>6515: Buss/minibuss i rute</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="minibuss_Privat">
+        <annotation>
+          <documentation>6516: Minibuss (privat)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenBuss_Turvogn">
+        <annotation>
+          <documentation>6517: Annen buss, turvogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ambulanseUnderUtrykning_BlålysOgEllerSærskiltLydsignal">
+        <annotation>
+          <documentation>6518: Ambulanse under utrykning (blålys og/eller særskilt lydsignal)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="politiUnderUtrykning_BlålysOgEllerSærskiltLydsignal">
+        <annotation>
+          <documentation>6519: Politi under utrykning (blålys og/eller særskilt lydsignal)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brannbilUnderUtrykning_BlålysOgEllerSærskiltLydsignal">
+        <annotation>
+          <documentation>6520: Brannbil under utrykning (blålys og/eller særskilt lydsignal)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="varebil">
+        <annotation>
+          <documentation>6521: Varebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebil">
+        <annotation>
+          <documentation>6522: Lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kombinertBil">
+        <annotation>
+          <documentation>6523: Kombinert bil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trekkbil_UtenSemitrailer">
+        <annotation>
+          <documentation>6524: Trekkbil (uten semitrailer)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="personbilStasjonsvognMedCampingvogn">
+        <annotation>
+          <documentation>6525: Personbil/stasjonsvogn med campingvogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="varebilMedCampingvogn">
+        <annotation>
+          <documentation>6526: Varebil med campingvogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tankbil">
+        <annotation>
+          <documentation>6527: Tankbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="campingbil_Bobil_Kombibil">
+        <annotation>
+          <documentation>6528: Campingbil, bobil, kombibil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="personbilStasjonsvognMedTilhTilhRedskap_UnntattCampVogn">
+        <annotation>
+          <documentation>6529: Personbil/stasjonsvogn med tilh./tilh.redskap (unntatt camp.vogn)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="varebilMedTilhengerTilhengerredskap_UnntattCampingvogn">
+        <annotation>
+          <documentation>6530: Varebil med tilhenger/tilhengerredskap (unntatt campingvogn)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebilMedPåhengsvogn_1Akslet">
+        <annotation>
+          <documentation>6531: Lastebil med påhengsvogn (1-akslet)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebilMedSlepevogn_2Akslet">
+        <annotation>
+          <documentation>6532: Lastebil med slepevogn (2-akslet)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebilMedTilhengerredskap">
+        <annotation>
+          <documentation>6533: Lastebil med tilhengerredskap</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kombinertBilMedTilhengerTilhengerredskap">
+        <annotation>
+          <documentation>6534: Kombinert bil med tilhenger/tilhengerredskap</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trekkbilMedSemitrailer">
+        <annotation>
+          <documentation>6535: Trekkbil med semitrailer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tankbilMedTilhenger">
+        <annotation>
+          <documentation>6536: Tankbil med tilhenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beltebil_AnnenBil">
+        <annotation>
+          <documentation>6537: Beltebil, annen bil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="traktor_Ordinær">
+        <annotation>
+          <documentation>6538: Traktor (ordinær)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilhengerTilhengerredskapUtenTrekkvogn">
+        <annotation>
+          <documentation>6539: Tilhenger/tilhengerredskap uten trekkvogn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jernbanetog">
+        <annotation>
+          <documentation>6540: Jernbanetog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sporvogn_Trikk">
+        <annotation>
+          <documentation>6541: Sporvogn, trikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetKjøretøy">
+        <annotation>
+          <documentation>6542: Annet kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjentKjøretøy">
+        <annotation>
+          <documentation>6543: Ukjent kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjøretøytypeUlykkesinvolvertEnhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RegistreringslandType">
+    <union memberTypes="nvdb:RegistreringslandEnumerationType nvdb:RegistreringslandOtherType"/>
+  </simpleType>
+  <simpleType name="RegistreringslandEnumerationType">
+    <restriction base="string">
+      <enumeration value="norge">
+        <annotation>
+          <documentation>6605: Norge</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sverige">
+        <annotation>
+          <documentation>6606: Sverige</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="danmark">
+        <annotation>
+          <documentation>6607: Danmark</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="finland">
+        <annotation>
+          <documentation>6608: Finland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="storbritannia">
+        <annotation>
+          <documentation>6609: Storbritannia</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tyskland">
+        <annotation>
+          <documentation>6610: Tyskland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="frankrike">
+        <annotation>
+          <documentation>6611: Frankrike</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nederland">
+        <annotation>
+          <documentation>6612: Nederland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belgia">
+        <annotation>
+          <documentation>6613: Belgia</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="luxembourg">
+        <annotation>
+          <documentation>6614: Luxembourg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="østerrike">
+        <annotation>
+          <documentation>6615: Østerrike</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sveits">
+        <annotation>
+          <documentation>6616: Sveits</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="italia">
+        <annotation>
+          <documentation>6617: Italia</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="polen">
+        <annotation>
+          <documentation>6618: Polen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="russland">
+        <annotation>
+          <documentation>6619: Russland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="litauen">
+        <annotation>
+          <documentation>9805: Litauen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="estland">
+        <annotation>
+          <documentation>13439: Estland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="latvia">
+        <annotation>
+          <documentation>13440: Latvia</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="romania">
+        <annotation>
+          <documentation>13441: Romania</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bulgaria">
+        <annotation>
+          <documentation>13442: Bulgaria</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kroatia">
+        <annotation>
+          <documentation>13443: Kroatia</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="andreØsteuropeiskeLand">
+        <annotation>
+          <documentation>6620: Andre østeuropeiske land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="andreVesteuropeiskeLand">
+        <annotation>
+          <documentation>6621: Andre vesteuropeiske land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="diplomatbil">
+        <annotation>
+          <documentation>6622: Diplomatbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="militærtKjøretøy">
+        <annotation>
+          <documentation>6623: Militært kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetLand">
+        <annotation>
+          <documentation>6624: Annet land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6625: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RegistreringslandOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReguleringForEnhetIVegkryssType">
+    <union memberTypes="nvdb:ReguleringForEnhetIVegkryssEnumerationType nvdb:ReguleringForEnhetIVegkryssOtherType"/>
+  </simpleType>
+  <simpleType name="ReguleringForEnhetIVegkryssEnumerationType">
+    <restriction base="string">
+      <enumeration value="ikkeIVegkryssEllerGangfelt">
+        <annotation>
+          <documentation>6585: Ikke i vegkryss eller gangfelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="intetSpesielt_Høyre_Regel">
+        <annotation>
+          <documentation>6586: Intet spesielt (høyre-regel)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lyssignalIFunksjonIKryssEllerGangfeltUtenforKryss">
+        <annotation>
+          <documentation>6587: Lyssignal i funksjon i kryss eller gangfelt utenfor kryss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forkjørsveg">
+        <annotation>
+          <documentation>6588: Forkjørsveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikeplikt">
+        <annotation>
+          <documentation>6589: Vikeplikt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stopplikt">
+        <annotation>
+          <documentation>6590: Stopplikt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltetOppmerketGangfelt_UtenLysregulering">
+        <annotation>
+          <documentation>6591: Skiltet / oppmerket gangfelt (uten lysregulering)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lyssignalUteAvFunksjon_GultBlinkendeLysEllerUtenLys">
+        <annotation>
+          <documentation>6592: Lyssignal ute av funksjon (gult blinkende lys eller uten lys)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenReguleringIVegkryss_InkludertMidlertidig">
+        <annotation>
+          <documentation>6593: Annen regulering i vegkryss, inkludert midlertidig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6594: ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReguleringForEnhetIVegkryssOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningUlykkesinvolvertEnhetType">
+    <union memberTypes="nvdb:RetningUlykkesinvolvertEnhetEnumerationType nvdb:RetningUlykkesinvolvertEnhetOtherType"/>
+  </simpleType>
+  <simpleType name="RetningUlykkesinvolvertEnhetEnumerationType">
+    <restriction base="string">
+      <enumeration value="ikkeRelevant">
+        <annotation>
+          <documentation>6544: Ikke relevant</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraNord">
+        <annotation>
+          <documentation>6545: Fra nord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraNordøst">
+        <annotation>
+          <documentation>6546: Fra nordøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraØst">
+        <annotation>
+          <documentation>6547: Fra øst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraSørøst">
+        <annotation>
+          <documentation>6548: Fra sørøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraSør">
+        <annotation>
+          <documentation>6549: Fra sør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraSørvest">
+        <annotation>
+          <documentation>6550: Fra sørvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraVest">
+        <annotation>
+          <documentation>6551: Fra vest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraNordvest">
+        <annotation>
+          <documentation>6552: Fra nordvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>6553: ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningUlykkesinvolvertEnhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="UlykkesinvolvertEnhet" substitutionGroup="nvdb:AbstraktUlykkesinvolvertEnhet" type="nvdb:UlykkesinvolvertEnhetType">
+    <annotation>
+      <documentation>571: Enheter involvert i ulykken. En fotgjenger regnes også som en enhet. Se kjøretøytype</documentation>
+    </annotation>
+  </element>
+  <complexType name="UlykkesinvolvertEnhetType">
+    <complexContent>
+      <extension base="nvdb:AbstraktUlykkesinvolvertEnhetType">
+        <sequence>
+          <element minOccurs="0" name="kjøretøytype" type="nvdb:KjøretøytypeUlykkesinvolvertEnhetType">
+            <annotation>
+              <documentation>5090: Alle kjøretøy er gitt sin egen kode fra 01 til 99.</documentation>
+            </annotation>
+          </element>
+          <element name="enhetsbokstav" type="nvdb:EnhetsbokstavType">
+            <annotation>
+              <documentation>5089: Hver enhet i en ulykke kodes med en enhetsbokstav fra A til Z (fortløpende).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallPersonerPrEnhetIUlykke" type="integer">
+            <annotation>
+              <documentation>5091: Antall personer pr. enhet i ulykke.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kryssveg" type="boolean"/>
+          <element minOccurs="0" name="kjøreretning" type="nvdb:KjøreretningType">
+            <annotation>
+              <documentation>5757: Angir hvilken retning kjøretøyet beveget seg i forhold til metreringsretning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="retning" type="nvdb:RetningUlykkesinvolvertEnhetType"/>
+          <element minOccurs="0" name="bevegelse" type="nvdb:BevegelseType"/>
+          <element minOccurs="0" name="postnummer" type="integer">
+            <annotation>
+              <documentation>5095: Postnummer, f.eks. 7085 (Korsvegen)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kommentarDekk" type="string"/>
+          <element minOccurs="0" name="ferdselsformål" type="nvdb:FerdselsformålType"/>
+          <element minOccurs="0" name="førerkortUtstedtFørsteGang" type="date">
+            <annotation>
+              <documentation>5098: Dato for førerkort utstedt første gang.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="reguleringForEnhetIVegkryss" type="nvdb:ReguleringForEnhetIVegkryssType"/>
+          <element minOccurs="0" name="førsteBerøringspunkt" type="nvdb:FørsteBerøringspunktType">
+            <annotation>
+              <documentation>5101: Det punkt på kjøretøyet hvor det anslagsvis ble truffet først</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsland" type="nvdb:RegistreringslandType"/>
+          <element minOccurs="0" name="årsmodellPåKjøretøy" type="integer">
+            <annotation>
+              <documentation>5103: Årsmodell på kjøretøy.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjennemerke" type="string">
+            <annotation>
+              <documentation>5088: Ikke frigitt for registrering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="hinderType" type="nvdb:HinderTypeType"/>
+          <element minOccurs="0" name="vegavstandFraHinder" type="double">
+            <annotation>
+              <documentation>5105: Avstand fra veg til hinder.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekktype" type="nvdb:DekktypeType">
+            <annotation>
+              <documentation>5106: Type dekk på enhet i STRAKS</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>10737: Gir punkt som geometrisk representerer vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="UlykkesinvolvertEnhetPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:UlykkesinvolvertEnhet"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Avstandsmåling" substitutionGroup="nvdb:AbstraktAvstandsmåling" type="nvdb:AvstandsmålingType">
+    <annotation>
+      <documentation>335: Målt avstand på tvers av vegen mellom gitt referansepunkt og et vegobjekt</documentation>
+    </annotation>
+  </element>
+  <complexType name="AvstandsmålingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktAvstandsmålingType">
+        <sequence>
+          <element minOccurs="0" name="avstandVegkant_Start" type="double">
+            <annotation>
+              <documentation>2248: Angir avstand fra vegkant i start av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandVegkant_Slutt" type="double">
+            <annotation>
+              <documentation>7566: Angir avstand fra vegkant i slutt av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandReferanselinje_Start" type="double">
+            <annotation>
+              <documentation>2249: Angir avstand fra referanselinje i start av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandReferanselinje_Slutt" type="double">
+            <annotation>
+              <documentation>7567: Angir avstand fra referanselinje i slutt av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="nvdb:KvalitetType">
+            <annotation>
+              <documentation>2250: Angir kvalitet på måling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="AvstandsmålingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Avstandsmåling"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KvalitetType">
+    <annotation>
+      <documentation>2250: Angir kvalitet på måling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KvalitetEnumerationType nvdb:KvalitetOtherType"/>
+  </simpleType>
+  <simpleType name="KvalitetEnumerationType">
+    <annotation>
+      <documentation>2250: Angir kvalitet på måling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skjønn">
+        <annotation>
+          <documentation>4622: Skjønn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="målt">
+        <annotation>
+          <documentation>4623: Målt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KvalitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

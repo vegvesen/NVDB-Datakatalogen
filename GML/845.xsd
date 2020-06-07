@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstFanggjerdeType">
+    <annotation>
+      <documentation>9602: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstFanggjerdeEnumerationType nvdb:AdkomstFanggjerdeOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstFanggjerdeEnumerationType">
+    <annotation>
+      <documentation>9602: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19822: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>13816: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>13817: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>13818: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>13819: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>13820: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>13821: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstFanggjerdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFanggjerdeType">
+    <annotation>
+      <documentation>9643: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFanggjerdeEnumerationType nvdb:EierFanggjerdeOtherType"/>
+  </simpleType>
+  <simpleType name="EierFanggjerdeEnumerationType">
+    <annotation>
+      <documentation>9643: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>13869: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18654: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>13870: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13871: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13872: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17621: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFanggjerdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Fanggjerde" substitutionGroup="nvdb:AbstraktFanggjerde" type="nvdb:FanggjerdeType">
+    <annotation>
+      <documentation>845: Gjerde som settes opp for å fange opp steinsprang eller mindre skred</documentation>
+    </annotation>
+  </element>
+  <complexType name="FanggjerdeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFanggjerdeType">
+        <sequence>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>9597: Angir total lengde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>9598: Angir egen-høyde av vegobjektet uavhengig av hvilken vinkel det står i.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="styrke" type="integer">
+            <annotation>
+              <documentation>9599: Energimengden fanggjerdet er kontruert for å motstå
+Enhet: KiloJoule</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjennomsnittligAvstandFraVeg" type="integer">
+            <annotation>
+              <documentation>9600: Gjennomsnittlig avstand fra vegkant til vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="helningsvinkelGjerde" type="integer">
+            <annotation>
+              <documentation>9601: Helningsgrad for vegobjektet.
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstFanggjerdeType">
+            <annotation>
+              <documentation>9602: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9606: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="nvdb:ProdusentType">
+            <annotation>
+              <documentation>9642: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9876: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11161: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierFanggjerdeType">
+            <annotation>
+              <documentation>9643: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligFanggjerdeType">
+            <annotation>
+              <documentation>9644: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9604: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FanggjerdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fanggjerde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="ProdusentType">
+    <annotation>
+      <documentation>9642: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ProdusentEnumerationType nvdb:ProdusentOtherType"/>
+  </simpleType>
+  <simpleType name="ProdusentEnumerationType">
+    <annotation>
+      <documentation>9642: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="avaroc">
+        <annotation>
+          <documentation>13863: Avaroc</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elMontagne">
+        <annotation>
+          <documentation>13864: El Montagne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="geobrGg">
+        <annotation>
+          <documentation>13865: Geobrügg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="isofer">
+        <annotation>
+          <documentation>13866: Isofer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trumerSchutzbauten">
+        <annotation>
+          <documentation>13868: Trumer Schutzbauten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="maccaferri">
+        <annotation>
+          <documentation>13867: Maccaferri</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ProdusentOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFanggjerdeType">
+    <annotation>
+      <documentation>9644: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFanggjerdeEnumerationType nvdb:VedlikeholdsansvarligFanggjerdeOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFanggjerdeEnumerationType">
+    <annotation>
+      <documentation>9644: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>13873: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18672: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19987: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18801: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13874: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13875: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17775: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFanggjerdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

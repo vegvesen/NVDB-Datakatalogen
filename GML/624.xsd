@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierFartstavleType">
+    <annotation>
+      <documentation>8044: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFartstavleEnumerationType nvdb:EierFartstavleOtherType"/>
+  </simpleType>
+  <simpleType name="EierFartstavleEnumerationType">
+    <annotation>
+      <documentation>8044: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10310: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18656: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10771: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10374: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10438: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17660: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFartstavleOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Fartstavle" substitutionGroup="nvdb:AbstraktFartstavle" type="nvdb:FartstavleType">
+    <annotation>
+      <documentation>624: Tavle som viser fart til kjøretøy som passerer</documentation>
+    </annotation>
+  </element>
+  <complexType name="FartstavleType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFartstavleType">
+        <sequence>
+          <element minOccurs="0" name="serienummer" type="string">
+            <annotation>
+              <documentation>9530: Angir serienummer på tavle</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stasjonering" type="nvdb:StasjoneringType">
+            <annotation>
+              <documentation>9531: Angir om fartstavle er mobil eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeMåling" type="nvdb:TypeMålingType">
+            <annotation>
+              <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produksjonsår" type="integer">
+            <annotation>
+              <documentation>9528: Angir hvilket år tavla ble produsert.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10463: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11739: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>10994: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>9529: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11632: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11466: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierFartstavleType">
+            <annotation>
+              <documentation>8044: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligFartstavleType">
+            <annotation>
+              <documentation>8120: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>6885: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FartstavlePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fartstavle"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="StasjoneringType">
+    <annotation>
+      <documentation>9531: Angir om fartstavle er mobil eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StasjoneringEnumerationType nvdb:StasjoneringOtherType"/>
+  </simpleType>
+  <simpleType name="StasjoneringEnumerationType">
+    <annotation>
+      <documentation>9531: Angir om fartstavle er mobil eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="fast">
+        <annotation>
+          <documentation>13452: Fast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mobil">
+        <annotation>
+          <documentation>13453: Mobil</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StasjoneringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeMålingType">
+    <annotation>
+      <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeMålingEnumerationType nvdb:TypeMålingOtherType"/>
+  </simpleType>
+  <simpleType name="TypeMålingEnumerationType">
+    <annotation>
+      <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sløyfe">
+        <annotation>
+          <documentation>13454: Sløyfe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="radar">
+        <annotation>
+          <documentation>13455: Radar</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeMålingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFartstavleType">
+    <annotation>
+      <documentation>8120: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFartstavleEnumerationType nvdb:VedlikeholdsansvarligFartstavleOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFartstavleEnumerationType">
+    <annotation>
+      <documentation>8120: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10514: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18749: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19975: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18878: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10592: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10670: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17758: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFartstavleOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

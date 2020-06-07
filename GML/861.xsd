@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierLedelysstrekning_OptiskType">
+    <annotation>
+      <documentation>9913: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierLedelysstrekning_OptiskEnumerationType nvdb:EierLedelysstrekning_OptiskOtherType"/>
+  </simpleType>
+  <simpleType name="EierLedelysstrekning_OptiskEnumerationType">
+    <annotation>
+      <documentation>9913: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>16117: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18618: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16118: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16119: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16120: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17627: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierLedelysstrekning_OptiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringLedelysstrekning_OptiskType">
+    <annotation>
+      <documentation>9921: Angir om ledelyset kan fjernstyres</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FjernstyringLedelysstrekning_OptiskEnumerationType nvdb:FjernstyringLedelysstrekning_OptiskOtherType"/>
+  </simpleType>
+  <simpleType name="FjernstyringLedelysstrekning_OptiskEnumerationType">
+    <annotation>
+      <documentation>9921: Angir om ledelyset kan fjernstyres</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16108: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16109: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringLedelysstrekning_OptiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InngårINødsystemetITunnelType">
+    <annotation>
+      <documentation>9916: Angir om ledelyset inngår i nødsystemet i en tunnel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InngårINødsystemetITunnelEnumerationType nvdb:InngårINødsystemetITunnelOtherType"/>
+  </simpleType>
+  <simpleType name="InngårINødsystemetITunnelEnumerationType">
+    <annotation>
+      <documentation>9916: Angir om ledelyset inngår i nødsystemet i en tunnel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16595: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16596: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InngårINødsystemetITunnelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ledelysstrekning_Optisk" substitutionGroup="nvdb:AbstraktLedelysstrekning_Optisk" type="nvdb:Ledelysstrekning_OptiskType">
+    <annotation>
+      <documentation>861: En rekke med lys satt opp i den hensikt å gi optisk ledning for de kjørende. Må ikke forveksles med rømningslys i tunnel, men kan like fullt ha funksjon i forbindelse med evakuering av røyklagt tunnel.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Ledelysstrekning_OptiskType">
+    <complexContent>
+      <extension base="nvdb:AbstraktLedelysstrekning_OptiskType">
+        <sequence>
+          <element minOccurs="0" name="lyskildeType" type="nvdb:LyskildeTypeType">
+            <annotation>
+              <documentation>9917: Angir type lyskilder i ledelyset</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringLedelysstrekning_OptiskType">
+            <annotation>
+              <documentation>9923: Angir hvor ledelys er plassert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="inngårINødsystemetITunnel" type="nvdb:InngårINødsystemetITunnelType">
+            <annotation>
+              <documentation>9916: Angir om ledelyset inngår i nødsystemet i en tunnel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallLedelyspunkt" type="integer">
+            <annotation>
+              <documentation>9907: Angir hvor mange ledelyspunkt det er totalt i ledelysstrekning
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandInnbyrdes" type="integer">
+            <annotation>
+              <documentation>9908: Angir normal innbyrdes avstand mellom ledelyspunktene i ledelysstrekningen.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fjernstyring" type="nvdb:FjernstyringLedelysstrekning_OptiskType">
+            <annotation>
+              <documentation>9921: Angir om ledelyset kan fjernstyres</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="effekt" type="integer">
+            <annotation>
+              <documentation>9912: Angir effekt for ett ledelys
+Enhet: Watt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spenning" type="nvdb:SpenningLedelysstrekning_OptiskType">
+            <annotation>
+              <documentation>9920: Driftspenning for lysene
+Enhet: Volt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsstrøm" type="double">
+            <annotation>
+              <documentation>9911: Angir driftsstrøm for en lyskilde ved full lysstyrke
+Enhet: Milliampere</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9909: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent_Lysarmatur" type="string">
+            <annotation>
+              <documentation>9919: Angir navn på produsent/fabrikant av de enkelte lysarmaturene.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>9918: Angir produktnavn for lysarmatur. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11647: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11173: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierLedelysstrekning_OptiskType">
+            <annotation>
+              <documentation>9913: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>9914: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligLedelysstrekning_OptiskType">
+            <annotation>
+              <documentation>9924: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9915: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Ledelysstrekning_OptiskPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ledelysstrekning_Optisk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="LyskildeTypeType">
+    <annotation>
+      <documentation>9917: Angir type lyskilder i ledelyset</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LyskildeTypeEnumerationType nvdb:LyskildeTypeOtherType"/>
+  </simpleType>
+  <simpleType name="LyskildeTypeEnumerationType">
+    <annotation>
+      <documentation>9917: Angir type lyskilder i ledelyset</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="LED">
+        <annotation>
+          <documentation>16112: LED</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysstoffrør">
+        <annotation>
+          <documentation>16113: Lysstoffrør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lystråd">
+        <annotation>
+          <documentation>16723: Tråd som lyser i hele trådens lengde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glødelampe">
+        <annotation>
+          <documentation>16724: Tradisjonell glødelampe</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LyskildeTypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringLedelysstrekning_OptiskType">
+    <annotation>
+      <documentation>9923: Angir hvor ledelys er plassert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringLedelysstrekning_OptiskEnumerationType nvdb:PlasseringLedelysstrekning_OptiskOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringLedelysstrekning_OptiskEnumerationType">
+    <annotation>
+      <documentation>9923: Angir hvor ledelys er plassert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="iBankettVegskulder">
+        <annotation>
+          <documentation>16098: Ledelys er motert på bankett eller vegskulder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påRekkverk">
+        <annotation>
+          <documentation>16099: På rekkverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påMurVegg">
+        <annotation>
+          <documentation>16100: På mur/vegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="egetOppsettingsutstyr">
+        <annotation>
+          <documentation>16101: Plassert på egene stolper, kantstolper eller eget oppsttingsutstyr</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringLedelysstrekning_OptiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningLedelysstrekning_OptiskType">
+    <annotation>
+      <documentation>9920: Driftspenning for lysene</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SpenningLedelysstrekning_OptiskEnumerationType nvdb:SpenningLedelysstrekning_OptiskOtherType"/>
+  </simpleType>
+  <simpleType name="SpenningLedelysstrekning_OptiskEnumerationType">
+    <annotation>
+      <documentation>9920: Driftspenning for lysene</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="12">
+        <annotation>
+          <documentation>16125: 12 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>16126: 24 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="230">
+        <annotation>
+          <documentation>16127: 230 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="400">
+        <annotation>
+          <documentation>16128: 400 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="690">
+        <annotation>
+          <documentation>16719: 690 volt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningLedelysstrekning_OptiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLedelysstrekning_OptiskType">
+    <annotation>
+      <documentation>9924: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligLedelysstrekning_OptiskEnumerationType nvdb:VedlikeholdsansvarligLedelysstrekning_OptiskOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLedelysstrekning_OptiskEnumerationType">
+    <annotation>
+      <documentation>9924: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>16116: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18724: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19997: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18853: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16114: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16115: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17781: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLedelysstrekning_OptiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

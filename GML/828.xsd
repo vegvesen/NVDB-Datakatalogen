@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="MaterialtypeRistType">
+    <union memberTypes="nvdb:MaterialtypeRistEnumerationType nvdb:MaterialtypeRistOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeRistEnumerationType">
+    <restriction base="string">
+      <enumeration value="stål">
+        <annotation>
+          <documentation>13129: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="aluminium">
+        <annotation>
+          <documentation>13130: Aluminium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kompositt">
+        <annotation>
+          <documentation>13131: Kompositt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeRistOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Rist" substitutionGroup="nvdb:AbstraktRist" type="nvdb:RistType">
+    <annotation>
+      <documentation>828: benyttes for å sikre grøfter etc.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RistType">
+    <complexContent>
+      <extension base="nvdb:AbstraktRistType">
+        <sequence>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>9389: Beskrivelse av rist, utforming, bruk, innfesting, etc</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>9387: Angir areal
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeRistType"/>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10349: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11218: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11203: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RistPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Rist"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

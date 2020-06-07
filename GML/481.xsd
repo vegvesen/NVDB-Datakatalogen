@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SpenningTennpunktType">
+    <annotation>
+      <documentation>10080: Angir spenning enheten opererer med</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SpenningTennpunktEnumerationType nvdb:SpenningTennpunktOtherType"/>
+  </simpleType>
+  <simpleType name="SpenningTennpunktEnumerationType">
+    <annotation>
+      <documentation>10080: Angir spenning enheten opererer med</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="12">
+        <annotation>
+          <documentation>16448: 12 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>16449: 24 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="230">
+        <annotation>
+          <documentation>16450: 230 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="400">
+        <annotation>
+          <documentation>16451: 400 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="690">
+        <annotation>
+          <documentation>16714: 690 volt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningTennpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Tennpunkt" substitutionGroup="nvdb:AbstraktTennpunkt" type="nvdb:TennpunktType">
+    <annotation>
+      <documentation>481: Utstyr for tenning av belysning</documentation>
+    </annotation>
+  </element>
+  <complexType name="TennpunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTennpunktType">
+        <sequence>
+          <element minOccurs="0" name="tennpunktnummer" type="string">
+            <annotation>
+              <documentation>3892: Angir nummer til tennpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spenning" type="nvdb:SpenningTennpunktType">
+            <annotation>
+              <documentation>10080: Angir spenning enheten opererer med
+Enhet: Volt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10070: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10071: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>10073: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>10072: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11139: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4996: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TennpunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Tennpunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

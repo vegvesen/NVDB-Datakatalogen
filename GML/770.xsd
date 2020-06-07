@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DriftsstatusFerjesambandType">
+    <union memberTypes="nvdb:DriftsstatusFerjesambandEnumerationType nvdb:DriftsstatusFerjesambandOtherType"/>
+  </simpleType>
+  <simpleType name="DriftsstatusFerjesambandEnumerationType">
+    <restriction base="string">
+      <enumeration value="trafikkeres">
+        <annotation>
+          <documentation>12858: Trafikkeres</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagt">
+        <annotation>
+          <documentation>12859: Nedlagt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DriftsstatusFerjesambandOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ferjesamband" substitutionGroup="nvdb:AbstraktFerjesamband" type="nvdb:FerjesambandType">
+    <annotation>
+      <documentation>770: Overfart som trafikkeres av bilferje.  Kan ha to eller flere anløpssteder.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FerjesambandType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFerjesambandType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>9186: Angir navn på ferjesambandet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sambandstype" type="nvdb:SambandstypeType">
+            <annotation>
+              <documentation>10954: Angir hvilken type samband det er, dvs om det er på stat-, fylke- eller kommunenivå.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsstatus" type="nvdb:DriftsstatusFerjesambandType"/>
+          <element minOccurs="0" name="ferjesambands_Id" type="integer">
+            <annotation>
+              <documentation>9187: Unik ID for ferjesamband.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FerjesambandPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ferjesamband"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SambandstypeType">
+    <annotation>
+      <documentation>10954: Angir hvilken type samband det er, dvs om det er på stat-, fylke- eller kommunenivå.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SambandstypeEnumerationType nvdb:SambandstypeOtherType"/>
+  </simpleType>
+  <simpleType name="SambandstypeEnumerationType">
+    <annotation>
+      <documentation>10954: Angir hvilken type samband det er, dvs om det er på stat-, fylke- eller kommunenivå.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="riksvegferjesamband">
+        <annotation>
+          <documentation>18304: Samband som administreres av stat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkesferjesamband">
+        <annotation>
+          <documentation>18305: Samband som administreres av fylkeskummune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommuneferjesamband">
+        <annotation>
+          <documentation>18306: Ferjesamband som administreres av kommune</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SambandstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

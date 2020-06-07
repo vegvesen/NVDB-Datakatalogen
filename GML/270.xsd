@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Skråning" substitutionGroup="nvdb:AbstraktSkråning" type="nvdb:SkråningType">
+    <annotation>
+      <documentation>270: Skråflate som er dannet ut fra geologiske prosesser.  Benyttes ikke i forbindelse med fylling og skjæring.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkråningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkråningType">
+        <sequence>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>1381: Angir areal av skråning.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>1348: Angir lengde av vegobjektet, oppgis bare hvis den avviker fra geometri/stedfesting
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeSkråningType">
+            <annotation>
+              <documentation>1225: Angir hvilken type skråning det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_GjSnitt" type="integer">
+            <annotation>
+              <documentation>1702: Angir gjennomsnittlig bredde av skråning.  Måles parallelt med skråning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11597: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4877: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8890: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkråningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skråning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSkråningType">
+    <annotation>
+      <documentation>1225: Angir hvilken type skråning det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSkråningEnumerationType nvdb:TypeSkråningOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSkråningEnumerationType">
+    <annotation>
+      <documentation>1225: Angir hvilken type skråning det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kombinertJordOgFjell">
+        <annotation>
+          <documentation>2584: Skråning med både jord og fjell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjell">
+        <annotation>
+          <documentation>2586: Fjell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jord">
+        <annotation>
+          <documentation>2588: Naturlig jordskråning, ikke menneskeskapt.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSkråningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

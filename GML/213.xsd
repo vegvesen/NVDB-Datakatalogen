@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Brannslokningsapparat" substitutionGroup="nvdb:AbstraktBrannslokningsapparat" type="nvdb:BrannslokningsapparatType">
+    <annotation>
+      <documentation>213: Apparat for å slokke brann</documentation>
+    </annotation>
+  </element>
+  <complexType name="BrannslokningsapparatType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBrannslokningsapparatType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeBrannslokningsapparatType">
+            <annotation>
+              <documentation>1206: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kapasitet" type="nvdb:KapasitetType">
+            <annotation>
+              <documentation>4021: Angir kapasitet
+Enhet: Kilogram</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plasseringITekniskRom" type="nvdb:PlasseringITekniskRomType">
+            <annotation>
+              <documentation>3739: Angir om objektet er plassert i teknisk rom</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10273: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11593: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11103: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4853: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BrannslokningsapparatPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Brannslokningsapparat"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KapasitetType">
+    <annotation>
+      <documentation>4021: Angir kapasitet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KapasitetEnumerationType nvdb:KapasitetOtherType"/>
+  </simpleType>
+  <simpleType name="KapasitetEnumerationType">
+    <annotation>
+      <documentation>4021: Angir kapasitet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="5">
+        <annotation>
+          <documentation>16018: 5</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>5049: 6</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>5050: 12</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KapasitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringITekniskRomType">
+    <annotation>
+      <documentation>3739: Angir om objektet er plassert i teknisk rom</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringITekniskRomEnumerationType nvdb:PlasseringITekniskRomOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringITekniskRomEnumerationType">
+    <annotation>
+      <documentation>3739: Angir om objektet er plassert i teknisk rom</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16019: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16020: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringITekniskRomOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrannslokningsapparatType">
+    <annotation>
+      <documentation>1206: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBrannslokningsapparatEnumerationType nvdb:TypeBrannslokningsapparatOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBrannslokningsapparatEnumerationType">
+    <annotation>
+      <documentation>1206: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="pulverapparat">
+        <annotation>
+          <documentation>3373: Pulverapparat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skumapparat">
+        <annotation>
+          <documentation>5048: Skumapparat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CO_Apparat">
+        <annotation>
+          <documentation>4917: CO-apparat</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrannslokningsapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

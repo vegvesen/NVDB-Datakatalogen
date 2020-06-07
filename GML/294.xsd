@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="TilstandSkade_Strekning" substitutionGroup="nvdb:AbstraktTilstandSkade_Strekning" type="nvdb:TilstandSkade_StrekningType">
+    <annotation>
+      <documentation>294: Gir informasjon om tilstand og eventuell skade.  Normalt knyttet til et spesifikt strekningsobjekt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_StrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_StrekningType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_StrekningType">
+            <annotation>
+              <documentation>2267: Angir tilstand til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="string">
+            <annotation>
+              <documentation>1241: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8782: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakTilstandSkade_StrekningType">
+            <annotation>
+              <documentation>2063: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltakNår" type="nvdb:TiltakNårTilstandSkade_StrekningType">
+            <annotation>
+              <documentation>2113: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_Tilstandsindeks" type="integer">
+            <annotation>
+              <documentation>9835: Angir tilstand. Til testformål
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7858: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4893: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_StrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Strekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_StrekningType">
+    <annotation>
+      <documentation>2267: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_StrekningEnumerationType nvdb:TilstandTilstandSkade_StrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_StrekningEnumerationType">
+    <annotation>
+      <documentation>2267: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>4100: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>4101: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>4102: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>4628: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_StrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_StrekningType">
+    <annotation>
+      <documentation>2113: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakNårTilstandSkade_StrekningEnumerationType nvdb:TiltakNårTilstandSkade_StrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_StrekningEnumerationType">
+    <annotation>
+      <documentation>2113: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="straks">
+        <annotation>
+          <documentation>3864: Straks</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14Dager">
+        <annotation>
+          <documentation>3866: 14 dager</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3Mnd">
+        <annotation>
+          <documentation>3868: 3 mnd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1År">
+        <annotation>
+          <documentation>3869: 1 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2År">
+        <annotation>
+          <documentation>3871: 1-2 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over2år">
+        <annotation>
+          <documentation>3874: &gt; 2år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påSikt">
+        <annotation>
+          <documentation>3876: på sikt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_StrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_StrekningType">
+    <annotation>
+      <documentation>2063: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakTilstandSkade_StrekningEnumerationType nvdb:TiltakTilstandSkade_StrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_StrekningEnumerationType">
+    <annotation>
+      <documentation>2063: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skiftes">
+        <annotation>
+          <documentation>3490: Skiftes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>3711: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utbedresPåStedet">
+        <annotation>
+          <documentation>3862: Utbedres på stedet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ryddes">
+        <annotation>
+          <documentation>5741: Ryddes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_StrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

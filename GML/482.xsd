@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="KildeType">
+    <union memberTypes="nvdb:KildeEnumerationType nvdb:KildeOtherType"/>
+  </simpleType>
+  <simpleType name="KildeEnumerationType">
+    <restriction base="string">
+      <enumeration value="registreringspunkt">
+        <annotation>
+          <documentation>12989: Registreringspunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bomstasjon">
+        <annotation>
+          <documentation>12990: Bomstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalanlegg">
+        <annotation>
+          <documentation>12991: Signalanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ATK">
+        <annotation>
+          <documentation>13106: ATK</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KildeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RegistreringsnivåType">
+    <annotation>
+      <documentation>3910: Angir hvilket nivå tellepunktet er på.  Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år.  Nivå 3 angir 1 uke pr år</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RegistreringsnivåEnumerationType nvdb:RegistreringsnivåOtherType"/>
+  </simpleType>
+  <simpleType name="RegistreringsnivåEnumerationType">
+    <annotation>
+      <documentation>3910: Angir hvilket nivå tellepunktet er på.  Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år.  Nivå 3 angir 1 uke pr år</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kontinuerlig_Nivå1">
+        <annotation>
+          <documentation>4892: Kontinuerlig (Nivå 1)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="periodisk_Nivå2">
+        <annotation>
+          <documentation>4893: Periodisk (Nivå 2)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="periodisk_Nivå3">
+        <annotation>
+          <documentation>10245: Periodisk (Nivå 3)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="enkeltmåling">
+        <annotation>
+          <documentation>4894: Enkeltmåling</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RegistreringsnivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusTrafikkregistreringsstasjonType">
+    <annotation>
+      <documentation>5201: Angir hvilken status registreringspunktet har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StatusTrafikkregistreringsstasjonEnumerationType nvdb:StatusTrafikkregistreringsstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="StatusTrafikkregistreringsstasjonEnumerationType">
+    <annotation>
+      <documentation>5201: Angir hvilken status registreringspunktet har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="operativ">
+        <annotation>
+          <documentation>7081: Operativ</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="midlertidigUteAvDrift">
+        <annotation>
+          <documentation>12987: Midlertidig ute av drift</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagt_IkkeLovÅBruke">
+        <annotation>
+          <documentation>7082: Nedlagt, ikke lov å bruke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagt">
+        <annotation>
+          <documentation>12988: Nedlagt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusTrafikkregistreringsstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeTrafikkregistreringsstasjonType">
+    <union memberTypes="nvdb:TrafikantgruppeTrafikkregistreringsstasjonEnumerationType nvdb:TrafikantgruppeTrafikkregistreringsstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikantgruppeTrafikkregistreringsstasjonEnumerationType">
+    <restriction base="string">
+      <enumeration value="motorkjøretøy">
+        <annotation>
+          <documentation>12992: Motorkjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sykkel">
+        <annotation>
+          <documentation>12993: Sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gående">
+        <annotation>
+          <documentation>12994: Gående</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeTrafikkregistreringsstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Trafikkregistreringsstasjon" substitutionGroup="nvdb:AbstraktTrafikkregistreringsstasjon" type="nvdb:TrafikkregistreringsstasjonType">
+    <annotation>
+      <documentation>482: Angir punkt for registrering av trafikkdata</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrafikkregistreringsstasjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikkregistreringsstasjonType">
+        <sequence>
+          <element name="målestasjonsnummer" type="integer">
+            <annotation>
+              <documentation>4627: Angir er entydig nummer knyttet til trafikkregistreringsstasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="med_Retning_Fra" type="string"/>
+          <element minOccurs="0" name="mot_Retning_Fra" type="string"/>
+          <element minOccurs="0" name="kilde" type="nvdb:KildeType"/>
+          <element minOccurs="0" name="registreringsnivå" type="nvdb:RegistreringsnivåType">
+            <annotation>
+              <documentation>3910: Angir hvilket nivå tellepunktet er på.  Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år.  Nivå 3 angir 1 uke pr år</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trafikantgruppe" type="nvdb:TrafikantgruppeTrafikkregistreringsstasjonType"/>
+          <element minOccurs="0" name="status" type="nvdb:StatusTrafikkregistreringsstasjonType">
+            <annotation>
+              <documentation>5201: Angir hvilken status registreringspunktet har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stedsnavn" type="string">
+            <annotation>
+              <documentation>4626: Gir stedsnavn relatert til tellepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKjørefelt" type="integer">
+            <annotation>
+              <documentation>5192: Angir hvor mange kjørefelt som er knytta til tellepunktet.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sistOppdatertFraNorTraf" type="date">
+            <annotation>
+              <documentation>9291: Angir dato for sist oppdatering fra NorTraf</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11140: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4997: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikkregistreringsstasjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikkregistreringsstasjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

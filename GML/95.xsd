@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AvskjæringsleddType">
+    <annotation>
+      <documentation>8772: Angir om det er avskjæringsledd på skiltpunktets oppsettingsutstyr. Med avskjæringsledd vil stolpe/mast knekke eller bøyes i dette leddet ved påkjørsel.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AvskjæringsleddEnumerationType nvdb:AvskjæringsleddOtherType"/>
+  </simpleType>
+  <simpleType name="AvskjæringsleddEnumerationType">
+    <annotation>
+      <documentation>8772: Angir om det er avskjæringsledd på skiltpunktets oppsettingsutstyr. Med avskjæringsledd vil stolpe/mast knekke eller bøyes i dette leddet ved påkjørsel.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11617: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11618: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AvskjæringsleddOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BebyggelseType">
+    <annotation>
+      <documentation>1919: Angir hvilken type bebyggelse vegobjektet er omgitt av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BebyggelseEnumerationType nvdb:BebyggelseOtherType"/>
+  </simpleType>
+  <simpleType name="BebyggelseEnumerationType">
+    <annotation>
+      <documentation>1919: Angir hvilken type bebyggelse vegobjektet er omgitt av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="landlig">
+        <annotation>
+          <documentation>2860: Landlig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tettbebygd">
+        <annotation>
+          <documentation>2861: Tettbebygd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="by">
+        <annotation>
+          <documentation>2862: By</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BebyggelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BrakettType">
+    <annotation>
+      <documentation>11199: Angir om det er benyttet brakett for festing av skiltet. Brakett benyttes gjerne for skiltpunkt som er festet på vegg, bru, mm.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BrakettEnumerationType nvdb:BrakettOtherType"/>
+  </simpleType>
+  <simpleType name="BrakettEnumerationType">
+    <annotation>
+      <documentation>11199: Angir om det er benyttet brakett for festing av skiltet. Brakett benyttes gjerne for skiltpunkt som er festet på vegg, bru, mm.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>18493: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>18494: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BrakettOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BøyleType">
+    <annotation>
+      <documentation>8773: Angir om skiltplaten(e) er festet inn i en metallbøyle (som igjen er festet på oppsettingsutstyret).</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BøyleEnumerationType nvdb:BøyleOtherType"/>
+  </simpleType>
+  <simpleType name="BøyleEnumerationType">
+    <annotation>
+      <documentation>8773: Angir om skiltplaten(e) er festet inn i en metallbøyle (som igjen er festet på oppsettingsutstyret).</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11619: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Toppmontert">
+        <annotation>
+          <documentation>16848: Ja, toppmontert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Sidemontert">
+        <annotation>
+          <documentation>16849: Ja, sidemontert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Midtmontert">
+        <annotation>
+          <documentation>16850: Ja, midtmontert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forgrening">
+        <annotation>
+          <documentation>17268: Skiltstolpe med forgrening. En eller flere av skiltplatene er festet på forgreningen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11620: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BøyleOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkiltpunktType">
+    <annotation>
+      <documentation>7999: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSkiltpunktEnumerationType nvdb:EierSkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="EierSkiltpunktEnumerationType">
+    <annotation>
+      <documentation>7999: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10265: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18564: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10727: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10329: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10393: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17570: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringSkiltpunktType">
+    <annotation>
+      <documentation>1671: Angir hvordan vegobjektet er fundamentert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FundamenteringSkiltpunktEnumerationType nvdb:FundamenteringSkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="FundamenteringSkiltpunktEnumerationType">
+    <annotation>
+      <documentation>1671: Angir hvordan vegobjektet er fundamentert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>3474: Ingen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IPåFjellfundament">
+        <annotation>
+          <documentation>2430: Skiltpunkt er fundamentert/montert på fjell eller massiv betongkonstruksjon (f.eks bru). Kan være påmontert stålfundament eller innfesting i borehull.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IPåJordfundament">
+        <annotation>
+          <documentation>2435: Skiltpunkt er fundamentert/montert på jord/løsmasser/pukk.  Kan være betongfundament eller jordstikk.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringSkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kampanje_EgnetType">
+    <annotation>
+      <documentation>9483: Angir type kampanje(r) som skiltpunktet er tilrettelagt for</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Kampanje_EgnetEnumerationType nvdb:Kampanje_EgnetOtherType"/>
+  </simpleType>
+  <simpleType name="Kampanje_EgnetEnumerationType">
+    <annotation>
+      <documentation>9483: Angir type kampanje(r) som skiltpunktet er tilrettelagt for</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bilbelte">
+        <annotation>
+          <documentation>13357: Punkt forberedt og egent for bruk i  bilbeltekampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fart">
+        <annotation>
+          <documentation>13360: Punkt forberedt og egnet for bruk i  fartskampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delVegen">
+        <annotation>
+          <documentation>17367: Punkt forberedt og egnet for bruk i del vegen-kampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bilbelteFart">
+        <annotation>
+          <documentation>13361: Punkt forberedt og egnet både for bruk i både bilbeltekampanje og fartskampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stoppOgSov_Historisk">
+        <annotation>
+          <documentation>13358: Punkt forberedt for stopp og sov kampanje. 2016: Kampanjen er utgått. Verdi er kun med for å kunne ta vare på historikk.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kampanje_EgnetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kampanje_PågåendeType">
+    <annotation>
+      <documentation>10895: Angir type kampanje som pågår i periode angitt under ET 10894 "Kampanjeperiode"</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Kampanje_PågåendeEnumerationType nvdb:Kampanje_PågåendeOtherType"/>
+  </simpleType>
+  <simpleType name="Kampanje_PågåendeEnumerationType">
+    <annotation>
+      <documentation>10895: Angir type kampanje som pågår i periode angitt under ET 10894 "Kampanjeperiode"</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bilbelte">
+        <annotation>
+          <documentation>18173: Punkt hvor det pågår bilbeltekampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fart">
+        <annotation>
+          <documentation>18172: Punkt hvor det pågår fartskampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delVegen">
+        <annotation>
+          <documentation>18174: Punkt hvor det pågår del vegen-kampanje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>18171: Punkt det er tilrettelat for kampanje, men hvor det for tiden ikke pågår noen kampanje</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kampanje_PågåendeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KlimaType">
+    <annotation>
+      <documentation>1882: Angir hvilken type klima det er der vegobjektet er plassert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KlimaEnumerationType nvdb:KlimaOtherType"/>
+  </simpleType>
+  <simpleType name="KlimaEnumerationType">
+    <annotation>
+      <documentation>1882: Angir hvilken type klima det er der vegobjektet er plassert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kystklima">
+        <annotation>
+          <documentation>3469: Kystklima</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innland">
+        <annotation>
+          <documentation>3894: Innland</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innland_Under300">
+        <annotation>
+          <documentation>2857: Innland, &lt; 300</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innland_300Til600">
+        <annotation>
+          <documentation>2858: Innland, 300 til 600</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innland_Over600">
+        <annotation>
+          <documentation>2859: Innland, &gt; 600</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KlimaOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MiljøType">
+    <annotation>
+      <documentation>1881: Angir om vegobjektet er lokalisert til et område med kjemisk forurensning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MiljøEnumerationType nvdb:MiljøOtherType"/>
+  </simpleType>
+  <simpleType name="MiljøEnumerationType">
+    <annotation>
+      <documentation>1881: Angir om vegobjektet er lokalisert til et område med kjemisk forurensning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ikkeKjemisk">
+        <annotation>
+          <documentation>3509: Ikke kjemisk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjemiskForurensning">
+        <annotation>
+          <documentation>3510: Kjemisk forurensning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MiljøOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSkiltpunktType">
+    <annotation>
+      <documentation>1876: Angir hvilket oppsettingsutstyr skiltplatene er festet på</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppsettingsutstyrSkiltpunktEnumerationType nvdb:OppsettingsutstyrSkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSkiltpunktEnumerationType">
+    <annotation>
+      <documentation>1876: Angir hvilket oppsettingsutstyr skiltplatene er festet på</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stolpe60_3Mm_2">
+        <annotation>
+          <documentation>2866: ytre diameter 60,3 mm og godstykkelse 2,9 mm (beteget som 2")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stolpe88_9Mm_3">
+        <annotation>
+          <documentation>2868: ytre diameter 88,9 mm og godstykkelse 3,2 mm (beteget som 3")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trestolpe">
+        <annotation>
+          <documentation>7988: Trestolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Liten">
+        <annotation>
+          <documentation>2879: Søyle, liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Liten_Rund110Mm">
+        <annotation>
+          <documentation>4597: Søyle, liten, rund 110 mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Liten_Åttekantet120mm">
+        <annotation>
+          <documentation>4598: Søyle, liten, åttekantet 120mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Middels">
+        <annotation>
+          <documentation>2881: Søyle, middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Middels_Åttekantet150Mm">
+        <annotation>
+          <documentation>4599: Søyle, middels, åttekantet 150 mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Stor">
+        <annotation>
+          <documentation>2883: Søyle, stor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Stor_Rund180Mm">
+        <annotation>
+          <documentation>4600: Søyle, stor, rund 180 mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søyle_Stor_Åttekantet190Mm">
+        <annotation>
+          <documentation>4601: Søyle, stor, åttekantet 190 mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast">
+        <annotation>
+          <documentation>4604: Gittermast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast_Trekant200mm">
+        <annotation>
+          <documentation>4602: Gittermast, trekant 200mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast_Trekant250mm">
+        <annotation>
+          <documentation>4603: Gittermast, trekant 250mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast_Firkant200mm">
+        <annotation>
+          <documentation>4605: Gittermast, firkant 200mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast_Firkant250mm">
+        <annotation>
+          <documentation>4606: Gittermast, firkant 250mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gittermast_Firkant380mm">
+        <annotation>
+          <documentation>4607: Gittermast, firkant 380mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hengerITakKabelbro">
+        <annotation>
+          <documentation>18488: Festet direkte i tak eller i kabelbro. Aktuelt i forbindelse med tunneler og underganger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1_RørPåBunnplate">
+        <annotation>
+          <documentation>8007: System brukt bla i Oppland.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2_RørPåBunnplate">
+        <annotation>
+          <documentation>8006: System brukt bla i Oppland.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3_RørPåBunnplate">
+        <annotation>
+          <documentation>8005: System brukt bla i Oppland.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bakkemontertBøyle">
+        <annotation>
+          <documentation>16851: Bøyle med innfesting i bakken. Skiltplater festes inni bøyle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helportal">
+        <annotation>
+          <documentation>2874: Festet på helportal. En helportal har to innfestinger i bakken.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="halvportal">
+        <annotation>
+          <documentation>2871: Festet på halvportal. En halvportal har bare en innfesting i bakken.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="wirestrekk">
+        <annotation>
+          <documentation>2877: Festet på wire som er spent opp over vegen. Wirw kan være festet i egne stolper, vegg/bygning e.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltbjelkeGitterdragerITak">
+        <annotation>
+          <documentation>5043: Festet på skiltbjelke/gitermast. Skiltbjelke/gitermast benyttes hovedsakelig i  tunnel eller i forbindelse med underganger og er festet i taket.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalstolpe">
+        <annotation>
+          <documentation>18926: På stolpe som primært er satt opp for  å feste signalhoder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegg">
+        <annotation>
+          <documentation>3266: Festet på vegg/bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysmast">
+        <annotation>
+          <documentation>2967: Festet på lysmast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegbom">
+        <annotation>
+          <documentation>17567: Festet på vegbom</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppsettingsutstyrSkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Produktnavn_SkiltmastType">
+    <annotation>
+      <documentation>10427: Angir produktnavn for ettergivende skiltmast. Verdier er hentet fra oversikt over godkjente produkttyper på vegvesen.no</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Produktnavn_SkiltmastEnumerationType nvdb:Produktnavn_SkiltmastOtherType"/>
+  </simpleType>
+  <simpleType name="Produktnavn_SkiltmastEnumerationType">
+    <annotation>
+      <documentation>10427: Angir produktnavn for ettergivende skiltmast. Verdier er hentet fra oversikt over godkjente produkttyper på vegvesen.no</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="HIMASTH500">
+        <annotation>
+          <documentation>16852: http://www.vegvesen.no/Fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=509351&amp;method=alle&amp;produkttype=12623</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HIMASTH1000">
+        <annotation>
+          <documentation>16853: HIMAST H1000</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HIMASTH2000">
+        <annotation>
+          <documentation>16854: HIMAST H2000</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HIMASTH3000">
+        <annotation>
+          <documentation>16855: HIMAST H3000</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jerol114">
+        <annotation>
+          <documentation>16856: Jerol 114</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jerol168">
+        <annotation>
+          <documentation>16857: Jerol 168</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jerol219">
+        <annotation>
+          <documentation>16858: Jerol 219</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jerol273">
+        <annotation>
+          <documentation>16859: Jerol 273</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lattixD4412">
+        <annotation>
+          <documentation>16860: Lattix D4412</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lattix4420">
+        <annotation>
+          <documentation>16861: Lattix 4420</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lattix4425">
+        <annotation>
+          <documentation>16862: Lattix 4425</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lattix4438">
+        <annotation>
+          <documentation>16863: Lattix 4438</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_89">
+        <annotation>
+          <documentation>16864: Norsafe NM 89</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_120">
+        <annotation>
+          <documentation>16865: Norsafe NM 120</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_150">
+        <annotation>
+          <documentation>16866: Norsafe NM 150</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_190C">
+        <annotation>
+          <documentation>16867: Norsafe NM 190C</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_190D">
+        <annotation>
+          <documentation>16868: Norsafe NM 190D</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norsafeNM_290">
+        <annotation>
+          <documentation>16869: Norsafe NM 290</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="opplandsmastToløper">
+        <annotation>
+          <documentation>16870: Opplandsmast toløper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="opplandsmastTreløper">
+        <annotation>
+          <documentation>16871: Opplandsmast treløper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TV">
+        <annotation>
+          <documentation>16872: T&amp;V</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Produktnavn_SkiltmastOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiltholderType">
+    <annotation>
+      <documentation>10548: Angir om skiltpunktet har skiltholder</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkiltholderEnumerationType nvdb:SkiltholderOtherType"/>
+  </simpleType>
+  <simpleType name="SkiltholderEnumerationType">
+    <annotation>
+      <documentation>10548: Angir om skiltpunktet har skiltholder</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_Rett">
+        <annotation>
+          <documentation>16935: Ja, rett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Buet">
+        <annotation>
+          <documentation>16936: Ja, buet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16937: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiltholderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Skiltpunkt" substitutionGroup="nvdb:AbstraktSkiltpunkt" type="nvdb:SkiltpunktType">
+    <annotation>
+      <documentation>95: Skiltpunkt er en sammensetning av skiltplater, stolper og stolpefundament mm.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkiltpunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkiltpunktType">
+        <sequence>
+          <element minOccurs="0" name="oppsettingsutstyr" type="nvdb:OppsettingsutstyrSkiltpunktType">
+            <annotation>
+              <documentation>1876: Angir hvilket oppsettingsutstyr skiltplatene er festet på</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallOppsettingsutstyr" type="integer">
+            <annotation>
+              <documentation>1877: Angir antall oppsettingsutstyr det er i forbindelse med vegobjektet.  Antall skiltstolper/søyler knyttet til skiltpunktet. Eventuelle støttestolper skal ikke medregnes.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallStøttestolper" type="integer">
+            <annotation>
+              <documentation>10929: Angir hvor mange støttestolper det er i tilknytning til skiltpunktet. Støttestolpene er skråstilte og benyttes for å avstive skiltpunkt i forhold til bla vindlast.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avskjæringsledd" type="nvdb:AvskjæringsleddType">
+            <annotation>
+              <documentation>8772: Angir om det er avskjæringsledd på skiltpunktets oppsettingsutstyr. Med avskjæringsledd vil stolpe/mast knekke eller bøyes i dette leddet ved påkjørsel.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde_MastStolpe" type="double">
+            <annotation>
+              <documentation>10428: Gir høyde (lengde) av selve masten/stolpen.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVegkant" type="double">
+            <annotation>
+              <documentation>2055: Angir høyde fra vegkant til underkant nederste skiltplate som ikke er underskilt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandFraDekkekant" type="double">
+            <annotation>
+              <documentation>1884: Angir hvilken avstand det er fra dekkekant til vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fundamentering" type="nvdb:FundamenteringSkiltpunktType">
+            <annotation>
+              <documentation>1671: Angir hvordan vegobjektet er fundamentert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallFundament" type="integer">
+            <annotation>
+              <documentation>1887: Angir hvor mange fundament det er i tilknytning til vegobjektet
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bøyle" type="nvdb:BøyleType">
+            <annotation>
+              <documentation>8773: Angir om skiltplaten(e) er festet inn i en metallbøyle (som igjen er festet på oppsettingsutstyret).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kampanje_Egnet" type="nvdb:Kampanje_EgnetType">
+            <annotation>
+              <documentation>9483: Angir type kampanje(r) som skiltpunktet er tilrettelagt for</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kampanje_Pågående" type="nvdb:Kampanje_PågåendeType">
+            <annotation>
+              <documentation>10895: Angir type kampanje som pågår i periode angitt under ET 10894 "Kampanjeperiode"</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kampanjeperiode" type="string">
+            <annotation>
+              <documentation>10894: Angir hvilken periode gjeldende kampanje gjelder for.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bebyggelse" type="nvdb:BebyggelseType">
+            <annotation>
+              <documentation>1919: Angir hvilken type bebyggelse vegobjektet er omgitt av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klima" type="nvdb:KlimaType">
+            <annotation>
+              <documentation>1882: Angir hvilken type klima det er der vegobjektet er plassert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="miljø" type="nvdb:MiljøType">
+            <annotation>
+              <documentation>1881: Angir om vegobjektet er lokalisert til et område med kjemisk forurensning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brakett" type="nvdb:BrakettType">
+            <annotation>
+              <documentation>11199: Angir om det er benyttet brakett for festing av skiltet. Brakett benyttes gjerne for skiltpunkt som er festet på vegg, bru, mm.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skiltholder" type="nvdb:SkiltholderType">
+            <annotation>
+              <documentation>10548: Angir om skiltpunktet har skiltholder</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn_Skiltmast" type="nvdb:Produktnavn_SkiltmastType">
+            <annotation>
+              <documentation>10427: Angir produktnavn for ettergivende skiltmast. Verdier er hentet fra oversikt over godkjente produkttyper på vegvesen.no</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10854: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11078: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSkiltpunktType">
+            <annotation>
+              <documentation>7999: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSkiltpunktType">
+            <annotation>
+              <documentation>8063: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4794: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkiltpunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skiltpunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligSkiltpunktType">
+    <annotation>
+      <documentation>8063: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSkiltpunktEnumerationType nvdb:VedlikeholdsansvarligSkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkiltpunktEnumerationType">
+    <annotation>
+      <documentation>8063: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10457: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18782: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19931: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18911: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10535: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10613: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17715: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Oppgravingsdata" substitutionGroup="nvdb:AbstraktOppgravingsdata" type="nvdb:OppgravingsdataType">
+    <annotation>
+      <documentation>601: Gir informasjon om oppgraving.  Tidligere register 16 i VDB</documentation>
+    </annotation>
+  </element>
+  <complexType name="OppgravingsdataType">
+    <complexContent>
+      <extension base="nvdb:AbstraktOppgravingsdataType">
+        <sequence>
+          <element minOccurs="0" name="oppgravingsdato" type="date">
+            <annotation>
+              <documentation>9138: Angir dato for oppgraving</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="signatur" type="string">
+            <annotation>
+              <documentation>9139: Angir hvem som er ansvarlig for data</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>6889: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="OppgravingsdataPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Oppgravingsdata"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

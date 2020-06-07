@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierFerjeoppstillingsplassType">
+    <annotation>
+      <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFerjeoppstillingsplassEnumerationType nvdb:EierFerjeoppstillingsplassOtherType"/>
+  </simpleType>
+  <simpleType name="EierFerjeoppstillingsplassEnumerationType">
+    <annotation>
+      <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10255: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18605: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10717: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10319: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10383: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17615: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFerjeoppstillingsplassOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ferjeoppstillingsplass" substitutionGroup="nvdb:AbstraktFerjeoppstillingsplass" type="nvdb:FerjeoppstillingsplassType">
+    <annotation>
+      <documentation>41: Område for oppstilling og venting for kjøretøy i forbindelse med ferjestrekning.  Areal til rasting, parkering etc. registreres som rasteplass og parkeringsområde. Områder som ligger fysisk adskilt, men i tilknytning til samme ferjeleie skal registreres som egne forekomster.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FerjeoppstillingsplassType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFerjeoppstillingsplassType">
+        <sequence>
+          <element minOccurs="0" name="ferjeTil" type="string">
+            <annotation>
+              <documentation>1804: Angir hvor det går ferje til.  Hvis det er flere steder oppgis de med semikolon mellom.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallOppstillingsfelt" type="integer">
+            <annotation>
+              <documentation>2081: Angir hvor mange oppstillingsfelt det er.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeOppstillingsfelt_Forflytningshemmede" type="integer">
+            <annotation>
+              <documentation>10728: Angir total lengde oppstillingsfelt reservert for kjøretøy for forflytningshemmede. Slike felt skal være skiltet og ha ekstra god plass slik at det er mulig å få rullestol ut og inn av bilen. Det skal angis 0 om det ikke finnes slike felt.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeOppstillingsfelt_PersonbilKombinert" type="integer">
+            <annotation>
+              <documentation>10732: Angir lengde av alle oppstillingsfelt reservert for bare personbil pluss lengde av alle oppstillingsfelt for kombinert trafikk.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeOppstillingsfelt_TungeKjøretøy" type="integer">
+            <annotation>
+              <documentation>10731: Angir lengde av alle oppstilliongsfelt reservert for tunge kjøretøy. Angis som 0 om det kun er kombinerte oppstillingsfelt på ferjeleiet.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallOppstillingsplSmåKjt" type="integer">
+            <annotation>
+              <documentation>1806: Angir hvor mange oppstillingsplasser for personbiler det er til sammen.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>1357: Angir areal av ferjeoppstillingsplass.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10292: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11561: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11048: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierFerjeoppstillingsplassType">
+            <annotation>
+              <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligFerjeoppstillingsplassType">
+            <annotation>
+              <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4748: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9429: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10966: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FerjeoppstillingsplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ferjeoppstillingsplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassType">
+    <annotation>
+      <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFerjeoppstillingsplassEnumerationType nvdb:VedlikeholdsansvarligFerjeoppstillingsplassOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassEnumerationType">
+    <annotation>
+      <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10447: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18682: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19923: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18811: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10525: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10603: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17706: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

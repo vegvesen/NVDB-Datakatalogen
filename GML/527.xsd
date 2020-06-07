@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Trafikanttilbud" substitutionGroup="nvdb:AbstraktTrafikanttilbud" type="nvdb:TrafikanttilbudType">
+    <annotation>
+      <documentation>527: Angir sted/område hvor det er en eller flere tilbud til trafikantene.  Dette kan f.eks være bensinstasjon, verksted, tømmeanlegg for bobil osv.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrafikanttilbudType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikanttilbudType">
+        <sequence>
+          <element minOccurs="0" name="stedsangivelse" type="string">
+            <annotation>
+              <documentation>7907: Stedsnavn hvor forekomst er lokalisert.  Evt plassering i forhold til stedsnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5027: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikanttilbudPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikanttilbud"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

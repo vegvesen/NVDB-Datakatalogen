@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Service" substitutionGroup="nvdb:AbstraktService" type="nvdb:ServiceType">
+    <annotation>
+      <documentation>110: Vegobjekt som gir informasjon om service som er aktuell for trafikantene</documentation>
+    </annotation>
+  </element>
+  <complexType name="ServiceType">
+    <complexContent>
+      <extension base="nvdb:AbstraktServiceType">
+        <sequence>
+          <element minOccurs="0" name="informasjon" type="string">
+            <annotation>
+              <documentation>1918: Her kan gis utfyllende informasjon om servicen.  F.eks åpningstid, vareutvalg, navn, adresse, etc.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeServiceType">
+            <annotation>
+              <documentation>1159: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10351: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11578: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4806: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ServicePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Service"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeServiceType">
+    <annotation>
+      <documentation>1159: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeServiceEnumerationType nvdb:TypeServiceOtherType"/>
+  </simpleType>
+  <simpleType name="TypeServiceEnumerationType">
+    <annotation>
+      <documentation>1159: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="badeplass">
+        <annotation>
+          <documentation>5348: Angir at det er lagt til rette for bading</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kiosk">
+        <annotation>
+          <documentation>2691: Kiosk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gatekjøkken">
+        <annotation>
+          <documentation>2692: Gatekjøkken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kafe">
+        <annotation>
+          <documentation>2693: Kafe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegkro">
+        <annotation>
+          <documentation>2694: Vegkro</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="telefon">
+        <annotation>
+          <documentation>2695: Telefon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venterom">
+        <annotation>
+          <documentation>2696: Venterom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="offentligToalett">
+        <annotation>
+          <documentation>2697: Toalett som Statens Vegvesen eier/drifter skal registreres som egne objekt av type Toalett (243)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="offentligToalett_Handikap">
+        <annotation>
+          <documentation>2698: Toalett som Statens Vegvesen eier/drifter skal registreres som egne objekt av type Toalett (243)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stellerom">
+        <annotation>
+          <documentation>2699: Stellerom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="butikk_Dagligvarer">
+        <annotation>
+          <documentation>2700: Butikk, dagligvarer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bensinstasjon">
+        <annotation>
+          <documentation>2701: Bensinstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tømmeanleggBobil">
+        <annotation>
+          <documentation>2702: Tømmeanlegg bobil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hotell">
+        <annotation>
+          <documentation>2703: Hotell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pensjonat">
+        <annotation>
+          <documentation>2704: Pensjonat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="post">
+        <annotation>
+          <documentation>2705: Post</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bank">
+        <annotation>
+          <documentation>2706: Bank</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="turistinformasjon_Kontor">
+        <annotation>
+          <documentation>2707: Turistinformasjon, kontor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="turistinformasjon_Infotavle">
+        <annotation>
+          <documentation>2708: Standard infotavle med skiltnummer 636 skal registreres som Skiltpunkt (95)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="campingplass">
+        <annotation>
+          <documentation>2709: Campingplass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hytteutleie">
+        <annotation>
+          <documentation>2710: Hytteutleie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hvileplassForLangtransport">
+        <annotation>
+          <documentation>2711: Hvileplass for langtransport</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="severdighet">
+        <annotation>
+          <documentation>2712: Severdighet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utsiktspunkt">
+        <annotation>
+          <documentation>2713: Utsiktspunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rastemulighet">
+        <annotation>
+          <documentation>3908: Rasteplasser som Statens Vegvesen eier/driver skal registreres som Rasteplass (39)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkeringsanlegg">
+        <annotation>
+          <documentation>3909: Parkeringsanlegg som Statens Vegvesen eier/driver skal registreres som Parkeringsområde (43)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkeringsanlegg_Langtidsparkering">
+        <annotation>
+          <documentation>3910: Parkeringsanlegg som Statens Vegvesen eier/driver skal registreres som Parkeringsområde (43)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeServiceOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

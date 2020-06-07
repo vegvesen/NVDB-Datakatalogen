@@ -1,0 +1,1362 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierHoldeplassutrustningType">
+    <annotation>
+      <documentation>10221: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierHoldeplassutrustningEnumerationType nvdb:EierHoldeplassutrustningOtherType"/>
+  </simpleType>
+  <simpleType name="EierHoldeplassutrustningEnumerationType">
+    <annotation>
+      <documentation>10221: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>16693: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18612: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16694: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16695: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16696: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17635: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierHoldeplassutrustningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Holdeplassutrustning" substitutionGroup="nvdb:AbstraktHoldeplassutrustning" type="nvdb:HoldeplassutrustningType">
+    <annotation>
+      <documentation>487: Sted for på og avstigning av kollektivtrafikk.</documentation>
+    </annotation>
+  </element>
+  <complexType name="HoldeplassutrustningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktHoldeplassutrustningType">
+        <sequence>
+          <element minOccurs="0" name="UU_TypeTransportmiddel" type="nvdb:UU_TypeTransportmiddelType">
+            <annotation>
+              <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Type" type="nvdb:UU_TypeType">
+            <annotation>
+              <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om. Jfr HB V123 (232)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Viktighetsnivå" type="nvdb:UU_ViktighetsnivåType">
+            <annotation>
+              <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_PåOgAvstigning" type="nvdb:UU_PåOgAvstigningType">
+            <annotation>
+              <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trafikkretning_Geografisk" type="nvdb:Trafikkretning_GeografiskType">
+            <annotation>
+              <documentation>10213: Angir hvilken trafikkretning som betjenes.  Angis hvis entydig.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="holdeplassnavn_NVDB_original" type="string">
+            <annotation>
+              <documentation>3957: Navn slik det opprinnelig ligger i NVDB. Ikke synkronisert mot NSR: Beholdes inntil videre. Vil etter hvert fases ut til fordel for ET 10885 "NSR_Stopplace_Navn" som er synkronisert mot NSR.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Stopplace_Navn" type="string">
+            <annotation>
+              <documentation>10885: Navn på Stopplace (stoppestedet) som Holdeplassutrustning tilhører. Offisielt navn hentet fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Stopplace_ID" type="string">
+            <annotation>
+              <documentation>11309: Unik ID på Stopplace (stoppestedet) som Holdeplassutrustning tilhører. NSR_Stopplace_ID hentes fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Quay_ID" type="string">
+            <annotation>
+              <documentation>11310: Unik ID på Quay (stoppunkt) som Holdeplassutrustning tilhører. NSR_Quai_ID hentes fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS. NSR_Quay_ID er basis ID for synkronisering mot NSR.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Quay_Tag" type="string">
+            <annotation>
+              <documentation>11425: Merking/navn på Quay (Stoppunkt).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stoppestedsnummer_Alternativ" type="string">
+            <annotation>
+              <documentation>10884: Angir alternativt holdeplassnummer, kan f.eks være 8-sifret nummer som inneholde kommunenummer. Vil bli overflødig på sikt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stoppunktnummer_Alternativ" type="string">
+            <annotation>
+              <documentation>10204: Stoppunktnummer som er benyttet tidligere eller benyttes i andre sammenhenger.  Vil bli overflødig på sikt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_poeng_Beregnet_Mulig" type="double">
+            <annotation>
+              <documentation>10261: Angir hvor mange poeng det er mulig å oppnå.  Verdi beregnes på basis av andre UU-egenskapstyper.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_poeng_Beregnet_Faktisk" type="double">
+            <annotation>
+              <documentation>10188: Beregnet antall Universell utforming poeng for Holdeplassutrustning. Beregnes på basis av andre UU-egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Holdeplasskilt" type="nvdb:UU_HoldeplasskiltType">
+            <annotation>
+              <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_OppslagstavleForRutetabell" type="nvdb:UU_OppslagstavleForRutetabellType">
+            <annotation>
+              <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_OppslagstavleRutetab_HøydeUnderkant" type="integer">
+            <annotation>
+              <documentation>10207: Høyde over bakken for nedre kant av oppslagstavle for rutetabell..
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_OppslagstavleRutetab_HøydeOverkant" type="integer">
+            <annotation>
+              <documentation>10257: Høyde over bakken for øvre kant av oppslagstavle for rutetabell..
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_OppslagstavleRutetab_Adgang" type="nvdb:UU_OppslagstavleRutetab_AdgangType">
+            <annotation>
+              <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_OppslagstavleRutetab_Belyst" type="nvdb:UU_OppslagstavleRutetab_BelystType">
+            <annotation>
+              <documentation>10417: Angir om oppslagstavle er belyst eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Sanntidsinformasjon" type="nvdb:UU_SanntidsinformasjonType">
+            <annotation>
+              <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Høyttaler" type="nvdb:UU_HøyttalerType">
+            <annotation>
+              <documentation>10210: Angir om det er høyttaler for å formidle informasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Belysning" type="nvdb:UU_BelysningType">
+            <annotation>
+              <documentation>3959: Angir utvendige belysningsforhold.  Evt. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Takoverbygg" type="nvdb:UU_TakoverbyggType">
+            <annotation>
+              <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Leskur_FriBreddeInnvendig" type="double">
+            <annotation>
+              <documentation>10262: Angir minste frie bredde innvendig i leskur
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Leskur_FriDybdeInnvendig" type="double">
+            <annotation>
+              <documentation>10263: Angir minimum fri dybde i leskur
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Leskur_ArealTilpassetRullestol" type="nvdb:UU_Leskur_ArealTilpassetRullestolType">
+            <annotation>
+              <documentation>10200: Angir om det finnes fritt areal innvendig i takoverbygg/leskur på minst 1.5 x 1.5 m</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Sittemulighet" type="nvdb:UU_SittemulighetType">
+            <annotation>
+              <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Gangadkomst" type="nvdb:UU_GangadkomstType">
+            <annotation>
+              <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Sykkelparkering" type="nvdb:UU_SykkelparkeringType">
+            <annotation>
+              <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Gangadkomst_Stigning" type="nvdb:UU_Gangadkomst_StigningType">
+            <annotation>
+              <documentation>10190: Stigningsforhold på beste adkomst til Holdeplass</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Bilparkering" type="nvdb:UU_BilparkeringType">
+            <annotation>
+              <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Gangadkomst_Kryssingsmulighet" type="nvdb:UU_Gangadkomst_KryssingsmulighetType">
+            <annotation>
+              <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Type" type="nvdb:UU_Plattform_TypeType">
+            <annotation>
+              <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Belegning" type="nvdb:UU_Plattform_BelegningType">
+            <annotation>
+              <documentation>10193: Belegning på plattform</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Dekkekvalitet" type="nvdb:UU_Plattform_DekkekvalitetType">
+            <annotation>
+              <documentation>10189: Dekkekvalitet på Holdeplassutrustning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Lengde" type="double">
+            <annotation>
+              <documentation>10191: Lengde av plattform eksklusiv inn-/utkjøringslengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Bredde" type="double">
+            <annotation>
+              <documentation>10192: Fri bredde i plattformens fulle lengde. Ved varierende bredde brukes gjennomsnitt.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Areal" type="integer">
+            <annotation>
+              <documentation>11862: Areal av plattform
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Punkthinder" type="nvdb:UU_Plattform_PunkthinderType">
+            <annotation>
+              <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_Minstebredde" type="double">
+            <annotation>
+              <documentation>10201: Minste bredde på beste gang-/forflytningsbane langs plattformen. Det skal tas hensyn til permanente punkthinder som trapper, skiltstolper, portaler, bygninger osv. Kjøretøy, rullestoler, vogner etc som har bredde større enn denne minstebredden vil ikke kunne passere fritt på plattform.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_KantsteinhøydePåstigning" type="double">
+            <annotation>
+              <documentation>10194: Høyde på kantstein ved påstigningspunkt
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_KantsteinhøydeAvstigning" type="double">
+            <annotation>
+              <documentation>10195: Høyde på kantstein ved avstigningspunkt (ca 5 m bak påstigning)
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_BussAdgangTilKant" type="nvdb:UU_Plattform_BussAdgangTilKantType">
+            <annotation>
+              <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_Plattform_varselfeltLangsKant" type="nvdb:UU_Plattform_varselfeltLangsKantType">
+            <annotation>
+              <documentation>10198: Angir om det er varsellinje langs perrongkant ut mot veg for å gjøre folk oppmerksom på kanten og på innkomende busser/trikker.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="UU_TaktileIndikatorerTilPåstigning" type="nvdb:UU_TaktileIndikatorerTilPåstigningType">
+            <annotation>
+              <documentation>10197: Angir om det er Taktile indikatorer til påstigningpunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10306: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sistOppgradert" type="integer">
+            <annotation>
+              <documentation>11311: Angir årstall for når holdeplassutrustning sist ble oppgradert. Eksempel på oppgradering kan være anleggelse av plattform, etablere bedre tilbud til trafikantene i form av sanntidsinformasjon, sykkelparkering, leskur, mm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7833: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11141: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierHoldeplassutrustningType">
+            <annotation>
+              <documentation>10221: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligHoldeplassutrustningType">
+            <annotation>
+              <documentation>3962: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5001: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8926: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="HoldeplassutrustningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Holdeplassutrustning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="Trafikkretning_GeografiskType">
+    <annotation>
+      <documentation>10213: Angir hvilken trafikkretning som betjenes.  Angis hvis entydig.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Trafikkretning_GeografiskEnumerationType nvdb:Trafikkretning_GeografiskOtherType"/>
+  </simpleType>
+  <simpleType name="Trafikkretning_GeografiskEnumerationType">
+    <annotation>
+      <documentation>10213: Angir hvilken trafikkretning som betjenes.  Angis hvis entydig.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="begge">
+        <annotation>
+          <documentation>16653: Holdeplassutrustning betjener trafikk i begge/alle retninger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraSentrum">
+        <annotation>
+          <documentation>16654: Betjener primært trafikk fra sentrum av nærmeste by</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilSentrum">
+        <annotation>
+          <documentation>16657: Betjener primært trafikk til sentrum av nærmeste by.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sørgående">
+        <annotation>
+          <documentation>16656: Betjener primært trafikk fra nord til sør.  Retning må sees i større perspektiv enn den lokale retningen transportåren har inne på Holdeplassutrustning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordgående">
+        <annotation>
+          <documentation>16655: Betjener primært trafikk fra sør til nord.  Retning må sees i større perspektiv enn den lokale retningen transportåren har inne på Holdeplassutrustning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vestgående">
+        <annotation>
+          <documentation>16659: Betjener normalt trafikk fra øst til vest.  Retning må sees i større perspektiv enn den lokale retningen transportåren har inne på Holdeplassutrustning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="østgående">
+        <annotation>
+          <documentation>16660: Betjener primært trafikk fra vest til øst  Retning må sees i større perspektiv enn den lokale retningen transportåren har inne på Holdeplassutrustning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="varierer">
+        <annotation>
+          <documentation>16658: Benyttes hvis det varierer hvilken retning som trafikkerer Holdeplassutrustningen.  Eks for tog/fly vil samme Holdeplassutrustning benyttes til ulike retninger.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Trafikkretning_GeografiskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_BelysningType">
+    <annotation>
+      <documentation>3959: Angir utvendige belysningsforhold.  Evt. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_BelysningEnumerationType nvdb:UU_BelysningOtherType"/>
+  </simpleType>
+  <simpleType name="UU_BelysningEnumerationType">
+    <annotation>
+      <documentation>3959: Angir utvendige belysningsforhold.  Evt. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_EgenBelysning">
+        <annotation>
+          <documentation>4978: Ja, egen belysning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_BelystAvGatebelysning">
+        <annotation>
+          <documentation>9954: Ja, belyst av gatebelysning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4979: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_BelysningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_BilparkeringType">
+    <annotation>
+      <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_BilparkeringEnumerationType nvdb:UU_BilparkeringOtherType"/>
+  </simpleType>
+  <simpleType name="UU_BilparkeringEnumerationType">
+    <annotation>
+      <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16648: Angir at det er bilparkering i tilknytning til holdeplassutrustning, men parkering er uten takoverbygg og det er ikke tilrettelagt for forflytningshemmede</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedTakoverbygg">
+        <annotation>
+          <documentation>16649: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, men parkering er ikke tilrettelagt for forflytningshemmede</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_TilrettelagtForForflytningshemmede">
+        <annotation>
+          <documentation>16650: Angir at det er bilparkering i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede, men det er ikke takoverbygg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_TilrettelagtForForflytningshemmedeOgTakoverbygg">
+        <annotation>
+          <documentation>16651: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16652: Det er ikke parkering i tilknytning til holdeplassutrustning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_BilparkeringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_GangadkomstType">
+    <annotation>
+      <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_GangadkomstEnumerationType nvdb:UU_GangadkomstOtherType"/>
+  </simpleType>
+  <simpleType name="UU_GangadkomstEnumerationType">
+    <annotation>
+      <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4987: Gangadkomst fra tilnærmet allle tilhørende områder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delvis">
+        <annotation>
+          <documentation>4988: Gangadkomst fra noen av de tilhørende områdene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4989: Ingen form for egen gangadkomst til holdeplassen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_GangadkomstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_KryssingsmulighetType">
+    <annotation>
+      <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Gangadkomst_KryssingsmulighetEnumerationType nvdb:UU_Gangadkomst_KryssingsmulighetOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_KryssingsmulighetEnumerationType">
+    <annotation>
+      <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17273: Skal angi Ja om det er gangfelt eller tilrettelagt kryssing. Tilrettelagt kryssing vil si at det f.eks er åpning i rekkverk/gjerde, men uten at det er gangfelt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17274: Skal anig Nei der det ikke er tilrettelagt kryssing eller gangfelt. Det skal angis Nei også i tilfeller hvor det er kryssing over/under på egen g/s-veg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_KryssingsmulighetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_StigningType">
+    <annotation>
+      <documentation>10190: Stigningsforhold på beste adkomst til Holdeplass</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Gangadkomst_StigningEnumerationType nvdb:UU_Gangadkomst_StigningOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_StigningEnumerationType">
+    <annotation>
+      <documentation>10190: Stigningsforhold på beste adkomst til Holdeplass</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="inntil1til20">
+        <annotation>
+          <documentation>16601: Inntil 1:20</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inntil1til15">
+        <annotation>
+          <documentation>16602: Inntil 1:15</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inntil1til12">
+        <annotation>
+          <documentation>16603: Inntil 1:12</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brattereEnn1til12">
+        <annotation>
+          <documentation>16604: Brattere enn 1:12</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Gangadkomst_StigningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_HoldeplasskiltType">
+    <annotation>
+      <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_HoldeplasskiltEnumerationType nvdb:UU_HoldeplasskiltOtherType"/>
+  </simpleType>
+  <simpleType name="UU_HoldeplasskiltEnumerationType">
+    <annotation>
+      <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_StandardSkiltplate">
+        <annotation>
+          <documentation>16791: Det er standard skiltplate i tilknytning til holdeplass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_IntegrertSymbol">
+        <annotation>
+          <documentation>18175: Skilt er integrert ("trykket") som symbol i selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Klistremerke">
+        <annotation>
+          <documentation>18176: Skilt er limt på selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen i form av klistremerke.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16792: Det er ingen Ingen former for holdeplasskilt.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_HoldeplasskiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_HøyttalerType">
+    <annotation>
+      <documentation>10210: Angir om det er høyttaler for å formidle informasjon</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_HøyttalerEnumerationType nvdb:UU_HøyttalerOtherType"/>
+  </simpleType>
+  <simpleType name="UU_HøyttalerEnumerationType">
+    <annotation>
+      <documentation>10210: Angir om det er høyttaler for å formidle informasjon</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16633: Holdeplassutrustning har høyttaler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16634: Holdeplassutrustning har ikke høyttaler</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_HøyttalerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Leskur_ArealTilpassetRullestolType">
+    <annotation>
+      <documentation>10200: Angir om det finnes fritt areal innvendig i takoverbygg/leskur på minst 1.5 x 1.5 m</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Leskur_ArealTilpassetRullestolEnumerationType nvdb:UU_Leskur_ArealTilpassetRullestolOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Leskur_ArealTilpassetRullestolEnumerationType">
+    <annotation>
+      <documentation>10200: Angir om det finnes fritt areal innvendig i takoverbygg/leskur på minst 1.5 x 1.5 m</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16621: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16622: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Leskur_ArealTilpassetRullestolOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleForRutetabellType">
+    <annotation>
+      <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_OppslagstavleForRutetabellEnumerationType nvdb:UU_OppslagstavleForRutetabellOtherType"/>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleForRutetabellEnumerationType">
+    <annotation>
+      <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16627: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16628: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleForRutetabellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_AdgangType">
+    <annotation>
+      <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_OppslagstavleRutetab_AdgangEnumerationType nvdb:UU_OppslagstavleRutetab_AdgangOtherType"/>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_AdgangEnumerationType">
+    <annotation>
+      <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16629: Det er mulig å komme helt inn til rutetidsinformasjonen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16630: Det er ikke mulig å komme helt inn til rutetidsinformasjonen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_AdgangOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_BelystType">
+    <annotation>
+      <documentation>10417: Angir om oppslagstavle er belyst eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_OppslagstavleRutetab_BelystEnumerationType nvdb:UU_OppslagstavleRutetab_BelystOtherType"/>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_BelystEnumerationType">
+    <annotation>
+      <documentation>10417: Angir om oppslagstavle er belyst eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16793: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16794: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_OppslagstavleRutetab_BelystOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_BelegningType">
+    <annotation>
+      <documentation>10193: Belegning på plattform</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_BelegningEnumerationType nvdb:UU_Plattform_BelegningOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_BelegningEnumerationType">
+    <annotation>
+      <documentation>10193: Belegning på plattform</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>16605: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>16606: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betongstein">
+        <annotation>
+          <documentation>16607: Betongstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturstein_Brostein">
+        <annotation>
+          <documentation>16609: Naturstein, brostein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturstein_Heller">
+        <annotation>
+          <documentation>20073: Naturstein, heller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grus">
+        <annotation>
+          <documentation>16608: Grus</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_BelegningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_BussAdgangTilKantType">
+    <annotation>
+      <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_BussAdgangTilKantEnumerationType nvdb:UU_Plattform_BussAdgangTilKantOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_BussAdgangTilKantEnumerationType">
+    <annotation>
+      <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16610: Buss/trikk kan kjøre uhindret inn til kant</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16611: Buss/trikk kan ikke kjøre uhindret inn til kant</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_BussAdgangTilKantOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_DekkekvalitetType">
+    <annotation>
+      <documentation>10189: Dekkekvalitet på Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_DekkekvalitetEnumerationType nvdb:UU_Plattform_DekkekvalitetOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_DekkekvalitetEnumerationType">
+    <annotation>
+      <documentation>10189: Dekkekvalitet på Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="god">
+        <annotation>
+          <documentation>16598: Stabilt og jevnt dekke uten sjenerende skader</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>16599: Noen ujevnheter og/eller mindre skader</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dårlig">
+        <annotation>
+          <documentation>16600: Ujevnt og/eller betydelig skadd dekke</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_DekkekvalitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_PunkthinderType">
+    <annotation>
+      <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_PunkthinderEnumerationType nvdb:UU_Plattform_PunkthinderOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_PunkthinderEnumerationType">
+    <annotation>
+      <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16623: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16624: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_PunkthinderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_TypeType">
+    <annotation>
+      <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_TypeEnumerationType nvdb:UU_Plattform_TypeOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_TypeEnumerationType">
+    <annotation>
+      <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="egetAreal">
+        <annotation>
+          <documentation>16692: Eget areal som brukes som venteareal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delAvFortau">
+        <annotation>
+          <documentation>16690: Plattformen er del av gjennomgående fortau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delAvGS_Veg">
+        <annotation>
+          <documentation>19834: Plattformen er del av gjennomgående g/sveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkøy">
+        <annotation>
+          <documentation>16691: Trafikkøy som skiller kjørefelt eller påstigningspunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkePlattform">
+        <annotation>
+          <documentation>16689: Det er ikke noe eget tilpasset venteareal</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_TypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_varselfeltLangsKantType">
+    <annotation>
+      <documentation>10198: Angir om det er varsellinje langs perrongkant ut mot veg for å gjøre folk oppmerksom på kanten og på innkomende busser/trikker.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_Plattform_varselfeltLangsKantEnumerationType nvdb:UU_Plattform_varselfeltLangsKantOtherType"/>
+  </simpleType>
+  <simpleType name="UU_Plattform_varselfeltLangsKantEnumerationType">
+    <annotation>
+      <documentation>10198: Angir om det er varsellinje langs perrongkant ut mot veg for å gjøre folk oppmerksom på kanten og på innkomende busser/trikker.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16614: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16615: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_Plattform_varselfeltLangsKantOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_PåOgAvstigningType">
+    <annotation>
+      <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_PåOgAvstigningEnumerationType nvdb:UU_PåOgAvstigningOtherType"/>
+  </simpleType>
+  <simpleType name="UU_PåOgAvstigningEnumerationType">
+    <annotation>
+      <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bådePåOgAvstigning">
+        <annotation>
+          <documentation>16625: Både på- og avstigning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="primærtAvstigning">
+        <annotation>
+          <documentation>16626: Primært avstigning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_PåOgAvstigningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SanntidsinformasjonType">
+    <annotation>
+      <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_SanntidsinformasjonEnumerationType nvdb:UU_SanntidsinformasjonOtherType"/>
+  </simpleType>
+  <simpleType name="UU_SanntidsinformasjonEnumerationType">
+    <annotation>
+      <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16631: Holdeplassutrustning har sanntidsinformasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16632: Holdeplassutrustning har ikke sanntidsinformasjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SanntidsinformasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SittemulighetType">
+    <annotation>
+      <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_SittemulighetEnumerationType nvdb:UU_SittemulighetOtherType"/>
+  </simpleType>
+  <simpleType name="UU_SittemulighetEnumerationType">
+    <annotation>
+      <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16635: Angir at det er sittemulighet, men ikke sittemulighet under tak og det er ikke armlene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedTak">
+        <annotation>
+          <documentation>16636: Angir at det er sittemulighet under tak, men det er ikke armlene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedArmlene">
+        <annotation>
+          <documentation>16637: Angir at det er sittemulighet med armlene, men ikke under tak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedArmleneOgTak">
+        <annotation>
+          <documentation>16638: Angir at det er sittemulighet under tak og at det er sittemulighet med armlene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16639: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SittemulighetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SykkelparkeringType">
+    <annotation>
+      <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_SykkelparkeringEnumerationType nvdb:UU_SykkelparkeringOtherType"/>
+  </simpleType>
+  <simpleType name="UU_SykkelparkeringEnumerationType">
+    <annotation>
+      <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_UtenOverbygg">
+        <annotation>
+          <documentation>16640: Holdeplassutrustning har sykkelparkering uten overbygg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedOverbygg">
+        <annotation>
+          <documentation>16641: Holdeplassutrustning har overbygd sykkelparkering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16642: Holdeplassutrustning har ikke sykkelparkering</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_SykkelparkeringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TakoverbyggType">
+    <annotation>
+      <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_TakoverbyggEnumerationType nvdb:UU_TakoverbyggOtherType"/>
+  </simpleType>
+  <simpleType name="UU_TakoverbyggEnumerationType">
+    <annotation>
+      <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="leskur">
+        <annotation>
+          <documentation>16619: Holdeplassutrustning har leskur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="åpentOverbygg">
+        <annotation>
+          <documentation>16620: Holdeplassutrustning er plassert under åpent overbygg.  Beskytter mot regn, men ikke nødvendigvis mot vind.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innendørs">
+        <annotation>
+          <documentation>16618: Holdeplassutrustning er plassert innendørs</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeTakoverbygg">
+        <annotation>
+          <documentation>16617: Det er ikke takoverbygg ved Holdeplassutrustning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TakoverbyggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TaktileIndikatorerTilPåstigningType">
+    <annotation>
+      <documentation>10197: Angir om det er Taktile indikatorer til påstigningpunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_TaktileIndikatorerTilPåstigningEnumerationType nvdb:UU_TaktileIndikatorerTilPåstigningOtherType"/>
+  </simpleType>
+  <simpleType name="UU_TaktileIndikatorerTilPåstigningEnumerationType">
+    <annotation>
+      <documentation>10197: Angir om det er Taktile indikatorer til påstigningpunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16612: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16613: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TaktileIndikatorerTilPåstigningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TypeType">
+    <annotation>
+      <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om. Jfr HB V123 (232)</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_TypeEnumerationType nvdb:UU_TypeOtherType"/>
+  </simpleType>
+  <simpleType name="UU_TypeEnumerationType">
+    <annotation>
+      <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om. Jfr HB V123 (232)</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="signalstopp">
+        <annotation>
+          <documentation>16688: Holdeplasstype 1 i HB V123 (232): Stopp på signal, uten fysisk markering av holdeplassen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kunSkilt">
+        <annotation>
+          <documentation>5079: Holdeplasstype 2 i HB V123 (232): Kun 512-skilt med informasjonsbærer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kantstopp">
+        <annotation>
+          <documentation>5080: Holdeplasstype 3 i HB V123 (232): 512-skilt med plattform for passasjer eller stopp ved fortau i by/tettbebyggelse.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plattformOgLomme">
+        <annotation>
+          <documentation>5078: Holdeplasstype 4  i HB V123 (232) : 512-skilt med plattform for passasjer + lomme.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lommeOgSkilt_IkkePlattform">
+        <annotation>
+          <documentation>19089: Det er anlagt lomme, det er skilt, men ikke plattform.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenType">
+        <annotation>
+          <documentation>5081: Andre typer holdeplassutrustning. Kan f.eks være perrong på terminal, endeholdeplass, snuholdeplass, mm. Gi beskrivelse under merknad.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TypeTransportmiddelType">
+    <annotation>
+      <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_TypeTransportmiddelEnumerationType nvdb:UU_TypeTransportmiddelOtherType"/>
+  </simpleType>
+  <simpleType name="UU_TypeTransportmiddelEnumerationType">
+    <annotation>
+      <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="buss">
+        <annotation>
+          <documentation>16750: Buss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trikkBybane">
+        <annotation>
+          <documentation>16751: Trikk/bybane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="togT_Bane">
+        <annotation>
+          <documentation>16752: Tog/T-bane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="drosje">
+        <annotation>
+          <documentation>16759: Drosje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferje">
+        <annotation>
+          <documentation>16837: Ferje</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_TypeTransportmiddelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_ViktighetsnivåType">
+    <annotation>
+      <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UU_ViktighetsnivåEnumerationType nvdb:UU_ViktighetsnivåOtherType"/>
+  </simpleType>
+  <simpleType name="UU_ViktighetsnivåEnumerationType">
+    <annotation>
+      <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nasjonaltKnutepunkt">
+        <annotation>
+          <documentation>16753: Knutepunkter hvorfra man kan reise både lokalt, regionalt og til andre landsdeler i Norge. Noen nasjonale knutepunkter har internasjonale reisemål. Det finnes et fåtall nasjonale knutepunkter som alle krever spesiell utforming. Se HB V123</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regionaltKnutepunkt">
+        <annotation>
+          <documentation>16754: Knutepunkter der man kan reise lokalt og regionalt i betydningen i og til de nærmeste fylkene. Se HB V123</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lokaltKnutepunkt">
+        <annotation>
+          <documentation>16755: Knutepunkter hvorfra man kan reise lokalt innen samme kommune og/eller samme fylke. Se HB V123.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenViktigHoldeplass">
+        <annotation>
+          <documentation>16756: Det aller enkleste knutepunktet der det er tilrettelagt for omstigning. I sin enkleste form er et mindre knutepunkt en holdeplass der det er lagt til rette for overgang mellom to eller flere transportmidler i kollektivsystemet (buss, båt, taxi i rute). Se HB V123</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="standardHoldeplass">
+        <annotation>
+          <documentation>16757: Angir at holdeplass ikke har funksjon som knutepunkt, eller av andre grunner karakteriseres som en ekstra viktig holdeplass. Se HB V123</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UU_ViktighetsnivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligHoldeplassutrustningType">
+    <annotation>
+      <documentation>3962: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligHoldeplassutrustningEnumerationType nvdb:VedlikeholdsansvarligHoldeplassutrustningOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligHoldeplassutrustningEnumerationType">
+    <annotation>
+      <documentation>3962: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>4984: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18700: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16758: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18829: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>4985: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>4986: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17679: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligHoldeplassutrustningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

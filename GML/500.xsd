@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierNødstasjonType">
+    <annotation>
+      <documentation>10985: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierNødstasjonEnumerationType nvdb:EierNødstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="EierNødstasjonEnumerationType">
+    <annotation>
+      <documentation>10985: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>18363: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18663: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>18364: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>18365: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>18366: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>18367: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierNødstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Nødstasjon" substitutionGroup="nvdb:AbstraktNødstasjon" type="nvdb:NødstasjonType">
+    <annotation>
+      <documentation>500: Sted hvor det er plassert utstyr til bruk i nødsituasjoner, f.eks. brannslokker, nødtelefon etc. I henhold til Tunnelsikkerhetsforskriften skal en nødstasjon minimum være utstyrt med en nødtelefon og to brannslokningsapparater. Utstyr som er plassert utenfor kiosk, men nærmere kiosken enn 20 m, skal regnes som del av samme nødstasjon som kiosken.</documentation>
+    </annotation>
+  </element>
+  <complexType name="NødstasjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktNødstasjonType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>9393: Gir navn. Anbefalt mønster for navning: SOSxxx, der xxx er nummerering av nødstasjonen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandTilNødutgang" type="double">
+            <annotation>
+              <documentation>9852: Angir avstand til nærmeste nødutgang
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringNødstasjonType"/>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9853: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10473: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11737: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11624: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11694: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11142: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierNødstasjonType">
+            <annotation>
+              <documentation>10985: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligNødstasjonType">
+            <annotation>
+              <documentation>9854: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5005: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NødstasjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Nødstasjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="PlasseringNødstasjonType">
+    <union memberTypes="nvdb:PlasseringNødstasjonEnumerationType nvdb:PlasseringNødstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringNødstasjonEnumerationType">
+    <restriction base="string">
+      <enumeration value="iKiosk">
+        <annotation>
+          <documentation>5037: Nødstasjon er plassert i kiosk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iSkap">
+        <annotation>
+          <documentation>5038: Nødstasjon er plassert i skap</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iKioskOgSkap">
+        <annotation>
+          <documentation>16070: Nødstasjonen er plassert i kiosk, men brannslokkingsapparat er plassert i separat skap utenfor kiosken.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringNødstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNødstasjonType">
+    <annotation>
+      <documentation>9854: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligNødstasjonEnumerationType nvdb:VedlikeholdsansvarligNødstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNødstasjonEnumerationType">
+    <annotation>
+      <documentation>9854: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>16025: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18691: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19995: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18820: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16023: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16024: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17779: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNødstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

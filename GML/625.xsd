@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstSkredmagasinFanggrøftType">
+    <annotation>
+      <documentation>9688: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstSkredmagasinFanggrøftEnumerationType nvdb:AdkomstSkredmagasinFanggrøftOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstSkredmagasinFanggrøftEnumerationType">
+    <annotation>
+      <documentation>9688: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19830: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>13961: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>13962: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>13963: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>13964: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>13965: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>13966: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstSkredmagasinFanggrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkredmagasinFanggrøftType">
+    <annotation>
+      <documentation>9690: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSkredmagasinFanggrøftEnumerationType nvdb:EierSkredmagasinFanggrøftOtherType"/>
+  </simpleType>
+  <simpleType name="EierSkredmagasinFanggrøftEnumerationType">
+    <annotation>
+      <documentation>9690: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>13974: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18645: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>13975: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13976: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13977: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17630: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkredmagasinFanggrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="SkredmagasinFanggrøft" substitutionGroup="nvdb:AbstraktSkredmagasinFanggrøft" type="nvdb:SkredmagasinFanggrøftType">
+    <annotation>
+      <documentation>625: Magasin for å fange opp skredmasser eller nedfall fra bergskjæringer</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredmagasinFanggrøftType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredmagasinFanggrøftType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeSkredmagasinFanggrøftType">
+            <annotation>
+              <documentation>11265: Angir hvilken type magasin det er tale om.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>5661: Kan angi beskrivelse til skredgropen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>9685: Lengde av magasinet langs vegretningen
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>9686: Gjennomsnittlig bredde av magasinet på tvers av vegretningen
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="magasinvolum" type="integer">
+            <annotation>
+              <documentation>5660: Angir hvor stort volum med masser magasinet kan ta opp
+Enhet: Kubikkmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybdeUnderVegkant" type="double">
+            <annotation>
+              <documentation>9687: Høydeforskjell mellom nærmeste vegkant og bunn av magasin
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstSkredmagasinFanggrøftType">
+            <annotation>
+              <documentation>9688: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9689: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9874: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11153: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSkredmagasinFanggrøftType">
+            <annotation>
+              <documentation>9690: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSkredmagasinFanggrøftType">
+            <annotation>
+              <documentation>9691: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6872: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8902: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredmagasinFanggrøftPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:SkredmagasinFanggrøft"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSkredmagasinFanggrøftType">
+    <annotation>
+      <documentation>11265: Angir hvilken type magasin det er tale om.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSkredmagasinFanggrøftEnumerationType nvdb:TypeSkredmagasinFanggrøftOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSkredmagasinFanggrøftEnumerationType">
+    <annotation>
+      <documentation>11265: Angir hvilken type magasin det er tale om.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skredmagasin">
+        <annotation>
+          <documentation>19004: Magasin for å samle opp skred fra naturlig terreng</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fanggrøft">
+        <annotation>
+          <documentation>19005: Magasin for å samle opp nedfall fra bergskjæringer</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSkredmagasinFanggrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredmagasinFanggrøftType">
+    <annotation>
+      <documentation>9691: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSkredmagasinFanggrøftEnumerationType nvdb:VedlikeholdsansvarligSkredmagasinFanggrøftOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredmagasinFanggrøftEnumerationType">
+    <annotation>
+      <documentation>9691: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>13978: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18689: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19992: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18818: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13979: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13980: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17766: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredmagasinFanggrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

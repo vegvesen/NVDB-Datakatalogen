@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AlvorligsteSkadegradType">
+    <annotation>
+      <documentation>11846: Alvorligste skadegrad i ulykken. Gjelder uavhengig av om person har  tilhørighet til involvert kjøretøy eller ikke. NB: Skadegrad skal være bekreftet av autorisert personell innen ulykkesregistrering.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AlvorligsteSkadegradEnumerationType nvdb:AlvorligsteSkadegradOtherType"/>
+  </simpleType>
+  <simpleType name="AlvorligsteSkadegradEnumerationType">
+    <annotation>
+      <documentation>11846: Alvorligste skadegrad i ulykken. Gjelder uavhengig av om person har  tilhørighet til involvert kjøretøy eller ikke. NB: Skadegrad skal være bekreftet av autorisert personell innen ulykkesregistrering.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="drept">
+        <annotation>
+          <documentation>20049: Drept</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="megetAlvorligSkadd">
+        <annotation>
+          <documentation>20050: Meget alvorlig skadd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="alvorligSkadd">
+        <annotation>
+          <documentation>20051: Alvorlig skadd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lettereSkadd">
+        <annotation>
+          <documentation>20052: Lettere skadd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uskadd">
+        <annotation>
+          <documentation>20053: Uskadd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20054: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AlvorligsteSkadegradOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="BrannhendelseITunnel" substitutionGroup="nvdb:AbstraktBrannhendelseITunnel" type="nvdb:BrannhendelseITunnelType">
+    <annotation>
+      <documentation>952: Hendelse i form av brann (åpen flamme) i tunnel eller hendelse med potensiale til å resultere i brann  i tunnel.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BrannhendelseITunnelType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBrannhendelseITunnelType">
+        <sequence>
+          <element minOccurs="0" name="typeHendelse" type="nvdb:TypeHendelseType">
+            <annotation>
+              <documentation>11857: Angir hvilken type hendelse det er tale om</documentation>
+            </annotation>
+          </element>
+          <element name="hendelsesdato" type="date">
+            <annotation>
+              <documentation>11850: Angir hvilken dato hendelse inntraff.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klokkeslett" type="integer">
+            <annotation>
+              <documentation>11851: Angir hvilket klokkeslett hendelse inntraff (hele time)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="årsakskategori" type="nvdb:ÅrsakskategoriType">
+            <annotation>
+              <documentation>11859: Angir hvilken kategori årsak til brannhendelse faller inn under</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeKjøretøy" type="nvdb:TypeKjøretøyType">
+            <annotation>
+              <documentation>11858: Angir hvilken kjøretøykategori kjøretøyet hvor brann oppstod tilhører</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="drivstoff" type="nvdb:DrivstoffType">
+            <annotation>
+              <documentation>11849: Angir hvilket drivstoff kjøretøy hvor brann oppstod benytter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilhenger" type="nvdb:TilhengerType">
+            <annotation>
+              <documentation>11855: Angir om kjøretøy hvor brann oppstod hadde tilhenger. Relevant for Personbil, Varebil,  Lastebil, Buss, Minibuss, Anleggsmaskin og Bobil/Bil med campingvogn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKjøretøyInvolvert" type="integer">
+            <annotation>
+              <documentation>11847: Angir hvor mange kjøretøy som var involvert i hendelsen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="personskade" type="nvdb:PersonskadeType">
+            <annotation>
+              <documentation>11863: Angir om hendelse har resultert i personskade.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="alvorligsteSkadegrad" type="nvdb:AlvorligsteSkadegradType">
+            <annotation>
+              <documentation>11846: Alvorligste skadegrad i ulykken. Gjelder uavhengig av om person har  tilhørighet til involvert kjøretøy eller ikke. NB: Skadegrad skal være bekreftet av autorisert personell innen ulykkesregistrering.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadomfangKjøretøy" type="nvdb:SkadomfangKjøretøyType">
+            <annotation>
+              <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadeomfangTunnel" type="nvdb:SkadeomfangTunnelType">
+            <annotation>
+              <documentation>11852: Angir skadeomfang på selve tunnelkonstruksjonen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengning" type="nvdb:StengningType">
+            <annotation>
+              <documentation>11854: Angir omfang av stengning i forbindelse med hendelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11856: Informasjon som ikke framkommer av andre egenskapdata</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11848: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11860: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BrannhendelseITunnelPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:BrannhendelseITunnel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="DrivstoffType">
+    <annotation>
+      <documentation>11849: Angir hvilket drivstoff kjøretøy hvor brann oppstod benytter</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DrivstoffEnumerationType nvdb:DrivstoffOtherType"/>
+  </simpleType>
+  <simpleType name="DrivstoffEnumerationType">
+    <annotation>
+      <documentation>11849: Angir hvilket drivstoff kjøretøy hvor brann oppstod benytter</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bensin">
+        <annotation>
+          <documentation>20040: Bensin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="diesel">
+        <annotation>
+          <documentation>20041: Diesel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elektrisk">
+        <annotation>
+          <documentation>20042: Elektrisk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hydrogen">
+        <annotation>
+          <documentation>20043: Hydrogen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetDrivstoff">
+        <annotation>
+          <documentation>20044: Annet drivstoff</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20045: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DrivstoffOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PersonskadeType">
+    <annotation>
+      <documentation>11863: Angir om hendelse har resultert i personskade.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PersonskadeEnumerationType nvdb:PersonskadeOtherType"/>
+  </simpleType>
+  <simpleType name="PersonskadeEnumerationType">
+    <annotation>
+      <documentation>11863: Angir om hendelse har resultert i personskade.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>20074: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>20075: Nei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20076: Det er ikke kjent hvor vidt det ble personskade eller ikke</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PersonskadeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadeomfangTunnelType">
+    <annotation>
+      <documentation>11852: Angir skadeomfang på selve tunnelkonstruksjonen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadeomfangTunnelEnumerationType nvdb:SkadeomfangTunnelOtherType"/>
+  </simpleType>
+  <simpleType name="SkadeomfangTunnelEnumerationType">
+    <annotation>
+      <documentation>11852: Angir skadeomfang på selve tunnelkonstruksjonen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="mindreEllerIngenSkade">
+        <annotation>
+          <documentation>20059: Mindre eller ingen skade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="noeSkade">
+        <annotation>
+          <documentation>20060: Noe skade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="omfattendeSkade">
+        <annotation>
+          <documentation>20061: Omfattende skade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20062: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadeomfangTunnelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadomfangKjøretøyType">
+    <annotation>
+      <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadomfangKjøretøyEnumerationType nvdb:SkadomfangKjøretøyOtherType"/>
+  </simpleType>
+  <simpleType name="SkadomfangKjøretøyEnumerationType">
+    <annotation>
+      <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="mindreEllerIngenSkade">
+        <annotation>
+          <documentation>20055: Mindre eller ingen skade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="reparerbarSkade">
+        <annotation>
+          <documentation>20056: Reparerbar skade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="totalvrak">
+        <annotation>
+          <documentation>20057: Totalvrak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20058: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadomfangKjøretøyOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengningType">
+    <annotation>
+      <documentation>11854: Angir omfang av stengning i forbindelse med hendelse</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StengningEnumerationType nvdb:StengningOtherType"/>
+  </simpleType>
+  <simpleType name="StengningEnumerationType">
+    <annotation>
+      <documentation>11854: Angir omfang av stengning i forbindelse med hendelse</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ikkeStengtKortStoppITrafikkavvikling">
+        <annotation>
+          <documentation>20063: Ikke stengt/kort stopp i trafikkavvikling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtUnderEttDøgn">
+        <annotation>
+          <documentation>20064: Stengt under ett døgn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengt1til6Døgn">
+        <annotation>
+          <documentation>20065: Stengt 1-6 døgn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengt1til4Uker">
+        <annotation>
+          <documentation>20066: Stengt 1-4 uker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtMerEnn1Mnd">
+        <annotation>
+          <documentation>20067: Stengt mer enn 1 mnd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20068: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilhengerType">
+    <annotation>
+      <documentation>11855: Angir om kjøretøy hvor brann oppstod hadde tilhenger. Relevant for Personbil, Varebil,  Lastebil, Buss, Minibuss, Anleggsmaskin og Bobil/Bil med campingvogn</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilhengerEnumerationType nvdb:TilhengerOtherType"/>
+  </simpleType>
+  <simpleType name="TilhengerEnumerationType">
+    <annotation>
+      <documentation>11855: Angir om kjøretøy hvor brann oppstod hadde tilhenger. Relevant for Personbil, Varebil,  Lastebil, Buss, Minibuss, Anleggsmaskin og Bobil/Bil med campingvogn</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>20046: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>20047: Nei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20048: Ukjent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilhengerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeHendelseType">
+    <annotation>
+      <documentation>11857: Angir hvilken type hendelse det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeHendelseEnumerationType nvdb:TypeHendelseOtherType"/>
+  </simpleType>
+  <simpleType name="TypeHendelseEnumerationType">
+    <annotation>
+      <documentation>11857: Angir hvilken type hendelse det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="brann">
+        <annotation>
+          <documentation>20022: Brann i form av åpen flamme</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hendelseMedPotensialeForBrann">
+        <annotation>
+          <documentation>20023: Hendelse med potensiale for brann. Kan f.eks være drivstofflekkasje, varmeutvikling, mm. Gi mer info under tilleggsinformasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hendelseMedPotensialeForAnnenStorulykke">
+        <annotation>
+          <documentation>20069: Hendelse med potensiale for storulykke, uten spesiell fare for brann. Kan for eksempel være gasslekkasje, lekkasje av farlige væsker, tap av usikret tung last, kollisjon med installasjoner i heng i tunnel.  Gi mer info under tilleggsinformasjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeHendelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKjøretøyType">
+    <annotation>
+      <documentation>11858: Angir hvilken kjøretøykategori kjøretøyet hvor brann oppstod tilhører</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKjøretøyEnumerationType nvdb:TypeKjøretøyOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKjøretøyEnumerationType">
+    <annotation>
+      <documentation>11858: Angir hvilken kjøretøykategori kjøretøyet hvor brann oppstod tilhører</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="personbil">
+        <annotation>
+          <documentation>20028: Personbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motorsykkel">
+        <annotation>
+          <documentation>20029: Motorsykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="varebil">
+        <annotation>
+          <documentation>20030: Varebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebil">
+        <annotation>
+          <documentation>20031: Lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vogntog">
+        <annotation>
+          <documentation>20032: Forutsetter at det er med tilhenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vogntogADR">
+        <annotation>
+          <documentation>20033: Forutsetter at det er med tilhenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="buss">
+        <annotation>
+          <documentation>20034: Buss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="minibuss">
+        <annotation>
+          <documentation>20035: Minibuss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="anleggsmaskin">
+        <annotation>
+          <documentation>20036: Anleggsmaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialtransportMFølgebil">
+        <annotation>
+          <documentation>20037: Spesialtransport m følgebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bobilBilMedCampingvogn">
+        <annotation>
+          <documentation>20038: Gjelder bobil eller bil med campingvogn. Det skal i tillegg angis tilhenger = Ja dersom det er bil med campingvogn eller bobil med tilhenger/campingvogn. Det angis Tilhenger = Nei dersom det er bobil uten tilhenger/campingvogn.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetKjøretøy">
+        <annotation>
+          <documentation>20039: Annet kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKjøretøyOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ÅrsakskategoriType">
+    <annotation>
+      <documentation>11859: Angir hvilken kategori årsak til brannhendelse faller inn under</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ÅrsakskategoriEnumerationType nvdb:ÅrsakskategoriOtherType"/>
+  </simpleType>
+  <simpleType name="ÅrsakskategoriEnumerationType">
+    <annotation>
+      <documentation>11859: Angir hvilken kategori årsak til brannhendelse faller inn under</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kjøretøytekniskÅrsak">
+        <annotation>
+          <documentation>20024: Teknisk feil ved kjøretøy er årsak til hendelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kollisjonTrafikkulykke">
+        <annotation>
+          <documentation>20025: Kollisjon er årsak til hendelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tekniskUtstyrITunnel">
+        <annotation>
+          <documentation>20026: Teknisk feil ved tunnelutstyr er årsak til hendelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ukjent">
+        <annotation>
+          <documentation>20027: Ukjent årssak</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ÅrsakskategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

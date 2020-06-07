@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="InspeksjonstypeType">
+    <annotation>
+      <documentation>11229: Angir type TS-inspeksjon.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InspeksjonstypeEnumerationType nvdb:InspeksjonstypeOtherType"/>
+  </simpleType>
+  <simpleType name="InspeksjonstypeEnumerationType">
+    <annotation>
+      <documentation>11229: Angir type TS-inspeksjon.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="inspeksjonAvEksisterendeVeg">
+        <annotation>
+          <documentation>18521: Inspeksjon av eksisterende veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inspeksjonAvGS_Veg">
+        <annotation>
+          <documentation>18522: Inspeksjon av GS-veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inspeksjonAvSykkelrute">
+        <annotation>
+          <documentation>18523: Inspeksjon av sykkelrute</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inspeksjonFørÅpning">
+        <annotation>
+          <documentation>18524: Inspeksjon før åpning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inspeksjonEtterÅpning">
+        <annotation>
+          <documentation>18525: Inspeksjon etter åpning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="temainspeksjon">
+        <annotation>
+          <documentation>18526: Temainspeksjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InspeksjonstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusTS_InspeksjonType">
+    <annotation>
+      <documentation>11319: Angir status for gjennomføring av tiltak.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StatusTS_InspeksjonEnumerationType nvdb:StatusTS_InspeksjonOtherType"/>
+  </simpleType>
+  <simpleType name="StatusTS_InspeksjonEnumerationType">
+    <annotation>
+      <documentation>11319: Angir status for gjennomføring av tiltak.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingenTiltak">
+        <annotation>
+          <documentation>19095: Ingen tiltak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delvisGjennomført">
+        <annotation>
+          <documentation>19096: Delvis gjennomført</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjennomført">
+        <annotation>
+          <documentation>19097: Gjennomført</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusTS_InspeksjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StørreInvesteringType">
+    <annotation>
+      <documentation>11318: Angir om tiltak er større investering eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StørreInvesteringEnumerationType nvdb:StørreInvesteringOtherType"/>
+  </simpleType>
+  <simpleType name="StørreInvesteringEnumerationType">
+    <annotation>
+      <documentation>11318: Angir om tiltak er større investering eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19093: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19094: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StørreInvesteringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TS_Inspeksjon" substitutionGroup="nvdb:AbstraktTS_Inspeksjon" type="nvdb:TS_InspeksjonType">
+    <annotation>
+      <documentation>914: Oversikt og status for TS-inspeksjoner</documentation>
+    </annotation>
+  </element>
+  <complexType name="TS_InspeksjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTS_InspeksjonType">
+        <sequence>
+          <element minOccurs="0" name="strekningsnavn" type="string">
+            <annotation>
+              <documentation>11227: Navn på strekning / stedsbestemmelse. Angis med navn fra-til i metreringsretning. Som navn kan benyttes stedsnavn i NVDB, kryss navn eller andre stedsnavn. Navnet vil framgå av rapporten fra aktuell TS-inspeksjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rapportnavn" type="string">
+            <annotation>
+              <documentation>11228: Navn på rapporten som beskriver funnene fra TS-inspeksjonen. Kan være nyttig for å kunne gjenfinne den aktuelle rapporten.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="inspeksjonstype" type="nvdb:InspeksjonstypeType">
+            <annotation>
+              <documentation>11229: Angir type TS-inspeksjon.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utførtDato" type="date">
+            <annotation>
+              <documentation>11230: Angir dato når inspeksjonen er gjennomført.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rapportDato" type="date">
+            <annotation>
+              <documentation>11231: Angir dato når rapporten er levert bestiller</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bestiller" type="string">
+            <annotation>
+              <documentation>11232: Angir navn på enhet eller prosjekt som har bestilt inspeksjonen. For enhet angis fortrinnsvis navn som er registrert i adresseboka i Outlook (f.eks. Drift Oppland). For prosjekt angis normalt navnet på prosjektet som har bestilt inspeksjonen (f.eks. Prosjekt E6 Biri-Otta). Prosjekt som bestiller vil i hovedsak være aktuelt for inspeksjon før og etter åpning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnad" type="integer">
+            <annotation>
+              <documentation>11236: Angir total beregnet kostnad for gjennomføring av alle kartlagte funn i den aktuelle TS-inspeksjonen
+Enhet: KiloKroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="størreInvestering" type="nvdb:StørreInvesteringType">
+            <annotation>
+              <documentation>11318: Angir om tiltak er større investering eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rapportreferanse" type="string">
+            <annotation>
+              <documentation>11239: Referanse til TS-rapport som er lagret på O:\Landsdekkende eller i Mime.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>11237: Kan gi tilleggsinformasjon. F.eks. nærmere beskrivelse av hvilke tiltak som er gjennomført, planlagt tid for gjennomføring (budsjett), avhengigheter for gjennomføring (tiltak som krever regulering) o.s.v.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="status" type="nvdb:StatusTS_InspeksjonType">
+            <annotation>
+              <documentation>11319: Angir status for gjennomføring av tiltak.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TS_InspeksjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TS_Inspeksjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

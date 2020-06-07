@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BassenginndelingType">
+    <annotation>
+      <documentation>10450: Angir hvordan bassengene er plassert i forhold til hverandre</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BassenginndelingEnumerationType nvdb:BassenginndelingOtherType"/>
+  </simpleType>
+  <simpleType name="BassenginndelingEnumerationType">
+    <annotation>
+      <documentation>10450: Angir hvordan bassengene er plassert i forhold til hverandre</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="adskilteBasseng">
+        <annotation>
+          <documentation>16901: Bassengene ligger fysisk adskilt fra hverandre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bassengVeggIVegg">
+        <annotation>
+          <documentation>16902: Bassengene ligger side ved side kun adskilt med vegg eller terskel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fellesBasseng">
+        <annotation>
+          <documentation>16903: Felles basseng</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BassenginndelingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DrensvannType">
+    <annotation>
+      <documentation>10605: Angir om anlegget håndterer drensvan fra tunnel/veg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DrensvannEnumerationType nvdb:DrensvannOtherType"/>
+  </simpleType>
+  <simpleType name="DrensvannEnumerationType">
+    <annotation>
+      <documentation>10605: Angir om anlegget håndterer drensvan fra tunnel/veg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="fraTunnel">
+        <annotation>
+          <documentation>17019: Fra tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraVegIDagen">
+        <annotation>
+          <documentation>17020: Fra veg i dagen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraVegIDagenOgTunnel">
+        <annotation>
+          <documentation>17021: Fra veg i dagen og tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeDrensvann">
+        <annotation>
+          <documentation>17022: Ikke drensvann</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DrensvannOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVannhåndteringsanleggType">
+    <annotation>
+      <documentation>10609: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierVannhåndteringsanleggEnumerationType nvdb:EierVannhåndteringsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="EierVannhåndteringsanleggEnumerationType">
+    <annotation>
+      <documentation>10609: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17032: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18662: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17027: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17028: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17030: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17639: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVannhåndteringsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Materialbruk_RørType">
+    <union memberTypes="nvdb:Materialbruk_RørEnumerationType nvdb:Materialbruk_RørOtherType"/>
+  </simpleType>
+  <simpleType name="Materialbruk_RørEnumerationType">
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>16922: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>16923: Plast</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Materialbruk_RørOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OvervannType">
+    <annotation>
+      <documentation>10604: Angir om anlegget håndterer overvann fra tunnel/veg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OvervannEnumerationType nvdb:OvervannOtherType"/>
+  </simpleType>
+  <simpleType name="OvervannEnumerationType">
+    <annotation>
+      <documentation>10604: Angir om anlegget håndterer overvann fra tunnel/veg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="fraTunnel">
+        <annotation>
+          <documentation>17015: Fra tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraVegIDagen">
+        <annotation>
+          <documentation>17016: Fra veg i dagen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fraVegIDagenOgTunnel">
+        <annotation>
+          <documentation>17017: Fra veg i dagen og tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeOvervann">
+        <annotation>
+          <documentation>17018: Ikke overvann</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OvervannOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RensingType">
+    <annotation>
+      <documentation>10607: Angir om anlegget er tiltenkt å ha rensefunksjon</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RensingEnumerationType nvdb:RensingOtherType"/>
+  </simpleType>
+  <simpleType name="RensingEnumerationType">
+    <annotation>
+      <documentation>10607: Angir om anlegget er tiltenkt å ha rensefunksjon</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17038: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17039: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RensingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SikringType">
+    <annotation>
+      <documentation>10449: Angir hvordan anlegget er sikret</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SikringEnumerationType nvdb:SikringOtherType"/>
+  </simpleType>
+  <simpleType name="SikringEnumerationType">
+    <annotation>
+      <documentation>10449: Angir hvordan anlegget er sikret</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="inngjerdet">
+        <annotation>
+          <documentation>16899: Inngjerdet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="åpent">
+        <annotation>
+          <documentation>16900: Åpent</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TankbillekkasjeType">
+    <annotation>
+      <documentation>10608: Angir hvorvidt anlegget er dimensjonert for å håndtere lekkasje fra tankbil</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TankbillekkasjeEnumerationType nvdb:TankbillekkasjeOtherType"/>
+  </simpleType>
+  <simpleType name="TankbillekkasjeEnumerationType">
+    <annotation>
+      <documentation>10608: Angir hvorvidt anlegget er dimensjonert for å håndtere lekkasje fra tankbil</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="storTankbil">
+        <annotation>
+          <documentation>17023: Eget system for å fange opp lekkasje fra tankbil. Er dimensjonert for å ta hånd om lekkasje fra stor tankbil, dvs volum inntil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mindreTankbil">
+        <annotation>
+          <documentation>17024: Eget system for å fange opp lekkasje fra tankbil. Er dimensjonert for å ta hånd om lekkasje fra mindre tankbil, dvs standard lastebil med tank uten henger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kunMindreLekkasjer">
+        <annotation>
+          <documentation>17025: Eget system for å fange opp mindre lekkasjer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hånderesIkkeSpesielt">
+        <annotation>
+          <documentation>17026: Anlegget har ikke eget system for å fange opp lekkasje fra tankbil.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TankbillekkasjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilgangForSlamfjerningType">
+    <union memberTypes="nvdb:TilgangForSlamfjerningEnumerationType nvdb:TilgangForSlamfjerningOtherType"/>
+  </simpleType>
+  <simpleType name="TilgangForSlamfjerningEnumerationType">
+    <restriction base="string">
+      <enumeration value="slamsugingsbil">
+        <annotation>
+          <documentation>16924: Slamsugingsbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebilGravemaskin">
+        <annotation>
+          <documentation>16925: Lastebil/gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilgangForSlamfjerningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vannhåndteringsanlegg" substitutionGroup="nvdb:AbstraktVannhåndteringsanlegg" type="nvdb:VannhåndteringsanleggType">
+    <annotation>
+      <documentation>882: System som samler opp drensvann og overvann før utslipp i resipient.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VannhåndteringsanleggType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVannhåndteringsanleggType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>10602: Gir navn på anlegget</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tankbillekkasje" type="nvdb:TankbillekkasjeType">
+            <annotation>
+              <documentation>10608: Angir hvorvidt anlegget er dimensjonert for å håndtere lekkasje fra tankbil</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rensing" type="nvdb:RensingType">
+            <annotation>
+              <documentation>10607: Angir om anlegget er tiltenkt å ha rensefunksjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="resipient" type="string">
+            <annotation>
+              <documentation>10448: URL til den bestemte forekomsten i vann-nett. Navn på resipient med id fra http://vann-nett.no/saksbehandler/</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vaskevannTunnel" type="nvdb:VaskevannTunnelType">
+            <annotation>
+              <documentation>10603: Angir om anlegget tar i mot vaskevann fra tunnel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overvann" type="nvdb:OvervannType">
+            <annotation>
+              <documentation>10604: Angir om anlegget håndterer overvann fra tunnel/veg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sikring" type="nvdb:SikringType">
+            <annotation>
+              <documentation>10449: Angir hvordan anlegget er sikret</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="drensvann" type="nvdb:DrensvannType">
+            <annotation>
+              <documentation>10605: Angir om anlegget håndterer drensvan fra tunnel/veg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bassenginndeling" type="nvdb:BassenginndelingType">
+            <annotation>
+              <documentation>10450: Angir hvordan bassengene er plassert i forhold til hverandre</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialbruk_Rør" type="nvdb:Materialbruk_RørType"/>
+          <element minOccurs="0" name="tilgangForSlamfjerning" type="nvdb:TilgangForSlamfjerningType"/>
+          <element minOccurs="0" name="adkomst_Beskrivelse" type="string">
+            <annotation>
+              <documentation>10599: Nødvendig informasjon for atkomst til bassengene: kjørevei, parkering, nøkler, m.m.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10601: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10600: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer_Utslippstillatelse" type="string">
+            <annotation>
+              <documentation>10606: Gir referanse til relevant sak i vegeiers arkivsystemstem til informasjon om utslippstillatelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11478: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierVannhåndteringsanleggType">
+            <annotation>
+              <documentation>10609: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligVannhåndteringsanleggType">
+            <annotation>
+              <documentation>10610: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>10668: Punkt som representerer vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>10785: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10669: Gir flate/polygon som geometrisk avgrenser vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VannhåndteringsanleggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vannhåndteringsanlegg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VaskevannTunnelType">
+    <annotation>
+      <documentation>10603: Angir om anlegget tar i mot vaskevann fra tunnel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VaskevannTunnelEnumerationType nvdb:VaskevannTunnelOtherType"/>
+  </simpleType>
+  <simpleType name="VaskevannTunnelEnumerationType">
+    <annotation>
+      <documentation>10603: Angir om anlegget tar i mot vaskevann fra tunnel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17013: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17014: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaskevannTunnelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVannhåndteringsanleggType">
+    <annotation>
+      <documentation>10610: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligVannhåndteringsanleggEnumerationType nvdb:VedlikeholdsansvarligVannhåndteringsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVannhåndteringsanleggEnumerationType">
+    <annotation>
+      <documentation>10610: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>17033: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18741: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20003: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18870: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17029: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17031: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17788: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVannhåndteringsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EtterslepTilstandSkadeFU_StrekningType">
+    <annotation>
+      <documentation>4086: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EtterslepTilstandSkadeFU_StrekningEnumerationType nvdb:EtterslepTilstandSkadeFU_StrekningOtherType"/>
+  </simpleType>
+  <simpleType name="EtterslepTilstandSkadeFU_StrekningEnumerationType">
+    <annotation>
+      <documentation>4086: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>5085: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>5086: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EtterslepTilstandSkadeFU_StrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkadeFU_Strekning" substitutionGroup="nvdb:AbstraktTilstandSkadeFU_Strekning" type="nvdb:TilstandSkadeFU_StrekningType">
+    <annotation>
+      <documentation>507: Gir informasjon om funksjonalitet.  Normalt knyttet til et spesifikt strekningsobjekt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkadeFU_StrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkadeFU_StrekningType">
+        <sequence>
+          <element minOccurs="0" name="etterslep" type="nvdb:EtterslepTilstandSkadeFU_StrekningType">
+            <annotation>
+              <documentation>4086: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>4085: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>4087: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5011: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkadeFU_StrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkadeFU_Strekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

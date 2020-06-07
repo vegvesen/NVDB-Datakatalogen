@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BolttypeType">
+    <annotation>
+      <documentation>11449: Angir boltetype</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BolttypeEnumerationType nvdb:BolttypeOtherType"/>
+  </simpleType>
+  <simpleType name="BolttypeEnumerationType">
+    <annotation>
+      <documentation>11449: Angir boltetype</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bolt_Uspesifisert">
+        <annotation>
+          <documentation>19471: Bolt - uspesifisert type</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bolt_NGO_Type">
+        <annotation>
+          <documentation>19474: Bolt, NGO-type</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bolt_SK_Type">
+        <annotation>
+          <documentation>19475: Bolt, SK-type</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bolt_Firkant_Type">
+        <annotation>
+          <documentation>19476: Bolt, firkant-type</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rør">
+        <annotation>
+          <documentation>19472: Rør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kamjern">
+        <annotation>
+          <documentation>19473: Kamjern</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BolttypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Fastmerke" substitutionGroup="nvdb:AbstraktFastmerke" type="nvdb:FastmerkeType">
+    <annotation>
+      <documentation>934: Fastmerke knyttet til bruk i vegens driftsfase, f.eks i tilknytning til tunneler</documentation>
+    </annotation>
+  </element>
+  <complexType name="FastmerkeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFastmerkeType">
+        <sequence>
+          <element minOccurs="0" name="bolttype" type="nvdb:BolttypeType">
+            <annotation>
+              <documentation>11449: Angir boltetype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fastmerkedato" type="date">
+            <annotation>
+              <documentation>11450: Informasjon om når punktet er etablert og koordinatberegningen er fullført</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fastmerkenavn" type="string">
+            <annotation>
+              <documentation>11451: Navn på fastmerket</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11452: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11453: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11454: Gir fastmerkets koordinater</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FastmerkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fastmerke"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

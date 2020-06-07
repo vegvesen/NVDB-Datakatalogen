@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdskilteLøpType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdskilteLøpEnumerationType nvdb:AdskilteLøpOtherType"/>
+  </simpleType>
+  <simpleType name="AdskilteLøpEnumerationType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="med">
+        <annotation>
+          <documentation>19035: Medstrekning for adskilte løp der kjøreretning er med metreringsretning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mot">
+        <annotation>
+          <documentation>19091: Motstrekning for adskilte løp der kjøreretning er mot metreringsretning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19036: Delstrekningen har ikke fysisk adskilte løp med egne referanser.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdskilteLøpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ArmType">
+    <annotation>
+      <documentation>11292: Angir om delstrekningen skal betraktes som en arm til et hovedløp</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ArmEnumerationType nvdb:ArmOtherType"/>
+  </simpleType>
+  <simpleType name="ArmEnumerationType">
+    <annotation>
+      <documentation>11292: Angir om delstrekningen skal betraktes som en arm til et hovedløp</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19046: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19047: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ArmOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeVegstrekningType">
+    <annotation>
+      <documentation>11289: Angir hvilken trafikantgruppe vegen som delstrekningen representerer skal benyttes av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrafikantgruppeVegstrekningEnumerationType nvdb:TrafikantgruppeVegstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikantgruppeVegstrekningEnumerationType">
+    <annotation>
+      <documentation>11289: Angir hvilken trafikantgruppe vegen som delstrekningen representerer skal benyttes av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="G">
+        <annotation>
+          <documentation>19037: Gående og syklende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19039: Kjørende</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeVegstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegstrekning" substitutionGroup="nvdb:AbstraktVegstrekning" type="nvdb:VegstrekningType">
+    <annotation>
+      <documentation>916: Deler inn vegsystemet i praktisk håndterbare størrelser nummerert i stigende rekkefølge i vegens retning</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegstrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegstrekningType">
+        <sequence>
+          <element name="strekningNummer" type="integer">
+            <annotation>
+              <documentation>11281: Nummer for den enkelte strekning i et vegsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="delstrekningNummer" type="integer">
+            <annotation>
+              <documentation>11284: Inndeling av Strekning i forhold til delstrekningens funksjon, f.eks. hovedløp, armer, gang- og sykkelveger. Nummeret er unikt innenfor strekningen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arm" type="nvdb:ArmType">
+            <annotation>
+              <documentation>11292: Angir om delstrekningen skal betraktes som en arm til et hovedløp</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adskilteLøp" type="nvdb:AdskilteLøpType">
+            <annotation>
+              <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adskilteLøpNummer" type="string">
+            <annotation>
+              <documentation>11314: Unik nummerering innenfor strekningen for adskilte løp som hører sammen, f.eks. 1-1, 1-2.</documentation>
+            </annotation>
+          </element>
+          <element name="trafikantgruppe" type="nvdb:TrafikantgruppeVegstrekningType">
+            <annotation>
+              <documentation>11289: Angir hvilken trafikantgruppe vegen som delstrekningen representerer skal benyttes av</documentation>
+            </annotation>
+          </element>
+          <element name="sekvens" type="integer">
+            <annotation>
+              <documentation>11282: Deler inn strekningen i sekvenser i stigende rekkefølge. Nummerering av sekvensene er slik at ved sortering kommer armer, gang- og sykkelveger, adskilte løp etc. på riktig plass topologisk. Nummeret er unikt innenfor strekningen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegstrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegstrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

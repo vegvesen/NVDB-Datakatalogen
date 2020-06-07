@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AntallLøsneområderType">
+    <annotation>
+      <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet.  Brukes i naturfareplan.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AntallLøsneområderEnumerationType nvdb:AntallLøsneområderOtherType"/>
+  </simpleType>
+  <simpleType name="AntallLøsneområderEnumerationType">
+    <annotation>
+      <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet.  Brukes i naturfareplan.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>13780: 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>13781: 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>13782: 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flere">
+        <annotation>
+          <documentation>13783: Flere</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AntallLøsneområderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="NaboskredType">
+    <annotation>
+      <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:NaboskredEnumerationType nvdb:NaboskredOtherType"/>
+  </simpleType>
+  <simpleType name="NaboskredEnumerationType">
+    <annotation>
+      <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>13093: Ingen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="toSkredløp_LitenSamtidighet">
+        <annotation>
+          <documentation>13094: To skredløp, liten samtidighet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="toSkredløp_StorSamtidighet">
+        <annotation>
+          <documentation>13095: To skredløp, stor samtidighet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flereSkredløp">
+        <annotation>
+          <documentation>13096: Flere skredløp</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="NaboskredOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OmkjøringType">
+    <annotation>
+      <documentation>9392: Beregnet omkjøringstid (inkl fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OmkjøringEnumerationType nvdb:OmkjøringOtherType"/>
+  </simpleType>
+  <simpleType name="OmkjøringEnumerationType">
+    <annotation>
+      <documentation>9392: Beregnet omkjøringstid (inkl fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="under1Min">
+        <annotation>
+          <documentation>13204: Under 1 min.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5Min">
+        <annotation>
+          <documentation>13190: 5 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15Min">
+        <annotation>
+          <documentation>13191: 15 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30Min">
+        <annotation>
+          <documentation>13192: 30 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="45Min">
+        <annotation>
+          <documentation>13193: 45 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60Min">
+        <annotation>
+          <documentation>13194: 60 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="75Min">
+        <annotation>
+          <documentation>13195: 75 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90Min">
+        <annotation>
+          <documentation>13196: 90 min</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2T">
+        <annotation>
+          <documentation>13197: 2 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3T">
+        <annotation>
+          <documentation>13198: 3 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4T">
+        <annotation>
+          <documentation>13199: 4 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5T">
+        <annotation>
+          <documentation>13200: 5 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6T">
+        <annotation>
+          <documentation>13201: 6 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="7T">
+        <annotation>
+          <documentation>13202: 7 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8T">
+        <annotation>
+          <documentation>13203: 8 t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingenOmkjøringsmulighet">
+        <annotation>
+          <documentation>13205: Ingen omkjøringsmulighet. Dersom omkjøring tar mer enn 8 timer regnes det også som ingen omkjøring.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OmkjøringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlannivåType">
+    <annotation>
+      <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlannivåEnumerationType nvdb:PlannivåOtherType"/>
+  </simpleType>
+  <simpleType name="PlannivåEnumerationType">
+    <annotation>
+      <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ikkeVurdert">
+        <annotation>
+          <documentation>13112: Ikke vurdert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="id">
+        <annotation>
+          <documentation>13113: Idé</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skisseForprosjekt">
+        <annotation>
+          <documentation>13114: Skisse/forprosjekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommunedelplan">
+        <annotation>
+          <documentation>13115: Kommunedelplan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="reguleringsplan">
+        <annotation>
+          <documentation>13116: Reguleringsplan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="byggeplan">
+        <annotation>
+          <documentation>13117: Byggeplan</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlannivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredfaktorkategoriType">
+    <annotation>
+      <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkredfaktorkategoriEnumerationType nvdb:SkredfaktorkategoriOtherType"/>
+  </simpleType>
+  <simpleType name="SkredfaktorkategoriEnumerationType">
+    <annotation>
+      <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="høy">
+        <annotation>
+          <documentation>13109: Høy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>13110: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lav">
+        <annotation>
+          <documentation>13111: Lav</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sikringUtført">
+        <annotation>
+          <documentation>16762: Angir at dette skredpunktet er sikret. Det er med for å ha historikk.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredfaktorkategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Skredpunkt" substitutionGroup="nvdb:AbstraktSkredpunkt" type="nvdb:SkredpunktType">
+    <annotation>
+      <documentation>824: Strekning som er utsatt for skred og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres fysisk uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredpunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredpunktType">
+        <sequence>
+          <element name="navn" type="string">
+            <annotation>
+              <documentation>9342: Navn på skredpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="databaseID" type="string">
+            <annotation>
+              <documentation>9344: Referanse til gammel databasenummerering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT" type="integer">
+            <annotation>
+              <documentation>9362: Angir hvilken ÅDT-verdi som er benyttet i beregning. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDTÅr" type="integer">
+            <annotation>
+              <documentation>9363: Angir hvilket år ÅDT-verdien gjelder for. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="snøskred_Frekvens" type="double">
+            <annotation>
+              <documentation>9346: Angir årlig frekvens av snøskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="snøskred_Bredde" type="integer">
+            <annotation>
+              <documentation>9347: Angir gjennomsnittlig bredde av alle snøskred. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sørpeskred_Frekvens" type="double">
+            <annotation>
+              <documentation>9348: Angir årlig frekvens av sørpeskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sørpeskred_Bredde" type="integer">
+            <annotation>
+              <documentation>9355: Angir gjennomsnittlig bredde av alle sørpeskred. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="steinsprangFjellskred_Frekvens" type="double">
+            <annotation>
+              <documentation>9349: Angir årlig frekvens av steinsprang/fjellskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="steinsprangFjellskred_Bredde" type="integer">
+            <annotation>
+              <documentation>9356: Angir gjennomsnittlig bredde av alle steinsprang/fjellskred. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="isnedfall_Frekvens" type="double">
+            <annotation>
+              <documentation>9351: Angir årlig frekvens av isnedfall. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="isnedfall_Bredde" type="integer">
+            <annotation>
+              <documentation>9357: Angir gjennomsnittlig bredde av alle isnedfall/isskred/isproblem. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="jordLøsmasseskredFrekvens" type="double">
+            <annotation>
+              <documentation>9353: Angir årlig frekvens av jord-/løsmasseskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="jordLøsmasseskred_Bredde" type="integer">
+            <annotation>
+              <documentation>9359: Angir gjennomsnittlig bredde av alle jord-/løsmasseskred. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="flomskred_Frekvens" type="double">
+            <annotation>
+              <documentation>9354: Angir årlig frekvens av flomskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="flomskred_Bredde" type="integer">
+            <annotation>
+              <documentation>9360: Angir gjennomsnittlig bredde av alle flomskred. Brukes i beregning av F2 Skredfarefaktor.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="omkjøring" type="nvdb:OmkjøringType">
+            <annotation>
+              <documentation>9392: Beregnet omkjøringstid (inkl fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengningsfrekvens_Skred" type="double">
+            <annotation>
+              <documentation>9365: Angir hvor mange ganger per år vegen i gjennomsnitt er stengt på grunn av skred. Brukes ved beregning av F4 Stengningsfaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengningdøgn_Skredfare" type="double">
+            <annotation>
+              <documentation>9366: Angir hvor mange døgn per år vegen i gjennomsnitt er stengt på grunn av skredfare. Benyttes kun når omkjøringstid er over 2 timer. Brukes i beregning av F5 Skredfarestengningsfaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="naboskred" type="nvdb:NaboskredType">
+            <annotation>
+              <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F1_Trafikkmengde_Faktor" type="double">
+            <annotation>
+              <documentation>9374: Beregnet faktor som gir uttrykk for hvor mye trafikkmengde virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F2_Skredfarefaktor" type="double">
+            <annotation>
+              <documentation>9375: Beregnet faktor som gir uttrykk for hvor mye skredfrekvens og skredbredde virker inn  på skredfaktoren for gitt skredpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F3_Omkjøringsfaktor" type="double">
+            <annotation>
+              <documentation>9376: Beregnet faktor som gir uttrykk for hvor mye omkjøringstiden virker inn på skredfaktoren for gitt skredpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F4_Stengningsfaktor" type="double">
+            <annotation>
+              <documentation>9368: Beregnet faktor som gir uttrykk for hvor mye vegens stengningsfrekvens virker inn på skredpunktets skredfaktor</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F5_Skredfarestengningsfaktor" type="double">
+            <annotation>
+              <documentation>9377: Beregnet faktor som gir uttrykk for hvor mye stengning av vegen pga skredfare virker inn på skredfaktoren for gitt skredpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="F6_Naboskredfaktor" type="double">
+            <annotation>
+              <documentation>9378: Beregnet faktor som gir uttrykk for hvor mye fare for naboskred virker inn på skredfaktoren for gitt skredpunkt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skredfaktor" type="double">
+            <annotation>
+              <documentation>9379: Beregnet tall som brukes for sammenligning mellom ulike skredutsatte punkt, basert på faktorene F1-F6</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skredfaktorkategori" type="nvdb:SkredfaktorkategoriType">
+            <annotation>
+              <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plannivå" type="nvdb:PlannivåType">
+            <annotation>
+              <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppstartHandlingsprogram" type="integer">
+            <annotation>
+              <documentation>9381: Angir hvilket år sikring er planlagt startet, hvis det er med i handlingsprogram.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnadsnivåÅr" type="integer">
+            <annotation>
+              <documentation>9371: Hvilken kroneverdi (årstall) kostnader er angitt i.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnadsoverslag_MillKr" type="double">
+            <annotation>
+              <documentation>9372: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt. Avrudet i henhold egne regler.
+Enhet: Millioner kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="usikkerhetKostnad" type="integer">
+            <annotation>
+              <documentation>9373: Angir prosentvis usikkerhet i kostnad +/- (forutsatt like mye oppover og nedover)
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utførtAnslag" type="nvdb:UtførtAnslagType">
+            <annotation>
+              <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="planlagtTiltak" type="string">
+            <annotation>
+              <documentation>10180: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sikringsnivå" type="double">
+            <annotation>
+              <documentation>10181: Anslått risiko etter at foreslått tiltak er utført. Oppgis som nominell sannsynlighet for skred. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år
+Enhet: Forholdstall</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utbedretÅr" type="integer">
+            <annotation>
+              <documentation>9369: For punkt som er sikret skal det angis hvilket år det ble sikret. Utfylt årstall gir prioriteringskategori «sikring utført».</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utløsendeVærforhold" type="string">
+            <annotation>
+              <documentation>9571: Beskrivelse av værforhold som kan gi skred i skredløpet. Brukes i naturfareplan.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse_Beredskap" type="string">
+            <annotation>
+              <documentation>9569: Beskrivelse som er relevant i forhold til beredskap. Brukes i naturfareplan.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallLøsneområder" type="nvdb:AntallLøsneområderType">
+            <annotation>
+              <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet.  Brukes i naturfareplan.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>9345: Eventuelt supplerende merknader knyttet til skredsikringsbehov</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>9343: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredpunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skredpunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="UtførtAnslagType">
+    <annotation>
+      <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtførtAnslagEnumerationType nvdb:UtførtAnslagOtherType"/>
+  </simpleType>
+  <simpleType name="UtførtAnslagEnumerationType">
+    <annotation>
+      <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16587: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16588: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtførtAnslagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BudsjettVegdekke_FresingType">
+    <annotation>
+      <documentation>5534: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BudsjettVegdekke_FresingEnumerationType nvdb:BudsjettVegdekke_FresingOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettVegdekke_FresingEnumerationType">
+    <annotation>
+      <documentation>5534: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>7864: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>7865: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettVegdekke_FresingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegdekke_FresingType">
+    <annotation>
+      <documentation>5522: Angir hvilken type fresing det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeVegdekke_FresingEnumerationType nvdb:TypeVegdekke_FresingOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVegdekke_FresingEnumerationType">
+    <annotation>
+      <documentation>5522: Angir hvilken type fresing det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="planfresing">
+        <annotation>
+          <documentation>7504: Planfresing</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dypfresing">
+        <annotation>
+          <documentation>7505: Dypfresing</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegdekke_FresingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegdekke_Fresing" substitutionGroup="nvdb:AbstraktVegdekke_Fresing" type="nvdb:Vegdekke_FresingType">
+    <annotation>
+      <documentation>614: Vedlikeholdstiltak for vegdekke, type fresing av vegdekke</documentation>
+    </annotation>
+  </element>
+  <complexType name="Vegdekke_FresingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegdekke_FresingType">
+        <sequence>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>5521: Angir tykkelse av fresing
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeVegdekke_FresingType">
+            <annotation>
+              <documentation>5522: Angir hvilken type fresing det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_GjSnitt" type="double">
+            <annotation>
+              <documentation>5532: Angir gjennomsnittlig fresebredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element name="fresingsdato" type="date">
+            <annotation>
+              <documentation>5545: Angir dato for fresing</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettVegdekke_FresingType">
+            <annotation>
+              <documentation>5534: Angir hvilket budsjett utlegging går over</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5548: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6903: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8900: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Vegdekke_FresingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegdekke_Fresing"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Kurvatur_Stigning" substitutionGroup="nvdb:AbstraktKurvatur_Stigning" type="nvdb:Kurvatur_StigningType">
+    <annotation>
+      <documentation>825: Angir gjennomsnittlig stigning på strekning. Basert på silingsfunksjon i forhold til primære høydedata. Splitting i ny forekomst når avvik større enn gitt verdi</documentation>
+    </annotation>
+  </element>
+  <complexType name="Kurvatur_StigningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKurvatur_StigningType">
+        <sequence>
+          <element minOccurs="0" name="stigning" type="double">
+            <annotation>
+              <documentation>9396: Angir stigning. Negativ verdi hvis nedoverbakke i metreringsretning, positiv verdi hvis oppoverbakke i metreringsretning
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beregningsinfo" type="string">
+            <annotation>
+              <documentation>9962: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Kurvatur_StigningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kurvatur_Stigning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

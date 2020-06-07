@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeType">
+    <annotation>
+      <documentation>6067: Angir hva statistikken omfatter</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeEnumerationType nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeOtherType"/>
+  </simpleType>
+  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeEnumerationType">
+    <annotation>
+      <documentation>6067: Angir hva statistikken omfatter</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="landet">
+        <annotation>
+          <documentation>8363: Landet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="region">
+        <annotation>
+          <documentation>8364: Region</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylke">
+        <annotation>
+          <documentation>8365: Fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegavdeling">
+        <annotation>
+          <documentation>8366: Vegavdeling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>11669: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrLand">
+        <annotation>
+          <documentation>8367: Veg pr land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrRegion">
+        <annotation>
+          <documentation>8368: Veg pr region</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrFylke">
+        <annotation>
+          <documentation>8369: Veg pr fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrAvdeling">
+        <annotation>
+          <documentation>8370: Veg pr avdeling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrKommune">
+        <annotation>
+          <documentation>11674: Veg pr kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HP">
+        <annotation>
+          <documentation>8371: HP</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="PMS_Parsell">
+        <annotation>
+          <documentation>8372: PMS-parsell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1000_Meter">
+        <annotation>
+          <documentation>13217: 1000-meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="generert">
+        <annotation>
+          <documentation>11299: Generert</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Statistikk_Trafikkmengde" substitutionGroup="nvdb:AbstraktStatistikk_Trafikkmengde" type="nvdb:Statistikk_TrafikkmengdeType">
+    <annotation>
+      <documentation>643: Aggregert informasjon ifbm PMS-rapport 2603</documentation>
+    </annotation>
+  </element>
+  <complexType name="Statistikk_TrafikkmengdeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStatistikk_TrafikkmengdeType">
+        <sequence>
+          <element minOccurs="0" name="opprettetDato" type="date"/>
+          <element minOccurs="0" name="stedsangivelse_Fra_Til" type="string">
+            <annotation>
+              <documentation>8729: Angir stedsnavn for start og slutt strekning.  Rekkefølge som navnene settes i har ikke betydning.</documentation>
+            </annotation>
+          </element>
+          <element name="geografiskOppløsning" type="nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeType">
+            <annotation>
+              <documentation>6067: Angir hva statistikken omfatter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="min_Mm_R_Grunnlag" type="integer">
+            <annotation>
+              <documentation>6073: Datagrunnlaget for statistikkobjektet er ikke eldre enn gitt år</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maks_Mm_År_Grunnlag" type="integer">
+            <annotation>
+              <documentation>6074: Datagrunnlaget for statistikkobjektet er ikke nyere enn gitt år</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT_Fordeling"/>
+          <element minOccurs="0" name="midlereÅDT" type="integer"/>
+          <element minOccurs="0" name="minsteÅDT" type="integer"/>
+          <element minOccurs="0" name="størsteÅDT" type="integer"/>
+          <element minOccurs="0" name="ÅDT_90ProsentVerdi" type="integer"/>
+          <element minOccurs="0" name="måltProsent" type="double">
+            <annotation>
+              <documentation>6079: Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>7547: Angir total lengde av strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="midlereAndelLange" type="double">
+            <annotation>
+              <documentation>7927: Midlere andel lange kjøretøy.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="minsteAndelLange" type="double">
+            <annotation>
+              <documentation>7928: Minste andel lange kjøretøy.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="størsteAndelLange" type="double">
+            <annotation>
+              <documentation>7929: Største andel lange kjøretøy.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Statistikk_TrafikkmengdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Statistikk_Trafikkmengde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

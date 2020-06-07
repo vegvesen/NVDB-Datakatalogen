@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SkadetypeTilstandSkade_SkiltplateType">
+    <annotation>
+      <documentation>2292: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadetypeTilstandSkade_SkiltplateEnumerationType nvdb:SkadetypeTilstandSkade_SkiltplateOtherType"/>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_SkiltplateEnumerationType">
+    <annotation>
+      <documentation>2292: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dårligRefleks">
+        <annotation>
+          <documentation>4164: Dårlig refleks</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hærverk">
+        <annotation>
+          <documentation>4165: Hærverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="unødvendig">
+        <annotation>
+          <documentation>4166: Unødvendig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="feilBruk">
+        <annotation>
+          <documentation>4167: Feil bruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ugyldig">
+        <annotation>
+          <documentation>4169: Ugyldig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skjevhet">
+        <annotation>
+          <documentation>4170: Skjevhet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="defektUteAvFunksjon">
+        <annotation>
+          <documentation>4171: Defekt/ute av funksjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_SkiltplateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Skiltplate" substitutionGroup="nvdb:AbstraktTilstandSkade_Skiltplate" type="nvdb:TilstandSkade_SkiltplateType">
+    <annotation>
+      <documentation>438: Gir informasjon om tilstand og eventuell skade på skiltplate</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_SkiltplateType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_SkiltplateType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_SkiltplateType">
+            <annotation>
+              <documentation>2291: Angir tilstand til skiltplate</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_SkiltplateType">
+            <annotation>
+              <documentation>2292: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8779: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakTilstandSkade_SkiltplateType">
+            <annotation>
+              <documentation>2293: Angir aktuelt tiltak for skiltskade</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_Tilstandsindeks" type="integer">
+            <annotation>
+              <documentation>9837: Angir tilstand. Til testformål
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7855: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4956: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_SkiltplatePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Skiltplate"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_SkiltplateType">
+    <annotation>
+      <documentation>2291: Angir tilstand til skiltplate</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_SkiltplateEnumerationType nvdb:TilstandTilstandSkade_SkiltplateOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_SkiltplateEnumerationType">
+    <annotation>
+      <documentation>2291: Angir tilstand til skiltplate</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>4161: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>4162: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>4163: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>4632: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_SkiltplateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltplateType">
+    <annotation>
+      <documentation>2293: Angir aktuelt tiltak for skiltskade</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakTilstandSkade_SkiltplateEnumerationType nvdb:TiltakTilstandSkade_SkiltplateOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltplateEnumerationType">
+    <annotation>
+      <documentation>2293: Angir aktuelt tiltak for skiltskade</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skiftes">
+        <annotation>
+          <documentation>4172: Skiftes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flyttes">
+        <annotation>
+          <documentation>4173: Flyttes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>4174: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rettes">
+        <annotation>
+          <documentation>4175: Rettes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltplateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="InnsatstypeType">
+    <annotation>
+      <documentation>11830: Angir hvilken type innsats som er aktuell på stedet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InnsatstypeEnumerationType nvdb:InnsatstypeOtherType"/>
+  </simpleType>
+  <simpleType name="InnsatstypeEnumerationType">
+    <annotation>
+      <documentation>11830: Angir hvilken type innsats som er aktuell på stedet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dirigering_AktiverManuell">
+        <annotation>
+          <documentation>19857: Dirigering, Aktiver manuell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalanlegg_AktiverAutomatisk">
+        <annotation>
+          <documentation>19858: Signalanlegg, Aktiver automatisk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalhode_AktiverStyringVTS">
+        <annotation>
+          <documentation>19859: Signalhode, Aktiver styringVTS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltplate_AktiverManuell_SkiltPåLøsfot">
+        <annotation>
+          <documentation>19860: Skiltplate, Aktiver manuell (Skilt på løsfot…)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltplate_DekkTil_AktiverManuell">
+        <annotation>
+          <documentation>19861: Skiltplate, Dekk til, Aktiver manuell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltplate_FastOmskilting">
+        <annotation>
+          <documentation>19862: Skiltplate, Fast omskilting</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="variabeltSkilt_AktiverStyringVTS">
+        <annotation>
+          <documentation>19863: Variabelt skilt, Aktiver styringVTS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="variabeltSkilt_AktiverManuell">
+        <annotation>
+          <documentation>19864: Variabelt skilt, Aktiver manuell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegbom_AktiverStyringVTS">
+        <annotation>
+          <documentation>19865: Vegbom, Aktiver styringVTS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegbom_AktiverManuell">
+        <annotation>
+          <documentation>19866: Vegbom, Aktiver manuell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venteplass_AktiverManuell">
+        <annotation>
+          <documentation>19867: Venteplass, Aktiver manuell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnsatstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Omkjøringsruteinnsats_Punkt" substitutionGroup="nvdb:AbstraktOmkjøringsruteinnsats_Punkt" type="nvdb:Omkjøringsruteinnsats_PunktType">
+    <annotation>
+      <documentation>950: Punkt i vegnettet der det kreves innsats i forbindelse med klargjøring av ei omkjøringsrute for omkjøringstrafikk</documentation>
+    </annotation>
+  </element>
+  <complexType name="Omkjøringsruteinnsats_PunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktOmkjøringsruteinnsats_PunktType">
+        <sequence>
+          <element minOccurs="0" name="innsatstype" type="nvdb:InnsatstypeType">
+            <annotation>
+              <documentation>11830: Angir hvilken type innsats som er aktuell på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skiltnummer_MidlertidigSkilt" type="nvdb:Skiltnummer_MidlertidigSkiltType">
+            <annotation>
+              <documentation>11831: Angir skiltnummer til midlertidig skilt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skilttekst_MidlertidigSkilt" type="string">
+            <annotation>
+              <documentation>11832: Angir tekst på midlertidig skilt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sesong" type="nvdb:SesongType">
+            <annotation>
+              <documentation>11834: Angir hvilken sesong innsats er relevant</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="referanseTilEksisterendeVegobjekt" type="string">
+            <annotation>
+              <documentation>11833: Gir referanse til eksisterende vegobjekt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11835: Angir tilleggsinformasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11836: Punkt for plassering av Innsatspunkt</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Omkjøringsruteinnsats_PunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Omkjøringsruteinnsats_Punkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SesongType">
+    <annotation>
+      <documentation>11834: Angir hvilken sesong innsats er relevant</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SesongEnumerationType nvdb:SesongOtherType"/>
+  </simpleType>
+  <simpleType name="SesongEnumerationType">
+    <annotation>
+      <documentation>11834: Angir hvilken sesong innsats er relevant</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vinter">
+        <annotation>
+          <documentation>19879: Vinter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sommer">
+        <annotation>
+          <documentation>19880: Sommer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavhengigAvSesong">
+        <annotation>
+          <documentation>19881: Uavhengig av sesong</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SesongOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Skiltnummer_MidlertidigSkiltType">
+    <annotation>
+      <documentation>11831: Angir skiltnummer til midlertidig skilt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Skiltnummer_MidlertidigSkiltEnumerationType nvdb:Skiltnummer_MidlertidigSkiltOtherType"/>
+  </simpleType>
+  <simpleType name="Skiltnummer_MidlertidigSkiltEnumerationType">
+    <annotation>
+      <documentation>11831: Angir skiltnummer til midlertidig skilt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="713V_VanligVegviser_Venstre">
+        <annotation>
+          <documentation>19872: 713.V - Vanlig vegviser, Venstre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="713H_VanligVegviser_Høyre">
+        <annotation>
+          <documentation>19873: 713.H - Vanlig vegviser, Høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="723_41_OmkjøringsruteForStoreKjøretøy">
+        <annotation>
+          <documentation>19874: 723.41 - Omkjøringsrute for store kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="741_OmkjøringForBestemteKjøretøygrupper">
+        <annotation>
+          <documentation>19875: 741 - Omkjøring for bestemte kjøretøygrupper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="743_1_MidlertidigOmkjøringUtenTekst">
+        <annotation>
+          <documentation>19876: 743.1 - Midlertidig omkjøring.  Uten tekst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="743_2_MidlertidigOmkjøringMedTekst">
+        <annotation>
+          <documentation>19877: 743.2 - Midlertidig omkjøring.  Med tekst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetSkiltnummer">
+        <annotation>
+          <documentation>19878: Annet skiltnummer</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Skiltnummer_MidlertidigSkiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

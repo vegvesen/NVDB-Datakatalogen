@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Telehiv" substitutionGroup="nvdb:AbstraktTelehiv" type="nvdb:TelehivType"/>
+  <complexType name="TelehivType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTelehivType">
+        <sequence>
+          <element minOccurs="0" name="årsak" type="nvdb:ÅrsakType">
+            <annotation>
+              <documentation>4557: Angir årsak til telehiv</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11600: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4889: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TelehivPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Telehiv"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="ÅrsakType">
+    <annotation>
+      <documentation>4557: Angir årsak til telehiv</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ÅrsakEnumerationType nvdb:ÅrsakOtherType"/>
+  </simpleType>
+  <simpleType name="ÅrsakEnumerationType">
+    <annotation>
+      <documentation>4557: Angir årsak til telehiv</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stikkrenne">
+        <annotation>
+          <documentation>5465: Stikkrenne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grunnforhold">
+        <annotation>
+          <documentation>5466: Grunnforhold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ÅrsakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

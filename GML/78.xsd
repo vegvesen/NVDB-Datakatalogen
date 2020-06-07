@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierLukketRørgrøftType">
+    <annotation>
+      <documentation>10880: Angir hvem som er eier av innholdet i grøften.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierLukketRørgrøftEnumerationType nvdb:EierLukketRørgrøftOtherType"/>
+  </simpleType>
+  <simpleType name="EierLukketRørgrøftEnumerationType">
+    <annotation>
+      <documentation>10880: Angir hvem som er eier av innholdet i grøften.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17939: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18633: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17942: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17940: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17941: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17943: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierLukketRørgrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GrunnforholdLukketRørgrøftType">
+    <annotation>
+      <documentation>1138: Angir hvilken type masse grøfta går gjennom</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GrunnforholdLukketRørgrøftEnumerationType nvdb:GrunnforholdLukketRørgrøftOtherType"/>
+  </simpleType>
+  <simpleType name="GrunnforholdLukketRørgrøftEnumerationType">
+    <annotation>
+      <documentation>1138: Angir hvilken type masse grøfta går gjennom</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="løsmasse">
+        <annotation>
+          <documentation>2287: Løsmasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="berg">
+        <annotation>
+          <documentation>2326: Berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kombinertLøsmasseOgBerg">
+        <annotation>
+          <documentation>3284: Kombinert løsmasse og berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprengtStein">
+        <annotation>
+          <documentation>13793: Sprengt stein</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GrunnforholdLukketRørgrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KablerType">
+    <annotation>
+      <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KablerEnumerationType nvdb:KablerOtherType"/>
+  </simpleType>
+  <simpleType name="KablerEnumerationType">
+    <annotation>
+      <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>15884: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>15885: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KablerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="LukketRørgrøft" substitutionGroup="nvdb:AbstraktLukketRørgrøft" type="nvdb:LukketRørgrøftType">
+    <annotation>
+      <documentation>78: Trase med nedgravd(e) rørledning(er) eller pukkstreng. Benyttes i første rekke i forbindelse med drenering av veger, men kan også inneholde andre typer rørledninger. Merknad: Lukket rørgrøft med kun kabler og trekkerør er definert som egen vegobjekttype Kabelgrøft</documentation>
+    </annotation>
+  </element>
+  <complexType name="LukketRørgrøftType">
+    <complexContent>
+      <extension base="nvdb:AbstraktLukketRørgrøftType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeLukketRørgrøftType">
+            <annotation>
+              <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="grunnforhold" type="nvdb:GrunnforholdLukketRørgrøftType">
+            <annotation>
+              <documentation>1138: Angir hvilken type masse grøfta går gjennom</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>11248: Angir total lengde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybde" type="double">
+            <annotation>
+              <documentation>1657: Angir dybde av vegobjektet. Dybde måles ned til topp fundament
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varmekabler" type="nvdb:VarmekablerLukketRørgrøftType">
+            <annotation>
+              <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kabler" type="nvdb:KablerType">
+            <annotation>
+              <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10323: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10673: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks beskrivelse av hvordan grøft er bygget opp. Lagdeling, materialbruk, mm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11067: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierLukketRørgrøftType">
+            <annotation>
+              <documentation>10880: Angir hvem som er eier av innholdet i grøften.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4779: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LukketRørgrøftPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:LukketRørgrøft"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeLukketRørgrøftType">
+    <annotation>
+      <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeLukketRørgrøftEnumerationType nvdb:TypeLukketRørgrøftOtherType"/>
+  </simpleType>
+  <simpleType name="TypeLukketRørgrøftEnumerationType">
+    <annotation>
+      <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="drensgrøft_Dyp">
+        <annotation>
+          <documentation>5450: Rørgrøft med drensledning og/eller overvannsledning. Frostfri dybde. Se også Håndbok N200 (018).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="drensgrøft_Grunn">
+        <annotation>
+          <documentation>5451: Rørgrøft med drensledning. Ikke frostfri dybde. Se også Håndbok N200 (018).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pukkstreng">
+        <annotation>
+          <documentation>2924: Jfr Håndbok N200 (018)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avløpsgrøft">
+        <annotation>
+          <documentation>11581: Grøft som kun har rør for å lede bort overvann/avløpsvann.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="filterRensegrøft">
+        <annotation>
+          <documentation>17232: Grøft fylt med sand. Vann renses ved å renne gjennom sanden. Også benevnt infiltrasjonsgrøft eller sandfiltergrøft. Slike grøfter benyttes bla i forbindelse med rensing av overvann og/eller vaskevann fra tunnel.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeLukketRørgrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerLukketRørgrøftType">
+    <annotation>
+      <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VarmekablerLukketRørgrøftEnumerationType nvdb:VarmekablerLukketRørgrøftOtherType"/>
+  </simpleType>
+  <simpleType name="VarmekablerLukketRørgrøftEnumerationType">
+    <annotation>
+      <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3523: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3561: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerLukketRørgrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

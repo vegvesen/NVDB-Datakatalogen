@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="ArealTilpassetRullestolType">
+    <annotation>
+      <documentation>9846: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ArealTilpassetRullestolEnumerationType nvdb:ArealTilpassetRullestolOtherType"/>
+  </simpleType>
+  <simpleType name="ArealTilpassetRullestolEnumerationType">
+    <annotation>
+      <documentation>9846: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16008: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16009: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ArealTilpassetRullestolOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierLeskurType">
+    <annotation>
+      <documentation>5812: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierLeskurEnumerationType nvdb:EierLeskurOtherType"/>
+  </simpleType>
+  <simpleType name="EierLeskurEnumerationType">
+    <annotation>
+      <documentation>5812: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8207: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18589: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10699: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8233: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8259: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17597: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierLeskurOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GlassflaterMarkertType">
+    <annotation>
+      <documentation>9845: Angir om glassflater har markering i 2 høyder for å unngå at noen går på dem.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GlassflaterMarkertEnumerationType nvdb:GlassflaterMarkertOtherType"/>
+  </simpleType>
+  <simpleType name="GlassflaterMarkertEnumerationType">
+    <annotation>
+      <documentation>9845: Angir om glassflater har markering i 2 høyder for å unngå at noen går på dem.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16006: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16007: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GlassflaterMarkertOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnvendigBelysningType">
+    <annotation>
+      <documentation>3128: Angir om det er innvendig belysning i leskur</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InnvendigBelysningEnumerationType nvdb:InnvendigBelysningOtherType"/>
+  </simpleType>
+  <simpleType name="InnvendigBelysningEnumerationType">
+    <annotation>
+      <documentation>3128: Angir om det er innvendig belysning i leskur</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4660: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4661: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnvendigBelysningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Leskur" substitutionGroup="nvdb:AbstraktLeskur" type="nvdb:LeskurType">
+    <annotation>
+      <documentation>25: Lite bygg for vern mot vær og vind.  Benyttes i forbindelse med holdeplasser.</documentation>
+    </annotation>
+  </element>
+  <complexType name="LeskurType">
+    <complexContent>
+      <extension base="nvdb:AbstraktLeskurType">
+        <sequence>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeLeskurType">
+            <annotation>
+              <documentation>1401: Angir primær materialtype for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallModuler" type="integer">
+            <annotation>
+              <documentation>11420: Angir hvor mange moduler et leskur er satt sammen av.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde_Utvendig" type="double">
+            <annotation>
+              <documentation>11421: Angir utvendig lengdemål. Lengde gis i leskurets lengderetning. Dette er vanligvis parallelt med plattform.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innvendigBelysning" type="nvdb:InnvendigBelysningType">
+            <annotation>
+              <documentation>3128: Angir om det er innvendig belysning i leskur</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealTilpassetRullestol" type="nvdb:ArealTilpassetRullestolType">
+            <annotation>
+              <documentation>9846: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="friBreddeInnvendig" type="double">
+            <annotation>
+              <documentation>10264: Angir minste frie bredde innvendig i leskur. Fri bredde måles i leskurets lengderetning, dvs  parallelt med  åpning. Innenfor denne bredden skal det være mulig å bevege seg med rullestol, dvs bredde av evt benker mm er ikke inkludert i fri bredde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="friDybdeInnvendig" type="double">
+            <annotation>
+              <documentation>10265: Angir minste fri dybde i leskur. Fri dybde måles innover i leskuret fra åpningen mot bakvegg.   Innenfor denne bredden skal det være mulig å bevege seg med rullestol, dvs bredde av evt benker mm skal ikke inkluderes i fri bredde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="glassflaterMarkert" type="nvdb:GlassflaterMarkertType">
+            <annotation>
+              <documentation>9845: Angir om glassflater har markering i 2 høyder for å unngå at noen går på dem.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sittemulighet" type="nvdb:SittemulighetType">
+            <annotation>
+              <documentation>3952: Angir om det er sittemulighet i leskur</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trinnfriAdkomst" type="nvdb:TrinnfriAdkomstType">
+            <annotation>
+              <documentation>9847: Angir om høydeforskjell mellom fortau og leskur er så lav at f.eks. rullestol eller barnevogn enkelt kan komme inn, dvs. mindre enn 2 cm.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsavtale" type="string">
+            <annotation>
+              <documentation>1559: Angir hvem det er gjort vedlikeholdsavtale med</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="reklameavtale" type="nvdb:ReklameavtaleType">
+            <annotation>
+              <documentation>3130: Angir om det finnes avtale for reklame i leskuret</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10322: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1515: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>1438: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11554: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11042: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierLeskurType">
+            <annotation>
+              <documentation>5812: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligLeskurType">
+            <annotation>
+              <documentation>3129: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4733: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>9844: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LeskurPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Leskur"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaterialtypeLeskurType">
+    <annotation>
+      <documentation>1401: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeLeskurEnumerationType nvdb:MaterialtypeLeskurOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeLeskurEnumerationType">
+    <annotation>
+      <documentation>1401: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>2188: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>2206: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein">
+        <annotation>
+          <documentation>4014: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>4013: Metall</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall_Stål_Galvanisert">
+        <annotation>
+          <documentation>2229: Metall, stål, galvanisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall_Aluminium">
+        <annotation>
+          <documentation>2250: Metall, aluminium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>2268: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pleksiglass">
+        <annotation>
+          <documentation>2369: Pleksiglass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="herdetGlass">
+        <annotation>
+          <documentation>12130: F.eks City90</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glassfiber">
+        <annotation>
+          <documentation>2374: Glassfiber</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeLeskurOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReklameavtaleType">
+    <annotation>
+      <documentation>3130: Angir om det finnes avtale for reklame i leskuret</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ReklameavtaleEnumerationType nvdb:ReklameavtaleOtherType"/>
+  </simpleType>
+  <simpleType name="ReklameavtaleEnumerationType">
+    <annotation>
+      <documentation>3130: Angir om det finnes avtale for reklame i leskuret</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4665: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4666: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReklameavtaleOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SittemulighetType">
+    <annotation>
+      <documentation>3952: Angir om det er sittemulighet i leskur</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SittemulighetEnumerationType nvdb:SittemulighetOtherType"/>
+  </simpleType>
+  <simpleType name="SittemulighetEnumerationType">
+    <annotation>
+      <documentation>3952: Angir om det er sittemulighet i leskur</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4964: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MedArmlene">
+        <annotation>
+          <documentation>16005: Ja, med armlene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4965: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SittemulighetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrinnfriAdkomstType">
+    <annotation>
+      <documentation>9847: Angir om høydeforskjell mellom fortau og leskur er så lav at f.eks. rullestol eller barnevogn enkelt kan komme inn, dvs. mindre enn 2 cm.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrinnfriAdkomstEnumerationType nvdb:TrinnfriAdkomstOtherType"/>
+  </simpleType>
+  <simpleType name="TrinnfriAdkomstEnumerationType">
+    <annotation>
+      <documentation>9847: Angir om høydeforskjell mellom fortau og leskur er så lav at f.eks. rullestol eller barnevogn enkelt kan komme inn, dvs. mindre enn 2 cm.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16010: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16011: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrinnfriAdkomstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLeskurType">
+    <annotation>
+      <documentation>3129: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligLeskurEnumerationType nvdb:VedlikeholdsansvarligLeskurOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLeskurEnumerationType">
+    <annotation>
+      <documentation>3129: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>4662: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18710: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19896: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18839: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>4663: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>4664: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17674: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLeskurOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

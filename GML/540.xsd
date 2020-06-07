@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="GrunnlagForÅDTType">
+    <annotation>
+      <documentation>4625: Angir hva som er grunnlag for ÅDT-verdien</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GrunnlagForÅDTEnumerationType nvdb:GrunnlagForÅDTOtherType"/>
+  </simpleType>
+  <simpleType name="GrunnlagForÅDTEnumerationType">
+    <annotation>
+      <documentation>4625: Angir hva som er grunnlag for ÅDT-verdien</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="norTraf">
+        <annotation>
+          <documentation>5579: NorTraf</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="norTrafKommune">
+        <annotation>
+          <documentation>13102: Fra NorTraf Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferjedatabanken">
+        <annotation>
+          <documentation>5582: Ferjedatabanken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tellingOgSkjønn">
+        <annotation>
+          <documentation>5581: Basert på telling og skjønn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skjønn">
+        <annotation>
+          <documentation>5580: Basert på skjønn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegorama">
+        <annotation>
+          <documentation>5578: Vegorama</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GrunnlagForÅDTOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppdatertFraType">
+    <annotation>
+      <documentation>6843: Angir hvorfra ÅDT-verdien er kommet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppdatertFraEnumerationType nvdb:OppdatertFraOtherType"/>
+  </simpleType>
+  <simpleType name="OppdatertFraEnumerationType">
+    <annotation>
+      <documentation>6843: Angir hvorfra ÅDT-verdien er kommet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="oppskrevetFraPrimærtellepunktet">
+        <annotation>
+          <documentation>9030: Oppskrevet fra primærtellepunktet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oppskrevetFraNivå_1Tellepunktet">
+        <annotation>
+          <documentation>9031: Oppskrevet fra nivå-1 tellepunktet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oppskrevetFraFylkesindeksen">
+        <annotation>
+          <documentation>9032: Oppskrevet fra fylkesindeksen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brukersatt">
+        <annotation>
+          <documentation>9033: Brukersatt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppdatertFraOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Trafikkmengde" substitutionGroup="nvdb:AbstraktTrafikkmengde" type="nvdb:TrafikkmengdeType">
+    <annotation>
+      <documentation>540: Gir informasjon om representativ trafikkmengde for en strekning</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrafikkmengdeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikkmengdeType">
+        <sequence>
+          <element name="ådtTotal" type="integer">
+            <annotation>
+              <documentation>4623: Angir total årsdøgntrafikk.  Representativt for gitt strekning.  Gjennomsnittsverdi.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ådtAndelLangeKjøretøy" type="integer">
+            <annotation>
+              <documentation>4624: Angir hvor stor andel (i prosent) av kjøretøyene som er definert som lange.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element name="årGjelderFor" type="integer">
+            <annotation>
+              <documentation>4621: Angir hvilket år trafikkdataene gjelder for</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdatertFra" type="nvdb:OppdatertFraType">
+            <annotation>
+              <documentation>6843: Angir hvorfra ÅDT-verdien er kommet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="grunnlagForÅDT" type="nvdb:GrunnlagForÅDTType">
+            <annotation>
+              <documentation>4625: Angir hva som er grunnlag for ÅDT-verdien</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ansvarligId" type="string">
+            <annotation>
+              <documentation>4620: Angir brukeridentifikasjon til ansvarlig for datainnlegging</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trafikkarbeidstall" type="integer">
+            <annotation>
+              <documentation>7477: Antall vognkilometer pr år.  Veglengde x ÅDT x 365.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tellepunktPrimært" type="integer">
+            <annotation>
+              <documentation>5219: Angir hvilket tellepunkt som representerer strekningen primært</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tellepunktSekundært" type="integer">
+            <annotation>
+              <documentation>5222: Sekundært tellepunkt for kobling av ÅDT-strekninger.(Nivå-1 pkt.)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forholdÅDT" type="double">
+            <annotation>
+              <documentation>5220: Prosent ÅDT på parsellen.  PRSTARTR = 100.0 *VDB-VERDI / TDB-VERDI</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forholdLange" type="double">
+            <annotation>
+              <documentation>5221: Prosent Lange på strekningen ift. prosenttallet i tellepunktet.  PRLANGE = 100.0 *VDB-VERDI / TDB-VERDI
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="mfaktor" type="double">
+            <annotation>
+              <documentation>4622: Multiplikasjonsfaktor.  Faktor for å kalkulere ÅDT verdi inne på en strekning.
+Enhet: Forholdstall</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ådtStart" type="integer">
+            <annotation>
+              <documentation>7475: Angir årsdøgntrafikk i start av gitt strekning.  Inkl tunge kjøretøy</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ådtSlutt" type="integer">
+            <annotation>
+              <documentation>7476: Angir årsdøgntrafikk i slutt av gitt strekning.  Inkl tunge kjøretøy</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5042: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikkmengdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikkmengde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

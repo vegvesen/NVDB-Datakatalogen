@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Høydemåling" substitutionGroup="nvdb:AbstraktHøydemåling" type="nvdb:HøydemålingType">
+    <annotation>
+      <documentation>113: Strekning med gitt høyde relatert til bestemt vegobjektforekomst. Inneholder egenhøyde start/slutt, samt høyde over vegkant</documentation>
+    </annotation>
+  </element>
+  <complexType name="HøydemålingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktHøydemålingType">
+        <sequence>
+          <element minOccurs="0" name="høyde_Start" type="double">
+            <annotation>
+              <documentation>1591: Angir høyde (egenhøyde) i start av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde_Slutt" type="double">
+            <annotation>
+              <documentation>7568: Angir høyde (egenhøyde) i slutt av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVeg_Start" type="double">
+            <annotation>
+              <documentation>2252: Angir høyde relativt til vegkant i start av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVeg_Slutt" type="double">
+            <annotation>
+              <documentation>7569: Angir høyde relativt til vegkant i slutt av målestrekning.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="nvdb:KvalitetHøydemålingType">
+            <annotation>
+              <documentation>2109: Angir kvalitet på måling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="måltÅr" type="integer">
+            <annotation>
+              <documentation>10310: Angir årstall målingen er utført</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4809: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="HøydemålingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Høydemåling"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KvalitetHøydemålingType">
+    <annotation>
+      <documentation>2109: Angir kvalitet på måling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KvalitetHøydemålingEnumerationType nvdb:KvalitetHøydemålingOtherType"/>
+  </simpleType>
+  <simpleType name="KvalitetHøydemålingEnumerationType">
+    <annotation>
+      <documentation>2109: Angir kvalitet på måling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skjønn">
+        <annotation>
+          <documentation>4626: Skjønn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="målt">
+        <annotation>
+          <documentation>4627: Målt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KvalitetHøydemålingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

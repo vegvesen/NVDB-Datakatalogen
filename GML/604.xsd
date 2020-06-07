@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Vegnormalstrekning" substitutionGroup="nvdb:AbstraktVegnormalstrekning" type="nvdb:VegnormalstrekningType">
+    <annotation>
+      <documentation>604: En vegstrekning med krav til ulike parametre som gir definerte enhetlige vegnormalstrekninger. Tidligere register 40-Vegnormal i VDB. Tilstandsanalyse ( TAV )</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegnormalstrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegnormalstrekningType">
+        <sequence>
+          <element minOccurs="0" name="vegnormaldata" type="string">
+            <annotation>
+              <documentation>5473: Gir databuffer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6914: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegnormalstrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegnormalstrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

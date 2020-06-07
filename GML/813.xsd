@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Gågatereguleringer" substitutionGroup="nvdb:AbstraktGågatereguleringer" type="nvdb:GågatereguleringerType">
+    <annotation>
+      <documentation>813: Gate uten fortau reservert for gående hvor trafikkreglene for gågate gjelder</documentation>
+    </annotation>
+  </element>
+  <complexType name="GågatereguleringerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktGågatereguleringerType">
+        <sequence>
+          <element minOccurs="0" name="varetransportLørdagPeriode1FraKl" type="string">
+            <annotation>
+              <documentation>9314: Varetransport hverdag  untatt lørdag periode 1, fra klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode1TilKl" type="string">
+            <annotation>
+              <documentation>9315: Varetransport hverdag  untatt lørdag periode 1, til klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode2FraKl" type="string">
+            <annotation>
+              <documentation>9316: Varetransport hverdag  untatt lørdag periode 2, fra klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode2TilKl" type="string">
+            <annotation>
+              <documentation>9317: Varetransport hverdag  untatt lørdag periode 2, til klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode1FraKl" type="string">
+            <annotation>
+              <documentation>11537: Varetransport  lørdag periode 1, fra klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode1TilKl" type="string">
+            <annotation>
+              <documentation>11538: Varetransport lørdag periode 1, til klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode2FraKl" type="string">
+            <annotation>
+              <documentation>11539: Varetransport lørdag periode 2, fra klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagPeriode2TilKl" type="string">
+            <annotation>
+              <documentation>11540: Varetransport  lørdag periode 2, til klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjøringTilEiendommeneTillatt" type="nvdb:KjøringTilEiendommeneTillattType"/>
+          <element minOccurs="0" name="varetransportLørdagFra" type="string">
+            <annotation>
+              <documentation>9318: Varetransport lørdag fra klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varetransportLørdagTil" type="string">
+            <annotation>
+              <documentation>9319: Varetransport lørdag til klokkeslett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9322: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GågatereguleringerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Gågatereguleringer"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KjøringTilEiendommeneTillattType">
+    <union memberTypes="nvdb:KjøringTilEiendommeneTillattEnumerationType nvdb:KjøringTilEiendommeneTillattOtherType"/>
+  </simpleType>
+  <simpleType name="KjøringTilEiendommeneTillattEnumerationType">
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13007: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13008: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjøringTilEiendommeneTillattOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

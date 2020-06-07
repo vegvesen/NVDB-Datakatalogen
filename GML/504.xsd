@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="KryssingsmulighetÅpning" substitutionGroup="nvdb:AbstraktKryssingsmulighetÅpning" type="nvdb:KryssingsmulighetÅpningType">
+    <annotation>
+      <documentation>504: Angir punkt der det er mulig å krysse/bevege seg gjennom et fysisk hinder.  Eksempelvis kan dette være åpning i et rekkverk, sted hvor en midtdeler kan krysses, mm</documentation>
+    </annotation>
+  </element>
+  <complexType name="KryssingsmulighetÅpningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKryssingsmulighetÅpningType">
+        <sequence>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>4084: Angir bredde av kryssing/åpning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11627: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11473: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5009: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8927: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KryssingsmulighetÅpningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:KryssingsmulighetÅpning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierMasseutskiftingType">
+    <annotation>
+      <documentation>11340: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierMasseutskiftingEnumerationType nvdb:EierMasseutskiftingOtherType"/>
+  </simpleType>
+  <simpleType name="EierMasseutskiftingEnumerationType">
+    <annotation>
+      <documentation>11340: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19160: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19159: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19156: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19157: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19158: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19161: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierMasseutskiftingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Masseutskifting" substitutionGroup="nvdb:AbstraktMasseutskifting" type="nvdb:MasseutskiftingType">
+    <annotation>
+      <documentation>929: Fjerning av uegnede løsmasser som erstattes med masser av ønsket kvalitet.</documentation>
+    </annotation>
+  </element>
+  <complexType name="MasseutskiftingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktMasseutskiftingType">
+        <sequence>
+          <element name="typeNyeMasser" type="nvdb:TypeNyeMasserType">
+            <annotation>
+              <documentation>11394: Type masser det er skiftet ut til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybde_Maksimal" type="double">
+            <annotation>
+              <documentation>11395: Maksimal utskiftingsdybde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>11396: Angir areal av område med utskiftede masser
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>11397: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11398: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11334: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11799: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierMasseutskiftingType">
+            <annotation>
+              <documentation>11340: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligMasseutskiftingType">
+            <annotation>
+              <documentation>11346: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11352: Gir flate/polygon som avgrenser område med masseutskifting</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MasseutskiftingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Masseutskifting"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeNyeMasserType">
+    <annotation>
+      <documentation>11394: Type masser det er skiftet ut til</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeNyeMasserEnumerationType nvdb:TypeNyeMasserOtherType"/>
+  </simpleType>
+  <simpleType name="TypeNyeMasserEnumerationType">
+    <annotation>
+      <documentation>11394: Type masser det er skiftet ut til</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sprengtStein">
+        <annotation>
+          <documentation>19231: Sprengt stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sandGrus">
+        <annotation>
+          <documentation>19232: Sand/grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="letteMasser">
+        <annotation>
+          <documentation>19233: Masser i kategorien "lette masser". Detaljer spesifiseres i ET 11398 "Tilleggsinformasjon"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="knusteMasser">
+        <annotation>
+          <documentation>19234: Knuste masser</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeNyeMasserOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligMasseutskiftingType">
+    <annotation>
+      <documentation>11346: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligMasseutskiftingEnumerationType nvdb:VedlikeholdsansvarligMasseutskiftingOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligMasseutskiftingEnumerationType">
+    <annotation>
+      <documentation>11346: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>19196: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>19193: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20019: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>19194: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19192: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19195: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19197: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligMasseutskiftingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

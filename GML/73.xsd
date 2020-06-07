@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="PlasseringSikringsboltType">
+    <annotation>
+      <documentation>1652: Angir plassering til vegobjektet i samleobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringSikringsboltEnumerationType nvdb:PlasseringSikringsboltOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringSikringsboltEnumerationType">
+    <annotation>
+      <documentation>1652: Angir plassering til vegobjektet i samleobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="heng">
+        <annotation>
+          <documentation>3300: Sikring plassert  i heng i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="venstreVegg">
+        <annotation>
+          <documentation>3306: Sikring plassert på venstre vegg (i forhold til vegens metreringsretning)  i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyreVegg">
+        <annotation>
+          <documentation>3309: Sikring plassert på høyre vegg (i forhold til vegens metreringsretning)  i tunnelløp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skjæringIDagen">
+        <annotation>
+          <documentation>17443: Skjæring i dagen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringSikringsboltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Sikringsbolt" substitutionGroup="nvdb:AbstraktSikringsbolt" type="nvdb:SikringsboltType">
+    <annotation>
+      <documentation>73: Fjellbolt brukt i forbindelse med sikring av fjellskjæring/tunnel</documentation>
+    </annotation>
+  </element>
+  <complexType name="SikringsboltType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSikringsboltType">
+        <sequence>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2197: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="diameter" type="integer">
+            <annotation>
+              <documentation>1722: Angir diameter av vegobjektet
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1319: Angir lengde av sikringsbolt. Dersom antall bolter &gt;1 skal det angis gjennomsnittlig lengde av boltene.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeSikringsboltType">
+            <annotation>
+              <documentation>1134: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>3782: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11572: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11065: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4775: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5898: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>5901: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringSikringsboltType">
+            <annotation>
+              <documentation>1652: Angir plassering til vegobjektet i samleobjektet</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SikringsboltPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Sikringsbolt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSikringsboltType">
+    <annotation>
+      <documentation>1134: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSikringsboltEnumerationType nvdb:TypeSikringsboltOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSikringsboltEnumerationType">
+    <annotation>
+      <documentation>1134: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="innstøptBoltAvKamstål">
+        <annotation>
+          <documentation>3311: Innstøpt bolt av kamstål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="endeforankretBoltMed_Polyester">
+        <annotation>
+          <documentation>3312: Endeforankret bolt m/polyester</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rørbolt_EndeforankretMed_Ekspansjonshylse">
+        <annotation>
+          <documentation>3313: Rørbolt, endeforankret m/ekspansjonshylse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesial">
+        <annotation>
+          <documentation>18543: Benyttes om bolter som ikke kommer i noen av de øvrige kategoriene. Det skal legges inn informasjon under egenskap "Produktinformajson"</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSikringsboltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="KommunesenterType">
+    <annotation>
+      <documentation>5510: Angir kommunesenter</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KommunesenterEnumerationType nvdb:KommunesenterOtherType"/>
+  </simpleType>
+  <simpleType name="KommunesenterEnumerationType">
+    <annotation>
+      <documentation>5510: Angir kommunesenter</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>7502: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>7503: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KommunesenterOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Stedsinformasjon" substitutionGroup="nvdb:AbstraktStedsinformasjon" type="nvdb:StedsinformasjonType">
+    <annotation>
+      <documentation>611: Gir informasjon om sted langs vegnettet</documentation>
+    </annotation>
+  </element>
+  <complexType name="StedsinformasjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStedsinformasjonType">
+        <sequence>
+          <element minOccurs="0" name="navn_Overordnet" type="string">
+            <annotation>
+              <documentation>5488: Gir overordna navn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn_Detaljert" type="string">
+            <annotation>
+              <documentation>5487: Gir detaljert navn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kommunesenter" type="nvdb:KommunesenterType">
+            <annotation>
+              <documentation>5510: Angir kommunesenter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5511: Gir merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>6886: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="StedsinformasjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Stedsinformasjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

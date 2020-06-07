@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksklasseHelårBruksklasse_TømmertransportType">
+    <annotation>
+      <documentation>10897: Angir helårs bruksklasse.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksklasseHelårBruksklasse_TømmertransportEnumerationType nvdb:BruksklasseHelårBruksklasse_TømmertransportOtherType"/>
+  </simpleType>
+  <simpleType name="BruksklasseHelårBruksklasse_TømmertransportEnumerationType">
+    <annotation>
+      <documentation>10897: Angir helårs bruksklasse.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10-50">
+        <annotation>
+          <documentation>18212: Bruksklasse Bk10.  Maks totalvekt 50 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="10-42">
+        <annotation>
+          <documentation>18213: Bruksklasse Bk10.  Maks totalvekt 42 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-50">
+        <annotation>
+          <documentation>18214: Bruksklasse BkT8.  Maks totalvekt 50 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-40">
+        <annotation>
+          <documentation>18215: Bruksklasse BkT8.  Maks totalvekt 40 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8-32">
+        <annotation>
+          <documentation>18216: Bruksklasse Bk8.  Maks totalvekt 32 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6-28">
+        <annotation>
+          <documentation>18217: Bruksklasse Bk6.  Maks totalvekt 28 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Spes">
+        <annotation>
+          <documentation>18218: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til aksellastrestriksjon eller begrensning i totalvekt.  Nedsatte verdier gis i egne egenskapstyper.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseHelårBruksklasse_TømmertransportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_TømmertransportType">
+    <annotation>
+      <documentation>10903: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksklasseVinterBruksklasse_TømmertransportEnumerationType nvdb:BruksklasseVinterBruksklasse_TømmertransportOtherType"/>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_TømmertransportEnumerationType">
+    <annotation>
+      <documentation>10903: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10-50">
+        <annotation>
+          <documentation>18219: Bk10</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-40">
+        <annotation>
+          <documentation>18220: BkT8</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8-32">
+        <annotation>
+          <documentation>18221: Bk8</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="10-60">
+        <annotation>
+          <documentation>19636: Bk10-60</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_TømmertransportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Bruksklasse_Tømmertransport" substitutionGroup="nvdb:AbstraktBruksklasse_Tømmertransport" type="nvdb:Bruksklasse_TømmertransportType">
+    <annotation>
+      <documentation>900: Gjeldende bruksklasse for tømmertransport i vegliste</documentation>
+    </annotation>
+  </element>
+  <complexType name="Bruksklasse_TømmertransportType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBruksklasse_TømmertransportType">
+        <sequence>
+          <element name="bruksklasseHelår" type="nvdb:BruksklasseHelårBruksklasse_TømmertransportType">
+            <annotation>
+              <documentation>10897: Angir helårs bruksklasse.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksklasseVinter" type="nvdb:BruksklasseVinterBruksklasse_TømmertransportType">
+            <annotation>
+              <documentation>10903: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksVogntoglengde" type="nvdb:MaksVogntoglengdeBruksklasse_TømmertransportType">
+            <annotation>
+              <documentation>10909: Angir maksimal lengde for vogntog</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="strekningsbeskrivelse" type="string">
+            <annotation>
+              <documentation>10915: Beskrivelse av aktuell vegstrekning.  Denne teksten blir henta direkte inn i veglistene.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksTotalvektTømmertransport" type="nvdb:MaksTotalvektTømmertransportType">
+            <annotation>
+              <documentation>10921: Angir maksimal totalvekt for tømmertransport
+Enhet: Tonn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>11005: Merknad knyttet til aktuell strekning. Kommer med uthevet tekst i veglistene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="veglisteGjelderAlltid" type="string">
+            <annotation>
+              <documentation>11208: Veglister er forskrift og gjelder alltid foran kartvisning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Bruksklasse_TømmertransportPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bruksklasse_Tømmertransport"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaksTotalvektTømmertransportType">
+    <annotation>
+      <documentation>10921: Angir maksimal totalvekt for tømmertransport</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksTotalvektTømmertransportEnumerationType nvdb:MaksTotalvektTømmertransportOtherType"/>
+  </simpleType>
+  <simpleType name="MaksTotalvektTømmertransportEnumerationType">
+    <annotation>
+      <documentation>10921: Angir maksimal totalvekt for tømmertransport</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="50">
+        <annotation>
+          <documentation>18267: 50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="56">
+        <annotation>
+          <documentation>18268: 56</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>18269: 60</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTotalvektTømmertransportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_TømmertransportType">
+    <annotation>
+      <documentation>10909: Angir maksimal lengde for vogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksVogntoglengdeBruksklasse_TømmertransportEnumerationType nvdb:MaksVogntoglengdeBruksklasse_TømmertransportOtherType"/>
+  </simpleType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_TømmertransportEnumerationType">
+    <annotation>
+      <documentation>10909: Angir maksimal lengde for vogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="12_40">
+        <annotation>
+          <documentation>18239: 12,40</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15_00">
+        <annotation>
+          <documentation>18424: 15,00</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19_50">
+        <annotation>
+          <documentation>18423: 19,50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22_00">
+        <annotation>
+          <documentation>18237: 22,00</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24_00">
+        <annotation>
+          <documentation>18238: 24,00</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesiellBegrensning">
+        <annotation>
+          <documentation>18240: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til vogntog-/kjøretøylengde.  Nedsatte verdier gis i egne egenskapstyper</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_TømmertransportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

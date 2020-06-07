@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Bruksklasse_Modulvogntog_Uoffisiell" substitutionGroup="nvdb:AbstraktBruksklasse_Modulvogntog_Uoffisiell" type="nvdb:Bruksklasse_Modulvogntog_UoffisiellType">
+    <annotation>
+      <documentation>890: Angir bruksklasse for modulvogntog. Foreløpig versjon for intern bruk</documentation>
+    </annotation>
+  </element>
+  <complexType name="Bruksklasse_Modulvogntog_UoffisiellType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBruksklasse_Modulvogntog_UoffisiellType">
+        <sequence>
+          <element minOccurs="0" name="strekningsbeskrivelse" type="string">
+            <annotation>
+              <documentation>10775: Beskrivelse av aktuell vegstrekning. Denne teksten blir henta direkte inn i veglistene.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksTillattTotalvekt" type="nvdb:MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellType">
+            <annotation>
+              <documentation>10773: Angir maksimal totalvekt for modulvogntog
+Enhet: Tonn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksTillattVogntoglengde" type="nvdb:MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellType">
+            <annotation>
+              <documentation>10774: Angir maksimal lengde for modulvogntog
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterstengtFor60Tonn" type="nvdb:VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellType">
+            <annotation>
+              <documentation>10777: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderIkkeLinksemitrailer" type="nvdb:GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellType">
+            <annotation>
+              <documentation>10772: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>11545: Merknad knyttet til aktuell strekning. Kommer med uthevet tekst i veglistene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Bruksklasse_Modulvogntog_UoffisiellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bruksklasse_Modulvogntog_Uoffisiell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellType">
+    <annotation>
+      <documentation>10772: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellEnumerationType nvdb:GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10772: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="L">
+        <annotation>
+          <documentation>17462: Modulvogntog av type Linksemitrailer er IKKE tillatt på strekning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderIkkeLinksemitrailerBruksklasse_Modulvogntog_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellType">
+    <annotation>
+      <documentation>10773: Angir maksimal totalvekt for modulvogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellEnumerationType nvdb:MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10773: Angir maksimal totalvekt for modulvogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bk10_50">
+        <annotation>
+          <documentation>17460: Bk 10/50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bk10_60">
+        <annotation>
+          <documentation>17461: Bk 10/60</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektBruksklasse_Modulvogntog_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellType">
+    <annotation>
+      <documentation>10774: Angir maksimal lengde for modulvogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellEnumerationType nvdb:MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10774: Angir maksimal lengde for modulvogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="25_25">
+        <annotation>
+          <documentation>17459: 25,25</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeBruksklasse_Modulvogntog_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellType">
+    <annotation>
+      <documentation>10777: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellEnumerationType nvdb:VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10777: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V">
+        <annotation>
+          <documentation>17463: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnBruksklasse_Modulvogntog_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

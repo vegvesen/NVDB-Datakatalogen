@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="FunksjonellVegklasse" substitutionGroup="nvdb:AbstraktFunksjonellVegklasse" type="nvdb:FunksjonellVegklasseType">
+    <annotation>
+      <documentation>821: En klassifisering basert på hvor viktig en veg er for det totale vegnettets forbindelsesmuligheter. Brukes blant annet for vekting i ruteplanlegging</documentation>
+    </annotation>
+  </element>
+  <complexType name="FunksjonellVegklasseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFunksjonellVegklasseType">
+        <sequence>
+          <element name="vegklasse" type="nvdb:VegklasseType">
+            <annotation>
+              <documentation>9338: Angir funksjonell vegklasse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>10183: Permanent merknad til aktuell forekomst.  Kan gi informasjoner som ikke er mulig å gi på annet vis.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>11844: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FunksjonellVegklassePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:FunksjonellVegklasse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VegklasseType">
+    <annotation>
+      <documentation>9338: Angir funksjonell vegklasse</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VegklasseEnumerationType nvdb:VegklasseOtherType"/>
+  </simpleType>
+  <simpleType name="VegklasseEnumerationType">
+    <annotation>
+      <documentation>9338: Angir funksjonell vegklasse</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>13060: De viktigste vegene i et vegnettverk, f.eks. motorveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>13061: De nest viktigste vegene i et vegnettverk, f.eks. større riksveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>13062: De tredje viktigste vegene i et vegnettverk, f.eks. mindre riksveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>13063: De fjerde viktigste vegene i et vegnettverk, f.eks. større fylkesveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>13064: De femte viktigste vegene i et vegnettverk, f.eks. mindre fylkesveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5">
+        <annotation>
+          <documentation>13065: De sjette viktigste vegene i et vegnettverk, f.eks. de minste fylkesvegene og viktige kommunale veger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>13066: De sjuende viktigste vegene i et vegnettverk, f.eks. kommunale veger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="7">
+        <annotation>
+          <documentation>13067: De åttende viktigste vegene i et vegnettverk, f.eks. private veger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8">
+        <annotation>
+          <documentation>13068: De niende viktigste vegene i et vegnettverk, f.eks. skogsbilveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="9">
+        <annotation>
+          <documentation>13069: De minst viktige vegene i et vegnettverk, f.eks. veger det ikke er anbefalt å kjøre på, men mulig å kjøre på.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

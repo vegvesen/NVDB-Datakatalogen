@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BillettsalgType">
+    <annotation>
+      <documentation>10594: Angir om det er billettsalg i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BillettsalgEnumerationType nvdb:BillettsalgOtherType"/>
+  </simpleType>
+  <simpleType name="BillettsalgEnumerationType">
+    <annotation>
+      <documentation>10594: Angir om det er billettsalg i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16996: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_KioskSkranke">
+        <annotation>
+          <documentation>16997: Ja, kiosk/skranke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Automat">
+        <annotation>
+          <documentation>16998: Ja, automat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_KioskSkrankeOgAutomat">
+        <annotation>
+          <documentation>16999: Ja, kiosk/skranke og automat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17000: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BillettsalgOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKollektivknutepunktType">
+    <annotation>
+      <documentation>10589: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKollektivknutepunktEnumerationType nvdb:EierKollektivknutepunktOtherType"/>
+  </simpleType>
+  <simpleType name="EierKollektivknutepunktEnumerationType">
+    <annotation>
+      <documentation>10589: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17008: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18626: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17005: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17006: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17007: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17638: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKollektivknutepunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderBussType">
+    <annotation>
+      <documentation>2026: Angir om kollektivknutepunktet benyttes av buss</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderBussEnumerationType nvdb:GjelderBussOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderBussEnumerationType">
+    <annotation>
+      <documentation>2026: Angir om kollektivknutepunktet benyttes av buss</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3534: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3572: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderBussOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderDrosjeType">
+    <annotation>
+      <documentation>2029: Angir om kollektivknutepunktet benyttes av drosje</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderDrosjeEnumerationType nvdb:GjelderDrosjeOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderDrosjeEnumerationType">
+    <annotation>
+      <documentation>2029: Angir om kollektivknutepunktet benyttes av drosje</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3537: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3575: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderDrosjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderFerjeType">
+    <annotation>
+      <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderFerjeEnumerationType nvdb:GjelderFerjeOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderFerjeEnumerationType">
+    <annotation>
+      <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16748: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16749: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderFerjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderFlyType">
+    <annotation>
+      <documentation>10598: Angir om kollektivknutepunktet benyttes av fly</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderFlyEnumerationType nvdb:GjelderFlyOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderFlyEnumerationType">
+    <annotation>
+      <documentation>10598: Angir om kollektivknutepunktet benyttes av fly</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16988: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16989: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderFlyOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderRutebåtType">
+    <annotation>
+      <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderRutebåtEnumerationType nvdb:GjelderRutebåtOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderRutebåtEnumerationType">
+    <annotation>
+      <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3536: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3574: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderRutebåtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderTogType">
+    <annotation>
+      <documentation>2027: Angir om kollektivknutepunktet benyttes av tog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderTogEnumerationType nvdb:GjelderTogOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderTogEnumerationType">
+    <annotation>
+      <documentation>2027: Angir om kollektivknutepunktet benyttes av tog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3535: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3573: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderTogOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderTrikkBybaneType">
+    <annotation>
+      <documentation>10596: Angir omkollektivknutepunktet benyttes av trikk/bybane</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderTrikkBybaneEnumerationType nvdb:GjelderTrikkBybaneOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderTrikkBybaneEnumerationType">
+    <annotation>
+      <documentation>10596: Angir omkollektivknutepunktet benyttes av trikk/bybane</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16986: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16987: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderTrikkBybaneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kollektivknutepunkt" substitutionGroup="nvdb:AbstraktKollektivknutepunkt" type="nvdb:KollektivknutepunktType">
+    <annotation>
+      <documentation>42: Sted i kollektivnettet der kollektivlinjer krysser eller tangerer hverandre. Knutepunktets funksjon er å binde kollektivnettet sammen til et nettverk slik at den reisende ved hjelp av tilrettelagt omstigning/bytte kan nå sitt bestemmelsessted. Et knutepunkt har ofte begrepet terminal eller stasjon i navnet (HB V123)</documentation>
+    </annotation>
+  </element>
+  <complexType name="KollektivknutepunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKollektivknutepunktType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>1075: Angir navn på kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nivå" type="nvdb:NivåType">
+            <annotation>
+              <documentation>10588: Angir hvilket nivå kollektivknutepunktet tilhører</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderBuss" type="nvdb:GjelderBussType">
+            <annotation>
+              <documentation>2026: Angir om kollektivknutepunktet benyttes av buss</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderTrikkBybane" type="nvdb:GjelderTrikkBybaneType">
+            <annotation>
+              <documentation>10596: Angir omkollektivknutepunktet benyttes av trikk/bybane</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Stopplace_ID" type="string">
+            <annotation>
+              <documentation>10956: Unik ID som refererer til Stopplace (stoppested)  i Nasjonalt stoppestedsregister (NSR). Benytes for datautveksling mellom NVDB og NSR</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderTog" type="nvdb:GjelderTogType">
+            <annotation>
+              <documentation>2027: Angir om kollektivknutepunktet benyttes av tog</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderRutebåt" type="nvdb:GjelderRutebåtType">
+            <annotation>
+              <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderFerje" type="nvdb:GjelderFerjeType">
+            <annotation>
+              <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderFly" type="nvdb:GjelderFlyType">
+            <annotation>
+              <documentation>10598: Angir om kollektivknutepunktet benyttes av fly</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderDrosje" type="nvdb:GjelderDrosjeType">
+            <annotation>
+              <documentation>2029: Angir om kollektivknutepunktet benyttes av drosje</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallStoppunkt_Test" type="integer">
+            <annotation>
+              <documentation>10592: Angir hvor mange stoppunkt det er knyttet til kollektivknutepunktet
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="venterom" type="nvdb:VenteromKollektivknutepunktType">
+            <annotation>
+              <documentation>10593: Angir om det er venterom i tilknytning til kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="toalett_Test" type="nvdb:Toalett_TestType">
+            <annotation>
+              <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="billettsalg" type="nvdb:BillettsalgType">
+            <annotation>
+              <documentation>10594: Angir om det er billettsalg i tilknytning til kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sykkelparkering_Test" type="nvdb:Sykkelparkering_TestType">
+            <annotation>
+              <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="parkering_Test" type="nvdb:Parkering_TestType">
+            <annotation>
+              <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="parkeringForForflytningshemmede_Test" type="nvdb:ParkeringForForflytningshemmede_TestType">
+            <annotation>
+              <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sistVerifisert" type="date">
+            <annotation>
+              <documentation>10591: Angir data for når egenskapene sist var verifisert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10317: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11562: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11470: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKollektivknutepunktType">
+            <annotation>
+              <documentation>10589: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKollektivknutepunktType">
+            <annotation>
+              <documentation>10590: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4749: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9430: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KollektivknutepunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kollektivknutepunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="NivåType">
+    <annotation>
+      <documentation>10588: Angir hvilket nivå kollektivknutepunktet tilhører</documentation>
+    </annotation>
+    <union memberTypes="nvdb:NivåEnumerationType nvdb:NivåOtherType"/>
+  </simpleType>
+  <simpleType name="NivåEnumerationType">
+    <annotation>
+      <documentation>10588: Angir hvilket nivå kollektivknutepunktet tilhører</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nasjonalt">
+        <annotation>
+          <documentation>16982: Knutepunkter hvorfra man kan reise både lokalt, regionalt og til andre landsdeler i Norge. Noen nasjonale knutepunkter har internasjonale reisemål. Det finnes et fåtall nasjonale knutepunkter som alle krever spesiell utforming.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regionalt">
+        <annotation>
+          <documentation>16983: Knutepunkter der man kan reise lokalt og regionalt i betydningen i og til de nærmeste fylkene.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lokalt">
+        <annotation>
+          <documentation>16984: Knutepunkter hvorfra man kan reise lokalt innen samme kommune og/eller samme fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mindre">
+        <annotation>
+          <documentation>16985: Det aller enkleste knutepunktet der det er tilrettelagt for omstigning. I sin enkleste form er et mindre knutepunkt en holdeplass der det er lagt til rette for overgang mellom to eller flere transportmidler i kollektivsystemet (buss, båt, taxi i rute).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="NivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ParkeringForForflytningshemmede_TestType">
+    <annotation>
+      <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ParkeringForForflytningshemmede_TestEnumerationType nvdb:ParkeringForForflytningshemmede_TestOtherType"/>
+  </simpleType>
+  <simpleType name="ParkeringForForflytningshemmede_TestEnumerationType">
+    <annotation>
+      <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17003: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17004: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ParkeringForForflytningshemmede_TestOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Parkering_TestType">
+    <annotation>
+      <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Parkering_TestEnumerationType nvdb:Parkering_TestOtherType"/>
+  </simpleType>
+  <simpleType name="Parkering_TestEnumerationType">
+    <annotation>
+      <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3520: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3558: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Parkering_TestOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Sykkelparkering_TestType">
+    <annotation>
+      <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Sykkelparkering_TestEnumerationType nvdb:Sykkelparkering_TestOtherType"/>
+  </simpleType>
+  <simpleType name="Sykkelparkering_TestEnumerationType">
+    <annotation>
+      <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17001: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17002: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Sykkelparkering_TestOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Toalett_TestType">
+    <annotation>
+      <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Toalett_TestEnumerationType nvdb:Toalett_TestOtherType"/>
+  </simpleType>
+  <simpleType name="Toalett_TestEnumerationType">
+    <annotation>
+      <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16993: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Tilgjengelig">
+        <annotation>
+          <documentation>16994: Ja, tilgjengelig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16995: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Toalett_TestOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKollektivknutepunktType">
+    <annotation>
+      <documentation>10590: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligKollektivknutepunktEnumerationType nvdb:VedlikeholdsansvarligKollektivknutepunktOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKollektivknutepunktEnumerationType">
+    <annotation>
+      <documentation>10590: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>17011: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18739: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20002: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18868: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17009: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17010: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17787: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKollektivknutepunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VenteromKollektivknutepunktType">
+    <annotation>
+      <documentation>10593: Angir om det er venterom i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VenteromKollektivknutepunktEnumerationType nvdb:VenteromKollektivknutepunktOtherType"/>
+  </simpleType>
+  <simpleType name="VenteromKollektivknutepunktEnumerationType">
+    <annotation>
+      <documentation>10593: Angir om det er venterom i tilknytning til kollektivknutepunktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16990: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Tilgjengelig">
+        <annotation>
+          <documentation>16991: Ja, tilgjengelig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16992: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VenteromKollektivknutepunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BelysningTrafikklommeType">
+    <annotation>
+      <documentation>3122: Angir om trafikklommen er belyst</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BelysningTrafikklommeEnumerationType nvdb:BelysningTrafikklommeOtherType"/>
+  </simpleType>
+  <simpleType name="BelysningTrafikklommeEnumerationType">
+    <annotation>
+      <documentation>3122: Angir om trafikklommen er belyst</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_EgenBelysning">
+        <annotation>
+          <documentation>4648: Belysning satt opp spesielt for utvendig belysning av bussholdeplass/lomme</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_BelystAvGatebelysning">
+        <annotation>
+          <documentation>4649: Ingen ekstraordinær belysning for trafikklomme/bussholdeplass Men belyst av gatebelysning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4650: Ingen utvendig belysning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelysningTrafikklommeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeTrafikklommeType">
+    <annotation>
+      <documentation>1257: Angir primært bruksområde for trafikklomma.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeTrafikklommeEnumerationType nvdb:BruksområdeTrafikklommeOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeTrafikklommeEnumerationType">
+    <annotation>
+      <documentation>1257: Angir primært bruksområde for trafikklomma.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="busslomme">
+        <annotation>
+          <documentation>3200: Trafikklomme i forbindelse med stoppunkt for buss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="havarinisjeStopplomme">
+        <annotation>
+          <documentation>3201: Trafikklomme hvor det er tilrettelagt for parkering i forbindelse med nødstopp eller kortere stopp ved spesielle behov.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjørepauseParkering">
+        <annotation>
+          <documentation>3202: Trafikklomme der det er mulig å parkere for å ta en kjørepause</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="møteplass">
+        <annotation>
+          <documentation>4071: Spesielt anlagt og merket breddeutvidelse hvor kjøretøy kan komme forbi hverandre på enfeltsveg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passeringslommeIT_Kryss">
+        <annotation>
+          <documentation>19786: Lomme/breddeutvidelse på utsida i T-kryss, dvs på motsatt side av sideveg. Lomme benyttes  for at trafikk som skal rett fram i krysset skal ha mulighet til å passere på høyre side av kjøretøy som skal svinge til venstre i krysset. Merknad: Dette har tidligere vært egen vegobjekttype</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="arbeidslommeSVV">
+        <annotation>
+          <documentation>4674: Trafikklomme som brukes i forbindelse med vegarbeid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastelomme">
+        <annotation>
+          <documentation>3203: Trafikklomme for lasting , lossing eller omlasting.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="informasjonslomme">
+        <annotation>
+          <documentation>4969: Trafikklomme hvor skilt eller annen form for informasjon er plassert.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjettingplass">
+        <annotation>
+          <documentation>4970: Trafikklomme for å sette på eller ta av kjettinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kolonneoppstilling">
+        <annotation>
+          <documentation>8190: Trafikklomme som fungerer som midlertidig parkering mens man venter på å sette i gang kolonnekjøring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lomme_Generell">
+        <annotation>
+          <documentation>4968: Lomme som har bruksområde som ikke dekkes av øvrige tillatte verdier.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeTrafikklommeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DekketypeTrafikklommeType">
+    <annotation>
+      <documentation>4612: Angir hvilken type dekke det er på trafikklomma</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DekketypeTrafikklommeEnumerationType nvdb:DekketypeTrafikklommeOtherType"/>
+  </simpleType>
+  <simpleType name="DekketypeTrafikklommeEnumerationType">
+    <annotation>
+      <documentation>4612: Angir hvilken type dekke det er på trafikklomma</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>5570: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grus">
+        <annotation>
+          <documentation>5569: Grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein">
+        <annotation>
+          <documentation>5572: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>5571: Betong</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DekketypeTrafikklommeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpesieltParkeringsformålType">
+    <annotation>
+      <documentation>9883: Angir at trafikklomme benyttes til spesielt parkerngsformål</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SpesieltParkeringsformålEnumerationType nvdb:SpesieltParkeringsformålOtherType"/>
+  </simpleType>
+  <simpleType name="SpesieltParkeringsformålEnumerationType">
+    <annotation>
+      <documentation>9883: Angir at trafikklomme benyttes til spesielt parkerngsformål</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tekniskRom">
+        <annotation>
+          <documentation>16061: Teknisk rom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19462: Det er ikke spesielt parkeringsformål</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpesieltParkeringsformålOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Trafikklomme" substitutionGroup="nvdb:AbstraktTrafikklomme" type="nvdb:TrafikklommeType">
+    <annotation>
+      <documentation>47: Kjøreareal som ligger inntil ytterste kjørefelt. Der kan være trafikkdeler mellom kjørefelt og trafikklomme.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrafikklommeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikklommeType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeTrafikklommeType">
+            <annotation>
+              <documentation>1257: Angir primært bruksområde for trafikklomma.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>3120: Angir navn på trafikklomme.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>1362: Angir arealet av vegobjektet
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeMedFullBredde" type="double">
+            <annotation>
+              <documentation>1307: Angir lengde av trafikklommen med minimum ca. 3 meter bredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>2239: Angir fast bredde for vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brøytetAreal" type="integer">
+            <annotation>
+              <documentation>8317: Angir hvor stort areal av trafikklomma som brøytes.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spesieltParkeringsformål" type="nvdb:SpesieltParkeringsformålType">
+            <annotation>
+              <documentation>9883: Angir at trafikklomme benyttes til spesielt parkerngsformål</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinteråpen" type="nvdb:VinteråpenType">
+            <annotation>
+              <documentation>4652: Angir om trafikklomma blir holdt åpen gjennom vinteren.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10377: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11567: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11052: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligTrafikklommeType">
+            <annotation>
+              <documentation>3125: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4754: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5897: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>5900: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belysning" type="nvdb:BelysningTrafikklommeType">
+            <annotation>
+              <documentation>3122: Angir om trafikklommen er belyst</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utforming" type="nvdb:UtformingTrafikklommeType">
+            <annotation>
+              <documentation>1118: Angir hvordan vegobjektet er utforma</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekketype" type="nvdb:DekketypeTrafikklommeType">
+            <annotation>
+              <documentation>4612: Angir hvilken type dekke det er på trafikklomma</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikklommePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikklomme"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="UtformingTrafikklommeType">
+    <annotation>
+      <documentation>1118: Angir hvordan vegobjektet er utforma</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtformingTrafikklommeEnumerationType nvdb:UtformingTrafikklommeOtherType"/>
+  </simpleType>
+  <simpleType name="UtformingTrafikklommeEnumerationType">
+    <annotation>
+      <documentation>1118: Angir hvordan vegobjektet er utforma</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="lommeMedFysiskDeleøy">
+        <annotation>
+          <documentation>3204: Lomme med fysisk deleøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lommeMedMaltDeleøy">
+        <annotation>
+          <documentation>3205: Lomme med malt deleøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lommeUtenDeleøy">
+        <annotation>
+          <documentation>3206: Lomme uten deleøy</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingTrafikklommeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligTrafikklommeType">
+    <annotation>
+      <documentation>3125: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligTrafikklommeEnumerationType nvdb:VedlikeholdsansvarligTrafikklommeOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligTrafikklommeEnumerationType">
+    <annotation>
+      <documentation>3125: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>4655: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18712: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19895: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18841: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>4656: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>4657: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17673: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligTrafikklommeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinteråpenType">
+    <annotation>
+      <documentation>4652: Angir om trafikklomma blir holdt åpen gjennom vinteren.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinteråpenEnumerationType nvdb:VinteråpenOtherType"/>
+  </simpleType>
+  <simpleType name="VinteråpenEnumerationType">
+    <annotation>
+      <documentation>4652: Angir om trafikklomma blir holdt åpen gjennom vinteren.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>5698: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>5699: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinteråpenOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

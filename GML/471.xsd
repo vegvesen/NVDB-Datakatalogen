@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="MobiltelefonGSM_NetcomType">
+    <annotation>
+      <documentation>3702: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MobiltelefonGSM_NetcomEnumerationType nvdb:MobiltelefonGSM_NetcomOtherType"/>
+  </simpleType>
+  <simpleType name="MobiltelefonGSM_NetcomEnumerationType">
+    <annotation>
+      <documentation>3702: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4824: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11757: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MobiltelefonGSM_NetcomOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MobiltelefonGSM_TelenorMobilType">
+    <annotation>
+      <documentation>3703: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MobiltelefonGSM_TelenorMobilEnumerationType nvdb:MobiltelefonGSM_TelenorMobilOtherType"/>
+  </simpleType>
+  <simpleType name="MobiltelefonGSM_TelenorMobilEnumerationType">
+    <annotation>
+      <documentation>3703: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4825: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11758: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MobiltelefonGSM_TelenorMobilOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Mobiltelefonsamband" substitutionGroup="nvdb:AbstraktMobiltelefonsamband" type="nvdb:MobiltelefonsambandType">
+    <annotation>
+      <documentation>471: System for innhenting og videreformidling av mobiltelefonsignal feks i tunnel.</documentation>
+    </annotation>
+  </element>
+  <complexType name="MobiltelefonsambandType">
+    <complexContent>
+      <extension base="nvdb:AbstraktMobiltelefonsambandType">
+        <sequence>
+          <element minOccurs="0" name="networkNorway" type="nvdb:NetworkNorwayType">
+            <annotation>
+              <documentation>10577: Angir om det er tilrettelagt for angitt mobilnettverk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="mobiltelefonGSM_Netcom" type="nvdb:MobiltelefonGSM_NetcomType">
+            <annotation>
+              <documentation>3702: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="mobiltelefonGSM_TelenorMobil" type="nvdb:MobiltelefonGSM_TelenorMobilType">
+            <annotation>
+              <documentation>3703: Angir om det er dekning for denne type mobiltelefonnett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10327: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11618: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11132: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4988: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MobiltelefonsambandPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Mobiltelefonsamband"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="NetworkNorwayType">
+    <annotation>
+      <documentation>10577: Angir om det er tilrettelagt for angitt mobilnettverk</documentation>
+    </annotation>
+    <union memberTypes="nvdb:NetworkNorwayEnumerationType nvdb:NetworkNorwayOtherType"/>
+  </simpleType>
+  <simpleType name="NetworkNorwayEnumerationType">
+    <annotation>
+      <documentation>10577: Angir om det er tilrettelagt for angitt mobilnettverk</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16964: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16965: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="NetworkNorwayOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

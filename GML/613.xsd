@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BudsjettFilterlagType">
+    <annotation>
+      <documentation>5537: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BudsjettFilterlagEnumerationType nvdb:BudsjettFilterlagOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettFilterlagEnumerationType">
+    <annotation>
+      <documentation>5537: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>7870: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>7871: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettFilterlagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Filterlag" substitutionGroup="nvdb:AbstraktFilterlag" type="nvdb:FilterlagType">
+    <annotation>
+      <documentation>613: Lag av filtermateriale, normalt nederste lag i overbygningen mellom planum og forsterkningslaget (018)</documentation>
+    </annotation>
+  </element>
+  <complexType name="FilterlagType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFilterlagType">
+        <sequence>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>11240: Angir normal tykkelse av vegobjektet
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_GjSnitt" type="double">
+            <annotation>
+              <documentation>7037: Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="masseforbruk" type="integer">
+            <annotation>
+              <documentation>5546: Angir masseforbruk i kg/kvm
+Enhet: Kilo/kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element name="utleggingsdato" type="date">
+            <annotation>
+              <documentation>5542: Angir dato for utlegging</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettFilterlagType">
+            <annotation>
+              <documentation>5537: Angir hvilket budsjett utlegging går over</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5551: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11468: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6917: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8899: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FilterlagPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Filterlag"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

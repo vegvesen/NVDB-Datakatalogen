@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="FartsgrenseVariabel" substitutionGroup="nvdb:AbstraktFartsgrenseVariabel" type="nvdb:FartsgrenseVariabelType">
+    <annotation>
+      <documentation>721: Høyeste tillatte hastighet på en vegstrekning innenfor et avgrenset tidsrom.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FartsgrenseVariabelType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFartsgrenseVariabelType">
+        <sequence>
+          <element name="fartsgrenseVerdi" type="nvdb:FartsgrenseVerdiFartsgrenseVariabelType">
+            <annotation>
+              <documentation>7023: Verdien på fartsgrensen i angitt tidsrom
+Enhet: Kilometer/time</documentation>
+            </annotation>
+          </element>
+          <element name="type" type="nvdb:TypeFartsgrenseVariabelType">
+            <annotation>
+              <documentation>7016: Angir hvilken type variabel fartsgrense det er</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ukedag" type="nvdb:UkedagType">
+            <annotation>
+              <documentation>9401: Angir ukedager en variabel fartsgrense gjelder for.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoFra" type="string">
+            <annotation>
+              <documentation>7019: Angir dato (mmdd) som variabel fartsgrense gjelder fra og med i et normalår.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoTil" type="string">
+            <annotation>
+              <documentation>7022: Angir dato (mmdd) som variabel fartsgrense gjelder til og med i et normalår.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klokkeslettFra" type="string">
+            <annotation>
+              <documentation>7017: Angir tidspunkt (hhmm) på døgnet som variabel fartsgrense gjelder fra.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klokkeslettTil" type="string">
+            <annotation>
+              <documentation>7018: Angir tidspunkt på døgnet (hhmm) som variabel fartsgrense gjelder til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksnummer" type="string">
+            <annotation>
+              <documentation>9402: Angir vedtaksnummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gyldigFraDato" type="date">
+            <annotation>
+              <documentation>9400: Dato for når fartsgrense ble satt i drift.  Den dato skiltene ble "avduket".</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>8829: Kan gi merknad i forhold til variabel fartsgrense.  F.eks spesifikasjon av gyldighet, retningslinjer for nedsetting av fartsgrense etc</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>9399: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11465: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FartsgrenseVariabelPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:FartsgrenseVariabel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="FartsgrenseVerdiFartsgrenseVariabelType">
+    <annotation>
+      <documentation>7023: Verdien på fartsgrensen i angitt tidsrom</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FartsgrenseVerdiFartsgrenseVariabelEnumerationType nvdb:FartsgrenseVerdiFartsgrenseVariabelOtherType"/>
+  </simpleType>
+  <simpleType name="FartsgrenseVerdiFartsgrenseVariabelEnumerationType">
+    <annotation>
+      <documentation>7023: Verdien på fartsgrensen i angitt tidsrom</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="20">
+        <annotation>
+          <documentation>11577: 20</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>9333: 30</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>9334: 40</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>9335: 50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>9336: 60</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>9337: 70</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>9338: 80</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>9339: 90</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="100">
+        <annotation>
+          <documentation>9340: 100</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="110">
+        <annotation>
+          <documentation>16591: 110</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FartsgrenseVerdiFartsgrenseVariabelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFartsgrenseVariabelType">
+    <annotation>
+      <documentation>7016: Angir hvilken type variabel fartsgrense det er</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeFartsgrenseVariabelEnumerationType nvdb:TypeFartsgrenseVariabelOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFartsgrenseVariabelEnumerationType">
+    <annotation>
+      <documentation>7016: Angir hvilken type variabel fartsgrense det er</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vinterfartsgrense">
+        <annotation>
+          <documentation>9327: Vinterfartsgrense</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sommerfartsgrense">
+        <annotation>
+          <documentation>13242: Sommerfartsgrense</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skole">
+        <annotation>
+          <documentation>9328: Skole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="miljøfartsgrense">
+        <annotation>
+          <documentation>13241: Miljøfartsgrense</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFartsgrenseVariabelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UkedagType">
+    <annotation>
+      <documentation>9401: Angir ukedager en variabel fartsgrense gjelder for.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UkedagEnumerationType nvdb:UkedagOtherType"/>
+  </simpleType>
+  <simpleType name="UkedagEnumerationType">
+    <annotation>
+      <documentation>9401: Angir ukedager en variabel fartsgrense gjelder for.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="hverdager">
+        <annotation>
+          <documentation>13243: Mandag - Lørdag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hverdagerUtenLørdag">
+        <annotation>
+          <documentation>13244: Mandag - Fredag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lørdagOgSøndag">
+        <annotation>
+          <documentation>13245: Lørdag - Søndag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mandag">
+        <annotation>
+          <documentation>13246: Mandag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tirsdag">
+        <annotation>
+          <documentation>13247: Tirsdag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="onsdag">
+        <annotation>
+          <documentation>13248: Onsdag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="torsdag">
+        <annotation>
+          <documentation>13249: Torsdag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fredag">
+        <annotation>
+          <documentation>13250: Fredag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lørdag">
+        <annotation>
+          <documentation>13251: Lørdag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="søndag">
+        <annotation>
+          <documentation>13252: Søndag</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UkedagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

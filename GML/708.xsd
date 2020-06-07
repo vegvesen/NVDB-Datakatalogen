@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="LengdeklasseType">
+    <union memberTypes="nvdb:LengdeklasseEnumerationType nvdb:LengdeklasseOtherType"/>
+  </simpleType>
+  <simpleType name="LengdeklasseEnumerationType">
+    <restriction base="string">
+      <enumeration value="alleKjøretøy">
+        <annotation>
+          <documentation>9045: Alle kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kortereEnn5_6Meter">
+        <annotation>
+          <documentation>9046: Kortere enn 5,6 meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5_6_7_5Meter">
+        <annotation>
+          <documentation>9047: 5,6 - 7,5 meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="7_6_12_4Meter">
+        <annotation>
+          <documentation>9048: 7,6 - 12,4 meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12_5_15_9Meter">
+        <annotation>
+          <documentation>9049: 12,5 - 15,9 meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lengreEnn15_9Meter">
+        <annotation>
+          <documentation>9050: Lengre enn 15,9 meter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="langeKjøretøy">
+        <annotation>
+          <documentation>9967: Kjøretøy &gt;5.5 meter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LengdeklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TrafikkdataITellepunkt" substitutionGroup="nvdb:AbstraktTrafikkdataITellepunkt" type="nvdb:TrafikkdataITellepunktType"/>
+  <complexType name="TrafikkdataITellepunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikkdataITellepunktType">
+        <sequence>
+          <element minOccurs="0" name="tellepunktnummer" type="integer"/>
+          <element minOccurs="0" name="årstall" type="integer"/>
+          <element minOccurs="0" name="kjørefelt" type="string"/>
+          <element minOccurs="0" name="lengdeklasse" type="nvdb:LengdeklasseType"/>
+          <element minOccurs="0" name="ÅDT_AndelLangeKjøretøy" type="double">
+            <annotation>
+              <documentation>6858: Angir hvor stor andel (i prosent) av kjøretøyene som er definert som lange.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT" type="integer">
+            <annotation>
+              <documentation>6859: Årsdøgntrafikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SDT" type="integer">
+            <annotation>
+              <documentation>6860: Sommerdøgntrafikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="YDT" type="integer">
+            <annotation>
+              <documentation>6861: Yrkesdøgntrafikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="HDT" type="integer">
+            <annotation>
+              <documentation>6862: Helgedøgntrafikk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="usikkerhetÅDT" type="double">
+            <annotation>
+              <documentation>7572: Relativ usikkerhet (i %) for årsdøgntrafikk
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="usikkerhetSDT" type="double">
+            <annotation>
+              <documentation>7573: Relativ usikkerhet (i %) for sommerdøgntrafikken.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="usikkerhetYDT" type="double">
+            <annotation>
+              <documentation>7574: Relativ usikkerhet (i %) for yrkesdøgntrafikken
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="usikkerhetHDT" type="double">
+            <annotation>
+              <documentation>7575: Relativ usikkerhet (i %) for helgedøgntrafikken
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>6883: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikkdataITellepunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TrafikkdataITellepunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

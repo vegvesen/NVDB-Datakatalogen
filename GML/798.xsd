@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="OppdatertFraTrafikkmengde_KjørefeltType">
+    <annotation>
+      <documentation>9112: Angir hvorfra ÅDT-verdien er kommet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppdatertFraTrafikkmengde_KjørefeltEnumerationType nvdb:OppdatertFraTrafikkmengde_KjørefeltOtherType"/>
+  </simpleType>
+  <simpleType name="OppdatertFraTrafikkmengde_KjørefeltEnumerationType">
+    <annotation>
+      <documentation>9112: Angir hvorfra ÅDT-verdien er kommet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="oppskrevetFraPrimærtellepunktet">
+        <annotation>
+          <documentation>12090: Oppskrevet fra primærtellepunktet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oppskrevetFraNivå_1Tellepunktet">
+        <annotation>
+          <documentation>12089: Oppskrevet fra nivå-1 tellepunktet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oppskrevetFraFylkesindeksen">
+        <annotation>
+          <documentation>12088: Oppskrevet fra fylkesindeksen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brukersatt">
+        <annotation>
+          <documentation>12087: Brukersatt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppdatertFraTrafikkmengde_KjørefeltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Trafikkmengde_Kjørefelt" substitutionGroup="nvdb:AbstraktTrafikkmengde_Kjørefelt" type="nvdb:Trafikkmengde_KjørefeltType"/>
+  <complexType name="Trafikkmengde_KjørefeltType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikkmengde_KjørefeltType">
+        <sequence>
+          <element name="ÅDT" type="integer">
+            <annotation>
+              <documentation>9109: Angir årsdøgntrafikk for angitt kjørefelt.  Representativt for gitt strekning.  Gjennomsnittsverdi.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT_AndelLangeKjøretøy" type="integer">
+            <annotation>
+              <documentation>9110: Angir hvor stor andel (i prosent) av kjøretøyene som er definert som lange.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdatertFra" type="nvdb:OppdatertFraTrafikkmengde_KjørefeltType">
+            <annotation>
+              <documentation>9112: Angir hvorfra ÅDT-verdien er kommet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9111: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Trafikkmengde_KjørefeltPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikkmengde_Kjørefelt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

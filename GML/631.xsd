@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Vegkommentar" substitutionGroup="nvdb:AbstraktVegkommentar" type="nvdb:VegkommentarType">
+    <annotation>
+      <documentation>631: Kommentar rettet mot et konkret sted på vegen .</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegkommentarType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegkommentarType">
+        <sequence>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>5780: Gir beskrivelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5786: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>11519: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11518: Gir flate/polygon som geometrisk avgrenser vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegkommentarPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegkommentar"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

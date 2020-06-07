@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SidevegType">
+    <annotation>
+      <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs "Ikke sideveg".</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SidevegEnumerationType nvdb:SidevegOtherType"/>
+  </simpleType>
+  <simpleType name="SidevegEnumerationType">
+    <annotation>
+      <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs "Ikke sideveg".</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>15943: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>15944: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SidevegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Veglenkeadresse" substitutionGroup="nvdb:AbstraktVeglenkeadresse" type="nvdb:VeglenkeadresseType">
+    <annotation>
+      <documentation>538: Sammensatt identifikator for veglenkeadresse. Merknad: Komplett vegadresse består i tillegg av husnummer og bokstav.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VeglenkeadresseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVeglenkeadresseType">
+        <sequence>
+          <element minOccurs="0" name="sideveg" type="nvdb:SidevegType">
+            <annotation>
+              <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs "Ikke sideveg".</documentation>
+            </annotation>
+          </element>
+          <element name="adressekode" type="integer">
+            <annotation>
+              <documentation>4588: Nummer som entydig identifiserer adresserbare veglenker i matrikkelen. For hvert adressenavn (gatenavn) skal det således foreligge en adressekode, jf. matrikkelforskriften § 51.2. Merknad: Adressekode er unik innenfor kommunen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adressenavn" type="string">
+            <annotation>
+              <documentation>4589: Navn på veglenke i matrikkelen (matrikkelforskriften § 2e)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5037: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8897: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VeglenkeadressePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Veglenkeadresse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

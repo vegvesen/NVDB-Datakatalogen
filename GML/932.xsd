@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstSkredtekniskObjektType">
+    <annotation>
+      <documentation>11435: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstSkredtekniskObjektEnumerationType nvdb:AdkomstSkredtekniskObjektOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstSkredtekniskObjektEnumerationType">
+    <annotation>
+      <documentation>11435: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19831: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>19457: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>19455: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>19460: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>19458: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>19459: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>19456: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstSkredtekniskObjektOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringSkredtekniskObjektType">
+    <annotation>
+      <documentation>11433: Beskriver hvordan utstyret er fundamentert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FundamenteringSkredtekniskObjektEnumerationType nvdb:FundamenteringSkredtekniskObjektOtherType"/>
+  </simpleType>
+  <simpleType name="FundamenteringSkredtekniskObjektEnumerationType">
+    <annotation>
+      <documentation>11433: Beskriver hvordan utstyret er fundamentert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="iLøsmasser">
+        <annotation>
+          <documentation>19452: Utstyret er plassert på jordfundament eller annen fundamentering i løsmasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iFjell">
+        <annotation>
+          <documentation>19453: Utstyr boltet fast/festet direkte i fjell eller store steiner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>19454: Utstyr er montert på plasstøpt betongfundament (fundamentet kan ligge på fjell eller løsmasser)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringSkredtekniskObjektOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="SkredtekniskObjekt" substitutionGroup="nvdb:AbstraktSkredtekniskObjekt" type="nvdb:SkredtekniskObjektType">
+    <annotation>
+      <documentation>932: Enkeltkomponent i et skredvarslingsanlegg eller i et skredutløsningstiltak. Omfatter ikke skilting og signalanlegg på vegen.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredtekniskObjektType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredtekniskObjektType">
+        <sequence>
+          <element name="type" type="nvdb:TypeSkredtekniskObjektType">
+            <annotation>
+              <documentation>11432: Beskriver hvilken type utstyr det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fundamentering" type="nvdb:FundamenteringSkredtekniskObjektType">
+            <annotation>
+              <documentation>11433: Beskriver hvordan utstyret er fundamentert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>11434: Angir utstyrets egenhøyde fra topp fundament til topp utstyr.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstSkredtekniskObjektType">
+            <annotation>
+              <documentation>11435: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>11437: Beskrivelse av utstyret</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>11436: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11745: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredtekniskObjektPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:SkredtekniskObjekt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSkredtekniskObjektType">
+    <annotation>
+      <documentation>11432: Beskriver hvilken type utstyr det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSkredtekniskObjektEnumerationType nvdb:TypeSkredtekniskObjektOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSkredtekniskObjektEnumerationType">
+    <annotation>
+      <documentation>11432: Beskriver hvilken type utstyr det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sprengningstårn">
+        <annotation>
+          <documentation>19442: Tårn/mast som står i løsneområdet for snøskred med sprengladninger. Detonasjon kontrolleres fra avstand.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gassdetonator">
+        <annotation>
+          <documentation>19443: Rørkonstruksjon som står i løsneområde for snøskred som får tilførsel av gassblanding for detonasjon. Detonasjon kontrolleres fra avstand.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gassdetonatorTekniskBygg">
+        <annotation>
+          <documentation>19444: Kontrollenhet for gassdetonator med gasstanker og kommunikasjon. kontrukisjonen står utenfor løsneområde.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="taubanemast">
+        <annotation>
+          <documentation>19445: Mast som er plassert ved løsneområder for skred og som binder sammen taubanen(wire)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="taubanesentral">
+        <annotation>
+          <documentation>19446: Startpunkt for taubane utenfor skredområde der sprengladninger henges på og fraktes ut til forhåndsdefinerte detonasjonspunkter mellom taubanemastene.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="radar">
+        <annotation>
+          <documentation>19447: Installasjon som består av enten InSar-radar eller dopplerradar for deteksjon av bevegelse i løsneområdet. Konstruksjonen står utenfor skredområde og kan benyttes på ulike skredtyper.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="geofonstyreskap">
+        <annotation>
+          <documentation>19448: Kontrollenhet for geofonanlegg som kommuniserer med sensorer og evt styresystem fra VTS. Plassert utenfor skredområde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="geofonsensor">
+        <annotation>
+          <documentation>19449: Sensor som ligger i løsneområdet og måler rystelser i bakken. Sensorene er oftest trådløse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="geofonmast">
+        <annotation>
+          <documentation>19450: Mast ved siden av løsneområdet som kommuniserer med sensorer i løsneområdet og styreskap, oftest trådløst.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetUtstyr">
+        <annotation>
+          <documentation>19451: Utstyr som ikke hører inn under noen av de andre kategoriene</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSkredtekniskObjektOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

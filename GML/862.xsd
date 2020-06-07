@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierReisetidsregistreringspunktType">
+    <annotation>
+      <documentation>9947: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierReisetidsregistreringspunktEnumerationType nvdb:EierReisetidsregistreringspunktOtherType"/>
+  </simpleType>
+  <simpleType name="EierReisetidsregistreringspunktEnumerationType">
+    <annotation>
+      <documentation>9947: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>16140: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18544: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16141: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16142: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16143: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17641: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierReisetidsregistreringspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Reisetidsregistreringspunkt" substitutionGroup="nvdb:AbstraktReisetidsregistreringspunkt" type="nvdb:ReisetidsregistreringspunktType">
+    <annotation>
+      <documentation>862: Stasjon der det er plassert utstyr for registrering av passerende kjøretøy som brukes for registrering av reisetid</documentation>
+    </annotation>
+  </element>
+  <complexType name="ReisetidsregistreringspunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktReisetidsregistreringspunktType">
+        <sequence>
+          <element minOccurs="0" name="punktnavn" type="string">
+            <annotation>
+              <documentation>9946: Navn på registreringspunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeReisetidsregistreringspunktType">
+            <annotation>
+              <documentation>9948: Angir hvilken type utstyr/metode som benyttes for reisetidsregistrering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="IDEksterntSystem" type="string">
+            <annotation>
+              <documentation>9949: Gir en referanse (ID) til et eksternt system hvor ytterligere informasjon er lagret.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10345: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierReisetidsregistreringspunktType">
+            <annotation>
+              <documentation>9947: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>9951: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ReisetidsregistreringspunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Reisetidsregistreringspunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeReisetidsregistreringspunktType">
+    <annotation>
+      <documentation>9948: Angir hvilken type utstyr/metode som benyttes for reisetidsregistrering</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeReisetidsregistreringspunktEnumerationType nvdb:TypeReisetidsregistreringspunktOtherType"/>
+  </simpleType>
+  <simpleType name="TypeReisetidsregistreringspunktEnumerationType">
+    <annotation>
+      <documentation>9948: Angir hvilken type utstyr/metode som benyttes for reisetidsregistrering</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="autoPASS">
+        <annotation>
+          <documentation>16144: AutoPASS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="blåtann">
+        <annotation>
+          <documentation>16835: Blåtann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="autopassBlåtann">
+        <annotation>
+          <documentation>16836: Autopass/blåtann</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeReisetidsregistreringspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

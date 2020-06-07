@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="NedsenkaKantstein" substitutionGroup="nvdb:AbstraktNedsenkaKantstein" type="nvdb:NedsenkaKantsteinType">
+    <annotation>
+      <documentation>10: Nedsenka kantstein er en del av kantsteinen som er senket. F.eks i forbindelse med avkjørsler og gangfelt</documentation>
+    </annotation>
+  </element>
+  <complexType name="NedsenkaKantsteinType">
+    <complexContent>
+      <extension base="nvdb:AbstraktNedsenkaKantsteinType">
+        <sequence>
+          <element minOccurs="0" name="dybde" type="double">
+            <annotation>
+              <documentation>1656: Angir dybde målt fra topp kantstein til full nedbygd kantstein
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1302: Angir lengde av vegobjektet.  Lengde gjelder kantsteinsstrekning som ikke har full høyde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10331: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11548: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11033: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4718: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8915: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NedsenkaKantsteinPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:NedsenkaKantstein"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AntallLamperType">
+    <annotation>
+      <documentation>1958: Angir hvor mange lyspærer det er knyttet til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AntallLamperEnumerationType nvdb:AntallLamperOtherType"/>
+  </simpleType>
+  <simpleType name="AntallLamperEnumerationType">
+    <annotation>
+      <documentation>1958: Angir hvor mange lyspærer det er knyttet til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>3731: 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>3740: 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>3747: 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>3017: 4</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AntallLamperOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningSignalhodeType">
+    <annotation>
+      <documentation>5659: Angir hvilken retning signalhodet peker relatert til metreringsretning.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RetningSignalhodeEnumerationType nvdb:RetningSignalhodeOtherType"/>
+  </simpleType>
+  <simpleType name="RetningSignalhodeEnumerationType">
+    <annotation>
+      <documentation>5659: Angir hvilken retning signalhodet peker relatert til metreringsretning.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="3">
+        <annotation>
+          <documentation>7978: Signalhodet peker mot høyre sett i forhold til metreringsretning på vegen signalhodet er stedfesta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>7981: Signalhodet peker i samme retning som metreringsretning på vegen signalhodet er stedfesta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="9">
+        <annotation>
+          <documentation>7984: Signalhodet peker mot venstre sett i forhold til metreringsretning på vegen signalhodet er stedfesta</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>7987: Signalhodet peker i motsatt retning av metreringsretningen på vegen signalhodet er stedfesta.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningSignalhodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Signalhode" substitutionGroup="nvdb:AbstraktSignalhode" type="nvdb:SignalhodeType">
+    <annotation>
+      <documentation>91: Innfatning med ett eller flere lys/lamper som til sammen danner et trafikklyssignal</documentation>
+    </annotation>
+  </element>
+  <complexType name="SignalhodeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSignalhodeType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeSignalhodeType">
+            <annotation>
+              <documentation>1147: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallLamper" type="nvdb:AntallLamperType">
+            <annotation>
+              <documentation>1958: Angir hvor mange lyspærer det er knyttet til vegobjektet
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="størrelse" type="nvdb:StørrelseType">
+            <annotation>
+              <documentation>1969: Angir størrelse av vegobjekt
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde_Egen" type="double">
+            <annotation>
+              <documentation>1900: Angir vegobjektets egenhøyde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="retning" type="nvdb:RetningSignalhodeType">
+            <annotation>
+              <documentation>5659: Angir hvilken retning signalhodet peker relatert til metreringsretning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10354: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10477: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11712: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1530: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>1452: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="leverandør" type="string">
+            <annotation>
+              <documentation>1490: Angir navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11002: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11663: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11076: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4791: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SignalhodePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Signalhode"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="StørrelseType">
+    <annotation>
+      <documentation>1969: Angir størrelse av vegobjekt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StørrelseEnumerationType nvdb:StørrelseOtherType"/>
+  </simpleType>
+  <simpleType name="StørrelseEnumerationType">
+    <annotation>
+      <documentation>1969: Angir størrelse av vegobjekt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="100">
+        <annotation>
+          <documentation>3011: 100</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="200">
+        <annotation>
+          <documentation>3929: Verdi benyttes om signalhoder som har størrelse 200 eller 210</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="300">
+        <annotation>
+          <documentation>3014: 300</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StørrelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSignalhodeType">
+    <annotation>
+      <documentation>1147: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSignalhodeEnumerationType nvdb:TypeSignalhodeOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSignalhodeEnumerationType">
+    <annotation>
+      <documentation>1147: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="hovedsignal_3Lys_1080">
+        <annotation>
+          <documentation>2992: Standard kjøretøysignal. 3 lysåpninger. Rød, gul og gul. Signal 1080 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_3Lys_Venstre_1082_1">
+        <annotation>
+          <documentation>2999: Kjøretøysignal, pilsignal, 3 lysåpninger. Rød, gul og grønn venstrepil. Signal 1082.1 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_3Lys_RettFram_1082_2">
+        <annotation>
+          <documentation>3000: Kjøretøysignal, pilsignal, 3 lysåpninger. Rød, gul og grønn rett-frampil. Signal 1082.2 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_3Lys_Høyre_1082_3">
+        <annotation>
+          <documentation>3001: Kjøretøysignal, pilsignal, 3 lysåpninger. Rød, gul og grønn høyrepil. Signal 1082.3 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_GulGrønn_Venstre_1082_1">
+        <annotation>
+          <documentation>2996: Kjøretøysignal. Pilsignal, 2 lysåpninger. Gul og grønn venstrepil. Variant av signal 1082.1 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_GulGrønn_RettFram_1082_2">
+        <annotation>
+          <documentation>18415: Kjøretøysignal. Pilsignal, 2 lysåpninger. Gul og grønn rett-frampil. Variant av signal 1082.2 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_GulGrønn_Høyre_1082_3">
+        <annotation>
+          <documentation>18416: Kjøretøysignal. Pilsignal, 2 lysåpninger. Gul og grønn høyrepil. Variant av signal 1082.3 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_RødGul_Venstre_1082_1">
+        <annotation>
+          <documentation>2997: Kjøretøysignal. Pilsignal, 2 lysåpninger. Rød og gul venstrepil. Variant av signal 1082.1 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_RødGul_RettFram_1082_2">
+        <annotation>
+          <documentation>18418: Kjøretøysignal. Pilsignal, 2 lysåpninger. Rød og gul venstrepil. Variant av signal 1082.2 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_2Lys_RødGul_Høyre_1082_3">
+        <annotation>
+          <documentation>18417: Kjøretøysignal. Pilsignal, 2 lysåpninger. Rød og gul høyrepil. Variant av signal 1082.3 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_1Lys_GrønnVenstre_1082_1">
+        <annotation>
+          <documentation>2995: Kjøretøysignal. Pilsignal, 1 lysåpning. Grønn venstrepil. Variant av signal 1082.1 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_1Lys_GrønnRettFramn_1082_2">
+        <annotation>
+          <documentation>18413: Kjøretøysignal. Pilsignal, 1 lysåpning. Grønn venstrepil. Variant av signal 1082.2 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pilsignal_1Lys_GrønnHøyre_1082_3">
+        <annotation>
+          <documentation>18414: Kjøretøysignal. Pilsignal, 1 lysåpning. Grønn venstrepil. Variant av signal 1082.3 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sykkelsignal_1084">
+        <annotation>
+          <documentation>3003: Sykkelsignal gjelder for kjørende i sykkelfelt og sykkelkryssing. Signal 1084 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fotgjengersignal_1086">
+        <annotation>
+          <documentation>3004: Signal rettet mot fotgjengere. Normalt rød og grønn mann. Kan være variant med dobbelt rød mann.  Signal 1086 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalForKollektivtrafikk_1088">
+        <annotation>
+          <documentation>3002: Standard kjøretøysignal for kollektivtrafikk. 3 lysåpninger. Nederste lysåpning kan være venstrepil, rettframpil eller høyrepil. Signal 1088 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjørefeltsignal_1090">
+        <annotation>
+          <documentation>3005: Signaler i form av enten rødt kryss, grønn pil eller gul pil over kjørefelt. De benyttes i forbindelse med stengning eller reversering av kjørefelt i forbindelse med trafikkomlegginger ved vegarbeid, hendelser o.l. på flerfeltsveger og i tunneler der slike hendelser erfaringsmessig skjer forholdsvis hyppig. Signal 1090 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tolyssignal_1092">
+        <annotation>
+          <documentation>3006: Tolyssignaler anvendes på bomstasjoner, fergeleier, parkeringsanlegg og andre offentlige steder åpne for allmenn ferdsel hvor formålet er å dirigere trafikk ved lave hastigheter.  Signal 1092 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_1094">
+        <annotation>
+          <documentation>3007: Rødt stoppblinksignal benyttes hvor trafikken må stoppes helt over en kortere eller lengre periode.  Signal 1094 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="blinkendeSignalForanJernbane_1096">
+        <annotation>
+          <documentation>3008: Blinkende signal foran jernbane kan benyttes ved planoverganger der vegtrafikken må stoppes for sikker kryssing av skinnegang.  Signal 1096 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gultBlinksignal_1098">
+        <annotation>
+          <documentation>3009: Signalet angir at trafikantene må vise særlig aktpågivenhet og varsomhet.  Signal 1098 i Håndbok N303</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSignalhodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="ReferanseForType">
+    <annotation>
+      <documentation>5759: Angir hvilken organisasjon det er referanse for</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ReferanseForEnumerationType nvdb:ReferanseForOtherType"/>
+  </simpleType>
+  <simpleType name="ReferanseForEnumerationType">
+    <annotation>
+      <documentation>5759: Angir hvilken organisasjon det er referanse for</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>7999: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NSB">
+        <annotation>
+          <documentation>8000: NSB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jernbaneverket">
+        <annotation>
+          <documentation>8001: Jernbaneverket</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReferanseForOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Referansepunkt" substitutionGroup="nvdb:AbstraktReferansepunkt" type="nvdb:ReferansepunktType">
+    <annotation>
+      <documentation>627: Punkt på vegen som benyttes som referanse i vegnettet</documentation>
+    </annotation>
+  </element>
+  <complexType name="ReferansepunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktReferansepunktType">
+        <sequence>
+          <element minOccurs="0" name="referansenummer" type="string">
+            <annotation>
+              <documentation>5760: Angir punktets entydige referansenummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="referanseFor" type="nvdb:ReferanseForType">
+            <annotation>
+              <documentation>5759: Angir hvilken organisasjon det er referanse for</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegident_Generert" type="string">
+            <annotation>
+              <documentation>8133: Angir generert vegident</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5761: Gir stedfesting</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ReferansepunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Referansepunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

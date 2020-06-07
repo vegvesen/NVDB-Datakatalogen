@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DriftsstatusType">
+    <annotation>
+      <documentation>9229: Angir driftsstatus til ferjeleie</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DriftsstatusEnumerationType nvdb:DriftsstatusOtherType"/>
+  </simpleType>
+  <simpleType name="DriftsstatusEnumerationType">
+    <annotation>
+      <documentation>9229: Angir driftsstatus til ferjeleie</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="trafikkeres">
+        <annotation>
+          <documentation>12865: Ferjeleie benyttes i normal rutetrafikk.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagt">
+        <annotation>
+          <documentation>12866: Ferjeleie benyttes ikke i normal rutetrafikk, men er intakt slik at det kan benyttes i forbindelse med omkjøring/vegstengning med mer.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DriftsstatusOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EgenGangbaneTilFerjeType">
+    <annotation>
+      <documentation>9493: Angir om det er egen gangbane for gående for ombordstigning til ferje</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EgenGangbaneTilFerjeEnumerationType nvdb:EgenGangbaneTilFerjeOtherType"/>
+  </simpleType>
+  <simpleType name="EgenGangbaneTilFerjeEnumerationType">
+    <annotation>
+      <documentation>9493: Angir om det er egen gangbane for gående for ombordstigning til ferje</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13373: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13374: Nei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delvis">
+        <annotation>
+          <documentation>17378: Angir at det delvis er egen gangbane og/eller at det er gangbane til ei ferje/ferjelem og ikke til annen. Det skal gis mer informasjon under "Tilleggsinformasjon"</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EgenGangbaneTilFerjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFerjeleieType">
+    <annotation>
+      <documentation>7559: Angir hvem som eier ferjeleiet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFerjeleieEnumerationType nvdb:EierFerjeleieOtherType"/>
+  </simpleType>
+  <simpleType name="EierFerjeleieEnumerationType">
+    <annotation>
+      <documentation>7559: Angir hvem som eier ferjeleiet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>9822: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18565: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>9825: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>9823: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>9824: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17608: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFerjeleieOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ferjeleie" substitutionGroup="nvdb:AbstraktFerjeleie" type="nvdb:FerjeleieType">
+    <annotation>
+      <documentation>64: Sted med en eller flere ferjelemmer hvor ferje anløper for å ta om bord og slippe av kjøretøy og passasjerer.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FerjeleieType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFerjeleieType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>2179: Angir navn på ferjeleie</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsstatus" type="nvdb:DriftsstatusType">
+            <annotation>
+              <documentation>9229: Angir driftsstatus til ferjeleie</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallFerjelemmer" type="integer">
+            <annotation>
+              <documentation>9491: Angir antall ferjelemmer på ferjeleiet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ferjeleieId" type="integer">
+            <annotation>
+              <documentation>2180: Angir unikt nummer på ferjeleie i Ferjedatabanken.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NSR_Stopplace_ID" type="string">
+            <annotation>
+              <documentation>10727: Unikt nummer på stoppestedet som Ferjeleie tilhører. Forbeholdt nummer som benyttes i Nasjonalt Stoppestedregister (NSR). Benytes for datautveksling mellom NVDB og NSR. NSR administreres av Entur AS</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealTotaltØvrig" type="integer">
+            <annotation>
+              <documentation>9487: Angir øvrig areal på ferjeleiet. Dvs samme areal som øvrig kjørbart areal, samt annet areal i tilknytning til ferjeleiet som eier har ansvar for.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealKjørbartØvrig" type="integer">
+            <annotation>
+              <documentation>9488: Angir øvrig kjørbart areal på ferjeleiet. Dvs kjørbart areal som kommer i tillegg til areal av oppstillingsområde, parkeringområde og areal av veger med eget vegnett.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="egenGangbaneTilFerje" type="nvdb:EgenGangbaneTilFerjeType">
+            <annotation>
+              <documentation>9493: Angir om det er egen gangbane for gående for ombordstigning til ferje</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kaikantsikring" type="nvdb:KaikantsikringType">
+            <annotation>
+              <documentation>9492: Beskriver om ferjeleiet har en form for sikring mot vann. Ja: om hele ferjeleiet har sikring. Delvis: deler av kaikanten er sikret</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="venterom" type="nvdb:VenteromType">
+            <annotation>
+              <documentation>10729: Angir om det er venterom i tilknytning til ferjeleiet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10291: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9228: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11467: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eierFerjeleie" type="nvdb:EierFerjeleieType">
+            <annotation>
+              <documentation>7559: Angir hvem som eier ferjeleiet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarligFerjeleie" type="nvdb:VedlikeholdsansvarligFerjeleieType">
+            <annotation>
+              <documentation>7560: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4766: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9432: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10967: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FerjeleiePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ferjeleie"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KaikantsikringType">
+    <annotation>
+      <documentation>9492: Beskriver om ferjeleiet har en form for sikring mot vann. Ja: om hele ferjeleiet har sikring. Delvis: deler av kaikanten er sikret</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KaikantsikringEnumerationType nvdb:KaikantsikringOtherType"/>
+  </simpleType>
+  <simpleType name="KaikantsikringEnumerationType">
+    <annotation>
+      <documentation>9492: Beskriver om ferjeleiet har en form for sikring mot vann. Ja: om hele ferjeleiet har sikring. Delvis: deler av kaikanten er sikret</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13370: Hele kaikanten er sikret/markert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="delvis">
+        <annotation>
+          <documentation>13371: Deler av kaikant er sikret/markert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13372: Kaikant er ikke sikret/markert</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KaikantsikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFerjeleieType">
+    <annotation>
+      <documentation>7560: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFerjeleieEnumerationType nvdb:VedlikeholdsansvarligFerjeleieOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFerjeleieEnumerationType">
+    <annotation>
+      <documentation>7560: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>9826: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18690: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>9829: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18819: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>9827: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>9828: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17700: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFerjeleieOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VenteromType">
+    <annotation>
+      <documentation>10729: Angir om det er venterom i tilknytning til ferjeleiet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VenteromEnumerationType nvdb:VenteromOtherType"/>
+  </simpleType>
+  <simpleType name="VenteromEnumerationType">
+    <annotation>
+      <documentation>10729: Angir om det er venterom i tilknytning til ferjeleiet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>17383: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>17384: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VenteromOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierKantklipparealType">
+    <annotation>
+      <documentation>10875: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKantklipparealEnumerationType nvdb:EierKantklipparealOtherType"/>
+  </simpleType>
+  <simpleType name="EierKantklipparealEnumerationType">
+    <annotation>
+      <documentation>10875: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17922: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18562: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17925: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17923: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17924: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17926: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKantklipparealOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kantklipp_AnbefaltIntervallType">
+    <annotation>
+      <documentation>2382: Gir anbefaling for hvor ofte det bør foretas kantklipp.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Kantklipp_AnbefaltIntervallEnumerationType nvdb:Kantklipp_AnbefaltIntervallOtherType"/>
+  </simpleType>
+  <simpleType name="Kantklipp_AnbefaltIntervallEnumerationType">
+    <annotation>
+      <documentation>2382: Gir anbefaling for hvor ofte det bør foretas kantklipp.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="2GPrÅr">
+        <annotation>
+          <documentation>5074: Klipp to ganger pr  år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1GPrÅr">
+        <annotation>
+          <documentation>5073: Klipp hvert år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2HvertÅr">
+        <annotation>
+          <documentation>5075: Klipp annethvert år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3til5HvertÅr">
+        <annotation>
+          <documentation>5272: 3-5. hvert år</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kantklipp_AnbefaltIntervallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kantklippareal" substitutionGroup="nvdb:AbstraktKantklippareal" type="nvdb:KantklipparealType">
+    <annotation>
+      <documentation>301: Angir område med vegetasjon langs vegkant/skråning.  Dette er vanligvis vegetasjon som skal skjøttes vha kantklipper (kantslått).  Det er mulig å gi bredde i form av tilkopla "breddemåling".</documentation>
+    </annotation>
+  </element>
+  <complexType name="KantklipparealType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKantklipparealType">
+        <sequence>
+          <element minOccurs="0" name="klippebredde_Faktisk" type="integer">
+            <annotation>
+              <documentation>9969: Angir skrå bredde på området som faktisk skal klippes.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klippebredde_Kvalitet" type="nvdb:Klippebredde_KvalitetType">
+            <annotation>
+              <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav"
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kantklipp_AnbefaltIntervall" type="nvdb:Kantklipp_AnbefaltIntervallType">
+            <annotation>
+              <documentation>2382: Gir anbefaling for hvor ofte det bør foretas kantklipp.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>11312: Angir areal av vegobjekttype
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="klippebredde_Krav" type="integer">
+            <annotation>
+              <documentation>9970: Angir hvor langt ut fra vegkant,målt horisontalt, det er krav om å klippe.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11404: Informasjon av varig karakter som har betydning for kantklipp</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKantklipparealType">
+            <annotation>
+              <documentation>10875: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKantklipparealType">
+            <annotation>
+              <documentation>8088: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4898: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>9136: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KantklipparealPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kantklippareal"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="Klippebredde_KvalitetType">
+    <annotation>
+      <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav"</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Klippebredde_KvalitetEnumerationType nvdb:Klippebredde_KvalitetOtherType"/>
+  </simpleType>
+  <simpleType name="Klippebredde_KvalitetEnumerationType">
+    <annotation>
+      <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav"</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="måltIFelt">
+        <annotation>
+          <documentation>16183: Angir at det framkommet basert på en del målinger i felt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vurdertIFelt">
+        <annotation>
+          <documentation>16184: Angir at det er vurdert noe grovt i felt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vurdertUtFraVegbilderFlyfotoKart">
+        <annotation>
+          <documentation>16185: Angir at det er angitt ut fra bilder og kart uten at det er foretatt vuredering i felt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="genereltAnslag">
+        <annotation>
+          <documentation>16186: Angir at det er stor usikkerhet til informasjon, kan f.eks være basert på diverse gamle data osv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="basertPåGenerelleKrav">
+        <annotation>
+          <documentation>16187: Angir at det er lagt inn verdier ut fra generelle krav til klippebredde, f.eks kan det da være lagt inn 6 meter på alle steder der det er behov for klipping på gitt strekning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Klippebredde_KvalitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKantklipparealType">
+    <annotation>
+      <documentation>8088: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligKantklipparealEnumerationType nvdb:VedlikeholdsansvarligKantklipparealOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKantklipparealEnumerationType">
+    <annotation>
+      <documentation>8088: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10482: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18772: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19951: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18901: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10560: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10638: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17734: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKantklipparealOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

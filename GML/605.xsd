@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="VærrelatertStrekning" substitutionGroup="nvdb:AbstraktVærrelatertStrekning" type="nvdb:VærrelatertStrekningType">
+    <annotation>
+      <documentation>605: Gir informasjon om hvilken værstasjon (tilhørende DNMI) gitt strekning er knyttet til.  Tidligere register 33 Målestasjon i VDB</documentation>
+    </annotation>
+  </element>
+  <complexType name="VærrelatertStrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVærrelatertStrekningType">
+        <sequence>
+          <element minOccurs="0" name="værstasjon1" type="integer">
+            <annotation>
+              <documentation>5795: Angir værstasjon 1</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="værstasjon2" type="integer">
+            <annotation>
+              <documentation>5796: Angir Værstasjon 2</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11630: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6915: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VærrelatertStrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:VærrelatertStrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

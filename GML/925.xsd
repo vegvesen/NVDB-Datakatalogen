@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AktivType">
+    <annotation>
+      <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i aneleggsfase</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AktivEnumerationType nvdb:AktivOtherType"/>
+  </simpleType>
+  <simpleType name="AktivEnumerationType">
+    <annotation>
+      <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i aneleggsfase</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19220: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19221: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AktivOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeStagforankringType">
+    <annotation>
+      <documentation>11360: Angir hva stagforankring forankrer</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeStagforankringEnumerationType nvdb:BruksområdeStagforankringOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeStagforankringEnumerationType">
+    <annotation>
+      <documentation>11360: Angir hva stagforankring forankrer</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="støttekonstruksjon">
+        <annotation>
+          <documentation>19215: Støttekonstruksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jordnagling">
+        <annotation>
+          <documentation>19216: Jordnagling</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeStagforankringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierStagforankringType">
+    <annotation>
+      <documentation>11336: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierStagforankringEnumerationType nvdb:EierStagforankringOtherType"/>
+  </simpleType>
+  <simpleType name="EierStagforankringEnumerationType">
+    <annotation>
+      <documentation>11336: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19136: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19135: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19132: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19133: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19134: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19137: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierStagforankringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Stagforankring" substitutionGroup="nvdb:AbstraktStagforankring" type="nvdb:StagforankringType">
+    <annotation>
+      <documentation>925: Stag e.l. som benyttes for å forankre støttevegger, etc. Stagene ligger skrått eller tilnærmet horisontalt ut fra konstruksjonen. En registrert forekomst vil normalt dekke et område med flere enkeltstag.</documentation>
+    </annotation>
+  </element>
+  <complexType name="StagforankringType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStagforankringType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeStagforankringType">
+            <annotation>
+              <documentation>11360: Angir hva stagforankring forankrer</documentation>
+            </annotation>
+          </element>
+          <element name="typeStag" type="nvdb:TypeStagType">
+            <annotation>
+              <documentation>11361: Angir type stag for stagforankring</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallEnkeltstag" type="integer">
+            <annotation>
+              <documentation>11362: Angir hvor mange enkeltstag det er innenfor avgrenset område
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyesteKotenivåForInnfesting" type="double">
+            <annotation>
+              <documentation>11363: Kotenivå (moh) ved innfesting i konstruksjonen (høyeste kotenivå ved staghode). 
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="staglengde_Maks" type="integer">
+            <annotation>
+              <documentation>11364: Maks staglengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senteravstand_Maks" type="double">
+            <annotation>
+              <documentation>11365: Angir maks senteravstand i horisontalretning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinkel_MaksNedover" type="integer">
+            <annotation>
+              <documentation>11366: Angir maksimal vinkel under vannrett planum for en enkeltstag 0 =vannrett stag, 90 = loddrett stag
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinkel_MinNedover" type="integer">
+            <annotation>
+              <documentation>11367: Angir minimum vinkel under vannrett planum for en enkeltstag 0 =vannrett stag, 90 = loddrett stag
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="aktiv" type="nvdb:AktivType">
+            <annotation>
+              <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i aneleggsfase</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>11369: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11370: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11330: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11795: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierStagforankringType">
+            <annotation>
+              <documentation>11336: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligStagforankringType">
+            <annotation>
+              <documentation>11342: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11348: Gir flate/polygon som geometrisk avgrenser område med stagforankring.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="StagforankringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Stagforankring"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeStagType">
+    <annotation>
+      <documentation>11361: Angir type stag for stagforankring</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeStagEnumerationType nvdb:TypeStagOtherType"/>
+  </simpleType>
+  <simpleType name="TypeStagEnumerationType">
+    <annotation>
+      <documentation>11361: Angir type stag for stagforankring</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="lissestag">
+        <annotation>
+          <documentation>19217: Lissestag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="selvborendeStag">
+        <annotation>
+          <documentation>19218: Selvborende stag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stangstag">
+        <annotation>
+          <documentation>19219: Stangstag</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeStagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStagforankringType">
+    <annotation>
+      <documentation>11342: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligStagforankringEnumerationType nvdb:VedlikeholdsansvarligStagforankringOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStagforankringEnumerationType">
+    <annotation>
+      <documentation>11342: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>19172: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>19169: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20015: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>19170: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19168: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19171: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19173: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStagforankringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

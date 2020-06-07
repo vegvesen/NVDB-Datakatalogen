@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeDetektor_TrafikkType">
+    <annotation>
+      <documentation>3513: Angir hva detektoren hovedsaklig brukes til</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeDetektor_TrafikkEnumerationType nvdb:BruksområdeDetektor_TrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeDetektor_TrafikkEnumerationType">
+    <annotation>
+      <documentation>3513: Angir hva detektoren hovedsaklig brukes til</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="signalreguleringMotorkjøretøy">
+        <annotation>
+          <documentation>13703: Signalregulering motorkjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalreguleringSykkel">
+        <annotation>
+          <documentation>13704: Signalregulering sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalregulering_Fotgjenger">
+        <annotation>
+          <documentation>18405: Signalregulering, fotgjenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkregistreringMotorkjøretøy">
+        <annotation>
+          <documentation>13705: Trafikkregistrering motorkjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkregistreringSykkel">
+        <annotation>
+          <documentation>13706: Trafikkregistrering sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkregistrering_Fotgjenger">
+        <annotation>
+          <documentation>18406: Trafikkregistrering, fotgjenger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ATK">
+        <annotation>
+          <documentation>16760: Detektor benyttet i forbindelse med ATK</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeDetektor_TrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Detektor_Trafikk" substitutionGroup="nvdb:AbstraktDetektor_Trafikk" type="nvdb:Detektor_TrafikkType">
+    <annotation>
+      <documentation>167: En enhet som gir en impuls til styreapparatet når den blir aktivert av en trafikant</documentation>
+    </annotation>
+  </element>
+  <complexType name="Detektor_TrafikkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktDetektor_TrafikkType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeDetektor_TrafikkType">
+            <annotation>
+              <documentation>3513: Angir hva detektoren hovedsaklig brukes til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeDetektor_TrafikkType">
+            <annotation>
+              <documentation>1183: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="detektornummer" type="string">
+            <annotation>
+              <documentation>7981: Angir nummer på detektor</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="feltbeskrivelse" type="string">
+            <annotation>
+              <documentation>7982: Supplement til "Kjørefelt-paramenter".  Kan f.eks benyttes for å beskrive geografisk retning på kjørefelt som detektor er lokalisert i.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>3876: Angir lengde (i vegens retning)
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>3849: Angir bredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="double">
+            <annotation>
+              <documentation>1375: Angir arealet av vegobjektet
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10283: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11092: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4833: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Detektor_TrafikkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Detektor_Trafikk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeDetektor_TrafikkType">
+    <annotation>
+      <documentation>1183: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeDetektor_TrafikkEnumerationType nvdb:TypeDetektor_TrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="TypeDetektor_TrafikkEnumerationType">
+    <annotation>
+      <documentation>1183: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="induktivsløyfe_Motorkjøretøy">
+        <annotation>
+          <documentation>4895: Induktivsløyfe, motorkjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="induktivsløyfe_Sykkel">
+        <annotation>
+          <documentation>4896: Induktivsløyfe, sykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="piezo_ElektriskKabel">
+        <annotation>
+          <documentation>4897: Piezo-elektrisk kabel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="infrarødDetektor">
+        <annotation>
+          <documentation>4898: Infrarød detektor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="videodetektor">
+        <annotation>
+          <documentation>4899: Videodetektor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="video_Varmesøkende">
+        <annotation>
+          <documentation>18407: Video, varmesøkende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="radardetektor">
+        <annotation>
+          <documentation>4900: Radardetektor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeDetektor_TrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

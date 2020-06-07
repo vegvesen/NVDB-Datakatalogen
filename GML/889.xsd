@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Bruksklasse_Modulvogntog" substitutionGroup="nvdb:AbstraktBruksklasse_Modulvogntog" type="nvdb:Bruksklasse_ModulvogntogType">
+    <annotation>
+      <documentation>889: Gjeldende bruksklasse for modulvogntog i vegliste</documentation>
+    </annotation>
+  </element>
+  <complexType name="Bruksklasse_ModulvogntogType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBruksklasse_ModulvogntogType">
+        <sequence>
+          <element minOccurs="0" name="strekningsbeskrivelse" type="string">
+            <annotation>
+              <documentation>10738: Beskrivelse av aktuell vegstrekning. Denne teksten blir henta direkte inn i veglistene.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksTillattTotalvekt" type="nvdb:MaksTillattTotalvektType">
+            <annotation>
+              <documentation>10741: Angir maksimal totalvekt for modulvogntog
+Enhet: Tonn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksTillattVogntoglengde" type="nvdb:MaksTillattVogntoglengdeType">
+            <annotation>
+              <documentation>10742: Angir maksimal lengde for modulvogntog
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterstengtFor60Tonn" type="nvdb:VinterstengtFor60TonnType">
+            <annotation>
+              <documentation>10743: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjelderIkkeLinksemitrailer" type="nvdb:GjelderIkkeLinksemitrailerType">
+            <annotation>
+              <documentation>10744: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>11544: Merknad knyttet til aktuell strekning. Kommer med uthevet tekst i veglistene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="veglisteGjelderAlltid" type="string">
+            <annotation>
+              <documentation>10745: Veglister er forskrift og gjelder alltid foran kartvisning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Bruksklasse_ModulvogntogPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bruksklasse_Modulvogntog"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="GjelderIkkeLinksemitrailerType">
+    <annotation>
+      <documentation>10744: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjelderIkkeLinksemitrailerEnumerationType nvdb:GjelderIkkeLinksemitrailerOtherType"/>
+  </simpleType>
+  <simpleType name="GjelderIkkeLinksemitrailerEnumerationType">
+    <annotation>
+      <documentation>10744: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="L">
+        <annotation>
+          <documentation>17398: Modulvogntog av type Linksemitrailer er IKKE tillatt på strekning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjelderIkkeLinksemitrailerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektType">
+    <annotation>
+      <documentation>10741: Angir maksimal totalvekt for modulvogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksTillattTotalvektEnumerationType nvdb:MaksTillattTotalvektOtherType"/>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektEnumerationType">
+    <annotation>
+      <documentation>10741: Angir maksimal totalvekt for modulvogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bk10_50">
+        <annotation>
+          <documentation>17394: Bk 10/50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bk10_60">
+        <annotation>
+          <documentation>17395: Bk 10/60</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattTotalvektOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeType">
+    <annotation>
+      <documentation>10742: Angir maksimal lengde for modulvogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksTillattVogntoglengdeEnumerationType nvdb:MaksTillattVogntoglengdeOtherType"/>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeEnumerationType">
+    <annotation>
+      <documentation>10742: Angir maksimal lengde for modulvogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="25_25">
+        <annotation>
+          <documentation>17396: 25,25</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksTillattVogntoglengdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnType">
+    <annotation>
+      <documentation>10743: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterstengtFor60TonnEnumerationType nvdb:VinterstengtFor60TonnOtherType"/>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnEnumerationType">
+    <annotation>
+      <documentation>10743: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V">
+        <annotation>
+          <documentation>17397: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterstengtFor60TonnOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

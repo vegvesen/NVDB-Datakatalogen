@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierKontraktsområdeType">
+    <annotation>
+      <documentation>11801: Angir hvem som er eier av kontrakt.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKontraktsområdeEnumerationType nvdb:EierKontraktsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="EierKontraktsområdeEnumerationType">
+    <annotation>
+      <documentation>11801: Angir hvem som er eier av kontrakt.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19774: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19773: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikenFylkeskommune">
+        <annotation>
+          <documentation>19770: Viken Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innlandetFylkeskommune">
+        <annotation>
+          <documentation>19772: Innlandet Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vestfoldOgTelemarkFylkeskommune">
+        <annotation>
+          <documentation>19775: Vestfold og Telemark Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="agderFylkeskommune">
+        <annotation>
+          <documentation>19776: Agder Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rogalandFylkeskommune">
+        <annotation>
+          <documentation>19777: Rogaland Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vestlandFylkeskommune">
+        <annotation>
+          <documentation>19778: Vestland Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="møreOgRomsdalFylkeskommune">
+        <annotation>
+          <documentation>19779: Møre og Romsdal Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trøndelagFylkeskommune">
+        <annotation>
+          <documentation>19780: Trøndelag Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordlandFylkeskommune">
+        <annotation>
+          <documentation>19781: Nordland Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tromsOgFinnmarkFylkeskommune">
+        <annotation>
+          <documentation>19782: Troms og Finnmark Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="osloKommune">
+        <annotation>
+          <documentation>19783: Oslo Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19771: Kommune</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKontraktsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kontraktsområde" substitutionGroup="nvdb:AbstraktKontraktsområde" type="nvdb:KontraktsområdeType">
+    <annotation>
+      <documentation>580: Kontrakt/avtale om drift/vedlikehold relatert til bestemte veger innenfor et avgrensa område</documentation>
+    </annotation>
+  </element>
+  <complexType name="KontraktsområdeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKontraktsområdeType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>5174: Angir navn på kontraktsområdet.  Navnet skal settes sammen etter følgende mønster: "NNNN n..........n ÅÅÅÅ-ÅÅÅÅ" .  "NNNN" er et firesifret nummer knyttet til kontraktsområde, nr &lt; 2100 kan bli tolka som at de to første siffer er fylkesnummer.  For siffer mindre enn 1000 skal det gis 0 (f.eks 0350) .  "n.....n" er navn på kontraktsområdet. "ÅÅÅÅ-ÅÅÅÅ" angir årstal kontrakten løper fra og til. Eksempel på navn:  "1203 Nordhordland 2004-2008</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nr" type="integer">
+            <annotation>
+              <documentation>5175: Angir nummer på kontraktsområde</documentation>
+            </annotation>
+          </element>
+          <element name="type" type="nvdb:TypeKontraktsområdeType">
+            <annotation>
+              <documentation>8832: Angir hvilken type kotraktsområde det er tale om</documentation>
+            </annotation>
+          </element>
+          <element name="datoFra" type="date">
+            <annotation>
+              <documentation>8833: Kontrakten løper fra og med angitt dato</documentation>
+            </annotation>
+          </element>
+          <element name="datoTil" type="date">
+            <annotation>
+              <documentation>8834: Kontrakten løper til og med angitt dato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11472: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKontraktsområdeType">
+            <annotation>
+              <documentation>11801: Angir hvem som er eier av kontrakt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5173: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>5172: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KontraktsområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kontraktsområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeKontraktsområdeType">
+    <annotation>
+      <documentation>8832: Angir hvilken type kotraktsområde det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKontraktsområdeEnumerationType nvdb:TypeKontraktsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKontraktsområdeEnumerationType">
+    <annotation>
+      <documentation>8832: Angir hvilken type kotraktsområde det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="driftskontrakt">
+        <annotation>
+          <documentation>11750: Driftskontrakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS_Kontrakt">
+        <annotation>
+          <documentation>11751: OPS-kontrakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="refusjonsavtale">
+        <annotation>
+          <documentation>11752: Refusjonsavtale</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elektrokontrakt">
+        <annotation>
+          <documentation>11753: Elektrokontrakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="veglyskontrakt">
+        <annotation>
+          <documentation>11754: Veglyskontrakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnelkontrakt">
+        <annotation>
+          <documentation>11755: Tunnelkontrakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grøntkontrakt">
+        <annotation>
+          <documentation>18158: Område der det er inngått egen driftskontrakt rettet mot grøntområder/grøntobjekter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="andrepartskontrakt">
+        <annotation>
+          <documentation>18159: Område der drift administreres av annen part, f.eks en kommune på vegne av Statens vegvesen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utprøving">
+        <annotation>
+          <documentation>11756: Benyttes som "kladd" dersom man ønsker å se på flere alternativer før man bestemmer seg for hvilke veger som skal være med i en kontrakt.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKontraktsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

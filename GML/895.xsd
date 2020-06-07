@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="01_BruddhendelseType">
+    <annotation>
+      <documentation>11012: Angir type bruddhendelse.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:01_BruddhendelseEnumerationType nvdb:01_BruddhendelseOtherType"/>
+  </simpleType>
+  <simpleType name="01_BruddhendelseEnumerationType">
+    <annotation>
+      <documentation>11012: Angir type bruddhendelse.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vegStengt">
+        <annotation>
+          <documentation>18469: Veg stengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnelStengt">
+        <annotation>
+          <documentation>18470: Tunnel stengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bruStengt">
+        <annotation>
+          <documentation>18471: Bru stengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferjeFerjekaiStengt">
+        <annotation>
+          <documentation>18472: Ferje/ferjekai stengt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="01_BruddhendelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="02_BruddårsakSpesifikkType">
+    <annotation>
+      <documentation>10749: Angir hva som er årsak til bruddhendelse</documentation>
+    </annotation>
+    <union memberTypes="nvdb:02_BruddårsakSpesifikkEnumerationType nvdb:02_BruddårsakSpesifikkOtherType"/>
+  </simpleType>
+  <simpleType name="02_BruddårsakSpesifikkEnumerationType">
+    <annotation>
+      <documentation>10749: Angir hva som er årsak til bruddhendelse</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bilberging_Vogntog">
+        <annotation>
+          <documentation>17410: Brukes i Veg stengt. Brukes der det er eller forventes økt forekomst av fastkjørte vogntog, for eksempel i bratte stigninger vinterstid..</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brann_IObjekterPåNærVegen">
+        <annotation>
+          <documentation>17411: Brukes i Tunnel stengt eller Veg stengt. Brukes i tunneler eller der vegen ligger nært opp til objekter som kan forårsake storbrann som fører til langvarig stengt veg, for eksempel prosessindustri. Bensinstasjoner og industriområder generelt skal ikke kartlegges her. Brukes kun i særskilte tilfeller.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dreneringssvikt">
+        <annotation>
+          <documentation>17413: Brukes i Veg stengt. Brukes der det er skadde og/eller underdimensjonerte stikkrenner eller lukket drenering langs veg som erfaringsvis forårsaker overvann/flom ved store nedbørsmengder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="farligGodsUlykke">
+        <annotation>
+          <documentation>17415: Brukes i Veg stengt. Brukes der det er spesielt høy risiko for ulykker med farlig gods, for eksempel i tilknytning til raffineri/industri.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flom">
+        <annotation>
+          <documentation>17417: Brukes i Bru stengt eller Veg stengt. Brukes for bruer, evt. tunneler eller der det er veg langs vassdrag som erfaringsvis er utsatt for flom ved store nedbørsmengder og/eller snøsmelting, eller ved flom i sidebekker på grunn av ekstremnedbør.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fundamenteringssvikt">
+        <annotation>
+          <documentation>17418: Brukes i Veg stengt. Brukes der det er økt sannsynlighet for brudd i vegfundamenteringen pga. utvasking etter store nedbørsmengder, slitasje fra tungtrafikk, dårlige grunnforhold eller andre årsaker.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyde_Lengde_Bredde_Vekt">
+        <annotation>
+          <documentation>17419: Brukes i Bru stengt, Veg stengt eller Tunnel stengt. Brukes der restriksjoner eller begrensninger kan føre til at kjøretøy som overstiger grensene kjører seg fast, eller skader/ødelegger infrastrukturen eller på annen måte stenger for annen trafikk.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredKvikkleire">
+        <annotation>
+          <documentation>17421: Brukes i Veg stengt. Punkt eller strekning med fare for kvikkleireskred der vegen ligger i eller nær et område med kvikkleire.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredJord">
+        <annotation>
+          <documentation>17422: Brukes i Veg stengt. Punkt eller strekning som er spesielt utsatt for jordskred. Jordskred er raske utglidninger og bevegelse av vannmettede løsmasser i bratte skråninger, utenfor definerte vannveier. Høyt vanninnhold og oppbygging av vanntrykk i løsmassene er oftest den utløsende faktoren for jordskred. Dette skjer som følge langvarig nedbør, eller etter korte og intense regnskyll eller i kombinasjon med rask snøsmelting, se NVE's faktaark 2013-01 om Jordskred og flomskred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredSnø">
+        <annotation>
+          <documentation>17424: Brukes i veg stengt. Punkt eller strekning som er spesielt utsatt for snøskred.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredStein">
+        <annotation>
+          <documentation>17425: Brukes i Veg stengt. Punkt eller strekning som er spesielt utsatt for steinskred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedfallFraFjellskjæring">
+        <annotation>
+          <documentation>18536: Brukes i Veg stengt. Punkt eller strekning der det er fare for nedfall fra fjellskjæring.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stormflo">
+        <annotation>
+          <documentation>17426: Brukes i Veg stengt, evt. Tunnel stengt, Bru stengt eller Ferje/ferjekai stengt. Brukes der det finnes lavtliggende punkt eller strekning som ligger slik til at det kan bli oversvømt ved stormflo.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="strømbrudd">
+        <annotation>
+          <documentation>17427: Brukes i Tunnel stengt, Ferje/ferjekai stengt, Veg stengt, Bru stengt. Brukes i tilknytning til mekaniske skilt, bommer, pumpesumper eller lignende, og kun der langvarige strømbrudd er av avgjørende betydning for funksjonsevnen til vegen, brua, tunnelen, ferjekaia.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ulykkespunktStrekning">
+        <annotation>
+          <documentation>17430: Brukes i Veg stengt eller Tunnel stengt. Kartlegging av ulykkespunkt og -strekninger i VegROS skal være et supplement til allerede eksisterende ulykkespunkt i NVDB. Det som spesielt skal registreres er punkt eller strekninger der hyppig forekommende ulykker og utforkjøringer (som oftest uten personskade) er et tegn på potensielle framkommelighetsutfordringer slik de er definert i risikovurderingen i retningslinjene for VegROS. Lokal kunnskap er spesielt viktig i denne kartleggingen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utglidning">
+        <annotation>
+          <documentation>17431: Brukes i Veg stengt. Utglidning brukes også for å indikere en generell massebevegelse i en skråning og er ofte det første bruddet i et senere jordskred. Utglidninger oppstår i slakere terreng med finkornet, vannmettet jord og leire. De finnes gjerne på dyrket mark eller i naturlige skråninger i terrenget, særlig i de bratte sidekantene langs veier, elver, kunstige/modifiserte skråninger, langs jernbaner og i menneskeskapte fyllinger i bebodde områder.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vind">
+        <annotation>
+          <documentation>17432: Brukes i Veg stengt, Bru stengt, eller Ferje/ferjekai stengt. Brukes for strekning som er spesielt sårbar for sterk vind som storm/orkan, for eksempel vinterstormer over fjelloverganger, eller store trær nær vegen som gir økt risiko for vindfall og dermed stengt veg ved sterk vind/storm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø">
+        <annotation>
+          <documentation>17433: Brukes i Veg stengt, Tunnel stengt. Punkt eller strekning som er utsatt for snøfokk o.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenÅrsak">
+        <annotation>
+          <documentation>18535: Brukes i Veg stengt, Bru stengt, Tunnel stengt, Ferje stengt. Punkt eller strekning der bruddårsak ikke dekkes av det forhåndsdefinerte utvalget.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="02_BruddårsakSpesifikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="05_BruddårsakHovedgruppeType">
+    <annotation>
+      <documentation>11864: Angir hovedgruppe bruddfare</documentation>
+    </annotation>
+    <union memberTypes="nvdb:05_BruddårsakHovedgruppeEnumerationType nvdb:05_BruddårsakHovedgruppeOtherType"/>
+  </simpleType>
+  <simpleType name="05_BruddårsakHovedgruppeEnumerationType">
+    <annotation>
+      <documentation>11864: Angir hovedgruppe bruddfare</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="natur">
+        <annotation>
+          <documentation>20085: Brukes der naturrelaterte farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikk">
+        <annotation>
+          <documentation>20086: Brukes der trafikkrelaterte farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="konstruksjon">
+        <annotation>
+          <documentation>20087: Brukes der konstruksjonsrelaterte farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="05_BruddårsakHovedgruppeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="06_BruddårsakUndergruppeType">
+    <annotation>
+      <documentation>11865: Angir undergruppe bruddfare</documentation>
+    </annotation>
+    <union memberTypes="nvdb:06_BruddårsakUndergruppeEnumerationType nvdb:06_BruddårsakUndergruppeOtherType"/>
+  </simpleType>
+  <simpleType name="06_BruddårsakUndergruppeEnumerationType">
+    <annotation>
+      <documentation>11865: Angir undergruppe bruddfare</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skred">
+        <annotation>
+          <documentation>20088: Brukes der skred farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flom">
+        <annotation>
+          <documentation>20089: Brukes der flom farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vær">
+        <annotation>
+          <documentation>20090: Brukes der vær farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ulykke">
+        <annotation>
+          <documentation>20091: Brukes der ulykker farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="konstruksjonsfeil">
+        <annotation>
+          <documentation>20092: Brukes der konstruksjonsfeil farer er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tekniskSvikt">
+        <annotation>
+          <documentation>20093: Brukes der teknisk svikt er hovedårsak til brudd</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="06_BruddårsakUndergruppeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="10_RisikoType">
+    <annotation>
+      <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:10_RisikoEnumerationType nvdb:10_RisikoOtherType"/>
+  </simpleType>
+  <simpleType name="10_RisikoEnumerationType">
+    <annotation>
+      <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>18436: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>18437: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>18438: Stor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="10_RisikoOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="11_TrusselType">
+    <annotation>
+      <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:11_TrusselEnumerationType nvdb:11_TrusselOtherType"/>
+  </simpleType>
+  <simpleType name="11_TrusselEnumerationType">
+    <annotation>
+      <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>18427: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>18428: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>18429: Stor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="11_TrusselOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="12_VerdiType">
+    <annotation>
+      <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:12_VerdiEnumerationType nvdb:12_VerdiOtherType"/>
+  </simpleType>
+  <simpleType name="12_VerdiEnumerationType">
+    <annotation>
+      <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>18430: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>18431: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>18432: Stor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="12_VerdiOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="13_SårbarhetType">
+    <annotation>
+      <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap</documentation>
+    </annotation>
+    <union memberTypes="nvdb:13_SårbarhetEnumerationType nvdb:13_SårbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="13_SårbarhetEnumerationType">
+    <annotation>
+      <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>18433: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>18434: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>18435: Stor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="13_SårbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="14_UsikkerhetType">
+    <annotation>
+      <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko</documentation>
+    </annotation>
+    <union memberTypes="nvdb:14_UsikkerhetEnumerationType nvdb:14_UsikkerhetOtherType"/>
+  </simpleType>
+  <simpleType name="14_UsikkerhetEnumerationType">
+    <annotation>
+      <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>18537: Lite usikkerhet. Omfattende faglig grunnlag.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>18538: Noe usikkerhet. Noe faglig grunnlag.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>18539: Stor usikkerhet. Mangelfullt eller svært lite faglig grunnlag.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="14_UsikkerhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="15_FagligGrunnlagType">
+    <annotation>
+      <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:15_FagligGrunnlagEnumerationType nvdb:15_FagligGrunnlagOtherType"/>
+  </simpleType>
+  <simpleType name="15_FagligGrunnlagEnumerationType">
+    <annotation>
+      <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nivå1">
+        <annotation>
+          <documentation>18540: Identifisere og kartlegge områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Liten bruk av fagkompetanse.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nivå2">
+        <annotation>
+          <documentation>18541: Identifisere, kartlegge og vurdere områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Noe bruk av fagkompetanse.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nivå3">
+        <annotation>
+          <documentation>18542: Identifisere, kartlegge og detaljvurdere områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Utstrakt bruk av fagkompetanse.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="15_FagligGrunnlagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="VegROS" substitutionGroup="nvdb:AbstraktVegROS" type="nvdb:VegROSType">
+    <annotation>
+      <documentation>895: Punkt/strekning i vegnettet hvor det er økt risiko og sårbarhet for langvarige fremkommelighetsbrudd. Merknad: Skal ha minst 10 meters utstrekning</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegROSType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegROSType">
+        <sequence>
+          <element minOccurs="0" name="01_Bruddhendelse" type="nvdb:01_BruddhendelseType">
+            <annotation>
+              <documentation>11012: Angir type bruddhendelse.</documentation>
+            </annotation>
+          </element>
+          <element name="02_BruddårsakSpesifikk" type="nvdb:02_BruddårsakSpesifikkType">
+            <annotation>
+              <documentation>10749: Angir hva som er årsak til bruddhendelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="03_Sted" type="string">
+            <annotation>
+              <documentation>10750: Stedsnavn eller strekningsnavn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="04_Beskrivelse" type="string">
+            <annotation>
+              <documentation>10751: Beskrivelse av hendelse og særskilte forhold ved denne</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="05_BruddårsakHovedgruppe" type="nvdb:05_BruddårsakHovedgruppeType">
+            <annotation>
+              <documentation>11864: Angir hovedgruppe bruddfare</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="06_BruddårsakUndergruppe" type="nvdb:06_BruddårsakUndergruppeType">
+            <annotation>
+              <documentation>11865: Angir undergruppe bruddfare</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="10_Risiko" type="nvdb:10_RisikoType">
+            <annotation>
+              <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="11_Trussel" type="nvdb:11_TrusselType">
+            <annotation>
+              <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="12_Verdi" type="nvdb:12_VerdiType">
+            <annotation>
+              <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="13_Sårbarhet" type="nvdb:13_SårbarhetType">
+            <annotation>
+              <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="14_Usikkerhet" type="nvdb:14_UsikkerhetType">
+            <annotation>
+              <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="15_FagligGrunnlag" type="nvdb:15_FagligGrunnlagType">
+            <annotation>
+              <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="20_TiltakInvesteringUtbedring" type="string">
+            <annotation>
+              <documentation>11024: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="21_TiltakDriftVedlikehold" type="string">
+            <annotation>
+              <documentation>11025: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="22_TiltakBeredskap" type="string">
+            <annotation>
+              <documentation>11026: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="23_TiltakKartleggingAnalyse" type="string">
+            <annotation>
+              <documentation>11027: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="50_Merknad" type="string">
+            <annotation>
+              <documentation>10752: Merknad. Kan benyttes ifm. revisjon eller oppdatering eller for å angi spesielle grunner til at dette er et VegROSpunkt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="60_Arkivnummer" type="string">
+            <annotation>
+              <documentation>10754: Referanse til Mime</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="70_Metadata" type="string">
+            <annotation>
+              <documentation>10753: Angir hvor det finnes metadata. URL eller filkatalog</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>11011: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegROSPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:VegROS"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

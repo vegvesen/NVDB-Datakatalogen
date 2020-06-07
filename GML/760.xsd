@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Rapportdefinisjon" substitutionGroup="nvdb:AbstraktRapportdefinisjon" type="nvdb:RapportdefinisjonType">
+    <annotation>
+      <documentation>760: Rapportdefinisjon.  Til intern bruk i NVDB</documentation>
+    </annotation>
+  </element>
+  <complexType name="RapportdefinisjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktRapportdefinisjonType">
+        <sequence>
+          <element minOccurs="0" name="rapportmalfil">
+            <annotation>
+              <documentation>7580: Rapportmalfil</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="publisertdato" type="date">
+            <annotation>
+              <documentation>7581: Publiseringsdato</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rapporttype" type="nvdb:RapporttypeType">
+            <annotation>
+              <documentation>7582: Rapporttype</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RapportdefinisjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Rapportdefinisjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="RapporttypeType">
+    <annotation>
+      <documentation>7582: Rapporttype</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RapporttypeEnumerationType nvdb:RapporttypeOtherType"/>
+  </simpleType>
+  <simpleType name="RapporttypeEnumerationType">
+    <annotation>
+      <documentation>7582: Rapporttype</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="punkt">
+        <annotation>
+          <documentation>9867: Punkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="strekning">
+        <annotation>
+          <documentation>9868: Strekning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegnett">
+        <annotation>
+          <documentation>9869: Vegnett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="detaljert">
+        <annotation>
+          <documentation>9870: Detaljert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangel">
+        <annotation>
+          <documentation>9871: Mangel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="generiskdetaljert">
+        <annotation>
+          <documentation>9872: Generiskdetaljert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjelpefil">
+        <annotation>
+          <documentation>9873: Hjelpefil</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RapporttypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

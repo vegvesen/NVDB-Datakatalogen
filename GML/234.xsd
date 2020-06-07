@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstVollType">
+    <annotation>
+      <documentation>9682: Beskriver hvordan man får adkomst til vegobjektet (bakside) for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstVollEnumerationType nvdb:AdkomstVollOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstVollEnumerationType">
+    <annotation>
+      <documentation>9682: Beskriver hvordan man får adkomst til vegobjektet (bakside) for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19829: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>13955: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>13956: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>13957: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>13958: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>13959: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>13960: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstVollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeVollType">
+    <annotation>
+      <documentation>1286: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeVollEnumerationType nvdb:BruksområdeVollOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeVollEnumerationType">
+    <annotation>
+      <documentation>1286: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="støyskjerming">
+        <annotation>
+          <documentation>1996: Støyskjerming</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredsikring_Ledevoll">
+        <annotation>
+          <documentation>13984: Skredsikring, ledevoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredsikring_Fangvoll">
+        <annotation>
+          <documentation>13983: Skredsikring, fangvoll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flomsikring">
+        <annotation>
+          <documentation>3805: Flomsikring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snøVindskjerming">
+        <annotation>
+          <documentation>1999: Snø/vindskjerming</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeVollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVollType">
+    <annotation>
+      <documentation>5824: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierVollEnumerationType nvdb:EierVollOtherType"/>
+  </simpleType>
+  <simpleType name="EierVollEnumerationType">
+    <annotation>
+      <documentation>5824: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8219: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18599: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10711: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8245: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8271: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17607: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeVollType">
+    <annotation>
+      <documentation>1422: Angir primær materialtype for vegobjektet. For skredsikringsvoller skal det angis materiale på støtside.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeVollEnumerationType nvdb:MaterialtypeVollOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeVollEnumerationType">
+    <annotation>
+      <documentation>1422: Angir primær materialtype for vegobjektet. For skredsikringsvoller skal det angis materiale på støtside.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="jord">
+        <annotation>
+          <documentation>4671: Jord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein">
+        <annotation>
+          <documentation>4672: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>4673: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tørrmur">
+        <annotation>
+          <documentation>15961: Mur av stein e.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gabioner">
+        <annotation>
+          <documentation>15962: Steinfylte nettingkister som kan stables inntil- og oppå hverandre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeVollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVollType">
+    <annotation>
+      <documentation>5809: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligVollEnumerationType nvdb:VedlikeholdsansvarligVollOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVollEnumerationType">
+    <annotation>
+      <documentation>5809: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>8204: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18732: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19918: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18861: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8230: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8256: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17697: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Voll" substitutionGroup="nvdb:AbstraktVoll" type="nvdb:VollType">
+    <annotation>
+      <documentation>234: Opphøyd terrengformasjon f.eks. anlagt for å skjerme mot vegtrafikkstøy eller skredmasser. Kan være sammensatt av flere lag</documentation>
+    </annotation>
+  </element>
+  <complexType name="VollType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVollType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeVollType">
+            <annotation>
+              <documentation>1286: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeVollType">
+            <annotation>
+              <documentation>1422: Angir primær materialtype for vegobjektet. For skredsikringsvoller skal det angis materiale på støtside.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>4558: Lengde fra ende til ende av vollfoten
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="breddeFot" type="double">
+            <annotation>
+              <documentation>1930: Angir gjennomsnittlig bredde ved vollens fot
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="breddeKrone" type="double">
+            <annotation>
+              <documentation>1935: Angir gjennomsnittlig bredde ved vollens krone (topp)
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde_Gjsn" type="double">
+            <annotation>
+              <documentation>1598: Angir gjennomsnittlig egenhøyde fra fot voll til topp krone av vollen. Høyde skal måles på støtside for skredsikringsvoller.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde_Maks" type="double">
+            <annotation>
+              <documentation>9678: Angis største egenhøyde fra fot voll til topp krone av vollen. Høyde skal måles på støtside for skredsikringsvoller.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="helning_Gjsn" type="integer">
+            <annotation>
+              <documentation>9679: Gjennomsnittlig helning av vollskråningen i fallretningen. Helning skal måles på støtside for skredsikringsvoller.
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="helning_Maks" type="integer">
+            <annotation>
+              <documentation>9680: Største helning av vollskråningen i fallretning. Helning skal måles på støtside for skredsikringsvoller..
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="retningsendring" type="double">
+            <annotation>
+              <documentation>9681: Angir hvor mye skredretningen endres fra skredløpet før ledevollen til slutt av ledevollen. 
+Enhet: Grader (360)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstVollType">
+            <annotation>
+              <documentation>9682: Beskriver hvordan man får adkomst til vegobjektet (bakside) for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9683: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10868: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11109: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierVollType">
+            <annotation>
+              <documentation>5824: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligVollType">
+            <annotation>
+              <documentation>5809: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4864: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8886: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VollPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Voll"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

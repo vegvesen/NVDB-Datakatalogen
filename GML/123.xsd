@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AlvorlighetsgradType">
+    <annotation>
+      <documentation>1998: Angir hvor alvorlig en skade/tilstand er</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AlvorlighetsgradEnumerationType nvdb:AlvorlighetsgradOtherType"/>
+  </simpleType>
+  <simpleType name="AlvorlighetsgradEnumerationType">
+    <annotation>
+      <documentation>1998: Angir hvor alvorlig en skade/tilstand er</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>2623: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>2628: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>2633: Stor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kritisk">
+        <annotation>
+          <documentation>2637: Kritisk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AlvorlighetsgradOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_DekkeType">
+    <annotation>
+      <documentation>1162: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadetypeTilstandSkade_DekkeEnumerationType nvdb:SkadetypeTilstandSkade_DekkeOtherType"/>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_DekkeEnumerationType">
+    <annotation>
+      <documentation>1162: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="områdeMedKrakkelering">
+        <annotation>
+          <documentation>2617: Område med krakkelering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="langsgåendeDekkesprekk">
+        <annotation>
+          <documentation>2618: Langsgående dekkesprekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tverrsgåendeDekkesprekk">
+        <annotation>
+          <documentation>2619: Tverrsgående dekkesprekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="overflateskade">
+        <annotation>
+          <documentation>2620: Overflateskade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sporslitasje">
+        <annotation>
+          <documentation>17906: Spordannelse grunnet slitasje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hull">
+        <annotation>
+          <documentation>20083: Hull</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_DekkeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Dekke" substitutionGroup="nvdb:AbstraktTilstandSkade_Dekke" type="nvdb:TilstandSkade_DekkeType">
+    <annotation>
+      <documentation>123: Gir informasjon om tilstand og eventuell skade på vegdekke.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_DekkeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_DekkeType">
+        <sequence>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2205: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_DekkeType">
+            <annotation>
+              <documentation>1162: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="årsakTilSkadeMangel" type="nvdb:ÅrsakTilSkadeMangelType">
+            <annotation>
+              <documentation>2001: Angir årsak til en skade eller mangel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8775: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsdato" type="date">
+            <annotation>
+              <documentation>2009: Angir dato da vegobjektet ble registrert.  Datoformat: ååååmmdd</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7852: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4814: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="alvorlighetsgrad" type="nvdb:AlvorlighetsgradType">
+            <annotation>
+              <documentation>1998: Angir hvor alvorlig en skade/tilstand er</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utbredelse" type="nvdb:UtbredelseType">
+            <annotation>
+              <documentation>2000: Angir hvor utbredt en skade/tilstand er</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_DekkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Dekke"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="UtbredelseType">
+    <annotation>
+      <documentation>2000: Angir hvor utbredt en skade/tilstand er</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtbredelseEnumerationType nvdb:UtbredelseOtherType"/>
+  </simpleType>
+  <simpleType name="UtbredelseEnumerationType">
+    <annotation>
+      <documentation>2000: Angir hvor utbredt en skade/tilstand er</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="liten">
+        <annotation>
+          <documentation>2625: Liten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middels">
+        <annotation>
+          <documentation>2630: Middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stor">
+        <annotation>
+          <documentation>2635: Stor</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtbredelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ÅrsakTilSkadeMangelType">
+    <annotation>
+      <documentation>2001: Angir årsak til en skade eller mangel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ÅrsakTilSkadeMangelEnumerationType nvdb:ÅrsakTilSkadeMangelOtherType"/>
+  </simpleType>
+  <simpleType name="ÅrsakTilSkadeMangelEnumerationType">
+    <annotation>
+      <documentation>2001: Angir årsak til en skade eller mangel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dårligeGrunnforhold">
+        <annotation>
+          <documentation>2639: Dårlige grunnforhold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dårligVegfundament">
+        <annotation>
+          <documentation>2640: Dårlig vegfundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="telefarligMateriale">
+        <annotation>
+          <documentation>2641: Telefarlig materiale</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dårligDrenering">
+        <annotation>
+          <documentation>2642: Dårlig drenering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sporslitasje">
+        <annotation>
+          <documentation>17878: Sporslitasje</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ÅrsakTilSkadeMangelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

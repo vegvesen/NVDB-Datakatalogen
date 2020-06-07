@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeTemperaturmålerType">
+    <annotation>
+      <documentation>5289: Angir bruksområde</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeTemperaturmålerEnumerationType nvdb:BruksområdeTemperaturmålerOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeTemperaturmålerEnumerationType">
+    <annotation>
+      <documentation>5289: Angir bruksområde</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="lufttemperatur_Ute">
+        <annotation>
+          <documentation>7300: Lufttemperatur, ute</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lufttemperaturIKiosk">
+        <annotation>
+          <documentation>7301: Lufttemperatur i kiosk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lufttemperaturITunnel">
+        <annotation>
+          <documentation>7302: Lufttemperatur i tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegbanetemperatur">
+        <annotation>
+          <documentation>7303: Vegbanetemperatur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lufttemperaturITekniskRom">
+        <annotation>
+          <documentation>16963: Lufttemperatur i teknisk rom</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeTemperaturmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierTemperaturmålerType">
+    <annotation>
+      <documentation>8026: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierTemperaturmålerEnumerationType nvdb:EierTemperaturmålerOtherType"/>
+  </simpleType>
+  <simpleType name="EierTemperaturmålerEnumerationType">
+    <annotation>
+      <documentation>8026: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10292: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18639: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10753: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10356: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10420: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17649: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierTemperaturmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Temperaturmåler" substitutionGroup="nvdb:AbstraktTemperaturmåler" type="nvdb:TemperaturmålerType">
+    <annotation>
+      <documentation>463: Utstyr for å måle temperatur.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TemperaturmålerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTemperaturmålerType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeTemperaturmålerType">
+            <annotation>
+              <documentation>5289: Angir bruksområde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>5288: Angir antall
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverBakken" type="double">
+            <annotation>
+              <documentation>10576: Angir vegobjektets høyde over bakken/vegen/gulvet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10374: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10486: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11728: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>3536: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>3799: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11613: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11686: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11126: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierTemperaturmålerType">
+            <annotation>
+              <documentation>8026: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligTemperaturmålerType">
+            <annotation>
+              <documentation>8101: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4980: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TemperaturmålerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Temperaturmåler"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligTemperaturmålerType">
+    <annotation>
+      <documentation>8101: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligTemperaturmålerEnumerationType nvdb:VedlikeholdsansvarligTemperaturmålerOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligTemperaturmålerEnumerationType">
+    <annotation>
+      <documentation>8101: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10495: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18788: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19960: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18917: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10573: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10651: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17743: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligTemperaturmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

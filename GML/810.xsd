@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DriftsklasseType">
+    <annotation>
+      <documentation>9260: Angir hvilken driftsklasse som gjelder på denne strekningen. De ulike driftsklassene er beskrevet i HB R610 (111).</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DriftsklasseEnumerationType nvdb:DriftsklasseOtherType"/>
+  </simpleType>
+  <simpleType name="DriftsklasseEnumerationType">
+    <annotation>
+      <documentation>9260: Angir hvilken driftsklasse som gjelder på denne strekningen. De ulike driftsklassene er beskrevet i HB R610 (111).</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dkA">
+        <annotation>
+          <documentation>12904: Godkjent føreforhold er bar veg (tørr eller våt). Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Lav">
+        <annotation>
+          <documentation>13354: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is  tillates utenom hjulspor i begrenset tidsrom. Lavt tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Middels">
+        <annotation>
+          <documentation>12905: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Middels tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Høy">
+        <annotation>
+          <documentation>13355: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is  tillates utenom hjulspor i begrenset tidsrom. Høyt tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkC">
+        <annotation>
+          <documentation>12906: Godkjent føreforhold er bar veg (tørr eller våt) i milde perioder og  hard snø/is i kalde perioder. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkD">
+        <annotation>
+          <documentation>12907: Godkjent føreforhold er hard snø/is. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkE">
+        <annotation>
+          <documentation>12908: Godkjent føreforhold er hard snø/is. Friksjon ned til 0,20 aksepteres. DkE skal ikke nyttes på riksveg. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gsA">
+        <annotation>
+          <documentation>12909: Bymessig strøk med høy gang- og sykkeltrafikk Hovednett for sykkeltrafikk Ferdselsareal hvor store deler av arealet eller strekningen har indikatorer. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gsB">
+        <annotation>
+          <documentation>12910: Øvrige ferdselsareal for gående og syklende. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sideanlegg">
+        <annotation>
+          <documentation>15876: Spesiell standard for sideanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vinterstengt">
+        <annotation>
+          <documentation>19682: Vegen holdes stengt om vinteren.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DriftsklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vinterdriftsklasse" substitutionGroup="nvdb:AbstraktVinterdriftsklasse" type="nvdb:VinterdriftsklasseType">
+    <annotation>
+      <documentation>810: Inndeling av vegnettet for å beskrive ulik standard for vinterdrift. Inndelingen baseres på trafikkmengde, viktighet av veg, klima, trafikksikkerhet mm. (Revidert HB R610 (111))</documentation>
+    </annotation>
+  </element>
+  <complexType name="VinterdriftsklasseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVinterdriftsklasseType">
+        <sequence>
+          <element minOccurs="0" name="driftsklasse" type="nvdb:DriftsklasseType">
+            <annotation>
+              <documentation>9260: Angir hvilken driftsklasse som gjelder på denne strekningen. De ulike driftsklassene er beskrevet i HB R610 (111).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11638: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11481: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9301: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VinterdriftsklassePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vinterdriftsklasse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

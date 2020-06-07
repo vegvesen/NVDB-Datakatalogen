@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Sideanleggsdel" substitutionGroup="nvdb:AbstraktSideanleggsdel" type="nvdb:SideanleggsdelType">
+    <annotation>
+      <documentation>920: De enkelte delene et sideanlegg består av</documentation>
+    </annotation>
+  </element>
+  <complexType name="SideanleggsdelType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSideanleggsdelType">
+        <sequence>
+          <element name="sideanleggsdel" type="integer">
+            <annotation>
+              <documentation>11288: Nummer for den enkelte del av sidealegget</documentation>
+            </annotation>
+          </element>
+          <element name="trafikantgruppe" type="nvdb:TrafikantgruppeSideanleggsdelType">
+            <annotation>
+              <documentation>11291: Angir hvilken trafikantgruppe vegen som sideanleggsdelen representerer skal benyttes av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SideanleggsdelPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Sideanleggsdel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TrafikantgruppeSideanleggsdelType">
+    <annotation>
+      <documentation>11291: Angir hvilken trafikantgruppe vegen som sideanleggsdelen representerer skal benyttes av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrafikantgruppeSideanleggsdelEnumerationType nvdb:TrafikantgruppeSideanleggsdelOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikantgruppeSideanleggsdelEnumerationType">
+    <annotation>
+      <documentation>11291: Angir hvilken trafikantgruppe vegen som sideanleggsdelen representerer skal benyttes av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="G">
+        <annotation>
+          <documentation>19043: Gående og syklende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19045: Kjørende</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeSideanleggsdelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

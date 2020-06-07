@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AvgiftType">
+    <annotation>
+      <documentation>9934: Angir hvorvidt parkeringsområdet er avgiftsbelagt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AvgiftEnumerationType nvdb:AvgiftOtherType"/>
+  </simpleType>
+  <simpleType name="AvgiftEnumerationType">
+    <annotation>
+      <documentation>9934: Angir hvorvidt parkeringsområdet er avgiftsbelagt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16129: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16130: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AvgiftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeParkeringsområdeType">
+    <annotation>
+      <documentation>1255: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeParkeringsområdeEnumerationType nvdb:BruksområdeParkeringsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeParkeringsområdeEnumerationType">
+    <annotation>
+      <documentation>1255: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="utfart_Tur">
+        <annotation>
+          <documentation>3159: Utfart, tur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="handel">
+        <annotation>
+          <documentation>3160: Handel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="idrett">
+        <annotation>
+          <documentation>3925: Idrett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skole">
+        <annotation>
+          <documentation>3926: Skole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VKollektivterminalKai">
+        <annotation>
+          <documentation>3927: v kollektivterminal/kai</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeParkeringsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierParkeringsområdeType">
+    <annotation>
+      <documentation>7990: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierParkeringsområdeEnumerationType nvdb:EierParkeringsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="EierParkeringsområdeEnumerationType">
+    <annotation>
+      <documentation>7990: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10256: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18572: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10718: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10320: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10384: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17603: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierParkeringsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnfartsparkeringType">
+    <annotation>
+      <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InnfartsparkeringEnumerationType nvdb:InnfartsparkeringOtherType"/>
+  </simpleType>
+  <simpleType name="InnfartsparkeringEnumerationType">
+    <annotation>
+      <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>8177: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>8178: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnfartsparkeringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kjøretøytype_DimensjonerendeType">
+    <annotation>
+      <documentation>1775: Dimensjonerende kjøretøytype for kjøring på parkeringsområde.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Kjøretøytype_DimensjonerendeEnumerationType nvdb:Kjøretøytype_DimensjonerendeOtherType"/>
+  </simpleType>
+  <simpleType name="Kjøretøytype_DimensjonerendeEnumerationType">
+    <annotation>
+      <documentation>1775: Dimensjonerende kjøretøytype for kjøring på parkeringsområde.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="personbil">
+        <annotation>
+          <documentation>3111: Personbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="litenLastebil">
+        <annotation>
+          <documentation>3116: Liten lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lastebil">
+        <annotation>
+          <documentation>3121: Lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="semitrailer">
+        <annotation>
+          <documentation>3126: Semitrailer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vogntog">
+        <annotation>
+          <documentation>3132: Vogntog</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Kjøretøytype_DimensjonerendeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Parkeringsområde" substitutionGroup="nvdb:AbstraktParkeringsområde" type="nvdb:ParkeringsområdeType">
+    <annotation>
+      <documentation>43: Område avsatt til parkering for mer enn ett kjøretøy. (1)</documentation>
+    </annotation>
+  </element>
+  <complexType name="ParkeringsområdeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktParkeringsområdeType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>1076: Angir navn på vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeParkeringsområdeType">
+            <annotation>
+              <documentation>1116: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeParkeringsområdeType">
+            <annotation>
+              <documentation>1255: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innfartsparkering" type="nvdb:InnfartsparkeringType">
+            <annotation>
+              <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjøretøytype_Dimensjonerende" type="nvdb:Kjøretøytype_DimensjonerendeType">
+            <annotation>
+              <documentation>1775: Dimensjonerende kjøretøytype for kjøring på parkeringsområde.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallParkeringsplasserSmåKjt" type="integer">
+            <annotation>
+              <documentation>1807: Angir antall oppmerka parkeringsplasser for små personbiler.  For parkeringsområder som ikke har oppmerka plasser gis det anslag på hvor mange personbiler det er plass til.  Områder som er skiltet o.l. for buss/lastebil regnes ikke med.  Rasteplasser kan ha oppstillingsplasser utenom parkeringsområde (se "Rasteplass").
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plasserReservertHandikappede" type="integer">
+            <annotation>
+              <documentation>1818: Angir antall parkerings/oppstillingsplasser reservert handikappede
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallParkeringsplasserStoreKjt" type="integer">
+            <annotation>
+              <documentation>1817: Angir antall oppmerka parkeringsplasser for store kjøretøy.  For parkeringsområder som ikke har oppmerka plasser telles det kun med antall slike plasser innenfor delområder som er tydelig merka buss/lastebil.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>1359: Angir totalt areal.  Dette inkluderer kjørbart, ikke kjørbart og bebygd areal innenfor parkeringsområdets avgrensning.  Se tilhørende "datterobjekt" for mer detaljert arealinformasjon.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avgift" type="nvdb:AvgiftType">
+            <annotation>
+              <documentation>9934: Angir hvorvidt parkeringsområdet er avgiftsbelagt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avgiftsRestriksjonsinfo" type="string">
+            <annotation>
+              <documentation>1815: Informasjon om avgiiftsbelegging og/eller restriksjoner knyttet til parkeringsområde,</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterdriftsklasse" type="nvdb:VinterdriftsklasseParkeringsområdeType">
+            <annotation>
+              <documentation>9555: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brøyterodenummer" type="string">
+            <annotation>
+              <documentation>9868: Angir nummer til brøyterode som dekker parkeringsområde.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="strørodenummer" type="string">
+            <annotation>
+              <documentation>9869: Angir nummer til strørode som dekker parkeringsområde.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10335: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11563: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11049: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierParkeringsområdeType">
+            <annotation>
+              <documentation>7990: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligParkeringsområdeType">
+            <annotation>
+              <documentation>8054: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4750: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9431: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10891: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ParkeringsområdePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Parkeringsområde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeParkeringsområdeType">
+    <annotation>
+      <documentation>1116: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeParkeringsområdeEnumerationType nvdb:TypeParkeringsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="TypeParkeringsområdeEnumerationType">
+    <annotation>
+      <documentation>1116: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="POmrLangsKjørebane">
+        <annotation>
+          <documentation>3161: P.omr langs kjørebane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avskjermetPlass">
+        <annotation>
+          <documentation>3162: Avskjermet plass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkeringshus">
+        <annotation>
+          <documentation>3163: Parkeringshus</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeParkeringsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligParkeringsområdeType">
+    <annotation>
+      <documentation>8054: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligParkeringsområdeEnumerationType nvdb:VedlikeholdsansvarligParkeringsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligParkeringsområdeEnumerationType">
+    <annotation>
+      <documentation>8054: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10448: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18695: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19924: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18824: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10526: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10604: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17707: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligParkeringsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterdriftsklasseParkeringsområdeType">
+    <annotation>
+      <documentation>9555: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse)</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterdriftsklasseParkeringsområdeEnumerationType nvdb:VinterdriftsklasseParkeringsområdeOtherType"/>
+  </simpleType>
+  <simpleType name="VinterdriftsklasseParkeringsområdeEnumerationType">
+    <annotation>
+      <documentation>9555: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse)</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dkA">
+        <annotation>
+          <documentation>13759: Godkjent føreforhold er bar veg (tørr eller våt). Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Lav">
+        <annotation>
+          <documentation>13758: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is  tillates utenom hjulspor i begrenset tidsrom. Lavt tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Middels">
+        <annotation>
+          <documentation>13757: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Middels tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkB_Høy">
+        <annotation>
+          <documentation>13756: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is  tillates utenom hjulspor i begrenset tidsrom. Høyt tidskrav. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkC">
+        <annotation>
+          <documentation>13755: Godkjent føreforhold er bar veg (tørr eller våt) i milde perioder og  hard snø/is i kalde perioder. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkD">
+        <annotation>
+          <documentation>13754: Godkjent føreforhold er hard snø/is. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dkE">
+        <annotation>
+          <documentation>13753: Godkjent føreforhold er hard snø/is. Friksjon ned til 0,20 aksepteres. DkE skal ikke nyttes på riksveg. Håndbok R610 (111)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sideanlegg">
+        <annotation>
+          <documentation>15874: Spesiell standard for sideanlegg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterdriftsklasseParkeringsområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

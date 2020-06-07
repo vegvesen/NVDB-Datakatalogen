@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="TilstandSkade_Punkt" substitutionGroup="nvdb:AbstraktTilstandSkade_Punkt" type="nvdb:TilstandSkade_PunktType">
+    <annotation>
+      <documentation>761: Gir informasjon om tilstand og eventuell skade.  Normalt knyttet til et spesifikt punktobjekt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_PunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_PunktType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_PunktType">
+            <annotation>
+              <documentation>7596: Angir tilstand til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="string">
+            <annotation>
+              <documentation>7590: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8777: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakTilstandSkade_PunktType">
+            <annotation>
+              <documentation>7594: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltakNår" type="nvdb:TiltakNårTilstandSkade_PunktType">
+            <annotation>
+              <documentation>7595: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_Tilstandsindeks" type="integer">
+            <annotation>
+              <documentation>9834: Angir tilstand. Til testformål
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7859: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>7597: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_PunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Punkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_PunktType">
+    <annotation>
+      <documentation>7596: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_PunktEnumerationType nvdb:TilstandTilstandSkade_PunktOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_PunktEnumerationType">
+    <annotation>
+      <documentation>7596: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>9890: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>9891: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>9892: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>9893: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_PunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_PunktType">
+    <annotation>
+      <documentation>7595: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakNårTilstandSkade_PunktEnumerationType nvdb:TiltakNårTilstandSkade_PunktOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_PunktEnumerationType">
+    <annotation>
+      <documentation>7595: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="straks">
+        <annotation>
+          <documentation>9883: Straks</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14Dager">
+        <annotation>
+          <documentation>9884: 14 dager</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3Mnd">
+        <annotation>
+          <documentation>9885: 3 mnd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1År">
+        <annotation>
+          <documentation>9886: 1 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2År">
+        <annotation>
+          <documentation>9887: 1-2 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over2år">
+        <annotation>
+          <documentation>9888: &gt; 2år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påSikt">
+        <annotation>
+          <documentation>9889: på sikt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_PunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_PunktType">
+    <annotation>
+      <documentation>7594: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakTilstandSkade_PunktEnumerationType nvdb:TiltakTilstandSkade_PunktOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_PunktEnumerationType">
+    <annotation>
+      <documentation>7594: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skiftes">
+        <annotation>
+          <documentation>9880: Skiftes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>9881: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utbedresPåStedet">
+        <annotation>
+          <documentation>9882: Utbedres på stedet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ryddes">
+        <annotation>
+          <documentation>9896: Ryddes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_PunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

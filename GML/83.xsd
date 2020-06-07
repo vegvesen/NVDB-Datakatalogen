@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AvløpType">
+    <annotation>
+      <documentation>8838: Angir hvor avløpet fra kummen ledes.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AvløpEnumerationType nvdb:AvløpOtherType"/>
+  </simpleType>
+  <simpleType name="AvløpEnumerationType">
+    <annotation>
+      <documentation>8838: Angir hvor avløpet fra kummen ledes.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rørledningTilResipient">
+        <annotation>
+          <documentation>11784: Rørledning til resipient</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avløpTilOffentligSystem">
+        <annotation>
+          <documentation>11785: Avløp til offentlig system</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AvløpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeKumType">
+    <annotation>
+      <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeKumEnumerationType nvdb:BruksområdeKumOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeKumEnumerationType">
+    <annotation>
+      <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="drenering">
+        <annotation>
+          <documentation>2936: Drenering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inspeksjonskum">
+        <annotation>
+          <documentation>2937: Inspeksjonskum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inntakUtløpStikkrenne">
+        <annotation>
+          <documentation>2939: Inntak/utløp stikkrenne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spillvannskum">
+        <annotation>
+          <documentation>2938: Spillvannskum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fallkum">
+        <annotation>
+          <documentation>2940: Fallkum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vannkum">
+        <annotation>
+          <documentation>2943: Kum som inngår i et vannforsyningsanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pumpekum">
+        <annotation>
+          <documentation>2942: Pumpekum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brannkum">
+        <annotation>
+          <documentation>17534: Vannkum hvor det er dimensjonert for vannuttak til slokking av brann og er lagt til rette for påkopling av brannslanger.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DykkerType">
+    <annotation>
+      <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp f</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DykkerEnumerationType nvdb:DykkerOtherType"/>
+  </simpleType>
+  <simpleType name="DykkerEnumerationType">
+    <annotation>
+      <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp f</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>5531: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>5532: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DykkerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKumType">
+    <annotation>
+      <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKumEnumerationType nvdb:EierKumOtherType"/>
+  </simpleType>
+  <simpleType name="EierKumEnumerationType">
+    <annotation>
+      <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8211: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18593: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10703: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8237: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8263: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17562: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="HarFlyterammeType">
+    <annotation>
+      <documentation>2294: Angir om kummen har flyteramme eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:HarFlyterammeEnumerationType nvdb:HarFlyterammeOtherType"/>
+  </simpleType>
+  <simpleType name="HarFlyterammeEnumerationType">
+    <annotation>
+      <documentation>2294: Angir om kummen har flyteramme eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4176: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4177: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HarFlyterammeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InngårIDrenssystemType">
+    <annotation>
+      <documentation>2122: Angir om kum inngår i drenssystemet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InngårIDrenssystemEnumerationType nvdb:InngårIDrenssystemOtherType"/>
+  </simpleType>
+  <simpleType name="InngårIDrenssystemEnumerationType">
+    <annotation>
+      <documentation>2122: Angir om kum inngår i drenssystemet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3547: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3584: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InngårIDrenssystemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kum" substitutionGroup="nvdb:AbstraktKum" type="nvdb:KumType">
+    <annotation>
+      <documentation>83: Konstruksjon som benyttes i forbindelse med kopling av rørledninger og/eller inntak av vann gjennom rist/sluk. Merknad: Kum for kopling av trekkerør og kabler er definert som egen vegobjekttype Trekkekum.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KumType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKumType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeKumType">
+            <annotation>
+              <documentation>1141: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeKumType">
+            <annotation>
+              <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeKumType">
+            <annotation>
+              <documentation>1411: Angir primær materialtype for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringKumType">
+            <annotation>
+              <documentation>10228: Angir hvor kummen er plassert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lokkRist_Type" type="nvdb:LokkRist_TypeType"/>
+          <element minOccurs="0" name="spesiellBelegningRundtKum" type="nvdb:SpesiellBelegningRundtKumType">
+            <annotation>
+              <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="diameter" type="double">
+            <annotation>
+              <documentation>1727: Angir indre diameter av kum
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="diameter_Åpning" type="double">
+            <annotation>
+              <documentation>2289: Angir diameter på kummens åpning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybde" type="double">
+            <annotation>
+              <documentation>1586: Angir dybde målt fra topp kumlokk til innvendig bunn.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybdeTilUtløp" type="double">
+            <annotation>
+              <documentation>2079: Angir dybde fra topp kum til underkant (innvendig rør) av utløp
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde1_Firkantkum" type="double">
+            <annotation>
+              <documentation>5797: Angir bredde 1 av firkantkum
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde2_Firkantkum" type="double">
+            <annotation>
+              <documentation>5798: Angir bredde 2 av firkantkum
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandFraVegkant" type="double">
+            <annotation>
+              <documentation>2388: Angir avstand fra vegkant til senter kumlokk
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stige" type="nvdb:StigeType">
+            <annotation>
+              <documentation>1946: Angir hva slags stige det er i kummen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="harFlyteramme" type="nvdb:HarFlyterammeType">
+            <annotation>
+              <documentation>2294: Angir om kummen har flyteramme eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avløp" type="nvdb:AvløpType">
+            <annotation>
+              <documentation>8838: Angir hvor avløpet fra kummen ledes.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dykker" type="nvdb:DykkerType">
+            <annotation>
+              <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp for tining av frosne kummer eller ledninger.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oljeutskilling" type="nvdb:OljeutskillingKumType">
+            <annotation>
+              <documentation>10969: Kum har system for utskilling av olje.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallRørInn" type="integer">
+            <annotation>
+              <documentation>1949: Angir hvor mange rør som kommer inn mot kummen
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallHjelpesluker" type="integer">
+            <annotation>
+              <documentation>1947: Angir hvor mange hjelpesluker det er i tilknytning til kummen
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kumskjerm" type="nvdb:KumskjermType">
+            <annotation>
+              <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppslammingstid" type="nvdb:OppslammingstidType">
+            <annotation>
+              <documentation>2121: Angir hvor lang tid det normalt tar før en kum blir full av slam.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="inngårIDrenssystem" type="nvdb:InngårIDrenssystemType">
+            <annotation>
+              <documentation>2122: Angir om kum inngår i drenssystemet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>7065: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10470: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1447: Angir produktnavn/typebetegnelse, kan også ta med typenummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>1525: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="leverandør" type="string">
+            <annotation>
+              <documentation>1485: Angir navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11430: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11660: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11070: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FKB_ID" type="string">
+            <annotation>
+              <documentation>10851: Refererer til FKB-identitet. Benyttes i forbindelse med felles forvaltning av geometri.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKumType">
+            <annotation>
+              <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>11198: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKumType">
+            <annotation>
+              <documentation>5804: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4784: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KumPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kum"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KumskjermType">
+    <annotation>
+      <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KumskjermEnumerationType nvdb:KumskjermOtherType"/>
+  </simpleType>
+  <simpleType name="KumskjermEnumerationType">
+    <annotation>
+      <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16738: Angir at det er kumskjerm, men det mangler informasjon om hvilken type den er av</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Plast">
+        <annotation>
+          <documentation>16706: Ja, plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Betong">
+        <annotation>
+          <documentation>16705: Ja, betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Metall_Stål">
+        <annotation>
+          <documentation>16707: Ja, metall, stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Tre">
+        <annotation>
+          <documentation>16708: Ja, tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16739: Angir at kum ikke har kumskjerm.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KumskjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="LokkRist_TypeType">
+    <union memberTypes="nvdb:LokkRist_TypeEnumerationType nvdb:LokkRist_TypeOtherType"/>
+  </simpleType>
+  <simpleType name="LokkRist_TypeEnumerationType">
+    <restriction base="string">
+      <enumeration value="tettLokk_Støpjern">
+        <annotation>
+          <documentation>4149: Tett lokk, støpjern</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tettLokk_Betong">
+        <annotation>
+          <documentation>4148: Tett lokk, betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tettLokk_Plast">
+        <annotation>
+          <documentation>17889: Tett lokk av plastmateriale</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tettLokk_Tre">
+        <annotation>
+          <documentation>5541: Tett lokk, tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="støpjernslokkMHelRist">
+        <annotation>
+          <documentation>5542: Støpjernslokk m hel rist</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="støpjernslokkMHalvRist">
+        <annotation>
+          <documentation>4156: Støpjernslokk m halv rist</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kuppelrist_Flat">
+        <annotation>
+          <documentation>4151: Kuppelrist, flat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kuppelrist_Lav">
+        <annotation>
+          <documentation>4152: Kuppelrist, lav</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kuppelrist_Høy">
+        <annotation>
+          <documentation>4153: Kuppelrist, høy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="slukrist_IGateplan">
+        <annotation>
+          <documentation>4158: Slukrist, i gateplan</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="slukrist_Vertikal">
+        <annotation>
+          <documentation>4155: Benevnes også "kjeftsluk"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betonglokkMLitenRist">
+        <annotation>
+          <documentation>5341: Betonglokk m liten rist</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skrårist">
+        <annotation>
+          <documentation>12867: Skrårist</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="åpen">
+        <annotation>
+          <documentation>4157: Åpen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LokkRist_TypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeKumType">
+    <annotation>
+      <documentation>1411: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeKumEnumerationType nvdb:MaterialtypeKumOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeKumEnumerationType">
+    <annotation>
+      <documentation>1411: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>2211: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>2272: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturstein">
+        <annotation>
+          <documentation>2255: Naturstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="teglstein_Murstein">
+        <annotation>
+          <documentation>2377: Teglstein, murstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betongstein">
+        <annotation>
+          <documentation>5540: Betongstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rustfrittStål">
+        <annotation>
+          <documentation>19635: Rustfritt stål</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OljeutskillingKumType">
+    <annotation>
+      <documentation>10969: Kum har system for utskilling av olje.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OljeutskillingKumEnumerationType nvdb:OljeutskillingKumOtherType"/>
+  </simpleType>
+  <simpleType name="OljeutskillingKumEnumerationType">
+    <annotation>
+      <documentation>10969: Kum har system for utskilling av olje.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>18320: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>18321: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OljeutskillingKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppslammingstidType">
+    <annotation>
+      <documentation>2121: Angir hvor lang tid det normalt tar før en kum blir full av slam.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppslammingstidEnumerationType nvdb:OppslammingstidOtherType"/>
+  </simpleType>
+  <simpleType name="OppslammingstidEnumerationType">
+    <annotation>
+      <documentation>2121: Angir hvor lang tid det normalt tar før en kum blir full av slam.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="under1år">
+        <annotation>
+          <documentation>3888: &lt; 1år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2År">
+        <annotation>
+          <documentation>3872: 1-2 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over2år">
+        <annotation>
+          <documentation>3875: &gt; 2år</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppslammingstidOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringKumType">
+    <annotation>
+      <documentation>10228: Angir hvor kummen er plassert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringKumEnumerationType nvdb:PlasseringKumOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringKumEnumerationType">
+    <annotation>
+      <documentation>10228: Angir hvor kummen er plassert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="iGrøft">
+        <annotation>
+          <documentation>16709: Kum er plassert i åpen grøft ved veg, evt. mellom veg og g/s-veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iVegbane">
+        <annotation>
+          <documentation>16710: Kum er plassert innenfor vegens kjøreareal (egen verdi for g/s-veg)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påVegskulder">
+        <annotation>
+          <documentation>16711: Kum er plassert utenfor vegdekkekant.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iGS_Veg">
+        <annotation>
+          <documentation>16712: Kum er plassert innenfor vegkantene til g/s-veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påFortau">
+        <annotation>
+          <documentation>19477: Kum er plassert på fortau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iTrafikkdeler">
+        <annotation>
+          <documentation>16713: Kum er plassert  på trafikkdeler</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpesiellBelegningRundtKumType">
+    <annotation>
+      <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SpesiellBelegningRundtKumEnumerationType nvdb:SpesiellBelegningRundtKumOtherType"/>
+  </simpleType>
+  <simpleType name="SpesiellBelegningRundtKumEnumerationType">
+    <annotation>
+      <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>19268: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein">
+        <annotation>
+          <documentation>19269: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>19270: Ingen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpesiellBelegningRundtKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StigeType">
+    <annotation>
+      <documentation>1946: Angir hva slags stige det er i kummen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StigeEnumerationType nvdb:StigeOtherType"/>
+  </simpleType>
+  <simpleType name="StigeEnumerationType">
+    <annotation>
+      <documentation>1946: Angir hva slags stige det er i kummen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stige">
+        <annotation>
+          <documentation>3052: Stige</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innstøpteTrinn">
+        <annotation>
+          <documentation>3053: Innstøpte trinn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeStige">
+        <annotation>
+          <documentation>19080: Ikke stige</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StigeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKumType">
+    <annotation>
+      <documentation>1141: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKumEnumerationType nvdb:TypeKumOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKumEnumerationType">
+    <annotation>
+      <documentation>1141: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="standardKum">
+        <annotation>
+          <documentation>2944: Standard kum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjelpesluk">
+        <annotation>
+          <documentation>4144: Hjelpesluk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="standardK_Mm_Sandfang">
+        <annotation>
+          <documentation>4146: Standard kum m sandfang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="firkantkum">
+        <annotation>
+          <documentation>5742: Firkantkum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gategutt">
+        <annotation>
+          <documentation>4145: Liten kum med lokk i som skjuler VA objekt (f.eks. en stoppekran) eller andre objekter (f.eks.fastpunkt) i veg/fortau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialkum">
+        <annotation>
+          <documentation>2945: Spesialkum</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialkum_Prefabrikkert">
+        <annotation>
+          <documentation>2946: Spesialkum, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialkumPlasstøpt">
+        <annotation>
+          <documentation>2947: Spesialkum plasstøpt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialkum_Murt">
+        <annotation>
+          <documentation>2948: Spesialkum, murt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesialkum_Infiltreringskum">
+        <annotation>
+          <documentation>2949: En infiltrasjonskum samler opp overvann og lar det infiltreres i grunnen via bunnen på kummen. Vil kunne være aktuelt å bruke der det er store asfaltflater og andre overflater som hindrer at overvann kan trenge ned i grunnen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kumSprengtIFjell">
+        <annotation>
+          <documentation>5474: Kum som er sprengt direkte i fjell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKumType">
+    <annotation>
+      <documentation>5804: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligKumEnumerationType nvdb:VedlikeholdsansvarligKumOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKumEnumerationType">
+    <annotation>
+      <documentation>5804: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>8199: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18697: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19913: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18826: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8225: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8251: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17692: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeTaktileIndikatorerType">
+    <annotation>
+      <documentation>9812: Angir hovedbruksområde for ledelinje</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeTaktileIndikatorerEnumerationType nvdb:BruksområdeTaktileIndikatorerOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeTaktileIndikatorerEnumerationType">
+    <annotation>
+      <documentation>9812: Angir hovedbruksområde for ledelinje</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gangfelt">
+        <annotation>
+          <documentation>15964: Markerer gangfelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="perrong">
+        <annotation>
+          <documentation>15965: Langsgående markering ved perrong eller holdeplass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trapp">
+        <annotation>
+          <documentation>15966: Varsler trapp/nivåsprang (oppe/nede)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="markeringStoppunktPåHoldeplass">
+        <annotation>
+          <documentation>15967: Punkt der bussen stopper (fremdør)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="knutepunkt">
+        <annotation>
+          <documentation>15968: Kan være f.eks. ledelinjer mellom stoppunkt, mellom stoppunkt og infotavler, mellom stoppunkt og terminal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferjeleie">
+        <annotation>
+          <documentation>15969: Markering på kaikant eller lignende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="inngangsparti">
+        <annotation>
+          <documentation>16968: Benyttes f.eks ved inngangsparti til rasteplass</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeTaktileIndikatorerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeTaktileIndikatorerType">
+    <annotation>
+      <documentation>9816: Angir hvilken materialtype Taktil indikator er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeTaktileIndikatorerEnumerationType nvdb:MaterialeTaktileIndikatorerOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeTaktileIndikatorerEnumerationType">
+    <annotation>
+      <documentation>9816: Angir hvilken materialtype Taktil indikator er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>15971: Indikator av betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturstein">
+        <annotation>
+          <documentation>15972: Indikator av naturstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>15973: Indikator av metall. For eksempel støpejern</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>15970: Indikator av tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="keramisk">
+        <annotation>
+          <documentation>15986: Indikator av kjeramisk materiale/flis</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturgummi">
+        <annotation>
+          <documentation>15987: Indikator av naturgummi</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeTaktileIndikatorerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TaktileIndikatorer" substitutionGroup="nvdb:AbstraktTaktileIndikatorer" type="nvdb:TaktileIndikatorerType">
+    <annotation>
+      <documentation>859: Taktile indikatorer er standardiserte elementer som er lagt ned i gategrunn for å bidra til vegfinning for blinde og svaksynte. Kan bestå av retnings-, varsels- eller oppmerksomhetsindikator. For mer utfyllende informasjon, se HB V129 (278).</documentation>
+    </annotation>
+  </element>
+  <complexType name="TaktileIndikatorerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTaktileIndikatorerType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeTaktileIndikatorerType">
+            <annotation>
+              <documentation>9812: Angir hovedbruksområde for ledelinje</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materiale" type="nvdb:MaterialeTaktileIndikatorerType">
+            <annotation>
+              <documentation>9816: Angir hvilken materialtype Taktil indikator er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>9815: Lengde langs naturlig bevegelsesretning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>9811: Bredde for Taktil indikator (på tvers av naturlig bevegelsesretning)
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="double">
+            <annotation>
+              <documentation>9810: Totalt areal for Taktil indikator
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10370: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9817: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11171: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>9814: Gir punkt som geometrisk representerer objektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9813: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10968: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TaktileIndikatorerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TaktileIndikatorer"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

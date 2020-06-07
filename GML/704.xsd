@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="FellesruteType">
+    <annotation>
+      <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FellesruteEnumerationType nvdb:FellesruteOtherType"/>
+  </simpleType>
+  <simpleType name="FellesruteEnumerationType">
+    <annotation>
+      <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="primær">
+        <annotation>
+          <documentation>8861: Primær</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sekundær">
+        <annotation>
+          <documentation>8862: Sekundær</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FellesruteOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PeriodeType">
+    <annotation>
+      <documentation>6835: Angir periode</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PeriodeEnumerationType nvdb:PeriodeOtherType"/>
+  </simpleType>
+  <simpleType name="PeriodeEnumerationType">
+    <annotation>
+      <documentation>6835: Angir periode</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="2006til2009">
+        <annotation>
+          <documentation>8863: 2006-2009</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2010til2019">
+        <annotation>
+          <documentation>8864: 2010-2019</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2014til20232018til2029">
+        <annotation>
+          <documentation>16131: 2014-2023 / 2018-2029</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PeriodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Riksvegrute" substitutionGroup="nvdb:AbstraktRiksvegrute" type="nvdb:RiksvegruteType">
+    <annotation>
+      <documentation>704: Riksveger inndelt i ruter som i hovedsak benyttes i arbeidet med riksvegutredninger og NTP.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RiksvegruteType">
+    <complexContent>
+      <extension base="nvdb:AbstraktRiksvegruteType">
+        <sequence>
+          <element minOccurs="0" name="periode" type="nvdb:PeriodeType">
+            <annotation>
+              <documentation>6835: Angir periode</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="riksvegrute" type="nvdb:RiksvegruteRiksvegruteType">
+            <annotation>
+              <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nummer" type="string">
+            <annotation>
+              <documentation>6827: Angir nr på stamvegrute</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>6822: Gir navn til Stamvegstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string"/>
+          <element minOccurs="0" name="fellesrute" type="nvdb:FellesruteType">
+            <annotation>
+              <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RiksvegrutePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Riksvegrute"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="RiksvegruteRiksvegruteType">
+    <annotation>
+      <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RiksvegruteRiksvegruteEnumerationType nvdb:RiksvegruteRiksvegruteOtherType"/>
+  </simpleType>
+  <simpleType name="RiksvegruteRiksvegruteEnumerationType">
+    <annotation>
+      <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rute1_E6_RiksgrensenSvinesund_Oslo">
+        <annotation>
+          <documentation>20286: Rute 1: E6 Riksgrensen/Svinesund - Oslo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute2a_E18_RiksgrensenØrje_Oslo">
+        <annotation>
+          <documentation>20287: Rute 2a: E18 Riksgrensen/Ørje - Oslo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute2b_E16_Riksgrensen_HønefossOgRv35_Hønefoss_Hokksund">
+        <annotation>
+          <documentation>20288: Rute 2b: E16 Riksgrensen/Riksåsen – Hønefoss og rv 35 Hønefoss – Hokksund med tilknytninger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute3_E18_Oslo_Kristiansand_Stavanger">
+        <annotation>
+          <documentation>20289: Rute 3: E18 Oslo - Kristiansand  - Stavanger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute4a_E39_Stavanger_Bergen_Ålesund">
+        <annotation>
+          <documentation>20290: Rute 4a: E39 Stavanger - Bergen - Ålesund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute4b_E39_Ålesund_Trondheim">
+        <annotation>
+          <documentation>20291: Rute 4b: E39 Ålesund - Trondheim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute4c_Rv9_Kristiansand_HaukeligrendOgRv13_55_Jøsendal_Sogndal">
+        <annotation>
+          <documentation>20292: Rute 4c: Rv 9 Kristiansand - Haukeligrend og Rv 13/55 Jøsendal - Sogndal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute5a_E134_Drammen_Haugesund">
+        <annotation>
+          <documentation>20293: Rute 5a: E134 Drammen - Haugesund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute5b_Rv7_Hønefoss_BuOgRv52_Gol_Borlaug">
+        <annotation>
+          <documentation>20294: Rute 5b: Rv 7 Hønefoss - Bu og Rv52 Gol - Borlaug</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute5c_E16_Sandvika_Bergen">
+        <annotation>
+          <documentation>20295: Rute 5c: E16 Sandvika - Bergen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute6a_E6_Oslo_Trondheim">
+        <annotation>
+          <documentation>20296: Rute 6a: E6 Oslo - Trondheim</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute6b_Rv3_Kolomoen_Ulsberg">
+        <annotation>
+          <documentation>20297: Rute 6b: Rv3 Kolomoen - Ulsberg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute6c_Rv15_Otta_Måløy">
+        <annotation>
+          <documentation>20298: Rute 6c: Rv15 Otta - Måløy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute6d_E136_Dombås_Ålesund">
+        <annotation>
+          <documentation>20299: Rute 6d: E136 Dombås - Ålesund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute6e_Rv70_Oppdal_Kristiansund">
+        <annotation>
+          <documentation>20300: Rute 6e: Rv70 Oppdal - Kristiansund</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute7_E6_Trondheim_Fauske">
+        <annotation>
+          <documentation>20301: Rute 7: E6 Trondheim - Fauske</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute8a_E6_Fauske_Nordkjosbotn">
+        <annotation>
+          <documentation>20302: Rute 8a: E6 Fauske - Nordkjosbotn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rute8b_E6_Nordkjosbotn_Kirkenes">
+        <annotation>
+          <documentation>20303: Rute 8b: E6 Nordkjosbotn - Kirkenes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RiksvegruteRiksvegruteOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="ArtsrikVegkant" substitutionGroup="nvdb:AbstraktArtsrikVegkant" type="nvdb:ArtsrikVegkantType">
+    <annotation>
+      <documentation>517: Det kan her legges inn områder som har høy biologisk verdi.  Dette vil være nyttig å ta hensyn til ved skjøtsel av vegens sideområde.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ArtsrikVegkantType">
+    <complexContent>
+      <extension base="nvdb:AbstraktArtsrikVegkantType">
+        <sequence>
+          <element minOccurs="0" name="plantelivVerdi" type="nvdb:PlantelivVerdiType">
+            <annotation>
+              <documentation>4162: Angir hvor verdifullt planteliv det er i vegens sideområde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeVegkant" type="nvdb:TypeVegkantType">
+            <annotation>
+              <documentation>9989: Angir hvilken type vegkant objektet gjelder</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bakgrunn_Kort" type="string">
+            <annotation>
+              <documentation>4496: Vurdering/beskrivelse av forekomsten. Kun viktig informasjon som ikke finnes i andre felt. Beskriv dominerende arter, typiske arter, ev sjeldne eller rødlista arter. Ev status som naturtypelokalitet (og i tilfelle verdi A, B eller C) nevnes, hvis ikke kommenteres ikke NT-lokalitet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lokalitet" type="string">
+            <annotation>
+              <documentation>10083: Stedsbeskrivelse som angir hvor forekomsten finnes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spesiellBeskrivelseMerknad" type="string">
+            <annotation>
+              <documentation>9994: Gir beskrivelse for skjøtsel, tidsrom for kantklipp, andre hensyn og ev. annen type skjøtsel.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sone" type="nvdb:SoneType">
+            <annotation>
+              <documentation>9990: Angir hvilken sone beskrivelsen gjelder for</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>4149: Angir samlet areal
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="egenSkjøtselsplan" type="nvdb:EgenSkjøtselsplanType">
+            <annotation>
+              <documentation>9993: Angir om det finnes en egen skjøtselsplan for strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="restriksjonGrøftKantrensk" type="nvdb:RestriksjonGrøftKantrenskType">
+            <annotation>
+              <documentation>4163: Angir om det skal taes spesielle hensyn ved skjøtsel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sprøyteforbud" type="nvdb:SprøyteforbudType">
+            <annotation>
+              <documentation>9991: Angir om det skal tas spesielle hensyn ved bruk av plantevernmidler</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="restriksjonKantklipp" type="nvdb:RestriksjonKantklippType">
+            <annotation>
+              <documentation>9992: Angir hvordan klipp skal utføres for å ta hensyn til vegetasjonen. Tidsrom for klipp skrives i feltet "Spesiell beskrivelse/ merknad"</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5018: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8895: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ArtsrikVegkantPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:ArtsrikVegkant"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="EgenSkjøtselsplanType">
+    <annotation>
+      <documentation>9993: Angir om det finnes en egen skjøtselsplan for strekningen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EgenSkjøtselsplanEnumerationType nvdb:EgenSkjøtselsplanOtherType"/>
+  </simpleType>
+  <simpleType name="EgenSkjøtselsplanEnumerationType">
+    <annotation>
+      <documentation>9993: Angir om det finnes en egen skjøtselsplan for strekningen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16234: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16235: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EgenSkjøtselsplanOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlantelivVerdiType">
+    <annotation>
+      <documentation>4162: Angir hvor verdifullt planteliv det er i vegens sideområde</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlantelivVerdiEnumerationType nvdb:PlantelivVerdiOtherType"/>
+  </simpleType>
+  <simpleType name="PlantelivVerdiEnumerationType">
+    <annotation>
+      <documentation>4162: Angir hvor verdifullt planteliv det er i vegens sideområde</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="noeHøyVerdi">
+        <annotation>
+          <documentation>5135: Noe høy verdi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="høyVerdi">
+        <annotation>
+          <documentation>5134: Høy verdi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sværtHøyVerdi">
+        <annotation>
+          <documentation>5133: Svært høy verdi</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlantelivVerdiOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RestriksjonGrøftKantrenskType">
+    <annotation>
+      <documentation>4163: Angir om det skal taes spesielle hensyn ved skjøtsel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RestriksjonGrøftKantrenskEnumerationType nvdb:RestriksjonGrøftKantrenskOtherType"/>
+  </simpleType>
+  <simpleType name="RestriksjonGrøftKantrenskEnumerationType">
+    <annotation>
+      <documentation>4163: Angir om det skal taes spesielle hensyn ved skjøtsel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="utføresEtterSærskiltBeskrivelse">
+        <annotation>
+          <documentation>5137: Utføres etter særskilt beskrivelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utføresSomAvtaltIDriftskontrakt">
+        <annotation>
+          <documentation>5138: Utføres som avtalt i driftskontrakt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RestriksjonGrøftKantrenskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RestriksjonKantklippType">
+    <annotation>
+      <documentation>9992: Angir hvordan klipp skal utføres for å ta hensyn til vegetasjonen. Tidsrom for klipp skrives i feltet "Spesiell beskrivelse/ merknad"</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RestriksjonKantklippEnumerationType nvdb:RestriksjonKantklippOtherType"/>
+  </simpleType>
+  <simpleType name="RestriksjonKantklippEnumerationType">
+    <annotation>
+      <documentation>9992: Angir hvordan klipp skal utføres for å ta hensyn til vegetasjonen. Tidsrom for klipp skrives i feltet "Spesiell beskrivelse/ merknad"</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skalBareHaSlått1">
+        <annotation>
+          <documentation>16231: Bare slått 1 skal gjennomføres. jf R 610</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skalBareHaSlått2">
+        <annotation>
+          <documentation>16232: Bare slått 2 skal gjennomføres. jf R 610</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1mBreddeSlått1_FullBreddeSlått2">
+        <annotation>
+          <documentation>19832: Det skal kun slås i 1 meters bredde i første slått. Det slås i full bredde i andre slått.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skalHaSlått1Og2">
+        <annotation>
+          <documentation>16233: Både slått 1 og 2 skal utføres. jf R 610</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="følgerOrdinærKantklippIKontrakt">
+        <annotation>
+          <documentation>17887: Klipp følger driftskontaktens regime. Likegyldig antall klipp på stedet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="klippIHhtEgenSkjøtselsplan">
+        <annotation>
+          <documentation>17888: Egen skjøtselsplan skal følges</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RestriksjonKantklippOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SoneType">
+    <annotation>
+      <documentation>9990: Angir hvilken sone beskrivelsen gjelder for</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SoneEnumerationType nvdb:SoneOtherType"/>
+  </simpleType>
+  <simpleType name="SoneEnumerationType">
+    <annotation>
+      <documentation>9990: Angir hvilken sone beskrivelsen gjelder for</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="alle">
+        <annotation>
+          <documentation>16221: Hele området utenfor asfaltkant</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="asfaltkantsone">
+        <annotation>
+          <documentation>16222: Smal sone nærmest asfaltkanten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="midtsone">
+        <annotation>
+          <documentation>16223: Sone mellom asfaltsone og grøft-/fyllingsskråning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grøft">
+        <annotation>
+          <documentation>16224: Grøft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bakkantsone">
+        <annotation>
+          <documentation>16225: Sonen utenfor grøft/fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bakkantsoneOgGrøft">
+        <annotation>
+          <documentation>16226: Sonen utenfor start grøft/fyllingsskråning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SoneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SprøyteforbudType">
+    <annotation>
+      <documentation>9991: Angir om det skal tas spesielle hensyn ved bruk av plantevernmidler</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SprøyteforbudEnumerationType nvdb:SprøyteforbudOtherType"/>
+  </simpleType>
+  <simpleType name="SprøyteforbudEnumerationType">
+    <annotation>
+      <documentation>9991: Angir om det skal tas spesielle hensyn ved bruk av plantevernmidler</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16228: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16229: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SprøyteforbudOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegkantType">
+    <annotation>
+      <documentation>9989: Angir hvilken type vegkant objektet gjelder</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeVegkantEnumerationType nvdb:TypeVegkantOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVegkantEnumerationType">
+    <annotation>
+      <documentation>9989: Angir hvilken type vegkant objektet gjelder</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tørrengvegkant">
+        <annotation>
+          <documentation>16217: Dette er den klassiske artsrike vegkanten med tørrenger og tørrberg på moderat til sterkt tørkeutsatt og veldrenert mark. Typisk med kortvokste urter og gras, gjerne slåttetolerante/slåttebegunstigete arter som blomstrer tidlig og setter frø i løpet av juni og første halvdel av juli.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="frisk_FuktigHøgstaudeVegkant">
+        <annotation>
+          <documentation>16218: Urterik utforming, ofte dominert av høgstauder og halvgras. Opptrer normalt på veldrenert og frisk mark, men kan også finnes på moderat tørkeutsatt og sesongfuktig mark. Næringsstatus varierer fra næringsfattig til noe næringsrik.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordligAlpinVegkant">
+        <annotation>
+          <documentation>16219: Utforming basert på naturgeografisk tilhørighet. Typisk består denne utformingen av tørrengpartier i veksling med eller mosikk med friske enger og kildepregete fuktenger og våtenger. Best utviklet på baserik berggrunn med tørrengpreg eller som reinrosehei. Særlig i beitepåvirkede områder opp mot fjellet i øvre deler av dalførene og på fjellovergangene i Sør-Norge kan det være en rik flora av fjellplanter.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fukteng_VåtengVegkant">
+        <annotation>
+          <documentation>16220: Vegkanter rik sumpvegetasjon eller rikmyrspreg, ofte knyttet til stagnerende vann i veggrøfta, eventuelt frisk til våt fuktmark i grøfta og et stykke oppetter skjæring og fylling. Utformingen utvikles som regel inntil verdifulle våtmarksmiljøer, rik myrkantskog (sumpskog) og rikmyr. Med intakt, blottlagt torvjord i skjæring og grøft, vil kravfulle og konkurransesvake arter fra rikmyr ha mulighet til å etablere seg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenTypeVegkant">
+        <annotation>
+          <documentation>16254: Vegkant som ikke passer i de beskrevne typene. Spesiefiser type og/eller beskrivelse i feltet "Spesiell beskrivelse/ merknad"</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegkantOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

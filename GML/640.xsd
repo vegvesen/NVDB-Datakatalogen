@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Kurvatur_Vertikalelement" substitutionGroup="nvdb:AbstraktKurvatur_Vertikalelement" type="nvdb:Kurvatur_VertikalelementType">
+    <annotation>
+      <documentation>640: Del av vegens vertikalkurvatur.  Sirkelbue (høybrekk/lavbrekk) eller rettlinje.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Kurvatur_VertikalelementType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKurvatur_VertikalelementType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeKurvatur_VertikalelementType">
+            <annotation>
+              <documentation>5843: Angir hvilken elementtype det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="radius" type="integer">
+            <annotation>
+              <documentation>5830: Angir radius for vertikalelementet.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeStart" type="double">
+            <annotation>
+              <documentation>5831: Angir absolutthøyde i elementets startpunkt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeSlutt" type="double">
+            <annotation>
+              <documentation>5832: Angir absolutthøyde i elementets sluttpunkt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stigning_Start" type="double">
+            <annotation>
+              <documentation>5833: Angir stigning i elementets startpunkt.  Positiv stigning når høyde stiger i metreringsretning.  Negativ stigning når høyde avtar i metreringsretning.
+Enhet: Promille</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stigning_Slutt" type="double">
+            <annotation>
+              <documentation>5834: Angir stigning i elementets sluttpunkt
+Enhet: Promille</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beregningsinfo" type="string">
+            <annotation>
+              <documentation>9963: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6899: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Kurvatur_VertikalelementPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kurvatur_Vertikalelement"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeKurvatur_VertikalelementType">
+    <annotation>
+      <documentation>5843: Angir hvilken elementtype det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKurvatur_VertikalelementEnumerationType nvdb:TypeKurvatur_VertikalelementOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKurvatur_VertikalelementEnumerationType">
+    <annotation>
+      <documentation>5843: Angir hvilken elementtype det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rettlinje">
+        <annotation>
+          <documentation>8318: Rettlinje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sirkelbue">
+        <annotation>
+          <documentation>8319: Sirkelbue</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKurvatur_VertikalelementOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

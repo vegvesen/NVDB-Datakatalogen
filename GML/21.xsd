@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Brøytestikk" substitutionGroup="nvdb:AbstraktBrøytestikk" type="nvdb:BrøytestikkType">
+    <annotation>
+      <documentation>21: Sammenhengende rekke med brøytestikk.  Brøytestikk er stav av lauv- eller bartre, bambus e.l. plassert til markering av vegkant for snøbrøytingen (1).</documentation>
+    </annotation>
+  </element>
+  <complexType name="BrøytestikkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBrøytestikkType">
+        <sequence>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2192: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstand_Innbyrdes" type="integer">
+            <annotation>
+              <documentation>1713: Angir normal innbyrdes avstand mellom vegobjekt som ligger etter hverandre i rekke
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVegkant" type="double">
+            <annotation>
+              <documentation>1580: Angir gjennomsnittlig høyde over nærmeste vegkant for hele vegobjektet.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeBrøytestikkType">
+            <annotation>
+              <documentation>1103: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="optiskLedning" type="nvdb:OptiskLedningType">
+            <annotation>
+              <documentation>4553: Angir om brøytestikk benyttes for optisk ledning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="refleks" type="nvdb:RefleksType">
+            <annotation>
+              <documentation>1920: Angir om det er refleks i tilknytning til vegobjektet og evt hvilken type.  Angir om brøytestikk har refleks eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="permanent" type="nvdb:PermanentType">
+            <annotation>
+              <documentation>2068: Angir om vegobjektet er permanent eller midlertidig/sesongbetinga.  Angir om brøytestikk er fast montert hele året, eller om de tas ned i sommersesongen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10279: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11551: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4729: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BrøytestikkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Brøytestikk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="OptiskLedningType">
+    <annotation>
+      <documentation>4553: Angir om brøytestikk benyttes for optisk ledning.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OptiskLedningEnumerationType nvdb:OptiskLedningOtherType"/>
+  </simpleType>
+  <simpleType name="OptiskLedningEnumerationType">
+    <annotation>
+      <documentation>4553: Angir om brøytestikk benyttes for optisk ledning.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>5461: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>5462: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OptiskLedningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PermanentType">
+    <annotation>
+      <documentation>2068: Angir om vegobjektet er permanent eller midlertidig/sesongbetinga.  Angir om brøytestikk er fast montert hele året, eller om de tas ned i sommersesongen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PermanentEnumerationType nvdb:PermanentOtherType"/>
+  </simpleType>
+  <simpleType name="PermanentEnumerationType">
+    <annotation>
+      <documentation>2068: Angir om vegobjektet er permanent eller midlertidig/sesongbetinga.  Angir om brøytestikk er fast montert hele året, eller om de tas ned i sommersesongen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3543: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3581: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PermanentOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RefleksType">
+    <annotation>
+      <documentation>1920: Angir om det er refleks i tilknytning til vegobjektet og evt hvilken type.  Angir om brøytestikk har refleks eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RefleksEnumerationType nvdb:RefleksOtherType"/>
+  </simpleType>
+  <simpleType name="RefleksEnumerationType">
+    <annotation>
+      <documentation>1920: Angir om det er refleks i tilknytning til vegobjektet og evt hvilken type.  Angir om brøytestikk har refleks eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3529: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3567: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RefleksOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrøytestikkType">
+    <annotation>
+      <documentation>1103: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBrøytestikkEnumerationType nvdb:TypeBrøytestikkOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBrøytestikkEnumerationType">
+    <annotation>
+      <documentation>1103: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>2197: Omfatter brøytestikk av kvist samt andre typer av tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bambus">
+        <annotation>
+          <documentation>2198: Bambus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall_Stål_Galvanisert">
+        <annotation>
+          <documentation>2224: Metall, stål, galvanisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>2263: Plast</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrøytestikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

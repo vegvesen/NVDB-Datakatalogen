@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Funksjonsklasse" substitutionGroup="nvdb:AbstraktFunksjonsklasse" type="nvdb:FunksjonsklasseType">
+    <annotation>
+      <documentation>912: Inndeling av vegnettet i forhold til hvilken funksjon vegen har eller er prioritert for.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FunksjonsklasseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFunksjonsklasseType">
+        <sequence>
+          <element name="funksjonsklasse" type="nvdb:FunksjonsklasseFunksjonsklasseType">
+            <annotation>
+              <documentation>11216: Angir hvilken funksjonsklasse vegstrekning er definert som.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FunksjonsklassePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Funksjonsklasse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="FunksjonsklasseFunksjonsklasseType">
+    <annotation>
+      <documentation>11216: Angir hvilken funksjonsklasse vegstrekning er definert som.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FunksjonsklasseFunksjonsklasseEnumerationType nvdb:FunksjonsklasseFunksjonsklasseOtherType"/>
+  </simpleType>
+  <simpleType name="FunksjonsklasseFunksjonsklasseEnumerationType">
+    <annotation>
+      <documentation>11216: Angir hvilken funksjonsklasse vegstrekning er definert som.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="A_NasjonaleHovedveger">
+        <annotation>
+          <documentation>18511: Nasjonale hovedveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B_RegionaleHovedveger">
+        <annotation>
+          <documentation>18512: Veger med regional funksjon, overordnet/ regional betydning. Sammen med funksjonsklasse A utgjør disse et overordnet transportnett.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="C_LokaleHovedveger">
+        <annotation>
+          <documentation>18513: Veger med viktig lokal, men også en viss regional, funksjon hvor hovedfunksjonen er viktige forbindelsesveger mellom funksjonsklasse A og B og forbindelse til kommunesentra.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="D_LokaleSamleveger">
+        <annotation>
+          <documentation>18514: Veger som binder sammen bygder og grender eller gir hovedadkomst til bygd eller grend. Disse vegene har også en samlefunksjon for trafikk til eller fra veger i funksjonsklasse B og C.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="E_LokaleAdkomstveger">
+        <annotation>
+          <documentation>18515: Veger som kan være samleveier, men som mest domineres av adkomst til boliger og virksomheter langs disse veiene.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FunksjonsklasseFunksjonsklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

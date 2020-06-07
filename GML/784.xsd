@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="KjemiskPåvirkningAvVannforekomst" substitutionGroup="nvdb:AbstraktKjemiskPåvirkningAvVannforekomst" type="nvdb:KjemiskPåvirkningAvVannforekomstType">
+    <annotation>
+      <documentation>784: Vegstrekning som bidrar til kjemisk forurensning av innsjø eller vassdrag nærmere enn 200 meter fra vegen.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KjemiskPåvirkningAvVannforekomstType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKjemiskPåvirkningAvVannforekomstType">
+        <sequence>
+          <element minOccurs="0" name="resipienttilstand" type="nvdb:ResipienttilstandType"/>
+          <element minOccurs="0" name="resipienttype" type="nvdb:ResipienttypeType"/>
+          <element minOccurs="0" name="vassdragsnummer" type="string">
+            <annotation>
+              <documentation>8331: Vasssdragsnummer på vassdrag som blir berørt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vassdragsnavn" type="string">
+            <annotation>
+              <documentation>8332: Gir navn på vassdrag.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="problembeskrivelse" type="string">
+            <annotation>
+              <documentation>8333: Gir mulighet for å gi utfyllende beskrivelse av problemet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>8827: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8826: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KjemiskPåvirkningAvVannforekomstPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:KjemiskPåvirkningAvVannforekomst"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="ResipienttilstandType">
+    <union memberTypes="nvdb:ResipienttilstandEnumerationType nvdb:ResipienttilstandOtherType"/>
+  </simpleType>
+  <simpleType name="ResipienttilstandEnumerationType">
+    <restriction base="string">
+      <enumeration value="storPåvirkning">
+        <annotation>
+          <documentation>11275: Stor påvirkning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middelsEllerUkjentPåvirkning">
+        <annotation>
+          <documentation>11276: Middels eller ukjent påvirkning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="litenPåvirkning">
+        <annotation>
+          <documentation>11277: Liten påvirkning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ResipienttilstandOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ResipienttypeType">
+    <union memberTypes="nvdb:ResipienttypeEnumerationType nvdb:ResipienttypeOtherType"/>
+  </simpleType>
+  <simpleType name="ResipienttypeEnumerationType">
+    <restriction base="string">
+      <enumeration value="innsjø">
+        <annotation>
+          <documentation>11278: Innsjø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grunnvann">
+        <annotation>
+          <documentation>11279: Grunnvann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elvBekk">
+        <annotation>
+          <documentation>11280: Elv/bekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="myr">
+        <annotation>
+          <documentation>11281: Myr</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="våtmark">
+        <annotation>
+          <documentation>11282: Våtmark</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ResipienttypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

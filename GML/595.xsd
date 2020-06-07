@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Motorveg" substitutionGroup="nvdb:AbstraktMotorveg" type="nvdb:MotorvegType">
+    <annotation>
+      <documentation>595: Strekninger som har vedtatt status motorveg.</documentation>
+    </annotation>
+  </element>
+  <complexType name="MotorvegType">
+    <complexContent>
+      <extension base="nvdb:AbstraktMotorvegType">
+        <sequence>
+          <element name="motorvegtype" type="nvdb:MotorvegtypeType">
+            <annotation>
+              <documentation>5378: Angir hvilken type motorveg det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksnummer" type="string">
+            <annotation>
+              <documentation>5376: Angir vedtaksnummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>9485: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6908: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="MotorvegPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Motorveg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MotorvegtypeType">
+    <annotation>
+      <documentation>5378: Angir hvilken type motorveg det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MotorvegtypeEnumerationType nvdb:MotorvegtypeOtherType"/>
+  </simpleType>
+  <simpleType name="MotorvegtypeEnumerationType">
+    <annotation>
+      <documentation>5378: Angir hvilken type motorveg det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="motorveg">
+        <annotation>
+          <documentation>7355: Motorveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motortrafikkveg">
+        <annotation>
+          <documentation>7356: Motortrafikkveg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MotorvegtypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

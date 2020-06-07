@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Fartsgrense" substitutionGroup="nvdb:AbstraktFartsgrense" type="nvdb:FartsgrenseType">
+    <annotation>
+      <documentation>105: Høyeste tillatte hastighet på en vegstrekning.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FartsgrenseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFartsgrenseType">
+        <sequence>
+          <element name="fartsgrenseVerdi" type="nvdb:FartsgrenseVerdiType">
+            <annotation>
+              <documentation>2021: Fartsgrense
+Enhet: Kilometer/time</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksnummer" type="string">
+            <annotation>
+              <documentation>1891: Angir vedtaksnummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>11845: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gyldigFraDato" type="date">
+            <annotation>
+              <documentation>5127: Dato for når fartsgrense ble satt i drift.  Den dato skiltene ble "avduket".</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>9155: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FartsgrensePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fartsgrense"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="FartsgrenseVerdiType">
+    <annotation>
+      <documentation>2021: Fartsgrense</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FartsgrenseVerdiEnumerationType nvdb:FartsgrenseVerdiOtherType"/>
+  </simpleType>
+  <simpleType name="FartsgrenseVerdiEnumerationType">
+    <annotation>
+      <documentation>2021: Fartsgrense</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="5">
+        <annotation>
+          <documentation>19885: Til bruk i forbindelse med gatetun, gågater, etc</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>11576: 20</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>2726: 30</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>2728: 40</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>2730: 50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>2732: 60</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>2735: 70</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>2738: 80</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>2741: 90</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="100">
+        <annotation>
+          <documentation>5087: 100</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="110">
+        <annotation>
+          <documentation>9721: 110</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="120">
+        <annotation>
+          <documentation>19642: 120</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FartsgrenseVerdiOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

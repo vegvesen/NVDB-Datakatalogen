@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BudsjettBærelagType">
+    <union memberTypes="nvdb:BudsjettBærelagEnumerationType nvdb:BudsjettBærelagOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettBærelagEnumerationType">
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>6942: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>6943: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettBærelagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Bærelag" substitutionGroup="nvdb:AbstraktBærelag" type="nvdb:BærelagType">
+    <annotation>
+      <documentation>226: Det øverste lag i vegfundamentet.  Deles ofte i nedre og øvre (1).</documentation>
+    </annotation>
+  </element>
+  <complexType name="BærelagType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBærelagType">
+        <sequence>
+          <element minOccurs="0" name="lagtype" type="nvdb:LagtypeType">
+            <annotation>
+              <documentation>8742: Angir om det er tale om øvre eller nedre bærelag</documentation>
+            </annotation>
+          </element>
+          <element name="type" type="nvdb:TypeBærelagType">
+            <annotation>
+              <documentation>1211: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="øvreNominelleSteinstørrelse" type="nvdb:ØvreNominelleSteinstørrelseType">
+            <annotation>
+              <documentation>5531: Angir øvre nominell steinstørrelse for bærelagsmaterialet.
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nedreNominelleSteinstørrelse" type="nvdb:NedreNominelleSteinstørrelseType">
+            <annotation>
+              <documentation>11305: Angir nedre nominell steinstørrelse for bærelagsmaterialet.
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element name="tykkelse" type="integer">
+            <annotation>
+              <documentation>1630: Angir tykkelse
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Gjennomsnitt" type="double">
+            <annotation>
+              <documentation>5143: Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="forbruk" type="integer">
+            <annotation>
+              <documentation>5150: Angir masseforbruk pr kvm
+Enhet: Kilo/kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element name="leggedato" type="date"/>
+          <element minOccurs="0" name="reseptnummer" type="string">
+            <annotation>
+              <documentation>11304: Gir reseptnummer for oppslag i Labsys</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettBærelagType"/>
+          <element minOccurs="0" name="modifisertBindemiddel" type="nvdb:ModifisertBindemiddelType">
+            <annotation>
+              <documentation>5533: Angir om det er brukt modifisert bindemiddel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5547: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11106: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4860: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8882: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BærelagPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bærelag"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="LagtypeType">
+    <annotation>
+      <documentation>8742: Angir om det er tale om øvre eller nedre bærelag</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LagtypeEnumerationType nvdb:LagtypeOtherType"/>
+  </simpleType>
+  <simpleType name="LagtypeEnumerationType">
+    <annotation>
+      <documentation>8742: Angir om det er tale om øvre eller nedre bærelag</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="øvreBærelag">
+        <annotation>
+          <documentation>11571: Øvre bærelag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedreBærelag">
+        <annotation>
+          <documentation>11572: Nedre bærelag</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LagtypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ModifisertBindemiddelType">
+    <annotation>
+      <documentation>5533: Angir om det er brukt modifisert bindemiddel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ModifisertBindemiddelEnumerationType nvdb:ModifisertBindemiddelOtherType"/>
+  </simpleType>
+  <simpleType name="ModifisertBindemiddelEnumerationType">
+    <annotation>
+      <documentation>5533: Angir om det er brukt modifisert bindemiddel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>7878: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>7879: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ModifisertBindemiddelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="NedreNominelleSteinstørrelseType">
+    <annotation>
+      <documentation>11305: Angir nedre nominell steinstørrelse for bærelagsmaterialet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:NedreNominelleSteinstørrelseEnumerationType nvdb:NedreNominelleSteinstørrelseOtherType"/>
+  </simpleType>
+  <simpleType name="NedreNominelleSteinstørrelseEnumerationType">
+    <annotation>
+      <documentation>11305: Angir nedre nominell steinstørrelse for bærelagsmaterialet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>19077: 0</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="16">
+        <annotation>
+          <documentation>19078: 16</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>19079: 22</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="NedreNominelleSteinstørrelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBærelagType">
+    <annotation>
+      <documentation>1211: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBærelagEnumerationType nvdb:TypeBærelagOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBærelagEnumerationType">
+    <annotation>
+      <documentation>1211: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Msm">
+        <annotation>
+          <documentation>3660: Mekanisk stabiliserte materialer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Fp">
+        <annotation>
+          <documentation>3665: Mest aktuelle sorteringer: 16/56, 22/63, 22/90</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Gk">
+        <annotation>
+          <documentation>6960: Mest aktuelle sorteringer: 0/22, 0/32, 0/45, 0/63</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Fk">
+        <annotation>
+          <documentation>6961: Knuste steinmaterialer. Mest aktuelle sorteringer: 0/32, 0/45, 0/63</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ak">
+        <annotation>
+          <documentation>16134: Benyttes ikke om dypfresing. Forutsetter at masser er tilført utenfra.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dypfrest_MekaniskStabilisert">
+        <annotation>
+          <documentation>19018: Resultat av dypfresing av dekke/bærelag. Blandede masser mekanisk stabilisert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Bm">
+        <annotation>
+          <documentation>3666: Bitumenstabiliserte materialer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ag">
+        <annotation>
+          <documentation>3667: Asfaltert grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ap">
+        <annotation>
+          <documentation>3668: Asfaltert pukk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Pp">
+        <annotation>
+          <documentation>3669: Penetrert pukk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Bg">
+        <annotation>
+          <documentation>3671: Bitumesnstabilisert grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Bag">
+        <annotation>
+          <documentation>19074: Bitumenanriket grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Eg">
+        <annotation>
+          <documentation>19075: Emulsjonsgrus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ep">
+        <annotation>
+          <documentation>19076: Emulsjonspukk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Sg">
+        <annotation>
+          <documentation>6957: Skumgrus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dypfrest_Bitumenstabilisert">
+        <annotation>
+          <documentation>19022: Resultat av dypfresing av dekke/bærelag. Blandede masser stabilisert med med bitumen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="C">
+        <annotation>
+          <documentation>3674: Sementstabiliserte materialer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Cp">
+        <annotation>
+          <documentation>3675: Sementstabilisert pukk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Cg">
+        <annotation>
+          <documentation>3676: Sementstabilisert grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Gjb">
+        <annotation>
+          <documentation>6962: Gjenbruksbetong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ls">
+        <annotation>
+          <documentation>19020: Grus-/Steinmaterialer stabilisert med lignin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dl">
+        <annotation>
+          <documentation>19019: Resultat av dypfresing av dekke/bærelag. Blandede masser stabilisert med lignin</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBærelagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ØvreNominelleSteinstørrelseType">
+    <annotation>
+      <documentation>5531: Angir øvre nominell steinstørrelse for bærelagsmaterialet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ØvreNominelleSteinstørrelseEnumerationType nvdb:ØvreNominelleSteinstørrelseOtherType"/>
+  </simpleType>
+  <simpleType name="ØvreNominelleSteinstørrelseEnumerationType">
+    <annotation>
+      <documentation>5531: Angir øvre nominell steinstørrelse for bærelagsmaterialet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="11">
+        <annotation>
+          <documentation>7849: 11</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="16">
+        <annotation>
+          <documentation>7850: 16</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>7851: 19</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>7852: 22</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>7855: 32</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>7859: 63</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>7861: 90</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ØvreNominelleSteinstørrelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DriftsstatusFerjestrekningType">
+    <annotation>
+      <documentation>9221: Angir hvilken driftsstatus ferjestrekningen har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DriftsstatusFerjestrekningEnumerationType nvdb:DriftsstatusFerjestrekningOtherType"/>
+  </simpleType>
+  <simpleType name="DriftsstatusFerjestrekningEnumerationType">
+    <annotation>
+      <documentation>9221: Angir hvilken driftsstatus ferjestrekningen har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="trafikkeres">
+        <annotation>
+          <documentation>12860: Trafikkeres</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagt">
+        <annotation>
+          <documentation>12861: Nedlagt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DriftsstatusFerjestrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ferjestrekning" substitutionGroup="nvdb:AbstraktFerjestrekning" type="nvdb:FerjestrekningType">
+    <annotation>
+      <documentation>807: Strekning mellom to ferjekaier hvor det er tilrettelagt for å reise med ferje.</documentation>
+    </annotation>
+  </element>
+  <complexType name="FerjestrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFerjestrekningType">
+        <sequence>
+          <element name="fraNavn" type="string">
+            <annotation>
+              <documentation>9217: Navn på ferjekai som ferja går fra.  Merknad: Når begge ferjekaier tilhører samme veg, vil den ferjekaien med ”lavest” vegident benevnes som fra-kai.  Hvis ferjekaiene tilhører ulike veger, vil den ferjekaien som tilhører vegen som har høyest status benevnes som fra-kai</documentation>
+            </annotation>
+          </element>
+          <element name="tilNavn" type="string">
+            <annotation>
+              <documentation>9218: Navn på ferjekai som ferja går til.  Merknad: Når begge ferjekaier tilhører samme veg, vil den ferjekaien med ”høyest” vegident benevnes som til-kai.  Hvis ferjekaiene tilhører ulike veger, vil den ferjekaien som tilhører vegen som har lavest status benevnes som til-kai</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="NFDB_Id" type="integer">
+            <annotation>
+              <documentation>9219: Nøkkel i ny FDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="GFDB_Id" type="integer">
+            <annotation>
+              <documentation>9220: Nøkkel i gammel FDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsstatus" type="nvdb:DriftsstatusFerjestrekningType">
+            <annotation>
+              <documentation>9221: Angir hvilken driftsstatus ferjestrekningen har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sone" type="integer">
+            <annotation>
+              <documentation>9222: Indikator som benyttes i forbindelse med ferjetakst, verdien er en funksjon av overfartslengde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sonepåslag" type="integer">
+            <annotation>
+              <documentation>9223: Antall soner som pålegges strekningen for vegfinansiering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overfartstid" type="integer">
+            <annotation>
+              <documentation>9224: Angir hvor lang tid ferja skal bruke på en normal overfart, dvs på flertallet av overfartene.
+Enhet: Minutt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeFarled" type="integer">
+            <annotation>
+              <documentation>9225: Angir lengde av en normal overfart, dvs for flertallet av overfartene.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11637: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FerjestrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ferjestrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

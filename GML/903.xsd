@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellType">
+    <annotation>
+      <documentation>10900: Angir helårs bruksklasse.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellEnumerationType nvdb:BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10900: Angir helårs bruksklasse.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10-50">
+        <annotation>
+          <documentation>18191: Bruksklasse Bk10.  Maks totalvekt 50 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="10-42">
+        <annotation>
+          <documentation>18192: Bruksklasse Bk10.  Maks totalvekt 42 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-50">
+        <annotation>
+          <documentation>18193: Bruksklasse BkT8.  Maks totalvekt 50 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-40">
+        <annotation>
+          <documentation>18194: Bruksklasse BkT8.  Maks totalvekt 40 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8-32">
+        <annotation>
+          <documentation>18195: Bruksklasse Bk8.  Maks totalvekt 32 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6-28">
+        <annotation>
+          <documentation>18196: Bruksklasse Bk6.  Maks totalvekt 28 tonn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Spes">
+        <annotation>
+          <documentation>18197: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til aksellastrestriksjon eller begrensning i totalvekt.  Nedsatte verdier gis i egne egenskapstyper.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellType">
+    <annotation>
+      <documentation>10906: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellEnumerationType nvdb:BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10906: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10-50">
+        <annotation>
+          <documentation>18228: Bk10</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8-40">
+        <annotation>
+          <documentation>18229: BkT8</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8-32">
+        <annotation>
+          <documentation>18230: Bk8</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="10-60">
+        <annotation>
+          <documentation>19639: Bk10-60</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Bruksklasse_Spesialtransport_Uoffisiell" substitutionGroup="nvdb:AbstraktBruksklasse_Spesialtransport_Uoffisiell" type="nvdb:Bruksklasse_Spesialtransport_UoffisiellType">
+    <annotation>
+      <documentation>903: Angir bruksklasse for spesialtransport. Foreløpig versjon for intern bruk</documentation>
+    </annotation>
+  </element>
+  <complexType name="Bruksklasse_Spesialtransport_UoffisiellType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBruksklasse_Spesialtransport_UoffisiellType">
+        <sequence>
+          <element name="bruksklasseHelår" type="nvdb:BruksklasseHelårBruksklasse_Spesialtransport_UoffisiellType">
+            <annotation>
+              <documentation>10900: Angir helårs bruksklasse.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksklasseVinter" type="nvdb:BruksklasseVinterBruksklasse_Spesialtransport_UoffisiellType">
+            <annotation>
+              <documentation>10906: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="maksVogntoglengde" type="nvdb:MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellType">
+            <annotation>
+              <documentation>10912: Angir maksimal lengde for vogntog</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="veggruppe" type="nvdb:VeggruppeBruksklasse_Spesialtransport_UoffisiellType">
+            <annotation>
+              <documentation>10924: Angir dispensasjon for spesialtransport avhengig av bruenes tilstand</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="strekningsbeskrivelse" type="string">
+            <annotation>
+              <documentation>10918: Beskrivelse av aktuell vegstrekning.  Denne teksten blir henta direkte inn i veglistene.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>11008: Merknad knyttet til aktuell strekning. Kommer med uthevet tekst i veglistene</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Bruksklasse_Spesialtransport_UoffisiellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bruksklasse_Spesialtransport_Uoffisiell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellType">
+    <annotation>
+      <documentation>10912: Angir maksimal lengde for vogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellEnumerationType nvdb:MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10912: Angir maksimal lengde for vogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="19_50">
+        <annotation>
+          <documentation>18249: 19,50</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15_00">
+        <annotation>
+          <documentation>18250: 15,00</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12_40">
+        <annotation>
+          <documentation>18251: 12,40</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spesiellBegrensning">
+        <annotation>
+          <documentation>18252: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til vogntog-/kjøretøylengde.  Nedsatte verdier gis i egne egenskapstyper</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaksVogntoglengdeBruksklasse_Spesialtransport_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VeggruppeBruksklasse_Spesialtransport_UoffisiellType">
+    <annotation>
+      <documentation>10924: Angir dispensasjon for spesialtransport avhengig av bruenes tilstand</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VeggruppeBruksklasse_Spesialtransport_UoffisiellEnumerationType nvdb:VeggruppeBruksklasse_Spesialtransport_UoffisiellOtherType"/>
+  </simpleType>
+  <simpleType name="VeggruppeBruksklasse_Spesialtransport_UoffisiellEnumerationType">
+    <annotation>
+      <documentation>10924: Angir dispensasjon for spesialtransport avhengig av bruenes tilstand</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="A">
+        <annotation>
+          <documentation>18264: Veger som har bruer med flere kjørefelt, nyere bruer med ett kjørefelt eller veger som ikke har bruer. (Vegliste, spesialtransport)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>18265: Øvrige bruer med ett kjørefelt (Vegliste, spesialtransport)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikke">
+        <annotation>
+          <documentation>18266: Offentlige veger som det må søkes dispensasjon for i hvert enkelt tilfelle</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VeggruppeBruksklasse_Spesialtransport_UoffisiellOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

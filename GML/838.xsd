@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="GrunnlagType">
+    <annotation>
+      <documentation>9534: Angir hvilke kilde dataene kommer fra</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GrunnlagEnumerationType nvdb:GrunnlagOtherType"/>
+  </simpleType>
+  <simpleType name="GrunnlagEnumerationType">
+    <annotation>
+      <documentation>9534: Angir hvilke kilde dataene kommer fra</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="FKB">
+        <annotation>
+          <documentation>13456: FKB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="laserdata_Dekketilstand">
+        <annotation>
+          <documentation>13457: Laserdata, dekketilstand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="manuellMåling">
+        <annotation>
+          <documentation>13458: Manuell måling</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GrunnlagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegbredde_Beregnet" substitutionGroup="nvdb:AbstraktVegbredde_Beregnet" type="nvdb:Vegbredde_BeregnetType">
+    <annotation>
+      <documentation>838: Vegbredde beregnet på basis av grunnlagsdata, f.eks FKB, dekkestilstandsdata etc . Merknad: Disse dataene er i første omgang tiltenkt bruksområder hvor det ikke stilles veldig nøyaktige krav til breddenøyaktighet, bla analyser knyttet til NTP.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Vegbredde_BeregnetType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegbredde_BeregnetType">
+        <sequence>
+          <element minOccurs="0" name="dekkebredde" type="double">
+            <annotation>
+              <documentation>9537: Angir total dekkebredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkebredde_Min" type="double">
+            <annotation>
+              <documentation>9538: Angir minimum dekkebredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkebredde_Maks" type="double">
+            <annotation>
+              <documentation>9536: Angir maks dekkebredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkebredde_Median" type="double">
+            <annotation>
+              <documentation>10248: Gir median for dekkebredde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkebredde_Normal" type="double">
+            <annotation>
+              <documentation>10249: Angir den dekkebredden som flest av de beregna profilene har når de er avrundet i henhold til oppgitt avrundingsintervall.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegbredde" type="double">
+            <annotation>
+              <documentation>9797: Angir total vegbredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegbredde_Min" type="double">
+            <annotation>
+              <documentation>9798: Angir minimum vegbredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegbredde_Maks" type="double">
+            <annotation>
+              <documentation>9796: Angir maks vegbredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjørebanebredde" type="double">
+            <annotation>
+              <documentation>9800: Angir total kjørebanebredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjørebanebredde_Min" type="double">
+            <annotation>
+              <documentation>9801: Angir minimum kjørebanebredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjørebanebredde_Maks" type="double">
+            <annotation>
+              <documentation>9799: Angir maks kjørebanebredde på gitt strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="grunnlag" type="nvdb:GrunnlagType">
+            <annotation>
+              <documentation>9534: Angir hvilke kilde dataene kommer fra</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="målemetodeGrunnlag" type="string">
+            <annotation>
+              <documentation>9535: Angir hvilken målemetode som er benyttet for å framskaffe grunnlagsdata. Verdier fra SOSI målemetode.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoGrunnlag" type="date">
+            <annotation>
+              <documentation>9533: Angir opprinnelsesdato for eldste grunnlagsdata</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitetGrunnlag" type="integer">
+            <annotation>
+              <documentation>9539: Angir kvalitet på grunnlagsdata
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beregningsinfo" type="string">
+            <annotation>
+              <documentation>9540: Informasjon knyttet til vegbreddeberegningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Vegbredde_BeregnetPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegbredde_Beregnet"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

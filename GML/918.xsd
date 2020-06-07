@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Kryssdel" substitutionGroup="nvdb:AbstraktKryssdel" type="nvdb:KryssdelType">
+    <annotation>
+      <documentation>918: De enkelte delene et kryssystem består av, f.eks. ramper eller deler av en rundkjøring.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KryssdelType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKryssdelType">
+        <sequence>
+          <element name="kryssdel" type="integer">
+            <annotation>
+              <documentation>11286: Nummer for den enkelte del av kryssystemet</documentation>
+            </annotation>
+          </element>
+          <element name="trafikantgruppe" type="nvdb:TrafikantgruppeType">
+            <annotation>
+              <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KryssdelPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kryssdel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TrafikantgruppeType">
+    <annotation>
+      <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrafikantgruppeEnumerationType nvdb:TrafikantgruppeOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikantgruppeEnumerationType">
+    <annotation>
+      <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gåendeOgSyklende">
+        <annotation>
+          <documentation>19040: Gående og syklende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjørende">
+        <annotation>
+          <documentation>19042: Kjørende</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikantgruppeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

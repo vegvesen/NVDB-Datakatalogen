@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Bomstasjon" substitutionGroup="nvdb:AbstraktBomstasjon" type="nvdb:BomstasjonType">
+    <annotation>
+      <documentation>45: Et punkt i vegnettet hvor det kreves betaling for å kunne kjøre videre.  Kan gjelde i en eller begge retninger.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BomstasjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBomstasjonType">
+        <sequence>
+          <element minOccurs="0" name="bomstasjonstype" type="nvdb:BomstasjonstypeType">
+            <annotation>
+              <documentation>9390: Angir hvilken type bomstasjon det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navnBompengeanlegg_FraCS" type="string">
+            <annotation>
+              <documentation>10714: Angir navn på bompengeanlegg. Overføres automatisk fra CS-Norge</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navnBomstasjon" type="string">
+            <annotation>
+              <documentation>1078: Gir navn på bomstasjon.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtattTilÅr" type="integer">
+            <annotation>
+              <documentation>9413: Årstall som det er vedtatt at bomstasjonen skal stå fram til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="linkTilBomstasjon" type="string">
+            <annotation>
+              <documentation>10715: Url til detaljer om bomstasjon i CS-Norge</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innkrevningsretning" type="nvdb:InnkrevningsretningType">
+            <annotation>
+              <documentation>9414: Angir hvilken retning det er betalingsinnkrevning i forhold til vegens metreringsretning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bompengeanlegg_Id" type="integer">
+            <annotation>
+              <documentation>9596: Angir ID på bompengeanlegget. Er grunnlag for å få overført takstinformasjon fra CS-Norge</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bomstasjon_Id" type="integer">
+            <annotation>
+              <documentation>9595: Angir ID på bomstasjonen.  Er grunnlag for å få overført takstinformasjon fra CS-Norge</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="operatør_Id" type="integer">
+            <annotation>
+              <documentation>11883: Angir ID på bompengeanleggests operatør.  Er grunnlag for å få overført takstinformasjon fra Autopass IP</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="takstLitenBil" type="double">
+            <annotation>
+              <documentation>1820: Angir ordinær takst for å passere med liten bil. Det skal angis første takst etter midnatt som er har en kostnad over kr 0 på ukedag mandag.
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="takstStorBil" type="double">
+            <annotation>
+              <documentation>1819: Angir ordinær takst for å passere bomstasjon med stor bil.   Det skal angis første takst etter midnatt som er har en kostnad over kr 0 på ukedag mandag. .
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidstakstLitenBil" type="double">
+            <annotation>
+              <documentation>9410: Angir takst for å passere med liten bil i rushtid
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tidsdifferensiertTakst" type="nvdb:TidsdifferensiertTakstType">
+            <annotation>
+              <documentation>9409: Angir om takst for en eller flere vektklasser varierer over døgnet. Det skal også angis Ja om det er gratis i perioder av døgnet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidstakstStorBil" type="double">
+            <annotation>
+              <documentation>9411: Angir takst for å passere bomstasjon med stor bil i rushtid
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidMorgen_Fra" type="string">
+            <annotation>
+              <documentation>9407: Angir tidspunkt eventuell rushtidsavgift starter på morgenen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidMorgen_Til" type="string">
+            <annotation>
+              <documentation>9408: Angir tidspunkt eventuell rushtidsavgift slutter på morgenen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidEttermiddag_Fra" type="string">
+            <annotation>
+              <documentation>9405: Angir tidspunkt eventuell rushtidsavgift starter på ettermiddagen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rushtidEttermiddag_Til" type="string">
+            <annotation>
+              <documentation>9406: Angir tidspunkt eventuell rushtidsavgift slutter på ettermiddagen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="timesregel" type="nvdb:TimesregelType">
+            <annotation>
+              <documentation>9412: Angir ordning der man betaler kun for den første passeringen ved to eller flere passeringer gjennom samme bompengeanlegg i løpet av en time.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="timesregel_Varighet" type="integer">
+            <annotation>
+              <documentation>10952: Angir hvor lang tid (minutter) det maksimalt kan gå mellom to bomstasjopnspasseringer for at rabatt skal innrømmes basert på timesregel.
+Enhet: Minutt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="timesregel_Passeringsgruppe" type="integer">
+            <annotation>
+              <documentation>10951: Unik ID som er felles for de bomstasjonene som har samme timesregel.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gratisGjennomkjøringVedHC_Brikke" type="nvdb:GratisGjennomkjøringVedHC_BrikkeType">
+            <annotation>
+              <documentation>9404: Angir om gjennomkjøring med HC-brikke er gratis</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10271: Angir hvilket år bomstasjonen ble satt i drift</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11565: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11051: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierBomstasjonType">
+            <annotation>
+              <documentation>7992: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBomstasjonType">
+            <annotation>
+              <documentation>5799: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4752: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BomstasjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bomstasjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BomstasjonstypeType">
+    <annotation>
+      <documentation>9390: Angir hvilken type bomstasjon det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BomstasjonstypeEnumerationType nvdb:BomstasjonstypeOtherType"/>
+  </simpleType>
+  <simpleType name="BomstasjonstypeEnumerationType">
+    <annotation>
+      <documentation>9390: Angir hvilken type bomstasjon det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="autoPASSManuell">
+        <annotation>
+          <documentation>13132: Bomstasjon har Autopass og manuell betaling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="autoPASSAutomatisk">
+        <annotation>
+          <documentation>13133: Bomstasjon har autopass og automatisk betaling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kunManuell">
+        <annotation>
+          <documentation>13134: Bomstasjon har kun manuell innkreving</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BomstasjonstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBomstasjonType">
+    <annotation>
+      <documentation>7992: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierBomstasjonEnumerationType nvdb:EierBomstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="EierBomstasjonEnumerationType">
+    <annotation>
+      <documentation>7992: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10258: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18596: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10720: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10322: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10386: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17577: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBomstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GratisGjennomkjøringVedHC_BrikkeType">
+    <annotation>
+      <documentation>9404: Angir om gjennomkjøring med HC-brikke er gratis</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GratisGjennomkjøringVedHC_BrikkeEnumerationType nvdb:GratisGjennomkjøringVedHC_BrikkeOtherType"/>
+  </simpleType>
+  <simpleType name="GratisGjennomkjøringVedHC_BrikkeEnumerationType">
+    <annotation>
+      <documentation>9404: Angir om gjennomkjøring med HC-brikke er gratis</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13253: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13254: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GratisGjennomkjøringVedHC_BrikkeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnkrevningsretningType">
+    <annotation>
+      <documentation>9414: Angir hvilken retning det er betalingsinnkrevning i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InnkrevningsretningEnumerationType nvdb:InnkrevningsretningOtherType"/>
+  </simpleType>
+  <simpleType name="InnkrevningsretningEnumerationType">
+    <annotation>
+      <documentation>9414: Angir hvilken retning det er betalingsinnkrevning i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="medMetrering">
+        <annotation>
+          <documentation>13259: Med metrering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motMetrering">
+        <annotation>
+          <documentation>13260: Mot metrering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beggeRetninger">
+        <annotation>
+          <documentation>13261: Begge retninger</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnkrevningsretningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TidsdifferensiertTakstType">
+    <annotation>
+      <documentation>9409: Angir om takst for en eller flere vektklasser varierer over døgnet. Det skal også angis Ja om det er gratis i perioder av døgnet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TidsdifferensiertTakstEnumerationType nvdb:TidsdifferensiertTakstOtherType"/>
+  </simpleType>
+  <simpleType name="TidsdifferensiertTakstEnumerationType">
+    <annotation>
+      <documentation>9409: Angir om takst for en eller flere vektklasser varierer over døgnet. Det skal også angis Ja om det er gratis i perioder av døgnet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13255: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13256: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TidsdifferensiertTakstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TimesregelType">
+    <annotation>
+      <documentation>9412: Angir ordning der man betaler kun for den første passeringen ved to eller flere passeringer gjennom samme bompengeanlegg i løpet av en time.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TimesregelEnumerationType nvdb:TimesregelOtherType"/>
+  </simpleType>
+  <simpleType name="TimesregelEnumerationType">
+    <annotation>
+      <documentation>9412: Angir ordning der man betaler kun for den første passeringen ved to eller flere passeringer gjennom samme bompengeanlegg i løpet av en time.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="standardTimesregel">
+        <annotation>
+          <documentation>13257: Det gis fritak/rabatt ved passering av mer enn en bomstasjon innenfor et avgrenset tidsrom.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="omvendtTimesregel">
+        <annotation>
+          <documentation>18299: Det gis fritak/rabatt om kun en av to eller flere angitte bomstasjon passeres innenfor et gitt tidsrom. Må passere minst to bomstasjoner for å bli belastet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeTimesregel">
+        <annotation>
+          <documentation>13258: Ikke timesregel</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TimesregelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBomstasjonType">
+    <annotation>
+      <documentation>5799: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBomstasjonEnumerationType nvdb:VedlikeholdsansvarligBomstasjonOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBomstasjonEnumerationType">
+    <annotation>
+      <documentation>5799: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>8194: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18737: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19908: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18866: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8220: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8246: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17687: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBomstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

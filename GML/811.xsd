@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Dataanalyse" substitutionGroup="nvdb:AbstraktDataanalyse" type="nvdb:DataanalyseType">
+    <annotation>
+      <documentation>811: Objekttype som brukes lokalt for å ta vare på midlertidige analysedata, f.eks. mangel, overlapp eller annen inkonsistens. Objekter av denne type kan lagres lokalt i "project"-databaser, men skal ikke lagres i sentral NVDB-database.</documentation>
+    </annotation>
+  </element>
+  <complexType name="DataanalyseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktDataanalyseType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeDataanalyseType">
+            <annotation>
+              <documentation>9288: Angir hvilken type dataanalyse som er gjort</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegobjekttypeID" type="integer">
+            <annotation>
+              <documentation>9289: Angir vegobjektID for vegobjekter som ble analysert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>9290: Beskrivelse av det som ble funnet i analysen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="DataanalysePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Dataanalyse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeDataanalyseType">
+    <annotation>
+      <documentation>9288: Angir hvilken type dataanalyse som er gjort</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeDataanalyseEnumerationType nvdb:TypeDataanalyseOtherType"/>
+  </simpleType>
+  <simpleType name="TypeDataanalyseEnumerationType">
+    <annotation>
+      <documentation>9288: Angir hvilken type dataanalyse som er gjort</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="manglendeData">
+        <annotation>
+          <documentation>12980: Manglende data</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="overlappendeData">
+        <annotation>
+          <documentation>12981: Overlappende data</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="generell">
+        <annotation>
+          <documentation>12982: Generell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeDataanalyseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

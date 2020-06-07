@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Svingerestriksjon" substitutionGroup="nvdb:AbstraktSvingerestriksjon" type="nvdb:SvingerestriksjonType">
+    <annotation>
+      <documentation>573: Angir svingerestriksjon</documentation>
+    </annotation>
+  </element>
+  <complexType name="SvingerestriksjonType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSvingerestriksjonType">
+        <sequence>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5294: Kan gi permanent merknad.  F.eks "høyresving forbudt"</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>8875: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element name="svingeforbudFra">
+            <annotation>
+              <documentation>angir hvilken lenke svingerestriksjonen gjelder fra. Merknad: Egenskapen finnes ikke i NVDB, men avledes ut fra stedfesting på referanselenkene</documentation>
+            </annotation>
+          </element>
+          <element name="svingeforbudTil">
+            <annotation>
+              <documentation>angir hvilken lenke svingerestriksjonen gjelder til. Merknad: Egenskapen finnes ikke i NVDB, men avledes ut fra stedfesting på referanselenkene</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SvingerestriksjonPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Svingerestriksjon"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

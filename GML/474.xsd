@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Brannslokkingsanlegg" substitutionGroup="nvdb:AbstraktBrannslokkingsanlegg" type="nvdb:BrannslokkingsanleggType">
+    <annotation>
+      <documentation>474: System for automatisk brannslokking.  Vanligvis sprinkleranlegg</documentation>
+    </annotation>
+  </element>
+  <complexType name="BrannslokkingsanleggType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBrannslokkingsanleggType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeBrannslokkingsanleggType">
+            <annotation>
+              <documentation>3777: Angir type</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>5485: Angir lengde av sprinkleranlegg
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10274: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>11816: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>11815: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11620: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11135: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierBrannslokkingsanleggType">
+            <annotation>
+              <documentation>8033: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBrannslokkingsanleggType">
+            <annotation>
+              <documentation>8108: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4991: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>10079: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BrannslokkingsanleggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Brannslokkingsanlegg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="EierBrannslokkingsanleggType">
+    <annotation>
+      <documentation>8033: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierBrannslokkingsanleggEnumerationType nvdb:EierBrannslokkingsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="EierBrannslokkingsanleggEnumerationType">
+    <annotation>
+      <documentation>8033: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10299: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18636: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10760: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10363: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10427: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17654: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBrannslokkingsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrannslokkingsanleggType">
+    <annotation>
+      <documentation>3777: Angir type</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBrannslokkingsanleggEnumerationType nvdb:TypeBrannslokkingsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBrannslokkingsanleggEnumerationType">
+    <annotation>
+      <documentation>3777: Angir type</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sprinkleranlegg">
+        <annotation>
+          <documentation>5041: Sprinkleranlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hallogenBrannslokkingsanlegg">
+        <annotation>
+          <documentation>5042: Hallogen brannslokkingsanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vanntåke">
+        <annotation>
+          <documentation>13036: Vanntåke</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBrannslokkingsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBrannslokkingsanleggType">
+    <annotation>
+      <documentation>8108: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBrannslokkingsanleggEnumerationType nvdb:VedlikeholdsansvarligBrannslokkingsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBrannslokkingsanleggEnumerationType">
+    <annotation>
+      <documentation>8108: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10502: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18750: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19966: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18879: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10580: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10658: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17749: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBrannslokkingsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

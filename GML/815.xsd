@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Avkjørsel_Holdningsklasse" substitutionGroup="nvdb:AbstraktAvkjørsel_Holdningsklasse" type="nvdb:Avkjørsel_HoldningsklasseType">
+    <annotation>
+      <documentation>815: Angir hvilken offisiell holdning det er til opprettelse av avkjørsler på strekningen</documentation>
+    </annotation>
+  </element>
+  <complexType name="Avkjørsel_HoldningsklasseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktAvkjørsel_HoldningsklasseType">
+        <sequence>
+          <element name="klasse" type="nvdb:KlasseType">
+            <annotation>
+              <documentation>9320: Angir holdningsklasse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11640: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9321: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Avkjørsel_HoldningsklassePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Avkjørsel_Holdningsklasse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KlasseType">
+    <annotation>
+      <documentation>9320: Angir holdningsklasse</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KlasseEnumerationType nvdb:KlasseOtherType"/>
+  </simpleType>
+  <simpleType name="KlasseEnumerationType">
+    <annotation>
+      <documentation>9320: Angir holdningsklasse</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="megetStreng">
+        <annotation>
+          <documentation>13009: Meget streng</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="streng">
+        <annotation>
+          <documentation>13010: Streng</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mindreStreng">
+        <annotation>
+          <documentation>13011: Mindre streng</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="liteStreng">
+        <annotation>
+          <documentation>13012: Lite streng</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KlasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

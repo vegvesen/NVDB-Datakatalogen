@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Siktsone" substitutionGroup="nvdb:AbstraktSiktsone" type="nvdb:SiktsoneType">
+    <annotation>
+      <documentation>518: Siktsone er et areal som krever tiltak for å tilfredsstille siktkrav som ikke tilfredsstilles av kantklipp.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SiktsoneType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSiktsoneType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeSiktsoneType">
+            <annotation>
+              <documentation>4165: Angir hvilken type siktsone det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak_AnbefaltIntervall" type="nvdb:Tiltak_AnbefaltIntervallType">
+            <annotation>
+              <documentation>9974: Gir anbefaling for hvor ofte og når det bør foretas tiltak. Gjelder areal utenfor kantklipp</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdePrimærveg" type="integer">
+            <annotation>
+              <documentation>4561: Angir hvor langt siktsonen strekker seg langs primærvegen
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeSekundærveg" type="integer">
+            <annotation>
+              <documentation>4560: Angir hvor langt inn i sekundærvegen siktsonen strekker seg
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealInnenforKantklipp" type="integer">
+            <annotation>
+              <documentation>9972: Areal innefor vanlig kantklipp som skal driftes spesielt for å sikre god sikt
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealUtenforKantklipp" type="integer">
+            <annotation>
+              <documentation>4166: Areal utenfor vanlig kantklipp som skal driftes spesielt for å sikre god sikt
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9975: Tilleggsinformasjon knyttet til eiendomsforhold, avtaler, innhold eller skjøtsel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer_Avtale" type="string">
+            <annotation>
+              <documentation>9973: Gir arkivnummer for avtale med privat eier for område som skal ryddes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSiktsoneType">
+            <annotation>
+              <documentation>8116: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>5019: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8896: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SiktsonePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Siktsone"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="Tiltak_AnbefaltIntervallType">
+    <annotation>
+      <documentation>9974: Gir anbefaling for hvor ofte og når det bør foretas tiltak. Gjelder areal utenfor kantklipp</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Tiltak_AnbefaltIntervallEnumerationType nvdb:Tiltak_AnbefaltIntervallOtherType"/>
+  </simpleType>
+  <simpleType name="Tiltak_AnbefaltIntervallEnumerationType">
+    <annotation>
+      <documentation>9974: Gir anbefaling for hvor ofte og når det bør foretas tiltak. Gjelder areal utenfor kantklipp</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="2GPrÅr">
+        <annotation>
+          <documentation>16189: 2 g. pr år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1GPrÅr">
+        <annotation>
+          <documentation>16188: 1 g. pr år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2HvertÅr">
+        <annotation>
+          <documentation>16190: 2.hvert år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3til5HvertÅr">
+        <annotation>
+          <documentation>16191: 3-5. hvert år</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Tiltak_AnbefaltIntervallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSiktsoneType">
+    <annotation>
+      <documentation>4165: Angir hvilken type siktsone det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSiktsoneEnumerationType nvdb:TypeSiktsoneOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSiktsoneEnumerationType">
+    <annotation>
+      <documentation>4165: Angir hvilken type siktsone det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kryssAvkjørsel">
+        <annotation>
+          <documentation>5140: Kryss/avkjørsel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kurve">
+        <annotation>
+          <documentation>5141: Kurve</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiltInfo">
+        <annotation>
+          <documentation>5142: Gjelder generelt soner siktsoner knyttet til objekt som skal gi informasjon til trafikanter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="siktrydding_Vilt">
+        <annotation>
+          <documentation>5139: Siktrydding, vilt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSiktsoneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSiktsoneType">
+    <annotation>
+      <documentation>8116: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSiktsoneEnumerationType nvdb:VedlikeholdsansvarligSiktsoneOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSiktsoneEnumerationType">
+    <annotation>
+      <documentation>8116: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10510: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18767: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19971: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18896: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10588: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10666: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17754: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSiktsoneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

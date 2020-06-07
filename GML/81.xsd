@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="ElvBekk_Gjenlagt" substitutionGroup="nvdb:AbstraktElvBekk_Gjenlagt" type="nvdb:ElvBekk_GjenlagtType">
+    <annotation>
+      <documentation>81: Elv eller bekk som er gjenlagt i forbindelse med veganlegg.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ElvBekk_GjenlagtType">
+    <complexContent>
+      <extension base="nvdb:AbstraktElvBekk_GjenlagtType">
+        <sequence>
+          <element minOccurs="0" name="egennavn" type="string">
+            <annotation>
+              <documentation>5634: Angir egennavn på elv/bekk</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>1968: Angir beskrivelse av vegobjekt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengdeGjenlegging" type="integer">
+            <annotation>
+              <documentation>5635: Angir lengde av gjenlagt bekk/elv
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10287: Angir hvilket årstall gjenlegging ble utført</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligElvBekk_GjenlagtType">
+            <annotation>
+              <documentation>5636: Angir hvem som er vedlikeholdsansvarlig i forhold til elv/bekk i tilknytning til veg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4782: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8918: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ElvBekk_GjenlagtPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:ElvBekk_Gjenlagt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligElvBekk_GjenlagtType">
+    <annotation>
+      <documentation>5636: Angir hvem som er vedlikeholdsansvarlig i forhold til elv/bekk i tilknytning til veg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligElvBekk_GjenlagtEnumerationType nvdb:VedlikeholdsansvarligElvBekk_GjenlagtOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligElvBekk_GjenlagtEnumerationType">
+    <annotation>
+      <documentation>5636: Angir hvem som er vedlikeholdsansvarlig i forhold til elv/bekk i tilknytning til veg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>7914: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18742: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19905: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18871: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>7915: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>7916: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17684: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligElvBekk_GjenlagtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

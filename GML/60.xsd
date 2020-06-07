@@ -1,0 +1,3079 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Bru" substitutionGroup="nvdb:AbstraktBru" type="nvdb:BruType">
+    <annotation>
+      <documentation>60: Byggverk uten overliggende fylling som fører vegen over en fri åpning på minst 2,5 meter (1).  Kort bru &lt; 40 meter, lang bru &gt; 40 meter.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BruType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBruType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>1080: Angir navn på bru.</documentation>
+            </annotation>
+          </element>
+          <element name="nummer" type="integer">
+            <annotation>
+              <documentation>2175: Angir brunummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="byggverkstype" type="nvdb:ByggverkstypeType">
+            <annotation>
+              <documentation>9182: Angir hvilken type byggverk det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeBruType">
+            <annotation>
+              <documentation>1404: Angir primær materialtype for brukonstruksjonen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1313: Angir brulengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengsteSpenn" type="double">
+            <annotation>
+              <documentation>1971: Angir lengste spenn for vegobjekt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="opprinneligF_Nr" type="integer">
+            <annotation>
+              <documentation>11180: Angir opprinnelig fylkesnummer benyttet i Brutus. Dette nummeret vil sammen med «Nummer» (2175) gi unik identitet til et byggverk.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="status" type="nvdb:StatusType">
+            <annotation>
+              <documentation>11317: Angir hvilken status ei bru har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sv12_100_Plassering" type="nvdb:Sv12_100_PlasseringType">
+            <annotation>
+              <documentation>11457: Angir hvor på brua spesialtransport må kjøre</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sv12_100_Avstand" type="integer">
+            <annotation>
+              <documentation>11458: Angir minimum avstand mellom etterfølgende spesialtransporter
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="veggruppe" type="nvdb:VeggruppeType">
+            <annotation>
+              <documentation>11459: Angir veggruppe for spesialtransport</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sv12_100_Merknad" type="string">
+            <annotation>
+              <documentation>11460: Gir merknad knyttet til spesialtransport</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brukategori" type="nvdb:BrukategoriType">
+            <annotation>
+              <documentation>1263: Angir hvilken kategori brukonstruksjonen tilhører</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="byggeår" type="integer">
+            <annotation>
+              <documentation>10278: Angir byggeår for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBruType">
+            <annotation>
+              <documentation>8969: Angir hvem som er ansvarlig for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4763: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8906: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BruPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bru"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BrukategoriType">
+    <annotation>
+      <documentation>1263: Angir hvilken kategori brukonstruksjonen tilhører</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BrukategoriEnumerationType nvdb:BrukategoriOtherType"/>
+  </simpleType>
+  <simpleType name="BrukategoriEnumerationType">
+    <annotation>
+      <documentation>1263: Angir hvilken kategori brukonstruksjonen tilhører</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vegbru">
+        <annotation>
+          <documentation>7304: Vegbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bruIFylling">
+        <annotation>
+          <documentation>7305: Bru i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="GS_Bru">
+        <annotation>
+          <documentation>7306: G/S-bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferjeleie">
+        <annotation>
+          <documentation>7307: Ferjeleie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnelVegoverbygg">
+        <annotation>
+          <documentation>7309: Tunnel/Vegoverbygg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="støttekonstruksjon">
+        <annotation>
+          <documentation>7310: Støttekonstruksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jernbanebru">
+        <annotation>
+          <documentation>7311: Jernbanebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenByggvKategori">
+        <annotation>
+          <documentation>7312: Annen byggv.kategori</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BrukategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ByggverkstypeType">
+    <annotation>
+      <documentation>9182: Angir hvilken type byggverk det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ByggverkstypeEnumerationType nvdb:ByggverkstypeOtherType"/>
+  </simpleType>
+  <simpleType name="ByggverkstypeEnumerationType">
+    <annotation>
+      <documentation>9182: Angir hvilken type byggverk det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>12333: 1 - Kulvert, bjelkeramme, rør og hvelv i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="10">
+        <annotation>
+          <documentation>12334: 10 - Kulvert, bjelkeramme, rør og hvelv i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="100">
+        <annotation>
+          <documentation>12335: 100 - Kulvert, bjelkeramme, rør og hvelv i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="11">
+        <annotation>
+          <documentation>12336: 11 - Kulvert, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="110">
+        <annotation>
+          <documentation>12337: 110 - Kulvert, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="111">
+        <annotation>
+          <documentation>12338: 111 - Kulvert, plassprodusert, m/bunnplate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="112">
+        <annotation>
+          <documentation>12339: 112 - Kulvert, plassprodusert, m/sålefundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="113">
+        <annotation>
+          <documentation>12340: 113 - Kulvert, plassprodusert, m/sålefundament og trykkbjelk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="114">
+        <annotation>
+          <documentation>12341: 114 - Kulvert, plassprodusert, m/fjellfot</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="119">
+        <annotation>
+          <documentation>12342: 119 - Kulvert, plassprodusert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="12">
+        <annotation>
+          <documentation>12343: 12 - Kulvert, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="120">
+        <annotation>
+          <documentation>12344: 120 - Kulvert, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="121">
+        <annotation>
+          <documentation>12345: 121 - Kulvert, prefabrikkert, elementkulvert nr. 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="122">
+        <annotation>
+          <documentation>12346: 122 - Kulvert, prefabrikkert, elementkulvert nr. 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="123">
+        <annotation>
+          <documentation>12347: 123 - Kulvert, prefabrikkert, elementkulvert nr. 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="124">
+        <annotation>
+          <documentation>12348: 124 - Kulvert, prefabrikkert, m/plasstøp bunnplate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="129">
+        <annotation>
+          <documentation>12349: 129 - Kulvert, prefabrikkert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="13">
+        <annotation>
+          <documentation>12350: 13 - Bjelkeramme</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="130">
+        <annotation>
+          <documentation>12351: 130 - Bjelkeramme</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="131">
+        <annotation>
+          <documentation>12352: 131 - Bjelkeramme, m/bunnplate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="132">
+        <annotation>
+          <documentation>12353: 132 - Bjelkeramme, m/sålefundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="133">
+        <annotation>
+          <documentation>12354: 133 - Bjelkeramme, m/sålefundament og trykkbjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="134">
+        <annotation>
+          <documentation>12355: 134 - Bjelkeramme, m/fjellfot</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="139">
+        <annotation>
+          <documentation>12356: 139 - Bjelkeramme, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14">
+        <annotation>
+          <documentation>12357: 14 - Rør i fylling, korrugert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="140">
+        <annotation>
+          <documentation>12358: 140 - Rør i fylling, korrugert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="141">
+        <annotation>
+          <documentation>12359: 141 - Rør i fylling, korrugert, sirkulært</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="142">
+        <annotation>
+          <documentation>12360: 142 - Rør i fylling, korrugert, stående ellipse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="143">
+        <annotation>
+          <documentation>12361: 143 - Rør i fylling, korrugert, liggende ellipse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="144">
+        <annotation>
+          <documentation>12362: 144 - Rør i fylling, korrugert, pæreformet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="145">
+        <annotation>
+          <documentation>12363: 145 - Rør i fylling, korrugert, flatbunnet (lavprofil)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="149">
+        <annotation>
+          <documentation>12364: 149 - Rør i fylling, korrugert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="15">
+        <annotation>
+          <documentation>12365: 15 - Rør i fylling, glattvegget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="150">
+        <annotation>
+          <documentation>12366: 150 - Rør i fylling, glattvegget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="151">
+        <annotation>
+          <documentation>12367: 151 - Rør i fylling, glattvegget, sirkulært</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="152">
+        <annotation>
+          <documentation>12368: 152 - Rør i fylling, glattvegget, stående ellipse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="153">
+        <annotation>
+          <documentation>12369: 153 - Rør i fylling, glattvegget, liggende ellipse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="154">
+        <annotation>
+          <documentation>12370: 154 - Rør i fylling, glattvegget, pæreformet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="155">
+        <annotation>
+          <documentation>12371: 155 - Rør i fylling, glattvegget, flatbunnet (lavprofil)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="159">
+        <annotation>
+          <documentation>12372: 159 - Rør i fylling, glattvegget, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="16">
+        <annotation>
+          <documentation>12373: 16 - Hvelv i fylling, korrugert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="160">
+        <annotation>
+          <documentation>12374: 160 - Hvelv i fylling, korrugert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="161">
+        <annotation>
+          <documentation>12375: 161 - Hvelv i fylling, korrugert, m/bunnplate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="162">
+        <annotation>
+          <documentation>12376: 162 - Hvelv i fylling, korrugert, m/sålefundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="163">
+        <annotation>
+          <documentation>12377: 163 - Hvelv i fylling, korrugert, m/sålefundament og trykkbjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="164">
+        <annotation>
+          <documentation>12378: 164 - Hvelv i fylling, korrugert, m/fjellfot</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="169">
+        <annotation>
+          <documentation>12379: 169 - Hvelv i fylling, korrugert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="17">
+        <annotation>
+          <documentation>12380: 17 - Hvelv i fylling, glattvegget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="170">
+        <annotation>
+          <documentation>12381: 170 - Hvelv i fylling, glattvegget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="171">
+        <annotation>
+          <documentation>12382: 171 - Hvelv i fylling, glattvegget, m/bunnplate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="172">
+        <annotation>
+          <documentation>12383: 172 - Hvelv i fylling, glattvegget, m/sålefundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="173">
+        <annotation>
+          <documentation>12384: 173 - Hvelv i fylling, glattvegget, m/sålefundament og trykkbjelke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="174">
+        <annotation>
+          <documentation>12385: 174 - Hvelv i fylling, glattvegget, m/fjellfot</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="175">
+        <annotation>
+          <documentation>12386: 175 - Hvelv i fylling, prefabrikkert, Matiere</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="179">
+        <annotation>
+          <documentation>12387: 179 - Hvelv i fylling, glattvegget, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="19">
+        <annotation>
+          <documentation>12388: 19 - Andre kulverter, rør og hvelv i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="190">
+        <annotation>
+          <documentation>12389: 190 - Andre kulverter, rør og hvelv i fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>12390: 2 - Platebru, bjelkeplatebru og ribbeplatebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="20">
+        <annotation>
+          <documentation>12391: 20 - Platebru, bjelkeplatebru og ribbeplatebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="200">
+        <annotation>
+          <documentation>12392: 200 - Platebru, bjelkeplatebru og ribbeplatebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="21">
+        <annotation>
+          <documentation>12393: 21 - Platebru, massiv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="210">
+        <annotation>
+          <documentation>12394: 210 - Platebru, massiv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="211">
+        <annotation>
+          <documentation>12395: 211 - Platebru, massiv, rektangulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="212">
+        <annotation>
+          <documentation>12396: 212 - Platebru, massiv, skrå platekanter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="213">
+        <annotation>
+          <documentation>12397: 213 - Platebru, massiv, m/vinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="214">
+        <annotation>
+          <documentation>12398: 214 - Platebru, massiv, m/overliggende kantforsterkning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="215">
+        <annotation>
+          <documentation>12399: 215 - Platebru, massiv, m/underliggende kantforsterkning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="219">
+        <annotation>
+          <documentation>12400: 219 - Platebru, massiv, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="22">
+        <annotation>
+          <documentation>12401: 22 - Platebru m/sparerør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="220">
+        <annotation>
+          <documentation>12402: 220 - Platebru m/sparerør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="221">
+        <annotation>
+          <documentation>12403: 221 - Platebru m/sparerør, rektangulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="222">
+        <annotation>
+          <documentation>12404: 222 - Platebru m/sparerør, skrå platekanter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="223">
+        <annotation>
+          <documentation>12405: 223 - Platebru m/sparerør, m/vinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="229">
+        <annotation>
+          <documentation>12406: 229 - Platebru m/sparerør, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="23">
+        <annotation>
+          <documentation>12407: 23 - Bjelke-platebru, massiv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="230">
+        <annotation>
+          <documentation>12408: 230 - Bjelke-platebru, massiv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="231">
+        <annotation>
+          <documentation>12409: 231 - Bjelke-platebru, massiv, rektangulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="232">
+        <annotation>
+          <documentation>12410: 232 - Bjelke-platebru, massiv, skrå platekanter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="233">
+        <annotation>
+          <documentation>12411: 233 - Bjelke-platebru, massiv, m/vinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="239">
+        <annotation>
+          <documentation>12412: 239 - Bjelke-platebru, massiv, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>12413: 24 - Bjelke-platebru m/sparerør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="240">
+        <annotation>
+          <documentation>12414: 240 - Bjelke-platebru m/sparerør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="241">
+        <annotation>
+          <documentation>12415: 241 - Bjelke-platebru m/sparerør, rektangulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="242">
+        <annotation>
+          <documentation>12416: 242 - Bjelke-platebru m/sparerør, skrå platekanter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="243">
+        <annotation>
+          <documentation>12417: 243 - Bjelke-platebru m/sparerør, m/vinger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="249">
+        <annotation>
+          <documentation>12418: 249 - Bjelke-platebru m/sparerør, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="25">
+        <annotation>
+          <documentation>12419: 25 - Ribbeplatebru (massiv over støtte)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="250">
+        <annotation>
+          <documentation>12420: 250 - Ribbeplatebru (massiv over støtte)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="26">
+        <annotation>
+          <documentation>12421: 26 - Tverrspent platebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="260">
+        <annotation>
+          <documentation>12422: 260 - Tverrspent platebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="261">
+        <annotation>
+          <documentation>12423: 261 - Tverrspent platebru, elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="262">
+        <annotation>
+          <documentation>12424: 262 - Tverrspent platebru, lameller/plank</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="269">
+        <annotation>
+          <documentation>12425: 269 - Tverrspent platebru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="27">
+        <annotation>
+          <documentation>12426: 27 - Plate-elementbru, prefabrikkerte</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="270">
+        <annotation>
+          <documentation>12427: 270 - Plate-elementbru, prefabrikkerte</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="271">
+        <annotation>
+          <documentation>12428: 271 - Plate-elementbru, prefabrikkerte, elementbru nr. 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="272">
+        <annotation>
+          <documentation>12429: 272 - Plate-elementbru, prefabrikkerte, huldekke-elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="279">
+        <annotation>
+          <documentation>12430: 279 - Plate-elementbru, prefabrikkerte, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="29">
+        <annotation>
+          <documentation>12431: 29 - Andre platebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="290">
+        <annotation>
+          <documentation>12432: 290 - Andre platebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>12433: 3 - Bjelkebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="30">
+        <annotation>
+          <documentation>12434: 30 - Bjelkebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="300">
+        <annotation>
+          <documentation>12435: 300 - Bjelkebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="31">
+        <annotation>
+          <documentation>12436: 31 - Bjelkebru, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="310">
+        <annotation>
+          <documentation>12437: 310 - Bjelkebru, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="311">
+        <annotation>
+          <documentation>12438: 311 - Bjelkebru, plassprodusert, konstant høyde m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="312">
+        <annotation>
+          <documentation>12439: 312 - Bjelkebru, plassprodusert, konstant høyde u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="313">
+        <annotation>
+          <documentation>12440: 313 - Bjelkebru, plassprodusert, variabel høyde m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="314">
+        <annotation>
+          <documentation>12441: 314 - Bjelkebru, plassprodusert, variabel høyde u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="315">
+        <annotation>
+          <documentation>12442: 315 - Bjelkebru, plassprodusert, overliggende bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="319">
+        <annotation>
+          <documentation>12443: 319 - Bjelkebru, plassprodusert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="32">
+        <annotation>
+          <documentation>12444: 32 - Bjelkebru, NIB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="320">
+        <annotation>
+          <documentation>12445: 320 - Bjelkebru, NIB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="321">
+        <annotation>
+          <documentation>12446: 321 - Bjelkebru, NIB, forspente m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="322">
+        <annotation>
+          <documentation>12447: 322 - Bjelkebru, NIB, forspente u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="323">
+        <annotation>
+          <documentation>12448: 323 - Bjelkebru, NIB, etterspente m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="324">
+        <annotation>
+          <documentation>12449: 324 - Bjelkebru, NIB, etterspente u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="329">
+        <annotation>
+          <documentation>12450: 329 - Bjelkebru, NIB, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="33">
+        <annotation>
+          <documentation>12451: 33 - Bjelkebru, NOB/NOT</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="330">
+        <annotation>
+          <documentation>12452: 330 - Bjelkebru, NOB/NOT</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="331">
+        <annotation>
+          <documentation>12453: 331 - Bjelkebru, NOB, massivtverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="332">
+        <annotation>
+          <documentation>12454: 332 - Bjelkebru, NOB, hulromstverrsnitt m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="333">
+        <annotation>
+          <documentation>12455: 333 - Bjelkebru, NOB, hulromstverrsnitt u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="334">
+        <annotation>
+          <documentation>12456: 334 - Bjelkebru, NOT m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="335">
+        <annotation>
+          <documentation>12457: 335 - Bjelkebru, NOT u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="339">
+        <annotation>
+          <documentation>12458: 339 - Bjelkebru, NOB/NOT, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="34">
+        <annotation>
+          <documentation>12459: 34 - Bjelkebru, normerte elementer (ikke NIB/NOB/NOT)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="340">
+        <annotation>
+          <documentation>12460: 340 - Bjelkebru, normerte elementer (ikke NIB/NOB/NOT)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="341">
+        <annotation>
+          <documentation>12461: 341 - Bjelkebru, normerte elementer, elementbru nr. 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="342">
+        <annotation>
+          <documentation>12462: 342 - Bjelkebru, normerte elementer, gangvegbru nr. 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="343">
+        <annotation>
+          <documentation>12463: 343 - Bjelkebru, normerte elementer, gangvegbru nr. 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="344">
+        <annotation>
+          <documentation>12464: 344 - Bjelkebru, normerte elementer, gangvegbru nr. 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="349">
+        <annotation>
+          <documentation>12465: 349 - Bjelkebru, normerte elementer, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="35">
+        <annotation>
+          <documentation>12466: 35 - Bjelkebru, ikke normerte elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="350">
+        <annotation>
+          <documentation>12467: 350 - Bjelkebru, ikke normerte elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="351">
+        <annotation>
+          <documentation>12468: 351 - Bjelkebru, ikke normerte elementer, DT - elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="352">
+        <annotation>
+          <documentation>12469: 352 - Bjelkebru, ikke normerte elementer, I - elementer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="353">
+        <annotation>
+          <documentation>12470: 353 - Bjelkebru, ikke normerte elementer, svalbard gangbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="354">
+        <annotation>
+          <documentation>12471: 354 - Bjelkebru, ikke normerte elementer, mod. I-elem.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="355">
+        <annotation>
+          <documentation>12472: 355 - Bjelkebru, "ubåtbjelker" (tyskebjelker)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="356">
+        <annotation>
+          <documentation>12473: 356 - Bjelkebru, tverrspent plate m/bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="357">
+        <annotation>
+          <documentation>12474: 357 - Bjelkebru, utligger (utkraget)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="359">
+        <annotation>
+          <documentation>12475: 359 - Bjelkebru, ikke normerte elementer, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="36">
+        <annotation>
+          <documentation>12476: 36 - Bjelkebru, valsede bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="360">
+        <annotation>
+          <documentation>12477: 360 - Bjelkebru, valsede bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="361">
+        <annotation>
+          <documentation>12478: 361 - Bjelkebru, valsede bjelker, HE-A u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362">
+        <annotation>
+          <documentation>12479: 362 - Bjelkebru, valsede bjelker, HE-A m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="363">
+        <annotation>
+          <documentation>12480: 363 - Bjelkebru, valsede bjelker, HE-B u/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="364">
+        <annotation>
+          <documentation>12481: 364 - Bjelkebru, valsede bjelker, HE-B m/samvirke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="365">
+        <annotation>
+          <documentation>12482: 365 - Bjelkebru, valsede bjelker, HE-M</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="366">
+        <annotation>
+          <documentation>12483: 366 - Bjelkebru, valsede bjelker, I-profiler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="369">
+        <annotation>
+          <documentation>12484: 369 - Bjelkebru, valsede bjelker, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="37">
+        <annotation>
+          <documentation>12485: 37 - Bjelkebru, platebærere, konstant høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="370">
+        <annotation>
+          <documentation>12486: 370 - Bjelkebru, platebærere, konstant høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="371">
+        <annotation>
+          <documentation>12487: 371 - Bj.bru, plateb., kon.h., sveiset m/sveiseskj. u/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="372">
+        <annotation>
+          <documentation>12488: 372 - Bj.bru, plateb., kon.h., sveiset m/sveiseskj. m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="373">
+        <annotation>
+          <documentation>12489: 373 - Bj.bru, plateb., kon.h., sveiset m/frik.skj. u/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="374">
+        <annotation>
+          <documentation>12490: 374 - Bj.bru, plateb., kon.h., sveiset m/frik.skj. m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="375">
+        <annotation>
+          <documentation>12491: 375 - Bj.bru, plateb., kon.h., sveiset m/doble steg u/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="376">
+        <annotation>
+          <documentation>12492: 376 - Bj.bru, plateb., kon.h., sveiset m/doble steg m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="377">
+        <annotation>
+          <documentation>12493: 377 - Bj.bru, plateb., kon.h., klinkede m/nagleskjøter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="379">
+        <annotation>
+          <documentation>12494: 379 - Bj.bru, plateb., kon.h., andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="38">
+        <annotation>
+          <documentation>12495: 38 - Bjelkebru, platebærere, variabel høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="380">
+        <annotation>
+          <documentation>12496: 380 - Bjelkebru, platebærere, variabel høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="381">
+        <annotation>
+          <documentation>12497: 381 - Bj.bru, plateb., vari.h., sveiset m/sveiseskj. u/samv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="382">
+        <annotation>
+          <documentation>12498: 382 - Bj.bru, plateb., vari.h., sveiset m/sveiseskj. m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="383">
+        <annotation>
+          <documentation>12499: 383 - Bj.bru, plateb., vari.h., sveiset m/frik.skj. u/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="384">
+        <annotation>
+          <documentation>12500: 384 - Bj.bru, plateb., vari.h., sveiset m/frik.skj. m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="385">
+        <annotation>
+          <documentation>12501: 385 - Bj.bru, plateb., vari.h., sveiset m/doble steg u/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="386">
+        <annotation>
+          <documentation>12502: 386 - Bj.bru, plateb., vari.h., sveiset m/doble steg m/samv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="387">
+        <annotation>
+          <documentation>12503: 387 - Bj.bru, plateb., vari.h., klinkede m/nagleskjøter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="389">
+        <annotation>
+          <documentation>12504: 389 - Bj.bru, plateb., vari.h., andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="39">
+        <annotation>
+          <documentation>12505: 39 - Ramme-og gitterbjelkebruer og andre bjelkebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="390">
+        <annotation>
+          <documentation>12506: 390 - Ramme- og gitterbjelkebru og andre bjelkebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="391">
+        <annotation>
+          <documentation>12507: 391 - Rammebjelkebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>12508: 4 - Kassebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="40">
+        <annotation>
+          <documentation>12509: 40 - Kassebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="400">
+        <annotation>
+          <documentation>12510: 400 - Kassebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="41">
+        <annotation>
+          <documentation>12511: 41 - Kassebru, konstant høyde,</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="410">
+        <annotation>
+          <documentation>12512: 410 - Kassebru, konstant høyde,</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="411">
+        <annotation>
+          <documentation>12513: 411 - Kassebru, konstant høyde, vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="412">
+        <annotation>
+          <documentation>12514: 412 - Kassebru, konstant høyde, vertikale vegger, m/avstiv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="413">
+        <annotation>
+          <documentation>12515: 413 - Kassebru, konstant høyde, tre/flere vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="415">
+        <annotation>
+          <documentation>12516: 415 - Kassebru, konstant høyde, skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="416">
+        <annotation>
+          <documentation>12517: 416 - Kassebru, konstant høyde, skrå vegger, m/avstivning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="417">
+        <annotation>
+          <documentation>12518: 417 - Kassebru, konstant høyde, tre/flere skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="419">
+        <annotation>
+          <documentation>12519: 419 - Kassebru, konstant høyde, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="42">
+        <annotation>
+          <documentation>12520: 42 - Kassebru, konstant høyde, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="420">
+        <annotation>
+          <documentation>12521: 420 - Kassebru, konstant høyde, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="421">
+        <annotation>
+          <documentation>12522: 421 - Kassebru, konstant høyde, m/motvekt, vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="422">
+        <annotation>
+          <documentation>12523: 422 - Kassebru,konstant h., m/motvekt, vert. vegger, m/avst.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="423">
+        <annotation>
+          <documentation>12524: 423 - Kassebru, konstant h., m/motv., tre/flere vert. vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="425">
+        <annotation>
+          <documentation>12525: 425 - Kassebru, konstant høyde, m/motvekt, skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="426">
+        <annotation>
+          <documentation>12526: 426 - Kassebru, konstant h., m/motvekt, skrå vegger, m/avst.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="427">
+        <annotation>
+          <documentation>12527: 427 - Kassebru, konstant h., m/motv., tre/flere skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="429">
+        <annotation>
+          <documentation>12528: 429 - Kassebru, konstant høyde, m/motvekt, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="43">
+        <annotation>
+          <documentation>12529: 43 - Kassebru, variabel høyde,</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="430">
+        <annotation>
+          <documentation>12530: 430 - Kassebru, variabel høyde,</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="431">
+        <annotation>
+          <documentation>12531: 431 - Kassebru, variabel høyde, vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="432">
+        <annotation>
+          <documentation>12532: 432 - Kassebru, variabel høyde, vertikale vegger, m/avstiv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="433">
+        <annotation>
+          <documentation>12533: 433 - Kassebru, variabel høyde, tre/flere vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="435">
+        <annotation>
+          <documentation>12534: 435 - Kassebru, variabel høyde, skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="436">
+        <annotation>
+          <documentation>12535: 436 - Kassebru, variabel høyde, skrå vegger, m/avstivning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="437">
+        <annotation>
+          <documentation>12536: 437 - Kassebru, variabel høyde, tre/flere skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="439">
+        <annotation>
+          <documentation>12537: 439 - Kassebru, variabel høyde, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="44">
+        <annotation>
+          <documentation>12538: 44 - Kassebru, variabel høyde, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="440">
+        <annotation>
+          <documentation>12539: 440 - Kassebru, variabel høyde, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="441">
+        <annotation>
+          <documentation>12540: 441 - Kassebru, variabel høyde, m/motvekt, vertikale vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="442">
+        <annotation>
+          <documentation>12541: 442 - Kassebru,variabel h., m/motvekt, vert. vegger, m/avst.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="443">
+        <annotation>
+          <documentation>12542: 443 - Kassebru, variabel h., m/motv., tre/flere vert. vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="445">
+        <annotation>
+          <documentation>12543: 445 - Kassebru, variabel høyde, m/motvekt, skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="446">
+        <annotation>
+          <documentation>12544: 446 - Kassebru, variabel h., m/motvekt, skrå vegger, m/avst.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="447">
+        <annotation>
+          <documentation>12545: 447 - Kassebru, variabel h., m/motvekt, tre/flere skrå vegge</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="449">
+        <annotation>
+          <documentation>12546: 449 - Kassebru, variabel høyde, m/motvekt, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="45">
+        <annotation>
+          <documentation>12547: 45 - Frittfrembygg, kassebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="450">
+        <annotation>
+          <documentation>12548: 450 - Frittfrembygg, kassebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="451">
+        <annotation>
+          <documentation>12549: 451 - Frittfrembygg-bru, vert. vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="452">
+        <annotation>
+          <documentation>12550: 452 - Frittfrembygg-bru, vert. vegger, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="453">
+        <annotation>
+          <documentation>12551: 453 - Frittfrembygg-bru, skrå vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="454">
+        <annotation>
+          <documentation>12552: 454 - Frittfrembygg-bru, skrå vegger, m/motvekt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="459">
+        <annotation>
+          <documentation>12553: 459 - Frittfrembygg-bru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="49">
+        <annotation>
+          <documentation>12554: 49 - Andre kassebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="490">
+        <annotation>
+          <documentation>12555: 490 - Andre kassebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5">
+        <annotation>
+          <documentation>12556: 5 - Buebru og hvelvbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="50">
+        <annotation>
+          <documentation>12557: 50 - Buebru og hvelvbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="500">
+        <annotation>
+          <documentation>12558: 500 - Buebru og hvelvbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="51">
+        <annotation>
+          <documentation>12559: 51 - Buebru, overliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="510">
+        <annotation>
+          <documentation>12560: 510 - Buebru, overliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="511">
+        <annotation>
+          <documentation>12561: 511 - Buebru, overl. brudekke, enkeltbue, massivt tverrs.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="512">
+        <annotation>
+          <documentation>12562: 512 - Buebru, overl. brudekke, enkeltbue, hultverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="513">
+        <annotation>
+          <documentation>12563: 513 - Buebru, overl. brudekke, dobbeltbue, massivt tverrs.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="514">
+        <annotation>
+          <documentation>12564: 514 - Buebru, overl. brudekke, dobbeltbue, hultverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="515">
+        <annotation>
+          <documentation>12565: 515 - Buebru, overl. brudekke, dobbeltbue, prof.tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="516">
+        <annotation>
+          <documentation>12566: 516 - Buebru, overl. brudekke, fagverksbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="519">
+        <annotation>
+          <documentation>12567: 519 - Buebru, overl. brudekke, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="52">
+        <annotation>
+          <documentation>12568: 52 - Buebru, overliggende brudekke sammenkobl. i toppen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="520">
+        <annotation>
+          <documentation>12569: 520 - Buebru, overliggende brudekke sammenkobl. i toppen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="521">
+        <annotation>
+          <documentation>12570: 521 - Buebru, overl. brud., kob.i toppen, e.bue, massivt tv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="522">
+        <annotation>
+          <documentation>12571: 522 - Buebru, overl. brud., kob.i toppen, e.bue, hultverrsn.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="523">
+        <annotation>
+          <documentation>12572: 523 - Buebru, overl. brud., kob.i toppen, d.buer, massivt tv.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="524">
+        <annotation>
+          <documentation>12573: 524 - Buebru, overl. brud., kob.i toppen, d.buer, hultverrsn.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="525">
+        <annotation>
+          <documentation>12574: 525 - Buebru, overl. brud., kob.i toppen, prof. tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="526">
+        <annotation>
+          <documentation>12575: 526 - Buebru, overl. brud., kob.i toppen, fagverksbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="529">
+        <annotation>
+          <documentation>12576: 529 - Buebru, overl. brud., kob.i toppen, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="53">
+        <annotation>
+          <documentation>12577: 53 - Buebru, mellomliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="530">
+        <annotation>
+          <documentation>12578: 530 - Buebru, mellomliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="531">
+        <annotation>
+          <documentation>12579: 531 - Buebru, melloml. brudekke, bue m/massivt tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="532">
+        <annotation>
+          <documentation>12580: 532 - Buebru, melloml. brudekke, bue m/hultverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="533">
+        <annotation>
+          <documentation>12581: 533 - Buebru, melloml. brudekke, bue m/profilert tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="534">
+        <annotation>
+          <documentation>12582: 534 - Buebru, melloml. brudekke, fagverksbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="539">
+        <annotation>
+          <documentation>12583: 539 - Buebru, melloml. brudekke, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="54">
+        <annotation>
+          <documentation>12584: 54 - Buebru, underliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="540">
+        <annotation>
+          <documentation>12585: 540 - Buebru, underliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="541">
+        <annotation>
+          <documentation>12586: 541 - Buebru, underl. brudekke, bue m/massivt tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="542">
+        <annotation>
+          <documentation>12587: 542 - Buebru, underl. brudekke, bue m/massivt tv., st.bånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="543">
+        <annotation>
+          <documentation>12588: 543 - Buebru, underl. brudekke, bue m/hultverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="544">
+        <annotation>
+          <documentation>12589: 544 - Buebru, underl. brudekke, bue m/hultverrsnitt, st.bånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="545">
+        <annotation>
+          <documentation>12590: 545 - Buebru, underl. brudekke, bue med profilert tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="546">
+        <annotation>
+          <documentation>12591: 546 - Buebru, underl. brudekke, profilert tverrsnitt, strekkbånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="547">
+        <annotation>
+          <documentation>12592: 547 - Buebru, underl. brudekke, fagverksbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="548">
+        <annotation>
+          <documentation>12593: 548 - Buebru, underl. brudekke, nettverksbue</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="549">
+        <annotation>
+          <documentation>12594: 549 - Buebru, underl. brudekke, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="55">
+        <annotation>
+          <documentation>12595: 55 - Buebru med langsgående bærevegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="550">
+        <annotation>
+          <documentation>12596: 550 - Buebru med langsgående bærevegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="551">
+        <annotation>
+          <documentation>12597: 551 - Buebru med langsgående bærevegger, u/flens</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="552">
+        <annotation>
+          <documentation>12598: 552 - Buebru med langsgående bærevegger, m/flens</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="553">
+        <annotation>
+          <documentation>12599: 553 - Buebru med langsgående bærevegger, kassetverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="554">
+        <annotation>
+          <documentation>12600: 554 - Buebru med langsgående bærev., kassetv., tre/fl vegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="555">
+        <annotation>
+          <documentation>12601: 555 - Buebru med langsgående bærevegger, U-tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="559">
+        <annotation>
+          <documentation>12602: 559 - Buebru med langsgående bærevegger, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="56">
+        <annotation>
+          <documentation>12603: 56 - Hvelvbru med hel overmur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="560">
+        <annotation>
+          <documentation>12604: 560 - Hvelvbru med hel overmur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="561">
+        <annotation>
+          <documentation>12605: 561 - Hvelvbru med hel overmur, alt murt som tørrmur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="562">
+        <annotation>
+          <documentation>12606: 562 - Hvelvbru med hel overmur, alt murt i mørtel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="563">
+        <annotation>
+          <documentation>12607: 563 - Hvelvbru m/hel o.mur, hvelv i mørtel og o.mur s.tørrmu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="564">
+        <annotation>
+          <documentation>12608: 564 - Hvelvbru m/hel o.mur, betonghvelv, o.mur som tørrmur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="565">
+        <annotation>
+          <documentation>12609: 565 - Hvelvbru med hel overmur, betonghvelv, overmur i mørte</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="569">
+        <annotation>
+          <documentation>12610: 569 - Hvelvbru med hel overmur, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="57">
+        <annotation>
+          <documentation>12611: 57 - Hvelvbru med overmur av små hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="570">
+        <annotation>
+          <documentation>12612: 570 - Hvelvbru med overmur av små hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="571">
+        <annotation>
+          <documentation>12613: 571 - Hvelvbru med overmur av små hvelv, alt murt som tørrmu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="572">
+        <annotation>
+          <documentation>12614: 572 - Hvelvbru med overmur av små hvelv, alt murt i mørtel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="573">
+        <annotation>
+          <documentation>12615: 573 - Hvelvbru m/o.mur av små hvelv i mørtel og o.mur s.t.mu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="574">
+        <annotation>
+          <documentation>12616: 574 - Hvelvbru m/o.mur av små hvelv, bet.hvelv, o.mur s.t.mu</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="575">
+        <annotation>
+          <documentation>12617: 575 - Hvelvbru m/o.mur av små hvelv, bet.hvelv, o.mur i mørt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="579">
+        <annotation>
+          <documentation>12618: 579 - Hvelvbru med overmur av små hvelv, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="59">
+        <annotation>
+          <documentation>12619: 59 - Andre buer og hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="590">
+        <annotation>
+          <documentation>12620: 590 - Andre buer og hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>12621: 6 - Fagverksbru, sprengverksbru og hengeverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="60">
+        <annotation>
+          <documentation>12622: 60 - Fagverksbru, sprengverksbru og hengeverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="600">
+        <annotation>
+          <documentation>12623: 600 - Fagverksbru, sprengverksbru og hengeverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="61">
+        <annotation>
+          <documentation>12624: 61 - Parallellfagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="610">
+        <annotation>
+          <documentation>12625: 610 - Parallellfagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="611">
+        <annotation>
+          <documentation>12626: 611 - Par.fagv.bru, overl. brudekke, hellende endestaver</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="612">
+        <annotation>
+          <documentation>12627: 612 - Par.fagv.bru, overl. brud., hellende endest., sek.sys.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="613">
+        <annotation>
+          <documentation>12628: 613 - Par.fagv.bru, overl. brudekke, vertikale endestaver</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="614">
+        <annotation>
+          <documentation>12629: 614 - Parallellfagverksbru, mellomliggende brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="615">
+        <annotation>
+          <documentation>12630: 615 - Par.fagv.bru, underl. brudekke, hellende endestaver</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="616">
+        <annotation>
+          <documentation>12631: 616 - Par.fagv.bru, underl. brud., hellende endest., sek.sys</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="617">
+        <annotation>
+          <documentation>12632: 617 - Par.fagv.bru, underl. brudekke, vertikale endestaver</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="618">
+        <annotation>
+          <documentation>12633: 618 - Par.fagv.bru, underl. brudekke, uten vindavstivning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="619">
+        <annotation>
+          <documentation>12634: 619 - Parallellfagverksbru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="62">
+        <annotation>
+          <documentation>12635: 62 - Fagverksbru, fritt opplagt m/buet overgurt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="620">
+        <annotation>
+          <documentation>12636: 620 - Fagverksbru, fritt opplagt m/buet overgurt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="621">
+        <annotation>
+          <documentation>12637: 621 - Fagv.bru, f.oppl. m/buet o.gurt, ver. bærev., u.l. bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="622">
+        <annotation>
+          <documentation>12638: 622 - Fagv.bru, f.o. b. o.gurt, v.bærev., u.l. brud., v.ende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="623">
+        <annotation>
+          <documentation>12639: 623 - Fagv.bru, f.oppl. m/buet o.gurt, ver. bærev., m.l. bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="624">
+        <annotation>
+          <documentation>12640: 624 - Fagv.bru, f.o. b. o.gurt, v.bærev., m.l. brud., v.ende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="625">
+        <annotation>
+          <documentation>12641: 625 - Fagv.bru, f.oppl. m/buet o.gurt, hellende bærevegger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="629">
+        <annotation>
+          <documentation>12642: 629 - Fagv.bru, f.oppl. m/buet o.gurt, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="63">
+        <annotation>
+          <documentation>12643: 63 - Fagverksbru, kontinuerlig m/varierende høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="630">
+        <annotation>
+          <documentation>12644: 630 - Fagverksbru, kontinuerlig m/varierende høyde</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="631">
+        <annotation>
+          <documentation>12645: 631 - Fagverksbru, kont. m/varierende h., overl. brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="632">
+        <annotation>
+          <documentation>12646: 632 - Fagverksbru, kont. m/varierende h., melloml. brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="633">
+        <annotation>
+          <documentation>12647: 633 - Fagverksbru, kont. m/varierende h., underl. brudekke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="639">
+        <annotation>
+          <documentation>12648: 639 - Fagverksbru, kont. m/varierende h., andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="64">
+        <annotation>
+          <documentation>12649: 64 - Hengefagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="640">
+        <annotation>
+          <documentation>12650: 640 - Hengefagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="65">
+        <annotation>
+          <documentation>12651: 65 - Skråstagfagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="650">
+        <annotation>
+          <documentation>12652: 650 - Skråstagfagverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="66">
+        <annotation>
+          <documentation>12653: 66 - Sprengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="660">
+        <annotation>
+          <documentation>12654: 660 - Sprengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="661">
+        <annotation>
+          <documentation>12655: 661 - Sprengverksbru, trekant, overliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="662">
+        <annotation>
+          <documentation>12656: 662 - Sprengverksbru, trekant, mellomliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="663">
+        <annotation>
+          <documentation>12657: 663 - Sprengverksbru, trekant, underliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="664">
+        <annotation>
+          <documentation>12658: 664 - Sprengverksbru, trapes, overliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="665">
+        <annotation>
+          <documentation>12659: 665 - Sprengverksbru, trapes, mellomliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="666">
+        <annotation>
+          <documentation>12660: 666 - Sprengverksbru, trapes, underliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="669">
+        <annotation>
+          <documentation>12661: 669 - Sprengverksbru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="67">
+        <annotation>
+          <documentation>12662: 67 - Hengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="670">
+        <annotation>
+          <documentation>12663: 670 - Hengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="671">
+        <annotation>
+          <documentation>12664: 671 - Hengverksbru, trekant, overliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="672">
+        <annotation>
+          <documentation>12665: 672 - Hengverksbru, trekant, mellomliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="673">
+        <annotation>
+          <documentation>12666: 673 - Hengverksbru, trekant, underliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="674">
+        <annotation>
+          <documentation>12667: 674 - Hengverksbru, trapes, overliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="675">
+        <annotation>
+          <documentation>12668: 675 - Hengverksbru, trapes, mellomliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="676">
+        <annotation>
+          <documentation>12669: 676 - Hengverksbru, trapes, underliggende brubane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="677">
+        <annotation>
+          <documentation>12670: 677 - Hengverksbru, parabel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="679">
+        <annotation>
+          <documentation>12671: 679 - Hengverksbru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="69">
+        <annotation>
+          <documentation>12672: 69 - Andre fagverks, sprengverks-og hengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="690">
+        <annotation>
+          <documentation>12673: 690 - Andre fagverks, sprengverks-og hengverksbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="7">
+        <annotation>
+          <documentation>12674: 7 - Hengebru, skråstagbru, flytebru og neddykket rørbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="70">
+        <annotation>
+          <documentation>12675: 70 - Hengebru, skråstagbru, flytebru og neddykket rørbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="700">
+        <annotation>
+          <documentation>12676: 700 - Hengebru, skråstagbru, flytebru og neddykket rørbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="71">
+        <annotation>
+          <documentation>12677: 71 - Hengebru m/bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="710">
+        <annotation>
+          <documentation>12678: 710 - Hengebru m/bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="711">
+        <annotation>
+          <documentation>12679: 711 - Hengebru m/bjelker, ingen opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="712">
+        <annotation>
+          <documentation>12680: 712 - Hengebru m/bjelker, 1 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="713">
+        <annotation>
+          <documentation>12681: 713 - Hengebru m/bjelker, 2 opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="714">
+        <annotation>
+          <documentation>12682: 714 - Hengebru m/bjelker, 1 tårn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719">
+        <annotation>
+          <documentation>12683: 719 - Hengebru m/bjelker, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="72">
+        <annotation>
+          <documentation>12684: 72 - Hengebru m/fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="720">
+        <annotation>
+          <documentation>12685: 720 - Hengebru m/fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="721">
+        <annotation>
+          <documentation>12686: 721 - Hengebru m/fagverk, ingen opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="722">
+        <annotation>
+          <documentation>12687: 722 - Hengebru m/fagverk, 1 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="723">
+        <annotation>
+          <documentation>12688: 723 - Hengebru m/fagverk, 2 opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="724">
+        <annotation>
+          <documentation>12689: 724 - Hengebru m/fagverk, 1 tårn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="729">
+        <annotation>
+          <documentation>12690: 729 - Hengebru m/fagverk, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="73">
+        <annotation>
+          <documentation>12691: 73 - Hengebru m/kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="730">
+        <annotation>
+          <documentation>12692: 730 - Hengebru m/kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="731">
+        <annotation>
+          <documentation>12693: 731 - Hengebru m/kasse, ingen opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="732">
+        <annotation>
+          <documentation>12694: 732 - Hengebru m/kasse, 1 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="733">
+        <annotation>
+          <documentation>12695: 733 - Hengebru m/kasse, 2 opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="734">
+        <annotation>
+          <documentation>12696: 734 - Hengebru m/kasse, 1 tårn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="739">
+        <annotation>
+          <documentation>12697: 739 - Hengebru m/kasse, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="74">
+        <annotation>
+          <documentation>12698: 74 - Skråstagbru m/bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="740">
+        <annotation>
+          <documentation>12699: 740 - Skråstagbru m/bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="741">
+        <annotation>
+          <documentation>12700: 741 - Skråstagbru m/bjelker, 1 tårn, 1 opphengt spenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="742">
+        <annotation>
+          <documentation>12701: 742 - Skråstagbru m/bjelker, 1 tårn, 2 opphengte spenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="743">
+        <annotation>
+          <documentation>12702: 743 - Skråstagbru m/bjelker, 2 tårn, ingen opphengte sidesp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="744">
+        <annotation>
+          <documentation>12703: 744 - Skråstagbru m/bjelker, 2 tårn, 1 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="745">
+        <annotation>
+          <documentation>12704: 745 - Skråstagbru m/bjelker, 2 tårn, 2 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="746">
+        <annotation>
+          <documentation>12705: 746 - Skråstagbru m/bjelker, 3/flere tårn, ingen opph. sides</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="747">
+        <annotation>
+          <documentation>12706: 747 - Skråstagbru m/bjelker, 3/flere tårn, 1 opphengt sidesp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="748">
+        <annotation>
+          <documentation>12707: 748 - Skråstagbru m/bjelker, 3/flere tårn, 2 opphengte sides</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="749">
+        <annotation>
+          <documentation>12708: 749 - Skråstagbru m/bjelker, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="75">
+        <annotation>
+          <documentation>12709: 75 - Skråstagbru m/kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="750">
+        <annotation>
+          <documentation>12710: 750 - Skråstagbru m/kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="751">
+        <annotation>
+          <documentation>12711: 751 - Skråstagbru m/kasse, 1 tårn, 1 opphengt spenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="752">
+        <annotation>
+          <documentation>12712: 752 - Skråstagbru m/kasse, 1 tårn, 2 opphengte spenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="753">
+        <annotation>
+          <documentation>12713: 753 - Skråstagbru m/kasse, 2 tårn, ingen opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="754">
+        <annotation>
+          <documentation>12714: 754 - Skråstagbru m/kasse, 2 tårn , 1 opphengt sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="755">
+        <annotation>
+          <documentation>12715: 755 - Skråstagbru m/kasse, 2 tårn,  2, opphengte sidespenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="756">
+        <annotation>
+          <documentation>12716: 756 - Skråstagbru m/kasse, 3/flere tårn, ingen opph. sidesp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="757">
+        <annotation>
+          <documentation>12717: 757 - Skråstagbru m/kasse, 3/flere tårn, 1 opphengt sidesp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="758">
+        <annotation>
+          <documentation>12718: 758 - Skråstagbru m/kasse, 3/flere tårn, 2 opphengte sidesp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="759">
+        <annotation>
+          <documentation>12719: 759 - Skråstagbru m/kasse, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="76">
+        <annotation>
+          <documentation>12720: 76 - Flytebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="760">
+        <annotation>
+          <documentation>12721: 760 - Flytebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="761">
+        <annotation>
+          <documentation>12722: 761 - Flytebru, kont. f.element m/forank., kjøreb. på søyler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="762">
+        <annotation>
+          <documentation>12723: 762 - Flytebru, kont. f.element m/forank., kjøreb. på f.elem</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="763">
+        <annotation>
+          <documentation>12724: 763 - Flytebru, kont. f.element u/forank., kjøreb. på søyler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="764">
+        <annotation>
+          <documentation>12725: 764 - Flytebru, kont. f.element u/forank., kjøreb. på f.elem</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="765">
+        <annotation>
+          <documentation>12726: 765 - Flytebru, adskilte flyteelementer m/forankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="766">
+        <annotation>
+          <documentation>12727: 766 - Flytebru, adskilte flyteleementer u/forankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="767">
+        <annotation>
+          <documentation>12728: 767 - Flytebru, neddykkede pontonger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="769">
+        <annotation>
+          <documentation>12729: 769 - Flytebru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="77">
+        <annotation>
+          <documentation>12730: 77 - Neddykket rørbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="770">
+        <annotation>
+          <documentation>12731: 770 - Neddykket rørbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="771">
+        <annotation>
+          <documentation>12732: 771 - Neddykket rørbru, konsentrerte forankringer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="772">
+        <annotation>
+          <documentation>12733: 772 - Neddykket rørbru, fordelte forankringer (&lt; enn 100m)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="773">
+        <annotation>
+          <documentation>12734: 773 - Neddykket rørbru, på bunnen, uten opplager</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="774">
+        <annotation>
+          <documentation>12735: 774 - Neddykket rørbru, på bunnen, med opplager</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="779">
+        <annotation>
+          <documentation>12736: 779 - Neddykket rørbru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="79">
+        <annotation>
+          <documentation>12737: 79 - Andre henge- og flytebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="790">
+        <annotation>
+          <documentation>12738: 790 - Andre henge- og flytebruer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="8">
+        <annotation>
+          <documentation>12739: 8 - Kai, bevegelig bru og andre brutyper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="80">
+        <annotation>
+          <documentation>12740: 80 - Kai, bevegelig bru og andre brutyper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="800">
+        <annotation>
+          <documentation>12741: 800 - Kai, bevegelig bru og andre brutyper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="81">
+        <annotation>
+          <documentation>12742: 81 - Ferjekaibru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="810">
+        <annotation>
+          <documentation>12743: 810 - Ferjekaibru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="811">
+        <annotation>
+          <documentation>12744: 811 - Ferjekaibru, std. '82</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="812">
+        <annotation>
+          <documentation>12745: 812 - Ferjekaibru, std. '93</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="813">
+        <annotation>
+          <documentation>12746: 813 - Reservebru, mobil ferjekaibru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="819">
+        <annotation>
+          <documentation>12747: 819 - Ferjekaibru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>12748: 82 - Kai</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="820">
+        <annotation>
+          <documentation>12749: 820 - Kai</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="821">
+        <annotation>
+          <documentation>12750: 821 - Tilleggskai, strandkai</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="822">
+        <annotation>
+          <documentation>12751: 822 - Tilleggskai, utstikker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="823">
+        <annotation>
+          <documentation>12752: 823 - Tilleggskai,strandk.std.'93</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="824">
+        <annotation>
+          <documentation>12753: 824 - Tilleggskai,utst.std.'93</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="825">
+        <annotation>
+          <documentation>12754: 825 - Sekundærkai</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="826">
+        <annotation>
+          <documentation>12755: 826 - Liggekai, strandkai</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="827">
+        <annotation>
+          <documentation>12756: 827 - Liggekai, utstikker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="828">
+        <annotation>
+          <documentation>12757: 828 - Ro-Ro-rampe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="829">
+        <annotation>
+          <documentation>12758: 829 - Andre kaier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="83">
+        <annotation>
+          <documentation>12759: 83 - Marine konstruksjoner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="830">
+        <annotation>
+          <documentation>12760: 830 - Marine konstruksjoner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="831">
+        <annotation>
+          <documentation>12761: 831 - Molo</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="832">
+        <annotation>
+          <documentation>12762: 832 - Dykdalber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="85">
+        <annotation>
+          <documentation>12763: 85 - Klaffebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="850">
+        <annotation>
+          <documentation>12764: 850 - Klaffebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="851">
+        <annotation>
+          <documentation>12765: 851 - Klaffebru, enarmet, bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="852">
+        <annotation>
+          <documentation>12766: 852 - Klaffebru, enarmet, kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="853">
+        <annotation>
+          <documentation>12767: 853 - Klaffebru, enarmet, fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="854">
+        <annotation>
+          <documentation>12768: 854 - Klaffebru, toarmet, bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="855">
+        <annotation>
+          <documentation>12769: 855 - Klaffebru, toarmet, kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="856">
+        <annotation>
+          <documentation>12770: 856 - Klaffebru, toarmet, fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="859">
+        <annotation>
+          <documentation>12771: 859 - Klaffebru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="86">
+        <annotation>
+          <documentation>12772: 86 - Svingbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="860">
+        <annotation>
+          <documentation>12773: 860 - Svingbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="861">
+        <annotation>
+          <documentation>12774: 861 - Svingbru, likearmet, bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="862">
+        <annotation>
+          <documentation>12775: 862 - Svingbru, likearmet, kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="863">
+        <annotation>
+          <documentation>12776: 863 - Svingbru, likearmet, fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="864">
+        <annotation>
+          <documentation>12777: 864 - Svingbru, ulikearmet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="869">
+        <annotation>
+          <documentation>12778: 869 - Svingbru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="87">
+        <annotation>
+          <documentation>12779: 87 - Rullebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="870">
+        <annotation>
+          <documentation>12780: 870 - Rullebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="871">
+        <annotation>
+          <documentation>12781: 871 - Rullebru, bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="872">
+        <annotation>
+          <documentation>12782: 872 - Rullebru, kasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="873">
+        <annotation>
+          <documentation>12783: 873 - Rullebru, fagverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="879">
+        <annotation>
+          <documentation>12784: 879 - Rullebru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="88">
+        <annotation>
+          <documentation>12785: 88 - Reservebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="880">
+        <annotation>
+          <documentation>12786: 880 - Reservebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="881">
+        <annotation>
+          <documentation>12787: 881 - Reservebru, Bailey</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="882">
+        <annotation>
+          <documentation>12788: 882 - Reservebru, Acrow</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="883">
+        <annotation>
+          <documentation>12789: 883 - Reservebru, Universal Mabey</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="884">
+        <annotation>
+          <documentation>12790: 884 - Reservebru, Unifloat flytebru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="889">
+        <annotation>
+          <documentation>12791: 889 - Reservebru, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="89">
+        <annotation>
+          <documentation>12792: 89 - Andre byggverkstyper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="890">
+        <annotation>
+          <documentation>12793: 890 - Andre byggverkstyper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="9">
+        <annotation>
+          <documentation>12794: 9 - Andre byggverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="90">
+        <annotation>
+          <documentation>12795: 90 - Andre byggverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="900">
+        <annotation>
+          <documentation>12796: 900 - Andre byggverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="91">
+        <annotation>
+          <documentation>12797: 91 - Støttemur, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="910">
+        <annotation>
+          <documentation>12798: 910 - Støttemur, plassprodusert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="911">
+        <annotation>
+          <documentation>12799: 911 - Støttemur, plassprodusert, massiv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="912">
+        <annotation>
+          <documentation>12800: 912 - Støttemur, plassprodusert, sålefundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="913">
+        <annotation>
+          <documentation>12801: 913 - Støttemur, plassprodusert, sålefund. m/forankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="914">
+        <annotation>
+          <documentation>12802: 914 - Støttemur, plassprodusert, sålefundament m/ribber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="915">
+        <annotation>
+          <documentation>12803: 915 - Støttemur, plassprodusert, ribber m/forankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="919">
+        <annotation>
+          <documentation>12804: 919 - Støttemur, plassprodusert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="92">
+        <annotation>
+          <documentation>12805: 92 - Støttemur, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="920">
+        <annotation>
+          <documentation>12806: 920 - Støttemur, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="921">
+        <annotation>
+          <documentation>12807: 921 - Støttemur, prefabrikkert, tørrmur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="922">
+        <annotation>
+          <documentation>12808: 922 - Støttemur, prefabrikkert, trådkurver</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="923">
+        <annotation>
+          <documentation>12809: 923 - Støttemur, prefabrikkert, bingemur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="924">
+        <annotation>
+          <documentation>12810: 924 - Støttemur, prefabrikkert, armert jord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="925">
+        <annotation>
+          <documentation>12811: 925 - Støttemur, prefabrikkert, spunt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="929">
+        <annotation>
+          <documentation>12812: 929 - Støttemur, prefabrikkert, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="93">
+        <annotation>
+          <documentation>12813: 93 - Skredoverbygg, u/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="930">
+        <annotation>
+          <documentation>12814: 930 - Skredoverbygg, u/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="931">
+        <annotation>
+          <documentation>12815: 931 - Skredoverbygg, u/f.forank., sålefund., hel frontvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="932">
+        <annotation>
+          <documentation>12816: 932 - Skredoverbygg, u/f.forank., sålefund., åpen frontvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="933">
+        <annotation>
+          <documentation>12817: 933 - Skredoverbygg, u/fjellforankring, kassetverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="934">
+        <annotation>
+          <documentation>12818: 934 - Skredoverbygg, u/fjellforankring, rørtverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="939">
+        <annotation>
+          <documentation>12819: 939 - Skredoverbygg, u/fjellforankring, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="94">
+        <annotation>
+          <documentation>12820: 94 - Skredoverbygg, m/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="940">
+        <annotation>
+          <documentation>12821: 940 - Skredoverbygg, m/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="941">
+        <annotation>
+          <documentation>12822: 941 - Skredoverbygg, m/fjellfor., hel frontvegg, u/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="942">
+        <annotation>
+          <documentation>12823: 942 - Skredoverbygg, m/fjellfor., hel frontvegg, m/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="943">
+        <annotation>
+          <documentation>12824: 943 - Skredoverbygg, m/fjellfor., åpen frontvegg, u/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="944">
+        <annotation>
+          <documentation>12825: 944 - Skredoverbygg, m/fjellfor., åpen frontvegg, m/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="949">
+        <annotation>
+          <documentation>12826: 949 - Skredoverbygg, m/fjellfor., andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="95">
+        <annotation>
+          <documentation>12827: 95 - Tunnelportal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="950">
+        <annotation>
+          <documentation>12828: 950 - Tunnelportal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="951">
+        <annotation>
+          <documentation>12829: 951 - Tunnelportal, sirkulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="952">
+        <annotation>
+          <documentation>12830: 952 - Tunnelportal, rektangulert tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="953">
+        <annotation>
+          <documentation>12831: 953 - Tunnelportal, hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="959">
+        <annotation>
+          <documentation>12832: 959 - Tunnelportal, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>12833: 96 - Miljøtunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="960">
+        <annotation>
+          <documentation>12834: 960 - Miljøtunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="961">
+        <annotation>
+          <documentation>12835: 961 - Næringslokk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="962">
+        <annotation>
+          <documentation>12836: 962 - Boliglokk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="963">
+        <annotation>
+          <documentation>12837: 963 - Servicelokk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="97">
+        <annotation>
+          <documentation>12838: 97 - Fjelltunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="970">
+        <annotation>
+          <documentation>12839: 970 - Fjelltunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="971">
+        <annotation>
+          <documentation>12840: 971 - Fjelltunnel, råsprengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="972">
+        <annotation>
+          <documentation>12841: 972 - Fjelltunnel, med elementhvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="973">
+        <annotation>
+          <documentation>12842: 973 - Fjelltunnel, med plasstøpt hvelv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="98">
+        <annotation>
+          <documentation>12843: 98 - Tunnelkonstruksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="980">
+        <annotation>
+          <documentation>12844: 980 - Tunnelkonstruksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="981">
+        <annotation>
+          <documentation>12845: 981 - Tunnelkonstruksjon, rektangulært tverrsnitt u/bunnpl.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="982">
+        <annotation>
+          <documentation>12846: 982 - Tunnelkonstruksjon, rektangulært tverrsnitt m/bunnpl.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="983">
+        <annotation>
+          <documentation>12847: 983 - Tunnelkonstruksjon, hvelv u/bunnpl.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="984">
+        <annotation>
+          <documentation>12848: 984 - Tunnelkonstruksjon, hvelv m/bunnpl.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="989">
+        <annotation>
+          <documentation>12849: 989 - Tunnelkonstruksjon, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="99">
+        <annotation>
+          <documentation>12850: 99 - Andre konstruksjoner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="990">
+        <annotation>
+          <documentation>12851: 990 - Andre konstruksjoner</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ByggverkstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeBruType">
+    <annotation>
+      <documentation>1404: Angir primær materialtype for brukonstruksjonen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeBruEnumerationType nvdb:MaterialtypeBruOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeBruEnumerationType">
+    <annotation>
+      <documentation>1404: Angir primær materialtype for brukonstruksjonen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>12325: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spennbetong">
+        <annotation>
+          <documentation>12326: Spennbetong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stål">
+        <annotation>
+          <documentation>12327: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="aluminium">
+        <annotation>
+          <documentation>12328: Aluminium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stein">
+        <annotation>
+          <documentation>12329: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>12330: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>12331: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetKonstruksjonsmateriale">
+        <annotation>
+          <documentation>12332: Annet konstruksjonsmateriale</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeBruOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusType">
+    <annotation>
+      <documentation>11317: Angir hvilken status ei bru har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StatusEnumerationType nvdb:StatusOtherType"/>
+  </simpleType>
+  <simpleType name="StatusEnumerationType">
+    <annotation>
+      <documentation>11317: Angir hvilken status ei bru har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="planlagt">
+        <annotation>
+          <documentation>19261: Planlagt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkert">
+        <annotation>
+          <documentation>19262: Trafikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagtSperret">
+        <annotation>
+          <documentation>19263: Nedlagt/Sperret</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nybygd_IkkeTraf">
+        <annotation>
+          <documentation>19264: Nybygd, ikke traf.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="revet">
+        <annotation>
+          <documentation>19265: Revet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="byggesIkkeAldri">
+        <annotation>
+          <documentation>19266: Bygges ikke/aldri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annen">
+        <annotation>
+          <documentation>19267: Annen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Sv12_100_PlasseringType">
+    <annotation>
+      <documentation>11457: Angir hvor på brua spesialtransport må kjøre</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Sv12_100_PlasseringEnumerationType nvdb:Sv12_100_PlasseringOtherType"/>
+  </simpleType>
+  <simpleType name="Sv12_100_PlasseringEnumerationType">
+    <annotation>
+      <documentation>11457: Angir hvor på brua spesialtransport må kjøre</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>19499: Tilstrebes å kjøre mest mulig sentrisk i kjørefelt som benyttes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>19500: Sentrisk på brua</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>19501: 2 kjørefelt - Inn mot gulstripe/midtdeler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2V">
+        <annotation>
+          <documentation>19502: 2 kjørefelt i kjøreretningen - Sentrisk i venstre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2S">
+        <annotation>
+          <documentation>19503: 2 kjørefelt i kjøreretningen - Sentrisk om begge kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2H">
+        <annotation>
+          <documentation>19504: 2 kjørefelt i kjøreretningen - Sentrisk i høyre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3V">
+        <annotation>
+          <documentation>19505: 3 kjørefelt i kjøreretningen - Sentrisk i venstre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3S">
+        <annotation>
+          <documentation>19506: 3 kjørefelt i kjøreretningen - Sentrisk i midtre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3H">
+        <annotation>
+          <documentation>19507: 3 kjørefelt i kjøreretningen - Sentrisk i høyre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3VS">
+        <annotation>
+          <documentation>19508: 3 kjørefelt i kjøreretningen - Sentrisk om de to indre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3HS">
+        <annotation>
+          <documentation>19509: 3 kjørefelt i kjøreretningen - Sentrisk om de to ytre kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annen">
+        <annotation>
+          <documentation>19510: Restriksjoner som ikke dekkes av skissene beskrives spesifikt i merknadsfeltet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Sv12_100_PlasseringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBruType">
+    <annotation>
+      <documentation>8969: Angir hvem som er ansvarlig for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBruEnumerationType nvdb:VedlikeholdsansvarligBruOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBruEnumerationType">
+    <annotation>
+      <documentation>8969: Angir hvem som er ansvarlig for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingenUteAvDrift">
+        <annotation>
+          <documentation>12852: Ingen/ute av drift</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegvesenetStaten">
+        <annotation>
+          <documentation>11808: Vegvesenet/Staten</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegvesenetFylkeskommunen">
+        <annotation>
+          <documentation>11812: Vegvesenet/Fylkeskommunen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegvesenetDriftForAndre">
+        <annotation>
+          <documentation>12853: Vegvesenet/Drift for andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="baneeier">
+        <annotation>
+          <documentation>12854: Baneeier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommunen">
+        <annotation>
+          <documentation>11807: Kommunen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS_Selskapet">
+        <annotation>
+          <documentation>12855: OPS-selskapet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>19092: Nye veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kraftsselskapet">
+        <annotation>
+          <documentation>12856: Kraftsselskapet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>11806: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="andre">
+        <annotation>
+          <documentation>12857: Andre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBruOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VeggruppeType">
+    <annotation>
+      <documentation>11459: Angir veggruppe for spesialtransport</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VeggruppeEnumerationType nvdb:VeggruppeOtherType"/>
+  </simpleType>
+  <simpleType name="VeggruppeEnumerationType">
+    <annotation>
+      <documentation>11459: Angir veggruppe for spesialtransport</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="A">
+        <annotation>
+          <documentation>19511: Veggruppe A</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>19512: Veggruppe B</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VeggruppeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

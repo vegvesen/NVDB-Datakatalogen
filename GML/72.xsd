@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstType">
+    <annotation>
+      <documentation>9675: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstEnumerationType nvdb:AdkomstOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstEnumerationType">
+    <annotation>
+      <documentation>9675: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19828: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>13942: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>13943: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>13944: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>13945: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>13946: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>13947: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Bergsikring" substitutionGroup="nvdb:AbstraktBergsikring" type="nvdb:BergsikringType">
+    <annotation>
+      <documentation>72: Område/felt i tunnel eller fjellskjæring i dagen som er sikra med nett, bolter etc.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BergsikringType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBergsikringType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeBergsikringType">
+            <annotation>
+              <documentation>1133: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="double">
+            <annotation>
+              <documentation>1368: Angir areal av sikringsfeltet.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallBolterAnker" type="integer">
+            <annotation>
+              <documentation>1989: Angir hvor mange bolter og/eller anker som er brukt i sikringsområde
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>5296: Angir total lengde av sikringsfelt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeSprøytbetong" type="nvdb:TypeSprøytbetongType">
+            <annotation>
+              <documentation>9166: Angir hvilken type sprøytbetong som er benyttet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVeg" type="integer">
+            <annotation>
+              <documentation>9673: Angir største høyde til overkant av bergsikring.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelseSprøytbetong" type="integer">
+            <annotation>
+              <documentation>9330: Angir tykkelse av sprøytbetong
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringBergsikringType">
+            <annotation>
+              <documentation>1651: Angir sikringsfeltets plassering.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="wiredimensjon" type="integer">
+            <annotation>
+              <documentation>9674: Angir dimensjon for sikringswire
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstType">
+            <annotation>
+              <documentation>9675: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9167: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9877: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11064: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierBergsikringType">
+            <annotation>
+              <documentation>9676: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBergsikringType">
+            <annotation>
+              <documentation>9677: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4774: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8877: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BergsikringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Bergsikring"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="EierBergsikringType">
+    <annotation>
+      <documentation>9676: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierBergsikringEnumerationType nvdb:EierBergsikringOtherType"/>
+  </simpleType>
+  <simpleType name="EierBergsikringEnumerationType">
+    <annotation>
+      <documentation>9676: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>13948: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18659: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>13949: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13950: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13951: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17665: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBergsikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringBergsikringType">
+    <annotation>
+      <documentation>1651: Angir sikringsfeltets plassering.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringBergsikringEnumerationType nvdb:PlasseringBergsikringOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringBergsikringEnumerationType">
+    <annotation>
+      <documentation>1651: Angir sikringsfeltets plassering.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tunnel_HeleProfilet">
+        <annotation>
+          <documentation>3295: Sikring plassert i hele profilet i tunnelløpet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_HengOgVegger">
+        <annotation>
+          <documentation>3297: Sikring plassert i heng og vegger i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_Heng">
+        <annotation>
+          <documentation>3299: Sikring plassert  i heng i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_Såle">
+        <annotation>
+          <documentation>3303: Sikring plassert i såle i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_HøyreVegg">
+        <annotation>
+          <documentation>3308: Sikring plassert på høyre vegg (i forhold til vegens metreringsretning)  i tunnelløp.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_VenstreVegg">
+        <annotation>
+          <documentation>3305: Sikring plassert på venstre vegg (i forhold til vegens metreringsretning)  i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_HøyreVeggOgHeng">
+        <annotation>
+          <documentation>3314: Sikring plassert på høyre vegg (i forhold til vegens metreringsretning) og heng i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_VenstreVeggOgHeng">
+        <annotation>
+          <documentation>3316: Sikring plassert på venstre vegg (i forhold til vegens metreringsretning) og heng i tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_HalveProfilHøyreSide">
+        <annotation>
+          <documentation>12999: Sikring plassert halve profil høyre side</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tunnel_HalveProfilVenstreSide">
+        <annotation>
+          <documentation>13000: Sikring plassert halve profil venstre side</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dagen_Skjæring">
+        <annotation>
+          <documentation>15877: Sikring er plassert i skjæring i dagen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dagen_NaturligTerreng">
+        <annotation>
+          <documentation>15878: Sikring er plassert i naturlig skråning i dagen</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringBergsikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBergsikringType">
+    <annotation>
+      <documentation>1133: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBergsikringEnumerationType nvdb:TypeBergsikringOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBergsikringEnumerationType">
+    <annotation>
+      <documentation>1133: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bartBerg">
+        <annotation>
+          <documentation>12995: Bart berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bolter">
+        <annotation>
+          <documentation>3290: Bolter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nett">
+        <annotation>
+          <documentation>3291: Nett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nett_Ubåtnett">
+        <annotation>
+          <documentation>13210: Kraftig stålnett som legges over områder med oppsprukket fjell, ur eller løsmasser for å hindre nedfall/ras. Boltes fast til fjellet. Benyttes normalt i fjellskjæringer og ikke i tunneler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nett_Isnett">
+        <annotation>
+          <documentation>13212: Stålnett som boltes fast fast på selve fjellskjæringa. Skal "binde" is og dermed avverga at isen faller ned på vegen. Benyttes normalt i fjellskjæringer og ikke i tunneler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nett_Steinsprangnett">
+        <annotation>
+          <documentation>13211: Stålnett som legges over områder med oppsprukket fjell, ur eller løsmasser for å hindre nedfall/ras. Boltes fast til fjellet. Benyttes normalt i fjellskjæringer og ikke i tunneler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="anker">
+        <annotation>
+          <documentation>15879: Anker/forebygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjellbånd">
+        <annotation>
+          <documentation>3289: Fjellbånd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprøytebetong">
+        <annotation>
+          <documentation>12250: Sprøytebetong benyttet i forbindelse med bergsikring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprøytebetongbuer_Enkel">
+        <annotation>
+          <documentation>12251: Sprøytebetongbuer, enkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprøytebetongbuer_Dobbel">
+        <annotation>
+          <documentation>12252: Sprøytebetongbuer, dobbel</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBergsikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSprøytbetongType">
+    <annotation>
+      <documentation>9166: Angir hvilken type sprøytbetong som er benyttet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSprøytbetongEnumerationType nvdb:TypeSprøytbetongOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSprøytbetongEnumerationType">
+    <annotation>
+      <documentation>9166: Angir hvilken type sprøytbetong som er benyttet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="uarmert">
+        <annotation>
+          <documentation>12253: Uarmert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="medPP_Fiber">
+        <annotation>
+          <documentation>12254: Med PP-fiber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="medStålfiber">
+        <annotation>
+          <documentation>12255: Med stålfiber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="medArmeringsnett">
+        <annotation>
+          <documentation>12256: Med armeringsnett</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSprøytbetongOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBergsikringType">
+    <annotation>
+      <documentation>9677: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBergsikringEnumerationType nvdb:VedlikeholdsansvarligBergsikringOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBergsikringEnumerationType">
+    <annotation>
+      <documentation>9677: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>13952: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18688: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19991: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18817: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13953: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13954: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17765: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBergsikringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

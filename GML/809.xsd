@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BelysningType">
+    <annotation>
+      <documentation>9264: Angir om plassen er belyst</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BelysningEnumerationType nvdb:BelysningOtherType"/>
+  </simpleType>
+  <simpleType name="BelysningEnumerationType">
+    <annotation>
+      <documentation>9264: Angir om plassen er belyst</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12921: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12922: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelysningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DrivstoffyllingsanleggType">
+    <annotation>
+      <documentation>9269: Angir om det er anlegg for fylling av drivstoff</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DrivstoffyllingsanleggEnumerationType nvdb:DrivstoffyllingsanleggOtherType"/>
+  </simpleType>
+  <simpleType name="DrivstoffyllingsanleggEnumerationType">
+    <annotation>
+      <documentation>9269: Angir om det er anlegg for fylling av drivstoff</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12932: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12933: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DrivstoffyllingsanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DusjType">
+    <annotation>
+      <documentation>9274: Angir om det er tilgang til dusj</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DusjEnumerationType nvdb:DusjOtherType"/>
+  </simpleType>
+  <simpleType name="DusjEnumerationType">
+    <annotation>
+      <documentation>9274: Angir om det er tilgang til dusj</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12942: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12943: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DusjOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Døgnhvileplass" substitutionGroup="nvdb:AbstraktDøgnhvileplass" type="nvdb:DøgnhvileplassType">
+    <annotation>
+      <documentation>809: Et område som er tilrettelagt for hensetting av vogntog i langtransport slik at sjåførene kan innta normal døgnhvile.</documentation>
+    </annotation>
+  </element>
+  <complexType name="DøgnhvileplassType">
+    <complexContent>
+      <extension base="nvdb:AbstraktDøgnhvileplassType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>9245: Navn på døgnhvileplass</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lokalisertVed" type="nvdb:LokalisertVedType">
+            <annotation>
+              <documentation>9246: Angir hvor døgnhvileplass er lokalisert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallOppstillingsplasserVogntog" type="integer">
+            <annotation>
+              <documentation>9467: Angir hvor mange oppstillingsplasser dimensjonert for vogntog det er tilrettelagt for på døgnhvileplassen.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skiltetAtkomst" type="nvdb:SkiltetAtkomstType">
+            <annotation>
+              <documentation>9247: Angir hvilken skilting det er i forbindelse med døgnhvileplass</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kontaktinfo" type="string">
+            <annotation>
+              <documentation>9249: Kotaktinfo til eier/ansvarlig som det er fysisk opplyst om (i form av oppslag etc) på døgnhvileplassen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsansvarlig" type="string">
+            <annotation>
+              <documentation>9251: Angir hvem som er ansvalig for drift av døgnhvileplassen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal_Totalt" type="integer">
+            <annotation>
+              <documentation>9252: Angir totalt areal av døgnhvileplass, inkludert kjøreareal, grøntareal, bygninger etc,
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal_Kjørbart" type="integer">
+            <annotation>
+              <documentation>9253: Angir areal av kjørbart område innenfor Døgnhvileplassen
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vaktordning" type="nvdb:VaktordningType">
+            <annotation>
+              <documentation>9262: Angir hvilken type vaktordning det er i tilknytning til området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kameraovervåkning" type="nvdb:KameraovervåkningType">
+            <annotation>
+              <documentation>9263: Angir om det er kameraovervåkning av området</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belysning" type="nvdb:BelysningType">
+            <annotation>
+              <documentation>9264: Angir om plassen er belyst</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengtMedBommer" type="nvdb:StengtMedBommerType">
+            <annotation>
+              <documentation>9265: Angir om plassen er stengt med bommer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="reserveringssystem" type="nvdb:ReserveringssystemType">
+            <annotation>
+              <documentation>9266: Angir om det er mulig å forhåndsreservere plass</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="systemS_Mm_LderTilgjengeligKapasitet" type="nvdb:SystemS_Mm_LderTilgjengeligKapasitetType">
+            <annotation>
+              <documentation>9267: Angir om det er system som melder tilgjengelig kapasitet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="farligGods" type="nvdb:FarligGodsType">
+            <annotation>
+              <documentation>9268: Angir hvordan det er tilrettelagt for kjøretøy som transporterer farlig gods.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="drivstoffyllingsanlegg" type="nvdb:DrivstoffyllingsanleggType">
+            <annotation>
+              <documentation>9269: Angir om det er anlegg for fylling av drivstoff</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vaskeplassForTrailere" type="nvdb:VaskeplassForTrailereType">
+            <annotation>
+              <documentation>9270: Angir om det er vaskeplass for trailere/vogntog</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilgangTilStrøm" type="nvdb:TilgangTilStrømType">
+            <annotation>
+              <documentation>9271: Angir om det er tilgang til strøm.  F.eks til aggregater og andre formål.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gebyrForStrøm" type="nvdb:GebyrForStrømType">
+            <annotation>
+              <documentation>9272: Angir hvorvidt det er gebyr for å bruke strøm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="toalett" type="nvdb:ToalettType">
+            <annotation>
+              <documentation>9273: Angir om det er tilgang til toalett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dusj" type="nvdb:DusjType">
+            <annotation>
+              <documentation>9274: Angir om det er tilgang til dusj</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kiosk" type="nvdb:KioskType">
+            <annotation>
+              <documentation>9275: Angir om det er kiosk i tilknytning til plassen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kafeteria" type="nvdb:KafeteriaType">
+            <annotation>
+              <documentation>9276: Angir om det er kafeteria i tilknytning til plassen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppholdsrom" type="nvdb:OppholdsromType">
+            <annotation>
+              <documentation>9277: Angir om det er oppholdsrom for hvilende</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trådløstInternett" type="nvdb:TrådløstInternettType">
+            <annotation>
+              <documentation>9278: Angir om det er tilgjengelig trådløst internett på stedet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kollektivtilbudTilSentrum" type="nvdb:KollektivtilbudTilSentrumType">
+            <annotation>
+              <documentation>9279: Angir om det er kollektivtilbud til sentrum</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gangavstandTilServicetilbud" type="nvdb:GangavstandTilServicetilbudType">
+            <annotation>
+              <documentation>9280: Angir om det er gangavstand til servicetilbud</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="terminalLogistikkområde" type="nvdb:TerminalLogistikkområdeType">
+            <annotation>
+              <documentation>9281: Angir om lokaliseringen er i et viktig målpunktområde for  godstransport</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="årligTilskuddFraStatensVegvesen" type="integer">
+            <annotation>
+              <documentation>9466: Angir hvor stor årlig bevilgning som tildeles til drift, jfr MOTIV
+Enhet: Kroner</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>9282: Gir mulighet til å angir tilleggsinformasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prisnivå" type="integer">
+            <annotation>
+              <documentation>9468: Angir hvilket prisnivå tilskudd fra Statens vegvesen (ET 9466) er oppgitt i  (Årstall)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10285: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11464: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierDøgnhvileplassType">
+            <annotation>
+              <documentation>9248: Angir hvem som er eier</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligDøgnhvileplassType">
+            <annotation>
+              <documentation>9250: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>9283: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>9284: Gir flate/polygon som geometrisk avgrenser døgnhvileplassen</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="DøgnhvileplassPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Døgnhvileplass"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="EierDøgnhvileplassType">
+    <annotation>
+      <documentation>9248: Angir hvem som er eier</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierDøgnhvileplassEnumerationType nvdb:EierDøgnhvileplassOtherType"/>
+  </simpleType>
+  <simpleType name="EierDøgnhvileplassEnumerationType">
+    <annotation>
+      <documentation>9248: Angir hvem som er eier</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>12892: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_Annen">
+        <annotation>
+          <documentation>12893: Stat, annen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18563: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylke">
+        <annotation>
+          <documentation>12894: Fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>12895: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="deltEierskap">
+        <annotation>
+          <documentation>12897: Delt eierskap</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>12896: Privat</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierDøgnhvileplassOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FarligGodsType">
+    <annotation>
+      <documentation>9268: Angir hvordan det er tilrettelagt for kjøretøy som transporterer farlig gods.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FarligGodsEnumerationType nvdb:FarligGodsOtherType"/>
+  </simpleType>
+  <simpleType name="FarligGodsEnumerationType">
+    <annotation>
+      <documentation>9268: Angir hvordan det er tilrettelagt for kjøretøy som transporterer farlig gods.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stengt">
+        <annotation>
+          <documentation>12929: Stengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkeTilrettelagtSpesielt">
+        <annotation>
+          <documentation>12930: Ikke tilrettelagt spesielt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="egneAtskiltePlasser">
+        <annotation>
+          <documentation>12931: Egne atskilte plasser</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FarligGodsOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GangavstandTilServicetilbudType">
+    <annotation>
+      <documentation>9280: Angir om det er gangavstand til servicetilbud</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GangavstandTilServicetilbudEnumerationType nvdb:GangavstandTilServicetilbudOtherType"/>
+  </simpleType>
+  <simpleType name="GangavstandTilServicetilbudEnumerationType">
+    <annotation>
+      <documentation>9280: Angir om det er gangavstand til servicetilbud</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12954: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12955: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GangavstandTilServicetilbudOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GebyrForStrømType">
+    <annotation>
+      <documentation>9272: Angir hvorvidt det er gebyr for å bruke strøm</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GebyrForStrømEnumerationType nvdb:GebyrForStrømOtherType"/>
+  </simpleType>
+  <simpleType name="GebyrForStrømEnumerationType">
+    <annotation>
+      <documentation>9272: Angir hvorvidt det er gebyr for å bruke strøm</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12938: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12939: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GebyrForStrømOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KafeteriaType">
+    <annotation>
+      <documentation>9276: Angir om det er kafeteria i tilknytning til plassen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KafeteriaEnumerationType nvdb:KafeteriaOtherType"/>
+  </simpleType>
+  <simpleType name="KafeteriaEnumerationType">
+    <annotation>
+      <documentation>9276: Angir om det er kafeteria i tilknytning til plassen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12946: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12947: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KafeteriaOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KameraovervåkningType">
+    <annotation>
+      <documentation>9263: Angir om det er kameraovervåkning av området</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KameraovervåkningEnumerationType nvdb:KameraovervåkningOtherType"/>
+  </simpleType>
+  <simpleType name="KameraovervåkningEnumerationType">
+    <annotation>
+      <documentation>9263: Angir om det er kameraovervåkning av området</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12919: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12920: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KameraovervåkningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KioskType">
+    <annotation>
+      <documentation>9275: Angir om det er kiosk i tilknytning til plassen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KioskEnumerationType nvdb:KioskOtherType"/>
+  </simpleType>
+  <simpleType name="KioskEnumerationType">
+    <annotation>
+      <documentation>9275: Angir om det er kiosk i tilknytning til plassen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12944: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12945: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KioskOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KollektivtilbudTilSentrumType">
+    <annotation>
+      <documentation>9279: Angir om det er kollektivtilbud til sentrum</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KollektivtilbudTilSentrumEnumerationType nvdb:KollektivtilbudTilSentrumOtherType"/>
+  </simpleType>
+  <simpleType name="KollektivtilbudTilSentrumEnumerationType">
+    <annotation>
+      <documentation>9279: Angir om det er kollektivtilbud til sentrum</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12952: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12953: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KollektivtilbudTilSentrumOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="LokalisertVedType">
+    <annotation>
+      <documentation>9246: Angir hvor døgnhvileplass er lokalisert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LokalisertVedEnumerationType nvdb:LokalisertVedOtherType"/>
+  </simpleType>
+  <simpleType name="LokalisertVedEnumerationType">
+    <annotation>
+      <documentation>9246: Angir hvor døgnhvileplass er lokalisert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rasteplass">
+        <annotation>
+          <documentation>12885: Rasteplass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bensinstasjon">
+        <annotation>
+          <documentation>12886: Bensinstasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegkro">
+        <annotation>
+          <documentation>12887: Vegkro</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="industriområde">
+        <annotation>
+          <documentation>12888: Industriområde</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LokalisertVedOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppholdsromType">
+    <annotation>
+      <documentation>9277: Angir om det er oppholdsrom for hvilende</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OppholdsromEnumerationType nvdb:OppholdsromOtherType"/>
+  </simpleType>
+  <simpleType name="OppholdsromEnumerationType">
+    <annotation>
+      <documentation>9277: Angir om det er oppholdsrom for hvilende</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12948: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12949: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OppholdsromOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReserveringssystemType">
+    <annotation>
+      <documentation>9266: Angir om det er mulig å forhåndsreservere plass</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ReserveringssystemEnumerationType nvdb:ReserveringssystemOtherType"/>
+  </simpleType>
+  <simpleType name="ReserveringssystemEnumerationType">
+    <annotation>
+      <documentation>9266: Angir om det er mulig å forhåndsreservere plass</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12925: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12926: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ReserveringssystemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiltetAtkomstType">
+    <annotation>
+      <documentation>9247: Angir hvilken skilting det er i forbindelse med døgnhvileplass</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkiltetAtkomstEnumerationType nvdb:SkiltetAtkomstOtherType"/>
+  </simpleType>
+  <simpleType name="SkiltetAtkomstEnumerationType">
+    <annotation>
+      <documentation>9247: Angir hvilken skilting det er i forbindelse med døgnhvileplass</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja_ForhånsvarslingOgVarslingVedAvkjøring">
+        <annotation>
+          <documentation>12889: Ja, forhånsvarsling og varsling ved avkjøring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_VarslingVedAvkjøring">
+        <annotation>
+          <documentation>12890: Ja, varsling ved avkjøring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12891: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiltetAtkomstOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengtMedBommerType">
+    <annotation>
+      <documentation>9265: Angir om plassen er stengt med bommer.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StengtMedBommerEnumerationType nvdb:StengtMedBommerOtherType"/>
+  </simpleType>
+  <simpleType name="StengtMedBommerEnumerationType">
+    <annotation>
+      <documentation>9265: Angir om plassen er stengt med bommer.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12923: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12924: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengtMedBommerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SystemS_Mm_LderTilgjengeligKapasitetType">
+    <annotation>
+      <documentation>9267: Angir om det er system som melder tilgjengelig kapasitet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SystemS_Mm_LderTilgjengeligKapasitetEnumerationType nvdb:SystemS_Mm_LderTilgjengeligKapasitetOtherType"/>
+  </simpleType>
+  <simpleType name="SystemS_Mm_LderTilgjengeligKapasitetEnumerationType">
+    <annotation>
+      <documentation>9267: Angir om det er system som melder tilgjengelig kapasitet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12927: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12928: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SystemS_Mm_LderTilgjengeligKapasitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TerminalLogistikkområdeType">
+    <annotation>
+      <documentation>9281: Angir om lokaliseringen er i et viktig målpunktområde for  godstransport</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TerminalLogistikkområdeEnumerationType nvdb:TerminalLogistikkområdeOtherType"/>
+  </simpleType>
+  <simpleType name="TerminalLogistikkområdeEnumerationType">
+    <annotation>
+      <documentation>9281: Angir om lokaliseringen er i et viktig målpunktområde for  godstransport</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12956: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12957: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TerminalLogistikkområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilgangTilStrømType">
+    <annotation>
+      <documentation>9271: Angir om det er tilgang til strøm.  F.eks til aggregater og andre formål.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilgangTilStrømEnumerationType nvdb:TilgangTilStrømOtherType"/>
+  </simpleType>
+  <simpleType name="TilgangTilStrømEnumerationType">
+    <annotation>
+      <documentation>9271: Angir om det er tilgang til strøm.  F.eks til aggregater og andre formål.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12936: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12937: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilgangTilStrømOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ToalettType">
+    <annotation>
+      <documentation>9273: Angir om det er tilgang til toalett</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ToalettEnumerationType nvdb:ToalettOtherType"/>
+  </simpleType>
+  <simpleType name="ToalettEnumerationType">
+    <annotation>
+      <documentation>9273: Angir om det er tilgang til toalett</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12940: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12941: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ToalettOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrådløstInternettType">
+    <annotation>
+      <documentation>9278: Angir om det er tilgjengelig trådløst internett på stedet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrådløstInternettEnumerationType nvdb:TrådløstInternettOtherType"/>
+  </simpleType>
+  <simpleType name="TrådløstInternettEnumerationType">
+    <annotation>
+      <documentation>9278: Angir om det er tilgjengelig trådløst internett på stedet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12950: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12951: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrådløstInternettOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaktordningType">
+    <annotation>
+      <documentation>9262: Angir hvilken type vaktordning det er i tilknytning til området</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VaktordningEnumerationType nvdb:VaktordningOtherType"/>
+  </simpleType>
+  <simpleType name="VaktordningEnumerationType">
+    <annotation>
+      <documentation>9262: Angir hvilken type vaktordning det er i tilknytning til området</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kontinuerligVakt">
+        <annotation>
+          <documentation>12916: Kontinuerlig vakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regelmessigVakt">
+        <annotation>
+          <documentation>12917: Regelmessig vakt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingenVakt">
+        <annotation>
+          <documentation>12918: Ingen vakt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaktordningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaskeplassForTrailereType">
+    <annotation>
+      <documentation>9270: Angir om det er vaskeplass for trailere/vogntog</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VaskeplassForTrailereEnumerationType nvdb:VaskeplassForTrailereOtherType"/>
+  </simpleType>
+  <simpleType name="VaskeplassForTrailereEnumerationType">
+    <annotation>
+      <documentation>9270: Angir om det er vaskeplass for trailere/vogntog</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12934: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12935: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaskeplassForTrailereOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligDøgnhvileplassType">
+    <annotation>
+      <documentation>9250: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligDøgnhvileplassEnumerationType nvdb:VedlikeholdsansvarligDøgnhvileplassOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligDøgnhvileplassEnumerationType">
+    <annotation>
+      <documentation>9250: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>12898: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18679: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19983: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18808: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>12899: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17772: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligDøgnhvileplassOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SkadetypeTilstandSkade_GrøftType">
+    <annotation>
+      <documentation>2272: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadetypeTilstandSkade_GrøftEnumerationType nvdb:SkadetypeTilstandSkade_GrøftOtherType"/>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_GrøftEnumerationType">
+    <annotation>
+      <documentation>2272: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tilgrodd">
+        <annotation>
+          <documentation>4109: Tilgrodd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tettetPgaRas">
+        <annotation>
+          <documentation>4110: Tettet pga ras</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_GrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Grøft" substitutionGroup="nvdb:AbstraktTilstandSkade_Grøft" type="nvdb:TilstandSkade_GrøftType">
+    <annotation>
+      <documentation>302: Gir informasjon om tilstand og eventuell skade på åpen grøft.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_GrøftType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_GrøftType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_GrøftType">
+            <annotation>
+              <documentation>2271: Angir tilstand til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_GrøftType">
+            <annotation>
+              <documentation>2272: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8776: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakType">
+            <annotation>
+              <documentation>1244: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltakNår" type="string"/>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7853: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4899: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_GrøftPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Grøft"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_GrøftType">
+    <annotation>
+      <documentation>2271: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_GrøftEnumerationType nvdb:TilstandTilstandSkade_GrøftOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_GrøftEnumerationType">
+    <annotation>
+      <documentation>2271: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>4106: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>4107: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>4108: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>4630: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_GrøftOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakType">
+    <annotation>
+      <documentation>1244: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakEnumerationType nvdb:TiltakOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakEnumerationType">
+    <annotation>
+      <documentation>1244: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="grøfterensk">
+        <annotation>
+          <documentation>3822: Grøfterensk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

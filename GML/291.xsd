@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="ArtType">
+    <annotation>
+      <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på evt skilting)</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ArtEnumerationType nvdb:ArtOtherType"/>
+  </simpleType>
+  <simpleType name="ArtEnumerationType">
+    <annotation>
+      <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på evt skilting)</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="elg">
+        <annotation>
+          <documentation>4073: Elg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rein">
+        <annotation>
+          <documentation>4074: Rein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjort">
+        <annotation>
+          <documentation>4072: Hjort</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rådyr">
+        <annotation>
+          <documentation>16783: Rådyr</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ArtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierViltfareType">
+    <annotation>
+      <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierViltfareEnumerationType nvdb:EierViltfareOtherType"/>
+  </simpleType>
+  <simpleType name="EierViltfareEnumerationType">
+    <annotation>
+      <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10282: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18579: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10744: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10346: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10410: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17605: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierViltfareOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligViltfareType">
+    <annotation>
+      <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligViltfareEnumerationType nvdb:VedlikeholdsansvarligViltfareOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligViltfareEnumerationType">
+    <annotation>
+      <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10481: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18769: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19950: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18898: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10559: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10637: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17733: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligViltfareOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Viltfare" substitutionGroup="nvdb:AbstraktViltfare" type="nvdb:ViltfareType">
+    <annotation>
+      <documentation>291: Strekninger som er skiltet med viltfare</documentation>
+    </annotation>
+  </element>
+  <complexType name="ViltfareType">
+    <complexContent>
+      <extension base="nvdb:AbstraktViltfareType">
+        <sequence>
+          <element minOccurs="0" name="art" type="nvdb:ArtType">
+            <annotation>
+              <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på evt skilting)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>10413: Angir øvrig intformasjon om strekning. Kan f.eks være sesongvariasjon, utdyping av hvike arter som er problem, omfang av vilt osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>10412: Viltfarestrekningens lengde
+Enhet: Kilometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11480: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierViltfareType">
+            <annotation>
+              <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligViltfareType">
+            <annotation>
+              <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4890: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ViltfarePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Viltfare"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

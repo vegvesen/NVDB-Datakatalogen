@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeSignalanleggType">
+    <annotation>
+      <documentation>1273: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeSignalanleggEnumerationType nvdb:BruksområdeSignalanleggOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeSignalanleggEnumerationType">
+    <annotation>
+      <documentation>1273: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vegkryss">
+        <annotation>
+          <documentation>2974: Signalanlegg for regulering av vegkryss. Kan bestå av kjøretøysignaler (trelyssignal, sykkelsignal og pilsignal), fotgjengersignal og kollektivsignal.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gangfelt">
+        <annotation>
+          <documentation>2975: Signalanlegg for regulering av gangfelt utenfor signalregulerte vegkryss.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skyttelsignalanlegg">
+        <annotation>
+          <documentation>2977: Signalanlegg for regulering av trafikken på steder utenfor vegkryss hvor bare én kjøreretning kan avvikles om gangen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signalerForRampekontroll">
+        <annotation>
+          <documentation>18277: Signalanlegg som benyttes for å styre tilførsel av trafikk fra rampe til hovedveg. Signalanlegget skal bare slippe én bil av gangen over på grønt lys.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjørefeltsignal">
+        <annotation>
+          <documentation>2979: Benyttes for å angi retning på kjørefeltene.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_Bru">
+        <annotation>
+          <documentation>2978: Signalanlegg for visning av trafikkretning for ett eller flere kjørefelt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_Høgfjellsstrekning">
+        <annotation>
+          <documentation>4870: Rødt blinkanlegg for å markere stengning av høyfjellsstrekning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_Tunnel">
+        <annotation>
+          <documentation>4876: Rødt blinkanlegg for å markere stengning av tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_LavHøyde">
+        <annotation>
+          <documentation>4875: Rødt blinkanlegg for å markere stengning av veg pga at et kjøretøy er for høgt.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_SkredSkredfare">
+        <annotation>
+          <documentation>4871: Rødt blinkanlegg for å markere stengning av veg pga skred eller fare for skred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_VindUvær">
+        <annotation>
+          <documentation>11719: Rødt blinkanlegg for å markere stengning av veg pga sterk vind/uvær</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_Utrykningsstasjon">
+        <annotation>
+          <documentation>11720: Rødt blinkanlegg for å markere stengning av veg pga utrykning fra brannstasjon, politistasjon, etc.tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rødtStoppblinksignal_AnnenFare">
+        <annotation>
+          <documentation>2980: Rødt blinkanlegg for å markere stengning av veg pga annen fare.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="blinkendeSignalForanJernbane">
+        <annotation>
+          <documentation>4874: Signalanlegg i forbindelse med jernbanekryssing.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gultBlinksignal">
+        <annotation>
+          <documentation>11721: Gult blinkanlegg for varsling av fare.  Merknad: Kombinerte gult/rødt blink anlegg gis bruksområde "Rødt blink…"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ferjekai">
+        <annotation>
+          <documentation>4872: Signalanlegg for dirigering av trafikk i forbindelse med om bord- og i landkjøring på ferjeleier.  Det benyttes normalt tolyssignaler.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bomstasjon">
+        <annotation>
+          <documentation>4873: Signalanlegg for dirigering av trafikk i forbindelse med bomstasjoner.  Det benyttes normalt tolyssignaler.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parkering">
+        <annotation>
+          <documentation>11718: Signalanlegg for dirigering av trafikk i forbindelse med parkeringsanlegg.  Det benyttes normalt tolyssignaler.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeSignalanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSignalanleggType">
+    <annotation>
+      <documentation>7998: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSignalanleggEnumerationType nvdb:EierSignalanleggOtherType"/>
+  </simpleType>
+  <simpleType name="EierSignalanleggEnumerationType">
+    <annotation>
+      <documentation>7998: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10264: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18567: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10726: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10328: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10392: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17571: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSignalanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnergitilførselType">
+    <annotation>
+      <documentation>8822: Angir hvilken energitilførsel det er til signalanlegget</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EnergitilførselEnumerationType nvdb:EnergitilførselOtherType"/>
+  </simpleType>
+  <simpleType name="EnergitilførselEnumerationType">
+    <annotation>
+      <documentation>8822: Angir hvilken energitilførsel det er til signalanlegget</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="spenningsbåndI">
+        <annotation>
+          <documentation>11735: (0-50VAC, 0-120VDC)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="spenningsbåndII">
+        <annotation>
+          <documentation>11736: (50-1000VAC, 120-1500VDC)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnergitilførselOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="LyshoderType">
+    <annotation>
+      <documentation>8823: Angir hvilken type lyshoder som er benyttet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LyshoderEnumerationType nvdb:LyshoderOtherType"/>
+  </simpleType>
+  <simpleType name="LyshoderEnumerationType">
+    <annotation>
+      <documentation>8823: Angir hvilken type lyshoder som er benyttet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="LED">
+        <annotation>
+          <documentation>11734: LED</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glødelampeSpenningsbåndI">
+        <annotation>
+          <documentation>11732: Glødelampe spenningsbånd I</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glødelampeSpenningsbåndII">
+        <annotation>
+          <documentation>11733: Glødelampe spenningsbånd II</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kombinajsonLedGlødelampe">
+        <annotation>
+          <documentation>18309: Signalanlegget har kombinasjon av LED og Glødelamper</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LyshoderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OmrådestyringType">
+    <annotation>
+      <documentation>8819: Angir om signalanlegg er områdestyrt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OmrådestyringEnumerationType nvdb:OmrådestyringOtherType"/>
+  </simpleType>
+  <simpleType name="OmrådestyringEnumerationType">
+    <annotation>
+      <documentation>8819: Angir om signalanlegg er områdestyrt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11726: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11727: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OmrådestyringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OvervåkingFraVTSType">
+    <annotation>
+      <documentation>8820: Angir om signalanlegg kan overvåkes fra VTS</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OvervåkingFraVTSEnumerationType nvdb:OvervåkingFraVTSOtherType"/>
+  </simpleType>
+  <simpleType name="OvervåkingFraVTSEnumerationType">
+    <annotation>
+      <documentation>8820: Angir om signalanlegg kan overvåkes fra VTS</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11728: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11729: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OvervåkingFraVTSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SamkjørtType">
+    <annotation>
+      <documentation>8818: Angir om signalanlegget er samkjørt med andre signalanlegg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SamkjørtEnumerationType nvdb:SamkjørtOtherType"/>
+  </simpleType>
+  <simpleType name="SamkjørtEnumerationType">
+    <annotation>
+      <documentation>8818: Angir om signalanlegget er samkjørt med andre signalanlegg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11724: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11725: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SamkjørtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Signalanlegg" substitutionGroup="nvdb:AbstraktSignalanlegg" type="nvdb:SignalanleggType">
+    <annotation>
+      <documentation>89: System for regulering og varsling av trafikk.  Det er sammensatt av flere signalpunkt med tilhørende signalhoder og blir styrt av et styreapparat.  Merknad: Rødblinkanlegg er som regel egne signalanlegg på hvert sted, dvs rødblink i en ende av en tunnel er et annet saignalanlegg enn rødblink i andre enden av tunnelen.  Motsatt kan signalpunkt ved et gangfelt høre sammen i samme signalanlegg som signalpunkt for et kryss like ved.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SignalanleggType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSignalanleggType">
+        <sequence>
+          <element minOccurs="0" name="anleggsnummer" type="string">
+            <annotation>
+              <documentation>8809: Gir unikt nummer til signalanlegget.  Nummeret er sammensatt av kommunenummer (4 siffer) og et tresifret løpenummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>7570: Angir navn på signalanlegget</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeSignalanleggType">
+            <annotation>
+              <documentation>1273: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksnummer" type="string">
+            <annotation>
+              <documentation>1889: Angir vedtaksnummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="igangsettingsdato" type="date">
+            <annotation>
+              <documentation>8813: Angir dato det ble satt i drift signalanlegg første gang på dette stedet uavhengig av eventuell utskifting av utstyr eller mindre endringer i reguleringen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tidsstyrt" type="nvdb:TidsstyrtType">
+            <annotation>
+              <documentation>8816: Angir om Signalanlegg er tidsstyrt eller ikke.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="trafikkstyrt" type="nvdb:TrafikkstyrtType">
+            <annotation>
+              <documentation>8817: Angir om signalanlegg er trafikkstyrt eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="samkjørt" type="nvdb:SamkjørtType">
+            <annotation>
+              <documentation>8818: Angir om signalanlegget er samkjørt med andre signalanlegg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="områdestyring" type="nvdb:OmrådestyringType">
+            <annotation>
+              <documentation>8819: Angir om signalanlegg er områdestyrt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overvåkingFraVTS" type="nvdb:OvervåkingFraVTSType">
+            <annotation>
+              <documentation>8820: Angir om signalanlegg kan overvåkes fra VTS</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="styringFraVTS" type="nvdb:StyringFraVTSType">
+            <annotation>
+              <documentation>3758: Angir om det er mulig å styre anlegg fra VTS</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="energitilførsel" type="nvdb:EnergitilførselType">
+            <annotation>
+              <documentation>8822: Angir hvilken energitilførsel det er til signalanlegget</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lyshoder" type="nvdb:LyshoderType">
+            <annotation>
+              <documentation>8823: Angir hvilken type lyshoder som er benyttet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>8811: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11074: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSignalanleggType">
+            <annotation>
+              <documentation>7998: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSignalanleggType">
+            <annotation>
+              <documentation>3824: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4789: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8919: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SignalanleggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Signalanlegg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="StyringFraVTSType">
+    <annotation>
+      <documentation>3758: Angir om det er mulig å styre anlegg fra VTS</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StyringFraVTSEnumerationType nvdb:StyringFraVTSOtherType"/>
+  </simpleType>
+  <simpleType name="StyringFraVTSEnumerationType">
+    <annotation>
+      <documentation>3758: Angir om det er mulig å styre anlegg fra VTS</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4725: Ja</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StyringFraVTSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TidsstyrtType">
+    <annotation>
+      <documentation>8816: Angir om Signalanlegg er tidsstyrt eller ikke.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TidsstyrtEnumerationType nvdb:TidsstyrtOtherType"/>
+  </simpleType>
+  <simpleType name="TidsstyrtEnumerationType">
+    <annotation>
+      <documentation>8816: Angir om Signalanlegg er tidsstyrt eller ikke.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11722: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11723: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TidsstyrtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikkstyrtType">
+    <annotation>
+      <documentation>8817: Angir om signalanlegg er trafikkstyrt eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrafikkstyrtEnumerationType nvdb:TrafikkstyrtOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikkstyrtEnumerationType">
+    <annotation>
+      <documentation>8817: Angir om signalanlegg er trafikkstyrt eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>11745: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>11746: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikkstyrtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSignalanleggType">
+    <annotation>
+      <documentation>3824: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSignalanleggEnumerationType nvdb:VedlikeholdsansvarligSignalanleggOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSignalanleggEnumerationType">
+    <annotation>
+      <documentation>3824: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>9807: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18702: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19901: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18831: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>9808: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>9809: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17699: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSignalanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

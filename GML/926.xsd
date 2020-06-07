@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierPelerPlateType">
+    <annotation>
+      <documentation>11337: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierPelerPlateEnumerationType nvdb:EierPelerPlateOtherType"/>
+  </simpleType>
+  <simpleType name="EierPelerPlateEnumerationType">
+    <annotation>
+      <documentation>11337: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19142: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19141: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19138: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19139: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19140: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19143: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierPelerPlateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="PelerPlate" substitutionGroup="nvdb:AbstraktPelerPlate" type="nvdb:PelerPlateType">
+    <annotation>
+      <documentation>926: Område med peler/plate</documentation>
+    </annotation>
+  </element>
+  <complexType name="PelerPlateType">
+    <complexContent>
+      <extension base="nvdb:AbstraktPelerPlateType">
+        <sequence>
+          <element name="type" type="nvdb:TypePelerPlateType">
+            <annotation>
+              <documentation>11373: Angir hvilken type konstruksjon det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typePeler" type="nvdb:TypePelerType">
+            <annotation>
+              <documentation>11374: Angir hva slags type peler det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="pellengde_Maks" type="integer">
+            <annotation>
+              <documentation>11375: Angir største pellengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>11402: Angir areal av pelet område
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brutusID" type="string">
+            <annotation>
+              <documentation>11379: Referanse til ID i Brutus</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>11377: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11378: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11331: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11796: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierPelerPlateType">
+            <annotation>
+              <documentation>11337: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligPelerPlateType">
+            <annotation>
+              <documentation>11343: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11349: Gir flate/polygon som avgrenser område med peler/plater</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PelerPlatePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:PelerPlate"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypePelerType">
+    <annotation>
+      <documentation>11374: Angir hva slags type peler det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypePelerEnumerationType nvdb:TypePelerOtherType"/>
+  </simpleType>
+  <simpleType name="TypePelerEnumerationType">
+    <annotation>
+      <documentation>11374: Angir hva slags type peler det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>19225: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stål">
+        <annotation>
+          <documentation>19226: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>19227: Tre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypePelerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypePelerPlateType">
+    <annotation>
+      <documentation>11373: Angir hvilken type konstruksjon det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypePelerPlateEnumerationType nvdb:TypePelerPlateOtherType"/>
+  </simpleType>
+  <simpleType name="TypePelerPlateEnumerationType">
+    <annotation>
+      <documentation>11373: Angir hvilken type konstruksjon det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="hatter">
+        <annotation>
+          <documentation>19222: Hatter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="striper">
+        <annotation>
+          <documentation>19223: Striper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kontinuerligPlate">
+        <annotation>
+          <documentation>19224: Kontinuerlig plate</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypePelerPlateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligPelerPlateType">
+    <annotation>
+      <documentation>11343: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligPelerPlateEnumerationType nvdb:VedlikeholdsansvarligPelerPlateOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligPelerPlateEnumerationType">
+    <annotation>
+      <documentation>11343: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>19178: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>19175: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20016: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>19176: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19174: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19177: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19179: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligPelerPlateOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="KjørbarType">
+    <annotation>
+      <documentation>9179: Angir om det er mulig å kjøre med bil i tunnelløpet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KjørbarEnumerationType nvdb:KjørbarOtherType"/>
+  </simpleType>
+  <simpleType name="KjørbarEnumerationType">
+    <annotation>
+      <documentation>9179: Angir om det er mulig å kjøre med bil i tunnelløpet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12319: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12320: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KjørbarOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="RømningsvegType">
+    <annotation>
+      <documentation>9178: Angir om tunnelløp kan benyttes som rømningsveg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RømningsvegEnumerationType nvdb:RømningsvegOtherType"/>
+  </simpleType>
+  <simpleType name="RømningsvegEnumerationType">
+    <annotation>
+      <documentation>9178: Angir om tunnelløp kan benyttes som rømningsveg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>12317: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>12318: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RømningsvegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TunnelløpUtenTrafikk" substitutionGroup="nvdb:AbstraktTunnelløpUtenTrafikk" type="nvdb:TunnelløpUtenTrafikkType">
+    <annotation>
+      <documentation>447: Et tunnelløp hvor det ikke er åpent for ordinær trafikk.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TunnelløpUtenTrafikkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTunnelløpUtenTrafikkType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeTunnelløpUtenTrafikkType">
+            <annotation>
+              <documentation>9177: Angir hvilken type tunnelløp det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>9257: Angir navn, kan gjerne være samme som navn på tunnel pluss tillegg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tunnelprofil" type="nvdb:TunnelprofilTunnelløpUtenTrafikkType">
+            <annotation>
+              <documentation>3102: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>3105: Angir lengde av tunnelløpet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>3848: Angir minimum bredde fra tunnelvegg til tunnelvegg i kjørebanenivå
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>3873: Angir høyde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rømningsveg" type="nvdb:RømningsvegType">
+            <annotation>
+              <documentation>9178: Angir om tunnelløp kan benyttes som rømningsveg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjørbar" type="nvdb:KjørbarType">
+            <annotation>
+              <documentation>9179: Angir om det er mulig å kjøre med bil i tunnelløpet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11604: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11116: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8920: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TunnelløpUtenTrafikkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TunnelløpUtenTrafikk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TunnelprofilTunnelløpUtenTrafikkType">
+    <annotation>
+      <documentation>3102: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TunnelprofilTunnelløpUtenTrafikkEnumerationType nvdb:TunnelprofilTunnelløpUtenTrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="TunnelprofilTunnelløpUtenTrafikkEnumerationType">
+    <annotation>
+      <documentation>3102: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="T4">
+        <annotation>
+          <documentation>12301: T4</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T5">
+        <annotation>
+          <documentation>12302: T5</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T5_5">
+        <annotation>
+          <documentation>12303: T5,5</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T6">
+        <annotation>
+          <documentation>12304: T6</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T7">
+        <annotation>
+          <documentation>12305: T7</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8_5">
+        <annotation>
+          <documentation>12306: T8,5</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T9">
+        <annotation>
+          <documentation>12307: T9</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T9_5">
+        <annotation>
+          <documentation>12308: T9,5</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T10">
+        <annotation>
+          <documentation>12309: T10</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T11">
+        <annotation>
+          <documentation>12310: T11</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rektangulærtTverrsnitt">
+        <annotation>
+          <documentation>12316: Rektangulært tverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TunnelprofilTunnelløpUtenTrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeTunnelløpUtenTrafikkType">
+    <annotation>
+      <documentation>9177: Angir hvilken type tunnelløp det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeTunnelløpUtenTrafikkEnumerationType nvdb:TypeTunnelløpUtenTrafikkOtherType"/>
+  </simpleType>
+  <simpleType name="TypeTunnelløpUtenTrafikkEnumerationType">
+    <annotation>
+      <documentation>9177: Angir hvilken type tunnelløp det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tverrforbindelseMellomTunnelløp">
+        <annotation>
+          <documentation>12299: Tverrforbindelse mellom tunnelløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tverrslagTilDagen">
+        <annotation>
+          <documentation>12300: Tverrslag til dagen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="parallelløpTilHovedløp">
+        <annotation>
+          <documentation>12323: Parallelløp til hovedløp</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sløyfe">
+        <annotation>
+          <documentation>13395: Tunnelløp som går i sløyfe, dvs det starter og slutter i samme løp. Benyttes f.eks som rensesløyfe</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeTunnelløpUtenTrafikkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

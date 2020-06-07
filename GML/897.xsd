@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierKalksementpelerType">
+    <annotation>
+      <documentation>10801: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKalksementpelerEnumerationType nvdb:EierKalksementpelerOtherType"/>
+  </simpleType>
+  <simpleType name="EierKalksementpelerEnumerationType">
+    <annotation>
+      <documentation>10801: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17555: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18661: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17554: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17556: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17557: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17644: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKalksementpelerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Kalksementpeler" substitutionGroup="nvdb:AbstraktKalksementpeler" type="nvdb:KalksementpelerType">
+    <annotation>
+      <documentation>897: Område hvor det er foretatt stabilisering av jordart ved nedboring av kalksementpeler.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KalksementpelerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKalksementpelerType">
+        <sequence>
+          <element minOccurs="0" name="mønster" type="nvdb:MønsterType">
+            <annotation>
+              <documentation>10786: Angir hvordan pelene er plassert i forhold til hverandre</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybdeTilBunn" type="integer">
+            <annotation>
+              <documentation>10787: Angir gjennomsnittlig dybde til underkant av stabilisert område
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybdeTilTopp" type="integer">
+            <annotation>
+              <documentation>10788: Angir gjennomsnittlig dybde til overkant av stabilisert område
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>11371: Angir areal av stabilisert området
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>11372: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10790: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper,  f.eks forhold knyttet til utførelse, materialtyper osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11329: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11178: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKalksementpelerType">
+            <annotation>
+              <documentation>10801: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKalksementpelerType">
+            <annotation>
+              <documentation>10802: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10789: Gir flate/polygon som avgrenser område med kalksementpeler</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KalksementpelerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kalksementpeler"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MønsterType">
+    <annotation>
+      <documentation>10786: Angir hvordan pelene er plassert i forhold til hverandre</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MønsterEnumerationType nvdb:MønsterOtherType"/>
+  </simpleType>
+  <simpleType name="MønsterEnumerationType">
+    <annotation>
+      <documentation>10786: Angir hvordan pelene er plassert i forhold til hverandre</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="enkeltpeler">
+        <annotation>
+          <documentation>17535: Peler står ikke i spesielt mønster</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="enkelRibbe">
+        <annotation>
+          <documentation>17536: Peler står på rekke etterhverandre.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dobbelRibbe">
+        <annotation>
+          <documentation>17537: To ribber som står ved siden av hverandre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="blokk">
+        <annotation>
+          <documentation>17538: Peler plassert i rutenett innenfor et avgrensa område</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MønsterOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKalksementpelerType">
+    <annotation>
+      <documentation>10802: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligKalksementpelerEnumerationType nvdb:VedlikeholdsansvarligKalksementpelerOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKalksementpelerEnumerationType">
+    <annotation>
+      <documentation>10802: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>17558: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18706: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20005: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18835: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17559: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17560: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17789: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKalksementpelerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

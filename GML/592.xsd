@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DekkekodeType">
+    <annotation>
+      <documentation>5314: Angir hvilken type dekke det er på stedet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DekkekodeEnumerationType nvdb:DekkekodeOtherType"/>
+  </simpleType>
+  <simpleType name="DekkekodeEnumerationType">
+    <annotation>
+      <documentation>5314: Angir hvilken type dekke det er på stedet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>7320: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>7321: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grus">
+        <annotation>
+          <documentation>7322: Grus</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DekkekodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FormålNedbøyningsmålingType">
+    <annotation>
+      <documentation>5298: Angir formål med nedbøyningsmåling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FormålNedbøyningsmålingEnumerationType nvdb:FormålNedbøyningsmålingOtherType"/>
+  </simpleType>
+  <simpleType name="FormålNedbøyningsmålingEnumerationType">
+    <annotation>
+      <documentation>5298: Angir formål med nedbøyningsmåling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="S">
+        <annotation>
+          <documentation>7313: Sommer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T">
+        <annotation>
+          <documentation>7314: Teleløsning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>7316: Parallellmåling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>7315: Referansestrekning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FormålNedbøyningsmålingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Nedbøyningsmåling" substitutionGroup="nvdb:AbstraktNedbøyningsmåling" type="nvdb:NedbøyningsmålingType">
+    <annotation>
+      <documentation>592: Måling av hvor mye vegen gir etter ved belastning med fallodd etc.</documentation>
+    </annotation>
+  </element>
+  <complexType name="NedbøyningsmålingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktNedbøyningsmålingType">
+        <sequence>
+          <element minOccurs="0" name="bæreevne" type="double">
+            <annotation>
+              <documentation>5486: Angir bæreevne
+Enhet: Tonn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="formål" type="nvdb:FormålNedbøyningsmålingType">
+            <annotation>
+              <documentation>5298: Angir formål med nedbøyningsmåling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="måledato" type="date">
+            <annotation>
+              <documentation>5330: Dato for måling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="måletidspunkt" type="string">
+            <annotation>
+              <documentation>5331: Klokkeslett for måling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spor" type="nvdb:SporNedbøyningsmålingType">
+            <annotation>
+              <documentation>5299: Angir hvor nedbøyning er foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_1_Avstand" type="integer">
+            <annotation>
+              <documentation>5300: Avstand fra lastsenter til geofon-1
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_1_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5307: Målt nedbøyning for geofon-1
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_2_Avstand" type="integer">
+            <annotation>
+              <documentation>5301: Avstand fra lastsenter til geofon-2
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_2_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5308: Målt nedbøyning for geofon-2
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_3_Avstand" type="integer">
+            <annotation>
+              <documentation>5302: Avstand fra lastsenter til geofon-3
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_3_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5309: Målt nedbøyning for geofon-3
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_4_Avstand" type="integer">
+            <annotation>
+              <documentation>5303: Avstand fra lastsenter til geofon-4
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_4_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5310: Målt nedbøyning for geofon-4
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_5_Avstand" type="integer">
+            <annotation>
+              <documentation>5304: Avstand fra lastsenter til geofon-5
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_5_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5311: Målt nedbøyning for geofon-5
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_6_Avstand" type="integer">
+            <annotation>
+              <documentation>5305: Avstand fra lastsenter til geofon-6
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_6_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5312: Målt nedbøyning for geofon-6
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_7_Avstand" type="integer">
+            <annotation>
+              <documentation>5306: Avstand fra lastsenter til geofon-7
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_7_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>5313: Målt nedbøyning for geofon-7
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_8_Avstand" type="integer">
+            <annotation>
+              <documentation>8757: Avstand fra lastsenter til geofon-8
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_8_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>8758: Målt nedbøyning for geofon-8
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_9_Avstand" type="integer">
+            <annotation>
+              <documentation>8759: Avstand fra lastsenter til geofon-9
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="geofon_9_Nedbøyning" type="integer">
+            <annotation>
+              <documentation>8760: Målt nedbøyning for geofon-9
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkekode" type="nvdb:DekkekodeType">
+            <annotation>
+              <documentation>5314: Angir hvilken type dekke det er på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKjørefelt" type="integer">
+            <annotation>
+              <documentation>5315: Angir hvor mange kjørefelt det er på stedet
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekketemperatur" type="integer">
+            <annotation>
+              <documentation>5316: Angir dekketemperatur
+Enhet: Grader Celcius</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lufttemperatur" type="integer">
+            <annotation>
+              <documentation>5317: Angir lufttemperatur
+Enhet: Grader Celcius</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skydekke" type="integer">
+            <annotation>
+              <documentation>5318: Angir skydekke.  0= skyfritt, 9 = Helt overskyet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utstyrstype" type="nvdb:UtstyrstypeNedbøyningsmålingType">
+            <annotation>
+              <documentation>5319: Angir hvilken type utstyr som er benyttet ved nedbøyningsmåling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5320: Merknad, kan referere til faste merknadsnummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11272: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT_Lang" type="integer">
+            <annotation>
+              <documentation>5321: ÅDT lange kjøretøy.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ÅDT_Total" type="integer">
+            <annotation>
+              <documentation>5322: ÅDT total</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nedbøyning_SenterPlate" type="integer">
+            <annotation>
+              <documentation>5323: Nedbøyning midt under platen
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ringtrykk" type="double">
+            <annotation>
+              <documentation>11269: Angir lufttrykk (ringtrykk) i bakhjulet til målebilen.
+Enhet: Megapascal</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nedbøyning_20cm_Avstand" type="integer">
+            <annotation>
+              <documentation>5324: Nedbøyning i 20 centimeters avstand
+Enhet: Mikrometer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="platediameter_Fallodd" type="integer">
+            <annotation>
+              <documentation>5325: Diameter av falloddplate
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kraft" type="double">
+            <annotation>
+              <documentation>5326: Kraft ved bruk av fallodd
+Enhet: Kilonewton</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="nødvendigForsterkning" type="integer">
+            <annotation>
+              <documentation>5327: Forsterkning som er nødvendig</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="svakhet" type="nvdb:SvakhetType">
+            <annotation>
+              <documentation>5328: Svakhet i bæreevne</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCI" type="integer">
+            <annotation>
+              <documentation>5329: Surface-kurvature-index</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>6892: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NedbøyningsmålingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Nedbøyningsmåling"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SporNedbøyningsmålingType">
+    <annotation>
+      <documentation>5299: Angir hvor nedbøyning er foretatt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SporNedbøyningsmålingEnumerationType nvdb:SporNedbøyningsmålingOtherType"/>
+  </simpleType>
+  <simpleType name="SporNedbøyningsmålingEnumerationType">
+    <annotation>
+      <documentation>5299: Angir hvor nedbøyning er foretatt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Y">
+        <annotation>
+          <documentation>7317: Ytre spor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="M">
+        <annotation>
+          <documentation>7318: Mellom spor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="I">
+        <annotation>
+          <documentation>7319: Indre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SporNedbøyningsmålingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SvakhetType">
+    <annotation>
+      <documentation>5328: Svakhet i bæreevne</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SvakhetEnumerationType nvdb:SvakhetOtherType"/>
+  </simpleType>
+  <simpleType name="SvakhetEnumerationType">
+    <annotation>
+      <documentation>5328: Svakhet i bæreevne</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="iDekkeBærelag">
+        <annotation>
+          <documentation>7327: I dekke/bærelag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iBærelagForsterkningslag">
+        <annotation>
+          <documentation>7328: I bærelag/forsterkningslag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="iForsterkningslagUndergrunn">
+        <annotation>
+          <documentation>7329: I Forsterkningslag/undergrunn</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SvakhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtstyrstypeNedbøyningsmålingType">
+    <annotation>
+      <documentation>5319: Angir hvilken type utstyr som er benyttet ved nedbøyningsmåling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtstyrstypeNedbøyningsmålingEnumerationType nvdb:UtstyrstypeNedbøyningsmålingOtherType"/>
+  </simpleType>
+  <simpleType name="UtstyrstypeNedbøyningsmålingEnumerationType">
+    <annotation>
+      <documentation>5319: Angir hvilken type utstyr som er benyttet ved nedbøyningsmåling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dynaflect">
+        <annotation>
+          <documentation>7323: Dynaflect</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fallodd">
+        <annotation>
+          <documentation>7324: Fallodd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lacroix">
+        <annotation>
+          <documentation>7325: Lacroix</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="benkelmann">
+        <annotation>
+          <documentation>7326: Benkelmann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TSD">
+        <annotation>
+          <documentation>19006: Vogntogbasert utstyr for å måle nedbøyningshastighet, som videre omregnes til nedbøyning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtstyrstypeNedbøyningsmålingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

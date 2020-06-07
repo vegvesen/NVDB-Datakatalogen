@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BelegningType">
+    <annotation>
+      <documentation>5637: Angir hvilken belegning det er på fortauet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BelegningEnumerationType nvdb:BelegningOtherType"/>
+  </simpleType>
+  <simpleType name="BelegningEnumerationType">
+    <annotation>
+      <documentation>5637: Angir hvilken belegning det er på fortauet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>7922: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Farget">
+        <annotation>
+          <documentation>7923: Betong, farget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_MønstretOgFarget">
+        <annotation>
+          <documentation>7924: Betong, mønstret og farget</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Heller">
+        <annotation>
+          <documentation>7925: Betong, heller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betongstein">
+        <annotation>
+          <documentation>7926: Betongstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brostein">
+        <annotation>
+          <documentation>7927: Brostein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="granitt">
+        <annotation>
+          <documentation>11231: Granitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skiferheller">
+        <annotation>
+          <documentation>11230: Skiferheller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>7928: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grus">
+        <annotation>
+          <documentation>7929: Grus</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelegningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFortauType">
+    <annotation>
+      <documentation>7994: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFortauEnumerationType nvdb:EierFortauOtherType"/>
+  </simpleType>
+  <simpleType name="EierFortauEnumerationType">
+    <annotation>
+      <documentation>7994: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10260: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18609: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10722: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10324: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10388: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17575: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFortauOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Fortau" substitutionGroup="nvdb:AbstraktFortau" type="nvdb:FortauType">
+    <annotation>
+      <documentation>48: Del av vegen reservert for gående.  Som regel ligger f. høyere enn kjørebanen og er atskilt fra denne med kantstein (1)</documentation>
+    </annotation>
+  </element>
+  <complexType name="FortauType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFortauType">
+        <sequence>
+          <element minOccurs="0" name="belegning" type="nvdb:BelegningType">
+            <annotation>
+              <documentation>5637: Angir hvilken belegning det er på fortauet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belegning_Detaljer" type="string">
+            <annotation>
+              <documentation>10953: Beskrivelse av belegning. Kan angi typebetegnelser, produsent, lagdeling, fundamentering mm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_GjSnitt" type="double">
+            <annotation>
+              <documentation>2241: Angir gjennomsnittlig bredde av vegobjektet.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Punkthinder" type="integer">
+            <annotation>
+              <documentation>10717: Angir bredde på fortau ved mest fremtredende punkthinder.
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="punkthinder" type="nvdb:PunkthinderType">
+            <annotation>
+              <documentation>10718: Sted hvor det er markant innsnevring av fortau. Kan være til hinder for gående og drift av fortauet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>11268: Angir lengde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varmekabler" type="nvdb:VarmekablerType">
+            <annotation>
+              <documentation>1830: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10295: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11568: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11053: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierFortauType">
+            <annotation>
+              <documentation>7994: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligFortauType">
+            <annotation>
+              <documentation>5638: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4755: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FortauPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fortau"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="PunkthinderType">
+    <annotation>
+      <documentation>10718: Sted hvor det er markant innsnevring av fortau. Kan være til hinder for gående og drift av fortauet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PunkthinderEnumerationType nvdb:PunkthinderOtherType"/>
+  </simpleType>
+  <simpleType name="PunkthinderEnumerationType">
+    <annotation>
+      <documentation>10718: Sted hvor det er markant innsnevring av fortau. Kan være til hinder for gående og drift av fortauet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="treBeplantning">
+        <annotation>
+          <documentation>17370: Tre/beplantning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skilt">
+        <annotation>
+          <documentation>17371: Skilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysmast">
+        <annotation>
+          <documentation>17372: Lysmast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bygningKonstruksjon">
+        <annotation>
+          <documentation>17373: Bygning/konstruksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="holdeplassLeskur">
+        <annotation>
+          <documentation>17374: Holdeplass/leskur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetHinder">
+        <annotation>
+          <documentation>17375: Annet hinder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikkePunkthinder">
+        <annotation>
+          <documentation>19465: Det er ikke punkthinder knyttet til fortauet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PunkthinderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerType">
+    <annotation>
+      <documentation>1830: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VarmekablerEnumerationType nvdb:VarmekablerOtherType"/>
+  </simpleType>
+  <simpleType name="VarmekablerEnumerationType">
+    <annotation>
+      <documentation>1830: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3522: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3560: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFortauType">
+    <annotation>
+      <documentation>5638: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFortauEnumerationType nvdb:VedlikeholdsansvarligFortauOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFortauEnumerationType">
+    <annotation>
+      <documentation>5638: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>7930: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18740: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19906: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18869: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>7931: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>7932: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17685: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFortauOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

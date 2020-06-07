@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DreneringType">
+    <annotation>
+      <documentation>9114: Angir løsning for drenering i tilknytning til vollen.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DreneringEnumerationType nvdb:DreneringOtherType"/>
+  </simpleType>
+  <simpleType name="DreneringEnumerationType">
+    <annotation>
+      <documentation>9114: Angir løsning for drenering i tilknytning til vollen.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="gjenfyltGrøft">
+        <annotation>
+          <documentation>12095: Gjenfylt grøft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjenfyltGrøftMedRør">
+        <annotation>
+          <documentation>12096: Rør i bunn av grøft</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DreneringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="JordvollMotFjellskjæring" substitutionGroup="nvdb:AbstraktJordvollMotFjellskjæring" type="nvdb:JordvollMotFjellskjæringType">
+    <annotation>
+      <documentation>799: Jordvoll mot fjellskjæring. Benyttes i første rekke som TS tiltak.  Vollen har effekt i forhold til at en unngår dyp sidegrøft, samt at den skjermer noe for kollisjon med fjellskjæring.  Vollen skrår fra vegkant og opp mot fjellskjæring.  Kan være grunn sidegrøft.</documentation>
+    </annotation>
+  </element>
+  <complexType name="JordvollMotFjellskjæringType">
+    <complexContent>
+      <extension base="nvdb:AbstraktJordvollMotFjellskjæringType">
+        <sequence>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeJordvollMotFjellskjæringType">
+            <annotation>
+              <documentation>9113: Angir hvilket materiale vollen hovedsakelig er bygd opp av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="drenering" type="nvdb:DreneringType">
+            <annotation>
+              <documentation>9114: Angir løsning for drenering i tilknytning til vollen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10313: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11635: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9299: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="JordvollMotFjellskjæringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:JordvollMotFjellskjæring"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaterialtypeJordvollMotFjellskjæringType">
+    <annotation>
+      <documentation>9113: Angir hvilket materiale vollen hovedsakelig er bygd opp av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeJordvollMotFjellskjæringEnumerationType nvdb:MaterialtypeJordvollMotFjellskjæringOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeJordvollMotFjellskjæringEnumerationType">
+    <annotation>
+      <documentation>9113: Angir hvilket materiale vollen hovedsakelig er bygd opp av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="løsmasse">
+        <annotation>
+          <documentation>12092: Løsmasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pukk">
+        <annotation>
+          <documentation>12093: Pukk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprengtStein">
+        <annotation>
+          <documentation>12094: Sprengt stein</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeJordvollMotFjellskjæringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

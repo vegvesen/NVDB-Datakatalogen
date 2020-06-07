@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierPlantekasseUrneType">
+    <annotation>
+      <documentation>5818: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierPlantekasseUrneEnumerationType nvdb:EierPlantekasseUrneOtherType"/>
+  </simpleType>
+  <simpleType name="EierPlantekasseUrneEnumerationType">
+    <annotation>
+      <documentation>5818: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8213: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18550: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10705: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8239: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8265: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17602: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierPlantekasseUrneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypePlantekasseUrneType">
+    <annotation>
+      <documentation>1399: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypePlantekasseUrneEnumerationType nvdb:MaterialtypePlantekasseUrneOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypePlantekasseUrneEnumerationType">
+    <annotation>
+      <documentation>1399: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong">
+        <annotation>
+          <documentation>2205: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>19235: Metall</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plastKompositt">
+        <annotation>
+          <documentation>2266: Plast/kompositt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>2186: Tre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypePlantekasseUrneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="PlantekasseUrne" substitutionGroup="nvdb:AbstraktPlantekasseUrne" type="nvdb:PlantekasseUrneType">
+    <annotation>
+      <documentation>18: Kasse, urne, krukke etc. med blomster/busker. Er plassert på terreng, ikke nedgravd.</documentation>
+    </annotation>
+  </element>
+  <complexType name="PlantekasseUrneType">
+    <complexContent>
+      <extension base="nvdb:AbstraktPlantekasseUrneType">
+        <sequence>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypePlantekasseUrneType">
+            <annotation>
+              <documentation>1399: Angir primær materialtype for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>1579: Angir vegobjektets egenhøyde (inkl fot).
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="breddeDiameter" type="double">
+            <annotation>
+              <documentation>6871: Angir hvor bredt vegobjektet er, Benyttes til å angi diameter om det er sirkulær form
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1304: Angir lengde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterlagring" type="nvdb:VinterlagringPlantekasseUrneType">
+            <annotation>
+              <documentation>11406: Angir om Plantekasse/urne blir flyttet til annet sted for vinterlagring eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10336: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>1436: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper. Kan f.eks være produktnavn/typebetegnelse, kan også ta med typenummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierPlantekasseUrneType">
+            <annotation>
+              <documentation>5818: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligPlantekasseUrneType">
+            <annotation>
+              <documentation>5805: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4726: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PlantekasseUrnePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:PlantekasseUrne"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligPlantekasseUrneType">
+    <annotation>
+      <documentation>5805: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligPlantekasseUrneEnumerationType nvdb:VedlikeholdsansvarligPlantekasseUrneOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligPlantekasseUrneEnumerationType">
+    <annotation>
+      <documentation>5805: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>8200: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18727: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19914: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18856: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8226: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8252: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17693: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligPlantekasseUrneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterlagringPlantekasseUrneType">
+    <annotation>
+      <documentation>11406: Angir om Plantekasse/urne blir flyttet til annet sted for vinterlagring eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterlagringPlantekasseUrneEnumerationType nvdb:VinterlagringPlantekasseUrneOtherType"/>
+  </simpleType>
+  <simpleType name="VinterlagringPlantekasseUrneEnumerationType">
+    <annotation>
+      <documentation>11406: Angir om Plantekasse/urne blir flyttet til annet sted for vinterlagring eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19236: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19237: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterlagringPlantekasseUrneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

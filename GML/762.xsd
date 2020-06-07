@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EtterslepType">
+    <annotation>
+      <documentation>7592: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EtterslepEnumerationType nvdb:EtterslepOtherType"/>
+  </simpleType>
+  <simpleType name="EtterslepEnumerationType">
+    <annotation>
+      <documentation>7592: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>9894: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>9895: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EtterslepOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkadeFU_Punkt" substitutionGroup="nvdb:AbstraktTilstandSkadeFU_Punkt" type="nvdb:TilstandSkadeFU_PunktType">
+    <annotation>
+      <documentation>762: Gir informasjon om funksjonalitet.  Normalt knyttet til et spesifikt punkt-objekt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkadeFU_PunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkadeFU_PunktType">
+        <sequence>
+          <element minOccurs="0" name="etterslep" type="nvdb:EtterslepType">
+            <annotation>
+              <documentation>7592: Angir om det er etterslep i forhold til Håndbok R610 (111).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>7591: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7593: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>7598: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkadeFU_PunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkadeFU_Punkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

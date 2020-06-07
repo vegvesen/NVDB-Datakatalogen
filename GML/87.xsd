@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Belysningspunkt" substitutionGroup="nvdb:AbstraktBelysningspunkt" type="nvdb:BelysningspunktType">
+    <annotation>
+      <documentation>87: Lokasjon/konteiner med samling av en eller flere lysarmaturer og lysmast i ett punkt. Det kan forekomme varianter uten lysmast, for eksempel lysarmatur opphengt i tunneltak, og det kan forekomme varianter uten lysarmatur, f.eks lysmast kun for kabelframføring.</documentation>
+    </annotation>
+  </element>
+  <complexType name="BelysningspunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBelysningspunktType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeBelysningspunktType">
+            <annotation>
+              <documentation>1272: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2198: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer. Merknad: Normalt skal det etableres et objekt per belysningspunkt.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringBelysningspunktType">
+            <annotation>
+              <documentation>1874: Angir plassering for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandFraVegkant" type="double">
+            <annotation>
+              <documentation>1883: Angir hvilken avstand det er fra vegkant til vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="strømtilførsel_Kategori" type="nvdb:Strømtilførsel_KategoriType">
+            <annotation>
+              <documentation>2078: Angir hvilken type strømtilkopling det er til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="strømtilførsel_TypeKabel" type="string">
+            <annotation>
+              <documentation>8744: Detaljert spesifikasjon av kabel for strømtilførsel.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overbelastningsvern" type="nvdb:OverbelastningsvernType">
+            <annotation>
+              <documentation>10006: Angir om det er overbelastningsvern i punktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fellesføringMedAnnenEtat" type="string">
+            <annotation>
+              <documentation>8745: Angir om det er felles luftlinjeframføring på felles stolperekke med f.eks energiverk, teleselskap, bredbåndsselskap etc</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fellesføringLeietaker" type="string">
+            <annotation>
+              <documentation>10005: Navn på leietaker(e) ved fellesføring der SVV har vedlikeholdsansvar</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>1488: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.  F.eks.  navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11072: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FKB_ID" type="string">
+            <annotation>
+              <documentation>10852: Refererer til FKB-identitet. Benyttes i forbindelse med felles forvaltning av geometri.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierBelysningspunktType">
+            <annotation>
+              <documentation>10003: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>10004: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBelysningspunktType">
+            <annotation>
+              <documentation>1555: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4787: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BelysningspunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Belysningspunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BruksområdeBelysningspunktType">
+    <annotation>
+      <documentation>1272: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeBelysningspunktEnumerationType nvdb:BruksområdeBelysningspunktOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeBelysningspunktEnumerationType">
+    <annotation>
+      <documentation>1272: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="belysningVegGate">
+        <annotation>
+          <documentation>2955: Belysnig av veg og gate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningTunnel">
+        <annotation>
+          <documentation>2963: Belysning i tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nødbelysningTunnel">
+        <annotation>
+          <documentation>4910: Nødbelysning i tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningBru">
+        <annotation>
+          <documentation>3319: Brukes kun for spesiell belysning av bru. Vanlig vegbelysning settes som Belysning veg/gate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningOmrådePlass">
+        <annotation>
+          <documentation>2957: Belysnig av veg og gate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningFerjeleie">
+        <annotation>
+          <documentation>16261: Belysning av ferjeleie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningVegkryss">
+        <annotation>
+          <documentation>2959: Belysning i vegkryss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningGangSykkelveg">
+        <annotation>
+          <documentation>2953: Belysning på gang- og sykkelveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningGangfelt">
+        <annotation>
+          <documentation>2961: Belysning for gangfelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningUndergang">
+        <annotation>
+          <documentation>17318: Belysningspunkt i undergang/under bru etc.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningUtstyr">
+        <annotation>
+          <documentation>4908: Belysning av vegutstyr f.eks betalingsautomat, skilt, med mer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningLeskur">
+        <annotation>
+          <documentation>19801: Belysningspunkt for opplysing av leskur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningSkilt">
+        <annotation>
+          <documentation>19802: Belysningspunkt for opplysing av skilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningPrivatOmråde">
+        <annotation>
+          <documentation>3856: Belysning av privat område</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kunKabelframføring">
+        <annotation>
+          <documentation>18317: Belysningspunkt som kun har funksjon kabelframføring, inneholder ikke lysarmatur.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rømningslysTunnel">
+        <annotation>
+          <documentation>4909: Rømningslys i tunnel</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeBelysningspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBelysningspunktType">
+    <annotation>
+      <documentation>10003: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierBelysningspunktEnumerationType nvdb:EierBelysningspunktOtherType"/>
+  </simpleType>
+  <simpleType name="EierBelysningspunktEnumerationType">
+    <annotation>
+      <documentation>10003: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>16262: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18621: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16263: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16264: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16265: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17632: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBelysningspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverbelastningsvernType">
+    <annotation>
+      <documentation>10006: Angir om det er overbelastningsvern i punktet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OverbelastningsvernEnumerationType nvdb:OverbelastningsvernOtherType"/>
+  </simpleType>
+  <simpleType name="OverbelastningsvernEnumerationType">
+    <annotation>
+      <documentation>10006: Angir om det er overbelastningsvern i punktet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16267: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16268: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverbelastningsvernOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringBelysningspunktType">
+    <annotation>
+      <documentation>1874: Angir plassering for vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringBelysningspunktEnumerationType nvdb:PlasseringBelysningspunktOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringBelysningspunktEnumerationType">
+    <annotation>
+      <documentation>1874: Angir plassering for vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="lysmast">
+        <annotation>
+          <documentation>2965: Lysmast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mindreStolpe">
+        <annotation>
+          <documentation>2969: Mindre stolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hengerITakKabelstige">
+        <annotation>
+          <documentation>2970: Henger i tak/kabelstige</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="festetTilVeggBygning">
+        <annotation>
+          <documentation>2972: Festet til vegg/bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påPortal">
+        <annotation>
+          <documentation>2988: På portal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påSkiltpunkt">
+        <annotation>
+          <documentation>19804: På skiltpunkt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hengerIVaier">
+        <annotation>
+          <documentation>3757: Henger i vaier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedfeltIBelegningDekke">
+        <annotation>
+          <documentation>19833: Belysningspunkt er nedfelt i belegning/dekke/underlag</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringBelysningspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Strømtilførsel_KategoriType">
+    <annotation>
+      <documentation>2078: Angir hvilken type strømtilkopling det er til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Strømtilførsel_KategoriEnumerationType nvdb:Strømtilførsel_KategoriOtherType"/>
+  </simpleType>
+  <simpleType name="Strømtilførsel_KategoriEnumerationType">
+    <annotation>
+      <documentation>2078: Angir hvilken type strømtilkopling det er til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="jordkabel">
+        <annotation>
+          <documentation>3765: Kabel i bakken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="line">
+        <annotation>
+          <documentation>3766: Uisolert kabel i ludt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="EX">
+        <annotation>
+          <documentation>3857: Isolert kabel i luft</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Strømtilførsel_KategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningspunktType">
+    <annotation>
+      <documentation>1555: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBelysningspunktEnumerationType nvdb:VedlikeholdsansvarligBelysningspunktOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningspunktEnumerationType">
+    <annotation>
+      <documentation>1555: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>2142: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18714: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19894: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18843: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>2146: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lokaltE_Verk">
+        <annotation>
+          <documentation>3717: Lokalt e-verk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>2150: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17672: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningspunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

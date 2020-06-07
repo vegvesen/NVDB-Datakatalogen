@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Sykkelparkering" substitutionGroup="nvdb:AbstraktSykkelparkering" type="nvdb:SykkelparkeringType">
+    <annotation>
+      <documentation>451: Angir område tilrettelagt for sykkelparkering</documentation>
+    </annotation>
+  </element>
+  <complexType name="SykkelparkeringType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSykkelparkeringType">
+        <sequence>
+          <element minOccurs="0" name="sykkelstativ" type="nvdb:SykkelstativType">
+            <annotation>
+              <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="takoverbygg" type="nvdb:TakoverbyggType">
+            <annotation>
+              <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallSyklerTotalt" type="integer">
+            <annotation>
+              <documentation>3127: Angir hvor mange sykler det er plass til totalt
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10369: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11607: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11118: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4969: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>8922: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10962: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SykkelparkeringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Sykkelparkering"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="SykkelstativType">
+    <annotation>
+      <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SykkelstativEnumerationType nvdb:SykkelstativOtherType"/>
+  </simpleType>
+  <simpleType name="SykkelstativEnumerationType">
+    <annotation>
+      <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4658: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4659: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SykkelstativOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TakoverbyggType">
+    <annotation>
+      <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TakoverbyggEnumerationType nvdb:TakoverbyggOtherType"/>
+  </simpleType>
+  <simpleType name="TakoverbyggEnumerationType">
+    <annotation>
+      <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16059: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16060: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TakoverbyggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

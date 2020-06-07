@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="FysiskInngrepIVannforekomst" substitutionGroup="nvdb:AbstraktFysiskInngrepIVannforekomst" type="nvdb:FysiskInngrepIVannforekomstType">
+    <annotation>
+      <documentation>783: sted hvor veginngrep hindrer fiskevandring, hindrer vannstrøm eller endrer strandsone</documentation>
+    </annotation>
+  </element>
+  <complexType name="FysiskInngrepIVannforekomstType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFysiskInngrepIVannforekomstType">
+        <sequence>
+          <element minOccurs="0" name="typeInngrep" type="nvdb:TypeInngrepType">
+            <annotation>
+              <documentation>8322: Angir hvilken type inngrep det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="hovedproblem" type="nvdb:HovedproblemType">
+            <annotation>
+              <documentation>8323: Angir hva som er hovedproblem ved dette inngrepet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vannforekomst_ID" type="string">
+            <annotation>
+              <documentation>11190: ID som refererer til vannforekomst i Vann-Nett Portal</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vannforekosmtNavn" type="string">
+            <annotation>
+              <documentation>11191: Navn som refererer til vannforekomst i Vann-Nett Portal</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vassdragsnummer" type="string">
+            <annotation>
+              <documentation>8324: ID som refererer til vassdragsnummer i NVE Nedbørsfelt (REGINE)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vassdragsnavn" type="string">
+            <annotation>
+              <documentation>8325: Navn som refererer til vassdragsforekomst i NVE Nedbørsfelt (Regine)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="problembeskrivelse" type="string">
+            <annotation>
+              <documentation>8326: Gir mulighet for å gi utfyllende beskrivelse av problemet og eventuelle tiltak som er gjort</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="naturmangfold" type="string">
+            <annotation>
+              <documentation>11195: Beskrivelse av det man kjenner til  angående fisk og evt elvemusling.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spesielleForhold" type="string">
+            <annotation>
+              <documentation>11196: Relevant informasjon som kan være nyttig å kjenne til, som feks gyro, svært sårbare områder, naturreservat (i eller i umiddelbar nærhet) etc.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registreringsdato" type="date">
+            <annotation>
+              <documentation>8327: Dato da opplysningene ble registrert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="registrertAv" type="string">
+            <annotation>
+              <documentation>8328: Navn på den som var ansvarlig for registrering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoUtbedret" type="date">
+            <annotation>
+              <documentation>11192: Dato det sist ble gjort utbedring på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utbedretAv" type="string">
+            <annotation>
+              <documentation>11193: Navn/signatur på de som foretok utbedring</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdOppfølging" type="string">
+            <annotation>
+              <documentation>11194: Kort om hva drift må gjøre av oppfølging</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>11197: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>8825: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8824: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FysiskInngrepIVannforekomstPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:FysiskInngrepIVannforekomst"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="HovedproblemType">
+    <annotation>
+      <documentation>8323: Angir hva som er hovedproblem ved dette inngrepet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:HovedproblemEnumerationType nvdb:HovedproblemOtherType"/>
+  </simpleType>
+  <simpleType name="HovedproblemEnumerationType">
+    <annotation>
+      <documentation>8323: Angir hva som er hovedproblem ved dette inngrepet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bruddIVannstrøm">
+        <annotation>
+          <documentation>11271: Brudd i vannstrøm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="strømningshastighet">
+        <annotation>
+          <documentation>11272: Strømningshastighet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dybde">
+        <annotation>
+          <documentation>11273: For liten dybde.  Fisken kommer ikke videre.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bunnsubstrat">
+        <annotation>
+          <documentation>11274: Bunnsubstrat</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HovedproblemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeInngrepType">
+    <annotation>
+      <documentation>8322: Angir hvilken type inngrep det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeInngrepEnumerationType nvdb:TypeInngrepOtherType"/>
+  </simpleType>
+  <simpleType name="TypeInngrepEnumerationType">
+    <annotation>
+      <documentation>8322: Angir hvilken type inngrep det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stikkrenneKulvert">
+        <annotation>
+          <documentation>11266: Stikkrenne/kulvert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bekkelukking">
+        <annotation>
+          <documentation>11267: Bekkelukking</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bru">
+        <annotation>
+          <documentation>11268: Bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylling">
+        <annotation>
+          <documentation>11269: Fyllinger kan for eksempel stenge fjordarmer ved at vi anlegger fyllinger med for små kulverter.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fyllingIStrandsoneOver250M">
+        <annotation>
+          <documentation>11270: Tilfeller hvor fylling er i konflikt med strandsone over strekning på minst 250 meter.  Det regnes som konflikt når avstand fra fyllingsfot til vann er mindre enn 30 meter.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeInngrepOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

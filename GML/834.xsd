@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="FareForNedfallType">
+    <annotation>
+      <documentation>9445: Angir om det er fare for fremtidig nedfall fra fjellskjæring</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FareForNedfallEnumerationType nvdb:FareForNedfallOtherType"/>
+  </simpleType>
+  <simpleType name="FareForNedfallEnumerationType">
+    <annotation>
+      <documentation>9445: Angir om det er fare for fremtidig nedfall fra fjellskjæring</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13302: Nei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13303: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Inntil5Kbm">
+        <annotation>
+          <documentation>13304: Ja, inntil 5 kbm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Inntil10Kbm">
+        <annotation>
+          <documentation>13305: Ja, inntil 10 kbm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_MerEnn10Kbm">
+        <annotation>
+          <documentation>13306: Ja, mer enn 10 kbm</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FareForNedfallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ObservertNedfallType">
+    <annotation>
+      <documentation>9441: Angir om det er observert nedfall fra skjæring, og indikasjon på omfang</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ObservertNedfallEnumerationType nvdb:ObservertNedfallOtherType"/>
+  </simpleType>
+  <simpleType name="ObservertNedfallEnumerationType">
+    <annotation>
+      <documentation>9441: Angir om det er observert nedfall fra skjæring, og indikasjon på omfang</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13291: Nei</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_0til1Kbm">
+        <annotation>
+          <documentation>13292: Ja, 0-1 kbm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_1til5Kbm">
+        <annotation>
+          <documentation>13293: Ja, 1-5 kbm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ja_Over5Kbm">
+        <annotation>
+          <documentation>13294: Ja, &gt; 5 kbm</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ObservertNedfallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Fjellskjæring" substitutionGroup="nvdb:AbstraktTilstandSkade_Fjellskjæring" type="nvdb:TilstandSkade_FjellskjæringType">
+    <annotation>
+      <documentation>834: Angir tilstand og skade knyttet til en fjellskjæring</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_FjellskjæringType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_FjellskjæringType">
+        <sequence>
+          <element minOccurs="0" name="observertNedfall" type="nvdb:ObservertNedfallType">
+            <annotation>
+              <documentation>9441: Angir om det er observert nedfall fra skjæring, og indikasjon på omfang</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fareForNedfall" type="nvdb:FareForNedfallType">
+            <annotation>
+              <documentation>9445: Angir om det er fare for fremtidig nedfall fra fjellskjæring</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vannISkjæring" type="nvdb:VannISkjæringType"/>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_FjellskjæringType">
+            <annotation>
+              <documentation>9444: Angir tilstand på gitt tidspunkt. EU-kategorier</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltakNår" type="nvdb:TiltakNårTilstandSkade_FjellskjæringType">
+            <annotation>
+              <documentation>9465: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>9463: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kontrollertAv" type="string">
+            <annotation>
+              <documentation>9464: Angir hvem som er ansvarlig for kontroll</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9443: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9542: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_FjellskjæringPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Fjellskjæring"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_FjellskjæringType">
+    <annotation>
+      <documentation>9444: Angir tilstand på gitt tidspunkt. EU-kategorier</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_FjellskjæringEnumerationType nvdb:TilstandTilstandSkade_FjellskjæringOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_FjellskjæringEnumerationType">
+    <annotation>
+      <documentation>9444: Angir tilstand på gitt tidspunkt. EU-kategorier</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0_GodKvalitet">
+        <annotation>
+          <documentation>13298: 0-God kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1_MiddelsKvalitet">
+        <annotation>
+          <documentation>13299: 1-Middels kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2_DårligKvalitet">
+        <annotation>
+          <documentation>13300: 2-Dårlig kvalitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3_SværtDårligKvalitet">
+        <annotation>
+          <documentation>13301: 3-Svært dårlig kvalitet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_FjellskjæringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_FjellskjæringType">
+    <annotation>
+      <documentation>9465: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakNårTilstandSkade_FjellskjæringEnumerationType nvdb:TiltakNårTilstandSkade_FjellskjæringOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_FjellskjæringEnumerationType">
+    <annotation>
+      <documentation>9465: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="straks">
+        <annotation>
+          <documentation>13353: Straks</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="14Dager">
+        <annotation>
+          <documentation>13352: 14 dager</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3Mnd">
+        <annotation>
+          <documentation>13351: 3 mnd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1År">
+        <annotation>
+          <documentation>13350: 1 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2År">
+        <annotation>
+          <documentation>13349: 1-2 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over2år">
+        <annotation>
+          <documentation>13348: &gt; 2år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påSikt">
+        <annotation>
+          <documentation>13347: på sikt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_FjellskjæringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VannISkjæringType">
+    <union memberTypes="nvdb:VannISkjæringEnumerationType nvdb:VannISkjæringOtherType"/>
+  </simpleType>
+  <simpleType name="VannISkjæringEnumerationType">
+    <restriction base="string">
+      <enumeration value="rennendeVann">
+        <annotation>
+          <documentation>13295: Rennende vann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fuktig">
+        <annotation>
+          <documentation>13296: Fuktig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tørt">
+        <annotation>
+          <documentation>13297: Tørt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VannISkjæringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

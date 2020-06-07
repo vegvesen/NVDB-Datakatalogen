@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="MaterialeNedføringsrenneType">
+    <annotation>
+      <documentation>9579: Angir hvilken type materiale vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeNedføringsrenneEnumerationType nvdb:MaterialeNedføringsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeNedføringsrenneEnumerationType">
+    <annotation>
+      <documentation>9579: Angir hvilken type materiale vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stein">
+        <annotation>
+          <documentation>13801: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>13800: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="berg">
+        <annotation>
+          <documentation>13809: Berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>13802: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stål">
+        <annotation>
+          <documentation>13803: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="asfalt">
+        <annotation>
+          <documentation>13799: Asfalt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeNedføringsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Nedføringsrenne" substitutionGroup="nvdb:AbstraktNedføringsrenne" type="nvdb:NedføringsrenneType">
+    <annotation>
+      <documentation>844: Grøft som fører vann fra topp skjæring ned til kum/stikkrenne</documentation>
+    </annotation>
+  </element>
+  <complexType name="NedføringsrenneType">
+    <complexContent>
+      <extension base="nvdb:AbstraktNedføringsrenneType">
+        <sequence>
+          <element minOccurs="0" name="utforming" type="nvdb:UtformingNedføringsrenneType">
+            <annotation>
+              <documentation>9584: Angir hvilken utforming nedføringsrenne har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materiale" type="nvdb:MaterialeNedføringsrenneType">
+            <annotation>
+              <documentation>9579: Angir hvilken type materiale vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>9585: Angir total lengde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybde" type="double">
+            <annotation>
+              <documentation>9582: Angir dybde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Topp" type="double">
+            <annotation>
+              <documentation>9580: Angir gjennomsnittlig bredde (topp) for hele vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Bunn" type="double">
+            <annotation>
+              <documentation>9581: Angir gjennomsnittlig bredde (bunn) for hele vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10330: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11643: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligNedføringsrenneType">
+            <annotation>
+              <documentation>9586: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>9593: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9583: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NedføringsrennePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Nedføringsrenne"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="UtformingNedføringsrenneType">
+    <annotation>
+      <documentation>9584: Angir hvilken utforming nedføringsrenne har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtformingNedføringsrenneEnumerationType nvdb:UtformingNedføringsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="UtformingNedføringsrenneEnumerationType">
+    <annotation>
+      <documentation>9584: Angir hvilken utforming nedføringsrenne har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="loddrett">
+        <annotation>
+          <documentation>13804: Benyttes i fjellskjæringer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skrå">
+        <annotation>
+          <documentation>13805: Benyttes i jordskjæring</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingNedføringsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNedføringsrenneType">
+    <annotation>
+      <documentation>9586: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligNedføringsrenneEnumerationType nvdb:VedlikeholdsansvarligNedføringsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNedføringsrenneEnumerationType">
+    <annotation>
+      <documentation>9586: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>13806: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18683: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19985: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18812: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13807: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13808: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17774: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligNedføringsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

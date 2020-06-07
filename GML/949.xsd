@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="GSVLangsAnnenVegkategori" substitutionGroup="nvdb:AbstraktGSVLangsAnnenVegkategori" type="nvdb:GSVLangsAnnenVegkategoriType">
+    <annotation>
+      <documentation>949: Gang-/sykkelvegstrekning der gang-/sykkelveg og parallell kjøreveg forvaltes av ulike vegmyndigheter og dermed også tilhører ulike vegkategorier. Eksempelvis kommunal gang-/sykkelveg langs fylkesveg.</documentation>
+    </annotation>
+  </element>
+  <complexType name="GSVLangsAnnenVegkategoriType">
+    <complexContent>
+      <extension base="nvdb:AbstraktGSVLangsAnnenVegkategoriType">
+        <sequence>
+          <element minOccurs="0" name="vegkategori" type="nvdb:VegkategoriType">
+            <annotation>
+              <documentation>11827: Vegkategori/vegmyndighet for kjørevegen gang- og sykkelvegen følger.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegnummer" type="integer">
+            <annotation>
+              <documentation>11828: Vegnummer for kjørevegen gang- og sykkelvegen følger.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11829: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GSVLangsAnnenVegkategoriPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:GSVLangsAnnenVegkategori"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VegkategoriType">
+    <annotation>
+      <documentation>11827: Vegkategori/vegmyndighet for kjørevegen gang- og sykkelvegen følger.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VegkategoriEnumerationType nvdb:VegkategoriOtherType"/>
+  </simpleType>
+  <simpleType name="VegkategoriEnumerationType">
+    <annotation>
+      <documentation>11827: Vegkategori/vegmyndighet for kjørevegen gang- og sykkelvegen følger.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E">
+        <annotation>
+          <documentation>19847: Europaveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>19848: Riksveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>19849: Fylkesveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19850: Kommunal veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>19851: Privat veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>19852: Skogsbilveg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

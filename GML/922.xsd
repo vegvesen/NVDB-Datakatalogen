@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="VegmyndighetKanBliEndret" substitutionGroup="nvdb:AbstraktVegmyndighetKanBliEndret" type="nvdb:VegmyndighetKanBliEndretType">
+    <annotation>
+      <documentation>922: Vegstrekning hvor sak om endring av klassifisering vil bli vurdert. Kan være omklassifisering, opptak eller nedleggelse av veg, eller omnummerering.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegmyndighetKanBliEndretType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegmyndighetKanBliEndretType">
+        <sequence>
+          <element name="strekning" type="string">
+            <annotation>
+              <documentation>11315: Strekningen eller prosjektet saken om endret klassifisering gjelder for</documentation>
+            </annotation>
+          </element>
+          <element name="saksnummer" type="string">
+            <annotation>
+              <documentation>11316: Saksnummer for den aktuelle saken om endret klassifisering</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegmyndighetKanBliEndretPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:VegmyndighetKanBliEndret"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

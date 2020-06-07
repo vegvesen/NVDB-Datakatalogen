@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeUPSType">
+    <annotation>
+      <documentation>10051: Angir hva vegobjektet brukes til</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeUPSEnumerationType nvdb:BruksområdeUPSOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeUPSEnumerationType">
+    <annotation>
+      <documentation>10051: Angir hva vegobjektet brukes til</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nødstrøm">
+        <annotation>
+          <documentation>16363: UPS brukes til nødstrøm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="reservestrøm">
+        <annotation>
+          <documentation>16364: UPS brukes til reservestrøm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nødnett">
+        <annotation>
+          <documentation>19681: Nødnett</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeUPSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierUPSType">
+    <annotation>
+      <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierUPSEnumerationType nvdb:EierUPSOtherType"/>
+  </simpleType>
+  <simpleType name="EierUPSEnumerationType">
+    <annotation>
+      <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10296: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18642: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10757: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10360: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10424: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17652: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierUPSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningUPSType">
+    <annotation>
+      <documentation>10049: Angir spenningen som leveres ut fra enheten</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SpenningUPSEnumerationType nvdb:SpenningUPSOtherType"/>
+  </simpleType>
+  <simpleType name="SpenningUPSEnumerationType">
+    <annotation>
+      <documentation>10049: Angir spenningen som leveres ut fra enheten</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="12">
+        <annotation>
+          <documentation>16359: 12 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="24">
+        <annotation>
+          <documentation>16360: 24 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="230">
+        <annotation>
+          <documentation>16361: 230 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="400">
+        <annotation>
+          <documentation>16362: 400 volt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="690">
+        <annotation>
+          <documentation>16716: 690 volt</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningUPSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="UPS" substitutionGroup="nvdb:AbstraktUPS" type="nvdb:UPSType">
+    <annotation>
+      <documentation>468: Reservestrømskilde bla i forbindelse med tunneler</documentation>
+    </annotation>
+  </element>
+  <complexType name="UPSType">
+    <complexContent>
+      <extension base="nvdb:AbstraktUPSType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeUPSType">
+            <annotation>
+              <documentation>10051: Angir hva vegobjektet brukes til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="totalEffekt" type="integer">
+            <annotation>
+              <documentation>3852: Angir total effekt UPS kan levere
+Enhet: KiloVoltAmpere</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftstid" type="integer">
+            <annotation>
+              <documentation>10046: Angir hvor lang tid batteriene er beregnet å kunne levere strøm til anlegget
+Enhet: Time</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kapasitet" type="integer">
+            <annotation>
+              <documentation>10043: Angir totalt kapasitet for alle batterier
+Enhet: Amperetimer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="spenning" type="nvdb:SpenningUPSType">
+            <annotation>
+              <documentation>10049: Angir spenningen som leveres ut fra enheten
+Enhet: Volt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="batteripakke_Spenning" type="integer">
+            <annotation>
+              <documentation>10044: Angir spenningen på hver batteripakke
+Enhet: Volt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="batteripakke_Antall" type="integer">
+            <annotation>
+              <documentation>3844: Angir hvor mange  batteripakker UPS har tilkoblet.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallEnkeltbatteri" type="integer">
+            <annotation>
+              <documentation>10893: Angir hvor mange enkeltbatteri UPS har tilkoplet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="batteripakke_SkftetÅr" type="integer">
+            <annotation>
+              <documentation>11220: Angir hvilket år batteripakke var ny/skiftet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skilletrafo" type="string">
+            <annotation>
+              <documentation>10050: Angir produsent og typebetegnelse for eventell skilletrafo</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>4077: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10047: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11732: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>10042: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>10041: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11616: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11690: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11130: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierUPSType">
+            <annotation>
+              <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>10048: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligUPSType">
+            <annotation>
+              <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4985: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="UPSPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:UPS"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligUPSType">
+    <annotation>
+      <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligUPSEnumerationType nvdb:VedlikeholdsansvarligUPSOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligUPSEnumerationType">
+    <annotation>
+      <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10498: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18787: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19963: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18916: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10576: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10654: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17746: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligUPSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

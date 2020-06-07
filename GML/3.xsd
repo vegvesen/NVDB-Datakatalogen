@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeSkjermType">
+    <annotation>
+      <documentation>1247: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeSkjermEnumerationType nvdb:BruksområdeSkjermOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeSkjermEnumerationType">
+    <annotation>
+      <documentation>1247: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="støyskjerm">
+        <annotation>
+          <documentation>1994: Skjerm benyttes primært for å skjerme omgivelser mot støy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="leskjer_Med_Sikringsskjerm">
+        <annotation>
+          <documentation>3287: Skjerm som primært er benyttet for å skjerme omgivelser mot sprut/støv fra veg, snø fra brøyting, innsyn, skjerming mot jernbane, vind etc.og samtidig ikke har funksjon i forhold til støyskjerming.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeSkjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkjermType">
+    <annotation>
+      <documentation>1546: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSkjermEnumerationType nvdb:EierSkjermOtherType"/>
+  </simpleType>
+  <simpleType name="EierSkjermEnumerationType">
+    <annotation>
+      <documentation>1546: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>2139: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18640: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10694: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>2143: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>2147: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17655: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringPlasseringType">
+    <annotation>
+      <documentation>2153: Angir hva skjermen er fundamentert/plassert på.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FundamenteringPlasseringEnumerationType nvdb:FundamenteringPlasseringOtherType"/>
+  </simpleType>
+  <simpleType name="FundamenteringPlasseringEnumerationType">
+    <annotation>
+      <documentation>2153: Angir hva skjermen er fundamentert/plassert på.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="påBerg">
+        <annotation>
+          <documentation>15974: Fundamentering på berg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påJordFylling">
+        <annotation>
+          <documentation>15975: Fundamentering på jord/fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påBergOgJordFylling">
+        <annotation>
+          <documentation>15976: Fundamentering varierer mellom på berg og på jord/fylling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påBru">
+        <annotation>
+          <documentation>15995: Skjerm er fundamentert/plassert på bru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påVoll">
+        <annotation>
+          <documentation>15998: Skjerm er fundamentert/plassert på topp av voll</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påMurAvNaturstein">
+        <annotation>
+          <documentation>17438: Skjerm er plassert oppå mur av naturstein.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påMurAvBetong">
+        <annotation>
+          <documentation>17437: Skjerm er plassert oppå betongmur.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påBetongrekkverk">
+        <annotation>
+          <documentation>15999: Skjerm er fundamentert/plassert på topp betongrekkverk.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FundamenteringPlasseringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="LydabsorberendeType">
+    <annotation>
+      <documentation>1606: Angir om vegobjektet er lydabsorberende</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LydabsorberendeEnumerationType nvdb:LydabsorberendeOtherType"/>
+  </simpleType>
+  <simpleType name="LydabsorberendeEnumerationType">
+    <annotation>
+      <documentation>1606: Angir om vegobjektet er lydabsorberende</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3511: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3549: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LydabsorberendeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeSkjermType">
+    <annotation>
+      <documentation>1087: Angir materialtype for skjerm</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeSkjermEnumerationType nvdb:MaterialeSkjermOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeSkjermEnumerationType">
+    <annotation>
+      <documentation>1087: Angir materialtype for skjerm</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>2181: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>3321: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betongstein">
+        <annotation>
+          <documentation>3339: Betongstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tegl">
+        <annotation>
+          <documentation>3350: Tegl</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>2222: Metall</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>2261: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kunststoff">
+        <annotation>
+          <documentation>2359: Kunststoff</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pleksiglass">
+        <annotation>
+          <documentation>2367: Pleksiglass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="herdetGlass">
+        <annotation>
+          <documentation>17393: Herdet glass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="torvmurMedGress">
+        <annotation>
+          <documentation>17223: Skjerm som er bygd opp med torv og fremstår som gressdekket.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naturstein">
+        <annotation>
+          <documentation>4963: Naturstein</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeSkjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeSøylerType">
+    <annotation>
+      <documentation>1665: Angir hvilken type søyler skjermen har.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeSøylerEnumerationType nvdb:MaterialeSøylerOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeSøylerEnumerationType">
+    <annotation>
+      <documentation>1665: Angir hvilken type søyler skjermen har.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>3347: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>3798: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stål">
+        <annotation>
+          <documentation>3800: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="aluminium">
+        <annotation>
+          <documentation>3799: Aluminium</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>3349: Plast</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeSøylerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverflatebehandlingSkjermType">
+    <annotation>
+      <documentation>1599: Angir hvordan vegobjektet er overflatebehandla</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OverflatebehandlingSkjermEnumerationType nvdb:OverflatebehandlingSkjermOtherType"/>
+  </simpleType>
+  <simpleType name="OverflatebehandlingSkjermEnumerationType">
+    <annotation>
+      <documentation>1599: Angir hvordan vegobjektet er overflatebehandla</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="malt">
+        <annotation>
+          <documentation>2151: Malt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beiset">
+        <annotation>
+          <documentation>2158: Beiset</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="impregnert">
+        <annotation>
+          <documentation>2164: Impregnert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oljet">
+        <annotation>
+          <documentation>2170: Oljet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lakkert">
+        <annotation>
+          <documentation>2176: Lakkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingen">
+        <annotation>
+          <documentation>19464: Overflatebehandling er enten ikke relevant eller det er bevisst ubehandlet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverflatebehandlingSkjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Skjerm" substitutionGroup="nvdb:AbstraktSkjerm" type="nvdb:SkjermType">
+    <annotation>
+      <documentation>3: En frittstående konstruksjon som skal være et hinder for f.eks støyutbredelse</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkjermType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkjermType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeSkjermType">
+            <annotation>
+              <documentation>1247: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialeSkjerm" type="nvdb:MaterialeSkjermType">
+            <annotation>
+              <documentation>1087: Angir materialtype for skjerm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialeSøyler" type="nvdb:MaterialeSøylerType">
+            <annotation>
+              <documentation>1665: Angir hvilken type søyler skjermen har.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fundamenteringPlassering" type="nvdb:FundamenteringPlasseringType">
+            <annotation>
+              <documentation>2153: Angir hva skjermen er fundamentert/plassert på.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeFundament" type="nvdb:TypeFundamentType">
+            <annotation>
+              <documentation>9819: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1296: Angir lengde av skjermvegg
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>9823: Angir skjermveggens gjennomsnittlige egenhøyde.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="double">
+            <annotation>
+              <documentation>1352: Angir arealet av skjermvegg, inkludert evt glassfelt. Det angis areal av ei side.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="søyleavstand" type="double">
+            <annotation>
+              <documentation>9832: Angir gjennomsnittlig avstand mellom søylene i ei søylerekke.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeGjennomsiktigVegg" type="nvdb:TypeGjennomsiktigVeggType">
+            <annotation>
+              <documentation>3951: Angir hvilket materiale gjennomsiktig vegg er laget av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arealGjennomsiktigVegg" type="double">
+            <annotation>
+              <documentation>1611: Angir totalt areal av gjennomsiktig skjerm.  F.eks plexiglass, herdeglass osv.
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>9828: Angir tykkelse av skjermvegg
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lydabsorberende" type="nvdb:LydabsorberendeType">
+            <annotation>
+              <documentation>1606: Angir om vegobjektet er lydabsorberende</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utformingTopp" type="nvdb:UtformingToppType">
+            <annotation>
+              <documentation>9829: Angir hvordan topp av vegobjektet er utformet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="farge" type="string">
+            <annotation>
+              <documentation>9839: Fargenavn/nummer for skjerm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overflatebehandling" type="nvdb:OverflatebehandlingSkjermType">
+            <annotation>
+              <documentation>1599: Angir hvordan vegobjektet er overflatebehandla</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9936: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9830: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11029: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FKB_ID" type="string">
+            <annotation>
+              <documentation>10846: Refererer til FKB-identitet. Benyttes i forbindelse med felles forvaltning av geometri.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSkjermType">
+            <annotation>
+              <documentation>1546: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>11202: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSkjermType">
+            <annotation>
+              <documentation>1549: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4712: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkjermPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skjerm"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeFundamentType">
+    <annotation>
+      <documentation>9819: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeFundamentEnumerationType nvdb:TypeFundamentOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFundamentEnumerationType">
+    <annotation>
+      <documentation>9819: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="betong_Bankett">
+        <annotation>
+          <documentation>15989: Skjerm er fundamentert på sammenhengende støpt såle/bankett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Punktfundamenter">
+        <annotation>
+          <documentation>15991: Skjerm er fundamentert på støpte punnktfundamenter.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Peler">
+        <annotation>
+          <documentation>17846: Skjerm er fundamentert på betongpeler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="direktefundamentertSøyle">
+        <annotation>
+          <documentation>17847: Søyler er funamentert direkte i jordmasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålspyd">
+        <annotation>
+          <documentation>17848: Søyler er fundamentert på spydspiss som er stukket ned i jord.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påKonstruksjon">
+        <annotation>
+          <documentation>17849: Skjerm er festet direkte på konstruksjon som f.eks mur, bru, mm</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFundamentOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeGjennomsiktigVeggType">
+    <annotation>
+      <documentation>3951: Angir hvilket materiale gjennomsiktig vegg er laget av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeGjennomsiktigVeggEnumerationType nvdb:TypeGjennomsiktigVeggOtherType"/>
+  </simpleType>
+  <simpleType name="TypeGjennomsiktigVeggEnumerationType">
+    <annotation>
+      <documentation>3951: Angir hvilket materiale gjennomsiktig vegg er laget av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="pleksiglass">
+        <annotation>
+          <documentation>4961: Pleksiglass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="herdetGlass">
+        <annotation>
+          <documentation>4962: Herdet glass</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeGjennomsiktigVeggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingToppType">
+    <annotation>
+      <documentation>9829: Angir hvordan topp av vegobjektet er utformet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtformingToppEnumerationType nvdb:UtformingToppOtherType"/>
+  </simpleType>
+  <simpleType name="UtformingToppEnumerationType">
+    <annotation>
+      <documentation>9829: Angir hvordan topp av vegobjektet er utformet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skrå">
+        <annotation>
+          <documentation>15992: Skrå</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trappRett">
+        <annotation>
+          <documentation>15993: Trapp/rett</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bue">
+        <annotation>
+          <documentation>15994: Bue</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtformingToppOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkjermType">
+    <annotation>
+      <documentation>1549: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSkjermEnumerationType nvdb:VedlikeholdsansvarligSkjermOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkjermEnumerationType">
+    <annotation>
+      <documentation>1549: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>2140: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18764: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19891: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18893: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>2144: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>2148: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17669: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17670: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkjermOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

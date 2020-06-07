@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="ArmeringType">
+    <annotation>
+      <documentation>9168: Angir om det er armering, og i tilfelle hvilken type</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ArmeringEnumerationType nvdb:ArmeringOtherType"/>
+  </simpleType>
+  <simpleType name="ArmeringEnumerationType">
+    <annotation>
+      <documentation>9168: Angir om det er armering, og i tilfelle hvilken type</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="enkel">
+        <annotation>
+          <documentation>12257: Enkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dobbel">
+        <annotation>
+          <documentation>12258: Dobbel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingenArmering">
+        <annotation>
+          <documentation>12259: Ingen armering</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ArmeringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Betongutstøping" substitutionGroup="nvdb:AbstraktBetongutstøping" type="nvdb:BetongutstøpingType">
+    <annotation>
+      <documentation>71: Utstøping i tunnel for sikring mot utrasing</documentation>
+    </annotation>
+  </element>
+  <complexType name="BetongutstøpingType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBetongutstøpingType">
+        <sequence>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1318: Angir lengde av vegobjektet, er normalt avledet fra geometri/stedfesting
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelse" type="double">
+            <annotation>
+              <documentation>1620: Angir standard tykkelse av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="armering" type="nvdb:ArmeringType">
+            <annotation>
+              <documentation>9168: Angir om det er armering, og i tilfelle hvilken type</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="membran" type="nvdb:MembranBetongutstøpingType">
+            <annotation>
+              <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="nvdb:PosisjonType">
+            <annotation>
+              <documentation>1650: Angir posisjon til vegobjektet i samleobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10269: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11571: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11063: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4773: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BetongutstøpingPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Betongutstøping"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MembranBetongutstøpingType">
+    <annotation>
+      <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MembranBetongutstøpingEnumerationType nvdb:MembranBetongutstøpingOtherType"/>
+  </simpleType>
+  <simpleType name="MembranBetongutstøpingEnumerationType">
+    <annotation>
+      <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfal_Mm_Ran">
+        <annotation>
+          <documentation>3429: Asfaltmembran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="foli_Mm_Ran">
+        <annotation>
+          <documentation>3430: Foliemembran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ikke_Mm_Ran">
+        <annotation>
+          <documentation>3431: Ikke membran</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MembranBetongutstøpingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PosisjonType">
+    <annotation>
+      <documentation>1650: Angir posisjon til vegobjektet i samleobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PosisjonEnumerationType nvdb:PosisjonOtherType"/>
+  </simpleType>
+  <simpleType name="PosisjonEnumerationType">
+    <annotation>
+      <documentation>1650: Angir posisjon til vegobjektet i samleobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="heleProfilet">
+        <annotation>
+          <documentation>3294: Hele profilet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="himling">
+        <annotation>
+          <documentation>3296: Himling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="såle">
+        <annotation>
+          <documentation>3302: Såle</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PosisjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

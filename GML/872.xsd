@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Faunapassasje" substitutionGroup="nvdb:AbstraktFaunapassasje" type="nvdb:FaunapassasjeType">
+    <annotation>
+      <documentation>872: Faunapassasjer har som primærfunksjon å koble sammen habitatområder som er fragmentert/isolert på grunn av en eksisterende veg</documentation>
+    </annotation>
+  </element>
+  <complexType name="FaunapassasjeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFaunapassasjeType">
+        <sequence>
+          <element minOccurs="0" name="lokalitetsnavn" type="string">
+            <annotation>
+              <documentation>10229: Navn på passasjen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeFaunapassasjeType">
+            <annotation>
+              <documentation>10230: Angir hvilken type utforming passasjen har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>10237: Beskrivelse av passasjen og område rundt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="regulertFor" type="string">
+            <annotation>
+              <documentation>10232: Angir hva passasjen er regulert for i reguleringsplan</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="flerbrukspassasje" type="string">
+            <annotation>
+              <documentation>10231: Angir om passasjen har jevnlig menneskelig ferdsel i form av rekreasjon (tursti) eller arbeids-/skogsveg, i tillegg til å kunne brukes som faunapassasje.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="formål" type="nvdb:FormålFaunapassasjeType">
+            <annotation>
+              <documentation>10233: Angir om passasjen er tilrettelagt for akvatiske og/eller terrestriske organismer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="integer">
+            <annotation>
+              <documentation>10235: Passasjens bredde målt langs etter vegen.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="integer">
+            <annotation>
+              <documentation>10234: Passasjens lengde målt på tvers av vegen.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeMin" type="double">
+            <annotation>
+              <documentation>10236: Passasjens minste gjennomgående høyde i 2/3 av passasjens snitt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeMaks" type="double">
+            <annotation>
+              <documentation>10246: Passasjens største gjennomgående høyde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="åpenhet" type="double">
+            <annotation>
+              <documentation>10238: En indeks som beskriver forholdet mellom høyden, bredden og lengden.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brutus_Id" type="string">
+            <annotation>
+              <documentation>10239: Gir referanse til brudatabanken</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10289: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>10240: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>10241: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FaunapassasjePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Faunapassasje"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="FormålFaunapassasjeType">
+    <annotation>
+      <documentation>10233: Angir om passasjen er tilrettelagt for akvatiske og/eller terrestriske organismer.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FormålFaunapassasjeEnumerationType nvdb:FormålFaunapassasjeOtherType"/>
+  </simpleType>
+  <simpleType name="FormålFaunapassasjeEnumerationType">
+    <annotation>
+      <documentation>10233: Angir om passasjen er tilrettelagt for akvatiske og/eller terrestriske organismer.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="akvatisk">
+        <annotation>
+          <documentation>16734: For alle vannlevende organismer (f.eks. fisk, bunndyr etc)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="terrestrisk">
+        <annotation>
+          <documentation>16735: For alle landlevende organismer (f.eks. hjortevilt, smågnagere etc)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="begge">
+        <annotation>
+          <documentation>16736: Passasjen har dobbeltfunksjon, tillater ferdsel av både land- og vannlevende organismer.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FormålFaunapassasjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFaunapassasjeType">
+    <annotation>
+      <documentation>10230: Angir hvilken type utforming passasjen har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeFaunapassasjeEnumerationType nvdb:TypeFaunapassasjeOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFaunapassasjeEnumerationType">
+    <annotation>
+      <documentation>10230: Angir hvilken type utforming passasjen har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="overgang">
+        <annotation>
+          <documentation>16730: En passasje som fører viltet i bro over vegen. Viltgjerder leder viltet i riktig retning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="undergang">
+        <annotation>
+          <documentation>16731: En passasje som fører viltet under vegen. Dette er enten en spesiallaget passasje for vilt eller en bru over en naturlig forsenkning i landskapet (e.g. over en bekkedal).</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kulvert">
+        <annotation>
+          <documentation>16732: Kulverter er gjennomløp beliggende under vegbanen, oftest støpt i betong. Finnes med og uten vannføring. Inkluderer også hvelv/rør i fylling.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sluse">
+        <annotation>
+          <documentation>16733: En åpning i viltgjerdet på omtrent 20-50 meter der viltet vil ha mulighet til å krysse vegen.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFaunapassasjeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

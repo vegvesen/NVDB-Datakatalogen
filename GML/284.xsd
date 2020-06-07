@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SkadetypeTilstandSkade_RekkverkType">
+    <annotation>
+      <documentation>1235: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadetypeTilstandSkade_RekkverkEnumerationType nvdb:SkadetypeTilstandSkade_RekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_RekkverkEnumerationType">
+    <annotation>
+      <documentation>1235: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="defektUteAvFunksjon">
+        <annotation>
+          <documentation>2647: Defekt/ute av funksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brøyteskade">
+        <annotation>
+          <documentation>3502: Brøyteskade</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_RekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Rekkverk" substitutionGroup="nvdb:AbstraktTilstandSkade_Rekkverk" type="nvdb:TilstandSkade_RekkverkType">
+    <annotation>
+      <documentation>284: Gir informasjon om tilstand og eventuell skade på rekkverk.</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_RekkverkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_RekkverkType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_RekkverkType">
+            <annotation>
+              <documentation>2269: Angir tilstand til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_RekkverkType">
+            <annotation>
+              <documentation>1235: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8778: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakTilstandSkade_RekkverkType">
+            <annotation>
+              <documentation>2062: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltakNår" type="nvdb:TiltakNårTilstandSkade_RekkverkType">
+            <annotation>
+              <documentation>2112: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_Tilstandsindeks" type="integer">
+            <annotation>
+              <documentation>9838: Angir tilstand. Til testformål
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7854: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4886: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_RekkverkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Rekkverk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_RekkverkType">
+    <annotation>
+      <documentation>2269: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_RekkverkEnumerationType nvdb:TilstandTilstandSkade_RekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_RekkverkEnumerationType">
+    <annotation>
+      <documentation>2269: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>4126: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>4127: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>4128: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>4631: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_RekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_RekkverkType">
+    <annotation>
+      <documentation>2112: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakNårTilstandSkade_RekkverkEnumerationType nvdb:TiltakNårTilstandSkade_RekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_RekkverkEnumerationType">
+    <annotation>
+      <documentation>2112: Angir tidsperiode fra skade er registrert til tiltaket bør være utført.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="under1år">
+        <annotation>
+          <documentation>3887: &lt; 1år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2År">
+        <annotation>
+          <documentation>3870: 1-2 år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over2år">
+        <annotation>
+          <documentation>3873: &gt; 2år</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakNårTilstandSkade_RekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_RekkverkType">
+    <annotation>
+      <documentation>2062: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakTilstandSkade_RekkverkEnumerationType nvdb:TiltakTilstandSkade_RekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_RekkverkEnumerationType">
+    <annotation>
+      <documentation>2062: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skiftes">
+        <annotation>
+          <documentation>3489: Skiftes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>3710: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_RekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeTankType">
+    <annotation>
+      <documentation>11511: Angir bruksområde</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeTankEnumerationType nvdb:BruksområdeTankOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeTankEnumerationType">
+    <annotation>
+      <documentation>11511: Angir bruksområde</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="slamavskiller_Septiktank">
+        <annotation>
+          <documentation>19552: Slamavskiller, septiktank</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vann_Drikkevann">
+        <annotation>
+          <documentation>19554: Vann, drikkevann</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oljeDrivstoff">
+        <annotation>
+          <documentation>19555: Olje/drivstoff</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeTankOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierTankType">
+    <annotation>
+      <documentation>11513: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierTankEnumerationType nvdb:EierTankOtherType"/>
+  </simpleType>
+  <simpleType name="EierTankEnumerationType">
+    <annotation>
+      <documentation>11513: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19565: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19564: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19561: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19562: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19563: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19566: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierTankOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeTankType">
+    <annotation>
+      <documentation>11514: Angir hvilket materiale tanken er laget av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialeTankEnumerationType nvdb:MaterialeTankOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialeTankEnumerationType">
+    <annotation>
+      <documentation>11514: Angir hvilket materiale tanken er laget av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stål">
+        <annotation>
+          <documentation>19557: Stål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>19559: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glassfiber">
+        <annotation>
+          <documentation>19558: Glassfiber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>19560: Plast</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialeTankOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Tank" substitutionGroup="nvdb:AbstraktTank" type="nvdb:TankType">
+    <annotation>
+      <documentation>939: Lukket beholder for magasinering av væske eller gass</documentation>
+    </annotation>
+  </element>
+  <complexType name="TankType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTankType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeTankType">
+            <annotation>
+              <documentation>11511: Angir bruksområde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materiale" type="nvdb:MaterialeTankType">
+            <annotation>
+              <documentation>11514: Angir hvilket materiale tanken er laget av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="volum" type="integer">
+            <annotation>
+              <documentation>11512: Angir hvor stort volum tanken har
+Enhet: Liter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11515: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierTankType">
+            <annotation>
+              <documentation>11513: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11516: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TankPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Tank"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

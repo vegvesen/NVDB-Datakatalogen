@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AbonnementstypeType">
+    <annotation>
+      <documentation>3508: Angir hvilken type abonnement det er på telefonforbindelsen (uoff)</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AbonnementstypeEnumerationType nvdb:AbonnementstypeOtherType"/>
+  </simpleType>
+  <simpleType name="AbonnementstypeEnumerationType">
+    <annotation>
+      <documentation>3508: Angir hvilken type abonnement det er på telefonforbindelsen (uoff)</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bredbåndFiber">
+        <annotation>
+          <documentation>18273: Bredbånd/fiber</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ISDN">
+        <annotation>
+          <documentation>4759: ISDN</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ISDN_Basis">
+        <annotation>
+          <documentation>4758: ISDN, Basis</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ISDN_Plus">
+        <annotation>
+          <documentation>4760: ISDN, Plus</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AbonnementstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeStyreapparatType">
+    <annotation>
+      <documentation>11003: Angir hovedbruksområde for styreapparat</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeStyreapparatEnumerationType nvdb:BruksområdeStyreapparatOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeStyreapparatEnumerationType">
+    <annotation>
+      <documentation>11003: Angir hovedbruksområde for styreapparat</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="signalanlegg">
+        <annotation>
+          <documentation>18408: Benyttes til styring av signalanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skilt">
+        <annotation>
+          <documentation>18409: Benyttes til styring av variabelt skilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegbom">
+        <annotation>
+          <documentation>18410: Benyttes til styring av vegbom</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ventilasjon">
+        <annotation>
+          <documentation>18411: Benyttes til styring av ventilasjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetUtstyr">
+        <annotation>
+          <documentation>18412: Benyttes til styring av annet teknisk utstyr.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeStyreapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierStyreapparatType">
+    <annotation>
+      <documentation>8021: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierStyreapparatEnumerationType nvdb:EierStyreapparatOtherType"/>
+  </simpleType>
+  <simpleType name="EierStyreapparatEnumerationType">
+    <annotation>
+      <documentation>8021: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10287: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18581: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10748: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10351: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10415: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17614: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierStyreapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnergikildeType">
+    <annotation>
+      <documentation>3750: Angir hvilken type energikilde som benyttes</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EnergikildeEnumerationType nvdb:EnergikildeOtherType"/>
+  </simpleType>
+  <simpleType name="EnergikildeEnumerationType">
+    <annotation>
+      <documentation>3750: Angir hvilken type energikilde som benyttes</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nettselskap">
+        <annotation>
+          <documentation>4882: Nettselskap</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="batteri">
+        <annotation>
+          <documentation>4883: Batteri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="batteriSolcellepanel">
+        <annotation>
+          <documentation>4884: Batteri/solcellepanel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="batteriVindgenerator">
+        <annotation>
+          <documentation>4885: Batteri/vindgenerator</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EnergikildeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="KommunikasjonType">
+    <annotation>
+      <documentation>3643: Angir hvilken type kommunikasjon det er i tilknytning til stasjonen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KommunikasjonEnumerationType nvdb:KommunikasjonOtherType"/>
+  </simpleType>
+  <simpleType name="KommunikasjonEnumerationType">
+    <annotation>
+      <documentation>3643: Angir hvilken type kommunikasjon det er i tilknytning til stasjonen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="mode_Med_Oppringt">
+        <annotation>
+          <documentation>4886: Modem/oppringt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mobiltelefon">
+        <annotation>
+          <documentation>4887: Mobiltelefon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fastLinje">
+        <annotation>
+          <documentation>4888: Fast linje</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="manuellTappingAvData">
+        <annotation>
+          <documentation>4889: Manuell "tapping" av data</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KommunikasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Styreapparat" substitutionGroup="nvdb:AbstraktStyreapparat" type="nvdb:StyreapparatType">
+    <annotation>
+      <documentation>456: Apparatur i tilknytning til teknisk utstyr.  Apparatur står vanligvis i skap.  Inneholder f.eks PLS, modem, batteri/strøm, telefon med mer.  Benyttes f.eks i tilknytning til signalanlegg.</documentation>
+    </annotation>
+  </element>
+  <complexType name="StyreapparatType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStyreapparatType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeStyreapparatType">
+            <annotation>
+              <documentation>8812: Angir type styreapparat.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeStyreapparatType">
+            <annotation>
+              <documentation>11003: Angir hovedbruksområde for styreapparat</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeIO" type="nvdb:TypeIOStyreapparatType">
+            <annotation>
+              <documentation>4053: Angir om det er digital eller analog tilkopling</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="igangsettingsdato" type="date">
+            <annotation>
+              <documentation>8815: Angir hvilket år utstyret ble satt i drift i det systemet det er en del av (f.eks signalanlegget).</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="telefonnummer1" type="string">
+            <annotation>
+              <documentation>3766: Angir telefonnr</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="telefonnummer2" type="string">
+            <annotation>
+              <documentation>3768: Angir telefonnr</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="typeCPU_Kort" type="string">
+            <annotation>
+              <documentation>3781: Angir type CPU-kort</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produksjonsår" type="integer">
+            <annotation>
+              <documentation>8814: Angir hvilket år utstyret ble produsert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>4066: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10482: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11723: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>3793: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11004: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11680: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11120: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierStyreapparatType">
+            <annotation>
+              <documentation>8021: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligStyreapparatType">
+            <annotation>
+              <documentation>8095: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4974: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="abonnementstype" type="nvdb:AbonnementstypeType">
+            <annotation>
+              <documentation>3508: Angir hvilken type abonnement det er på telefonforbindelsen (uoff)</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="energikilde" type="nvdb:EnergikildeType">
+            <annotation>
+              <documentation>3750: Angir hvilken type energikilde som benyttes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kommunikasjon" type="nvdb:KommunikasjonType">
+            <annotation>
+              <documentation>3643: Angir hvilken type kommunikasjon det er i tilknytning til stasjonen</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="StyreapparatPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Styreapparat"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeIOStyreapparatType">
+    <annotation>
+      <documentation>4053: Angir om det er digital eller analog tilkopling</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeIOStyreapparatEnumerationType nvdb:TypeIOStyreapparatOtherType"/>
+  </simpleType>
+  <simpleType name="TypeIOStyreapparatEnumerationType">
+    <annotation>
+      <documentation>4053: Angir om det er digital eller analog tilkopling</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="analog">
+        <annotation>
+          <documentation>5062: Analog</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="digital">
+        <annotation>
+          <documentation>5068: Digital</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeIOStyreapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeStyreapparatType">
+    <annotation>
+      <documentation>8812: Angir type styreapparat.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeStyreapparatEnumerationType nvdb:TypeStyreapparatOtherType"/>
+  </simpleType>
+  <simpleType name="TypeStyreapparatEnumerationType">
+    <annotation>
+      <documentation>8812: Angir type styreapparat.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="signal">
+        <annotation>
+          <documentation>11675: Signal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_C800V">
+        <annotation>
+          <documentation>11676: Signal, C800V</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_EC_1">
+        <annotation>
+          <documentation>11677: Signal, EC-1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ELC">
+        <annotation>
+          <documentation>11678: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ELC_2">
+        <annotation>
+          <documentation>11679: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ELC_3">
+        <annotation>
+          <documentation>11680: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ELC_2_3">
+        <annotation>
+          <documentation>11681: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_EPC">
+        <annotation>
+          <documentation>11682: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_EPC_4">
+        <annotation>
+          <documentation>11683: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_EPC_2">
+        <annotation>
+          <documentation>11684: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FC">
+        <annotation>
+          <documentation>11685: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FC_2000">
+        <annotation>
+          <documentation>11686: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FC_2008">
+        <annotation>
+          <documentation>11687: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FC_2016">
+        <annotation>
+          <documentation>11688: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FC_400">
+        <annotation>
+          <documentation>11689: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA">
+        <annotation>
+          <documentation>11690: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_400">
+        <annotation>
+          <documentation>11691: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_4000">
+        <annotation>
+          <documentation>11692: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_042">
+        <annotation>
+          <documentation>11693: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_082">
+        <annotation>
+          <documentation>11694: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_162">
+        <annotation>
+          <documentation>11695: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FCA_2">
+        <annotation>
+          <documentation>11696: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_FR_80">
+        <annotation>
+          <documentation>11697: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ITC_1">
+        <annotation>
+          <documentation>11698: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ITC_2">
+        <annotation>
+          <documentation>16164: Signal, ITC-2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_ITC_2_Mini">
+        <annotation>
+          <documentation>16165: Signal, ITC-2 Mini</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_JCF">
+        <annotation>
+          <documentation>11699: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_JCF_150">
+        <annotation>
+          <documentation>11700: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_JCF_250">
+        <annotation>
+          <documentation>11701: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_KL">
+        <annotation>
+          <documentation>11702: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_KL_5000">
+        <annotation>
+          <documentation>11703: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_KLT_5000">
+        <annotation>
+          <documentation>11704: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_LC">
+        <annotation>
+          <documentation>11705: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_LCFCA">
+        <annotation>
+          <documentation>11706: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_MQ">
+        <annotation>
+          <documentation>11707: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_MR">
+        <annotation>
+          <documentation>11708: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_NH">
+        <annotation>
+          <documentation>11709: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_PLS">
+        <annotation>
+          <documentation>11710: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_POFYR">
+        <annotation>
+          <documentation>11711: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SC_5400">
+        <annotation>
+          <documentation>11712: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SC_5408">
+        <annotation>
+          <documentation>11713: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SC_8800">
+        <annotation>
+          <documentation>11714: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SC_9016">
+        <annotation>
+          <documentation>11715: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SC_9108">
+        <annotation>
+          <documentation>11716: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal_SE">
+        <annotation>
+          <documentation>11717: Ikke aktuell ved nye anlegg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeStyreapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStyreapparatType">
+    <annotation>
+      <documentation>8095: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligStyreapparatEnumerationType nvdb:VedlikeholdsansvarligStyreapparatOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStyreapparatEnumerationType">
+    <annotation>
+      <documentation>8095: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10489: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18748: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19954: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18877: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10567: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10645: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17737: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligStyreapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

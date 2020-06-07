@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierSkredoverbyggType">
+    <annotation>
+      <documentation>7995: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSkredoverbyggEnumerationType nvdb:EierSkredoverbyggOtherType"/>
+  </simpleType>
+  <simpleType name="EierSkredoverbyggEnumerationType">
+    <annotation>
+      <documentation>7995: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10261: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18610: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10723: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10325: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10389: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17574: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkredoverbyggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Skredoverbygg" substitutionGroup="nvdb:AbstraktSkredoverbygg" type="nvdb:SkredoverbyggType">
+    <annotation>
+      <documentation>66: Konstruksjon som omslutter vegen for å beskytte den mot skred.  Tak og vegg inn mot skråning er massive.  Vegg ut fra skråning er åpen eller evt. tettet med lettere materiale.  Se også utgått Håndbok 100</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredoverbyggType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredoverbyggType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>5282: Angir navn på skredoverbygget</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeSkredoverbyggType">
+            <annotation>
+              <documentation>9508: Angir hvilken type skredoverbygg det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1316: Angir lengde av vegobjektet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5283: Permanent merknad til aktuell forekomst</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="brutus_Id" type="string">
+            <annotation>
+              <documentation>9302: Gir referanse til brudatabanken</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tunnelnummer" type="string">
+            <annotation>
+              <documentation>9516: Gir unikt nummer for tunnel/skredoverbygg, benyttes av Plania</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10361: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11059: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSkredoverbyggType">
+            <annotation>
+              <documentation>7995: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSkredoverbyggType">
+            <annotation>
+              <documentation>8058: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4768: Gir koordinatsett for å avgrense vegobjektets utstrekning. Vegobjektet representeres med vegnettsgeometri på strekning mellom startpunkt og sluttpunkt. Eventuelt mellomliggende punkt benyttes for å sikre at riktig veglinje benyttes for hele strekningen</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredoverbyggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skredoverbygg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSkredoverbyggType">
+    <annotation>
+      <documentation>9508: Angir hvilken type skredoverbygg det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSkredoverbyggEnumerationType nvdb:TypeSkredoverbyggOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSkredoverbyggEnumerationType">
+    <annotation>
+      <documentation>9508: Angir hvilken type skredoverbygg det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skredoverbygg_Uten_Fjellforankring">
+        <annotation>
+          <documentation>13398: Skredoverbygg, u/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Uten_Fjellforank_Sålefund_HelFrontvegg">
+        <annotation>
+          <documentation>13399: Skredoverbygg, u/fjellforank., sålefund., hel frontvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Uten_Fjellforank_Sålefund_ÅpenFrontvegg">
+        <annotation>
+          <documentation>13400: Skredoverbygg, u/fjellforank., sålefund., åpen frontvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Uten_Fjellforankring_Kassetverrsnitt">
+        <annotation>
+          <documentation>13401: Skredoverbygg, u/fjellforankring, kassetverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredbyggUten_Fjellforankring_Rørtverrsnitt">
+        <annotation>
+          <documentation>13402: Skredbygg u/fjellforankring, rørtverrsnitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Uten_Fjellforankring_Andre">
+        <annotation>
+          <documentation>13403: Skredoverbygg, u/fjellforankring, andre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbyggMed_Fjellforankring">
+        <annotation>
+          <documentation>13404: Skredoverbygg m/fjellforankring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbyggMed_Fjellforank_HelFrontvegg_Uten_Bakvegg">
+        <annotation>
+          <documentation>13405: Skredoverbygg m/fjellforank., hel frontvegg, u/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Med_Fjellforank_HelFrontvegg_Med_Bakvegg">
+        <annotation>
+          <documentation>13406: Skredoverbygg, m/fjellforank., hel frontvegg, m/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Med_Fjellforank_ÅpenFrontvegg_Uten_Bakvegg">
+        <annotation>
+          <documentation>13407: Skredoverbygg, m/fjellforank., åpen frontvegg, u/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Med_Fjellforank_ÅpenFrontvegg_Med_Bakvegg">
+        <annotation>
+          <documentation>13408: Skredoverbygg, m/fjellforank., åpen frontvegg, m/bakvegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredoverbygg_Med_Fjellforankring_Andre">
+        <annotation>
+          <documentation>13409: Skredoverbygg, m/fjellforankring, andre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSkredoverbyggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredoverbyggType">
+    <annotation>
+      <documentation>8058: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSkredoverbyggEnumerationType nvdb:VedlikeholdsansvarligSkredoverbyggOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredoverbyggEnumerationType">
+    <annotation>
+      <documentation>8058: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10452: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18671: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19928: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18800: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10530: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10608: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17711: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredoverbyggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

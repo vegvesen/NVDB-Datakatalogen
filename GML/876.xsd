@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Overvannsrenne" substitutionGroup="nvdb:AbstraktOvervannsrenne" type="nvdb:OvervannsrenneType">
+    <annotation>
+      <documentation>876: Konstruksjon som fører overvann langs vegen til lukket dreneringssystem eller grøft</documentation>
+    </annotation>
+  </element>
+  <complexType name="OvervannsrenneType">
+    <complexContent>
+      <extension base="nvdb:AbstraktOvervannsrenneType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeOvervannsrenneType">
+            <annotation>
+              <documentation>10442: Angir hvilken type objektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>10444: Angir lengde på rennen
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="integer">
+            <annotation>
+              <documentation>10445: Angir gjennomsnittlig bredde på rennen
+Enhet: Desimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dybde" type="integer">
+            <annotation>
+              <documentation>10446: Angir gjennomsnittlig dybde av rennen
+Enhet: Desimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="varmekabler" type="nvdb:VarmekablerOvervannsrenneType">
+            <annotation>
+              <documentation>11819: Angir om det er installert varmekabel i overvannsrenne for å sikre funksjon om vinteren. Mest relevant for kasserenne</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10443: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11649: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11175: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligOvervannsrenneType">
+            <annotation>
+              <documentation>10441: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>10447: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="OvervannsrennePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Overvannsrenne"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeOvervannsrenneType">
+    <annotation>
+      <documentation>10442: Angir hvilken type objektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeOvervannsrenneEnumerationType nvdb:TypeOvervannsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="TypeOvervannsrenneEnumerationType">
+    <annotation>
+      <documentation>10442: Angir hvilken type objektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="brosteinsrenne">
+        <annotation>
+          <documentation>16894: Renne langs vegen belagt med brostein. Benyttes f.eks. i tettbygd strøk der det ikke finnes kantstein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rennesteinsrenne">
+        <annotation>
+          <documentation>16895: Renne langs ytterkant av vegen mot kantstein. Selve vegkonstruksjonen er bygd slik at vannet renner ut til siden og ledes langsmed kantsteinen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kasserenne">
+        <annotation>
+          <documentation>16896: Renne formet som en kasse eller halvsirket nedbygd i bakken med rist på toppen. Plasseres der vann fra tilstøtende avrenningsflater møtes. Benyttes gjerne ved større flatearealer, f.eks parkeringsplasser</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeOvervannsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerOvervannsrenneType">
+    <annotation>
+      <documentation>11819: Angir om det er installert varmekabel i overvannsrenne for å sikre funksjon om vinteren. Mest relevant for kasserenne</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VarmekablerOvervannsrenneEnumerationType nvdb:VarmekablerOvervannsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="VarmekablerOvervannsrenneEnumerationType">
+    <annotation>
+      <documentation>11819: Angir om det er installert varmekabel i overvannsrenne for å sikre funksjon om vinteren. Mest relevant for kasserenne</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19808: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19809: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VarmekablerOvervannsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligOvervannsrenneType">
+    <annotation>
+      <documentation>10441: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligOvervannsrenneEnumerationType nvdb:VedlikeholdsansvarligOvervannsrenneOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligOvervannsrenneEnumerationType">
+    <annotation>
+      <documentation>10441: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>16888: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18733: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20001: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18862: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16889: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16890: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17784: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligOvervannsrenneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

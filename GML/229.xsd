@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BudsjettFrostsikringslagType">
+    <annotation>
+      <documentation>5539: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BudsjettFrostsikringslagEnumerationType nvdb:BudsjettFrostsikringslagOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettFrostsikringslagEnumerationType">
+    <annotation>
+      <documentation>5539: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>7874: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>7875: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettFrostsikringslagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Frostsikringslag" substitutionGroup="nvdb:AbstraktFrostsikringslag" type="nvdb:FrostsikringslagType">
+    <annotation>
+      <documentation>229: Den delen av overbygningen som er beregnet på, helt eller delvis, å hindre frosten i å trenge ned i undergrunn eller underbygning</documentation>
+    </annotation>
+  </element>
+  <complexType name="FrostsikringslagType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFrostsikringslagType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeFrostsikringslagType">
+            <annotation>
+              <documentation>1214: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>1633: Angir lagets tykkelse
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Gjennomsnitt" type="double">
+            <annotation>
+              <documentation>7034: Angir gjennomsnittsbredde for strekning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element name="leggedato" type="date">
+            <annotation>
+              <documentation>5145: Angir leggedato for frostsikringslag</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettFrostsikringslagType">
+            <annotation>
+              <documentation>5539: Angir hvilket budsjett utlegging går over</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5553: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11108: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4863: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8885: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FrostsikringslagPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Frostsikringslag"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeFrostsikringslagType">
+    <annotation>
+      <documentation>1214: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeFrostsikringslagEnumerationType nvdb:TypeFrostsikringslagOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFrostsikringslagEnumerationType">
+    <annotation>
+      <documentation>1214: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="syntetiskeMaterialer">
+        <annotation>
+          <documentation>3681: Syntetiske materialer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ekstrudertPolystyren">
+        <annotation>
+          <documentation>6720: Plater av ekspadert polystyren (XPS)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skumglass">
+        <annotation>
+          <documentation>3684: Skumglass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lettklinker">
+        <annotation>
+          <documentation>3683: Lettklinker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="steinmaterialer">
+        <annotation>
+          <documentation>17281: Kan være f.eks kult, knust fjell, pukk, sand, grus, mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bark">
+        <annotation>
+          <documentation>3685: Bark</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFrostsikringslagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

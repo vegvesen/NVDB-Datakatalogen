@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="TypeStrategiType">
+    <annotation>
+      <documentation>1158: Angir hvilken type vinterstrategi det er tale om.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeStrategiEnumerationType nvdb:TypeStrategiOtherType"/>
+  </simpleType>
+  <simpleType name="TypeStrategiEnumerationType">
+    <annotation>
+      <documentation>1158: Angir hvilken type vinterstrategi det er tale om.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="strategiBarVeg">
+        <annotation>
+          <documentation>2721: Omfatter strekninger som skal være snø- og isfrie hele vinteren. "Bar veg" skal omfatte kjørebane mellom ytterkant av kantlinjene</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="strategiVinterveg">
+        <annotation>
+          <documentation>2722: Omfatter strekninger hvor det er akseptabelt med snø- og isdekke hele eller deler av vinteren.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mellomstrategi">
+        <annotation>
+          <documentation>2723: Mellomstrategi</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeStrategiOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vinterdriftsstrategi" substitutionGroup="nvdb:AbstraktVinterdriftsstrategi" type="nvdb:VinterdriftsstrategiType">
+    <annotation>
+      <documentation>106: Angir hvilken strategi det skal være i forhold til vinterdrift på strekningen.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VinterdriftsstrategiType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVinterdriftsstrategiType">
+        <sequence>
+          <element minOccurs="0" name="typeStrategi" type="nvdb:TypeStrategiType">
+            <annotation>
+              <documentation>1158: Angir hvilken type vinterstrategi det er tale om.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>7838: Angir merknad.  Statisk informasjon knyttet til forekomst</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4804: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VinterdriftsstrategiPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vinterdriftsstrategi"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

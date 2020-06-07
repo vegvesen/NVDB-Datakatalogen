@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Oppgave_Vegnett" substitutionGroup="nvdb:AbstraktOppgave_Vegnett" type="nvdb:Oppgave_VegnettType">
+    <annotation>
+      <documentation>621: Enkeltoppgave i forbindelse med redigering av vegnettet</documentation>
+    </annotation>
+  </element>
+  <complexType name="Oppgave_VegnettType">
+    <complexContent>
+      <extension base="nvdb:AbstraktOppgave_VegnettType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeOppgave_VegnettType">
+            <annotation>
+              <documentation>5603: Angir hvilken type oppdrag det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>5562: Angir navn</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="definertDato" type="date">
+            <annotation>
+              <documentation>5566: Angir dato for opprettelse</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="frist" type="date">
+            <annotation>
+              <documentation>5573: Angir frist for når oppgave skal være ferdig</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="status" type="string">
+            <annotation>
+              <documentation>5575: Gir status</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5579: Kan gi fast merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="string"/>
+          <element minOccurs="0" name="ledetekstID" type="integer">
+            <annotation>
+              <documentation>5628: LedetekstID</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Oppgave_VegnettPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Oppgave_Vegnett"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeOppgave_VegnettType">
+    <annotation>
+      <documentation>5603: Angir hvilken type oppdrag det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeOppgave_VegnettEnumerationType nvdb:TypeOppgave_VegnettOtherType"/>
+  </simpleType>
+  <simpleType name="TypeOppgave_VegnettEnumerationType">
+    <annotation>
+      <documentation>5603: Angir hvilken type oppdrag det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="utsjekk">
+        <annotation>
+          <documentation>7893: Utsjekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegnettsredigering">
+        <annotation>
+          <documentation>7894: Vegnettsredigering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="godkjenning">
+        <annotation>
+          <documentation>7895: Godkjenning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="godkjenning">
+        <annotation>
+          <documentation>7892: Godkjenning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="setteVegnettIDrift">
+        <annotation>
+          <documentation>7896: Sette vegnett i drift</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeOppgave_VegnettOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

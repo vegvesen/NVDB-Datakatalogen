@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="ATK_Influensstrekning" substitutionGroup="nvdb:AbstraktATK_Influensstrekning" type="nvdb:ATK_InfluensstrekningType">
+    <annotation>
+      <documentation>775: Strekning hvor det er automatisk overvåkning av fartsnivå.  Strekning er definert fra varslingsskilt 556 til 3 km etter siste ATK-punkt for punkt-Atk og til 1 km etter det siste ATK-punktet for streknings-ATK.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ATK_InfluensstrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktATK_InfluensstrekningType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>7917: Gir navn på strekningen.  F.eks fra - til i kjøreretning</documentation>
+            </annotation>
+          </element>
+          <element name="typeTrafikkontroll" type="nvdb:TypeTrafikkontrollType">
+            <annotation>
+              <documentation>9370: Angir hvilken type trafikkontroll det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>7918: Gir merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ATK_InfluensstrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:ATK_Influensstrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeTrafikkontrollType">
+    <annotation>
+      <documentation>9370: Angir hvilken type trafikkontroll det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeTrafikkontrollEnumerationType nvdb:TypeTrafikkontrollOtherType"/>
+  </simpleType>
+  <simpleType name="TypeTrafikkontrollEnumerationType">
+    <annotation>
+      <documentation>9370: Angir hvilken type trafikkontroll det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="strekningMedATK_Punkter">
+        <annotation>
+          <documentation>13097: Strekning med ATK-punkter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="streknings_ATK">
+        <annotation>
+          <documentation>13098: Streknings-ATK</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeTrafikkontrollOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

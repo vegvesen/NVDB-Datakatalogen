@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BudsjettForsterkningslagType">
+    <annotation>
+      <documentation>5538: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BudsjettForsterkningslagEnumerationType nvdb:BudsjettForsterkningslagOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettForsterkningslagEnumerationType">
+    <annotation>
+      <documentation>5538: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>7872: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>7873: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettForsterkningslagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Forsterkningslag" substitutionGroup="nvdb:AbstraktForsterkningslag" type="nvdb:ForsterkningslagType">
+    <annotation>
+      <documentation>227: Lag i vegens overbygning mellom planum og bærelag.  Hovedfunksjonen er å fordele trafikkbelastningen slik at undergrunnen ikke overbelastes (2)</documentation>
+    </annotation>
+  </element>
+  <complexType name="ForsterkningslagType">
+    <complexContent>
+      <extension base="nvdb:AbstraktForsterkningslagType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeForsterkningslagType">
+            <annotation>
+              <documentation>1212: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="steinstørrelse" type="integer">
+            <annotation>
+              <documentation>11275: Angir største steinstørrelse
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>1631: Angir lagets tykkelse
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde_Gjennomsnitt" type="double">
+            <annotation>
+              <documentation>7035: Angir gjennomsnittsbredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element name="utleggingsdato" type="date">
+            <annotation>
+              <documentation>5543: Angir dato for utlegging</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettForsterkningslagType">
+            <annotation>
+              <documentation>5538: Angir hvilket budsjett utlegging går over</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5552: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11107: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4861: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8883: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ForsterkningslagPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Forsterkningslag"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeForsterkningslagType">
+    <annotation>
+      <documentation>1212: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeForsterkningslagEnumerationType nvdb:TypeForsterkningslagOtherType"/>
+  </simpleType>
+  <simpleType name="TypeForsterkningslagEnumerationType">
+    <annotation>
+      <documentation>1212: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="knusteSteinmaterialer">
+        <annotation>
+          <documentation>3679: Knuste steinmaterialer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sandGrus">
+        <annotation>
+          <documentation>3677: Sand/grus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjenbruksbetongTegl">
+        <annotation>
+          <documentation>19023: Gjenbruksbetong/-tegl</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeForsterkningslagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Trafikkreguleringer" substitutionGroup="nvdb:AbstraktTrafikkreguleringer" type="nvdb:TrafikkreguleringerType">
+    <annotation>
+      <documentation>856: Strekning hvor det er restriksjoner for motortrafikk eller gående og syklende</documentation>
+    </annotation>
+  </element>
+  <complexType name="TrafikkreguleringerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTrafikkreguleringerType">
+        <sequence>
+          <element name="trafikkreguleringer" type="nvdb:TrafikkreguleringerTrafikkreguleringerType">
+            <annotation>
+              <documentation>9794: Angir eventuelle restriksjoner for motortrafikk, gående og syklende</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjeldertidsrom" type="string">
+            <annotation>
+              <documentation>11541: Angir tidsrommet (hhmm-hhmm) eller (mnd-mnd) trafikkreguleringen gjelder</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>10782: Angir eventuelle unntak for tidspunkt, kjøretøytyper, mm</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TrafikkreguleringerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Trafikkreguleringer"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TrafikkreguleringerTrafikkreguleringerType">
+    <annotation>
+      <documentation>9794: Angir eventuelle restriksjoner for motortrafikk, gående og syklende</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TrafikkreguleringerTrafikkreguleringerEnumerationType nvdb:TrafikkreguleringerTrafikkreguleringerOtherType"/>
+  </simpleType>
+  <simpleType name="TrafikkreguleringerTrafikkreguleringerEnumerationType">
+    <annotation>
+      <documentation>9794: Angir eventuelle restriksjoner for motortrafikk, gående og syklende</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="forbudtForAlleKjøretøy">
+        <annotation>
+          <documentation>19643: Forbudt for alle kjøretøy</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForGående">
+        <annotation>
+          <documentation>19659: Forbudt for gående</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForGåendeOgSyklende">
+        <annotation>
+          <documentation>15945: Forbudt for gående og syklende, regulert vha skilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForLastebilOgTrekkbil">
+        <annotation>
+          <documentation>19660: Forbudt for lastebil og trekkbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForLastebilOgTrekkbilUnntattKjøringTilVirksomhetEllerAdresse">
+        <annotation>
+          <documentation>19661: Forbudt for lastebil og trekkbil unntatt kjøring til virksomhet eller adresse Virksomhet eller adresse spesifiseres som Merknad.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotorsykkel">
+        <annotation>
+          <documentation>19662: Forbudt for motorsykkel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotorsykkelOgMoped">
+        <annotation>
+          <documentation>19663: Forbudt for motorsykkel og moped</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikk">
+        <annotation>
+          <documentation>15946: Forbudt for motortrafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattBuss">
+        <annotation>
+          <documentation>19664: Forbudt for motortrafikk unntatt buss</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattBussOgTaxi">
+        <annotation>
+          <documentation>19665: Forbudt for motortrafikk unntatt buss og taxi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattMoped">
+        <annotation>
+          <documentation>19666: Forbudt for motortrafikk unntatt moped</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattSpesiellMotorvogntype">
+        <annotation>
+          <documentation>19667: Forbudt for motortrafikk unntatt spesiell motorvogntype. Motorvogntype spesifiseres som Merknad.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattTaxi">
+        <annotation>
+          <documentation>19668: Forbudt for motortrafikk unntatt taxi</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForMotortrafikkUnntattVaretransport">
+        <annotation>
+          <documentation>19669: Forbudt for motortrafikk unntatt varetransport</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForSyklende">
+        <annotation>
+          <documentation>18303: Forbudt for syklende, regulert vha skilt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forbudtForTraktor">
+        <annotation>
+          <documentation>19670: Forbudt for traktor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjennomkjøringForbudt">
+        <annotation>
+          <documentation>16847: Gjennomkjøring forbudt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjennomkjøringForbudtForLastebilOgTrekkbil">
+        <annotation>
+          <documentation>19671: Gjennomkjøring forbudt for lastebil og trekkbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjennomkjøringForbudtTilVegEllerGate">
+        <annotation>
+          <documentation>19672: Gjennomkjøring forbudt til veg eller gate. Veg eller gate som Merknad.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motortrafikkKunTillattForKjøringTilEiendommer">
+        <annotation>
+          <documentation>15948: Forbudt for motortrafikk, med unntak av kjøring til eiendommer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motortrafikkKunTillattForKjøringTilVirksomhetEllerAdresse">
+        <annotation>
+          <documentation>19673: Motortrafikk kun tillatt for kjøring til virksomhet eller adresse. Virksomhet eller adresse spesifiseres som Merknad.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motortrafikkKunTillattForVaretransport">
+        <annotation>
+          <documentation>15947: Forbudt for motortrafikk, med unntak av varetransport</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motortrafikkKunTillattForVaretransportOgKjøringTilEiendommer">
+        <annotation>
+          <documentation>15949: Forbudt for motortrafikk, med unntak av varetransport og kjøring til eiendommer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="syklingMotKjøreretningenTillatt">
+        <annotation>
+          <documentation>17464: Sykling mot kjøreretning er tillatt, og dette er regulert vha skilt. Gjelder der det ikke er merket opp egne sykkelfelt.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TrafikkreguleringerTrafikkreguleringerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

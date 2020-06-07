@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksklasseType">
+    <annotation>
+      <documentation>11455: Angir fiberdukens bruksklasse. Jfr Håndbok N200 fig 521.1</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksklasseEnumerationType nvdb:BruksklasseOtherType"/>
+  </simpleType>
+  <simpleType name="BruksklasseEnumerationType">
+    <annotation>
+      <documentation>11455: Angir fiberdukens bruksklasse. Jfr Håndbok N200 fig 521.1</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1">
+        <annotation>
+          <documentation>19479: 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>19480: 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>19481: 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="4">
+        <annotation>
+          <documentation>19482: 4</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="5">
+        <annotation>
+          <documentation>19483: 5</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettFiberdukType">
+    <annotation>
+      <documentation>5536: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BudsjettFiberdukEnumerationType nvdb:BudsjettFiberdukOtherType"/>
+  </simpleType>
+  <simpleType name="BudsjettFiberdukEnumerationType">
+    <annotation>
+      <documentation>5536: Angir hvilket budsjett utlegging går over</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="anlegg">
+        <annotation>
+          <documentation>7868: Anlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vedlikehold">
+        <annotation>
+          <documentation>7869: Vedlikehold</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BudsjettFiberdukOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Fiberduk" substitutionGroup="nvdb:AbstraktFiberduk" type="nvdb:FiberdukType">
+    <annotation>
+      <documentation>59: Permeabel duk som hovedsaklig brukes til filter og til separasjon av gode og dårlige masser.  Visse duker har også en armeringsfunksjon.  Betegnelsen geotekstil og fiberduk benyttes ofte om hverandre (2).</documentation>
+    </annotation>
+  </element>
+  <complexType name="FiberdukType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFiberdukType">
+        <sequence>
+          <element minOccurs="0" name="areal" type="double">
+            <annotation>
+              <documentation>1365: Angir arealet av vegobjektet
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element name="leggedato" type="date">
+            <annotation>
+              <documentation>5146: Angir leggedato for fiberduk/armeringsnett</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tykkelse" type="integer">
+            <annotation>
+              <documentation>1617: Angir standard tykkelse av vegobjektet
+Enhet: Millimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksklasse" type="nvdb:BruksklasseType">
+            <annotation>
+              <documentation>11455: Angir fiberdukens bruksklasse. Jfr Håndbok N200 fig 521.1</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="string">
+            <annotation>
+              <documentation>8750: Angir hvor i en konstruksjon fiberduken er plassert.  Kan f.eks være "på planering", med mer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="budsjett" type="nvdb:BudsjettFiberdukType">
+            <annotation>
+              <documentation>5536: Angir hvilket budsjett utlegging går over</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5550: Gir permanent merknad</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="breddeGjennomsnitt" type="double">
+            <annotation>
+              <documentation>5147: Angir representativ bredde
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1520: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>1443: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="leverandør" type="string">
+            <annotation>
+              <documentation>1480: Angir navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11056: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4762: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8876: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FiberdukPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fiberduk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

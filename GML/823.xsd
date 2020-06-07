@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="KontrollretningType">
+    <annotation>
+      <documentation>9519: Angir i hvilken kjøreretning det blir gjort trafikkontroll.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:KontrollretningEnumerationType nvdb:KontrollretningOtherType"/>
+  </simpleType>
+  <simpleType name="KontrollretningEnumerationType">
+    <annotation>
+      <documentation>9519: Angir i hvilken kjøreretning det blir gjort trafikkontroll.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="medMetreringsretning">
+        <annotation>
+          <documentation>13436: Det blir foretatt måling i samme retning som metreringsretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motMetreringsretning">
+        <annotation>
+          <documentation>13437: Det blir foretatt måling i motsatt retning av metreringsretning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KontrollretningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Streknings_ATK" substitutionGroup="nvdb:AbstraktStreknings_ATK" type="nvdb:Streknings_ATKType">
+    <annotation>
+      <documentation>823: Strekning mellom to ATK-punkt hvor det gjennomføres automatisk trafikkontroll (ATK) av gjennomsnittsfarten på passerende kjøretøy.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Streknings_ATKType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStreknings_ATKType">
+        <sequence>
+          <element minOccurs="0" name="sted" type="string">
+            <annotation>
+              <documentation>9520: Gir navn på strekningen.  F.eks fra - til</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kontrollretning" type="nvdb:KontrollretningType">
+            <annotation>
+              <documentation>9519: Angir i hvilken kjøreretning det blir gjort trafikkontroll.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>9341: Varig informasjon knyttet til vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10365: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11476: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Streknings_ATKPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Streknings_ATK"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

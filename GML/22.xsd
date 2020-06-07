@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierFeristType">
+    <annotation>
+      <documentation>7985: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierFeristEnumerationType nvdb:EierFeristOtherType"/>
+  </simpleType>
+  <simpleType name="EierFeristEnumerationType">
+    <annotation>
+      <documentation>7985: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10251: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18601: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10713: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10315: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10379: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17610: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierFeristOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Ferist" substitutionGroup="nvdb:AbstraktFerist" type="nvdb:FeristType">
+    <annotation>
+      <documentation>22: Konstruksjon med rist eller gitter som er innbygd i vegbanen, og som hindrer krøtter i å komme over. (jfr bokmålsordboka)</documentation>
+    </annotation>
+  </element>
+  <complexType name="FeristType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFeristType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeFeristType">
+            <annotation>
+              <documentation>1104: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="passering_Ved_Ferist" type="nvdb:Passering_Ved_FeristType">
+            <annotation>
+              <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tildekning_Fradato" type="string">
+            <annotation>
+              <documentation>4599: Angir dato for når ferist skal tildekkes for vinteren</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tildekning_Tildato" type="string">
+            <annotation>
+              <documentation>4600: Angir dato for når tildekking skal fjernes etter vintersesong</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterforberedelse" type="nvdb:VinterforberedelseType">
+            <annotation>
+              <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10290: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11552: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11039: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FKB_ID" type="string">
+            <annotation>
+              <documentation>10848: Refererer til FKB-identitet. Benyttes i forbindelse med felles forvaltning av geometri.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierFeristType">
+            <annotation>
+              <documentation>7985: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligFeristType">
+            <annotation>
+              <documentation>4651: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4730: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9425: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FeristPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Ferist"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="Passering_Ved_FeristType">
+    <annotation>
+      <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Passering_Ved_FeristEnumerationType nvdb:Passering_Ved_FeristOtherType"/>
+  </simpleType>
+  <simpleType name="Passering_Ved_FeristEnumerationType">
+    <annotation>
+      <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3516: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3554: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Passering_Ved_FeristOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFeristType">
+    <annotation>
+      <documentation>1104: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeFeristEnumerationType nvdb:TypeFeristOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFeristEnumerationType">
+    <annotation>
+      <documentation>1104: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="rør">
+        <annotation>
+          <documentation>2492: Rør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HI_Bjelker">
+        <annotation>
+          <documentation>2493: H/i-bjelker</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="elektrisk">
+        <annotation>
+          <documentation>2494: Elektrisk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFeristOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFeristType">
+    <annotation>
+      <documentation>4651: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligFeristEnumerationType nvdb:VedlikeholdsansvarligFeristOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFeristEnumerationType">
+    <annotation>
+      <documentation>4651: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>5652: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18708: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19904: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18837: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>5653: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>5654: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17682: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligFeristOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterforberedelseType">
+    <annotation>
+      <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterforberedelseEnumerationType nvdb:VinterforberedelseOtherType"/>
+  </simpleType>
+  <simpleType name="VinterforberedelseEnumerationType">
+    <annotation>
+      <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tildekkes">
+        <annotation>
+          <documentation>5533: Tildekkes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>5534: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterforberedelseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

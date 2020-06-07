@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="Ansiktsside_RettetMotVariabeltSkiltType">
+    <annotation>
+      <documentation>6987: Angir hva skiltplatens ansiktsside, dvs skiltmotivet er rettet mot.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Ansiktsside_RettetMotVariabeltSkiltEnumerationType nvdb:Ansiktsside_RettetMotVariabeltSkiltOtherType"/>
+  </simpleType>
+  <simpleType name="Ansiktsside_RettetMotVariabeltSkiltEnumerationType">
+    <annotation>
+      <documentation>6987: Angir hva skiltplatens ansiktsside, dvs skiltmotivet er rettet mot.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="trafikkIMetreringsretning">
+        <annotation>
+          <documentation>9138: Ansiktsside er rettet mot trafikanter som beveger seg i metreringsretning på vegen skiltplate er registrert.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkMotMetreringsretning">
+        <annotation>
+          <documentation>9139: Ansiktsside er rettet mot trafikanter som beveger seg mot metreringsretning på vegen skiltplate er registrert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="paralleltMotVeg">
+        <annotation>
+          <documentation>9140: Skiltplate er orientert parallelt med vegen den er registrert på. Ansiktsside er vendt inn mot denne vegen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="paralleltFraVeg">
+        <annotation>
+          <documentation>9141: Skiltplate er orientert parallelt med vegen den er registrert på. Ansiktsside er vendt ut fra denne vegen, dvs ansikt er kun synlig fra sideveger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tosidig">
+        <annotation>
+          <documentation>9142: Skiltplate har motiv på begge sider.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Ansiktsside_RettetMotVariabeltSkiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelystVariabeltSkiltType">
+    <annotation>
+      <documentation>4598: Angir om skiltet er belyst eller ikke</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BelystVariabeltSkiltEnumerationType nvdb:BelystVariabeltSkiltOtherType"/>
+  </simpleType>
+  <simpleType name="BelystVariabeltSkiltEnumerationType">
+    <annotation>
+      <documentation>4598: Angir om skiltet er belyst eller ikke</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>5538: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>5539: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelystVariabeltSkiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringVariabeltSkiltType">
+    <annotation>
+      <documentation>1739: Angir om vegobjektet kan fjernstyres</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FjernstyringVariabeltSkiltEnumerationType nvdb:FjernstyringVariabeltSkiltOtherType"/>
+  </simpleType>
+  <simpleType name="FjernstyringVariabeltSkiltEnumerationType">
+    <annotation>
+      <documentation>1739: Angir om vegobjektet kan fjernstyres</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>3518: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>3556: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringVariabeltSkiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiftingAvBudskapType">
+    <annotation>
+      <documentation>3745: Angir hvordan symbol/budskap skiftes</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkiftingAvBudskapEnumerationType nvdb:SkiftingAvBudskapOtherType"/>
+  </simpleType>
+  <simpleType name="SkiftingAvBudskapEnumerationType">
+    <annotation>
+      <documentation>3745: Angir hvordan symbol/budskap skiftes</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="manuelt">
+        <annotation>
+          <documentation>4735: Manuelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="automatisertElektrisk">
+        <annotation>
+          <documentation>4734: Automatisert/elektrisk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkiftingAvBudskapOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="Skiltnummer_OrdinærVisningType">
+    <annotation>
+      <documentation>10783: Angir skiltnumer på variabelt skilt i ordinær visningsmodus, dvs den visningen som er mest utbredt når skiltet ikke er avslått/blankt.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:Skiltnummer_OrdinærVisningEnumerationType nvdb:Skiltnummer_OrdinærVisningOtherType"/>
+  </simpleType>
+  <simpleType name="Skiltnummer_OrdinærVisningEnumerationType">
+    <annotation>
+      <documentation>10783: Angir skiltnumer på variabelt skilt i ordinær visningsmodus, dvs den visningen som er mest utbredt når skiltet ikke er avslått/blankt.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="110_Vegarbeid">
+        <annotation>
+          <documentation>19072: Vegarbeid</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="148_MøtendeTrafikk">
+        <annotation>
+          <documentation>17932: Møtende trafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="149_Kø">
+        <annotation>
+          <documentation>17486: Kø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="152_Sidevind">
+        <annotation>
+          <documentation>17477: Sidevind</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="153_Trafikkulykke">
+        <annotation>
+          <documentation>17512: Trafikkulykke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="306_5_ForbudtForLastebilOgTrekkbil">
+        <annotation>
+          <documentation>17478: Forbudt for lastebil og trekkbil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="310_ForbudtForMotorvognMedFlereEnnToHjulOgMedTillattTotalvektHøyereEnnAngitt">
+        <annotation>
+          <documentation>17495: Forbudt for motorvogn med flere enn to hjul og med tillatt totalvekt høyere enn angitt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="335_ForbikjøringsforbudForLastebil">
+        <annotation>
+          <documentation>17493: Forbikjøringsforbud for lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="337_SluttPåForbikjøringsforbudForLastebil">
+        <annotation>
+          <documentation>17494: Slutt på forbikjøringsforbud for lastebil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_20_Fartsgrense20Kmt">
+        <annotation>
+          <documentation>17521: Fartsgrense 20 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_30_Fartsgrense30Kmt">
+        <annotation>
+          <documentation>17513: Fartsgrense 30 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_40_Fartsgrense40Kmt">
+        <annotation>
+          <documentation>17514: Fartsgrense 40 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_50_Fartsgrense50Kmt">
+        <annotation>
+          <documentation>17515: Fartsgrense 50 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_60_Fartsgrense60Kmt">
+        <annotation>
+          <documentation>17516: Fartsgrense 60 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_70_Fartsgrense70Kmt">
+        <annotation>
+          <documentation>17517: Fartsgrense 70 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_80_Fartsgrense80Kmt">
+        <annotation>
+          <documentation>17518: Fartsgrense 80 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_90_Fartsgrense90Kmt">
+        <annotation>
+          <documentation>17519: Fartsgrense 90 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_100_Fartsgrense100Kmt">
+        <annotation>
+          <documentation>17520: Fartsgrense 100 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="362_110_Fartsgrense110Kmt">
+        <annotation>
+          <documentation>17522: Fartsgrense 110 km/t</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="539_01_KjørefeltendringMedMotgående">
+        <annotation>
+          <documentation>18476: Kjørefeltendring med motgående.  (F.o.m. ver. 1.76: Skiltnummer endret fra "539.1")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="539_02_KjørefeltendringMedToFelt">
+        <annotation>
+          <documentation>18477: Kjørefeltendring med to felt.  (F.o.m. ver. 1.76: Skiltnummer endret fra "539.2")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="560_Opplysningstavle">
+        <annotation>
+          <documentation>17790: Opplysningstavle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="601_Radiokanal">
+        <annotation>
+          <documentation>19071: Radiokanal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="701_1_TabellorienteringstavleForVanligKryss">
+        <annotation>
+          <documentation>17479: Tabellorienteringstavle for vanlig kryss.  (F.o.m. ver. 1.76: Skiltnummer endret fra "720.4")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="701_2_TabellorienteringstavleForPlanskiltKryssPåToOgTrefeltsveg">
+        <annotation>
+          <documentation>17496: Tabellorienteringstavle for planskilt kryss på to- og trefeltsveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="703_1_DiagramorienteringstavleForRundkjøring">
+        <annotation>
+          <documentation>17480: Diagramorienteringstavle for rundkjøring.  (F.o.m. ver. 1.76: Skiltnummer endret fra "720.3")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="703_2_DiagramorienteringstavleForKryssMedSpesiellUtforming">
+        <annotation>
+          <documentation>17497: Diagramorienteringstavle for kryss med spesiell utforming</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="705_1_Avkjøringstavle1000_MTavle">
+        <annotation>
+          <documentation>17481: Avkjøringstavle. 1000-m tavle.  (F.o.m. ver. 1.76: Skiltnummer endret fra "720.1")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="705_2_Avkjøringstavle500_MTavle">
+        <annotation>
+          <documentation>17482: Avkjøringstavle. 500-m tavle.  (F.o.m. ver. 1.76: Skiltnummer endret fra "720.2")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="707_1_KjørefeltorienteringstavleUtenVisningsmål">
+        <annotation>
+          <documentation>17498: Kjørefeltorienteringstavle uten visningsmål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="707_2_KjørefeltorienteringstavleMedVisningsmål">
+        <annotation>
+          <documentation>17499: Kjørefeltorienteringstavle med visningsmål</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="707_3_KjørefeltorienteringstavleForFeltsubtraksjon">
+        <annotation>
+          <documentation>17500: Kjørefeltorienteringstavle for feltsubtraksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="707_4_KjørefeltorienteringstavleForFerjeleie">
+        <annotation>
+          <documentation>17501: Kjørefeltorienteringstavle for ferjeleie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="709_1_PortalorienteringstavleForEttKjørefelt">
+        <annotation>
+          <documentation>17485: Portalorienteringstavle for ett kjørefelt.  (F.o.m. ver. 1.76: Skiltnummer endret fra "709")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="709_2_PortalorienteringstavleForFlereKjørefelt">
+        <annotation>
+          <documentation>17502: Portalorienteringstavle for flere kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="709_3_PortalorienteringstavleForFlereKjøreretninger">
+        <annotation>
+          <documentation>17503: Portalorienteringstavle for flere kjøreretninger</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="709_4_PortalorienteringstavleForFeltsubtraksjon">
+        <annotation>
+          <documentation>17504: Portalorienteringstavle for feltsubtraksjon</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="711R_Tabellvegviser_RettFram">
+        <annotation>
+          <documentation>17487: Tabellvegviser, Rett fram.  (F.o.m. ver. 1.76: Skiltnummer endret fra "711")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="711H90_Tabellvegviser_Høyre_90Grader">
+        <annotation>
+          <documentation>17505: Tabellvegviser, Høyre, 90 grader</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="711V90_Tabellvegviser_Venstre_90Grader">
+        <annotation>
+          <documentation>17506: Tabellvegviser, Venstre, 90 grader</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="713V_VanligVegviser_Venstre">
+        <annotation>
+          <documentation>17488: Vanlig vegviser, Venstre.  (F.o.m. ver. 1.76: Skiltnummer endret fra "713")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="713H_VanligVegviser_Høyre">
+        <annotation>
+          <documentation>17507: Vanlig vegviser, Høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="715_1_AvkjøringsvegviserForVegUtenKryssnummer">
+        <annotation>
+          <documentation>17489: Avkjøringsvegviser for veg uten kryssnummer.  (F.o.m. ver. 1.76: Skiltnummer endret fra "715")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="715_2_AvkjøringsvegviserForVegMedKryssnummer">
+        <annotation>
+          <documentation>17508: Avkjøringsvegviser for veg med kryssnummer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="717_Kjørefeltvegviser">
+        <annotation>
+          <documentation>17490: Kjørefeltvegviser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719_1_PortalvegviserForEttKjørefelt">
+        <annotation>
+          <documentation>17491: Portalvegviser for ett kjørefelt.  (F.o.m. ver. 1.76: Skiltnummer endret fra "719")</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719_2_PortalvegviserForFlereKjørefelt">
+        <annotation>
+          <documentation>17509: Portalvegviser for flere kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719_4_PortalvegviserForAvkjøring">
+        <annotation>
+          <documentation>17510: Portalvegviser for avkjøring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="719_5_PortalvegviserForFerjeleierOgBomstasjoner">
+        <annotation>
+          <documentation>17511: Portalvegviser for ferjeleier og bomstasjoner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="904H_Retningsmarkering_MotHøyre">
+        <annotation>
+          <documentation>17492: Retningsmarkering, Mot høyre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="904V_Retningsmarkering_MotVenstre">
+        <annotation>
+          <documentation>17483: Retningsmarkering, Mot venstre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="912_Avkjøringsmarkering">
+        <annotation>
+          <documentation>17484: Avkjøringsmarkering</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="Skiltnummer_OrdinærVisningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVariabeltSkiltType">
+    <annotation>
+      <documentation>1151: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeVariabeltSkiltEnumerationType nvdb:TypeVariabeltSkiltOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVariabeltSkiltEnumerationType">
+    <annotation>
+      <documentation>1151: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="mekanisk">
+        <annotation>
+          <documentation>2834: Mekanisk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mekaniskMedLameller">
+        <annotation>
+          <documentation>2836: Mekanisk med lameller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mekaniskRoterende">
+        <annotation>
+          <documentation>2835: Mekanisk roterende</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="digitalt">
+        <annotation>
+          <documentation>2832: Digitalt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="digitalt_Lysdioder">
+        <annotation>
+          <documentation>4877: Digitalt, Lysdioder</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="digitalt_Fiberoptisk">
+        <annotation>
+          <documentation>4880: Digitalt, Fiberoptisk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVariabeltSkiltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="VariabeltSkilt" substitutionGroup="nvdb:AbstraktVariabeltSkilt" type="nvdb:VariabeltSkiltType">
+    <annotation>
+      <documentation>97: Skilt som kan vise ulike motiv.  Motivet kan styres fra en sentral eller det kan varieres manuelt.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VariabeltSkiltType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVariabeltSkiltType">
+        <sequence>
+          <element minOccurs="0" name="skiltnummer_OrdinærVisning" type="nvdb:Skiltnummer_OrdinærVisningType">
+            <annotation>
+              <documentation>10783: Angir skiltnumer på variabelt skilt i ordinær visningsmodus, dvs den visningen som er mest utbredt når skiltet ikke er avslått/blankt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeVariabeltSkiltType">
+            <annotation>
+              <documentation>1151: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallAnsikt_InklAv" type="integer">
+            <annotation>
+              <documentation>3843: Angir hvor mange ansikt dette skiltet kan ha.  "Av" teller som en forekomst.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tekst_OrdinærVisning" type="string">
+            <annotation>
+              <documentation>3763: Angir tekst på variabelt skilt i ordinær visningsmodus, dvs den visningen som er mest utbredt når skiltet ikke er avslått/blankt.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="variasjon" type="nvdb:VariasjonType">
+            <annotation>
+              <documentation>1905: Angir hva som varierer på et variabelt skilt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skiftingAvBudskap" type="nvdb:SkiftingAvBudskapType">
+            <annotation>
+              <documentation>3745: Angir hvordan symbol/budskap skiftes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>8785: Felt til disposisjon for å beskrive det variable skiltet, kan f.eks angi hvilke skiltnummer som er involvert etc, hvordan det skiftes mellom ulik tekster/symbol osv.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plasseringskode" type="integer">
+            <annotation>
+              <documentation>6986: Angir plasseringskode for variabelt skilt i skiltpunkt.  Øverste posisjon har lavest nummer, nederste posisjon har høyest verdi.  Benytt nummerering 10, 20, 30 i utgangspunktet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ansiktsside_RettetMot" type="nvdb:Ansiktsside_RettetMotVariabeltSkiltType">
+            <annotation>
+              <documentation>6987: Angir hva skiltplatens ansiktsside, dvs skiltmotivet er rettet mot.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fjernstyring" type="nvdb:FjernstyringVariabeltSkiltType">
+            <annotation>
+              <documentation>1739: Angir om vegobjektet kan fjernstyres</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belyst" type="nvdb:BelystVariabeltSkiltType">
+            <annotation>
+              <documentation>4598: Angir om skiltet er belyst eller ikke</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksnummer" type="string">
+            <annotation>
+              <documentation>9157: Angir vedtaksnummer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skiltutforming">
+            <annotation>
+              <documentation>5291: Benyttes i forbindelse med interface mot skiltmodulen. Til testformål.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10393: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10489: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11713: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1534: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="leverandør" type="string">
+            <annotation>
+              <documentation>1495: Angir navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>9153: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11665: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11080: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4796: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VariabeltSkiltPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:VariabeltSkilt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VariasjonType">
+    <annotation>
+      <documentation>1905: Angir hva som varierer på et variabelt skilt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VariasjonEnumerationType nvdb:VariasjonOtherType"/>
+  </simpleType>
+  <simpleType name="VariasjonEnumerationType">
+    <annotation>
+      <documentation>1905: Angir hva som varierer på et variabelt skilt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="etMotivPåAv">
+        <annotation>
+          <documentation>2827: Skiltet kan veksle mellom å vise et definerte motiv og å være avslått.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vekslingMellomToMotiv">
+        <annotation>
+          <documentation>2828: Skiltet kan veksle mellom å vise to fast definerte motiv. Eventuell avslått posisjon kommer i tillegg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vekslingMellomTreMotiv">
+        <annotation>
+          <documentation>2829: Skiltet kan veksle mellom å vise tre fast definerte motiv. Eventuell avslått posisjon kommer i tillegg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vekslingMellomFlereEnnTreMotiv">
+        <annotation>
+          <documentation>17933: Skiltet kan veksle mellom å vise 3 eller flere fast definerte motiv. Eventuell avslått posisjon kommer i tillegg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="frittValgtFartsgrensevarsling">
+        <annotation>
+          <documentation>2830: Skiltet kan vise fritt valgt fartsgrense/fartsgrenseoppheving.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="frittValgtTekst">
+        <annotation>
+          <documentation>2831: Det kan vises fritt valgt teskt på skiltet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VariasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

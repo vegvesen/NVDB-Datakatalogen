@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Rekkverksskjøt" substitutionGroup="nvdb:AbstraktRekkverksskjøt" type="nvdb:RekkverksskjøtType">
+    <annotation>
+      <documentation>543: Betegnelse på skjøter mellom rekkverk eller rekkverkskomponenter på bru som ikke er konstruert for å oppta bevegelser fra temperatur, svinn etc. Skjøtene kan være utført med en viss dilatasjon/slakk for å lette montasjen og for å begrense strekkraften som kan oppstå i komponentene ved store utbøyninger. Kilde: Rekkverksnormal.</documentation>
+    </annotation>
+  </element>
+  <complexType name="RekkverksskjøtType">
+    <complexContent>
+      <extension base="nvdb:AbstraktRekkverksskjøtType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeRekkverksskjøtType">
+            <annotation>
+              <documentation>4664: Angir type</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10347: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>5039: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RekkverksskjøtPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Rekkverksskjøt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeRekkverksskjøtType">
+    <annotation>
+      <documentation>4664: Angir type</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeRekkverksskjøtEnumerationType nvdb:TypeRekkverksskjøtOtherType"/>
+  </simpleType>
+  <simpleType name="TypeRekkverksskjøtEnumerationType">
+    <annotation>
+      <documentation>4664: Angir type</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="dilatasjonsskjøt">
+        <annotation>
+          <documentation>5732: Betegnelse på skjøter, bla. mellom rekkverk eller rekkverkskomponenter på bru, som er konstruert for å oppta bevegelser fra temperatur, svinn etc.   Disse må alltid plasseres der det er brufuger. Kilde: Rekkverksnormal.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeRekkverksskjøtOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

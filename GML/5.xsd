@@ -1,0 +1,1979 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeRekkverkType">
+    <annotation>
+      <documentation>1248: Angir hva vegobjektet brukes til, hvilken funksjon det har, hva det skjermer mot.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeRekkverkEnumerationType nvdb:BruksområdeRekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeRekkverkEnumerationType">
+    <annotation>
+      <documentation>1248: Angir hva vegobjektet brukes til, hvilken funksjon det har, hva det skjermer mot.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skråning">
+        <annotation>
+          <documentation>2393: Skråning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjell">
+        <annotation>
+          <documentation>4045: Rekkverk mot fjellskjæring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vann">
+        <annotation>
+          <documentation>2396: Sikrer mot vann, sjø, elv</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikk">
+        <annotation>
+          <documentation>2394: Rekkverk benyttet som sikring mot trafikk på veg/areal ved siden av vegen, f.eks skille mellom hovedveg og sideveg, i forbindelse med parkeringsområde eller andre trafikerte sideareal. Merk: For midtdelere, gang- og sykkelveg og jernbane skal det benyttes egne verdier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="midtdeler">
+        <annotation>
+          <documentation>11789: Rekkverket er plassert på midtdeler, dvs på areal som fysisk skiller trafikk i motsatte retninger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="midtrekkverk">
+        <annotation>
+          <documentation>11788: Rekkverket er eneste skille mellom motgående trafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naboelement">
+        <annotation>
+          <documentation>2395: Rekkverk satt opp for beskytte mot trafikkfarlige element nær vegen, f.eks store trær, stolper, brupilarer</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gangSykkelveg">
+        <annotation>
+          <documentation>4044: Gang/sykkelveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sideaktivitet">
+        <annotation>
+          <documentation>17369: Rekkverk skjermer mot sideaktivitet nært inn mot vegen. Dette kan være næringsvirksomhet, privat/offentlig område, mm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jernbane">
+        <annotation>
+          <documentation>4591: Jernbane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brukantStup">
+        <annotation>
+          <documentation>4667: Gjelder rekkverk som benyttes for å hindre utforkjøring ved brukant eller stup</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeRekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierRekkverkType">
+    <annotation>
+      <documentation>7984: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierRekkverkEnumerationType nvdb:EierRekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="EierRekkverkEnumerationType">
+    <annotation>
+      <documentation>7984: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10250: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18600: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10712: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10314: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10378: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17609: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierRekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="HåndlistType">
+    <annotation>
+      <documentation>9592: Element i et stål-/betongrekkverk som fungerer som rekkverkets øvre føring, og som har sin primære funksjon å gi ekstra sikkerhet for gående og syklende.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:HåndlistEnumerationType nvdb:HåndlistOtherType"/>
+  </simpleType>
+  <simpleType name="HåndlistEnumerationType">
+    <annotation>
+      <documentation>9592: Element i et stål-/betongrekkverk som fungerer som rekkverkets øvre føring, og som har sin primære funksjon å gi ekstra sikkerhet for gående og syklende.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13813: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13814: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HåndlistOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MC_SkinneType">
+    <annotation>
+      <documentation>9591: Angir om det er festet ekstra skinne/hinder under hovedskinne for å hindre eventuelt skrensende motorsykler å treffe rekkverksstolper.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MC_SkinneEnumerationType nvdb:MC_SkinneOtherType"/>
+  </simpleType>
+  <simpleType name="MC_SkinneEnumerationType">
+    <annotation>
+      <documentation>9591: Angir om det er festet ekstra skinne/hinder under hovedskinne for å hindre eventuelt skrensende motorsykler å treffe rekkverksstolper.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13811: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13812: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MC_SkinneOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PanelType">
+    <annotation>
+      <documentation>4662: Felles betegnelse på elementer i et stålrekkverk som plasseres mellom stolpene, som f.eks sprosser,  brøytetette gitter e.l. (se figur 1.4 i Rekkverksnormal).  Kilde: Rekkverksnormal</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PanelEnumerationType nvdb:PanelOtherType"/>
+  </simpleType>
+  <simpleType name="PanelEnumerationType">
+    <annotation>
+      <documentation>4662: Felles betegnelse på elementer i et stålrekkverk som plasseres mellom stolpene, som f.eks sprosser,  brøytetette gitter e.l. (se figur 1.4 i Rekkverksnormal).  Kilde: Rekkverksnormal</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sprosse">
+        <annotation>
+          <documentation>5730: Sprosse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gitter">
+        <annotation>
+          <documentation>5731: Gitter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="pleksiglass">
+        <annotation>
+          <documentation>20077: Pleksiglass</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PanelOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringPåBruType">
+    <annotation>
+      <documentation>4665: Angir hvor på brua rekkverket er plassert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringPåBruEnumerationType nvdb:PlasseringPåBruOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringPåBruEnumerationType">
+    <annotation>
+      <documentation>4665: Angir hvor på brua rekkverket er plassert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ytterrekkverk">
+        <annotation>
+          <documentation>5728: Rekkverk på bru som er plassert langs bruas ytterkant (se figur 1.4 i Rekkverksnormal). Kilde: Rekkverksnormal.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="innerrekkverk">
+        <annotation>
+          <documentation>5729: Rekkverk på bru som benyttes innenfor bruas ytterkanter med trafikk på en eller begge sider (se figur 1.4). Rekkverket kan f.eks. benyttes som:  rekkverk mellom kjørebaner, rekkverk mellom kjørebane og g/s veg eller som rekkverk mellom kjørebane og sikkerhetsrom for motorvegbruer.  Kilde: Rekkverksnormal.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringPåBruOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="ProduktnavnTypegodkjenningType">
+    <annotation>
+      <documentation>10881: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for rekkverk godkjent  av Statens vegvesen.Jfr:  http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master</documentation>
+    </annotation>
+    <union memberTypes="nvdb:ProduktnavnTypegodkjenningEnumerationType nvdb:ProduktnavnTypegodkjenningOtherType"/>
+  </simpleType>
+  <simpleType name="ProduktnavnTypegodkjenningEnumerationType">
+    <annotation>
+      <documentation>10881: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for rekkverk godkjent  av Statens vegvesen.Jfr:  http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="activeBlock450_0_N1_W5_U">
+        <annotation>
+          <documentation>17944: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508484&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="activeBlock450_1_H1_W5_U">
+        <annotation>
+          <documentation>17945: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508485&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="activeBlock450_1_N2_W4_U">
+        <annotation>
+          <documentation>17946: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508486&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDVegP140_N2_W7">
+        <annotation>
+          <documentation>17947: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=759725&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDVeg_SigmaCC2_N2_W4">
+        <annotation>
+          <documentation>17948: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=759710&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDVeg_SigmaCC4_N2_W5">
+        <annotation>
+          <documentation>17949: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=759724&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDVeg_SigmaBS_CC1_H2_W5">
+        <annotation>
+          <documentation>17950: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=759706&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDVeg_SigmaBS_CC2_N2_W3">
+        <annotation>
+          <documentation>17951: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=759700&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDID_N2_W4">
+        <annotation>
+          <documentation>20344: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2685572&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDID_N2_W5">
+        <annotation>
+          <documentation>20345: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2685569&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDMVegCC2_H1_H1_W3">
+        <annotation>
+          <documentation>17952: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1093960&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDMVegCC2_N2_N2_W2">
+        <annotation>
+          <documentation>17953: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1110332&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BDMVegCC4_N2_N2_W4">
+        <annotation>
+          <documentation>17954: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1110336&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="birsta1P_H1_W5">
+        <annotation>
+          <documentation>17956: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=523590&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="birsta1P_N2_W4">
+        <annotation>
+          <documentation>17955: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=523578&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="birsta3P_H4B_W3">
+        <annotation>
+          <documentation>17957: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1265144&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BLINDN2R0_N2_W5">
+        <annotation>
+          <documentation>20346: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2449783&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="BMIDH1C2_H1_W3">
+        <annotation>
+          <documentation>20347: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2872257&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bri_Flex_H2_W4">
+        <annotation>
+          <documentation>17958: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508010&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="britpaveCSB_H2_W1">
+        <annotation>
+          <documentation>17959: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508567&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CARN2BL3_N2_W3">
+        <annotation>
+          <documentation>20348: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2687456&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_BT1_H2_W4">
+        <annotation>
+          <documentation>17960: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201254&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_BT2_H2_W1">
+        <annotation>
+          <documentation>17961: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201256&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_RH2til1_H2_W4">
+        <annotation>
+          <documentation>17962: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=908521&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_RH2til2_N2_W3">
+        <annotation>
+          <documentation>17963: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=908520&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_RP4_N2_W7">
+        <annotation>
+          <documentation>17964: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=908518&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_RS_2_N2_W4">
+        <annotation>
+          <documentation>17965: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=908517&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CC4_RS_4_N2_W5">
+        <annotation>
+          <documentation>17966: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=908519&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="CESVV2_H2_W1">
+        <annotation>
+          <documentation>20349: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1822939&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_65S_H1_W6">
+        <annotation>
+          <documentation>17983: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508168&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100_K340_H4B_W7_U">
+        <annotation>
+          <documentation>17973: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508447&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100AS_R_K280_H4B_W5">
+        <annotation>
+          <documentation>20442: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318118&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100SK150_H1_W5">
+        <annotation>
+          <documentation>17974: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508453&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100SK150_Double_H4B_W7">
+        <annotation>
+          <documentation>17975: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508456&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100SK220_H2_W5">
+        <annotation>
+          <documentation>17976: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508455&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100SK220_N2_W3">
+        <annotation>
+          <documentation>20350: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2316356&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_T180S_H2_W5">
+        <annotation>
+          <documentation>20351: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318247&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_T180S_N2_W4">
+        <annotation>
+          <documentation>20352: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318245&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_K150_H1_W4">
+        <annotation>
+          <documentation>17985: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508187&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_K150_N2_W3">
+        <annotation>
+          <documentation>17984: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508183&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_K150_Double_H2_W7">
+        <annotation>
+          <documentation>17986: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508189&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_K220_H1_W6_U">
+        <annotation>
+          <documentation>17990: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508180&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80_K220_N1_W4_U">
+        <annotation>
+          <documentation>17991: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508182&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80AS_A_K120S_H2_W1">
+        <annotation>
+          <documentation>20443: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318292&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80AS_E_K180SMed30CmBack_H2_W2">
+        <annotation>
+          <documentation>20353: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318324&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80AS_E_K180SMed40CmBack_H2_W1">
+        <annotation>
+          <documentation>20354: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318348&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80AS_R_K180_H2_W4">
+        <annotation>
+          <documentation>20444: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318409&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_80E_K150S_H2_W1">
+        <annotation>
+          <documentation>20355: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2318564&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100_K250_H2_W7_U">
+        <annotation>
+          <documentation>17969: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508192&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100_K280_H4B_W6">
+        <annotation>
+          <documentation>17970: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508449&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100_K340_H1_W5_U">
+        <annotation>
+          <documentation>17971: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508194&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="DB_100_K340_H2_W6_U">
+        <annotation>
+          <documentation>17972: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508443&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="duo_RailKAB_H1_W5_U">
+        <annotation>
+          <documentation>17997: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508095&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="duo_RailKAB_H2_W7_U">
+        <annotation>
+          <documentation>17996: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508129&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="duo_RailKAB_N2_W4_U">
+        <annotation>
+          <documentation>17995: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508093&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="duo_RailKAV_H2_W3">
+        <annotation>
+          <documentation>20356: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2064696&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE2_N2_W5">
+        <annotation>
+          <documentation>20357: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508028&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE3_H1_W5">
+        <annotation>
+          <documentation>20359: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2063330&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE3_N2_W3">
+        <annotation>
+          <documentation>20358: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2063319&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE12_N2_W5">
+        <annotation>
+          <documentation>18136: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508011&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE22_N2_W3">
+        <annotation>
+          <documentation>18137: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508020&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE23_N2_W3">
+        <annotation>
+          <documentation>18138: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508026&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE24_N2_W4">
+        <annotation>
+          <documentation>18139: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508028&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE25_N2_W5">
+        <annotation>
+          <documentation>18140: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508031&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ellipsZE26_N2_W5">
+        <annotation>
+          <documentation>18141: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508034&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamDS_N2_W2_U">
+        <annotation>
+          <documentation>18005: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1333921&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamDS_N2_W3_U">
+        <annotation>
+          <documentation>18003: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1333946&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamDS_N2_W4_U">
+        <annotation>
+          <documentation>18004: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508004&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamPLUS_H1_W4_U">
+        <annotation>
+          <documentation>18007: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508001&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamPLUS_H2_W5_U">
+        <annotation>
+          <documentation>18006: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=691901&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamSS_N2_W5til1_U">
+        <annotation>
+          <documentation>18008: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507997&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexBeamSS_N2_W5til2_U">
+        <annotation>
+          <documentation>18009: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507998&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexSafe_H2_W2">
+        <annotation>
+          <documentation>18010: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1355419&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexSafe1400_H2_W2">
+        <annotation>
+          <documentation>20360: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2213904&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_EU2_N2_W4">
+        <annotation>
+          <documentation>18001: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=526179&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_EU4_N2_W5">
+        <annotation>
+          <documentation>18002: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=526176&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_B1_H2_W3">
+        <annotation>
+          <documentation>18011: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507989&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_B1Bru1_2m_H2_W3">
+        <annotation>
+          <documentation>20361: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507989&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_B1Bru1_4m_H2_W3">
+        <annotation>
+          <documentation>20362: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2549081&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_C1_H1_W4">
+        <annotation>
+          <documentation>20363: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2058367&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_C1_N2_W4">
+        <annotation>
+          <documentation>20364: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2058366&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="FMK_VE3_N2_W3">
+        <annotation>
+          <documentation>18012: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507987&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="GPLINK_1_5_N2_W5til1_U">
+        <annotation>
+          <documentation>18014: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=717776&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="GPLINK_1_5_N2_W5til2_U">
+        <annotation>
+          <documentation>18013: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508458&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lineblocLB90_N2_W4_U">
+        <annotation>
+          <documentation>18015: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508596&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_100_D_H2_W1">
+        <annotation>
+          <documentation>18016: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508590&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_100_E_H2_W1">
+        <annotation>
+          <documentation>18017: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508589&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_101Bru_H2_W2">
+        <annotation>
+          <documentation>18018: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201295&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_102Veg_H2_W1">
+        <annotation>
+          <documentation>18019: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201296&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_103Veg_H2_W2">
+        <annotation>
+          <documentation>18020: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201304&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_104Veg_Bru_H2_W2">
+        <annotation>
+          <documentation>18021: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201306&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="LT_104Veg_Bru_H4B_W2">
+        <annotation>
+          <documentation>18022: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1201314&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="monoline_N2_W4">
+        <annotation>
+          <documentation>18028: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507962&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="monoline_N2_W5">
+        <annotation>
+          <documentation>20368: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507964&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NB100_300_H2_W4">
+        <annotation>
+          <documentation>20369: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2446473&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicMN2_N2_W4">
+        <annotation>
+          <documentation>20370: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2549129&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicRH2_High_H2_W2">
+        <annotation>
+          <documentation>20371: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553714&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicRN2_N2_W3">
+        <annotation>
+          <documentation>20372: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553646&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicWH2_High_H2_W2">
+        <annotation>
+          <documentation>20373: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553497&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicWN2_N2_W4">
+        <annotation>
+          <documentation>20374: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553577&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nordicWN2_N2_W5">
+        <annotation>
+          <documentation>20375: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553555&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="opplandSVV1_H2_W4">
+        <annotation>
+          <documentation>18032: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=974857&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="opplandSVV2_H2_W1">
+        <annotation>
+          <documentation>18033: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=974855&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoH2_H2_W3">
+        <annotation>
+          <documentation>20376: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1712770&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoH4b_H4B_W1">
+        <annotation>
+          <documentation>20377: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1712798&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoL1_H1_W3_U">
+        <annotation>
+          <documentation>18034: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=727881&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoL1_H1_W4_U">
+        <annotation>
+          <documentation>18036: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=727887&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoL1_N2_W2_U">
+        <annotation>
+          <documentation>18037: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=727880&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="passcoL1_N2_W3_U">
+        <annotation>
+          <documentation>18035: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=727883&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="peis100_H2_W3_U">
+        <annotation>
+          <documentation>18038: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508603&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB100_H2_W5">
+        <annotation>
+          <documentation>18050: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508489&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB100_H4B_W6">
+        <annotation>
+          <documentation>18051: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508496&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB100A_H2_W1">
+        <annotation>
+          <documentation>20379: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2320000&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB100SF_H4B_W4">
+        <annotation>
+          <documentation>20380: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2446427&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB100SFS_H4B_W5">
+        <annotation>
+          <documentation>20381: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2446452&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80_H1_W4">
+        <annotation>
+          <documentation>18056: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508501&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80_N2_W3">
+        <annotation>
+          <documentation>18055: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508499&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80A_H2_W1">
+        <annotation>
+          <documentation>20390: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1982191&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80AS_H2_W3">
+        <annotation>
+          <documentation>20391: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2446407&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80H_H2_W5">
+        <annotation>
+          <documentation>20392: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1915911&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB80L_N2_W4">
+        <annotation>
+          <documentation>20393: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2446392&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB84XEAL_H2_W1">
+        <annotation>
+          <documentation>20395: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2320080&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RB85BF_DobbelRad_H2_W5">
+        <annotation>
+          <documentation>20399: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2852104&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSS_2_Med_Cc_N2_W4">
+        <annotation>
+          <documentation>18057: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=737891&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSS_4_Med_Cc_N2_W5">
+        <annotation>
+          <documentation>18058: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=737894&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSSBru1_H2_W4">
+        <annotation>
+          <documentation>20400: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553908&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSSBru2_H2_W1">
+        <annotation>
+          <documentation>20401: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553909&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSS_BSB_1_Med_Cc_H2_W4">
+        <annotation>
+          <documentation>18059: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=737895&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSS_BSB_2_Med_Cc_N2_W3">
+        <annotation>
+          <documentation>18060: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=737899&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="RSS_PP_N2_W7">
+        <annotation>
+          <documentation>18061: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=737900&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safelineParapet_H2_W2">
+        <annotation>
+          <documentation>18062: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508598&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safelineParapet1_4_H2_W3">
+        <annotation>
+          <documentation>18063: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508599&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safelineVeg_Dobbeltsidig_N2_W5">
+        <annotation>
+          <documentation>18064: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=974638&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safelineVeg_Ensidig_N2_W5">
+        <annotation>
+          <documentation>18065: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=974636&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_M_H1_W3">
+        <annotation>
+          <documentation>20404: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749444&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_M_N2_W4til3">
+        <annotation>
+          <documentation>20403: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749442&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_M_N2_W4til6">
+        <annotation>
+          <documentation>20402: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749441&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_RH2_H2_W5">
+        <annotation>
+          <documentation>20405: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2780285&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_RN2_N2_W3">
+        <annotation>
+          <documentation>20407: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2780274&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safeLine_RN2_N2_W4">
+        <annotation>
+          <documentation>20406: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2780278&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safetybaerH2_D90_H2_W1">
+        <annotation>
+          <documentation>18066: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508558&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safetybaerH2_E80_H2_W1">
+        <annotation>
+          <documentation>18067: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508561&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="safetybaerH2_E90_H2_W1">
+        <annotation>
+          <documentation>18068: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508559&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="secura700_4000Lås250_N1_W4">
+        <annotation>
+          <documentation>18074: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508134&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="secura900_4000Lås250_N2_W4">
+        <annotation>
+          <documentation>18076: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508132&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="secura900_4000Lås330_H1_W4">
+        <annotation>
+          <documentation>18077: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1416586&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sicuro_Arc_H2_W2">
+        <annotation>
+          <documentation>18078: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507945&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sicuro_Classic_N2_W4">
+        <annotation>
+          <documentation>18080: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507949&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sicuro_Classic_N2_W6">
+        <annotation>
+          <documentation>18079: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507957&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="smartRail1_33_Plus_H2_W4">
+        <annotation>
+          <documentation>20412: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749399&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_05_N2_W5">
+        <annotation>
+          <documentation>20413: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749117&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_07_H1_W6">
+        <annotation>
+          <documentation>20414: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2750098&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_11_H1_W5_U">
+        <annotation>
+          <documentation>18081: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=602122&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_15_N2_W6">
+        <annotation>
+          <documentation>18082: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=602192&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_15W_N2_W4">
+        <annotation>
+          <documentation>18083: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=602208&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_15W_N2_W5_U">
+        <annotation>
+          <documentation>18084: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=602217&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SP_17_H1_W6">
+        <annotation>
+          <documentation>18085: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=602239&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SPR4_N2_W4">
+        <annotation>
+          <documentation>20415: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1822832&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailD_N2_W4_U">
+        <annotation>
+          <documentation>18087: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261089&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailDn_H2_W4">
+        <annotation>
+          <documentation>18086: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261073&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailHd_H1_W3">
+        <annotation>
+          <documentation>18088: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261029&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailHd_H2_W4">
+        <annotation>
+          <documentation>18089: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261040&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailSl_N2_W4">
+        <annotation>
+          <documentation>20072: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2691278&amp;method=produktnavn&amp;produkttype=12621&amp;query=stal</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailSu_H1_W3">
+        <annotation>
+          <documentation>18093: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261412&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailSu_N2_W2">
+        <annotation>
+          <documentation>18092: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261403&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailSx_H1_W4">
+        <annotation>
+          <documentation>18091: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261187&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stalProRailSx_N2_W3">
+        <annotation>
+          <documentation>18090: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1261100&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="STP_11M_H1_W1">
+        <annotation>
+          <documentation>20416: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2749338&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="super_Rail_H4B_W7_U">
+        <annotation>
+          <documentation>18094: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507934&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="super_RailPlus_H4B_W7_U">
+        <annotation>
+          <documentation>18095: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507936&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="svelvikEllipsen_N1_W1">
+        <annotation>
+          <documentation>18096: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507585&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SVS_Betong_H2_W1">
+        <annotation>
+          <documentation>18097: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507582&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SVS_T_N1_W4_U">
+        <annotation>
+          <documentation>18100: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507592&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SVS_T_N1_W6_U">
+        <annotation>
+          <documentation>18099: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507589&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SVS_T_N2_W7_U">
+        <annotation>
+          <documentation>18098: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507588&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SVS_TP_N2_W6_U">
+        <annotation>
+          <documentation>18101: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507587&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T18_4M_N2_W7">
+        <annotation>
+          <documentation>18102: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508577&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T18_4MS2_N2_W5">
+        <annotation>
+          <documentation>18103: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508573&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T22_N2_W6">
+        <annotation>
+          <documentation>18104: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508581&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T40_H2_W4">
+        <annotation>
+          <documentation>18106: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508586&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T40_N2_W3">
+        <annotation>
+          <documentation>18105: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508583&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TLC18_N1_W5">
+        <annotation>
+          <documentation>20417: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1823082&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TRSBoxBeam_N2_W4_U">
+        <annotation>
+          <documentation>18108: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508037&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TRSBoxBeam_N2_W5til1_U">
+        <annotation>
+          <documentation>18107: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508040&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="TRSBoxBeam_N2_W5til2_U">
+        <annotation>
+          <documentation>18109: Ikke lenger aktiv i database over typegodkjent vegutstyr. Tidligere link til utstyr: http ://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508042&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vik2mm_N2_W4til2">
+        <annotation>
+          <documentation>20418: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1982116&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vik2mm_N2_W4til4">
+        <annotation>
+          <documentation>18117: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507606&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikCC2_N2_W4">
+        <annotation>
+          <documentation>18118: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=510160&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikCC4_N2_W5">
+        <annotation>
+          <documentation>18119: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=510156&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VIKH1_H1_W4">
+        <annotation>
+          <documentation>20419: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2010839&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VIKH1Midtrekkverk_H1_W4">
+        <annotation>
+          <documentation>20420: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2010876&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikP_N2_W7">
+        <annotation>
+          <documentation>18120: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=620921&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikSVV1_H2_W4">
+        <annotation>
+          <documentation>18121: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=620770&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikSVV2_H2_W1">
+        <annotation>
+          <documentation>18122: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=620812&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikVegCC1_H2_W4">
+        <annotation>
+          <documentation>18123: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=621756&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikVegCC2_N2_W3">
+        <annotation>
+          <documentation>18124: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=621801&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikW3Cc2_N2_W3">
+        <annotation>
+          <documentation>18125: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=979608&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vikW3Cc4_N2_W3">
+        <annotation>
+          <documentation>18126: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=979629&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VIK_EP_H1_W3">
+        <annotation>
+          <documentation>20421: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2135775&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VIK_EP_N2_W2">
+        <annotation>
+          <documentation>20422: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2135784&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VIK_EP_N2_W4">
+        <annotation>
+          <documentation>20423: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2690093&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vik_Midtdeler_N2_W5">
+        <annotation>
+          <documentation>18127: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508049&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vik_P_N1_W4">
+        <annotation>
+          <documentation>18128: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507600&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VS_H2_D90_H2_W1">
+        <annotation>
+          <documentation>20424: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2319645&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VS_H2_E80_H2_W1">
+        <annotation>
+          <documentation>20425: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2319646&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VS_H2_E90_H2_W1">
+        <annotation>
+          <documentation>20426: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2319647&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB5til3_H2_W3">
+        <annotation>
+          <documentation>20427: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553786&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB5til4_H2_W3">
+        <annotation>
+          <documentation>20428: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553787&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB5til5_H2_W3">
+        <annotation>
+          <documentation>20429: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553806&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB5til6_H2_W3">
+        <annotation>
+          <documentation>20430: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2553807&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZR1_N2_W2">
+        <annotation>
+          <documentation>18130: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=536073&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZR1_N2_W5">
+        <annotation>
+          <documentation>18129: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=508036&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZR14D_N2_W5">
+        <annotation>
+          <documentation>18131: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=536791&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZR2_N2_W3">
+        <annotation>
+          <documentation>18133: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507991&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZR2_N2_W4">
+        <annotation>
+          <documentation>18132: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507993&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til1_H2_W3">
+        <annotation>
+          <documentation>18134: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1260925&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til12_H2_W2">
+        <annotation>
+          <documentation>20431: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248229&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til13_H2_W3">
+        <annotation>
+          <documentation>20432: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248335&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til14_H2_W2">
+        <annotation>
+          <documentation>20433: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248284&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til15_H2_W3">
+        <annotation>
+          <documentation>20434: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248368&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til16_H2_W3">
+        <annotation>
+          <documentation>20435: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2247994&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til17_H2_W3">
+        <annotation>
+          <documentation>20436: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248062&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til2_H2_W2">
+        <annotation>
+          <documentation>18135: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=537638&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til4_H2_W3">
+        <annotation>
+          <documentation>20437: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1949560&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til4_H2_W3">
+        <annotation>
+          <documentation>20438: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1951353&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til5_H2_W3">
+        <annotation>
+          <documentation>20439: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2247987&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til6_H2_W3">
+        <annotation>
+          <documentation>20440: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=2248031&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZB4til7_H2_W2">
+        <annotation>
+          <documentation>20441: https://www.vegvesen.no/fag/teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=1712300&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZK1_N2_W6">
+        <annotation>
+          <documentation>18143: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626819&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZK1_N2_W5">
+        <annotation>
+          <documentation>18142: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626804&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZW1_N2_W4">
+        <annotation>
+          <documentation>18150: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=588475&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZW1_N2_W5">
+        <annotation>
+          <documentation>18151: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626949&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZW1_EM_N2_W4">
+        <annotation>
+          <documentation>18153: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626376&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZW1_EM_N2_W5">
+        <annotation>
+          <documentation>18152: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626379&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ZW2_N2_W4">
+        <annotation>
+          <documentation>18154: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=626333&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ørsta_Bru_H2_W2">
+        <annotation>
+          <documentation>18155: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507982&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ørsta_VegCC3_N2_W4">
+        <annotation>
+          <documentation>18156: http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master/Sok+etter+godkjent+produkt/Vegutstyr?key=507966&amp;method=alle&amp;produkttype=12621</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="ProduktnavnTypegodkjenningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Rekkverk" substitutionGroup="nvdb:AbstraktRekkverk" type="nvdb:RekkverkType">
+    <annotation>
+      <documentation>5: En anordning som skal hindre at kjøretøy forlater vegen (Håndbok N101)</documentation>
+    </annotation>
+  </element>
+  <complexType name="RekkverkType">
+    <complexContent>
+      <extension base="nvdb:AbstraktRekkverkType">
+        <sequence>
+          <element minOccurs="0" name="rekkverkstype" type="nvdb:RekkverkstypeType">
+            <annotation>
+              <documentation>1089: Angir hvilken type rekkverk det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeRekkverkType">
+            <annotation>
+              <documentation>1248: Angir hva vegobjektet brukes til, hvilken funksjon det har, hva det skjermer mot.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skinneutrustning" type="nvdb:SkinneutrustningType">
+            <annotation>
+              <documentation>1647: Angir skinneutrustning for rekkverket.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plasseringPåBru" type="nvdb:PlasseringPåBruType">
+            <annotation>
+              <documentation>4665: Angir hvor på brua rekkverket er plassert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="MC_Skinne" type="nvdb:MC_SkinneType">
+            <annotation>
+              <documentation>9591: Angir om det er festet ekstra skinne/hinder under hovedskinne for å hindre eventuelt skrensende motorsykler å treffe rekkverksstolper.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="panel" type="nvdb:PanelType">
+            <annotation>
+              <documentation>4662: Felles betegnelse på elementer i et stålrekkverk som plasseres mellom stolpene, som f.eks sprosser,  brøytetette gitter e.l. (se figur 1.4 i Rekkverksnormal).  Kilde: Rekkverksnormal</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utblokking" type="nvdb:UtblokkingType">
+            <annotation>
+              <documentation>1645: Anordning mellom rekkverksskinne og rekkverksstolper for å skape større avstand mellom skinnen og stive stolper (se figur 1.2 i Rekkverksnormal). Kilde: Rekkverksnormal.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="håndlist" type="nvdb:HåndlistType">
+            <annotation>
+              <documentation>9592: Element i et stål-/betongrekkverk som fungerer som rekkverkets øvre føring, og som har sin primære funksjon å gi ekstra sikkerhet for gående og syklende.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="lengde" type="double">
+            <annotation>
+              <documentation>1298: Angir total lengde av rekkverket
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stolpeavstand" type="nvdb:StolpeavstandType">
+            <annotation>
+              <documentation>1567: Angir normal avstand mellom stolper
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="elementlengde" type="double">
+            <annotation>
+              <documentation>1965: Angir lengde av enkeltelement (skinner/betongelement etc)
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høyde" type="double">
+            <annotation>
+              <documentation>1574: Angir den høyde over vegkant som rekkverket var dimensjonert for ved oppsetting langs veg
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="rekkverksbredde" type="double">
+            <annotation>
+              <documentation>4663: Avstanden mellom forkant og bakkant av rekkverket (inkl. skinne og stolper - se figur l.5 i Rekkverksnormal).  Kilde: Rekkverksnormal
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="styrkeklasse" type="nvdb:StyrkeklasseType">
+            <annotation>
+              <documentation>9554: Angir styrkeklasse i henhold til håndbok N101 (231), vedlegg 1.1</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavnTypegodkjenning" type="nvdb:ProduktnavnTypegodkjenningType">
+            <annotation>
+              <documentation>10881: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for rekkverk godkjent  av Statens vegvesen.Jfr:  http://www.vegvesen.no/fag/Teknologi/Rekkverk+og+master</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>7558: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10415: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11030: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="FKB_ID" type="string">
+            <annotation>
+              <documentation>10847: Refererer til FKB-identitet. Benyttes i forbindelse med felles forvaltning av geometri.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierRekkverkType">
+            <annotation>
+              <documentation>7984: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligRekkverkType">
+            <annotation>
+              <documentation>8048: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4714: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RekkverkPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Rekkverk"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="RekkverkstypeType">
+    <annotation>
+      <documentation>1089: Angir hvilken type rekkverk det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RekkverkstypeEnumerationType nvdb:RekkverkstypeOtherType"/>
+  </simpleType>
+  <simpleType name="RekkverkstypeEnumerationType">
+    <annotation>
+      <documentation>1089: Angir hvilken type rekkverk det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stålskinneMed_Trestolper">
+        <annotation>
+          <documentation>13747: Stålskinne m/trestolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålskinneMed_Stålstolpler">
+        <annotation>
+          <documentation>13746: Stålskinne m/stålstolpler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålskinneMed_SigmaStålstolper">
+        <annotation>
+          <documentation>13790: Stålskinne m/sigma stålstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålskinneMed_Plaststolper">
+        <annotation>
+          <documentation>13745: Stålskinne m/plaststolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålskinneFestetPåMurVegg">
+        <annotation>
+          <documentation>13791: Rekkverksskinne er festet på mur, vegg, skjerm, etc og ikke på egen stolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Plasstøpt">
+        <annotation>
+          <documentation>3366: Betong, plasstøpt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_Prefabrikkert">
+        <annotation>
+          <documentation>3367: Betong, prefabrikkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong_NewJersey">
+        <annotation>
+          <documentation>3368: Betong, New Jersey</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålrørMed_RundeStålstolper">
+        <annotation>
+          <documentation>13748: Stålrør m/runde stålstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålrørMed_SigmaStålstolper">
+        <annotation>
+          <documentation>13749: Stålrør m/sigma stålstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stålrørMed_Trestolper">
+        <annotation>
+          <documentation>13750: Stålrør m/trestolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="wirerekkverk">
+        <annotation>
+          <documentation>3371: Wirerekkverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="treskinneMed_Trestolper">
+        <annotation>
+          <documentation>13752: Treskinne m/trestolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="treskinneMed_Stålstolper">
+        <annotation>
+          <documentation>13751: Treskinne m/stålstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stabbesteiner">
+        <annotation>
+          <documentation>3370: Stabbesteiner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brurekkverk_StålMed_Føringsskinne">
+        <annotation>
+          <documentation>13743: Brurekkverk, stål m/føringsskinne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brurekkverk_StålUten_Føringsskinne">
+        <annotation>
+          <documentation>13744: Brurekkverk, stål u/føringsskinne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brurekkverk_Betong">
+        <annotation>
+          <documentation>3467: Brurekkverk, betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rekkverkForGåendeSyklende">
+        <annotation>
+          <documentation>17305: Rekkverk som er dimensjonert for gående og syklende. Kan f.eks være for å hindre  utforkjørsel med sykkel. Benyttes ikke på/ved veger med biltrafikk</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RekkverkstypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkinneutrustningType">
+    <annotation>
+      <documentation>1647: Angir skinneutrustning for rekkverket.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkinneutrustningEnumerationType nvdb:SkinneutrustningOtherType"/>
+  </simpleType>
+  <simpleType name="SkinneutrustningEnumerationType">
+    <annotation>
+      <documentation>1647: Angir skinneutrustning for rekkverket.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ensidig_Enkel_O_Ll">
+        <annotation>
+          <documentation>3725: Ei skinne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ensidig_Dobbel_8Ll">
+        <annotation>
+          <documentation>3461: To skinner over hverandre på samme side av stolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tosidig_Enkel_O_Ll_O">
+        <annotation>
+          <documentation>3734: Ei skinne på hver side av stolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tosidig_Dobbel_8Ll8">
+        <annotation>
+          <documentation>3462: To skinner over hverandre på hver side av stolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tosidig_DobbelEnkel_8LlO">
+        <annotation>
+          <documentation>3464: To skinner over hverandre på side inn mot veg, ei på motsatt side.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tosidig_EnkelDobbel_O_Ll8">
+        <annotation>
+          <documentation>4076: Ei skinne på side inn mot veg, to skinne under hverandre på motsatt side.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkinneutrustningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StolpeavstandType">
+    <annotation>
+      <documentation>1567: Angir normal avstand mellom stolper</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StolpeavstandEnumerationType nvdb:StolpeavstandOtherType"/>
+  </simpleType>
+  <simpleType name="StolpeavstandEnumerationType">
+    <annotation>
+      <documentation>1567: Angir normal avstand mellom stolper</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="4">
+        <annotation>
+          <documentation>3998: 4</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2">
+        <annotation>
+          <documentation>3996: 2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>3995: 1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3">
+        <annotation>
+          <documentation>3997: 3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6">
+        <annotation>
+          <documentation>20070: 6</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1_33">
+        <annotation>
+          <documentation>13722: 1,33</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1_8">
+        <annotation>
+          <documentation>13723: 1,8</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2_3">
+        <annotation>
+          <documentation>13724: 2,3</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StolpeavstandOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StyrkeklasseType">
+    <annotation>
+      <documentation>9554: Angir styrkeklasse i henhold til håndbok N101 (231), vedlegg 1.1</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StyrkeklasseEnumerationType nvdb:StyrkeklasseOtherType"/>
+  </simpleType>
+  <simpleType name="StyrkeklasseEnumerationType">
+    <annotation>
+      <documentation>9554: Angir styrkeklasse i henhold til håndbok N101 (231), vedlegg 1.1</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="H1">
+        <annotation>
+          <documentation>13726: H1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H2">
+        <annotation>
+          <documentation>13727: H2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H3">
+        <annotation>
+          <documentation>13728: H3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H4a">
+        <annotation>
+          <documentation>13729: H4a</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="H4b">
+        <annotation>
+          <documentation>13730: H4b</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L1">
+        <annotation>
+          <documentation>13731: L1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L2">
+        <annotation>
+          <documentation>13732: L2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L3">
+        <annotation>
+          <documentation>13733: L3</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L4a">
+        <annotation>
+          <documentation>13734: L4a</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="L4b">
+        <annotation>
+          <documentation>13735: L4b</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="N1">
+        <annotation>
+          <documentation>13736: N1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="N2">
+        <annotation>
+          <documentation>13737: N2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T1">
+        <annotation>
+          <documentation>13738: T1</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T2">
+        <annotation>
+          <documentation>13739: T2</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="T3">
+        <annotation>
+          <documentation>13740: T3</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StyrkeklasseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtblokkingType">
+    <annotation>
+      <documentation>1645: Anordning mellom rekkverksskinne og rekkverksstolper for å skape større avstand mellom skinnen og stive stolper (se figur 1.2 i Rekkverksnormal). Kilde: Rekkverksnormal.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UtblokkingEnumerationType nvdb:UtblokkingOtherType"/>
+  </simpleType>
+  <simpleType name="UtblokkingEnumerationType">
+    <annotation>
+      <documentation>1645: Anordning mellom rekkverksskinne og rekkverksstolper for å skape større avstand mellom skinnen og stive stolper (se figur 1.2 i Rekkverksnormal). Kilde: Rekkverksnormal.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bakskinne">
+        <annotation>
+          <documentation>13741: Bakskinne</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bøyle">
+        <annotation>
+          <documentation>13742: Bøyle</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UtblokkingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligRekkverkType">
+    <annotation>
+      <documentation>8048: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligRekkverkEnumerationType nvdb:VedlikeholdsansvarligRekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligRekkverkEnumerationType">
+    <annotation>
+      <documentation>8048: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10442: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18694: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19919: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18823: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10520: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10598: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17701: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligRekkverkOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

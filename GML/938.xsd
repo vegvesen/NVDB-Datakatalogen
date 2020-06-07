@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BakgrunnForGravingType">
+    <annotation>
+      <documentation>11498: Angir hvilken type graving/tillatelse det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BakgrunnForGravingEnumerationType nvdb:BakgrunnForGravingOtherType"/>
+  </simpleType>
+  <simpleType name="BakgrunnForGravingEnumerationType">
+    <annotation>
+      <documentation>11498: Angir hvilken type graving/tillatelse det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nyetablering">
+        <annotation>
+          <documentation>19532: Graving i tilknytning til etablering av ny infrastruktur el.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="planlagtVedlikehold">
+        <annotation>
+          <documentation>19533: Graving i tilknytning til planlagt vedlikehold på eksisterende infrastruktur el.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="akuttVedlikehold">
+        <annotation>
+          <documentation>19534: Graving i tilknytning til akutt vedlikehold på eksisterende infrastruktur el.l. Kan f.eks være lekkasje, kabelbrudd etc.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BakgrunnForGravingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FramføringType">
+    <annotation>
+      <documentation>11526: Angir hvilken type framføring som primært skal benyttes. Dersom det er ulike typer framføring angis den som benyttes ved kryssing av veg. Om det ikke er kryssing av veg benyttes den som er mest framtredende. Angi beskrivelse i tilleggsinformasjon</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FramføringEnumerationType nvdb:FramføringOtherType"/>
+  </simpleType>
+  <simpleType name="FramføringEnumerationType">
+    <annotation>
+      <documentation>11526: Angir hvilken type framføring som primært skal benyttes. Dersom det er ulike typer framføring angis den som benyttes ved kryssing av veg. Om det ikke er kryssing av veg benyttes den som er mest framtredende. Angi beskrivelse i tilleggsinformasjon</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="boring">
+        <annotation>
+          <documentation>19577: Boring</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="graving">
+        <annotation>
+          <documentation>19578: Graving</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="microtrenching">
+        <annotation>
+          <documentation>19579: Microtrenching</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="luftspenn">
+        <annotation>
+          <documentation>19580: Luftspenn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenFramføring">
+        <annotation>
+          <documentation>19581: Beskrivelse av framføring skal angis under Tilleggsinformasjon (ET 11507)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FramføringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GraveformålType">
+    <annotation>
+      <documentation>11505: Angir formål for graving</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GraveformålEnumerationType nvdb:GraveformålOtherType"/>
+  </simpleType>
+  <simpleType name="GraveformålEnumerationType">
+    <annotation>
+      <documentation>11505: Angir formål for graving</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vann_Avløp_Overvann">
+        <annotation>
+          <documentation>19538: Ledninger, kuimmer etc i tilknytning til vann, avløp og/eller overvannssystem</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="drenering">
+        <annotation>
+          <documentation>19539: Ledninger, kuimmer etc i tilknytning til drenering</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ecom">
+        <annotation>
+          <documentation>19540: Kabler, trekkerør, trekkekummer, etc relatert til ecom, dvs signal, fiber, bredånd, etc</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="strømforsyning">
+        <annotation>
+          <documentation>19541: Kabler, trekkerør, trekkekummer, etc relatert til strømforsyning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernvarmeKjøling">
+        <annotation>
+          <documentation>19542: Rørledninger, kummer etc relatert til fjernvarme/kjøleanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="olje_Gass">
+        <annotation>
+          <documentation>19543: Rørledninger, kummer, etc relart til olje-/gassanlegg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avfall">
+        <annotation>
+          <documentation>19544: Avfallssug, etc</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegvedlikehold">
+        <annotation>
+          <documentation>19545: Graving i forbindelse med vegvedlikehold</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annetFormål">
+        <annotation>
+          <documentation>19546: Annet formål</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GraveformålOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GravestedType">
+    <annotation>
+      <documentation>11504: Angir hvor det er gitt tillatelse til graving relatert til vegen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GravestedEnumerationType nvdb:GravestedOtherType"/>
+  </simpleType>
+  <simpleType name="GravestedEnumerationType">
+    <annotation>
+      <documentation>11504: Angir hvor det er gitt tillatelse til graving relatert til vegen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="kryssingAvVeg">
+        <annotation>
+          <documentation>19535: Graving på tvers av veg, f.eks i form av kryssing med kabel/rørledning el.l.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ILangsVeg">
+        <annotation>
+          <documentation>19536: Det graves i eller langs veg helt eller delvis innenfor vegkant  f.eks i form av kabelgrøft langs veg.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utenforVegkant">
+        <annotation>
+          <documentation>19537: All graving skjer utenfor vegkant</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GravestedOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Gravetillatelse" substitutionGroup="nvdb:AbstraktGravetillatelse" type="nvdb:GravetillatelseType">
+    <annotation>
+      <documentation>938: Sted hvor det er gitt tillatelse til å grave i vegen</documentation>
+    </annotation>
+  </element>
+  <complexType name="GravetillatelseType">
+    <complexContent>
+      <extension base="nvdb:AbstraktGravetillatelseType">
+        <sequence>
+          <element minOccurs="0" name="bakgrunnForGraving" type="nvdb:BakgrunnForGravingType">
+            <annotation>
+              <documentation>11498: Angir hvilken type graving/tillatelse det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="graveformål" type="nvdb:GraveformålType">
+            <annotation>
+              <documentation>11505: Angir formål for graving</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gravested" type="nvdb:GravestedType">
+            <annotation>
+              <documentation>11504: Angir hvor det er gitt tillatelse til graving relatert til vegen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="framføring" type="nvdb:FramføringType">
+            <annotation>
+              <documentation>11526: Angir hvilken type framføring som primært skal benyttes. Dersom det er ulike typer framføring angis den som benyttes ved kryssing av veg. Om det ikke er kryssing av veg benyttes den som er mest framtredende. Angi beskrivelse i tilleggsinformasjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dato_SøknadMottatt" type="date">
+            <annotation>
+              <documentation>11501: Angir dato for når søknad ble mottatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dato_PlanlagtOppstart" type="date">
+            <annotation>
+              <documentation>11502: Angir hvilken dato graving har planlagt start/startet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dato_PlanlagtFerdigstillelse" type="date">
+            <annotation>
+              <documentation>11503: Angir hvilken dato graving er planlagt/ble ferdigsstilt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gravedybde" type="integer">
+            <annotation>
+              <documentation>11506: Angir planlagt gravedybde
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="ledningseier" type="string">
+            <annotation>
+              <documentation>11774: Navn på firma/etat som er ansvarlig for graving og formell søker om gravetillatelsen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="entreprenør" type="string">
+            <annotation>
+              <documentation>11775: Navn på firma/entreprenør som skal utføre gravearbeidet på vegne av ledningseier</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11507: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivnummer" type="string">
+            <annotation>
+              <documentation>11499: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>11517: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innmålingsdataLevert" type="nvdb:InnmålingsdataLevertType">
+            <annotation>
+              <documentation>11527: Angir om det er levert innmålingsdata som dokumenterer geografisk plassering av tiltak.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dato_EgenkontrollskjemaMottatt" type="date">
+            <annotation>
+              <documentation>11525: Dato når egenkontrollskjema ble levert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dato_Garantiutløp" type="date">
+            <annotation>
+              <documentation>11497: Angir dato garantitid utløper</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GravetillatelsePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Gravetillatelse"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="InnmålingsdataLevertType">
+    <annotation>
+      <documentation>11527: Angir om det er levert innmålingsdata som dokumenterer geografisk plassering av tiltak.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:InnmålingsdataLevertEnumerationType nvdb:InnmålingsdataLevertOtherType"/>
+  </simpleType>
+  <simpleType name="InnmålingsdataLevertEnumerationType">
+    <annotation>
+      <documentation>11527: Angir om det er levert innmålingsdata som dokumenterer geografisk plassering av tiltak.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>19582: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>19583: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnmålingsdataLevertOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

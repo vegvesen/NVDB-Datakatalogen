@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="DataopprinnelseVegbreddeType">
+    <annotation>
+      <documentation>5261: Angir hvilke kilde dataene kommer fra</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DataopprinnelseVegbreddeEnumerationType nvdb:DataopprinnelseVegbreddeOtherType"/>
+  </simpleType>
+  <simpleType name="DataopprinnelseVegbreddeEnumerationType">
+    <annotation>
+      <documentation>5261: Angir hvilke kilde dataene kommer fra</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vegReg">
+        <annotation>
+          <documentation>7115: Data registrert ute på veg med VegReg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="generertFraTverrprofilobjektet_ID_528">
+        <annotation>
+          <documentation>7113: Generert fra Tverrprofilobjektet (ID 528)</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="overførtFraPMSDekke">
+        <annotation>
+          <documentation>7114: Overført fra PMS/Dekke</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DataopprinnelseVegbreddeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeVegbreddeType">
+    <annotation>
+      <documentation>5262: Angir hvilken målemetode som er benyttet for å framskaffe bredde</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MålemetodeVegbreddeEnumerationType nvdb:MålemetodeVegbreddeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeVegbreddeEnumerationType">
+    <annotation>
+      <documentation>5262: Angir hvilken målemetode som er benyttet for å framskaffe bredde</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="måltIFelt">
+        <annotation>
+          <documentation>7157: Målt i felt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="måltIKartOrtofoto">
+        <annotation>
+          <documentation>7165: Målt i kart/ortofoto</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beregnetFraLaserdata_Dekketilstand">
+        <annotation>
+          <documentation>7168: Beregnet fra laserdata, dekketilstand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beregnetFraKartdataFKB">
+        <annotation>
+          <documentation>13459: Beregnet fra kartdata/FKB</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="anslåttVerdi">
+        <annotation>
+          <documentation>7161: Anslått verdi</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeVegbreddeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegbredde" substitutionGroup="nvdb:AbstraktVegbredde" type="nvdb:VegbreddeType">
+    <annotation>
+      <documentation>583: Strekning som har enhelig bredde på vegen. Inneholder bredde på dekke, kjørebane og total vegbredde. Merknad: Vi er i ferd med å gå over til å benytte vegbredde beregnet på grunnlag av FKB-kartdata. Beregnet vegbredde finnes under vegobjekttype "Vegbredde, beregnet" (VT 838). Vegbredde (VT 583) inneholder mye data som er foreldet. I en overgangsperiode bør VT 838 benyttes der den finnes og VT 583 ellers. Det er også mulig å legge inn målte bredder under VT838.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegbreddeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegbreddeType">
+        <sequence>
+          <element minOccurs="0" name="vegbredde_Totalt" type="double">
+            <annotation>
+              <documentation>5264: Avstand mellom ytterkant skulder. Dersom skulder er asfaltert, er dette avstanden mellom asfaltkantene eller kantstein. Dersom hele/deler av skulder ikke er asfaltert, er dette avstand mellom punktene hvor skulderen knekkes mot grøften. Dersom hver kjøreretning har egen vegreferanse må vegbredde registreres per kjøreretning
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dekkebredde" type="double">
+            <annotation>
+              <documentation>5555: Angir total dekkebredde eksklusiv eventuell fysiske trafikkdelere
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kjørebanebredde" type="double">
+            <annotation>
+              <documentation>5556: Angir kjørebanebredden som summen av bredden for hver kjørebane. Bredden på hver kjørebane er avstanden mellom midtpunktet på hver av kantlinjene
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="målemetode" type="nvdb:MålemetodeVegbreddeType">
+            <annotation>
+              <documentation>5262: Angir hvilken målemetode som er benyttet for å framskaffe bredde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dataopprinnelse" type="nvdb:DataopprinnelseVegbreddeType">
+            <annotation>
+              <documentation>5261: Angir hvilke kilde dataene kommer fra</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoRegistrert" type="date">
+            <annotation>
+              <documentation>5260: Angir dato for når bredde ble registrert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6923: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegbreddePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegbredde"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

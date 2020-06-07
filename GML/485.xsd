@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="HovedårsakTilStengningType">
+    <annotation>
+      <documentation>9397: Gir informasjon om hva som er hovedårsak til stengning av vegen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:HovedårsakTilStengningEnumerationType nvdb:HovedårsakTilStengningOtherType"/>
+  </simpleType>
+  <simpleType name="HovedårsakTilStengningEnumerationType">
+    <annotation>
+      <documentation>9397: Gir informasjon om hva som er hovedårsak til stengning av vegen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skred">
+        <annotation>
+          <documentation>13221: Stengning av vegstrekning pga av at ett eller flere skred stenger vegen.  Dette kan være alt fra mindre steinsprang til større snøskred.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skredfare">
+        <annotation>
+          <documentation>13222: Stengning av vegstrekning pga fare for skred.  Kan være ulike typer skred.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flom">
+        <annotation>
+          <documentation>13223: Stengning av vegstrekning pga for mye vann i vegen.  Kan skyldes springflo, flom i vassdrag, oversvømmelser pga mye regn eller vannlekkasje, vassdrag som har tatt nye løp med mer.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vind">
+        <annotation>
+          <documentation>13224: Vegstrekning stengt pga sterk vind.  Ofte i forbindelse med bruer og værutsatte strekninger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="drivsnøRedusertSikt">
+        <annotation>
+          <documentation>13228: Vesgstrekning stengt pga sterk vind i kombinasjon med snøfokk og eller nedbør i form av snø.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="brann">
+        <annotation>
+          <documentation>13226: Vestrekning stengt pga brann på eller ved vegen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegarbeid">
+        <annotation>
+          <documentation>13227: Vegstrekning er stengt pga pågående vedlikeholdsarbeid.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="trafikkhendelse">
+        <annotation>
+          <documentation>13225: Vegen er stengt pga at det har skjedd en trafikkhendelse, f.eks trafikkulykke, motorstopp/havari på eller i tilknytning til vegen slik at det ikke er mulig eller ønskelig å ha trafikk på strekningen.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glattVeg">
+        <annotation>
+          <documentation>13229: Vegen er stengt pga for lav friksjon.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tekniskFeil">
+        <annotation>
+          <documentation>13230: Vegen er stengt pga teknisk feil</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annenÅrsak">
+        <annotation>
+          <documentation>13239: Annen årsak</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HovedårsakTilStengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredtypeVegstengningType">
+    <annotation>
+      <documentation>3921: Angir hvilken type skred det er fare for.  Bare aktuell dersom hovedårsak til vegstengning er "Skred" eller "Skredfare".</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkredtypeVegstengningEnumerationType nvdb:SkredtypeVegstengningOtherType"/>
+  </simpleType>
+  <simpleType name="SkredtypeVegstengningEnumerationType">
+    <annotation>
+      <documentation>3921: Angir hvilken type skred det er fare for.  Bare aktuell dersom hovedårsak til vegstengning er "Skred" eller "Skredfare".</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stein">
+        <annotation>
+          <documentation>4931: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jordLøsmasse">
+        <annotation>
+          <documentation>4932: Jord/løsmasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø">
+        <annotation>
+          <documentation>4933: Snø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="is">
+        <annotation>
+          <documentation>4934: Is</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flomskred">
+        <annotation>
+          <documentation>4935: Består av vann, stein og jord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="isStein">
+        <annotation>
+          <documentation>5350: Is/stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sørpeskred">
+        <annotation>
+          <documentation>4936: Består av vann, snø og stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utglidningAvVeg">
+        <annotation>
+          <documentation>13231: Utglidning av veg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredtypeVegstengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengningVegstengningType">
+    <annotation>
+      <documentation>3924: Gir informasjon om stengning av vegen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StengningVegstengningEnumerationType nvdb:StengningVegstengningOtherType"/>
+  </simpleType>
+  <simpleType name="StengningVegstengningEnumerationType">
+    <annotation>
+      <documentation>3924: Gir informasjon om stengning av vegen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stengningAvDelAvVegbane">
+        <annotation>
+          <documentation>4945: F.eks stengning av et kjørefelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtForTungtrafikk">
+        <annotation>
+          <documentation>4944: Stengt for tungtrafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtForPersonbiler">
+        <annotation>
+          <documentation>4943: Stengt for personbiler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtForAllTrafikk">
+        <annotation>
+          <documentation>4942: Stengt for all trafikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kolonnekjøringStyrtAvvikling">
+        <annotation>
+          <documentation>13232: Kolonnekjøring/styrt avvikling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nattestengt">
+        <annotation>
+          <documentation>13233: Nattestengt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stengtForGåendeSyklende">
+        <annotation>
+          <documentation>13234: Stengt for gående/syklende</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengningVegstengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengtRetningType">
+    <annotation>
+      <documentation>9398: Angir hvilken trafikkretning vegen er stengt for.  Det er særlig for veger med midtdeler det er aktuelt å stenge for en trafikkretning.  Envegskjørte veger angis som "helt stengt".</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StengtRetningEnumerationType nvdb:StengtRetningOtherType"/>
+  </simpleType>
+  <simpleType name="StengtRetningEnumerationType">
+    <annotation>
+      <documentation>9398: Angir hvilken trafikkretning vegen er stengt for.  Det er særlig for veger med midtdeler det er aktuelt å stenge for en trafikkretning.  Envegskjørte veger angis som "helt stengt".</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="heltStengt">
+        <annotation>
+          <documentation>13235: Stengt for trafikk i begge retninger.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="medMetreringsretning">
+        <annotation>
+          <documentation>13236: Stengt for trafikk som kjører i samme retning som metrering.  Åpen for trafikk i motsatt retning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="motMetreringsretning">
+        <annotation>
+          <documentation>13237: Stengt for trafikk som kjører i motsatt retning av metreringsretning.  Åpen for trafikk med metreringsretning</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengtRetningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegstengning" substitutionGroup="nvdb:AbstraktVegstengning" type="nvdb:VegstengningType">
+    <annotation>
+      <documentation>485: Informasjon om periodevis stengning av veg.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegstengningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegstengningType">
+        <sequence>
+          <element name="hovedårsakTilStengning" type="nvdb:HovedårsakTilStengningType">
+            <annotation>
+              <documentation>9397: Gir informasjon om hva som er hovedårsak til stengning av vegen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skredtype" type="nvdb:SkredtypeVegstengningType">
+            <annotation>
+              <documentation>3921: Angir hvilken type skred det er fare for.  Bare aktuell dersom hovedårsak til vegstengning er "Skred" eller "Skredfare".</documentation>
+            </annotation>
+          </element>
+          <element name="stengtRetning" type="nvdb:StengtRetningType">
+            <annotation>
+              <documentation>9398: Angir hvilken trafikkretning vegen er stengt for.  Det er særlig for veger med midtdeler det er aktuelt å stenge for en trafikkretning.  Envegskjørte veger angis som "helt stengt".</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stedsangivelse" type="string">
+            <annotation>
+              <documentation>7906: Stedsnavn hvor forekomst er lokalisert.  Evt plassering i forhold til stedsnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="værforholdPåVegen" type="nvdb:VærforholdPåVegenVegstengningType">
+            <annotation>
+              <documentation>3922: Angir hvilke værforhold det var på vegen i forkant av da vegstengning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vindretning" type="nvdb:VindretningVegstengningType">
+            <annotation>
+              <documentation>3923: Angir hvilken vindretning det var på vegen i forkant av vegstengningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="temperaturPåVeg" type="double">
+            <annotation>
+              <documentation>5292: Angir temperatur på vegen i forkant av vegstengning
+Enhet: Grader Celcius</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengning" type="nvdb:StengningVegstengningType">
+            <annotation>
+              <documentation>3924: Gir informasjon om stengning av vegen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengtFraDato" type="date">
+            <annotation>
+              <documentation>3925: Angir dato for stengning av vegen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengtFraKlokkeslett" type="integer">
+            <annotation>
+              <documentation>3926: Angir klokkeslett for stengning av vegen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengtTilDato" type="date">
+            <annotation>
+              <documentation>3927: Angir dato for åpning av vegen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stengtTilKlokkeslett" type="integer">
+            <annotation>
+              <documentation>3928: Angir klokkeslett for åpning av vegen.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4999: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VegstengningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegstengning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VindretningVegstengningType">
+    <annotation>
+      <documentation>3923: Angir hvilken vindretning det var på vegen i forkant av vegstengningen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VindretningVegstengningEnumerationType nvdb:VindretningVegstengningOtherType"/>
+  </simpleType>
+  <simpleType name="VindretningVegstengningEnumerationType">
+    <annotation>
+      <documentation>3923: Angir hvilken vindretning det var på vegen i forkant av vegstengningen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="S">
+        <annotation>
+          <documentation>5682: sør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SSV">
+        <annotation>
+          <documentation>5683: Sør-sørvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SV">
+        <annotation>
+          <documentation>5684: Sørvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VSV">
+        <annotation>
+          <documentation>5685: Vest-Sørvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>5686: Vest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="VNV">
+        <annotation>
+          <documentation>5687: Vest-nordvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NV">
+        <annotation>
+          <documentation>5688: Nordvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NNV">
+        <annotation>
+          <documentation>5689: Nord-nordvest</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="N">
+        <annotation>
+          <documentation>5690: Nord</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NNØ">
+        <annotation>
+          <documentation>5691: Nord-nordøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="NØ">
+        <annotation>
+          <documentation>5692: Nordøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ØNØ">
+        <annotation>
+          <documentation>5693: Øst-nordøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ø">
+        <annotation>
+          <documentation>5694: Øst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ØSØ">
+        <annotation>
+          <documentation>5695: Øst-sørøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SØ">
+        <annotation>
+          <documentation>5696: Sørøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="SSØ">
+        <annotation>
+          <documentation>5697: Sør-sørøst</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vindstille">
+        <annotation>
+          <documentation>13238: Vindstille</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VindretningVegstengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VærforholdPåVegenVegstengningType">
+    <annotation>
+      <documentation>3922: Angir hvilke værforhold det var på vegen i forkant av da vegstengning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VærforholdPåVegenVegstengningEnumerationType nvdb:VærforholdPåVegenVegstengningOtherType"/>
+  </simpleType>
+  <simpleType name="VærforholdPåVegenVegstengningEnumerationType">
+    <annotation>
+      <documentation>3922: Angir hvilke værforhold det var på vegen i forkant av da vegstengning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ingenNedbør">
+        <annotation>
+          <documentation>5673: Ingen nedbør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regn">
+        <annotation>
+          <documentation>5674: Regn</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regn_Lite">
+        <annotation>
+          <documentation>5676: Regn, lite</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regn_Middels">
+        <annotation>
+          <documentation>5675: Regn, middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="regn_Mye">
+        <annotation>
+          <documentation>5677: Regn, mye</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø">
+        <annotation>
+          <documentation>5678: Snø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø_Lite">
+        <annotation>
+          <documentation>5679: Snø, lite</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø_Middels">
+        <annotation>
+          <documentation>5680: Snø, middels</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø_Mye">
+        <annotation>
+          <documentation>5681: Snø, mye</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VærforholdPåVegenVegstengningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

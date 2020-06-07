@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeVannstandsmålerType">
+    <annotation>
+      <documentation>10581: Angir primært bruksområde for vegobjekttype</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeVannstandsmålerEnumerationType nvdb:BruksområdeVannstandsmålerOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeVannstandsmålerEnumerationType">
+    <annotation>
+      <documentation>10581: Angir primært bruksområde for vegobjekttype</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="vannstand">
+        <annotation>
+          <documentation>16966: Vannstand</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oljenivå">
+        <annotation>
+          <documentation>16967: Oljenivå</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeVannstandsmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVannstandsmålerType">
+    <annotation>
+      <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierVannstandsmålerEnumerationType nvdb:EierVannstandsmålerOtherType"/>
+  </simpleType>
+  <simpleType name="EierVannstandsmålerEnumerationType">
+    <annotation>
+      <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10293: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18616: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10754: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10357: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10421: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17650: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierVannstandsmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVannstandsmålerType">
+    <annotation>
+      <documentation>10090: Angir hvilken type sensor som brukes</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeVannstandsmålerEnumerationType nvdb:TypeVannstandsmålerOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVannstandsmålerEnumerationType">
+    <annotation>
+      <documentation>10090: Angir hvilken type sensor som brukes</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="trykksensor">
+        <annotation>
+          <documentation>16457: Sensor som ligger på bunnen og måler vanndybde ut fra vanntrykk der.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="radarsensor">
+        <annotation>
+          <documentation>16458: Vanndybde måles fra overflaten ved å sende mikrobølger med "radar" frekvens som reflekteres fra bunnen og derved gir dybden</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flottørmåler">
+        <annotation>
+          <documentation>16592: Vanndybde måles ved hjelp av flottør</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="laser">
+        <annotation>
+          <documentation>16594: Vanndybde måles ved hjelp av laser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ultralyd">
+        <annotation>
+          <documentation>16593: Vanndybde måles ved hjelp av ultralyd</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVannstandsmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vannstandsmåler" substitutionGroup="nvdb:AbstraktVannstandsmåler" type="nvdb:VannstandsmålerType">
+    <annotation>
+      <documentation>464: Utstyr for å måle vannstand f.eks i pumpesump.</documentation>
+    </annotation>
+  </element>
+  <complexType name="VannstandsmålerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVannstandsmålerType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeVannstandsmålerType">
+            <annotation>
+              <documentation>10090: Angir hvilken type sensor som brukes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeVannstandsmålerType">
+            <annotation>
+              <documentation>10581: Angir primært bruksområde for vegobjekttype</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10392: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10089: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11729: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>3537: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>3800: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11614: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11687: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11127: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierVannstandsmålerType">
+            <annotation>
+              <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligVannstandsmålerType">
+            <annotation>
+              <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4981: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="VannstandsmålerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vannstandsmåler"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligVannstandsmålerType">
+    <annotation>
+      <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligVannstandsmålerEnumerationType nvdb:VedlikeholdsansvarligVannstandsmålerOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVannstandsmålerEnumerationType">
+    <annotation>
+      <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10496: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18794: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19961: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18923: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10574: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10652: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17744: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligVannstandsmålerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

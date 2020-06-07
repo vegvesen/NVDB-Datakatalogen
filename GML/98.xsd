@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="PlasseringReferansestolpeType">
+    <annotation>
+      <documentation>8134: Angir hva plate er plassert på</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PlasseringReferansestolpeEnumerationType nvdb:PlasseringReferansestolpeOtherType"/>
+  </simpleType>
+  <simpleType name="PlasseringReferansestolpeEnumerationType">
+    <annotation>
+      <documentation>8134: Angir hva plate er plassert på</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="egenStolpe">
+        <annotation>
+          <documentation>10687: Egen stolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rekkverk">
+        <annotation>
+          <documentation>10688: Rekkverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gjerdeStøyskjerm">
+        <annotation>
+          <documentation>10689: Gjerde/støyskjerm</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lysstolpe">
+        <annotation>
+          <documentation>10690: Lysstolpe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="andreSkiltstolper">
+        <annotation>
+          <documentation>10691: Andre skiltstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bygningKonstruksjon">
+        <annotation>
+          <documentation>10692: Bygning/konstruksjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlasseringReferansestolpeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Referansestolpe" substitutionGroup="nvdb:AbstraktReferansestolpe" type="nvdb:ReferansestolpeType">
+    <annotation>
+      <documentation>98: Punkt langs veg hvor vegens metrering er angitt på fastmontert plate.  Finnes i 500-1000 meters mellomrom langs europa-, riks- og fylkesveger.</documentation>
+    </annotation>
+  </element>
+  <complexType name="ReferansestolpeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktReferansestolpeType">
+        <sequence>
+          <element minOccurs="0" name="tekstPåPlate" type="string">
+            <annotation>
+              <documentation>1907: Angir tekst som står på plate.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydeOverVegkant" type="double">
+            <annotation>
+              <documentation>2056: Angir høyde fra vegkant til underkant plate.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringReferansestolpeType">
+            <annotation>
+              <documentation>8134: Angir hva plate er plassert på</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandFraVegkant" type="double">
+            <annotation>
+              <documentation>4597: Angir avstand fra vegkant til referansestolpe
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stolpefundamentering" type="nvdb:StolpefundamenteringType">
+            <annotation>
+              <documentation>1672: Angir hvordan vegobjektet er fundamentert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10344: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11081: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4797: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="ReferansestolpePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Referansestolpe"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="StolpefundamenteringType">
+    <annotation>
+      <documentation>1672: Angir hvordan vegobjektet er fundamentert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:StolpefundamenteringEnumerationType nvdb:StolpefundamenteringOtherType"/>
+  </simpleType>
+  <simpleType name="StolpefundamenteringEnumerationType">
+    <annotation>
+      <documentation>1672: Angir hvordan vegobjektet er fundamentert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="jordstikk">
+        <annotation>
+          <documentation>2426: Jordstikk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IPåFjell">
+        <annotation>
+          <documentation>3265: I/på fjell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IPåFjellfundament">
+        <annotation>
+          <documentation>2431: I/på fjellfundament</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="IPåJordfundament">
+        <annotation>
+          <documentation>2436: I/på jordfundament</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StolpefundamenteringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

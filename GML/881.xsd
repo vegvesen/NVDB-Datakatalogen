@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeKlimaanleggType">
+    <annotation>
+      <documentation>10568: Angir hva som er primært bruksområde</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeKlimaanleggEnumerationType nvdb:BruksområdeKlimaanleggOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeKlimaanleggEnumerationType">
+    <annotation>
+      <documentation>10568: Angir hva som er primært bruksområde</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="varming">
+        <annotation>
+          <documentation>16951: Hovedformål er å varme opp luft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjøling">
+        <annotation>
+          <documentation>16952: Hovedformål er å kjøle ned luft</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kjølingVarming">
+        <annotation>
+          <documentation>16953: Benyttes i perioder til kjøling, i andre perioder til varming</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avfukting">
+        <annotation>
+          <documentation>19531: Hovedformål er å holde nede fuktighetsnivået. Benyttes i bygninger, bergrom eller i brukasser</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeKlimaanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKlimaanleggType">
+    <annotation>
+      <documentation>10573: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierKlimaanleggEnumerationType nvdb:EierKlimaanleggOtherType"/>
+  </simpleType>
+  <simpleType name="EierKlimaanleggEnumerationType">
+    <annotation>
+      <documentation>10573: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>16957: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18546: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16954: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16955: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16956: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17637: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierKlimaanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Klimaanlegg" substitutionGroup="nvdb:AbstraktKlimaanlegg" type="nvdb:KlimaanleggType">
+    <annotation>
+      <documentation>881: Anlegg for klimastyring i form av kjøling, oppvarming eller avfukting, benyttes i bygg, bergrom eller i brukasser.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KlimaanleggType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKlimaanleggType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeKlimaanleggType">
+            <annotation>
+              <documentation>10568: Angir hva som er primært bruksområde</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKompressorer" type="string">
+            <annotation>
+              <documentation>10567: Angir hvor mange kopressorer anlegget har
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="plassering" type="string">
+            <annotation>
+              <documentation>10575: Beskrivelse av hvor vegobjektet er plassert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10574: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="driftsmerking" type="string">
+            <annotation>
+              <documentation>10571: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="SCADA_Merking" type="string">
+            <annotation>
+              <documentation>11742: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>10569: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11650: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="arkivreferanse" type="string">
+            <annotation>
+              <documentation>11703: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem.  Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11176: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierKlimaanleggType">
+            <annotation>
+              <documentation>10573: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKlimaanleggType">
+            <annotation>
+              <documentation>10572: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>10570: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KlimaanleggPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Klimaanlegg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligKlimaanleggType">
+    <annotation>
+      <documentation>10572: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligKlimaanleggEnumerationType nvdb:VedlikeholdsansvarligKlimaanleggOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKlimaanleggEnumerationType">
+    <annotation>
+      <documentation>10572: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>16961: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18736: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>16958: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18865: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>16959: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>16960: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17786: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligKlimaanleggOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

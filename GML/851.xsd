@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdkomstSkredutløsningstiltakType">
+    <annotation>
+      <documentation>9666: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <union memberTypes="nvdb:AdkomstSkredutløsningstiltakEnumerationType nvdb:AdkomstSkredutløsningstiltakOtherType"/>
+  </simpleType>
+  <simpleType name="AdkomstSkredutløsningstiltakEnumerationType">
+    <annotation>
+      <documentation>9666: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bil">
+        <annotation>
+          <documentation>19827: Adkomst er mulig med bil.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hjullaster">
+        <annotation>
+          <documentation>13926: Adkomst er mulig med hjullaster.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gravemaskin">
+        <annotation>
+          <documentation>13927: Adkomst for gravemaskin</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tilFots">
+        <annotation>
+          <documentation>13928: Adkomst til fots</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kran">
+        <annotation>
+          <documentation>13929: Adkomst for kran</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tau">
+        <annotation>
+          <documentation>13930: Adkomt med tau</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="helikopter">
+        <annotation>
+          <documentation>13931: Adkomst for helikopter</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdkomstSkredutløsningstiltakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkredutløsningstiltakType">
+    <annotation>
+      <documentation>9668: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierSkredutløsningstiltakEnumerationType nvdb:EierSkredutløsningstiltakOtherType"/>
+  </simpleType>
+  <simpleType name="EierSkredutløsningstiltakEnumerationType">
+    <annotation>
+      <documentation>9668: Angir hvem som er eier av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>13932: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18651: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>13933: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13934: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13935: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17664: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierSkredutløsningstiltakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Skredutløsningstiltak" substitutionGroup="nvdb:AbstraktSkredutløsningstiltak" type="nvdb:SkredutløsningstiltakType">
+    <annotation>
+      <documentation>851: Installasjoner for kunstig utløsning  som står i løsneområdene for skred</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredutløsningstiltakType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredutløsningstiltakType">
+        <sequence>
+          <element name="type" type="nvdb:TypeSkredutløsningstiltakType">
+            <annotation>
+              <documentation>9664: Angir type skredutløsning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallEnheter" type="integer">
+            <annotation>
+              <documentation>9665: Antall enheter for skredutløsning
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adkomst" type="nvdb:AdkomstSkredutløsningstiltakType">
+            <annotation>
+              <documentation>9666: Beskriver hvordan man får adkomst til vegobjektet for vedlikehold</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9667: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9870: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11166: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierSkredutløsningstiltakType">
+            <annotation>
+              <documentation>9668: Angir hvem som er eier av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligSkredutløsningstiltakType">
+            <annotation>
+              <documentation>9669: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>9671: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>9670: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredutløsningstiltakPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Skredutløsningstiltak"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeSkredutløsningstiltakType">
+    <annotation>
+      <documentation>9664: Angir type skredutløsning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeSkredutløsningstiltakEnumerationType nvdb:TypeSkredutløsningstiltakOtherType"/>
+  </simpleType>
+  <simpleType name="TypeSkredutløsningstiltakEnumerationType">
+    <annotation>
+      <documentation>9664: Angir type skredutløsning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="sprengladning_Forhåndsplassert">
+        <annotation>
+          <documentation>13922: Sprengladning som er forhåndsplassert i utløsningsområdet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sprengningstårn">
+        <annotation>
+          <documentation>13923: Innretning som settes opp i fjellsidene for å slippe ut sprenglegemer for å utløse skred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gassdetonator">
+        <annotation>
+          <documentation>13924: Innretning for fjernutløsning av en gasseksplosjon i utløsningsområdet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kabelbane">
+        <annotation>
+          <documentation>13925: kabelane som brukes for å bringe sprengladninger inn i skredutløsningsområdet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeSkredutløsningstiltakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredutløsningstiltakType">
+    <annotation>
+      <documentation>9669: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligSkredutløsningstiltakEnumerationType nvdb:VedlikeholdsansvarligSkredutløsningstiltakOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredutløsningstiltakEnumerationType">
+    <annotation>
+      <documentation>9669: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>13936: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18685: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19990: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18814: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>13937: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>13938: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17764: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligSkredutløsningstiltakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

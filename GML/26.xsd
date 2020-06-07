@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierLekeapparatType">
+    <annotation>
+      <documentation>5817: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierLekeapparatEnumerationType nvdb:EierLekeapparatOtherType"/>
+  </simpleType>
+  <simpleType name="EierLekeapparatEnumerationType">
+    <annotation>
+      <documentation>5817: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8212: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18594: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10704: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8238: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8264: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17601: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierLekeapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FastmontertType">
+    <annotation>
+      <documentation>9452: Angir om lekeapparatet er fastmontert</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FastmontertEnumerationType nvdb:FastmontertOtherType"/>
+  </simpleType>
+  <simpleType name="FastmontertEnumerationType">
+    <annotation>
+      <documentation>9452: Angir om lekeapparatet er fastmontert</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13317: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13318: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FastmontertOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Lekeapparat" substitutionGroup="nvdb:AbstraktLekeapparat" type="nvdb:LekeapparatType">
+    <annotation>
+      <documentation>26: Utstyr satt opp på f.eks. rasteplasser brukt til lek mm</documentation>
+    </annotation>
+  </element>
+  <complexType name="LekeapparatType">
+    <complexContent>
+      <extension base="nvdb:AbstraktLekeapparatType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeLekeapparatType">
+            <annotation>
+              <documentation>1107: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsavtale" type="string">
+            <annotation>
+              <documentation>1560: Angir arkivnummer for henvisning til eventuell vedlikeholdsavtale for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sikkerhetskrav" type="string">
+            <annotation>
+              <documentation>1741: Angir hvilke krav til sikkerhet som gjelder.  Det henvises til lover/forskrifter og paragrafer</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2193: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fastmontert" type="nvdb:FastmontertType">
+            <annotation>
+              <documentation>9452: Angir om lekeapparatet er fastmontert</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeLekeapparatType">
+            <annotation>
+              <documentation>9453: Angir primær materialtype for vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="overflatebehandling" type="nvdb:OverflatebehandlingLekeapparatType">
+            <annotation>
+              <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="underlag" type="nvdb:UnderlagType">
+            <annotation>
+              <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vinterlagring" type="nvdb:VinterlagringType">
+            <annotation>
+              <documentation>9455: angir om lekeapparatet blir vinterlagret</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10321: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produsent" type="string">
+            <annotation>
+              <documentation>1516: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="produktnavn" type="string">
+            <annotation>
+              <documentation>1439: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="leverandør" type="string">
+            <annotation>
+              <documentation>1476: Angir navn på firma som har levert vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11555: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11043: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierLekeapparatType">
+            <annotation>
+              <documentation>5817: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligLekeapparatType">
+            <annotation>
+              <documentation>8051: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4734: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LekeapparatPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Lekeapparat"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaterialtypeLekeapparatType">
+    <annotation>
+      <documentation>9453: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeLekeapparatEnumerationType nvdb:MaterialtypeLekeapparatOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeLekeapparatEnumerationType">
+    <annotation>
+      <documentation>9453: Angir primær materialtype for vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>13323: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>13322: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>13321: Metall</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="betong">
+        <annotation>
+          <documentation>13319: Betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="glassfiber">
+        <annotation>
+          <documentation>13320: Glassfiber</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeLekeapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverflatebehandlingLekeapparatType">
+    <annotation>
+      <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:OverflatebehandlingLekeapparatEnumerationType nvdb:OverflatebehandlingLekeapparatOtherType"/>
+  </simpleType>
+  <simpleType name="OverflatebehandlingLekeapparatEnumerationType">
+    <annotation>
+      <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="malt">
+        <annotation>
+          <documentation>13324: Malt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="beiset">
+        <annotation>
+          <documentation>13325: Beiset</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="impregnert">
+        <annotation>
+          <documentation>13326: Impregnert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="oljet">
+        <annotation>
+          <documentation>13327: Oljet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lakkert">
+        <annotation>
+          <documentation>13328: Lakkert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="emaljert">
+        <annotation>
+          <documentation>13329: Emaljert</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ingenOverflatebehandling">
+        <annotation>
+          <documentation>19081: Ingen overflatebehandling</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="OverflatebehandlingLekeapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeLekeapparatType">
+    <annotation>
+      <documentation>1107: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeLekeapparatEnumerationType nvdb:TypeLekeapparatOtherType"/>
+  </simpleType>
+  <simpleType name="TypeLekeapparatEnumerationType">
+    <annotation>
+      <documentation>1107: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="huske">
+        <annotation>
+          <documentation>2507: Huske</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sandkasse">
+        <annotation>
+          <documentation>2508: Sandkasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vippe">
+        <annotation>
+          <documentation>2509: Vippe</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lekehus">
+        <annotation>
+          <documentation>2510: Lekehus</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rutsjebane">
+        <annotation>
+          <documentation>2511: Rutsjebane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="minigolf">
+        <annotation>
+          <documentation>2512: Minigolf</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="klatrestativ">
+        <annotation>
+          <documentation>9821: Klatrestativ</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeLekeapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="UnderlagType">
+    <annotation>
+      <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:UnderlagEnumerationType nvdb:UnderlagOtherType"/>
+  </simpleType>
+  <simpleType name="UnderlagEnumerationType">
+    <annotation>
+      <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="asfaltSteinBetong">
+        <annotation>
+          <documentation>3818: Asfalt/stein/betong</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gu_Mm_Tte">
+        <annotation>
+          <documentation>13330: Gummimatte</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sandGress">
+        <annotation>
+          <documentation>2087: Sand/gress</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tre">
+        <annotation>
+          <documentation>4016: Tre</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="UnderlagOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLekeapparatType">
+    <annotation>
+      <documentation>8051: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligLekeapparatEnumerationType nvdb:VedlikeholdsansvarligLekeapparatOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLekeapparatEnumerationType">
+    <annotation>
+      <documentation>8051: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10445: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18681: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19921: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18810: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10523: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10601: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17704: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligLekeapparatOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterlagringType">
+    <annotation>
+      <documentation>9455: angir om lekeapparatet blir vinterlagret</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VinterlagringEnumerationType nvdb:VinterlagringOtherType"/>
+  </simpleType>
+  <simpleType name="VinterlagringEnumerationType">
+    <annotation>
+      <documentation>9455: angir om lekeapparatet blir vinterlagret</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>13331: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>13332: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VinterlagringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

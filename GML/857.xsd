@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Brøyterode" substitutionGroup="nvdb:AbstraktBrøyterode" type="nvdb:BrøyterodeType">
+    <annotation>
+      <documentation>857: Strekning som inngår i gitt rode</documentation>
+    </annotation>
+  </element>
+  <complexType name="BrøyterodeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBrøyterodeType">
+        <sequence>
+          <element minOccurs="0" name="nummer" type="integer">
+            <annotation>
+              <documentation>9806: Angir nummer på rode</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>9807: Angir navn på rode</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prioritet" type="nvdb:PrioritetType">
+            <annotation>
+              <documentation>9809: Angir hvilken prioritet som gjelder for aktuell rode</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9808: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11243: Gir flate/polygon som geometrisk avgrenser tilleggsareal som som skal brøytes, dvs sideareal, plasser, fotau, etc .</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BrøyterodePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Brøyterode"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="PrioritetType">
+    <annotation>
+      <documentation>9809: Angir hvilken prioritet som gjelder for aktuell rode</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PrioritetEnumerationType nvdb:PrioritetOtherType"/>
+  </simpleType>
+  <simpleType name="PrioritetEnumerationType">
+    <annotation>
+      <documentation>9809: Angir hvilken prioritet som gjelder for aktuell rode</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="A">
+        <annotation>
+          <documentation>15958: Høyest prioritet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="B">
+        <annotation>
+          <documentation>15959: Middels prioritet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="C">
+        <annotation>
+          <documentation>15960: Lavest prioritet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PrioritetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

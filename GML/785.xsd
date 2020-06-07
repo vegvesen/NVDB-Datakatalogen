@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="GeografiskOppløsningType">
+    <annotation>
+      <documentation>8339: Angir hva statistikken omfatter</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GeografiskOppløsningEnumerationType nvdb:GeografiskOppløsningOtherType"/>
+  </simpleType>
+  <simpleType name="GeografiskOppløsningEnumerationType">
+    <annotation>
+      <documentation>8339: Angir hva statistikken omfatter</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="landet">
+        <annotation>
+          <documentation>11290: Landet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="region">
+        <annotation>
+          <documentation>11291: Region</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylke">
+        <annotation>
+          <documentation>11292: Fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegavdeling">
+        <annotation>
+          <documentation>11293: Vegavdeling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>11665: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrLand">
+        <annotation>
+          <documentation>11294: Veg pr land</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrRegion">
+        <annotation>
+          <documentation>11295: Veg pr region</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrFylke">
+        <annotation>
+          <documentation>11286: Veg pr fylke</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrAvdeling">
+        <annotation>
+          <documentation>11287: Veg pr avdeling</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="vegPrKommune">
+        <annotation>
+          <documentation>11670: Veg pr kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="HP">
+        <annotation>
+          <documentation>11288: HP</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="PMS_Parsell">
+        <annotation>
+          <documentation>11289: PMS-parsell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="generert">
+        <annotation>
+          <documentation>11296: Generert</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GeografiskOppløsningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Statistikk_Generell" substitutionGroup="nvdb:AbstraktStatistikk_Generell" type="nvdb:Statistikk_GenerellType">
+    <annotation>
+      <documentation>785: Aggregert informasjon ifbm en vegobjekttype.</documentation>
+    </annotation>
+  </element>
+  <complexType name="Statistikk_GenerellType">
+    <complexContent>
+      <extension base="nvdb:AbstraktStatistikk_GenerellType">
+        <sequence>
+          <element name="kildeVegobjekttypeID" type="integer">
+            <annotation>
+              <documentation>8340: Id til den vegobjekttypen som objektet inneholder/skal inneholde begrenset statistisk informasjon for</documentation>
+            </annotation>
+          </element>
+          <element name="kildeEgenskapstypeID" type="integer">
+            <annotation>
+              <documentation>8341: Id til den egenskapstypen som den statistiske informasjonen gjelder for.</documentation>
+            </annotation>
+          </element>
+          <element name="geografiskOppløsning" type="nvdb:GeografiskOppløsningType">
+            <annotation>
+              <documentation>8339: Angir hva statistikken omfatter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stedsangivelse_Fra_Til" type="string">
+            <annotation>
+              <documentation>8733: Angir stedsnavn for start og slutt strekning.  Rekkefølge som navnene settes i har ikke betydning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fordelingIIntervaller"/>
+          <element minOccurs="0" name="konfidensnivå_50Prosent" type="double"/>
+          <element minOccurs="0" name="konfidensnivå_90Prosent" type="double"/>
+          <element minOccurs="0" name="middelverdi" type="double"/>
+          <element minOccurs="0" name="min_Mm_Verdi" type="double"/>
+          <element minOccurs="0" name="maksverdi" type="double"/>
+          <element minOccurs="0" name="andelMedData" type="double">
+            <annotation>
+              <documentation>8348: Del av veglengden som har informasjon i den egenskapstypen statistikken er beregna ut fra
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fordelingIVerdier"/>
+          <element minOccurs="0" name="veglengde" type="integer">
+            <annotation>
+              <documentation>8350: Målt veglengde som lokasjonsattributten dekker.  Evt. lengde av kjørefelt
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Statistikk_GenerellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Statistikk_Generell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

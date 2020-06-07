@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Belysningsstrekning" substitutionGroup="nvdb:AbstraktBelysningsstrekning" type="nvdb:BelysningsstrekningType">
+    <annotation>
+      <documentation>86: Gir en strekning langs vegen med belysningspunkt, kabler, stolper og fundamenter som naturlig hører sammen. Alle elektriske objekter i en Belysningsstrekning skal være koblet mot samme Elektriske anlegg, dvs. de skal ligge under samme måler</documentation>
+    </annotation>
+  </element>
+  <complexType name="BelysningsstrekningType">
+    <complexContent>
+      <extension base="nvdb:AbstraktBelysningsstrekningType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeBelysningsstrekningType">
+            <annotation>
+              <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeBelysningsstrekningType">
+            <annotation>
+              <documentation>1144: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="navnPåStrekning" type="string">
+            <annotation>
+              <documentation>8396: Gir navn på strekning som Belysningsstrekning dekker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tenningssystem" type="nvdb:TenningssystemType">
+            <annotation>
+              <documentation>8404: Angir hvilken teknologi som benyttes for tenning og slukking</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dimming" type="nvdb:DimmingType">
+            <annotation>
+              <documentation>10001: Angir om belysningsstrekning kan dimmes</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fjernstyring" type="nvdb:FjernstyringType">
+            <annotation>
+              <documentation>3760: Angir om det er mulig å fjernstyre belysningsstrekning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstand_Innbyrdes" type="integer">
+            <annotation>
+              <documentation>1714: Angir normal innbyrdes avstand mellom belysningspunkt som ligger etter hverandre i rekke.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="luminansnivå" type="string">
+            <annotation>
+              <documentation>8740: Gjennomsnittlig luminansnivå ved åpning av anlegget
+Enhet: Candela/kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>8399: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11575: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11462: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierBelysningsstrekningType">
+            <annotation>
+              <documentation>5810: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier_Navn" type="string">
+            <annotation>
+              <documentation>8397: Navn på eier av  vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligBelysningsstrekningType">
+            <annotation>
+              <documentation>1554: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4786: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="BelysningsstrekningPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Belysningsstrekning"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BruksområdeBelysningsstrekningType">
+    <annotation>
+      <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeBelysningsstrekningEnumerationType nvdb:BruksområdeBelysningsstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeBelysningsstrekningEnumerationType">
+    <annotation>
+      <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="belysningVegGate">
+        <annotation>
+          <documentation>2954: Belysning av veg og gate. Kan også benyttes for belysning av gangfelt og vegkryss når det er sammenehngende belysning.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningOmrådePlass">
+        <annotation>
+          <documentation>2956: Belysning av område eller plass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningGangfelt">
+        <annotation>
+          <documentation>2960: Belysning for gangfelt. Benyttes i tilfeller der belysningsstrekning er satt opp med hovedformål å belyse gangfelt</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningTunnel">
+        <annotation>
+          <documentation>2962: Belysning i tunnel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningGangSykkelveg">
+        <annotation>
+          <documentation>2952: Belysning på gang- og sykkelveg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningBru">
+        <annotation>
+          <documentation>3318: Brukes kun for spesiell belysning av bru. Vanlig vegbelysning settes som Belysning veg/gate</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningFerjeleie">
+        <annotation>
+          <documentation>16258: Belysning på ferjeleie</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privatOmråde">
+        <annotation>
+          <documentation>3855: Belysniong på privat område</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belysningVegkryss">
+        <annotation>
+          <documentation>2958: Belysning i vegkryss. Benyttes i tilfeller der belysningsstrekning er satt opp med hovedformål å belyse vegkryss.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeBelysningsstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DimmingType">
+    <annotation>
+      <documentation>10001: Angir om belysningsstrekning kan dimmes</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DimmingEnumerationType nvdb:DimmingOtherType"/>
+  </simpleType>
+  <simpleType name="DimmingEnumerationType">
+    <annotation>
+      <documentation>10001: Angir om belysningsstrekning kan dimmes</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>16259: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>16260: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DimmingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBelysningsstrekningType">
+    <annotation>
+      <documentation>5810: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierBelysningsstrekningEnumerationType nvdb:EierBelysningsstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="EierBelysningsstrekningEnumerationType">
+    <annotation>
+      <documentation>5810: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>8205: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18587: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10697: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>8231: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>8257: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17596: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierBelysningsstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringType">
+    <annotation>
+      <documentation>3760: Angir om det er mulig å fjernstyre belysningsstrekning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FjernstyringEnumerationType nvdb:FjernstyringOtherType"/>
+  </simpleType>
+  <simpleType name="FjernstyringEnumerationType">
+    <annotation>
+      <documentation>3760: Angir om det er mulig å fjernstyre belysningsstrekning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>4719: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>4720: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FjernstyringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TenningssystemType">
+    <annotation>
+      <documentation>8404: Angir hvilken teknologi som benyttes for tenning og slukking</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TenningssystemEnumerationType nvdb:TenningssystemOtherType"/>
+  </simpleType>
+  <simpleType name="TenningssystemEnumerationType">
+    <annotation>
+      <documentation>8404: Angir hvilken teknologi som benyttes for tenning og slukking</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="manuell">
+        <annotation>
+          <documentation>11342: Manuell</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fotocelle">
+        <annotation>
+          <documentation>11343: Fotocelle</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="ur">
+        <annotation>
+          <documentation>11344: Ur</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="signal">
+        <annotation>
+          <documentation>11345: Signal/frekvens</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kontaktor">
+        <annotation>
+          <documentation>11346: Kontaktor</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="radiotenner">
+        <annotation>
+          <documentation>11347: Radiotenner</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="slave">
+        <annotation>
+          <documentation>17568: Slave</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="datekstyring">
+        <annotation>
+          <documentation>18318: Datekstyring</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TenningssystemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBelysningsstrekningType">
+    <annotation>
+      <documentation>1144: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeBelysningsstrekningEnumerationType nvdb:TypeBelysningsstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TypeBelysningsstrekningEnumerationType">
+    <annotation>
+      <documentation>1144: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="belPktEnSideAvVeg">
+        <annotation>
+          <documentation>3761: Bel.pkt en side av veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belPktBeggeSiderAvVeg">
+        <annotation>
+          <documentation>3762: Bel.pkt. begge sider av veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belPkt_Senter">
+        <annotation>
+          <documentation>3764: Bel.pkt, senter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="belPkt_Senter_2Armet">
+        <annotation>
+          <documentation>3763: Bel.pkt, senter, 2-armet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeBelysningsstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningsstrekningType">
+    <annotation>
+      <documentation>1554: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligBelysningsstrekningEnumerationType nvdb:VedlikeholdsansvarligBelysningsstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningsstrekningEnumerationType">
+    <annotation>
+      <documentation>1554: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>2141: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18716: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19893: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18845: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>2145: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lokaltE_Verk">
+        <annotation>
+          <documentation>3716: Lokalt e-verk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>2149: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17671: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligBelysningsstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

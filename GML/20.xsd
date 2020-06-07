@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="KantstolperRefleks" substitutionGroup="nvdb:AbstraktKantstolperRefleks" type="nvdb:KantstolperRefleksType">
+    <annotation>
+      <documentation>20: Stolper -  f.eks forsynt med lysreflekterende materiale -  som markerer vegkanten og gir en optisk ledning langs vegen (1).  Kan også være refleks festa på rekkverk eller på dobber som henger i tunneltak. I noen tilfeller brukes det også ifm midtdelere.</documentation>
+    </annotation>
+  </element>
+  <complexType name="KantstolperRefleksType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKantstolperRefleksType">
+        <sequence>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2191: Vegobjektet kan representere flere objekt av samme type.  Vi angir her hvor mange objekt dette objektet representerer.
+Enhet: Stykker</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstand_Innbyrdes" type="integer">
+            <annotation>
+              <documentation>1712: Angir normal innbyrdes avstand mellom vegobjekt som ligger etter hverandre i rekke.  Innbyrdes avstand mellom kantstolper
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeKantstolperRefleksType">
+            <annotation>
+              <documentation>1102: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10316: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11550: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11038: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4728: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="materialtype" type="nvdb:MaterialtypeKantstolperRefleksType">
+            <annotation>
+              <documentation>1400: Angir primær materialtype for vegobjektet.  Stolpemateriale</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KantstolperRefleksPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:KantstolperRefleks"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="MaterialtypeKantstolperRefleksType">
+    <annotation>
+      <documentation>1400: Angir primær materialtype for vegobjektet.  Stolpemateriale</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeKantstolperRefleksEnumerationType nvdb:MaterialtypeKantstolperRefleksOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeKantstolperRefleksEnumerationType">
+    <annotation>
+      <documentation>1400: Angir primær materialtype for vegobjektet.  Stolpemateriale</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="tre">
+        <annotation>
+          <documentation>2187: Tre</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="plast">
+        <annotation>
+          <documentation>2267: Plast</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="metall">
+        <annotation>
+          <documentation>3286: Metall</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeKantstolperRefleksOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKantstolperRefleksType">
+    <annotation>
+      <documentation>1102: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeKantstolperRefleksEnumerationType nvdb:TypeKantstolperRefleksOtherType"/>
+  </simpleType>
+  <simpleType name="TypeKantstolperRefleksEnumerationType">
+    <annotation>
+      <documentation>1102: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="refleksPåStolper">
+        <annotation>
+          <documentation>2524: Refleks på stolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="refleksPåRekkverksstolper">
+        <annotation>
+          <documentation>2525: Refleks på rekkverksstolper</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flexiMark">
+        <annotation>
+          <documentation>11798: Trafikkskiller med refelks.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="overhengendeReflekssylinder">
+        <annotation>
+          <documentation>11237: Plastsylindrer med refleks som henger i flukt med vegens kantlinjer.  Benyttes først og fremst i tunneler.  Underkant plastsylinder skal flukte med skiltet høyde.  Typisk dimensjon: 40mm i diameter, lengde 200 mm.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeKantstolperRefleksOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="PMS_Parsell" substitutionGroup="nvdb:AbstraktPMS_Parsell" type="nvdb:PMS_ParsellType">
+    <annotation>
+      <documentation>603: Gir utstrekning av PMS-parsell.</documentation>
+    </annotation>
+  </element>
+  <complexType name="PMS_ParsellType">
+    <complexContent>
+      <extension base="nvdb:AbstraktPMS_ParsellType">
+        <sequence>
+          <element minOccurs="0" name="stedsangivelse_Fra_Til" type="string">
+            <annotation>
+              <documentation>5472: Angir stedsnavn for start og slutt av PMS-parsell.  Rekkefølge som navnene settes i har ikke betydning.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>6913: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="PMS_ParsellPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:PMS_Parsell"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="FresemetodeType">
+    <annotation>
+      <documentation>9502: Angir fresemetode som er benyttet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:FresemetodeEnumerationType nvdb:FresemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="FresemetodeEnumerationType">
+    <annotation>
+      <documentation>9502: Angir fresemetode som er benyttet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="nedfrestSinusriller">
+        <annotation>
+          <documentation>13386: Nedfrest sinusriller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sinusriller">
+        <annotation>
+          <documentation>13387: Sinusriller</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="annet">
+        <annotation>
+          <documentation>13388: Annet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FresemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegoppmerking_ForsterketType">
+    <annotation>
+      <documentation>9500: Angir hvilken type forsterket vegoppmerking det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeVegoppmerking_ForsterketEnumerationType nvdb:TypeVegoppmerking_ForsterketOtherType"/>
+  </simpleType>
+  <simpleType name="TypeVegoppmerking_ForsterketEnumerationType">
+    <annotation>
+      <documentation>9500: Angir hvilken type forsterket vegoppmerking det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="forsterketMidtoppmerking">
+        <annotation>
+          <documentation>13384: Forsterket vegoppmerling mellom motgående kjørefelt der det ikke er fysisk midtdeler.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forsterketOppmerkingMotMidtdeler">
+        <annotation>
+          <documentation>18276: Forsterket midtoppmerking inn mot midtdeler.</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forsterketKantoppmerking">
+        <annotation>
+          <documentation>13385: forsterket oppmerking på vegkant</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeVegoppmerking_ForsterketOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegoppmerking_Forsterket" substitutionGroup="nvdb:AbstraktVegoppmerking_Forsterket" type="nvdb:Vegoppmerking_ForsterketType">
+    <annotation>
+      <documentation>836: Vegoppmerking som er forsterket med fresing i asfaltdekket. Fresingen skal gi vibrasjon i kjøretøyet</documentation>
+    </annotation>
+  </element>
+  <complexType name="Vegoppmerking_ForsterketType">
+    <complexContent>
+      <extension base="nvdb:AbstraktVegoppmerking_ForsterketType">
+        <sequence>
+          <element name="type" type="nvdb:TypeVegoppmerking_ForsterketType">
+            <annotation>
+              <documentation>9500: Angir hvilken type forsterket vegoppmerking det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fresemetode" type="nvdb:FresemetodeType">
+            <annotation>
+              <documentation>9502: Angir fresemetode som er benyttet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="integer">
+            <annotation>
+              <documentation>9504: Angir bredde av forsterket vegoppmerking. Standardbredder for midtoppmerking er 55cm, 75 cm o g 105 cm. Standardbredde for kantoppmerking er 35 cm
+Enhet: Centimeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>9501: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10411: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11159: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>10258: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="Vegoppmerking_ForsterketPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Vegoppmerking_Forsterket"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

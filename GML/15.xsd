@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierGrasdekkerType">
+    <annotation>
+      <documentation>10874: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierGrasdekkerEnumerationType nvdb:EierGrasdekkerOtherType"/>
+  </simpleType>
+  <simpleType name="EierGrasdekkerEnumerationType">
+    <annotation>
+      <documentation>10874: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>17917: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18631: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>17920: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>17918: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>17919: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17921: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierGrasdekkerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Grasdekker" substitutionGroup="nvdb:AbstraktGrasdekker" type="nvdb:GrasdekkerType">
+    <annotation>
+      <documentation>15: Grønne områder som i håndbok R610 (111) benvenes som "grasplen" eller "grasbakke". Disse områdene er parklike og inngår ikke som en del av kantklipp.</documentation>
+    </annotation>
+  </element>
+  <complexType name="GrasdekkerType">
+    <complexContent>
+      <extension base="nvdb:AbstraktGrasdekkerType">
+        <sequence>
+          <element minOccurs="0" name="type" type="nvdb:TypeGrasdekkerType">
+            <annotation>
+              <documentation>4129: Angir hvilken type vegobjektet er av</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="areal" type="integer">
+            <annotation>
+              <documentation>1354: Angir arealet av vegobjektet
+Enhet: Kvadratmeter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sluttdatoForGarantitid" type="date">
+            <annotation>
+              <documentation>10493: Angir sluttdato for garantitid</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10303: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>9983: Felt for ekstra informasjon, f.eks om det vokser andre planter inni gressarealet eller om det er satt ned løker/knoller</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11036: Referanse til prosjekt. Benyttes for å lettere kunne skille nye data fra eksisterende data i NVDB</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierGrasdekkerType">
+            <annotation>
+              <documentation>10874: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligGrasdekkerType">
+            <annotation>
+              <documentation>8784: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4723: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>8911: Gir flate/polygon som geometrisk avgrenser området</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="GrasdekkerPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Grasdekker"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TypeGrasdekkerType">
+    <annotation>
+      <documentation>4129: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeGrasdekkerEnumerationType nvdb:TypeGrasdekkerOtherType"/>
+  </simpleType>
+  <simpleType name="TypeGrasdekkerEnumerationType">
+    <annotation>
+      <documentation>4129: Angir hvilken type vegobjektet er av</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="grasplen">
+        <annotation>
+          <documentation>5090: Grasplen skal fremstå som en jevn og ensartet kortklipt grasflate, ev. som en del av et prydanlegg. Innslag av mose og ugras skal være minimalt, og ikke virke skjemmende på det visuelle inntrykket. Fra HB 111: "Grasplen skal binde sammen veg og omgivelser, samt skape grønne områder eller landskapsrom ved å framstå som en jevn og ensartet kortklipt grasflate, eventuelt som er en del av et prydanlegg. Høyden skal være mellom 5 - 12 cm"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grasbakke">
+        <annotation>
+          <documentation>5092: Grasbakke skal fremstå som en jevn og ensartet grasflate med innslag av blomstrende urter. Lavere skjøtselsnivå enn for plen og grasmark, med større toleranse for ugras og mose. Fra HB 111: "Grasbakke skal binde sammen veg og omgivelser, samt skape grønne områder eller landskapsrom ved å framstå som en jevn og ensartet grasflate med innslag av blomstrende urter. Høyden skal være mellom 10 og 25 cm."</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeGrasdekkerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGrasdekkerType">
+    <annotation>
+      <documentation>8784: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligGrasdekkerEnumerationType nvdb:VedlikeholdsansvarligGrasdekkerOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGrasdekkerEnumerationType">
+    <annotation>
+      <documentation>8784: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>11626: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18795: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19978: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18924: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>11624: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>11625: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17761: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligGrasdekkerOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

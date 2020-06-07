@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BelysningUndergangType">
+    <annotation>
+      <documentation>5276: Angir om det er belysning i undergangen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BelysningUndergangEnumerationType nvdb:BelysningUndergangOtherType"/>
+  </simpleType>
+  <simpleType name="BelysningUndergangEnumerationType">
+    <annotation>
+      <documentation>5276: Angir om det er belysning i undergangen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ja">
+        <annotation>
+          <documentation>7292: Ja</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nei">
+        <annotation>
+          <documentation>7293: Nei</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BelysningUndergangOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierUndergangType">
+    <annotation>
+      <documentation>11825: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierUndergangEnumerationType nvdb:EierUndergangOtherType"/>
+  </simpleType>
+  <simpleType name="EierUndergangEnumerationType">
+    <annotation>
+      <documentation>11825: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>19835: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>19840: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19838: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>19836: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>19837: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>19839: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierUndergangOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="GårUnderType">
+    <annotation>
+      <documentation>5271: Angir hva som er begrensning i høyde.  Hva vegen går under</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GårUnderEnumerationType nvdb:GårUnderOtherType"/>
+  </simpleType>
+  <simpleType name="GårUnderEnumerationType">
+    <annotation>
+      <documentation>5271: Angir hva som er begrensning i høyde.  Hva vegen går under</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="veg">
+        <annotation>
+          <documentation>7287: Veg</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jernbane">
+        <annotation>
+          <documentation>7286: Jernbane</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gangbru">
+        <annotation>
+          <documentation>7285: Gangbru</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bygning">
+        <annotation>
+          <documentation>7909: Bygning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="viltovergang">
+        <annotation>
+          <documentation>8176: Viltovergang</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="låvebru">
+        <annotation>
+          <documentation>8188: Låvebru</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GårUnderOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Undergang" substitutionGroup="nvdb:AbstraktUndergang" type="nvdb:UndergangType">
+    <annotation>
+      <documentation>452: Passasje for trafikk av ulik art (kjørende, gående, dyr) under bru eller mindre bygning.  Se også Tunnelløp og Høydegrensning</documentation>
+    </annotation>
+  </element>
+  <complexType name="UndergangType">
+    <complexContent>
+      <extension base="nvdb:AbstraktUndergangType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>5630: Gir navn til undergang</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gårUnder" type="nvdb:GårUnderType">
+            <annotation>
+              <documentation>5271: Angir hva som er begrensning i høyde.  Hva vegen går under</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="belysning" type="nvdb:BelysningUndergangType">
+            <annotation>
+              <documentation>5276: Angir om det er belysning i undergangen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="merknad" type="string">
+            <annotation>
+              <documentation>5284: Permanent merknad til aktuell forekomst</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10389: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierUndergangType">
+            <annotation>
+              <documentation>11825: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligUndergangType">
+            <annotation>
+              <documentation>8092: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4970: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="UndergangPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Undergang"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="VedlikeholdsansvarligUndergangType">
+    <annotation>
+      <documentation>8092: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligUndergangEnumerationType nvdb:VedlikeholdsansvarligUndergangOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligUndergangEnumerationType">
+    <annotation>
+      <documentation>8092: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10486: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18745: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19953: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18874: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10564: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10642: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17736: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligUndergangOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="GjentakelsesintervallType">
+    <annotation>
+      <documentation>10679: Angir hvor ofte det statistisk sett oppstår skred eller skredfare slik at  veg må stenges.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:GjentakelsesintervallEnumerationType nvdb:GjentakelsesintervallOtherType"/>
+  </simpleType>
+  <simpleType name="GjentakelsesintervallEnumerationType">
+    <annotation>
+      <documentation>10679: Angir hvor ofte det statistisk sett oppstår skred eller skredfare slik at  veg må stenges.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="flereGangerPerMåned">
+        <annotation>
+          <documentation>17242: Flere ganger per måned</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flereGangerPerÅr">
+        <annotation>
+          <documentation>17244: Flere ganger per år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2GangerÅrlig">
+        <annotation>
+          <documentation>17243: 1-2 ganger årlig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hver2til5År">
+        <annotation>
+          <documentation>17245: Hver 2.-5. år</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sjeldnereEnnHvert5År">
+        <annotation>
+          <documentation>17246: Sjeldnere enn hvert 5. år</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="GjentakelsesintervallOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredtypeType">
+    <annotation>
+      <documentation>10678: Angir vanligste skredtype som gir skred på veg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkredtypeEnumerationType nvdb:SkredtypeOtherType"/>
+  </simpleType>
+  <simpleType name="SkredtypeEnumerationType">
+    <annotation>
+      <documentation>10678: Angir vanligste skredtype som gir skred på veg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stein">
+        <annotation>
+          <documentation>17234: Stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jordLøsmasse">
+        <annotation>
+          <documentation>17235: Jord/løsmasse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="snø">
+        <annotation>
+          <documentation>17236: Snø</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="is">
+        <annotation>
+          <documentation>17237: Is</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flomskred">
+        <annotation>
+          <documentation>17238: Flomskred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="isStein">
+        <annotation>
+          <documentation>17239: Is/stein</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sørpeskred">
+        <annotation>
+          <documentation>17240: Sørpeskred</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utglidningAv_Ved_Eg">
+        <annotation>
+          <documentation>17241: Utglidning av v eg</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkredtypeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="SkredutsattVeg" substitutionGroup="nvdb:AbstraktSkredutsattVeg" type="nvdb:SkredutsattVegType">
+    <annotation>
+      <documentation>883: Vegstrekning som periodevis er stengt av skred eller skredfare og som er avgrenset av bommer eller annet sperremateriell.</documentation>
+    </annotation>
+  </element>
+  <complexType name="SkredutsattVegType">
+    <complexContent>
+      <extension base="nvdb:AbstraktSkredutsattVegType">
+        <sequence>
+          <element minOccurs="0" name="navn" type="string">
+            <annotation>
+              <documentation>10676: Gjenkjennbart navn på strekningen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skredtype" type="nvdb:SkredtypeType">
+            <annotation>
+              <documentation>10678: Angir vanligste skredtype som gir skred på veg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="gjentakelsesintervall" type="nvdb:GjentakelsesintervallType">
+            <annotation>
+              <documentation>10679: Angir hvor ofte det statistisk sett oppstår skred eller skredfare slik at  veg må stenges.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>10680: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="SkredutsattVegPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:SkredutsattVeg"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

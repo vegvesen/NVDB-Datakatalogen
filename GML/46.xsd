@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Avkjørsel" substitutionGroup="nvdb:AbstraktAvkjørsel" type="nvdb:AvkjørselType">
+    <annotation>
+      <documentation>46: Kjørbar tilknytning til vegnettet for en eiendom eller et begrenset antall eiendommer (1).</documentation>
+    </annotation>
+  </element>
+  <complexType name="AvkjørselType">
+    <complexContent>
+      <extension base="nvdb:AbstraktAvkjørselType">
+        <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeType">
+            <annotation>
+              <documentation>1256: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="primæraktivitet" type="nvdb:PrimæraktivitetType">
+            <annotation>
+              <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="avstandPersonaktivitet" type="integer">
+            <annotation>
+              <documentation>1823: Angir korteste avstand fra en avkjørsel til personaktivitet
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="stigning" type="double">
+            <annotation>
+              <documentation>1825: Angir stigning på vegobjekt
+Enhet: Forholdstall</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bredde" type="double">
+            <annotation>
+              <documentation>1682: Angir fast bredde av vegobjektet, dvs bredde av vegen før utvidelsene ifbm selve krysset.
+Enhet: Meter</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="dreneringsforhold" type="nvdb:DreneringsforholdType">
+            <annotation>
+              <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="saksnummer" type="string">
+            <annotation>
+              <documentation>1822: Angir saksnummer til sak i vegeiers arkivsystem som omhandler avkjørselen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtak" type="nvdb:VedtakType">
+            <annotation>
+              <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedtaksdato" type="date">
+            <annotation>
+              <documentation>11444: Dato da det sist ble gjort vedtak i tilknytning til avkjørsel</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kontrollertOgGodkjentdato" type="date">
+            <annotation>
+              <documentation>11445: Dato da ferdig avkjørsel ble kontrollert og godkjent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10267: Angir hvilket år avkjørsel ble godkjent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>11566: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierAvkjørselType">
+            <annotation>
+              <documentation>7993: Angir hvem som er eier av vegobjektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligAvkjørselType">
+            <annotation>
+              <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4753: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="AvkjørselPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Avkjørsel"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="BruksområdeType">
+    <annotation>
+      <documentation>1256: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeEnumerationType nvdb:BruksområdeOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeEnumerationType">
+    <annotation>
+      <documentation>1256: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="bolig">
+        <annotation>
+          <documentation>3164: Bolig</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hytte">
+        <annotation>
+          <documentation>3165: Hytte</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="gardsbruk">
+        <annotation>
+          <documentation>3166: Gardsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="dyrkamarkJordbruk">
+        <annotation>
+          <documentation>3167: Dyrkamark/jordbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skogSkogbruk">
+        <annotation>
+          <documentation>3168: Skog/skogbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forretning">
+        <annotation>
+          <documentation>3169: Forretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="industri">
+        <annotation>
+          <documentation>3170: Industri</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="service">
+        <annotation>
+          <documentation>3171: Service</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skole">
+        <annotation>
+          <documentation>3172: Skole</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fritidsaktivitet">
+        <annotation>
+          <documentation>3173: Fritidsaktivitet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="naust">
+        <annotation>
+          <documentation>3174: Naust</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="DreneringsforholdType">
+    <annotation>
+      <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel</documentation>
+    </annotation>
+    <union memberTypes="nvdb:DreneringsforholdEnumerationType nvdb:DreneringsforholdOtherType"/>
+  </simpleType>
+  <simpleType name="DreneringsforholdEnumerationType">
+    <annotation>
+      <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>3598: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>3607: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="DreneringsforholdOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierAvkjørselType">
+    <annotation>
+      <documentation>7993: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:EierAvkjørselEnumerationType nvdb:EierAvkjørselOtherType"/>
+  </simpleType>
+  <simpleType name="EierAvkjørselEnumerationType">
+    <annotation>
+      <documentation>7993: Angir hvem som er eier av vegobjektet.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>10259: Stat, Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>18557: Stat, Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>10721: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10323: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10387: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17576: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierAvkjørselOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PrimæraktivitetType">
+    <annotation>
+      <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg</documentation>
+    </annotation>
+    <union memberTypes="nvdb:PrimæraktivitetEnumerationType nvdb:PrimæraktivitetOtherType"/>
+  </simpleType>
+  <simpleType name="PrimæraktivitetEnumerationType">
+    <annotation>
+      <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1til2leiligheter">
+        <annotation>
+          <documentation>3175: 1-2leiligheter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3til5Leiligheter">
+        <annotation>
+          <documentation>3176: 3-5 leiligheter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="6til10Leiligheter">
+        <annotation>
+          <documentation>3177: 6-10 leiligheter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over10Leiligheter">
+        <annotation>
+          <documentation>3178: &gt; 10 leiligheter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1til2Hytter">
+        <annotation>
+          <documentation>3179: 1-2 hytter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="3til5Hytter">
+        <annotation>
+          <documentation>3180: 3-5 hytter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="over5Hytter">
+        <annotation>
+          <documentation>3181: &gt; 5 hytter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1GardsbrukIDrift">
+        <annotation>
+          <documentation>3182: 1 gardsbruk i drift</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="2til3GardsbrukIDrift">
+        <annotation>
+          <documentation>3183: 2-3 gardsbruk i drift</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nedlagtGardsbruk">
+        <annotation>
+          <documentation>3184: Nedlagt gardsbruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="jordGrustak">
+        <annotation>
+          <documentation>3185: Jord/grustak</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tømmeropplagringVelteplass">
+        <annotation>
+          <documentation>3186: Tømmeropplagring/velteplass</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="grustakSteinbrudd">
+        <annotation>
+          <documentation>3187: Grustak/steinbrudd</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="litenForretning">
+        <annotation>
+          <documentation>3188: Liten forretning</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="middelsLandhandel">
+        <annotation>
+          <documentation>3189: Middels landhandel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="stortForretningssenter">
+        <annotation>
+          <documentation>3190: Stort forretningssenter</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kioskGatekjøkken">
+        <annotation>
+          <documentation>3191: Kiosk/gatekjøkken</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hotellUnder50Plasser">
+        <annotation>
+          <documentation>3192: Hotell &lt; 50 plasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hotellOver50Plasser">
+        <annotation>
+          <documentation>3193: Hotell &gt; 50 plasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="bensinstasjon_Bilverksted">
+        <annotation>
+          <documentation>3194: Bensinstasjon, bilverksted</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sykehusUnder50Plasser">
+        <annotation>
+          <documentation>3195: Sykehus &lt; 50 plasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="sykehusOver50Plasser">
+        <annotation>
+          <documentation>3196: Sykehus &gt; 50 plasser</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utfartsplass_Skitrekk">
+        <annotation>
+          <documentation>3197: Utfartsplass, skitrekk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fritid_Kino">
+        <annotation>
+          <documentation>3198: Fritid, kino</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="lekeplassLøkke">
+        <annotation>
+          <documentation>3199: Lekeplass/løkke</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PrimæraktivitetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligAvkjørselType">
+    <annotation>
+      <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligAvkjørselEnumerationType nvdb:VedlikeholdsansvarligAvkjørselOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligAvkjørselEnumerationType">
+    <annotation>
+      <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>10450: Statens vegvesen</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>18675: Nye Veier</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>19926: Fylkeskommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>18804: OPS</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>10528: Kommune</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>10606: Privat</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>17709: Uavklart</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligAvkjørselOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedtakType">
+    <annotation>
+      <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:VedtakEnumerationType nvdb:VedtakOtherType"/>
+  </simpleType>
+  <simpleType name="VedtakEnumerationType">
+    <annotation>
+      <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="varigTillatelse">
+        <annotation>
+          <documentation>17225: Varig tillatelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="midlertidigTillatelse">
+        <annotation>
+          <documentation>17224: Midlertidig tillatelse</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="endretBruk">
+        <annotation>
+          <documentation>17227: Endret bruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="utvidetBruk">
+        <annotation>
+          <documentation>17226: Utvidet bruk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avslag">
+        <annotation>
+          <documentation>19469: Ikke tillatelse til å etablere avkjørsel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="avslagEtterKlage">
+        <annotation>
+          <documentation>19470: Avslag på nytt etter klage på første avslag.</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedtakOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
+  <include schemaLocation="abstraktNVDB.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="SkadetypeTilstandSkade_SkiltpunktType">
+    <annotation>
+      <documentation>1229: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SkadetypeTilstandSkade_SkiltpunktEnumerationType nvdb:SkadetypeTilstandSkade_SkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_SkiltpunktEnumerationType">
+    <annotation>
+      <documentation>1229: Angir hvilken type skade det er tale om</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="brøyteskade">
+        <annotation>
+          <documentation>3501: Brøyteskade</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="hærverk">
+        <annotation>
+          <documentation>2666: Hærverk</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="påkjørsel">
+        <annotation>
+          <documentation>2658: Påkjørsel</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="storNedsmussing">
+        <annotation>
+          <documentation>3504: Stor nedsmussing</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="skjevhet">
+        <annotation>
+          <documentation>3833: Skjevhet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="defektUteAvFunksjon">
+        <annotation>
+          <documentation>2646: Defekt/ute av funksjon</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SkadetypeTilstandSkade_SkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="TilstandSkade_Skiltpunkt" substitutionGroup="nvdb:AbstraktTilstandSkade_Skiltpunkt" type="nvdb:TilstandSkade_SkiltpunktType">
+    <annotation>
+      <documentation>276: Gir informasjon om tilstand og eventuell skade på skiltpunkt</documentation>
+    </annotation>
+  </element>
+  <complexType name="TilstandSkade_SkiltpunktType">
+    <complexContent>
+      <extension base="nvdb:AbstraktTilstandSkade_SkiltpunktType">
+        <sequence>
+          <element minOccurs="0" name="tilstand" type="nvdb:TilstandTilstandSkade_SkiltpunktType">
+            <annotation>
+              <documentation>2270: Angir tilstand til vegobjektet</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_SkiltpunktType">
+            <annotation>
+              <documentation>1229: Angir hvilken type skade det er tale om</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datoKontrollert" type="date">
+            <annotation>
+              <documentation>8780: Angir dato for når kontroll ble foretatt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tiltak" type="nvdb:TiltakTilstandSkade_SkiltpunktType">
+            <annotation>
+              <documentation>2058: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="test_Tilstandsindeks" type="integer">
+            <annotation>
+              <documentation>9836: Angir tilstand. Til testformål
+Enhet: Prosent</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+            <annotation>
+              <documentation>7856: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4882: Gir punkt som geometrisk representerer objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TilstandSkade_SkiltpunktPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:TilstandSkade_Skiltpunkt"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TilstandTilstandSkade_SkiltpunktType">
+    <annotation>
+      <documentation>2270: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TilstandTilstandSkade_SkiltpunktEnumerationType nvdb:TilstandTilstandSkade_SkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_SkiltpunktEnumerationType">
+    <annotation>
+      <documentation>2270: Angir tilstand til vegobjektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="ok">
+        <annotation>
+          <documentation>4129: Ok</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="tiltaksbehov">
+        <annotation>
+          <documentation>4130: Tiltaksbehov</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mangler">
+        <annotation>
+          <documentation>4131: Mangler</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="funksjonell">
+        <annotation>
+          <documentation>4633: Funksjonell</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TilstandTilstandSkade_SkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltpunktType">
+    <annotation>
+      <documentation>2058: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TiltakTilstandSkade_SkiltpunktEnumerationType nvdb:TiltakTilstandSkade_SkiltpunktOtherType"/>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltpunktEnumerationType">
+    <annotation>
+      <documentation>2058: Angir hvilket tiltak som bør foretas på vegobjektet som skade er koplet mot</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="skiftes">
+        <annotation>
+          <documentation>3488: Skiftes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="flyttes">
+        <annotation>
+          <documentation>3494: Flyttes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fjernes">
+        <annotation>
+          <documentation>3709: Fjernes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="forsterkes">
+        <annotation>
+          <documentation>3496: Forsterkes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="rettes">
+        <annotation>
+          <documentation>3492: Rettes</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="siktrydding">
+        <annotation>
+          <documentation>3498: Siktrydding</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TiltakTilstandSkade_SkiltpunktOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>
