@@ -11,12 +11,44 @@ option explicit
 ' Purpose: Lager nivå med abstrakte klasser i SOSI-NVDB-modellen, for å lette implementering i GML
 ' Date: 2020-06-04
 
+dim absCon as EA.Connector
+dim absAssEl as EA.Element
+dim assEl as EA.Element
+
+
+Sub updateAssociationPropertiesFromNonAbstract()
+	'Oppdaterer egenskaper på en assosiasjon til en abstrakt klasse fra tilsvarende assosiasjon til konkret klasse
+	absCon.Type = con.Type
+	absCon.Subtype = con.Subtype
+
+	'Angi kardinaliteter 
+	absCon.ClientEnd.Visibility = con.ClientEnd.Visibility
+	absCon.ClientEnd.Cardinality = con.ClientEnd.Cardinality
+	absCon.SupplierEnd.Visibility = con.SupplierEnd.Visibility
+	absCon.SupplierEnd.Cardinality = con.SupplierEnd.Cardinality
+
+	'Rollenavn på assosiasjonen
+	If absCon.ClientID = element.ElementID Then
+		absCon.ClientEnd.Role = "" 
+		absCon.ClientEnd.Navigable = "Non-Navigable"
+		absCon.SupplierEnd.Role = "assosiert" & assEl.Name
+		absCon.SupplierEnd.Navigable = "Navigable"
+	Else
+		absCon.SupplierEnd.Role = "" 
+		absCon.SupplierEnd.Navigable = "Non-Navigable"
+		absCon.ClientEnd.Role = "assosiert" & assEl.Name
+		absCon.ClientEnd.Navigable = "Navigable"
+	End If
+	absCon.Update()
+end sub
 
 sub abstractClasses()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
 	Repository.CreateOutputTab "Error"
 	Repository.ClearOutput "Error"
+
+	set ePIF = Repository.GetProjectInterface
 
 	'Hent hovedpakken for NVDB Datakatalogen i SOSI-modellregister
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
@@ -30,6 +62,16 @@ sub abstractClasses()
 	For each absElement in absPck.Elements
 		Repository.WriteOutput "Script", Now & " Abstrakt klasse: " & absElement.Name &  " (" & absElement.Alias & ")", 0 
 		lstAbsCls.Add absElement.Alias, absElement.ElementGUID
+		'Sletter alle assosiasjoner mellom abstrakte klasser
+		for idxC = 0 to absElement.Connectors.Count -1
+			set con = absElement.Connectors.GetAt(idxC)
+			if con.type = "Aggregation" or con.Type = "Association" then
+				Repository.WriteOutput "Script", Now & " Sletter assosiasjon: " & con.Type & " " & con.ClientID &  " - " & con.SupplierID, 0 
+				absElement.Connectors.DeleteAt idxC, false
+			end if	
+		next
+		absElement.Connectors.Refresh
+
 	Next
 
 	dim keyIndex
@@ -37,8 +79,7 @@ sub abstractClasses()
 	dim msgAnsw
 
 	Repository.WriteOutput "Script", Now & " Hovedpakke: " & pkSOSINVDB.Name & " (" & pkSOSINVDB.PackageGUID & ")", 0 
-	
-	'Kjører gjennom alle pakker 
+	'Kjører gjennom alle pakker og lager abstrakte vegobjekttyper med arv til konkrete vegobjekttyper
 	for each pkOT in pkSOSINVDB.Packages	
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
 			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
@@ -47,7 +88,7 @@ sub abstractClasses()
 				if uCase(element.Stereotype) = "FEATURETYPE" then
 					Repository.WriteOutput "Script", Now & " Vegobjekttype: " & element.Name, 0 
 					if not lstAbsCls.Contains(element.Alias) then 
-						'Lager abstrakt klasse som skal være bærer av assosiasjonene
+						'Lager abstrakt klasse for elementet
 						set absElement = absPck.Elements.AddNew("Abstrakt" & element.Name, "Class")
 						Repository.WriteOutput "Script", Now & " Lager abstrakt klasse: " & absElement.Name, 0 
 						absElement.Alias = element.Alias
@@ -64,22 +105,14 @@ sub abstractClasses()
 						Repository.WriteOutput "Script", Now & " Abstrakt klasse eksisterer: " & absElement.Name, 0					
 					end if
 
-					'Arv fra abstrakt klasse til opprinnelig klasse + liste over assosiasjoner
+					'Arv fra abstrakt klasse til opprinnelig klasse 
 					dim lstAss
 					Set lstAss = CreateObject("System.Collections.SortedList")
-					dim assEl as EA.Element
 					dim inherits
 					inherits = false					
-					for each con in absElement.Connectors
-						if con.type = "Generalization" then
+					for each con in element.Connectors
+						if con.type = "Generalization" or con.type = "Generalisation" then
 							if con.SupplierID = absElement.ElementID then inherits = true
-						else
-							if con.ClientID <> absElement.ElementID then 
-								set assEl = Repository.GetElementByID(con.ClientID)
-							else
-								set assEl = Repository.GetElementByID(con.SupplierID)								
-							end if
-							lstAss.Add assEl.Alias, assEl.ElementGUID
 						end if	
 					next
 					If not inherits then 
@@ -91,49 +124,81 @@ sub abstractClasses()
 					else
 						Repository.WriteOutput "Script", Now & " Arv eksisterer fra abstrakt klasse " & absElement.Name & " til vegobjekttypen " & element.Name, 0					
 					end if
-					
-					'Flytter assosiasjoner fra opprinnelig klasse til abstrakt klasse
-					dim iC 
-					for iC = 0 to element.Connectors.Count - 1
-						set con = element.Connectors.GetAt(iC)
-						if (con.type = "Aggregation" or con.Type = "Association") then
-							if con.ClientID <> element.ElementID then 
-								set assEl = Repository.GetElementByID(con.ClientID)
-								if not lstAss.Contains(assEl.Alias) then 
-									Repository.WriteOutput "Script", Now & " Legger til assosiasjon mellom abstrakt klasse " & absElement.Name & " og  vegobjekttypen " & assEl.Name, 0
-									con.SupplierID = absElement.ElementID
-									con.Update
-								else
-									'Sletter overføldig assosiasjon
-									Repository.WriteOutput "Script", Now & " Assosiasjon eksisterer mellom abstrakt klasse " & absElement.Name & " og  vegobjekttypen " & assEl.Name, 0
-									element.Connectors.DeleteAt iC, false
-								end if	
-							else
-								set assEl = Repository.GetElementByID(con.SupplierID)								
-								if not lstAss.Contains(assEl.Alias) then 
-									con.ClientID = absElement.ElementID
-									Repository.WriteOutput "Script", Now & " Legger til assosiasjon mellom abstrakt klasse " & absElement.Name & " og  vegobjekttypen " & assEl.Name, 0
-									con.Update
-								else
-									Repository.WriteOutput "Script", Now & " Assosiasjon eksisterer mellom abstrakt klasse " & absElement.Name & " og  vegobjekttypen " & assEl.Name, 0
-									element.Connectors.DeleteAt iC, false
-								end if 
-							end if
-						end if	
-					next
-					element.Connectors.Refresh
-						
-					'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-					'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
-					'if msgAnsw = 2 then
-					'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
-					'	exit sub
-					'end if	
-		
 				end if
 			next
 		end if
 	next
+	
+	'Ny løkke for å legge til assosiasjoner til abstrakte vegobjekttyper
+	'Kjører gjennom alle pakker og lager abstrakte vegobjekttyper med arv til konkrete vegobjekttyper
+	for each pkOT in pkSOSINVDB.Packages	
+		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
+			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
+			Repository.WriteOutput "Script", Now & " Assosiasjoner til abstrakte klasser for vegobjekttype i pakken " & pkOT.Name, 0 
+			for each element in pkOT.Elements
+				if uCase(element.Stereotype) = "FEATURETYPE" then
+					Repository.WriteOutput "Script", Now & " Vegobjekttype: " & element.Name, 0 
+					for each con in element.Connectors
+						if (con.type = "Aggregation" or con.Type = "Association") then
+							'Lag ny assosiasjon 
+							set absCon = element.Connectors.AddNew("",con.Type)
+							if con.ClientID = element.ElementID then 
+								set assEl = Repository.GetElementByID(con.SupplierID)
+							else
+								set assEl = Repository.GetElementByID(con.ClientID)
+							end if
+							'Finn assosiert element sin abstrakte klasse				
+							keyIndex = lstAbsCls.IndexofKey(assEl.Alias)
+							guid = lstAbsCls.GetByIndex(keyIndex)
+							set absAssEl = Repository.GetElementByGuid(guid)
+							'Legg til assosiert abstrakt klasse som motsatt ende på assosiasjonen
+							Repository.WriteOutput "Script", Now & " Legger til assosiasjon mellom vegobjekttypen " & element.Name & " og den abstrakte vegobjekttypen " & absAssEl.Name, 0
+							if con.ClientID = element.ElementID then 
+								absCon.ClientID = element.ElementID
+								absCon.SupplierID = absAssEl.ElementID
+							else
+								absCon.ClientID = absAssEl.ElementID
+								absCon.SupplierID = element.ElementID
+							end if
+							updateAssociationPropertiesFromNonAbstract
+							absCon.Update
+						end if	
+					next
+					element.Connectors.Refresh
+				end if
+			next
+		end if
+	next
+
+	'Ny løkke for å slette assosiasjoner mellom konkrete klasser
+	for each pkOT in pkSOSINVDB.Packages	
+		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
+			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
+			Repository.WriteOutput "Script", Now & " Sletter assosiasjoner til konkrete klasser for vegobjekttype i pakken " & pkOT.Name, 0 
+			for each element in pkOT.Elements
+				if uCase(element.Stereotype) = "FEATURETYPE" then
+					Repository.WriteOutput "Script", Now & " Vegobjekttype: " & element.Name, 0 
+					for idxC = 0 to element.Connectors.Count - 1
+						set con = element.Connectors.GetAt(idxC)
+						if (con.type = "Aggregation" or con.Type = "Association") then
+							if con.ClientID = element.ElementID then 
+								set assEl = Repository.GetElementByID(con.SupplierID)
+							else
+								set assEl = Repository.GetElementByID(con.ClientID)
+							end if
+							if assEl.Abstract = 0 then
+								'Assosiasjon til konkret klasse, slettes
+								element.Connectors.DeleteAt idxC, false
+							end if	
+						end if	
+					next
+					element.Connectors.Refresh
+				end if
+			next
+		end if
+	next
+	
+	
 
 	'Løkke for assosiasjonsdiagrammer. Erstatter alle konkrete klasser med abstrakte klasser
 	Repository.WriteOutput "Script", Now & "  ", 0 
@@ -144,17 +209,42 @@ sub abstractClasses()
 			for each eDiagram in pkOT.Diagrams
 				if eDiagram.Name = pkOT.Name & " Assosiasjoner" then
 					Repository.WriteOutput "Script", Now & " Diagram: " & eDiagram.Name, 0 
+					dim concreteCls
+					concreteCls = false
 					for each diagramObject in eDiagram.DiagramObjects
 						set element = Repository.GetElementByID(diagramObject.ElementID)
-						if lstAbsCls.Contains(element.Alias) then 
+						if element.Alias <> pkot.Alias and lstAbsCls.Contains(element.Alias) then 
 							keyIndex = lstAbsCls.IndexofKey(element.Alias)
 							guid = lstAbsCls.GetByIndex(keyIndex)
 							set absElement = Repository.GetElementByGuid(guid)
-							Repository.WriteOutput "Script", Now & " Erstatter konkret klasse med abstrakt klasse: " & absElement.Name, 0		
-							diagramObject.ElementID = absElement.ElementID
-							diagramObject.Update
+							if absElement.ElementID <> element.ElementID then 
+								Repository.WriteOutput "Script", Now & " Erstatter konkret klasse med abstrakt klasse: " & absElement.Name, 0		
+								diagramObject.ElementID = absElement.ElementID
+								diagramObject.Update
+							end if	
+						end if
+						if element.Alias = pkOT.Alias and element.Abstract = 0 then
+							'Den konkrete hovedklassen finnes i diagrammet
+							Repository.WriteOutput "Script", Now & " Konkret hovedklasse funnet i diagrammet: " & element.Name, 0		
+							concreteCls = true
+						else
+							setSize diagramObject, 70, 200
 						end if
 					next
+					if not concreteCls then
+						'Den konkrete hovedklassen finnes ikke i diagrammet. Legger til. 
+						Repository.WriteOutput "Script", Now & " Konkret hovedklasse mangler i diagrammet", 0		
+						for each element in pkOT.Elements
+							if UCase(element.Stereotype) = "FEATURETYPE" then
+								Repository.WriteOutput "Script", Now & " Legger til konkret hovedklasse: " & element.Name, 0		
+								set diagramObject = eDiagram.DiagramObjects.AddNew("", "")
+								diagramObject.ElementId = element.ElementID
+								diagramObject.Update
+							end if
+						next			
+					end if
+					ePIF.LayoutDiagramEx eDiagram.DiagramGUID, 4, 4, 20, 20, True
+					repository.CloseDiagram(eDiagram.DiagramID)
 				end if
 			next
 		end if	

@@ -48,7 +48,7 @@ dim msgAnsw
 				createSCmodel
 				'Importerer Abstrakte klasser-pakken til modellen ShapeChange
 				importAbstrakteKlasser
-				set tagVal = absClasses.Element.TaggedValues.AddNew("xsdDocument", "abstraktNVDB.xsd")
+				set tagVal = absClasses.Element.TaggedValues.AddNew("xsdDocument", "AbstraktNVDB.xsd")
 				tagVal.Update				
 
 				'Importerer aktuell objekttype sin pakke til modellen ShapeChange

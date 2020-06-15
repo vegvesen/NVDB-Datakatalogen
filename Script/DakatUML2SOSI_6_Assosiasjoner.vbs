@@ -114,11 +114,13 @@ sub updateAssociations()
 	Repository.WriteOutput "Script", Now & " Lager hjelpeliste over alle feature types i SOSI-modellen", 0 
 	For each pkOT in pkSOSINVDB.Packages
 		Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
-		for each element in pkOT.Elements
-			if UCase(element.Stereotype) = "FEATURETYPE" then
-				lstSOSI.Add element.Alias, element.ElementGUID
-			end if	
-		Next	
+		if pkOT.Name <> "_AbstrakteKlasser" then
+			for each element in pkOT.Elements
+				if UCase(element.Stereotype) = "FEATURETYPE" then
+					lstSOSI.Add element.Alias, element.ElementGUID
+				end if	
+			Next	
+		end if
 	Next
 	
 	dim keyIndex
@@ -128,91 +130,93 @@ sub updateAssociations()
 	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
 	Repository.WriteOutput "Script", Now & " Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen", 0 
 	For each pkOT in pkSOSINVDB.Packages
-		'Finner tilsvarende pakke i NVDB
-		if lstNVDBpck.Contains(pkOT.Alias) then 
-			'Henter NVDB-pakke vha listeinformasjon
-			keyIndex = lstNVDBpck.IndexofKey(pkOT.Alias)
-			guid = lstNVDBpck.GetByIndex(keyIndex)
-			set pkOT_NVDB = Repository.GetPackageByGuid(guid)
-			Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
-			'Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
-		else
-			exit sub
-		end if
-
-		For each element in pkOT.Elements
-			If UCase(element.Stereotype) = "FEATURETYPE" then
-				'Finner tilsvarende objekttype i NVDB
-				set elNVDB = getElementByAlias(pkOT_NVDB, element.Alias)
-				'Lag liste over alle relaterte alias i NVDB
-				Set lstAlias = CreateObject("System.Collections.SortedList")
-				For each con in elNVDB.Connectors
-					If con.SupplierID = elNVDB.ElementID then 
-						set elementB = Repository.GetElementByID(con.ClientID)
-						lstAlias.Add elementB.Alias,con.ConnectorGUID				
-					end if	
-				Next
-				
-				Repository.WriteOutput "Script", Now & " Oppdatering assosiasjoner for feature type " & element.Name &  " (" & element.Alias & ")", 0 
-				'Repository.WriteOutput "Script", Now & " NVDB-vegobjekttype: " & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
-				'Spoler gjennom alle eksisterende assosiasjoner for klassen og sjekker om den finnes i NVDB
-				For idxP = 0 to element.Connectors.Count - 1 
-					set con= element.Connectors.GetAt(idxP)
-					If con.SupplierID = element.ElementID then 
-						set elementB = Repository.GetElementByID(con.ClientID)
-						if lstAlias.Contains(elementB.Alias) then 
-							'Finnes: Oppdaterer properties: Roller og multiplisitet fra NVDB
-							Repository.WriteOutput "Script", Now & " Assosiasjon til feature type " & elementB.Name &  " (" & elementB.Alias & ") funnet i NVDB", 0 		
-							'Get connector from alias list
-							keyIndex = lstAlias.IndexofKey(elementB.Alias)
-							guid = lstAlias.GetByIndex(keyIndex)
-							set conNVDB = Repository.GetConnectorByGuid(guid)
-							updateAssociationProperties
-						else	
-							'Finnes ikke: Sletter
-							Repository.WriteOutput "Endringer", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes ikke i NVDB, sletter", 0 
-							element.Connectors.DeleteAt idxP, False
-						end if	
-					end if	
-				Next
-				element.Connectors.Refresh
-				
-				'Lag liste over alle relaterte alias i SOSI
-				Set lstAlias = CreateObject("System.Collections.SortedList")
-				For each con in element.Connectors
-					If con.SupplierID = element.ElementID then 
-						set elementB = Repository.GetElementByID(con.ClientID)
-						lstAlias.Add elementB.Alias,con.ConnectorGUID				
-					end if	
-				Next
-				
-				'Spoler gjennom alle assosiasjoner for tilsvarende objekttype i NVDB og sjekker om den finnes i SOSI
-				For each conNVDB in elNVDB.Connectors
-					If conNVDB.SupplierID = elNVDB.ElementID then 
-						set elementB = Repository.GetElementByID(conNVDB.ClientID)
-						if lstAlias.Contains(elementB.Alias) then 
-							'Finnes: Ingen tiltak
-							Repository.WriteOutput "Script", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes i SOSI", 0 
-						else	
-							'Finnes ikke: Oppretter og oppdaterer properties
-							Repository.WriteOutput "Endringer", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes ikke i SOSI, oppretter", 0 
-							if lstSOSI.Contains(elementB.Alias) then 
-								'Repository.WriteOutput "Endringer", Now & " Noen hjemme?", 0 
-								set con = element.Connectors.AddNew("", conNVDB.Type)
-								con.SupplierID = element.ElementID
-								'Finn SOSI-element som skal assosieres ut i fra alias i lstSOSI
-								keyIndex = lstSOSI.IndexofKey(elementB.Alias)
-								guid = lstSOSI.GetByIndex(keyIndex)
-								set elementB = Repository.GetElementByGuid(guid)
-								con.ClientID = elementB.ElementID
-								con.Update
-								updateAssociationProperties
-							end if						
-						end if
-					end if	
-				Next								
+		if pkOT.Name <> "_AbstrakteKlasser" then
+			'Finner tilsvarende pakke i NVDB
+			if lstNVDBpck.Contains(pkOT.Alias) then 
+				'Henter NVDB-pakke vha listeinformasjon
+				keyIndex = lstNVDBpck.IndexofKey(pkOT.Alias)
+				guid = lstNVDBpck.GetByIndex(keyIndex)
+				set pkOT_NVDB = Repository.GetPackageByGuid(guid)
+				Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
+				'Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
+			else
+				exit sub
 			end if
-		Next
+
+			For each element in pkOT.Elements
+				If UCase(element.Stereotype) = "FEATURETYPE" then
+					'Finner tilsvarende objekttype i NVDB
+					set elNVDB = getElementByAlias(pkOT_NVDB, element.Alias)
+					'Lag liste over alle relaterte alias i NVDB
+					Set lstAlias = CreateObject("System.Collections.SortedList")
+					For each con in elNVDB.Connectors
+						If con.SupplierID = elNVDB.ElementID then 
+							set elementB = Repository.GetElementByID(con.ClientID)
+							lstAlias.Add elementB.Alias,con.ConnectorGUID				
+						end if	
+					Next
+					
+					Repository.WriteOutput "Script", Now & " Oppdatering assosiasjoner for feature type " & element.Name &  " (" & element.Alias & ")", 0 
+					'Repository.WriteOutput "Script", Now & " NVDB-vegobjekttype: " & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
+					'Spoler gjennom alle eksisterende assosiasjoner for klassen og sjekker om den finnes i NVDB
+					For idxP = 0 to element.Connectors.Count - 1 
+						set con= element.Connectors.GetAt(idxP)
+						If con.SupplierID = element.ElementID then 
+							set elementB = Repository.GetElementByID(con.ClientID)
+							if lstAlias.Contains(elementB.Alias) then 
+								'Finnes: Oppdaterer properties: Roller og multiplisitet fra NVDB
+								Repository.WriteOutput "Script", Now & " Assosiasjon til feature type " & elementB.Name &  " (" & elementB.Alias & ") funnet i NVDB", 0 		
+								'Get connector from alias list
+								keyIndex = lstAlias.IndexofKey(elementB.Alias)
+								guid = lstAlias.GetByIndex(keyIndex)
+								set conNVDB = Repository.GetConnectorByGuid(guid)
+								updateAssociationProperties
+							else	
+								'Finnes ikke: Sletter
+								Repository.WriteOutput "Endringer", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes ikke i NVDB, sletter", 0 
+								element.Connectors.DeleteAt idxP, False
+							end if	
+						end if	
+					Next
+					element.Connectors.Refresh
+					
+					'Lag liste over alle relaterte alias i SOSI
+					Set lstAlias = CreateObject("System.Collections.SortedList")
+					For each con in element.Connectors
+						If con.SupplierID = element.ElementID then 
+							set elementB = Repository.GetElementByID(con.ClientID)
+							lstAlias.Add elementB.Alias,con.ConnectorGUID				
+						end if	
+					Next
+					
+					'Spoler gjennom alle assosiasjoner for tilsvarende objekttype i NVDB og sjekker om den finnes i SOSI
+					For each conNVDB in elNVDB.Connectors
+						If conNVDB.SupplierID = elNVDB.ElementID then 
+							set elementB = Repository.GetElementByID(conNVDB.ClientID)
+							if lstAlias.Contains(elementB.Alias) then 
+								'Finnes: Ingen tiltak
+								Repository.WriteOutput "Script", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes i SOSI", 0 
+							else	
+								'Finnes ikke: Oppretter og oppdaterer properties
+								Repository.WriteOutput "Endringer", Now & " Assosiasjon fra " & element.Name &  " (" & element.Alias & ") til feature type " & elementB.Name &  " (" & elementB.Alias & ") finnes ikke i SOSI, oppretter", 0 
+								if lstSOSI.Contains(elementB.Alias) then 
+									'Repository.WriteOutput "Endringer", Now & " Noen hjemme?", 0 
+									set con = element.Connectors.AddNew("", conNVDB.Type)
+									con.SupplierID = element.ElementID
+									'Finn SOSI-element som skal assosieres ut i fra alias i lstSOSI
+									keyIndex = lstSOSI.IndexofKey(elementB.Alias)
+									guid = lstSOSI.GetByIndex(keyIndex)
+									set elementB = Repository.GetElementByGuid(guid)
+									con.ClientID = elementB.ElementID
+									con.Update
+									updateAssociationProperties
+								end if						
+							end if
+						end if	
+					Next								
+				end if
+			Next
+		end if
 	Next
 				
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 

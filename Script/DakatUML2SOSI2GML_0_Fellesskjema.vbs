@@ -117,14 +117,20 @@ sub importAbstrakteKlasser
 	if not absClasses is nothing then
 		Repository.WriteOutput "Script", Now & " Pakken med abstrakte klasser er funnet i prosjektet (" & absClasses.PackageGUID & ")", 0 
 		'Setter GML-tagger på SOSI Fellesegenskaper
-		set tagVal = absClasses.Element.TaggedValues.AddNew("version", FC_version)
-		tagVal.Update
-		set tagVal = absClasses.Element.TaggedValues.AddNew("xmlns", "nvdb")
-		tagVal.Update
+	'	set tagVal = absClasses.Element.TaggedValues.AddNew("version", FC_version)
+	'	tagVal.Update
+	'	set tagVal = absClasses.Element.TaggedValues.AddNew("xmlns", "nvdb")
+	'	tagVal.Update
 		'set tagVal = absClasses.Element.TaggedValues.AddNew("xsdDocument", "abstraktNVDB.xsd")
 		'tagVal.Update				
-		set tagVal = absClasses.Element.TaggedValues.AddNew("xsdEncodingRule", "sosi")
-		tagVal.Update
+	'	set tagVal = absClasses.Element.TaggedValues.AddNew("xsdEncodingRule", "sosi")
+	'	tagVal.Update
+	
+		'Fjerner alle tagged values på pakka
+		for idxT = 0 to absClasses.Element.TaggedValues.Count - 1
+			absClasses.Element.TaggedValues.DeleteAt idxT, false
+		next
+		absClasses.Element.TaggedValues.Refresh
 		scMod.Packages.Refresh		
 	else
 		Repository.WriteOutput "Script", Now & " Finner ikke pakken _AbstrakteKlasser", 0 
@@ -204,6 +210,8 @@ end sub
 sub Fellesskjema()
 
 	dim msgAnsw
+	dim pck as EA.Package
+
 	' Show and clear the script output window
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
@@ -269,7 +277,7 @@ sub Fellesskjema()
 			runSC							
 			'Flytter SOSIFelles.xsd og abstraktNVDB.xsd til riktig område
 			moveFile "SOSIFelles.xsd", scPath & "\XSD\INPUT\",gmlPath & "\"
-			moveFile "abstraktNVDB.xsd", scPath & "\XSD\INPUT\",gmlPath & "\"	
+			moveFile "AbstraktNVDB.xsd", scPath & "\XSD\INPUT\",gmlPath & "\"	
 		end if
 
 		'Close SC
@@ -277,7 +285,91 @@ sub Fellesskjema()
 		scRep.Exit
 		set scRep = nothing	
 		'Delete SC
-		objFS.DeleteFile scPath & "\" & scProject, true
+		'objFS.DeleteFile scPath & "\" & scProject, true
+
+		'Løkke for kjøring pr vegobjekttype
+		for each pck in thePackage.Packages
+			if pck.Alias <> "532" and pck.PackageGUID <> guidAbstrakteKlasser then 'Vegreferanse skal ikke være med
+				Repository.WriteOutput "Script", Now & " ", 0 
+				Repository.WriteOutput "Script", Now & " Lager applikasjonsskjemamodell for delpakken " & pck.Name & " (" & pck.PackageGUID & ")", 0 
+
+				'Liste med GML-tagger til hovedpakke
+				Set lstTags = CreateObject("System.Collections.SortedList")
+				lstTags.Add "targetNamespace", strTargetNamespace
+				lstTags.Add "version", FC_version
+				lstTags.Add "xmlns", "nvdb"
+				lstTags.Add "xsdDocument", pck.Alias & ".xsd"
+
+				'Lager modell og hovedpakke
+				createSCmodel
+				'Importerer SOSI Fellesegenskaper-pakken til modellen ShapeChange
+				importSOSIFelles
+
+				'Importerer aktuell objekttype sin pakke til modellen ShapeChange
+				Repository.WriteOutput "Script", Now & " Importerer pakke for hovedobjekttypen " & pck.Name & " (fil: " & sosiPath & "\" & pck.Alias & ".xml)", 0 
+				set pI = scRep.GetProjectInterface()
+				pI.ImportPackageXMI scPck.PackageGUID, sosiPath & "\" & pck.Alias & ".xml", 1,0
+				scPck.Packages.Refresh			
+
+				'Importerer Abstrakte klasser-pakken til modellen ShapeChange
+				importAbstrakteKlasser
+				set tagVal = absClasses.Element.TaggedValues.AddNew("xsdDocument", "AbstraktNVDB.xsd")
+				tagVal.Update				
+
+				'Fjerner eventuelle targetNamespace-tagger på delpakker
+				dim scSubPck as EA.Package
+				for each scSubPck in scPck.Packages
+					for idxT = 0 to scSubPck.Element.TaggedValues.Count -1
+						set tagVal = scSubPck.Element.TaggedValues.GetAt(idxT)
+						if tagVal.Name = "targetNamespace" or tagVal.Value = "" then 
+							Repository.WriteOutput "Script", Now & " Sletter tagged value " & scSubPck.Name & "." & tagVal.Name & " = " & tagVal.Value, 0 
+							scSubPck.Element.TaggedValues.DeleteAt idxT,false
+						end if
+						if scSubPck.Alias = pck.Alias then
+							'Fjerner alle tagged values på objekttypen sin pakke, den skal inngå i hovedpakken direkte.
+							Repository.WriteOutput "Script", Now & " Sletter tagged value " & scSubPck.Name & "." & tagVal.Name & " = " & tagVal.Value, 0 
+							scSubPck.Element.TaggedValues.DeleteAt idxT,false	
+							for each element in scSubPck.Elements
+								'Sletter alle constraints
+								for idxC = 0 to element.Constraints.Count - 1
+									element.Constraints.DeleteAt idxC, false
+								next
+								element.Constraints.Refresh											
+							next
+						end if
+					next
+					scSubPck.Element.TaggedValues.Refresh
+				next	 
+
+				'Fjerner alle andre abstrakte klasser enn den som tilhører hovedobjekttypen, for lettere ShapeChange-kjøring
+				'For idxe = 0 to absClasses.Elements.Count -1
+				'	set element = absClasses.Elements.GetAt(idxe)
+				'	if UCase(element.Stereotype) = "FEATURETYPE" and element.Alias <> pck.Alias then 
+						'Repository.WriteOutput "Script", Now & " Sletter abstrakt klasse: " & element.Name, 0 
+						'absClasses.Elements.DeleteAt idxe, false
+				'	end if						
+				'next	
+				'absClasses.Elements.Refresh	
+				
+				'Close SC
+				scRep.CloseFile
+				scRep.Exit
+				set scRep = nothing	
+				'Kjører ShapeChange, venter på fullføring
+				runSC							
+
+				'Flytter pakken sin skjemafil til riktig område
+				moveFile pck.Alias & ".xsd", scPath & "\XSD\INPUT\",gmlPath & "\"
+
+				'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
+				'msgAnsw = MsgBox("Sjekk SC-modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+				'if msgAnsw = 2 then
+				'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
+				'	exit sub
+				'end if	
+
+			end if
+		next
 
 
 	end if
