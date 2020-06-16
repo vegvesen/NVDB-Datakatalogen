@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
   <include schemaLocation="AbstraktNVDB.xsd"/>
+  <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Avstandsmåling" substitutionGroup="nvdb:AbstraktAvstandsmåling" type="nvdb:AvstandsmålingType">
@@ -35,7 +36,7 @@ Enhet: Meter</documentation>
 Enhet: Meter</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="kvalitet" type="nvdb:KvalitetType">
+          <element minOccurs="0" name="kvalitetAvstandsmåling" type="nvdb:AvstandsmålingKvalitetType">
             <annotation>
               <documentation>2250: Angir kvalitet på måling</documentation>
             </annotation>
@@ -45,12 +46,7 @@ Enhet: Meter</documentation>
               <documentation>Angivelse av objektets posisjon</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
@@ -67,13 +63,13 @@ Enhet: Meter</documentation>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <simpleType name="KvalitetType">
+  <simpleType name="AvstandsmålingKvalitetType">
     <annotation>
       <documentation>2250: Angir kvalitet på måling</documentation>
     </annotation>
-    <union memberTypes="nvdb:KvalitetEnumerationType nvdb:KvalitetOtherType"/>
+    <union memberTypes="nvdb:AvstandsmålingKvalitetEnumerationType nvdb:AvstandsmålingKvalitetOtherType"/>
   </simpleType>
-  <simpleType name="KvalitetEnumerationType">
+  <simpleType name="AvstandsmålingKvalitetEnumerationType">
     <annotation>
       <documentation>2250: Angir kvalitet på måling</documentation>
     </annotation>
@@ -90,7 +86,7 @@ Enhet: Meter</documentation>
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="KvalitetOtherType">
+  <simpleType name="AvstandsmålingKvalitetOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

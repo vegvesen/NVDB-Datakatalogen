@@ -1,93 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
-  <include schemaLocation="abstraktNVDB.xsd"/>
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+  <include schemaLocation="AbstraktNVDB.xsd"/>
+  <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="VegfaseType">
-    <annotation>
-      <documentation>11278: Angir vegens fase i livet.</documentation>
-    </annotation>
-    <union memberTypes="nvdb:VegfaseEnumerationType nvdb:VegfaseOtherType"/>
-  </simpleType>
-  <simpleType name="VegfaseEnumerationType">
-    <annotation>
-      <documentation>11278: Angir vegens fase i livet.</documentation>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="P">
-        <annotation>
-          <documentation>19030: Planlagt veg, vedtatt trasé.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="A">
-        <annotation>
-          <documentation>19031: Veg under bygging</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="V">
-        <annotation>
-          <documentation>19032: Veg som er del av operativt vegnett</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="F">
-        <annotation>
-          <documentation>19090: Fiktiv veglenke for stedfesting av objekter som ikke kan stedfestes på andre lenker.</documentation>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegfaseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemType">
-    <annotation>
-      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
-    </annotation>
-    <union memberTypes="nvdb:VegkategoriVegsystemEnumerationType nvdb:VegkategoriVegsystemOtherType"/>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemEnumerationType">
-    <annotation>
-      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="E">
-        <annotation>
-          <documentation>19024: SVV er vegmyndighet. Unik nummerering iht. europeisk avtale om internasjonale trafikkårer, AGR</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="R">
-        <annotation>
-          <documentation>19025: SVV er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="F">
-        <annotation>
-          <documentation>19026: Fylkeskommunen er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="K">
-        <annotation>
-          <documentation>19027: Kommunen er vegmyndighet. Unik nummerering innenfor kommunen.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="P">
-        <annotation>
-          <documentation>19028: Private veger. Evt. nummerering er unik innenfor kommunen.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="S">
-        <annotation>
-          <documentation>19029: Private landbruksveger som brukes til skogbruksformål. Nummerering iht. landbruksforvaltningens fagsystem ØKS</documentation>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
   <element name="Vegsystem" substitutionGroup="nvdb:AbstraktVegsystem" type="nvdb:VegsystemType">
     <annotation>
       <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
@@ -97,7 +12,7 @@
     <complexContent>
       <extension base="nvdb:AbstraktVegsystemType">
         <sequence>
-          <element name="vegkategori" type="nvdb:VegkategoriVegsystemType">
+          <element name="vegkategori" type="nvdb:VegkategoriType">
             <annotation>
               <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
             </annotation>
@@ -117,7 +32,7 @@
               <documentation>Angivelse av objektets posisjon</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>

@@ -1,40 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/XSD/NVDB" version="2.20">
-  <include schemaLocation="abstraktNVDB.xsd"/>
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+  <include schemaLocation="AbstraktNVDB.xsd"/>
+  <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="AdskilteLøpType">
-    <annotation>
-      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
-    </annotation>
-    <union memberTypes="nvdb:AdskilteLøpEnumerationType nvdb:AdskilteLøpOtherType"/>
-  </simpleType>
-  <simpleType name="AdskilteLøpEnumerationType">
-    <annotation>
-      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="med">
-        <annotation>
-          <documentation>19035: Medstrekning for adskilte løp der kjøreretning er med metreringsretning.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="mot">
-        <annotation>
-          <documentation>19091: Motstrekning for adskilte løp der kjøreretning er mot metreringsretning.</documentation>
-        </annotation>
-      </enumeration>
-      <enumeration value="nei">
-        <annotation>
-          <documentation>19036: Delstrekningen har ikke fysisk adskilte løp med egne referanser.</documentation>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="AdskilteLøpOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
   <simpleType name="ArmType">
     <annotation>
       <documentation>11292: Angir om delstrekningen skal betraktes som en arm til et hovedløp</documentation>
@@ -140,12 +108,7 @@
               <documentation>Angivelse av objektets posisjon</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>

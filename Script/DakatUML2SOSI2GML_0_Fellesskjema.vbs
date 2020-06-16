@@ -287,9 +287,27 @@ sub Fellesskjema()
 		'Delete SC
 		'objFS.DeleteFile scPath & "\" & scProject, true
 
+		'Hardkoda liste over objekttyper som ikke skal være med i GML-eksporten
+		dim lstOmit
+		Set lstOmit = CreateObject("System.Collections.ArrayList")
+		lstOmit.Add "532" 'Vegreferanse
+		lstOmit.Add "618" 'Oppdrag_Fagdata 
+		lstOmit.Add "619" 'Oppdrag_Vegnett
+		lstOmit.Add "620" 'Oppgave_Fagdata 
+		lstOmit.Add "621" 'Oppgave_Vegnett
+		lstOmit.Add "622" 'SOSI-Bestilling
+		lstOmit.Add "793" 'NVDBDokumentasjon
+		
+		'Hardkoda liste over datatyper som skal fjernes fra den enkelte pakken, ettersom de finnes i SOSI Fellesegenskaper.
+		dim lstDTOmit
+		Set lstDTOmit = CreateObject("System.Collections.ArrayList")
+		lstDTOmit.Add "Vegkategori" 
+		lstDTOmit.Add "Vegfase" 
+		lstDTOmit.Add "AdskilteLøp" 
+
 		'Løkke for kjøring pr vegobjekttype
 		for each pck in thePackage.Packages
-			if pck.Alias <> "532" and pck.PackageGUID <> guidAbstrakteKlasser then 'Vegreferanse skal ikke være med
+			if not lstOmit.Contains(pck.Alias) and pck.PackageGUID <> guidAbstrakteKlasser then 'Vegreferanse skal ikke være med
 				Repository.WriteOutput "Script", Now & " ", 0 
 				Repository.WriteOutput "Script", Now & " Lager applikasjonsskjemamodell for delpakken " & pck.Name & " (" & pck.PackageGUID & ")", 0 
 
@@ -329,27 +347,24 @@ sub Fellesskjema()
 							'Fjerner alle tagged values på objekttypen sin pakke, den skal inngå i hovedpakken direkte.
 							Repository.WriteOutput "Script", Now & " Sletter tagged value " & scSubPck.Name & "." & tagVal.Name & " = " & tagVal.Value, 0 
 							scSubPck.Element.TaggedValues.DeleteAt idxT,false	
-							for each element in scSubPck.Elements
+							for idxE = 0 to scSubPck.Elements.Count - 1 
+								set element = scSubPck.Elements.GetAt(idxE)
 								'Sletter alle constraints
 								for idxC = 0 to element.Constraints.Count - 1
 									element.Constraints.DeleteAt idxC, false
 								next
-								element.Constraints.Refresh											
+								element.Constraints.Refresh	
+								'Fjerner datatyper som finnes i SOSI Fellesegenskaper
+								if UCase(element.Stereotype) <> "FEATURETYPE" and lstDTOmit.Contains(element.Name) then
+									Repository.WriteOutput "Script", Now & " Sletter datatype " & scSubPck.Name & "." & element.Name, 0 
+									scSubPck.Elements.DeleteAt idxE, false
+								end if
 							next
+							scSubPck.Elements.Refresh
 						end if
 					next
 					scSubPck.Element.TaggedValues.Refresh
 				next	 
-
-				'Fjerner alle andre abstrakte klasser enn den som tilhører hovedobjekttypen, for lettere ShapeChange-kjøring
-				'For idxe = 0 to absClasses.Elements.Count -1
-				'	set element = absClasses.Elements.GetAt(idxe)
-				'	if UCase(element.Stereotype) = "FEATURETYPE" and element.Alias <> pck.Alias then 
-						'Repository.WriteOutput "Script", Now & " Sletter abstrakt klasse: " & element.Name, 0 
-						'absClasses.Elements.DeleteAt idxe, false
-				'	end if						
-				'next	
-				'absClasses.Elements.Refresh	
 				
 				'Close SC
 				scRep.CloseFile
@@ -370,7 +385,6 @@ sub Fellesskjema()
 
 			end if
 		next
-
 
 	end if
 	
