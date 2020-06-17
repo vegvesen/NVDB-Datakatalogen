@@ -3,28 +3,29 @@
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Bruksklasse_12_65Mobilkran_Mm" substitutionGroup="nvdb:AbstraktBruksklasse_12_65Mobilkran_Mm" type="nvdb:Bruksklasse_12_65Mobilkran_MmType">
+  <element name="Byggegrense" substitutionGroup="nvdb:AbstraktByggegrense" type="nvdb:ByggegrenseType">
     <annotation>
-      <documentation>891: Gjeldende bruksklasse for 12/65 - mobilkran m.m. i vegliste</documentation>
+      <documentation>771: Fastlagt grense for tillatt bebyggelse etter reguleringsplan eller vegloven (HB N100 (017))</documentation>
     </annotation>
   </element>
-  <complexType name="Bruksklasse_12_65Mobilkran_MmType">
+  <complexType name="ByggegrenseType">
     <complexContent>
-      <extension base="nvdb:AbstraktBruksklasse_12_65Mobilkran_MmType">
+      <extension base="nvdb:AbstraktByggegrenseType">
         <sequence>
-          <element minOccurs="0" name="strekningsbeskrivelse" type="string">
+          <element minOccurs="0" name="avstandFraVeg" type="integer">
             <annotation>
-              <documentation>10739: Beskrivelse av aktuell vegstrekning. Denne teksten blir hentet direkte inn i veglistene</documentation>
+              <documentation>7866: Angir avstand fra veg til byggegrense
+Enhet: Meter</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="veglisteGjelderAlltid" type="string">
+          <element minOccurs="0" name="merknad" type="string">
             <annotation>
-              <documentation>10746: Veglister er forskrift og gjelder alltid foran kartvisning.</documentation>
+              <documentation>7867: Angir tilleggsinformasjon om byggegrense</documentation>
             </annotation>
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
             <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
+              <documentation>8870: Gir linje/kurve som geometrisk representerer objektet.</documentation>
             </annotation>
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
@@ -32,13 +33,14 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="nvdb:AbstraktKommentarPropertyType"/>
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="Bruksklasse_12_65Mobilkran_MmPropertyType">
+  <complexType name="ByggegrensePropertyType">
     <sequence minOccurs="0">
-      <element ref="nvdb:Bruksklasse_12_65Mobilkran_Mm"/>
+      <element ref="nvdb:Byggegrense"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
