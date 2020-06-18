@@ -6,7 +6,8 @@
     xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1">
     <input>
         <parameter name="inputModelType" value="EA7"/>
-        <parameter name="inputFile" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\SC_NVDB.eap"/>
+        <parameter name="inputFile"
+            value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\SC_NVDB.eap"/>
         <parameter name="loadDiagrams" value="true"/>
         <parameter name="tmpDirectory" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\tmp"/>
         <parameter name="packageDiagramRegex" value="^(.*[\W]+)?Overview([\W]+.*)?$"/>
@@ -24,11 +25,59 @@
     <targets>
         <TargetXmlSchema class="de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema"
             mode="enabled">
-            <targetParameter name="outputDirectory" value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\XSD"/>
+            <targetParameter name="outputDirectory"
+                value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\XSD"/>
             <targetParameter name="defaultEncodingRule" value="sosi"/>
             <xi:include href="http://www.arkitektum.no/files/sosi/StandardRules.xml"/>
             <xi:include href="http://shapechange.net/resources/config/StandardNamespaces.xml"/>
-            <xi:include href="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\StandardMapEntries.xml"/>
+            <xi:include
+                href="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\StandardMapEntries.xml"/>
         </TargetXmlSchema>
+        <TargetOwl class="de.interactive_instruments.ShapeChange.Target.Ontology.OWLISO19150"
+            mode="disabled">
+            <targetParameter name="outputDirectory"
+                value="C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\OWL"/>
+            <targetParameter name="outputFormat" value="rdfxml"/>
+            <targetParameter name="language" value="en"/>
+            <targetParameter name="defaultTypeImplementation" value="owl:Class"/>
+            <targetParameter name="URIbase" value="http://rdf.vegdata.no"/>
+            <targetParameter name="defaultEncodingRule" value="NVDB"/>
+            <rules>
+                <EncodingRule name="NVDB" extends="*">
+                    <rule name="rule-owl-pkg-singleOntologyPerSchema"/>
+                    <rule name="rule-owl-pkg-ontologyName-code"/>
+                    <rule name="rule-owl-pkg-ontologyName-appendVersion"/>
+                    <rule name="rule-owl-pkg-versionInfo"/>
+                    <rule name="rule-owl-pkg-versionIRI"/>
+                    <rule name="rule-owl-pkg-versionIRI-avoid-duplicate-version"/>
+                    <rule name="rule-owl-pkg-dctSourceTitle"/>
+                    <rule name="rule-owl-cls-iso191502IsAbstract"/>
+                    <rule name="rule-owl-cls-generalization"/>
+                    <rule name="rule-owl-cls-disjoint-classes"/>
+                    <rule name="rule-owl-cls-encode-featuretypes"/>
+                    <rule name="rule-owl-cls-encode-objecttypes"/>
+                    <rule name="rule-owl-cls-encode-mixintypes"/>
+                    <rule name="rule-owl-cls-encode-datatypes"/>
+                    <rule name="rule-owl-cls-encode-basictypes"/>
+                    <rule name="rule-owl-prop-general"/>
+                    <rule name="rule-owl-prop-range-global"/>
+                    <rule name="rule-owl-prop-localScopeAll"/>
+                    <rule name="rule-owl-prop-multiplicityAsUnqualifiedCardinalityRestriction"/>
+                    <rule name="rule-owl-prop-iso191502AssociationName"/>
+                    <rule name="rule-owl-prop-inverseOf"/>
+                    <rule name="rule-owl-prop-iso191502Aggregation"/>
+                    <rule name="rule-owl-all-constraints-byConstraintMapping"/>
+                    <rule name="rule-owl-cls-union"/>
+                    <rule name="rule-owl-cls-unionSets"/>
+                    <rule name="rule-owl-cls-enumerationAsCodelist"/>
+                    <rule name="rule-owl-cls-codelist-external"/>
+                    <rule name="rule-owl-cls-codelist-19150-2"/>
+                    <rule name="rule-owl-cls-codelist-19150-2-objectOneOfForEnumeration"/>
+                    <rule name="rule-owl-cls-codelist-19150-2-differentIndividuals"/>
+                    <rule name="rule-owl-cls-codelist-19150-2-owlClassInDifferentNamespace"/>
+                    <rule name="rule-owl-prop-code-broader-byBroaderListedValue"/>
+                </EncodingRule>
+            </rules>
+        </TargetOwl>
     </targets>
 </ShapeChangeConfiguration>

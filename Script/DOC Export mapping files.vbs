@@ -9,7 +9,6 @@ option explicit
 ' Date: 20150508
 '
 
-const path = "C:\DATA\GitHub\NVDBGML\XSD\"
 dim dgr as EA.Diagram
 
 dim objFSO, objFtFile, objPtFile, objEnFile
@@ -74,38 +73,29 @@ sub exportMappingFiles()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script" 
 		
-	' Get the currently selected package in the tree to work on
-	dim thePackage as EA.Package
-	set thePackage = Repository.GetTreeSelectedPackage()
-	
-	if not thePackage is nothing and thePackage.ParentID <> 0 then
-		dim tv as EA.TaggedValue
-		set tv=thePackage.Element.TaggedValues.GetByName("xsdDocument")
-		dim name 
-		name=Replace(tv.value,".xsd","")
-	
-		Set objFSO=CreateObject("Scripting.FileSystemObject")
-		Set objFtFile = objFSO.CreateTextFile(path & "\" & name & "_ftMapping.csv",True)
-		Set objPtFile = objFSO.CreateTextFile(path & "\" & name & "_ptMapping.csv",True)
-		Set objEnFile = objFSO.CreateTextFile(path & "\" & name & "_enMapping.csv",True)
-		
-		objFtFile.Write "ftid;name" & vbCrLf
-		objPtFile.Write "ft_attr;ftid;ptid;name" & vbCrLf
-		objEnFile.Write "ptid;enid;name;fullname" & vbCrLf
-		
-		recLoopSubPackages(thePackage)
-	    
-		objFtFile.Close
-		objPtFile.Close
-		objEnFile.Close
+	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)		
+	dim tv as EA.TaggedValue
+	set tv=pkSOSINVDB.Element.TaggedValues.GetByName("xsdDocument")
+	dim name 
+	name=Replace(tv.value,".xsd","")
 
-		Session.Output(Now & " Ferdig!" )
+	Set objFSO=CreateObject("Scripting.FileSystemObject")
+	Set objFtFile = objFSO.CreateTextFile(csvPath & "\" & name & "_ftMapping.csv",True)
+	Set objPtFile = objFSO.CreateTextFile(csvPath & "\" & name & "_ptMapping.csv",True)
+	Set objEnFile = objFSO.CreateTextFile(csvPath & "\" & name & "_enMapping.csv",True)
+	
+	objFtFile.Write "ftid;name" & vbCrLf
+	objPtFile.Write "ft_attr;ftid;ptid;name" & vbCrLf
+	objEnFile.Write "ptid;enid;name;fullname" & vbCrLf
+	
+	recLoopSubPackages(pkSOSINVDB)
+	
+	objFtFile.Close
+	objPtFile.Close
+	objEnFile.Close
+
+	Session.Output(Now & " Ferdig!" )
 		
-	else
-		' No package selected in the tree
-		MsgBox( "This script requires a package to be selected in the Project Browser." & vbCrLf & _
-			"Please select a package in the Project Browser and try again." )
-	end if
 end sub
 
 exportMappingFiles

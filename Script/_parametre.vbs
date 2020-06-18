@@ -9,6 +9,8 @@ const strSOSIVersjon = "4.5"
 const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
+const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL"
+const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 const scProject = "SC_NVDB.eap"
 
 'GUID-er for pakker mm
@@ -30,10 +32,9 @@ const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
 
 
 
-'Parametre for konvertering til SOSI
+'Parametre for konvertering til SOSI - stort sett utgått pga nye script.
 
 const txtSOSIpakke = "NVDB Dokumentasjon"
-
 const txtShortName = ""
 const strPakker = "NVDB Dokumentasjon"
 'Eksempler på pakkestrenger:
