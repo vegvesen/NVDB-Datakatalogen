@@ -10,7 +10,10 @@ const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
 const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL"
+const owlURI = "http://rdf.vegdata.no/nvdb/nvdb-owl"
+
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
+
 const scProject = "SC_NVDB.eap"
 
 'GUID-er for pakker mm
