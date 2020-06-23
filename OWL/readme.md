@@ -26,4 +26,7 @@ Alle klasser har angitt tillegsinformasjon med offisiell NVDB-ID, definisjon, NV
   - Data Properties har angitt tillegsinformasjon med offisiell NVDB-ID, definisjon, NVDB-navn og SOSI-navn.  
 - Stedfesting av vegobjekter: Rot for properties som peker til en av stedfestingsklassene.
 
+## Individer:
+ - Kodelisteverdier er definert som individer av sin kodeliste
+ - Alle kodelisteverdier har angitt tillegsinformasjon med offisiell NVDB-ID, definisjon, NVDB-navn og SOSI-navn.  
   
