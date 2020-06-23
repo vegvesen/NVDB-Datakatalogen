@@ -8,9 +8,10 @@ OWL-Ontologi i Turtle-format, generert fra SOSI-UML-modell for NVDB Datakataloge
     - Alle kodelister er definert som egne klasser og gruppert på vegobjekttyper under denne klassen.
   - Vegobjekttype: Rotobjekt for vegobjekttyper. 
     - Alle vegobjekttyper ligger direkte under denne klassen
+    - Klassen Vegobjekttype er definert som subklasse av GeoSPARQL.Feature og ISO 19109.AnyFeature
 - Stedfesting: Rotobjekt for stedfestingskonsepter
-  - Geometri: Konsepter for stedfesting, med link til GeoSparql og ISO 19107-ontologien.
-  - Lineær posisjon: Konsepter for linere referanser, med link til ISO 19148-ontologi fra INTERLINK, ettersom offisiell ISO 19148-ontologi ikke finnes foreløpig. 
+  - Geometri: Konsepter for stedfesting, med linker til GeoSparql og ISO 19107-ontologien.
+  - Lineær posisjon: Konsepter for linere referanser, med linker til ISO 19148-ontologi fra INTERLINK, ettersom offisiell ISO 19148-ontologi ikke finnes foreløpig. 
 
 Alle klasser har angitt tilleggsinformasjon med offisiell NVDB-ID, definisjon, NVDB-navn og SOSI-navn. 
 
