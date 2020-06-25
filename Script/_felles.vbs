@@ -27,6 +27,7 @@ dim elementCL as EA.Element
 dim ftSOSIfelles as EA.Element
 dim tagVal as EA.TaggedValue
 dim aTag as EA.AttributeTag
+dim cTag as EA.ConnectorTag
 dim con as EA.Connector
 dim conNVDB as EA.Connector
 dim eDiagram As EA.Diagram

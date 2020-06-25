@@ -37,9 +37,12 @@ sub exportOntology()
 	objTemplate.close
 	'Write template
 	objOTLFile.WriteText strTemplate & vbCrLf
-
-
-    dim nvdb_navn
+	
+	dim tV as EA.TaggedValue
+	dim atV as EA.AttributeTag
+	dim ctV as EA.ConnectorTag
+    dim nvdb_navn, definition
+	
 	for each pkOT in pkSOSINVDB.Packages
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
 			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
@@ -60,7 +63,44 @@ sub exportOntology()
 					objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         :sosi_navn """ & element.Name & """@no ;" & vbCrLf
-					objOTLFile.WriteText "         skos:definition """ & replace(element.Notes, """","'") & """@no ." & vbCrLf
+					
+					set tV = element.TaggedValues.GetByName("KjorefeltRelevant")
+					if not tV is nothing then 
+						select case tV.Value
+							case "0": objOTLFile.WriteText "         :kjørefeltRelevant ""Kan ikke gi feltkode.""@no ;" & vbCrLf										
+							case "1": objOTLFile.WriteText "         :kjørefeltRelevant ""Kan gi feltkode.""@no ;" & vbCrLf																	
+							case "2": objOTLFile.WriteText "         :kjørefeltRelevant ""Må gi feltkode.""@no ;" & vbCrLf										
+						end select
+					end if
+
+					set tV = element.TaggedValues.GetByName("SideposisjonRelevant")
+					if not tV is nothing then 
+						select case tV.Value
+							case "0": objOTLFile.WriteText "         :sideposisjonRelevant ""Kan ikke gi sideposisjon.""@no ;" & vbCrLf										
+							case "1": objOTLFile.WriteText "         :sideposisjonRelevant ""Kan gi sideposisjon.""@no ;" & vbCrLf																	
+							case "2": objOTLFile.WriteText "         :sideposisjonRelevant ""Må gi sideposisjon.""@no ;" & vbCrLf										
+						end select
+					end if
+					
+					set tV = element.TaggedValues.GetByName("RetningsRelevant")
+					if not tV is nothing then 
+						select case tV.Value
+							case "J": objOTLFile.WriteText "         :retningRelevant ""Retningsrelevant.""@no ;" & vbCrLf										
+							case "N": objOTLFile.WriteText "         :retningRelevant ""Ikke retningsrelevant.""@no ;" & vbCrLf																	
+						end select
+					end if
+					
+					set tV = element.TaggedValues.GetByName("Stedfesting")
+					if not tV is nothing then 
+						select case tV.Value
+							case "punkt": objOTLFile.WriteText "         :stedfestingstype ""Punkt.""@no ;" & vbCrLf										
+							case "strekning": objOTLFile.WriteText "         :stedfestingstype ""Strekning.""@no ;" & vbCrLf																	
+						end select
+					end if
+					
+					definition = replace(element.Notes, """","'")
+					definition = replace(definition, vbCrLf," ")
+					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
 				
@@ -146,7 +186,23 @@ sub exportOntology()
 							objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 							objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 							objOTLFile.WriteText "         :sosi_navn """ & eAttributt.Name & """@no ;" & vbCrLf
-							objOTLFile.WriteText "         skos:definition """ & replace(eAttributt.Notes, """","'") & """@no ." & vbCrLf					
+							
+							set atV = eAttributt.TaggedValues.GetByName("Viktighet")
+							if not atV is nothing then objOTLFile.WriteText "         :viktighet """ & atV.Value & """@no ;" & vbCrLf																	
+
+							set atV = eAttributt.TaggedValues.GetByName("ANTALL_DESIMALER")
+							if not atV is nothing then objOTLFile.WriteText "         :desimaler " & atV.Value & ";" & vbCrLf																	
+
+							set atV = eAttributt.TaggedValues.GetByName("Enhet")
+							if not atV is nothing then objOTLFile.WriteText "         :enhet """ & atV.Value & """@no ;" & vbCrLf																	
+
+							set atV = eAttributt.TaggedValues.GetByName("Sensitiv")
+							if not atV is nothing then objOTLFile.WriteText "         :sensitiv ""Tilgjengelig kun for UREG-brukere""@no ;" & vbCrLf																	
+							
+							definition = replace(eAttributt.Notes, """","'")
+							definition = replace(definition, vbCrLf," ")
+							
+							objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf					
 							objOTLFile.WriteText vbCrLf
 							objOTLFile.WriteText vbCrLf
 						end if	
@@ -180,9 +236,11 @@ sub exportOntology()
 							objOTLFile.WriteText "         rdfs:domain :vot" & elementA.Alias & ";" & vbCrLf
 							objOTLFile.WriteText "         rdfs:range :vot" & elementB.Alias & ";" & vbCrLf
 							'objOTLFile.WriteText "         :nvdb_id " & eAttributt.Alias & " ;" & vbCrLf
-							'objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
-							objOTLFile.WriteText "         :sosi_navn ""assosiert" & elementC.Name & """@no ;" & vbCrLf
-							
+							'objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf		
+
+							set ctV = con.TaggedValues.GetByName("NVDB_ID")
+							if not ctV is nothing then objOTLFile.WriteText "         :nvdb_id " & ctV.Value & " ;" & vbCrLf																	
+
 							nvdb_navn = ""	
 							set tagVal = elementC.TaggedValues.GetByName("NVDB_navn")
 							if not tagVal is nothing then nvdb_navn=tagVal.Value
@@ -206,7 +264,10 @@ sub exportOntology()
 					objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         :sosi_navn """ & element.Name & """@no ;" & vbCrLf
-					objOTLFile.WriteText "         skos:definition """ & replace(element.Notes, """","'") & """@no ." & vbCrLf
+					
+					definition = replace(element.Notes, """","'")
+					definition = replace(definition, vbCrLf," ")			
+					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
 		
@@ -229,8 +290,10 @@ sub exportOntology()
 							Repository.WriteOutput "Script", Now & " Kodeverdi: " & eAttributt.Name & " (" & eAttributt.Default & ")", 0 
 						objOTLFile.WriteText "         :kortnavn """ & eAttributt.Default & """ ;" & vbCrLf
 						end if
-						
-						objOTLFile.WriteText "         skos:definition """ & replace(eAttributt.Notes, """","'") & """@no ." & vbCrLf
+
+						definition = replace(eAttributt.Notes, """","'")
+						definition = replace(definition, vbCrLf," ")			
+						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
 						objOTLFile.WriteText vbCrLf
 					Next

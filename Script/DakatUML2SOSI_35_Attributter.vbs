@@ -74,7 +74,13 @@ sub updateAttributeProperties()
 				else
 					eAttributt.LowerBound = 0
 				end if	
-			'SOSI_datatype: Egen prosess
+				set newATag = eAttributt.TaggedValues.AddNew(aTag.Name, aTag.Value)
+				newATag.Update()			
+			Case else
+				'Kopier tagged value uendra
+				set newATag = eAttributt.TaggedValues.AddNew(aTag.Name, aTag.Value)
+				newATag.Update()			
+
 		end select
 	next
 	eAttributt.TaggedValues.Refresh

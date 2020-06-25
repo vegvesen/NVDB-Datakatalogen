@@ -11,7 +11,11 @@ Sub updateProperties_Egenskapstyper()
 	Dim elementDT As EA.Element
 
 	eAttributt.Name = rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value
-	If Not IsNull(rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value) Then eAttributt.Notes = rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value
+	If Not IsNull(rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value) Then 
+		eAttributt.Notes = rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value
+	else
+		eAttributt.Notes = ""
+	end if	
 
 	For idxDataType = 0 To pkDatatyper.Elements.Count - 1
 		set elementDT = pkDatatyper.Elements.GetAt(idxDataType)
@@ -100,8 +104,8 @@ Sub updateProperties_Egenskapstyper()
 	If Not IsNull(rsEgenskapstyper.Fields("navn_enhet").Value) Then
 		set aTag = eAttributt.TaggedValues.AddNew("Enhet", rsEgenskapstyper.Fields("navn_enhet").Value)
 		aTag.Update()
-		eAttributt.Notes = eAttributt.Notes & vbCrLf & "Enhet: " & rsEgenskapstyper.Fields("navn_enhet").Value
-		eAttributt.Update()
+		'eAttributt.Notes = eAttributt.Notes & vbCrLf & "Enhet: " & rsEgenskapstyper.Fields("navn_enhet").Value
+		'eAttributt.Update()
 	End If
 	
 	eAttributt.TaggedValues.Refresh()

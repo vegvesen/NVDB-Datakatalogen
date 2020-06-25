@@ -36,6 +36,8 @@ sub updateDiagrams()
 	dim codeListDiagram
 	dim missing
 	
+	dim lstAss
+	
 	'Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker diagrammene
 	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
 	Repository.WriteOutput "Script", Now & " Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker diagrammer", 0 
@@ -102,6 +104,8 @@ sub updateDiagrams()
 		set eDiagram = Repository.GetDiagramByGuid(associationsDiagram)	
 		'Skal inneholde feature typen fra aktuell pakke, samt alle assosierte klasser 
 		Repository.WriteOutput "Script", Now & " Sjekker diagrammet " & eDiagram.Name,0
+		Set lstAss = CreateObject("System.Collections.SortedList")
+
 		for each element in pkOT.Elements
 			if UCase(element.Stereotype) = "FEATURETYPE" then
 				'Sjekk om selve klassen finnes i diagrammet, legg til dersom den mangler. 
@@ -127,6 +131,10 @@ sub updateDiagrams()
 						set elementB = Repository.GetElementByID(con.SupplierID)
 					end if
 					'Sjekk om den assosierte klassen finnes i diagrammet, legg til dersom den mangler. 
+					Repository.WriteOutput "Script", Now & " ConnectorID: " & con.ConnectorID & " til " & elementB.Name,0
+
+					lstAss.Add con.ConnectorID,elementB.ElementID
+					
 					missing = true
 					for idxD = 0 to eDiagram.DiagramObjects.Count - 1
 						set diagramObject = eDiagram.DiagramObjects.GetAt(idxD)
@@ -154,16 +162,23 @@ sub updateDiagrams()
 				'Skjuler assosiasjoner som ikke går fra aktuelt element, viser de som skal vises
 				Dim edCon As EA.DiagramLink
 				eDiagram.DiagramLinks.Refresh()
+				'for each edCon in eDiagram.DiagramLinks
 				For idxD = 0 To eDiagram.DiagramLinks.Count - 1
 					set edCon = eDiagram.DiagramLinks.GetAt(idxD)
-					set con = Repository.GetConnectorByID(edCon.ConnectorID)
-					if con.ClientID = element.ElementID or con.SupplierID= element.ElementID then
-						edCon.IsHidden = False
+					Repository.WriteOutput "Script", Now & " ConnectorID: " & edCon.ConnectorID,0
+					if not lstAss.Contains(edCon.ConnectorID) then
+						eDiagram.DiagramLinks.DeleteAt idxD, false
 					else
-						edCon.IsHidden = True
-					End If
-					edCon.Update()
+						set con = Repository.GetConnectorByID(edCon.ConnectorID)
+						if con.ClientID = element.ElementID or con.SupplierID = element.ElementID then
+							edCon.IsHidden = False
+						else
+							edCon.IsHidden = True
+						End If
+						edCon.Update()
+					end if	
 				Next 
+				eDiagram.DiagramLinks.Refresh
 				'fix layout dersom endring
 				if changed then 
 					ePIF.LayoutDiagramEx eDiagram.DiagramGUID, 4, 4, 20, 20, True

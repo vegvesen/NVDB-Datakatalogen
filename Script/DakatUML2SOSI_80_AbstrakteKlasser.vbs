@@ -15,33 +15,6 @@ dim absCon as EA.Connector
 dim absAssEl as EA.Element
 dim assEl as EA.Element
 
-
-Sub updateAssociationPropertiesFromNonAbstract()
-	'Oppdaterer egenskaper på en assosiasjon til en abstrakt klasse fra tilsvarende assosiasjon til konkret klasse
-	absCon.Type = con.Type
-	absCon.Subtype = con.Subtype
-
-	'Angi kardinaliteter 
-	absCon.ClientEnd.Visibility = con.ClientEnd.Visibility
-	absCon.ClientEnd.Cardinality = con.ClientEnd.Cardinality
-	absCon.SupplierEnd.Visibility = con.SupplierEnd.Visibility
-	absCon.SupplierEnd.Cardinality = con.SupplierEnd.Cardinality
-
-	'Rollenavn på assosiasjonen
-	If absCon.ClientID = element.ElementID Then
-		absCon.ClientEnd.Role = "" 
-		absCon.ClientEnd.Navigable = "Non-Navigable"
-		absCon.SupplierEnd.Role = "assosiert" & assEl.Name
-		absCon.SupplierEnd.Navigable = "Navigable"
-	Else
-		absCon.SupplierEnd.Role = "" 
-		absCon.SupplierEnd.Navigable = "Non-Navigable"
-		absCon.ClientEnd.Role = "assosiert" & assEl.Name
-		absCon.ClientEnd.Navigable = "Navigable"
-	End If
-	absCon.Update()
-end sub
-
 sub abstractClasses()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
@@ -62,11 +35,11 @@ sub abstractClasses()
 	For each absElement in absPck.Elements
 		Repository.WriteOutput "Script", Now & " Abstrakt klasse: " & absElement.Name &  " (" & absElement.Alias & ")", 0 
 		lstAbsCls.Add absElement.Alias, absElement.ElementGUID
-		'Sletter alle assosiasjoner mellom abstrakte klasser
+		'Sletter alle assosiasjoner fra abstrakte klasser
 		for idxC = 0 to absElement.Connectors.Count -1
 			set con = absElement.Connectors.GetAt(idxC)
 			if con.type = "Aggregation" or con.Type = "Association" then
-				Repository.WriteOutput "Script", Now & " Sletter assosiasjon: " & con.Type & " " & con.ClientID &  " - " & con.SupplierID, 0 
+				Repository.WriteOutput "Script", Now & " Sletter assosiasjon fra abstrakt klasse: " & con.Type & " " & con.ClientID &  " - " & con.SupplierID, 0 
 				absElement.Connectors.DeleteAt idxC, false
 			end if	
 		next
@@ -77,7 +50,7 @@ sub abstractClasses()
 	dim keyIndex
 	dim guid
 	dim msgAnsw
-
+	
 	Repository.WriteOutput "Script", Now & " Hovedpakke: " & pkSOSINVDB.Name & " (" & pkSOSINVDB.PackageGUID & ")", 0 
 	'Kjører gjennom alle pakker og lager abstrakte vegobjekttyper med arv til konkrete vegobjekttyper
 	for each pkOT in pkSOSINVDB.Packages	
@@ -142,6 +115,8 @@ sub abstractClasses()
 						if (con.type = "Aggregation" or con.Type = "Association") then
 							'Lag ny assosiasjon 
 							set absCon = element.Connectors.AddNew("",con.Type)
+							absCon.Subtype = con.Subtype
+							'Finn assosiert element
 							if con.ClientID = element.ElementID then 
 								set assEl = Repository.GetElementByID(con.SupplierID)
 							else
@@ -153,21 +128,92 @@ sub abstractClasses()
 							set absAssEl = Repository.GetElementByGuid(guid)
 							'Legg til assosiert abstrakt klasse som motsatt ende på assosiasjonen
 							Repository.WriteOutput "Script", Now & " Legger til assosiasjon mellom vegobjekttypen " & element.Name & " og den abstrakte vegobjekttypen " & absAssEl.Name, 0
+							Repository.WriteOutput "Script", Now & " Rollenavn og kardinaliteter", 0 
+							'Angi kardinaliteter 
+							absCon.ClientEnd.Visibility = con.ClientEnd.Visibility
+							absCon.ClientEnd.Cardinality = con.ClientEnd.Cardinality
+							absCon.SupplierEnd.Visibility = con.SupplierEnd.Visibility
+							absCon.SupplierEnd.Cardinality = con.SupplierEnd.Cardinality
 							if con.ClientID = element.ElementID then 
 								absCon.ClientID = element.ElementID
 								absCon.SupplierID = absAssEl.ElementID
+								absCon.ClientEnd.Role = "" 
+								absCon.ClientEnd.Navigable = "Non-Navigable"
+								absCon.SupplierEnd.Role = "assosiert" & assEl.Name
+								absCon.SupplierEnd.Navigable = "Navigable"
 							else
 								absCon.ClientID = absAssEl.ElementID
 								absCon.SupplierID = element.ElementID
+								absCon.SupplierEnd.Role = "" 
+								absCon.SupplierEnd.Navigable = "Non-Navigable"
+								absCon.ClientEnd.Role = "assosiert" & assEl.Name
+								absCon.ClientEnd.Navigable = "Navigable"
 							end if
-							updateAssociationPropertiesFromNonAbstract
+							absCon.Update
+
+							'Tagged values fra originalassosiasjon
+							dim cTagNVDB as EA.ConnectorTag
+							for each cTagNVDB in con.TaggedValues
+								Repository.WriteOutput "Script", Now & " Legger til tagged value " & cTagNVDB.Name & ": " & cTagNVDB.Value, 0 
+								set cTag = absCon.TaggedValues.AddNew(cTagNVDB.Name, cTagNVDB.Value)
+								cTag.Update()
+							next	
+							absCon.TaggedValues.Refresh()
+
+							'GML-tagged values på assosiasjonsendene
+							Dim rTag As EA.RoleTag
+							dim rTagFound
+							rTagFound = false
+							for each rTag in absCon.ClientEnd.TaggedValues
+								if rTag.Tag = "inlineOrByReference" then
+									rTag.Value = "ByReference"
+									rTag.Update
+									rTagFound = true
+								end  if
+							next
+							if not rTagfound then 
+								set rTag = absCon.ClientEnd.TaggedValues.AddNew("inlineOrByReference", "ByReference")
+								rTag.Update()
+							end if	
+							absCon.ClientEnd.TaggedValues.Refresh()
+							absCon.ClientEnd.Update()
+							
+							rTagFound = false
+							for each rTag in absCon.SupplierEnd.TaggedValues
+								if rTag.Tag = "inlineOrByReference" then
+									rTag.Value = "ByReference"
+									rTag.Update
+									rTagFound = true
+								end  if
+							next
+							if not rTagfound then 
+								set rTag = absCon.SupplierEnd.TaggedValues.AddNew("inlineOrByReference", "ByReference")
+								rTag.Update()
+							end if	
+							absCon.SupplierEnd.TaggedValues.Refresh()
+							absCon.SupplierEnd.Update()
+
 							absCon.Update
 						end if	
 					next
 					element.Connectors.Refresh
+					
+					for each con in element.Connectors
+						Repository.WriteOutput "Script", Now & " " & Con.Type & " connector: " & con.ConnectorID, 0 
+						for each cTag in con.TaggedValues
+							Repository.WriteOutput "Script", Now & " Connector tagged value " & cTag.Name & ": " & cTag.Value, 0 
+						next				
+					next
 				end if
 			next
 		end if
+		
+		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+		'if msgAnsw = 2 then
+		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
+		'	exit sub
+		'end if	
 	next
 
 	'Ny løkke for å slette assosiasjoner mellom konkrete klasser
@@ -196,9 +242,14 @@ sub abstractClasses()
 				end if
 			next
 		end if
+		
+		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+		'if msgAnsw = 2 then
+		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
+		'	exit sub
+		'end if	
 	next
-	
-	
 
 	'Løkke for assosiasjonsdiagrammer. Erstatter alle konkrete klasser med abstrakte klasser
 	Repository.WriteOutput "Script", Now & "  ", 0 

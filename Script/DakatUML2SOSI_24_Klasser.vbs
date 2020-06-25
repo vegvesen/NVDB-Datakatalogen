@@ -73,6 +73,10 @@ sub updateClassProperties()
 				'ID - gi nytt navn til tagged value
 				set newTV = element.TaggedValues.AddNew("NVDB_ID", tagVal.Value)
 				newTV.Update()
+			Case else
+				'Kopier tagged value uendra
+				set newTV = element.TaggedValues.AddNew(tagVal.Name, tagVal.Value)
+				newTV.Update()			
 		End Select
 	Next	
 
