@@ -31,3 +31,76 @@ Alle klasser har angitt tilleggsinformasjon med offisiell NVDB-ID, definisjon, N
  - Kodelisteverdier er definert som individer av sin kodeliste
  - Alle kodelisteverdier har angitt tilleggsinformasjon med offisiell NVDB-ID, definisjon, NVDB-navn og SOSI-navn.  
   
+## Eksempler på SPARQL-spørringer:
+### Alle vegobjekttyper
+'select distinct ?klasse ?vot_id ?navn ?sosinavn
+where
+{
+	?klasse rdfs:subClassOf+:Vegobjekttype .
+	?klasse :nvdb_id ?vot_id .
+	?klasse :nvdb_navn ?navn .
+	?klasse rdfs:label ?sosinavn .
+}'
+
+### Alle properties for alle vegobjekttyper, med sosi-navn
+select distinct ?klasse ?vot_id ?property ?et_id ?navn ?type ?sosi_navn
+where
+{
+    ?klasse rdfs:subClassOf+:Vegobjekttype .
+    ?klasse :nvdb_id ?vot_id .
+    ?property rdfs:domain ?klasse .
+    ?property :nvdb_id ?et_id .
+    ?property rdfs:label ?navn .
+    ?property :sosi_navn ?sosi_navn .
+    OPTIONAL {?property rdfs:range ?type .}
+    OPTIONAL {?property rdfs:subPropertyOf*/rdfs:range ?type .}
+}
+
+### Alle properties for en vegobjekttype (eksempel: Rekkverk - vot5)
+select distinct ?property ?et_id ?navn ?type ?sosi_navn
+where
+{
+    ?property rdfs:domain ?class .
+    ?property :nvdb_id ?et_id .
+    ?property rdfs:label ?navn .
+   :vot5 rdfs:subClassOf* ?class.
+    OPTIONAL {?property :sosi_navn ?sosi_navn .}
+    OPTIONAL {?property rdfs:range ?type .}
+    OPTIONAL {?property rdfs:subPropertyOf*/rdfs:range ?type .}
+}
+
+### Liste over alle tillatte verdier
+select distinct ?vot_id ?vot_navn ?et_id ?et_navn ?tv_id ?tv_navn ?sosi_navn ?kortnavn ?klasse ?property ?type ?instance 
+where
+{
+   ?klasse rdfs:subClassOf+:Vegobjekttype .
+   ?klasse :nvdb_id ?vot_id .
+   ?klasse rdfs:label ?vot_navn .
+   ?property rdfs:domain ?klasse .
+    ?property :nvdb_id ?et_id .
+    ?property rdfs:label ?et_navn .
+    ?property rdfs:range ?type .
+    ?instance rdf:type ?type .
+    ?instance :nvdb_id ?tv_id .
+    ?instance  rdfs:label ?tv_navn .
+    ?instance :sosi_navn ?sosi_navn .
+	OPTIONAL {?instance :kortnavn ?kortnavn .}
+}
+
+### Begrenset til de som har kortverdi
+select distinct ?vot_id ?vot_navn ?et_id ?et_navn ?tv_id ?tv_navn ?sosi_navn ?kortnavn ?klasse ?property ?type ?instance 
+where
+{
+   ?klasse rdfs:subClassOf+:Vegobjekttype .
+   ?klasse :nvdb_id ?vot_id .
+   ?klasse rdfs:label ?vot_navn .
+   ?property rdfs:domain ?klasse .
+   ?property :nvdb_id ?et_id .
+   ?property rdfs:label ?et_navn .
+   ?property rdfs:range ?type .
+   ?instance rdf:type ?type .
+   ?instance :nvdb_id ?tv_id .
+   ?instance  rdfs:label ?tv_navn .
+   ?instance :sosi_navn ?sosi_navn .
+   ?instance :kortnavn ?kortnavn .
+}
