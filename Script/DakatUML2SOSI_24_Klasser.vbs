@@ -189,7 +189,7 @@ sub updateClasses()
 			set element = getElementByAlias(pkOT, elNVDB.Alias)
 			if element is nothing then
 				'Eksisterer ikke i SOSI, legges til
-				Repository.WriteOutput "Endringer", Now & " NVDB-klassen finnes ikke i SOSI-modellregister, legges til: " & element.stereotype & " " & pkOT_NVDB.Name & "." & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
+				Repository.WriteOutput "Endringer", Now & " NVDB-klassen finnes ikke i SOSI-modellregister, legges til: " & elNVDB.stereotype & " " & pkOT_NVDB.Name & "." & elNVDB.Name &  " (" & elNVDB.Alias & ")", 0 
 				createClass
 			else
 				'Eksisterer i SOSI

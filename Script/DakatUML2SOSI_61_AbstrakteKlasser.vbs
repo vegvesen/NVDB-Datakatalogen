@@ -102,8 +102,14 @@ sub abstractClasses()
 		end if
 	next
 	
+	'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
+	'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
+	'if msgAnsw = 2 then
+	'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
+	'	exit sub
+	'end if	
+
 	'Ny løkke for å legge til assosiasjoner til abstrakte vegobjekttyper
-	'Kjører gjennom alle pakker og lager abstrakte vegobjekttyper med arv til konkrete vegobjekttyper
 	for each pkOT in pkSOSINVDB.Packages	
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
 			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
@@ -209,7 +215,7 @@ sub abstractClasses()
 		end if
 		
 		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
 		'if msgAnsw = 2 then
 		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		'	exit sub
@@ -244,7 +250,7 @@ sub abstractClasses()
 		end if
 		
 		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
 		'if msgAnsw = 2 then
 		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		'	exit sub
@@ -300,7 +306,7 @@ sub abstractClasses()
 			next
 		end if	
 		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "GML-applikasjonsskjema")
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
 		'if msgAnsw = 2 then
 		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		'	exit sub

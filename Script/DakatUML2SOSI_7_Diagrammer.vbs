@@ -130,20 +130,15 @@ sub updateDiagrams()
 					else
 						set elementB = Repository.GetElementByID(con.SupplierID)
 					end if
+					
 					'Sjekk om den assosierte klassen finnes i diagrammet, legg til dersom den mangler. 
 					Repository.WriteOutput "Script", Now & " ConnectorID: " & con.ConnectorID & " til " & elementB.Name,0
-
-					lstAss.Add con.ConnectorID,elementB.ElementID
-					
+					lstAss.Add con.ConnectorID,elementB.ElementID		
 					missing = true
 					for idxD = 0 to eDiagram.DiagramObjects.Count - 1
 						set diagramObject = eDiagram.DiagramObjects.GetAt(idxD)
 						if diagramObject.ElementId = elementB.ElementId then 
 							missing = false
-							'Skjuler egenskaper (AttPub=0) (alle egenskaper i modellen er public)
-							hideAttributes(diagramObject)
-							'Størrelse w=200xh=70
-							setSize diagramObject, 70, 200
 						end if	
 					next
 					if missing then 
@@ -151,14 +146,35 @@ sub updateDiagrams()
 						set diagramObject = eDiagram.DiagramObjects.AddNew("", "")
 						diagramObject.ElementID = elementB.ElementID
 						diagramObject.Update()
-						'Skjuler egenskaper (AttPub=0) (alle egenskaper i modellen er public)
-						hideAttributes(diagramObject)
-						'Størrelse w=200xh=70
-						setSize diagramObject, 70, 200				
 						changed = true
 					end if	
 					eDiagram.DiagramObjects.Refresh					
 				Next
+				
+				'Sletter diagramobjekter som ikke er assosierte, ordner størrelse på de som skal være med
+				for idxD = 0 to eDiagram.DiagramObjects.Count - 1
+					set diagramObject = eDiagram.DiagramObjects.GetAt(idxD)
+					set elementB = Repository.GetElementByID(diagramObject.ElementID)
+					if elementB.ElementId <> element.ElementId then 
+						dim assEl
+						assEl = false
+						for each con in elementB.Connectors
+							if con.ClientID = element.ElementID or con.SupplierID = element.ElementID then assEl = true
+						next
+						if assEl then 
+							'Skjuler egenskaper (AttPub=0) (alle egenskaper i modellen er public)
+							hideAttributes(diagramObject)
+							'Størrelse w=200xh=70
+							setSize diagramObject, 70, 200
+						else
+							'Sletter diagramobjektet
+							Repository.WriteOutput "Endringer", Now & " Fjerner objekttypen " & elementB.Name & " fra diagrammet " & eDiagram.Name,0
+							eDiagram.DiagramObjects.DeleteAt idxD, False
+						end if 					
+					end if	
+				next
+				eDiagram.DiagramObjects.Refresh
+				
 				'Skjuler assosiasjoner som ikke går fra aktuelt element, viser de som skal vises
 				Dim edCon As EA.DiagramLink
 				eDiagram.DiagramLinks.Refresh()
