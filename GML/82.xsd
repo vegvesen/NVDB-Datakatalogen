@@ -1,11 +1,99 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="EierHydravegType">
+    <annotation>
+      <documentation>11964: Angir hvem som er eier av vegobjektet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11964</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11964</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Eier</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:EierHydravegEnumerationType nvdb:EierHydravegOtherType"/>
+  </simpleType>
+  <simpleType name="EierHydravegEnumerationType">
+    <annotation>
+      <documentation>11964: Angir hvem som er eier av vegobjektet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11964</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11964</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Eier</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="stat_StatensVegvesen">
+        <annotation>
+          <documentation>20485: Stat, Statens vegvesen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20485</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Stat, Statens vegvesen</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="stat_NyeVeier">
+        <annotation>
+          <documentation>20486: Stat, Nye Veier</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20486</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Stat, Nye Veier</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20487: Fylkeskommune</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20487</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkeskommune</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>20488: Kommune</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20488</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kommune</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>20489: Privat</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20489</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Privat</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>20490: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20490</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Uavklart</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="EierHydravegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <element name="Hydraveg" substitutionGroup="nvdb:AbstraktHydraveg" type="nvdb:HydravegType">
     <annotation>
       <documentation>82: Drenering av plast.  Legges i vegkant for å skjære av vanntilsig inn mot vegen.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">82</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">82</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Hydraveg</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="HydravegType">
@@ -14,44 +102,92 @@
         <sequence>
           <element minOccurs="0" name="diameter" type="integer">
             <annotation>
-              <documentation>1726: Angir diameter av vegobjektet.  Diameter i bunn av hydraveg
-Enhet: Millimeter</documentation>
+              <documentation>1726: Angir diameter av vegobjektet.  Diameter i bunn av hydraveg</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1726</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Diameter</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="høyde" type="double">
             <annotation>
-              <documentation>1585: Angir vegobjektets egenhøyde.
-Enhet: Meter</documentation>
+              <documentation>1585: Angir vegobjektets egenhøyde.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1585</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Høyde</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="etableringsår" type="integer">
             <annotation>
               <documentation>10308: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10308</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Etableringsår</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="produsent" type="string">
             <annotation>
               <documentation>1524: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1524</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Produsent</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="produktnavn" type="string">
             <annotation>
               <documentation>1446: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1446</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Produktnavn</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="leverandør" type="string">
             <annotation>
               <documentation>1484: Angir navn på firma som har levert vegobjektet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1484</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Leverandør</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="tilleggsinformasjon" type="string">
             <annotation>
               <documentation>11573: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11573</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tilleggsinformasjon</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="eier" type="nvdb:EierHydravegType">
+            <annotation>
+              <documentation>11964: Angir hvem som er eier av vegobjektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11964</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Eier</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligHydravegType">
+            <annotation>
+              <documentation>11996: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11996</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vedlikeholdsansvarlig</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
             <annotation>
               <documentation>4783: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">4783</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, linje</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
@@ -59,9 +195,27 @@ Enhet: Meter</documentation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="nvdb:AbstraktKommentarPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="nvdb:AbstraktTilstandSkade_StrekningPropertyType"/>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="nvdb:AbstraktDokumentasjonPropertyType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Strekning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -73,4 +227,95 @@ Enhet: Meter</documentation>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="VedlikeholdsansvarligHydravegType">
+    <annotation>
+      <documentation>11996: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11996</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11996</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vedlikeholdsansvarlig</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VedlikeholdsansvarligHydravegEnumerationType nvdb:VedlikeholdsansvarligHydravegOtherType"/>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligHydravegEnumerationType">
+    <annotation>
+      <documentation>11996: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11996</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11996</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vedlikeholdsansvarlig</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="statensVegvesen">
+        <annotation>
+          <documentation>20679: Statens vegvesen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20679</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Statens vegvesen</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="nyeVeier">
+        <annotation>
+          <documentation>20680: Nye Veier</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20680</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nye Veier</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="fylkeskommune">
+        <annotation>
+          <documentation>20681: Fylkeskommune</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20681</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkeskommune</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="OPS">
+        <annotation>
+          <documentation>20682: OPS</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20682</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">OPS</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="kommune">
+        <annotation>
+          <documentation>20683: Kommune</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20683</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kommune</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="privat">
+        <annotation>
+          <documentation>20684: Privat</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20684</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Privat</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="uavklart">
+        <annotation>
+          <documentation>20685: Uavklart</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20685</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Uavklart</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VedlikeholdsansvarligHydravegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
 </schema>

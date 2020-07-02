@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Kurvatur_Vertikalpunkt" substitutionGroup="nvdb:AbstraktKurvatur_Vertikalpunkt" type="nvdb:Kurvatur_VertikalpunktType">
     <annotation>
       <documentation>642: Punkt i høybrekk/lavbrekk hvor stigning er 0, dvs i topp/bunnpunkt.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">642</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">642</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kurvatur, vertikalpunkt</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="Kurvatur_VertikalpunktType">
@@ -15,22 +21,37 @@
           <element minOccurs="0" name="type" type="nvdb:TypeKurvatur_VertikalpunktType">
             <annotation>
               <documentation>5844: Angir hvilken type vertikalpunkt det er</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5844</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="høyde" type="double">
             <annotation>
-              <documentation>5845: Angir absolutthøyde i punktet (hoh)
-Enhet: Meter</documentation>
+              <documentation>5845: Angir absolutthøyde i punktet (hoh)</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5845</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Høyde</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="beregningsinfo" type="string">
             <annotation>
               <documentation>9964: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9964</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Beregningsinfo</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
             <annotation>
               <documentation>6884: Gir punkt som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">6884</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, punkt</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
@@ -38,7 +59,13 @@ Enhet: Meter</documentation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element name="assosiertKurvaturgenerering" type="nvdb:AbstraktKurvaturgenereringPropertyType"/>
+          <element name="assosiertKurvaturgenerering" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvaturgenerering</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -53,37 +80,67 @@ Enhet: Meter</documentation>
   <simpleType name="TypeKurvatur_VertikalpunktType">
     <annotation>
       <documentation>5844: Angir hvilken type vertikalpunkt det er</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5844</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5844</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <union memberTypes="nvdb:TypeKurvatur_VertikalpunktEnumerationType nvdb:TypeKurvatur_VertikalpunktOtherType"/>
   </simpleType>
   <simpleType name="TypeKurvatur_VertikalpunktEnumerationType">
     <annotation>
       <documentation>5844: Angir hvilken type vertikalpunkt det er</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5844</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5844</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <restriction base="string">
       <enumeration value="toppunkt_Høybrekk">
         <annotation>
           <documentation>8320: Vendepunkt, hvor vertikalkurvatur går fra stigning til fall. I topp-punktet vil stigningen være null (s=0). Også kalt høybrekk.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">8320</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Toppunkt, høybrekk</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="bunnpunkt_Lavbrekk">
         <annotation>
           <documentation>8321: Vendepunkt, hvor vertikalkurvatur går fra fall til stigning. I bunn-punktet vil stigningen være null (s=0). Også kalt lavbrekk.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">8321</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bunnpunkt, lavbrekk</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="markertKnekkpunkt_Høy">
         <annotation>
           <documentation>9108: Markert knekkpunkt er et punkt hvor stigningsgraden endrer seg markant.  Stigningen har samme fortegn før og etter knekkpunktet.  Høy innebærer at vertikalkurvaturen er i et høybrekk i dette punktet.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9108</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Markert knekkpunkt, høy</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="markertKnekkpunkt_Lav">
         <annotation>
           <documentation>9109: Markert knekkpunkt er et punkt hvor stigningsgraden endrer seg markant. Stigningen har samme fortegn før og etter knekkpunktet. Lav innebærer at vertikalkurvaturen er i et lavbrekk i dette punktet.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9109</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Markert knekkpunkt, lav</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="bruddpunkt">
         <annotation>
           <documentation>9110: KurvGen (som beregner kurvatur til NVDB) deler vegstrekninger inn i delstrekninger (kurver). For å sikre seg at en har tilstrekkelig høydeinformasjon, beskriver bruddpunktet høyden i overgangen mellom to kurver.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9110</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bruddpunkt</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
     </restriction>

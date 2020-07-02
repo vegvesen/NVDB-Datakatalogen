@@ -1,30 +1,130 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="VegkategoriVegsystemType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VegkategoriVegsystemEnumerationType nvdb:VegkategoriVegsystemOtherType"/>
+  </simpleType>
+  <simpleType name="VegkategoriVegsystemEnumerationType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E">
+        <annotation>
+          <documentation>19024: SVV er vegmyndighet. Unik nummerering iht. europeisk avtale om internasjonale trafikkårer, AGR</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19024</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Europaveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>19025: SVV er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19025</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Riksveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>19026: Fylkeskommunen er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19026</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkesveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19027: Kommunen er vegmyndighet. Unik nummerering innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19027</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kommunal veg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>19028: Private veger. Evt. nummerering er unik innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19028</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Privat veg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>19029: Private landbruksveger som brukes til skogbruksformål. Nummerering iht. landbruksforvaltningens fagsystem ØKS</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19029</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skogsveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriVegsystemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <element name="Vegsystem" substitutionGroup="nvdb:AbstraktVegsystem" type="nvdb:VegsystemType">
     <annotation>
       <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">915</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">915</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegsystem</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="VegsystemType">
     <complexContent>
       <extension base="nvdb:AbstraktVegsystemType">
         <sequence>
-          <element name="vegkategori" type="nvdb:VegkategoriType">
+          <element name="vegkategori" type="nvdb:VegkategoriVegsystemType">
             <annotation>
               <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element name="vegfase" type="nvdb:VegfaseType">
             <annotation>
               <documentation>11278: Angir vegens fase i livet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fase</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="vegnummer" type="integer">
             <annotation>
               <documentation>11277: Angir hvilke deler av vegnettet som rutemessig hører sammen.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11277</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegnummer</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">

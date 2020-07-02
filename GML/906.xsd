@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="ElektriskKomponent_Test" substitutionGroup="nvdb:AbstraktElektriskKomponent_Test" type="nvdb:ElektriskKomponent_TestType">
     <annotation>
       <documentation>906: Enkelt teknisk/elektrisk komponent, som f.eks. sikring, jordfeilautomat eller kommunikasjonsutstyr</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">906</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">906</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Elektrisk komponent (test)</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="ElektriskKomponent_TestType">
@@ -15,31 +21,55 @@
           <element minOccurs="0" name="type" type="nvdb:TypeElektriskKomponent_TestType">
             <annotation>
               <documentation>10938: Angir hvilken type det er tale om</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10938</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="etableringsår" type="integer">
             <annotation>
               <documentation>11447: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11447</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Etableringsår</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="produsent" type="string">
             <annotation>
               <documentation>10935: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10935</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Produsent</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="produktnavn" type="string">
             <annotation>
               <documentation>10936: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10936</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Produktnavn</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="tilleggsinformasjon" type="string">
             <annotation>
               <documentation>10939: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10939</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tilleggsinformasjon</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
             <annotation>
               <documentation>10937: Gir punkt som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10937</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, punkt</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
@@ -47,8 +77,20 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertFordelingstavle" type="nvdb:AbstraktFordelingstavlePropertyType"/>
-          <element minOccurs="0" name="assosiertBygning" type="nvdb:AbstraktBygningPropertyType"/>
+          <element minOccurs="0" name="assosiertFordelingstavle" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFordelingstavle</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertBygning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktBygning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -63,52 +105,94 @@
   <simpleType name="TypeElektriskKomponent_TestType">
     <annotation>
       <documentation>10938: Angir hvilken type det er tale om</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10938</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10938</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <union memberTypes="nvdb:TypeElektriskKomponent_TestEnumerationType nvdb:TypeElektriskKomponent_TestOtherType"/>
   </simpleType>
   <simpleType name="TypeElektriskKomponent_TestEnumerationType">
     <annotation>
       <documentation>10938: Angir hvilken type det er tale om</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10938</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10938</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <restriction base="string">
       <enumeration value="bryter">
         <annotation>
           <documentation>18279: Bryter</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18279</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bryter</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="sikring">
         <annotation>
           <documentation>18280: Ulike typer sikring. Inkludert automatasikring</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18280</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sikring</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="jordfeilbryter">
         <annotation>
           <documentation>18281: Jordfeilbryter</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18281</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Jordfeilbryter</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="releKontraktor">
         <annotation>
           <documentation>18282: Rele/Kontraktor</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18282</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Rele/Kontraktor</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="strømforsyning">
         <annotation>
           <documentation>18283: Strømforsyning</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18283</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Strømforsyning</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="stikkontakt">
         <annotation>
           <documentation>18284: Stikkontakt</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18284</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Stikkontakt</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="rekkeklemme">
         <annotation>
           <documentation>18285: Rekkeklemme</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18285</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Rekkeklemme</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="varme">
         <annotation>
           <documentation>18286: Varme</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">18286</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Varme</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
     </restriction>

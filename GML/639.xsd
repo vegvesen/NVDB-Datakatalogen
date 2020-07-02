@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Kurvatur_Horisontalelement" substitutionGroup="nvdb:AbstraktKurvatur_Horisontalelement" type="nvdb:Kurvatur_HorisontalelementType">
     <annotation>
       <documentation>639: Del av vegens horisontalkurvatur.  Sirkelbue, rettlinje eller klotoide.  Rettlinje har radius 99999</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">639</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">639</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kurvatur, horisontalelement</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="Kurvatur_HorisontalelementType">
@@ -15,27 +21,46 @@
           <element minOccurs="0" name="type" type="nvdb:TypeKurvatur_HorisontalelementType">
             <annotation>
               <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5842</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element name="radius" type="integer">
             <annotation>
-              <documentation>5827: Angir elementets radius.  Negativ radius når krumming mot venstre, positiv når krumming mot høyre sett i metreringsretning.  Rettlinje har radius 0. Verdier med radius større enn 9999 eller mindre enn -9999 blir regnet som rettlinje og radius settes til 0
-Enhet: Meter</documentation>
+              <documentation>5827: Angir elementets radius.  Negativ radius når krumming mot venstre, positiv når krumming mot høyre sett i metreringsretning.  Rettlinje har radius 0. Verdier med radius større enn 9999 eller mindre enn -9999 blir regnet som rettlinje og radius settes til 0</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5827</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Radius</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="klotoideparameter" type="integer">
             <annotation>
               <documentation>5829: Angir klotoideparameter for elementet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5829</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Klotoideparameter</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="beregningsinfo" type="string">
             <annotation>
               <documentation>9961: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9961</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Beregningsinfo</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
             <annotation>
               <documentation>6898: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">6898</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, hjelpelinje</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
@@ -43,7 +68,13 @@ Enhet: Meter</documentation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element name="assosiertKurvaturgenerering" type="nvdb:AbstraktKurvaturgenereringPropertyType"/>
+          <element name="assosiertKurvaturgenerering" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvaturgenerering</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -58,27 +89,49 @@ Enhet: Meter</documentation>
   <simpleType name="TypeKurvatur_HorisontalelementType">
     <annotation>
       <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5842</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5842</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <union memberTypes="nvdb:TypeKurvatur_HorisontalelementEnumerationType nvdb:TypeKurvatur_HorisontalelementOtherType"/>
   </simpleType>
   <simpleType name="TypeKurvatur_HorisontalelementEnumerationType">
     <annotation>
       <documentation>5842: Angir hvilken elementtype det er tale om</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5842</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5842</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type</taggedValue>
+      </appinfo>
     </annotation>
     <restriction base="string">
       <enumeration value="rettlinje">
         <annotation>
           <documentation>8315: Rettlinje</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">8315</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Rettlinje</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="sirkelbue">
         <annotation>
           <documentation>8316: Sirkelbue</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">8316</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sirkelbue</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="klotoide">
         <annotation>
           <documentation>8317: Klotoide</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">8317</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Klotoide</taggedValue>
+          </appinfo>
         </annotation>
       </enumeration>
     </restriction>

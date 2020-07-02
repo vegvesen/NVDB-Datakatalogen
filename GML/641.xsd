@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.20">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Kurvaturgenerering" substitutionGroup="nvdb:AbstraktKurvaturgenerering" type="nvdb:KurvaturgenereringType">
     <annotation>
       <documentation>641: Administrative data knyttet til et sett med horisontal- og vertikalelement</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">641</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">641</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kurvaturgenerering</taggedValue>
+      </appinfo>
     </annotation>
   </element>
   <complexType name="KurvaturgenereringType">
@@ -15,27 +21,54 @@
           <element minOccurs="0" name="datoGenerert" type="date">
             <annotation>
               <documentation>5835: Angir dato da kurvatur ble generert</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5835</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Dato generert</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="kurvgenversjon" type="string">
             <annotation>
               <documentation>5836: Angir hvilken kurvgenversjon som ble brukt for å generere kurvaturen</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5836</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kurvgenversjon</taggedValue>
+              </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="SOSI_Filnavn" type="string"/>
+          <element minOccurs="0" name="SOSI_Filnavn" type="string">
+            <annotation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5840</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">SOSI-filnavn</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="merknad" type="string">
             <annotation>
               <documentation>5841: Angir merknad knyttet til dataene</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5841</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Merknad</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="produsertAv" type="string">
             <annotation>
               <documentation>5839: Navn på firma/enhet som har produsert dataene</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5839</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Produsert av</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="eier" type="string">
             <annotation>
               <documentation>5838: Angir hvem som er eier av vegobjektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5838</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Eier</taggedValue>
+              </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
@@ -48,10 +81,34 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertKurvatur_Horisontalelement" type="nvdb:AbstraktKurvatur_HorisontalelementPropertyType"/>
-          <element minOccurs="0" name="assosiertKurvatur_Vertikalelement" type="nvdb:AbstraktKurvatur_VertikalelementPropertyType"/>
-          <element minOccurs="0" name="assosiertKurvatur_Vertikalpunkt" type="nvdb:AbstraktKurvatur_VertikalpunktPropertyType"/>
-          <element minOccurs="0" name="assosiertKurvatur_Stigning" type="nvdb:AbstraktKurvatur_StigningPropertyType"/>
+          <element minOccurs="0" name="assosiertKurvatur_Horisontalelement" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvatur_Horisontalelement</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertKurvatur_Stigning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvatur_Stigning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertKurvatur_Vertikalelement" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvatur_Vertikalelement</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertKurvatur_Vertikalpunkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKurvatur_Vertikalpunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
