@@ -1,3 +1,4 @@
 # NVDB Datakatalogen
 
-Repository for arbeid med tilgjengeliggjøring av NVDB Datakatalogen i standardiserte formater.
+Et repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatalogen.vegdata.no/) i alternative og standardiserte formater. 
+
