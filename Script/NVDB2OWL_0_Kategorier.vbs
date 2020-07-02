@@ -73,22 +73,6 @@ Sub main
 		objOTLFile.WriteText "         skos:definition """ & rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value & """@no ." & vbCrLf
 		objOTLFile.WriteText vbCrLf
 		objOTLFile.WriteText vbCrLf
-
-		objOTLFile.WriteText "### " & owlURI & "#votkat_op" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & vbCrLf
-		objOTLFile.WriteText ":votkat_op" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & " rdf:type owl:ObjectProperty ;" & vbCrLf
-		objOTLFile.WriteText "         rdfs:subPropertyOf :votkat_o_properties ;" & vbCrLf
-		objOTLFile.WriteText "         rdfs:label ""Object Properties innen " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ;" & vbCrLf					
-		objOTLFile.WriteText "         skos:definition ""Rotklasse for object properties som inngår i vegobjekttypekategorien " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ." & vbCrLf
-		objOTLFile.WriteText vbCrLf
-		objOTLFile.WriteText vbCrLf
-
-		objOTLFile.WriteText "### " & owlURI & "#votkat_dp" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & vbCrLf
-		objOTLFile.WriteText ":votkat_dp" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & " rdf:type owl:DatatypeProperty ;" & vbCrLf
-		objOTLFile.WriteText "         rdfs:subPropertyOf :votkat_d_properties ;" & vbCrLf
-		objOTLFile.WriteText "         rdfs:label ""Datatype Properties innen " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ;" & vbCrLf					
-		objOTLFile.WriteText "         skos:definition ""Rotklasse for data properties som inngår i vegobjekttypekategorien " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ." & vbCrLf
-		objOTLFile.WriteText vbCrLf
-		objOTLFile.WriteText vbCrLf
 				
 		rsVOTKategorier.MoveNext()
 		
@@ -240,10 +224,10 @@ Sub main
 							end if
 							objOTLFile.WriteText "         rdfs:subPropertyOf :et_" & pType & "_vot" & pkOT.Alias & " ;" & vbCrLf
 							
-							rsETKat.Filter = "ID_EGENSKAPSTYPE = " & element.Alias
+							rsETKat.Filter = "ID_EGENSKAPSTYPE = " & eAttributt.Alias
 							do until rsETKat.EOF
-								Repository.WriteOutput "Script", Now & " Subproperty av vegobjekttypekategori :votkat" & pType & "_vot" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
-								objOTLFile.WriteText "         rdfs:subPropertyOf :votkat" & pType & "_vot" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
+								Repository.WriteOutput "Script", Now & " Medlem av vegobjekttypekategori :votkat" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
+								objOTLFile.WriteText "         :medlem_av_VOTKategori :votkat" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
 								rsETKat.MoveNext()
 							loop
 													
@@ -351,6 +335,14 @@ Sub main
 						objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         :sosi_navn """ & eAttributt.Name & """@no ;" & vbCrLf
 						
+						rsTVKat.Filter = "ID_TILLATT_VERDI = " & eAttributt.Alias
+						do until rsTVKat.EOF
+							Repository.WriteOutput "Script", Now & " Medlem av vegobjekttypekategori :votkat" & rsTVKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
+							objOTLFile.WriteText "         :medlem_av_VOTKategori :votkat" & rsTVKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
+							rsTVKat.MoveNext()
+						loop
+
+						
 						if IsNull(eAttributt.Default) or eAttributt.Default = "" then
 							Repository.WriteOutput "Script", Now & " Kodeverdi: " & eAttributt.Name, 0 
 						else
@@ -378,7 +370,7 @@ Sub main
 
 	next
 	
-	objOTLFile.SaveToFile owlPath & "\" & "nvdb_otl_kat.ttl", 2
+	objOTLFile.SaveToFile owlPath & "\" & "nvdb_owl.ttl", 2
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
