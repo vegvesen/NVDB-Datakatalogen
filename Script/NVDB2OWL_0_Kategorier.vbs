@@ -182,6 +182,8 @@ Sub main
 							dim pType, range 
 							pType = "d"
 							range = ""
+							dim gT 
+							gT = false
 							'Konverteringsregler for datatyper
 							Select Case eAttributt.Type
 								Case "CharacterString": 
@@ -204,6 +206,7 @@ Sub main
 								Case "Punkt", "Kurve", "Flate":
 									pType = "o"
 									range = ":" & eAttributt.Type
+									gT = true
 							case else
 								'Attributter med kodeliste
 								pType = "o"
@@ -223,6 +226,8 @@ Sub main
 								objOTLFile.WriteText ":et" & eAttributt.Alias & " rdf:type owl:ObjectProperty ;" & vbCrLf
 							end if
 							objOTLFile.WriteText "         rdfs:subPropertyOf :et_" & pType & "_vot" & pkOT.Alias & " ;" & vbCrLf
+							
+							if gT then objOTLFile.WriteText "         rdfs:subPropertyOf gsp:hasGeometry ;" & vbCrLf
 							
 							rsETKat.Filter = "ID_EGENSKAPSTYPE = " & eAttributt.Alias
 							do until rsETKat.EOF

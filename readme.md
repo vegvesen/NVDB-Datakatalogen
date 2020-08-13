@@ -1,1 +1,26 @@
+# NVDB Datakatalogen
 
+Et repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatalogen.vegdata.no/) i alternative og standardiserte formater. 
+
+## Innhold:
+
+### [UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/GML)
+XMI-filer for orginal UML-representasjon av NVDB Datakatalogen
+
+### [SOSI-UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SOSI-UML)
+XMI-filer for den SOSI-tilpassede UML-modellen avledet av den originale UML-representasjonen.
+
+### [GML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/GML)
+GML-Applikasjonsskjema for NVDB Datakatalogen, avledet fra SOSI-modellen.
+
+### [OWL](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL)
+OWL-Ontologi for NVDB Datakatalogen, avledet fra SOSI-modellen.
+
+### [PNG](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/PNG)
+PNG-rasterfiler for alle diagrammer i UML-modellen.
+
+### [Script](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/Script)
+Enterprise Architect-script for transformasjon mellom modellrepresentasjoner.
+
+### [SC](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SC)
+Konfigureringsfiler for ShapeChange.
