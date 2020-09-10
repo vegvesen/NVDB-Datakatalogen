@@ -24,14 +24,16 @@ def get_nvdb_pt(vot_id):
     query = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                PREFIX nvdb: <http://rdf.vegdata.no/nvdb/nvdb-owl#>
                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-               SELECT DISTINCT ?uri ?nvdb_id
+               SELECT DISTINCT ?uri ?nvdb_id ?label
                WHERE {
                 ?class rdfs:subClassOf+ nvdb:Vegobjekttype .
                 ?class nvdb:nvdb_id """ + vot_id + """ .
                 ?uri rdfs:domain ?class .
                 ?uri nvdb:nvdb_id ?nvdb_id .
+                ?uri rdfs:label ?label .
                 }"""
     r = requests.get(url, params = {"Accept": "application/json", 'query': query}, proxies=proxies)
+    #print(r.json())
     return r
 
 def get_nvdb_enum(vot_id):
@@ -61,8 +63,10 @@ if not [k for k in sys.path if localPath in k]:
 from nvdbapiv3 import nvdbFagdata
 
 # Setter opp søket
-sokeobjekt = nvdbFagdata(79)
-sokeobjekt.filter( {'kommune' : 3403 }) # Hamar kommune
+vot=7
+kommune=3413
+sokeobjekt = nvdbFagdata(vot)
+sokeobjekt.filter( {'kommune' : kommune }) # Hamar kommune
 
 from rdflib import Graph, Namespace, URIRef, BNode, Literal
 from rdflib.namespace import RDF, RDFS, FOAF, XSD
@@ -99,60 +103,106 @@ if isinstance(sokeobjekt, nvdbFagdata):
     nvdb_ns_otl = Namespace(nvdbOTLPath)
     g.bind("nvdb_vo", nvdb_ns_vo)
     g.bind("nvdb_otl",nvdb_ns_otl)
+    g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
     # TODO: Importer ontologi i grafen?
 
-    objektet = sokeobjekt.nesteNvdbFagObjekt()
+    objektet = sokeobjekt.nesteForekomst()
     count = 0
     while objektet:
+        #print(objektet)
         count += 1
         # Legger objektet inn i grafen
-        objectURI = URIRef(nvdbVoPath + str(objektet.id))
+        objectURI = URIRef(nvdbVoPath + str(objektet['id']))
         g.add((objectURI, RDF.type, classURI))
 
         # Her kommer prosessering av egenskaper!
-        for egenskapen in objektet.egenskaper:
+        for egenskapen in objektet['egenskaper']:
+
+            # Legger til assosiasjoner i grafen
+            if str(egenskapen['navn']).startswith('Assosierte'):
+                for assosiasjonen in egenskapen['innhold']:
+                    egenskapURI=''
+                    for result in sqresEgenskaper.json()["results"]["bindings"]:
+                        if 200000 + int(result["nvdb_id"]["value"]) == int(assosiasjonen['id']):
+                            egenskapURI = result["uri"]["value"]
+                            g.add((objectURI, URIRef(egenskapURI), URIRef(nvdbVoPath + str(assosiasjonen['verdi']))))
 
             # Slå opp egenskaps-uri i NVDB-OT (SPARQL)
-            uri = ''
+            egenskapURI = ''
             for result in sqresEgenskaper.json()["results"]["bindings"]:
                 if int(result["nvdb_id"]["value"]) == int(egenskapen['id']):
-                    uri = result["uri"]["value"]
+                    egenskapURI = result["uri"]["value"]
                     #Legger til egenskap i grafen, med primitiv datatype
-                    egenskapURI = URIRef(uri)
-                    #print(uri, ": ", egenskapen)
 
                     # TODO: Håndtering av egenskapstyper er ikke komplett
                     if str(egenskapen['egenskapstype']) == 'Heltall':
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.integer)))
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.integer)))
                     elif str(egenskapen['egenskapstype']) == 'Flyttall':
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.double)))
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.double)))
                     elif str(egenskapen['egenskapstype']) == 'Tekst':
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.string)))
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.string)))
+                    elif str(egenskapen['egenskapstype']) == 'Dato':
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.date)))
                     elif str(egenskapen['egenskapstype']) == 'Kortdato': # Kortdato håndteres som string
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.string)))
-                    elif str(egenskapen['egenskapstype']) == 'Tekstenum': #Enum, skal hentes fra  enuminstans
-                        # TODO: Dersom enum: slå opp enum-URI
-
-
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.string)))
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.string)))
+                    elif str(egenskapen['datatype']) == 'Flerverdiattributt, Tall' or str(egenskapen['datatype']) == 'FlerverdiAttributt, Tekst': #Enum, skal hentes fra  enuminstans
+                        for enumResult in sqresEnums.json()["results"]["bindings"]:
+                            if int(enumResult["property_id"]["value"]) == int(egenskapen['id']) \
+                                    and int(enumResult["enum_id"]["value"]) == int(egenskapen['enum_id']):
+                                enumUri = URIRef(str(enumResult["uri"]["value"]))
+                                g.add((objectURI, URIRef(egenskapURI), enumUri))
+                    elif str(egenskapen['egenskapstype']) == 'Geometri':
+                        # Geometriegenskaper - setter alt som "Geometri nå.
+                        # Ontologien skiller mellom Punkt, Kurve og Flate
+                        # egenskapen['datatype']) == 'GeomPunkt' --> Punkt
+                        # egenskapen['datatype']) == 'GeomLinje eller Kurve' --> Kurve
+                        # egenskapen['datatype']) == 'GeomFlate' --> Flate
+                        # Andre --> Geometri
+                        # Lager geometriobjekt og geometriproperty
+                        geomURI = URIRef(nvdbVoPath + str(objektet['id']) + '_' + str(egenskapen['id']))
+                        g.add((objectURI, URIRef(egenskapURI), geomURI))
+                        g.add((geomURI, RDF.type, URIRef(nvdbOTLPath + 'Geometri')))
+                        g.add((geomURI, URIRef('http://www.opengis.net/ont/geosparql#asWKT'), Literal(egenskapen['verdi'])))
+                        if 'høydereferanse' in egenskapen:
+                            g.add((geomURI, URIRef(nvdbOTLPath + 'høydereferanse'), Literal(egenskapen['høydereferanse'], datatype=XSD.string)))
+                        if 'medium' in egenskapen:
+                            g.add((geomURI, URIRef(nvdbOTLPath + 'medium'), Literal(egenskapen['medium'], datatype=XSD.string)))
+                        for kvaliteten in egenskapen['kvalitet']:
+                            if 'målemetode' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'målemetode'), Literal(egenskapen['kvalitet']['målemetode'])))
+                            if 'målemetodeHøyde' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'målemetodeHøyde'), Literal(egenskapen['kvalitet']['målemetodeHøyde'])))
+                            if 'nøyaktighet' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighet'), Literal(egenskapen['kvalitet']['nøyaktighet'])))
+                            if 'nøyaktighetHøyde' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighetHøyde'), Literal(egenskapen['kvalitet']['nøyaktighetHøyde'])))
+                            if 'synbarhet' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'synbarhet'), Literal(egenskapen['kvalitet']['synbarhet'])))
+                            if 'maksimaltAvvik' in kvaliteten:
+                                g.add((geomURI, URIRef(nvdbOTLPath + 'maksimaltAvvik'),Literal(egenskapen['kvalitet']['maksimaltAvvik'])))
                     else:
-                        #print(egenskapen)
+                        print('Annen egenskapstype: ', egenskapen)
+                        g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.string)))
 
-                        g.add((objectURI, egenskapURI, Literal(egenskapen['verdi'], datatype=XSD.string)))
+        # TODO: Stedfesting (geometri og lineære posisjoner)
+        if 'geometri' in objektet:
+           #TODO: SRID i WKT-strengen
+           geomURI = URIRef(nvdbVoPath + str(objektet['id']) + '_wkt')
+           g.add((objectURI, URIRef('http://www.opengis.net/ont/geosparql#hasGeometry'), geomURI))
+           g.add((geomURI, RDF.type, URIRef(nvdbOTLPath + 'Geometri')))
+           g.add((geomURI, URIRef(nvdbOTLPath + 'geometriposisjon'), Literal(objektet['geometri']['wkt'])))
+           g.add((geomURI, URIRef(nvdbOTLPath + 'egengeometri'), Literal(objektet['geometri']['wkt'], datatype=XSD.boolean)))
 
-            # TODO: Assosiasjoner
-            # TODO: Stedfesting (geometri og lineære posisjoner)
-
-        if count % 100 == 0 or count in [1, 10, 20, 50]:
+           if count % 100 == 0 or count in [1, 10, 20, 50]:
             print('Prosessert ', count, 'av', sokeobjekt.antall, 'NVDB-objekter av objekttypen ', lagnavn)
 
-        objektet = sokeobjekt.nesteNvdbFagObjekt()
+        objektet = sokeobjekt.nesteForekomst()
 
     print('Prosessert ', count, 'av', sokeobjekt.antall, 'NVDB-objekter av objekttypen ', lagnavn)
 
     # Lister grafen
     #print(g.serialize(format="turtle").decode())
     # Skriver til fil (turtle)
-    g.serialize(destination=localPath + "\\data\\" + lagnavn + ".ttl", format="turtle")
+    g.serialize(destination=localPath + "\\data\\" + str(kommune) + "_" + lagnavn + ".ttl", format="turtle")
 
 print('Ferdig')

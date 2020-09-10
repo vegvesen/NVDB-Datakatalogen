@@ -13,7 +13,8 @@
 @base <http://rdf.vegdata.no/nvdb/nvdb-owl> .
 
 <http://rdf.vegdata.no/nvdb/nvdb-owl> rdf:type owl:Ontology ;
-                                       owl:imports <http://www.w3.org/2004/02/skos/core> ;
+                                       owl:imports <http://www.opengis.net/ont/geosparql> ,
+                                                   <http://www.w3.org/2004/02/skos/core> ;
                                        dc:date "2020-06-19" ;
                                        dc:description "Ontologi for NVDB Datakatalogen"@no ;
                                        dcterms:title "NVDB Datakatalogen"@no .
@@ -132,6 +133,24 @@ dc:description rdf:type owl:AnnotationProperty .
 #    Object Properties
 #################################################################
 
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#geometriposisjon
+:geometriposisjon rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :vot_stedfesting ,
+                                     gsp:hasGeometry ;
+                  rdfs:label "Geometriposisjon"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#geometriproperties
+:geometriproperties rdf:type owl:ObjectProperty ;
+                    rdfs:label "Egenskaper på geometri"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#høyderefereanse
+:høyderefereanse rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :geometriproperties ;
+                 rdfs:label "Høydereferanse"@no .
+
+
 ###  http://rdf.vegdata.no/nvdb/nvdb-owl#lrpos
 :lrpos rdf:type owl:ObjectProperty ;
        rdfs:subPropertyOf :vot_stedfesting ;
@@ -140,28 +159,76 @@ dc:description rdf:type owl:AnnotationProperty .
        skos:definition "Angivelse av posisjon relativt til et  lineært objekt."@no .
 
 
-###  http://rdf.vegdata.no/nvdb/nvdb-owl#område
-:område rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf :vot_stedfesting ;
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#maksimaltAvvik
+:maksimaltAvvik rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :posisjonskvalitet ;
+                rdfs:label "Maksimalt avvik"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#medium
+:medium rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :geometriproperties ;
+        rdfs:label "Medium"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#målemetode
+:målemetode rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :posisjonskvalitet ;
+            rdfs:label "Målemetode"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#målemetodeHøyde
+:målemetodeHøyde rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :posisjonskvalitet ;
+                 rdfs:label "Målemetode, høyde"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#nøyaktighet
+:nøyaktighet rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :posisjonskvalitet ;
+             rdfs:label "Nøyaktighet"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#nøyaktighetHøyde
+:nøyaktighetHøyde rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :posisjonskvalitet ;
+                  rdfs:label "Nøyaktighet, høyde"@no .
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#områdegeometriposisjon
+:områdegeometriposisjon rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :geometriposisjon ;
         rdfs:range :Flate ;
         rdfs:label "Område/flate"@no ;
         skos:definition "Flate/polygon som geometrisk avgrenser området"@no .
 
 
-###  http://rdf.vegdata.no/nvdb/nvdb-owl#posisjon
-:posisjon rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf :vot_stedfesting ;
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#punktgeometriposisjon
+:punktgeometriposisjon rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :geometriposisjon ;
           rdfs:range :Punkt ;
-          rdfs:label "Punktposisjon"@no ;
+          rdfs:label "Punkt"@no ;
           skos:definition "Punkt som geometrisk representerer objektet."@no .
 
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#posisjonskvalitet
+:posisjonskvalitet rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :geometriproperties ;
+                   rdfs:label "Posisjonskvalitet"@no .
 
-###  http://rdf.vegdata.no/nvdb/nvdb-owl#senterlinje
-:senterlinje rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf :vot_stedfesting ;
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#linjegeometriposisjon
+:linjegeometriposisjon rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :geometriposisjon ;
              rdfs:range :Kurve ;
-             rdfs:label "Senterlinje"@no ;
+             rdfs:label "Kurve"@no ;
              skos:definition "Linje/kurve som geometrisk representerer objektet."@no .
+
+
+
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#synbarhet
+:synbarhet rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :posisjonskvalitet ;
+           rdfs:label "Synbarhet"@no .
 
 
 ###  http://rdf.vegdata.no/nvdb/nvdb-owl#vot_o_properties
@@ -180,6 +247,11 @@ dc:description rdf:type owl:AnnotationProperty .
 #################################################################
 #    Data properties
 #################################################################
+###  http://rdf.vegdata.no/nvdb/nvdb-owl#egengeometri
+:egengeometri rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Geometri ;
+              rdfs:range xsd:boolean ;
+              rdfs:label "Egengeometri"@no .
 
 ###  http://rdf.vegdata.no/nvdb/nvdb-owl#vot_d_properties
 :vot_d_properties rdf:type owl:DatatypeProperty ;
@@ -222,7 +294,8 @@ dc:description rdf:type owl:AnnotationProperty .
 ###  http://rdf.vegdata.no/nvdb/nvdb-owl#Geometri
 :Geometri rdf:type owl:Class ;
           rdfs:subClassOf <http://def.isotc211.org/iso19107/2003/GeometryRoot#GM_Object> ,
-                          :Stedfesting ;
+                          :Stedfesting ,
+                          gsp:Geometry ;
           owl:disjointWith :LineærPosisjon ;
           skos:definition "Geometri som representerer vegobjektet"@no .
 
