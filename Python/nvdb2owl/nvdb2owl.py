@@ -158,11 +158,14 @@ if isinstance(sokeobjekt, nvdbFagdata):
                         # egenskapen['datatype']) == 'GeomLinje eller Kurve' --> Kurve
                         # egenskapen['datatype']) == 'GeomFlate' --> Flate
                         # Andre --> Geometri
-                        # Lager geometriobjekt og geometriproperty
+
+                        # Lager geometriobjekt og geometriproperty.
+                        # Geometriobjektet brukes også for den generelle stedfestingen lenger ned.
+                        # Refererer da objektet sin geometrirepresentasjon til samme geometriobjekt som i objektets geometriegenskap
                         geomURI = URIRef(nvdbVoPath + str(objektet['id']) + '_' + str(egenskapen['id']))
                         g.add((objectURI, URIRef(egenskapURI), geomURI))
-                        g.add((geomURI, RDF.type, URIRef(nvdbOTLPath + 'Geometri')))
-                        g.add((geomURI, URIRef('http://www.opengis.net/ont/geosparql#asWKT'), Literal(egenskapen['verdi'])))
+                        g.add((geomURI, RDFS.label, Literal(str(objektet['id']) + ' Egengeometri')))
+
                         if 'høydereferanse' in egenskapen:
                             g.add((geomURI, URIRef(nvdbOTLPath + 'høydereferanse'), Literal(egenskapen['høydereferanse'], datatype=XSD.string)))
                         if 'medium' in egenskapen:
@@ -187,11 +190,16 @@ if isinstance(sokeobjekt, nvdbFagdata):
         # TODO: Stedfesting (geometri og lineære posisjoner)
         if 'geometri' in objektet:
            #TODO: SRID i WKT-strengen
-           geomURI = URIRef(nvdbVoPath + str(objektet['id']) + '_wkt')
-           g.add((objectURI, URIRef('http://www.opengis.net/ont/geosparql#hasGeometry'), geomURI))
+           if str(objektet['geometri']['egengeometri']) == 'False':
+               # Lager nytt geometriobjekt med geometri avledet fra vegnett
+               geomURI = URIRef(nvdbVoPath + str(objektet['id']) + '_lrGeo')
+               g.add((geomURI, RDFS.label, Literal(str(objektet['id']) + ' Geometri avledet fra vegnett')))
+
+           #Knytter geometriobjektet til objektet
+           g.add((objectURI, URIRef(nvdbOTLPath + 'geometriposisjon'), geomURI))
            g.add((geomURI, RDF.type, URIRef(nvdbOTLPath + 'Geometri')))
-           g.add((geomURI, URIRef(nvdbOTLPath + 'geometriposisjon'), Literal(objektet['geometri']['wkt'])))
-           g.add((geomURI, URIRef(nvdbOTLPath + 'egengeometri'), Literal(objektet['geometri']['wkt'], datatype=XSD.boolean)))
+           g.add((geomURI, URIRef('http://www.opengis.net/ont/geosparql#asWKT'), Literal(objektet['geometri']['wkt'])))
+           g.add((geomURI, URIRef(nvdbOTLPath + 'egengeometri'), Literal(objektet['geometri']['egengeometri'], datatype=XSD.boolean)))
 
            if count % 100 == 0 or count in [1, 10, 20, 50]:
             print('Prosessert ', count, 'av', sokeobjekt.antall, 'NVDB-objekter av objekttypen ', lagnavn)
