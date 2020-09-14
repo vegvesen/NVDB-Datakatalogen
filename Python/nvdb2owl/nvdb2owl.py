@@ -1,10 +1,15 @@
-localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+vot=5
+kommune=3403
 
+
+localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+#proxies = {}
 proxies = {'http': 'http://proxy.vegvesen.no:8080'}
 
 url = "http://rdfspatial.vegdata.no:7200/repositories/nvdb"
 # url = "http://localhost:7200/repositories/nvdb"
 nvdbVoPath = "http://rdf.vegdata.no/nvdb/vegobjekt#"
+nvdbVnPath = "http://rdf.vegdata.no/nvdb/vegnett#"
 nvdbOTLPath = "http://rdf.vegdata.no/nvdb/nvdb-owl#"
 
 
@@ -63,23 +68,29 @@ if not [k for k in sys.path if localPath in k]:
 from nvdbapiv3 import nvdbFagdata
 
 # Setter opp søket
-vot=7
-kommune=3413
 sokeobjekt = nvdbFagdata(vot)
 sokeobjekt.filter( {'kommune' : kommune }) # Hamar kommune
 
 from rdflib import Graph, Namespace, URIRef, BNode, Literal
 from rdflib.namespace import RDF, RDFS, FOAF, XSD
 
-# Leser NVDB-ontologien
-#gOTL = Graph()
-#nvdb_owl = gOTL.parse("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-owl.ttl",format="turtle")
 
 if isinstance(sokeobjekt, nvdbFagdata):
 
     lagnavn = sokeobjekt.objektTypeDef['navn']
+    # Initierer graf
+    g = Graph()
+    nvdb_ns_vo = Namespace(nvdbVoPath)
+    nvdb_ns_otl = Namespace(nvdbOTLPath)
+    g.bind("nvdb_vo", nvdb_ns_vo)
+    g.bind("nvdb_otl",nvdb_ns_otl)
+    g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
+    # Leser NVDB-ontologien
+    print('Leser inn NVDB-OTL')
+    g.parse("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-owl.ttl",format="turtle")
 
     # Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen
+    print('Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen')
     sqres = get_nvdb_ft(str(sokeobjekt.objektTypeDef['id']))
 
     # Henter ut sosinavn og uri fra resultatet
@@ -94,17 +105,11 @@ if isinstance(sokeobjekt, nvdbFagdata):
     lagnavn = sosinavn
 
     # Slå opp egenskaps-uri-er og enum-uri-er i NVDB-OT (SPARQL)
+    print('Oppslag i NVDB-OTL (SPARQL) på egenskaper')
     sqresEgenskaper = get_nvdb_pt(str(sokeobjekt.objektTypeDef['id']))
+    print('Oppslag i NVDB-OTL (SPARQL) på tillatte verdier')
     sqresEnums = get_nvdb_enum(str(sokeobjekt.objektTypeDef['id']))
 
-    # Initierer graf
-    g = Graph()
-    nvdb_ns_vo = Namespace(nvdbVoPath)
-    nvdb_ns_otl = Namespace(nvdbOTLPath)
-    g.bind("nvdb_vo", nvdb_ns_vo)
-    g.bind("nvdb_otl",nvdb_ns_otl)
-    g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
-    # TODO: Importer ontologi i grafen?
 
     objektet = sokeobjekt.nesteForekomst()
     count = 0
@@ -114,8 +119,9 @@ if isinstance(sokeobjekt, nvdbFagdata):
         # Legger objektet inn i grafen
         objectURI = URIRef(nvdbVoPath + str(objektet['id']))
         g.add((objectURI, RDF.type, classURI))
+        g.add((objectURI, URIRef(nvdbOTLPath + 'nvdb_id'), Literal(objektet['id'], datatype=XSD.integer)))
 
-        # Her kommer prosessering av egenskaper!
+        # Prosessering av egenskaper!
         for egenskapen in objektet['egenskaper']:
 
             # Legger til assosiasjoner i grafen
@@ -166,28 +172,30 @@ if isinstance(sokeobjekt, nvdbFagdata):
                         g.add((objectURI, URIRef(egenskapURI), geomURI))
                         g.add((geomURI, RDFS.label, Literal(str(objektet['id']) + ' Egengeometri')))
 
+                        #TODO: Geometriegenskaper referert til SKOS-konsepter fra skjema.geonorge.no
                         if 'høydereferanse' in egenskapen:
                             g.add((geomURI, URIRef(nvdbOTLPath + 'høydereferanse'), Literal(egenskapen['høydereferanse'], datatype=XSD.string)))
                         if 'medium' in egenskapen:
                             g.add((geomURI, URIRef(nvdbOTLPath + 'medium'), Literal(egenskapen['medium'], datatype=XSD.string)))
-                        for kvaliteten in egenskapen['kvalitet']:
-                            if 'målemetode' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'målemetode'), Literal(egenskapen['kvalitet']['målemetode'])))
-                            if 'målemetodeHøyde' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'målemetodeHøyde'), Literal(egenskapen['kvalitet']['målemetodeHøyde'])))
-                            if 'nøyaktighet' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighet'), Literal(egenskapen['kvalitet']['nøyaktighet'])))
-                            if 'nøyaktighetHøyde' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighetHøyde'), Literal(egenskapen['kvalitet']['nøyaktighetHøyde'])))
-                            if 'synbarhet' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'synbarhet'), Literal(egenskapen['kvalitet']['synbarhet'])))
-                            if 'maksimaltAvvik' in kvaliteten:
-                                g.add((geomURI, URIRef(nvdbOTLPath + 'maksimaltAvvik'),Literal(egenskapen['kvalitet']['maksimaltAvvik'])))
+
+                        if 'kvalitet' in egenskapen:
+                            for kvaliteten in egenskapen['kvalitet']:
+                                if 'målemetode' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'målemetode'), Literal(egenskapen['kvalitet']['målemetode'])))
+                                if 'målemetodeHøyde' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'målemetodeHøyde'), Literal(egenskapen['kvalitet']['målemetodeHøyde'])))
+                                if 'nøyaktighet' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighet'), Literal(egenskapen['kvalitet']['nøyaktighet'])))
+                                if 'nøyaktighetHøyde' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'nøyaktighetHøyde'), Literal(egenskapen['kvalitet']['nøyaktighetHøyde'])))
+                                if 'synbarhet' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'synbarhet'), Literal(egenskapen['kvalitet']['synbarhet'])))
+                                if 'maksimaltAvvik' in kvaliteten:
+                                    g.add((geomURI, URIRef(nvdbOTLPath + 'maksimaltAvvik'),Literal(egenskapen['kvalitet']['maksimaltAvvik'])))
                     else:
                         print('Annen egenskapstype: ', egenskapen)
                         g.add((objectURI, URIRef(egenskapURI), Literal(egenskapen['verdi'], datatype=XSD.string)))
 
-        # TODO: Stedfesting (geometri og lineære posisjoner)
         if 'geometri' in objektet:
            #TODO: SRID i WKT-strengen
            if str(objektet['geometri']['egengeometri']) == 'False':
@@ -201,7 +209,34 @@ if isinstance(sokeobjekt, nvdbFagdata):
            g.add((geomURI, URIRef('http://www.opengis.net/ont/geosparql#asWKT'), Literal(objektet['geometri']['wkt'])))
            g.add((geomURI, URIRef(nvdbOTLPath + 'egengeometri'), Literal(objektet['geometri']['egengeometri'], datatype=XSD.boolean)))
 
-           if count % 100 == 0 or count in [1, 10, 20, 50]:
+        if 'stedfestinger' in objektet['lokasjon']:
+           lrCount=0
+           for stedfestingen in objektet['lokasjon']['stedfestinger']:
+               #print(stedfestingen)
+               lrCount += 1
+               #Definer objekt med type http://rdf.vegdata.no/nvdb/nvdb-owl#LineærPosisjonPunkt eller http://rdf.vegdata.no/nvdb/nvdb-owl#LineærPosisjonStrekning
+               lrURI = URIRef(nvdbVoPath + str(objektet['id']) + '_lr' + str(lrCount))
+               if str(stedfestingen['type']) == 'Punkt':
+                   g.add((lrURI, RDF.type, URIRef(nvdbOTLPath + 'LineærPosisjonPunkt')))
+                   g.add((lrURI, URIRef(nvdbOTLPath + 'påPosisjon'),Literal(stedfestingen['relativPosisjon'], datatype=XSD.double)))
+               else:
+                   g.add((lrURI, RDF.type, URIRef(nvdbOTLPath + 'LineærPosisjonStrekning')))
+                   g.add((lrURI, URIRef(nvdbOTLPath + 'fraPosisjon'),Literal(stedfestingen['startposisjon'], datatype=XSD.double)))
+                   g.add((lrURI, URIRef(nvdbOTLPath + 'tilPosisjon'),Literal(stedfestingen['sluttposisjon'], datatype=XSD.double)))
+
+               g.add((lrURI, RDFS.label, Literal(str(objektet['id']) + ' Lineær posisjon' + '_' + str(lrCount))))
+               g.add((lrURI, URIRef(nvdbOTLPath + 'lrposNettverkselement'), URIRef(nvdbVnPath + str(stedfestingen['veglenkesekvensid']))))
+               g.add((lrURI, URIRef(nvdbOTLPath + 'lineærReferansemetode'), URIRef(nvdbOTLPath + 'lrmNormalisert')))
+
+               if 'retning' in stedfestingen:
+                   g.add((lrURI, URIRef(nvdbOTLPath + 'lrRetning'), Literal(stedfestingen['retning'], datatype=XSD.string)))
+               if 'sideposisjon' in stedfestingen:
+                   g.add((lrURI, URIRef(nvdbOTLPath + 'lrSideposisjon'), Literal(stedfestingen['sideposisjon'], datatype=XSD.string)))
+
+               #Koble den lineære posisjonen til objektet
+               g.add((objectURI, URIRef(nvdbOTLPath + 'lrposisjon'), lrURI))
+
+        if count % 100 == 0 or count in [1, 10, 20, 50]:
             print('Prosessert ', count, 'av', sokeobjekt.antall, 'NVDB-objekter av objekttypen ', lagnavn)
 
         objektet = sokeobjekt.nesteForekomst()
@@ -211,6 +246,7 @@ if isinstance(sokeobjekt, nvdbFagdata):
     # Lister grafen
     #print(g.serialize(format="turtle").decode())
     # Skriver til fil (turtle)
+    print('Skriver til turtle-fil')
     g.serialize(destination=localPath + "\\data\\" + str(kommune) + "_" + lagnavn + ".ttl", format="turtle")
 
 print('Ferdig')
