@@ -13,7 +13,7 @@ Har disse hjelpefunksjonene:
 Sjekk README.md for detaljer, og https://github.com/LtGlahn/nvdbapi-V3/issues for kjente feil og mangler. 
 
 """
-localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\nvdb2owl"
 
 import six # python 2 vs 3 compability library
 import json

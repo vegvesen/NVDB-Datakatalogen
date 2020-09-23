@@ -2,7 +2,7 @@ vot=5
 kommune=3403
 
 
-localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\nvdb2owl"
 #proxies = {}
 proxies = {'http': 'http://proxy.vegvesen.no:8080'}
 

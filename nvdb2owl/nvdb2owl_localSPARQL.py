@@ -2,7 +2,7 @@ vot=174
 kommune=3403
 
 
-localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\nvdb2owl"
 sqFileName=localPath + '\\data\\gdf.sparql'
 
 #proxies = {}
@@ -106,9 +106,11 @@ def sqFile2Array(fn):
 # *********************************
 # Her begynner selve moroa!
 import sys, requests,datetime
+
 if not [k for k in sys.path if localPath in k]:
     print('Føyer', localPath, 'til søkestien')
     sys.path.append(localPath)
+
 from nvdbapiv3 import nvdbFagdata
 
 startTime = datetime.datetime.now()
@@ -352,7 +354,8 @@ if isinstance(sokeobjekt, nvdbFagdata):
     print(str(datetime.datetime.now()) + ' Skriver til GDF-Turtle-fil')
     gdf_gg.serialize(destination=localPath + "\\data\\" + str(kommune) + "_gdf_" + lagnavn + ".ttl", format="turtle")
 
-timePassed =datetime.datetime.now() - startTime
 
+
+timePassed =datetime.datetime.now() - startTime
 
 print(str(datetime.datetime.now()) + ' Ferdig! Tidsforbruk: ' + str(timePassed) + ')')
