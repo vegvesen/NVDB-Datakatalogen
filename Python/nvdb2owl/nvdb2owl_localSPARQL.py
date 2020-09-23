@@ -1,17 +1,20 @@
-vot=79
+vot=174
 kommune=3403
 
 
 localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\Python\\nvdb2owl"
+sqFileName=localPath + '\\data\\gdf.sparql'
+
 #proxies = {}
 proxies = {'http': 'http://proxy.vegvesen.no:8080'}
 
-url = "http://rdfspatial.vegdata.no:7200/repositories/nvdb"
-# url = "http://localhost:7200/repositories/nvdb"
 nvdbVoPath = "http://rdf.vegdata.no/nvdb/vegobjekt#"
 nvdbVnPath = "http://rdf.vegdata.no/nvdb/vegnett#"
 nvdbOTLPath = "http://rdf.vegdata.no/nvdb/nvdb-owl#"
-
+gdfOTLPath = "http://rdf.gdf.org/gdf-owl#"
+nvdb_otl_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-owl.ttl'
+gdf_otl_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
+lr_set_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/LRS_NVDB_GDF.ttl'
 
 def get_nvdb_ft(vot_id):
     # SPARQL-oppslag på en vegobjekttype
@@ -21,7 +24,7 @@ def get_nvdb_ft(vot_id):
                 ?uri rdfs:subClassOf+ nvdb:Vegobjekttype .
                 ?uri nvdb:nvdb_id """ + vot_id + """ .
                 ?uri nvdb:sosi_navn ?sosinavn .}"""
-    qres=nvdb_otl.query(query)
+    qres=otl.query(query)
     return qres
 
 
@@ -38,7 +41,7 @@ def get_nvdb_pt(vot_id):
                 ?uri nvdb:nvdb_id ?nvdb_id .
                 ?uri rdfs:label ?label .
                 }"""
-    qres=nvdb_otl.query(query)
+    qres=otl.query(query)
     return qres
 
 def get_nvdb_enum(vot_id):
@@ -56,8 +59,49 @@ def get_nvdb_enum(vot_id):
     			?uri rdf:type ?codelist_uri .
         		?uri nvdb:nvdb_id ?enum_id .       
     			}"""
-    qres=nvdb_otl.query(query)
+    qres=otl.query(query)
     return qres
+
+def sqFile2Array(fn):
+    #Leser SPARQL-queries fra fil til liste
+    sqfile = open(sqFileName,'r',encoding='utf-8')
+    Lines = sqfile.readlines()
+
+    qList = [[]]
+    qRow = []
+    # Leser prefixer i headingen
+    strPrefix = ''
+    for line in Lines:
+        if line.startswith('/'):
+            break
+        else:
+            strPrefix += line
+    qRow =['prefix',strPrefix]
+
+    # Leser queries en og en
+    curQ = ''
+    qName=''
+    qCount = 0
+    for line in Lines:
+        if line.startswith('/'):
+            if qCount > 0:
+                qRow= [qName,curQ]
+            qList.append(qRow)
+            qCount += 1
+            #print('Query number ', qCount)
+            curQ = ''
+        elif line.startswith('#NAME'):
+            qName = line[6:].replace("\n", " ")
+            #print('Query name: ', qName)
+        elif qCount > 0:
+            curQ += line
+    curQ.encode(encoding='utf-8',errors='strict')
+    qRow = [qName, curQ]
+    qList.append(qRow)
+    del qList[0]
+    return qList
+
+
 
 # *********************************
 # Her begynner selve moroa!
@@ -81,16 +125,24 @@ if isinstance(sokeobjekt, nvdbFagdata):
     lagnavn = sokeobjekt.objektTypeDef['navn']
     # Initierer graf
     g = Graph()
-    nvdb_otl = Graph()
     nvdb_ns_vo = Namespace(nvdbVoPath)
     nvdb_ns_otl = Namespace(nvdbOTLPath)
     g.bind("nvdb_vo", nvdb_ns_vo)
     g.bind("nvdb_otl",nvdb_ns_otl)
     g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
-    # Leser NVDB-ontologien
-    nvdb_otl_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-owl.ttl'
+    # Leser ontologier
     print(str(datetime.datetime.now()) + ' Leser inn NVDB-OTL fra ', nvdb_otl_gh)
-    nvdb_otl.parse(nvdb_otl_gh,format="turtle")
+    otl_nvdb = Graph()
+    otl_nvdb.parse(nvdb_otl_gh,format="turtle")
+    print(str(datetime.datetime.now()) + ' Leser inn GDF-OTL fra ', gdf_otl_gh)
+    otl_gdf = Graph()
+    otl_gdf.parse(gdf_otl_gh,format="turtle")
+    print(str(datetime.datetime.now()) + ' Leser inn linkset fra ', lr_set_gh)
+    otl_lset = Graph()
+    otl_lset.parse(lr_set_gh,format="turtle")
+    #Slår sammen ontologier til en stor graf
+    otl = Graph()
+    otl = otl_nvdb + otl_gdf + otl_lset
 
     # Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen
     print(str(datetime.datetime.now()) + ' Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen')
@@ -251,8 +303,55 @@ if isinstance(sokeobjekt, nvdbFagdata):
     # Lister grafen
     #print(g.serialize(format="turtle").decode())
     # Skriver til fil (turtle)
-    print(str(datetime.datetime.now()) + ' Skriver til turtle-fil')
+    print(str(datetime.datetime.now()) + ' Skriver til NVDB-Turtle-fil')
     g.serialize(destination=localPath + "\\data\\" + str(kommune) + "_" + lagnavn + ".ttl", format="turtle")
+
+    # Konvertering til GDF vha SPARQL
+
+    #Lager graf med både OTL og individer
+    gOTL = otl + g
+    gdf_g = Graph()
+    gdf_g.bind("nvdb_vo", nvdb_ns_vo)
+    gdf_g.bind("gdf", gdfOTLPath)
+
+    #Les queries fra fil, sekvensiell prosessering
+    queryList = sqFile2Array(sqFileName)
+    i = 0
+    for queryRow in queryList:
+        if i == 0:
+            prefix=queryList[i][1]
+        else:
+            print('')
+            qName = queryList[i][0]
+            print(str(datetime.datetime.now()) + ' Konverteringsspørring : ', qName)
+            query = prefix + '\n' + queryList[i][1]
+            #print('Query: ', query)
+            # Kjører spørring og lager ny graf som resultat
+            gdf_res=gOTL.query(query)
+            newg = Graph().parse(data=gdf_res.serialize(format='xml'))
+            #print(newg.serialize(format="turtle").decode())
+            gdf_g += newg
+
+            cntGdf = 0
+            for subject, predicate, object in newg:
+                if not (subject, predicate, object) in newg:
+                    raise Exception("Iterator / Container Protocols are Broken!!")
+                cntGdf += 1
+            if cntGdf > 0:
+                print(str(datetime.datetime.now()) + ' Generert  ' + str(cntGdf) + ' tripler' )
+                # Lister grafen
+                # print(gdf_g.serialize(format="turtle").decode())
+            else:
+                print(str(datetime.datetime.now()) + ' Ingen matchende GDF features')
+        i += 1
+
+    gdf_gg = Graph()
+    gdf_gg = gdf_g + otl_gdf
+    #gdf_gg.remove((None, RDF.type, classURI))  # remove all triples refering to NVDB-type
+    print('')
+    print(str(datetime.datetime.now()) + ' Skriver til GDF-Turtle-fil')
+    gdf_gg.serialize(destination=localPath + "\\data\\" + str(kommune) + "_gdf_" + lagnavn + ".ttl", format="turtle")
+
 timePassed =datetime.datetime.now() - startTime
 
 
