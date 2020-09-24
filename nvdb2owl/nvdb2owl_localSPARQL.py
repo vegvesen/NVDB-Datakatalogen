@@ -348,7 +348,7 @@ if isinstance(sokeobjekt, nvdbFagdata):
         i += 1
 
     gdf_gg = Graph()
-    gdf_gg = gdf_g + otl_gdf
+    gdf_gg = gdf_g #+ otl_gdf
     #gdf_gg.remove((None, RDF.type, classURI))  # remove all triples refering to NVDB-type
     print('')
     print(str(datetime.datetime.now()) + ' Skriver til GDF-Turtle-fil')
