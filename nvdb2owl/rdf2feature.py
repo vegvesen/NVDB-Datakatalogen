@@ -1,18 +1,18 @@
-localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\nvdb2owl"
-rdfFile = localPath + "\\data\\3403_gdf_Gangfelt.ttl"
-gdf_otl_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
-gdfOTLPath = "http://rdf.gdf.org/gdf-owl#"
-rdfsUri = "http://www.w3.org/2000/01/rdf-schema#"
+#Importerer biblioteker
+import sys, datetime, sqlite3
+from constants import *
+from rdflib import Graph, Namespace, URIRef, BNode, Literal
+from rdflib.namespace import RDF, RDFS, FOAF, XSD
 
 # SPARQL-oppslag på instanser av GDF-typer
 q_prefix = """PREFIX gdf: <http://rdf.gdf.org/gdf-owl#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"""
 
-def opm(opuri):
+def opm(cluri):
     opm_query = q_prefix + """
                 SELECT DISTINCT ?op_uri ?op_code ?op_name  
                 WHERE { 
-            	?individual a <""" + opuri + """> .
+            	?individual a <""" + cluri + """> .
         		?individual ?op_uri ?gdf_val .
        			?gdf_val a ?gdf_valtype .
         		?op_uri rdfs:range ?gdf_valtype .
@@ -31,14 +31,10 @@ ft_query = q_prefix + """
         	?cls rdfs:label ?typename .
         	}"""
 
-import sys, requests,datetime, sqlite3
 
 #Create database
 conn = sqlite3.connect(localPath + '\\data\\test.db')
 c = conn.cursor()
-
-from rdflib import Graph, Namespace, URIRef, BNode, Literal
-from rdflib.namespace import RDF, RDFS, FOAF, XSD
 
 print(str(datetime.datetime.now()) + ' Reading GDF-OTL from ', gdf_otl_gh)
 otl_gdf = Graph()

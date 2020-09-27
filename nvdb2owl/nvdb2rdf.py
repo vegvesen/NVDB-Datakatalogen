@@ -1,17 +1,16 @@
-# Konvertering av data fra NVDB-API til RDF-format i henhold til NVDB Objekttypebibliotek
+# Funksjoner for konvertering fra NVDB-API til Graf (RDF)
 
 #Importerer biblioteker
 import sys, datetime
 from rdflib import Graph, Namespace, URIRef,  Literal
 from rdflib.namespace import RDF, RDFS, XSD
 from constants import *
-
 if not [k for k in sys.path if localPath in k]:
     print('Føyer', localPath, 'til søkestien')
     sys.path.append(localPath)
 from nvdbapiv3 import nvdbFagdata
 
-def get_nvdb_ft(vot_id):
+def get_nvdb_ft(vot_id,oGraph):
     # SPARQL-oppslag på en vegobjekttype
     query = """PREFIX nvdb: <http://rdf.vegdata.no/nvdb/nvdb-owl#>
                 SELECT DISTINCT ?uri ?sosinavn
@@ -19,10 +18,10 @@ def get_nvdb_ft(vot_id):
                 ?uri rdfs:subClassOf+ nvdb:Vegobjekttype .
                 ?uri nvdb:nvdb_id """ + vot_id + """ .
                 ?uri nvdb:sosi_navn ?sosinavn .}"""
-    qres=otl_nvdb.query(query)
+    qres=oGraph.query(query)
     return qres
 
-def get_nvdb_pt(vot_id):
+def get_nvdb_pt(vot_id,oGraph):
     # SPARQL-oppslag på egenskapstyper for en objekttype
     query = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                PREFIX nvdb: <http://rdf.vegdata.no/nvdb/nvdb-owl#>
@@ -35,10 +34,10 @@ def get_nvdb_pt(vot_id):
                 ?uri nvdb:nvdb_id ?nvdb_id .
                 ?uri rdfs:label ?label .
                 }"""
-    qres=otl_nvdb.query(query)
+    qres=oGraph.query(query)
     return qres
 
-def get_nvdb_enum(vot_id):
+def get_nvdb_enum(vot_id,oGraph):
     # SPARQL-oppslag på enumerations for en objekttype
     query = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                PREFIX nvdb: <http://rdf.vegdata.no/nvdb/nvdb-owl#>
@@ -48,15 +47,15 @@ def get_nvdb_enum(vot_id):
                 ?class rdfs:subClassOf+ nvdb:Vegobjekttype .
                 ?class nvdb:nvdb_id """ + vot_id + """ .
                 ?property rdfs:domain ?class .
-    			?property rdfs:range ?codelist_uri .
-    			?property nvdb:nvdb_id ?property_id .
-    			?uri rdf:type ?codelist_uri .
-        		?uri nvdb:nvdb_id ?enum_id .       
-    			}"""
-    qres=otl_nvdb.query(query)
+                ?property rdfs:range ?codelist_uri .
+                ?property nvdb:nvdb_id ?property_id .
+                ?uri rdf:type ?codelist_uri .
+                ?uri nvdb:nvdb_id ?enum_id .       
+                }"""
+    qres=oGraph.query(query)
     return qres
 
-def nvdb2graph(vot, kommune):
+def nvdb2graph(vot, kommune,oGraph):
     # Konvertering av en objekttype i en kommune fra NVDB-API til RDf i henhold til NVDB-OTL
     # Henter data fra NVDB-API
     sokeobjekt = nvdbFagdata(vot)
@@ -73,7 +72,7 @@ def nvdb2graph(vot, kommune):
 
         # Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen
         print(str(datetime.datetime.now()) + ' Oppslag i NVDB-OTL (SPAQRL) etter uri og navn for objekttypen')
-        sqres=get_nvdb_ft(str(sokeobjekt.objektTypeDef['id']))
+        sqres=get_nvdb_ft(str(sokeobjekt.objektTypeDef['id']),oGraph)
 
         # Henter ut sosinavn og uri fra resultatet
         for row in sqres:
@@ -89,9 +88,9 @@ def nvdb2graph(vot, kommune):
 
         # Slå opp egenskaps-uri-er og enum-uri-er i NVDB-OT (SPARQL)
         print(str(datetime.datetime.now()) + ' Oppslag i NVDB-OTL (SPARQL) på egenskaper')
-        sqresEgenskaper = get_nvdb_pt(str(sokeobjekt.objektTypeDef['id']))
+        sqresEgenskaper = get_nvdb_pt(str(sokeobjekt.objektTypeDef['id']), oGraph)
         print(str(datetime.datetime.now()) + ' Oppslag i NVDB-OTL (SPARQL) på tillatte verdier')
-        sqresEnums = get_nvdb_enum(str(sokeobjekt.objektTypeDef['id']))
+        sqresEnums = get_nvdb_enum(str(sokeobjekt.objektTypeDef['id']),oGraph)
 
         objektet = sokeobjekt.nesteForekomst()
         count = 0
@@ -221,36 +220,4 @@ def nvdb2graph(vot, kommune):
         print(str(datetime.datetime.now()) + ' Prosessert ', count, 'av', sokeobjekt.antall, 'NVDB-objekter av objekttypen ', lagnavn)
     return g
 
-# *********************************
-# Her begynner selve moroa!
-startTime = datetime.datetime.now()
-# Leser NVDB-ontologien
-print(str(datetime.datetime.now()) + ' Leser inn NVDB-OTL fra ', nvdb_otl_gh)
-otl_nvdb = Graph()
-otl_nvdb.parse(nvdb_otl_gh, format="turtle")
-# Setter opp graf og namespace-forkortelser for dataene
-g_nvdb=Graph()
-g_nvdb.bind("nvdb_vo", Namespace(nvdbVoPath))
-g_nvdb.bind("nvdb_otl",Namespace(nvdbOTLPath))
-g_nvdb.bind("gsp",'http://www.opengis.net/ont/geosparql#')
 
-# Filnavn
-vegobjekttype=174
-område='Innlandet'
-nvdbfile=localPath + "\\data\\" + område + "_" + str(vegobjekttype) + ".ttl."
-# Løkke for kommuner
-for knr in range (3400,3499):
-    print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
-    try:
-        # Lager graf fra NVDB-data
-        g_nvdb=g_nvdb + nvdb2graph(vegobjekttype,knr)
-    except:
-        print(str(datetime.datetime.now()) + ' Ukjent kommune: ' + str(knr))
-
-# Lister grafen
-# print(g_nvdb.serialize(format="turtle").decode())
-# Skriver til fil (turtle)
-print(str(datetime.datetime.now()) + ' Skriver til NVDB-Turtle-fil: ' + nvdbfile)
-g_nvdb.serialize(destination=nvdbfile, format="turtle")
-timePassed =datetime.datetime.now() - startTime
-print(str(datetime.datetime.now()) + ' Ferdig! Tidsforbruk: ' + str(timePassed) + ')')
