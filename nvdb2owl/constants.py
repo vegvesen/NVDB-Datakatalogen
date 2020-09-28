@@ -14,3 +14,4 @@ nvdb_otl_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/mas
 gdf_otl_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
 lr_set_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/LRS_NVDB_GDF.ttl'
 rdfsUri = "http://www.w3.org/2000/01/rdf-schema#"
+gspURI = "http://www.opengis.net/ont/geosparql#"

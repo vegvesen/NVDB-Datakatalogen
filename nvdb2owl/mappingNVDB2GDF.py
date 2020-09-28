@@ -33,9 +33,9 @@ otl = otl_nvdb + otl_gdf + otl_lset
 # Leser graf med NVDB-data
 g_nvdb = Graph()
 vegobjekttype=174
-område='Innlandet'
+område='FronSel'
 # Alt.1: Fra NVDB-API
-for knr in range (3400,3499):
+for knr in range (3436,3438):
     print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
     try:
         # Lager graf fra NVDB-data

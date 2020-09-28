@@ -1,8 +1,14 @@
+#Konverterer GDF-RDF til GeoJSON for bruk i f.eks. QGIS
+
 #Importerer biblioteker
 import sys, datetime, sqlite3
 from constants import *
 from rdflib import Graph, Namespace, URIRef, BNode, Literal
 from rdflib.namespace import RDF, RDFS, FOAF, XSD
+import geojson
+import shapely.wkt
+import pyproj
+from shapely.ops import transform
 
 # SPARQL-oppslag på instanser av GDF-typer
 q_prefix = """PREFIX gdf: <http://rdf.gdf.org/gdf-owl#>
@@ -23,6 +29,7 @@ def opm(cluri):
             """
     return opm_query
 
+
 ft_query = q_prefix + """
             SELECT DISTINCT ?cls ?typename
             WHERE { 
@@ -30,11 +37,6 @@ ft_query = q_prefix + """
         	?cls rdfs:subClassOf+ gdf:GDF_Feature .
         	?cls rdfs:label ?typename .
         	}"""
-
-
-#Create database
-conn = sqlite3.connect(localPath + '\\data\\test.db')
-c = conn.cursor()
 
 print(str(datetime.datetime.now()) + ' Reading GDF-OTL from ', gdf_otl_gh)
 otl_gdf = Graph()
@@ -47,65 +49,64 @@ ds_gdf.parse(rdfFile, format="turtle")
 g = Graph()
 g = otl_gdf + ds_gdf
 
-#TODO: Subgraph with features, data properties and values
+t2w84 = pyproj.Transformer.from_crs("EPSG:25833","EPSG:4326")
 
-#TODO: Subgraph with features and location references
-
-
-#Finner GDF-objekttyper i datasettet
+# List of feature types in the dataset
 ft_qres=g.query(ft_query)
 ft_cnt = 0
 for ft_row in ft_qres:
     print(str(datetime.datetime.now()) + ' GDF Feature Type: ' + ft_row.typename)
+    tblName = str(ft_row.typename).replace(" ","")
     ft_cnt += 1
     # List of object properties in use for this feature type
     omq= opm(str(ft_row.cls))
     op_qres = g.query(omq)
     print(str(datetime.datetime.now()) + ' Object Properties in use for the feature type: ')
-    dbCreate = '''CREATE TABLE ''' + str(ft_row.typename).replace(" ","") + ''' ('''
+
     for op_row in op_qres:
         print(str(datetime.datetime.now()) + ' ' + str(op_row.op_uri) + " code: " + str(op_row.op_code) + " Name: " + str(op_row.op_name))
-        dbCreate += str(op_row.op_code) + ''' text,'''
-    dbCreate = dbCreate[:-1]
-    dbCreate += ''')'''
-    # Create table
-    print(str(datetime.datetime.now()) + ' Creating database table: ' + dbCreate)
-    try:
-        c.execute(dbCreate)
-    except:
-        print(str(datetime.datetime.now()) + ' Table exsists')
+
+    #List of geometry types
 
     #Finner instanser av den aktuelle objekttypen
     f_cnt = 0
+    features = []
     for fs, fp, fo in g.triples((None, RDF.type, ft_row.cls)):
         print("Feature {}".format(fs) + " of type " + ft_row.typename)
         f_cnt += 1
         #Loop for object properties
+        pList = {}
+        pList['Feature type'] = tblName
         for op_row in op_qres:
             for ps, pp, po in ds_gdf.triples((fs, URIRef(op_row.op_uri), None)):
                 #Name of the codelist value
                 for ts, tp, to in otl_gdf.triples((po, URIRef(rdfsUri + "label"), None)):
                     vName = format(to)
-
+                    pList[str(op_row.op_name)] = vName
                 print("Object property {}".format(pp) + " (" + str(op_row.op_code) + ") (" + str(op_row.op_name) + ") with value {}".format(po) + " (" + vName + ")")
-                #print("Object property {}".format(pp) + " with value {}".format(po))
+
         #TODO: Loop for data properties
 
         #TODO: Loop for location referencing
+        wktGeometry = 'NULL'
+        for loc_s,loc_p,loc_o in ds_gdf.triples((fs, URIRef(gdfOTLPath + "locationReference"), None)):
+            for geom_s, geom_p, geom_o in ds_gdf.triples((loc_o, URIRef(gspURI + "asWKT"), None)):
+                print("Geometry Location Reference: {}".format(geom_o))
+                wktGeometry = format(geom_o)
+        if wktGeometry != 'NULL':
+            shplGeometry = shapely.wkt.loads(wktGeometry)
+            w84Geometry = shplGeometry #transform(t2w84.transform, shplGeometry)
+            print(w84Geometry)
+        else:
+            w84Geometry = {}
+        features.append(geojson.Feature(geometry=w84Geometry, properties=pList))
 
-        # Insert a row of data
-        # c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+    feature_collection = geojson.FeatureCollection(features)
+    with open(localPath + '\\data\\' + tblName + '.geojson', 'w') as f:
+        geojson.dump(feature_collection, f)
 
     print(str(datetime.datetime.now()) + ' Counted ' + str(f_cnt) + ' Features of type ' + ft_row.typename)
 
 print(str(datetime.datetime.now()) + ' Counted ' + str(ft_cnt) + ' GDF Feature Types')
-
-# Save (commit) the changes
-conn.commit()
-
-# We can also close the connection if we are done with it.
-# Just be sure any changes have been committed or they will be lost.
-conn.close()
-
 print(str(datetime.datetime.now()) + ' Done!')
 
