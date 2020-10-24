@@ -44,8 +44,8 @@ Sub updateProperties_Kodelisteverdier()
 
 	If Not IsNull(rsKodelister.Fields("SOSI_navn").Value) Then '
 		set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", rsKodelister.Fields("SOSI_navn").Value)
-	Else
-		set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", createSOSInavn(rsKodelister.Fields("NAVN_TILLATT_VERDI").Value, "Lower", 255, ""))
+	'Else
+	'	set aTag = eAttributt.TaggedValues.AddNew("SOSI_navn", createSOSInavn(rsKodelister.Fields("NAVN_TILLATT_VERDI").Value, "Lower", 255, ""))
 	End If
 	aTag.Update()
 

@@ -77,6 +77,7 @@ for ft_row in ft_qres:
         #Loop for object properties
         pList = {}
         pList['Feature type'] = tblName
+        pList['ID'] = format(fs)
         for op_row in op_qres:
             for ps, pp, po in ds_gdf.triples((fs, URIRef(op_row.op_uri), None)):
                 #Name of the codelist value
