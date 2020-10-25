@@ -22,7 +22,7 @@ end sub
 
 sub updateAttributeProperties()
 'Oppdaterer properties på egenskapstyper
-
+	eAttributt.Name = eAttrNVDB.Name
 	eAttributt.Notes = eAttrNVDB.Notes
 	eAttributt.LowerBound = 0
 	eAttributt.UpperBound = eAttrNVDB.UpperBound
@@ -41,10 +41,10 @@ sub updateAttributeProperties()
 		select case aTag.Name
 			Case "SOSI_navn"
 				'SOSI-navn på egenskapstypen. Brukes for å sette SOSI-modellnavn og SOSI-formatnavn
-				Repository.WriteOutput "SOSI", Now & " Egenskapen/kodelisteverdien " & element.Name & "." & eAttributt.Name & " (" & eAttributt.Alias & ") oppdateres til " & aTag.Value,0
-				'Endrer navn på klassen til SOSI-modellnavn
-				eAttributt.Name = aTag.Value
 				if ucase(element.stereotype) = "FEATURETYPE" then
+					Repository.WriteOutput "SOSI", Now & " Egenskapen " & element.Name & "." & eAttributt.Name & " (" & eAttributt.Alias & ") oppdateres til " & aTag.Value,0
+					'Endrer navn på klassen til SOSI-modellnavn
+					eAttributt.Name = aTag.Value
 					'Lager ny tagged value på SOSI-elementet for SOSI-formatnavn (NVDB_ & Uppercase(element.Name))
 					'Unntak: De som allerede har prefix "NVDB_" skal kun ha uppercase, ikke ny prefix
 					set newATag = eAttributt.TaggedValues.AddNew("SOSI_navn", "")
@@ -54,6 +54,13 @@ sub updateAttributeProperties()
 						newATag.Value = Ucase(aTag.Value)
 					End If
 					newATag.Update() 
+				else
+					'Kodelister: NVDB-navn som kodelisteverdi, sosi-navnet som intialverdi dersom den ikke er angitt fra kortverdi
+					
+					if eAttributt.Default = "" then 
+						Repository.WriteOutput "SOSI", Now & " Kodelisteverdien " & element.Name & "." & eAttributt.Name & " (" & eAttributt.Alias & ") gis initialverdi " & aTag.Value,0
+						eAttributt.Default = aTag.Value				
+					end if	
 				end if	
 			Case "NAVN_EGENSKAPSTYPE", "NAVN_TILLATT_VERDI"
 				'NVDB-navn
