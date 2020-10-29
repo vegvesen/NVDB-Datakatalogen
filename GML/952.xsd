@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -18,7 +18,7 @@
     <complexContent>
       <extension base="nvdb:AbstraktBrannhendelseITunnelType">
         <sequence>
-          <element minOccurs="0" name="typeHendelse" type="nvdb:TypeHendelseType">
+          <element name="typeHendelse" type="nvdb:TypeHendelseType">
             <annotation>
               <documentation>11857: Angir hvilken type hendelse det er tale om</documentation>
               <appinfo>
@@ -54,12 +54,30 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="typeKjøretøy" type="nvdb:TypeKjøretøyType">
+          <element minOccurs="0" name="skadeomfangTunnel" type="nvdb:SkadeomfangTunnelType">
             <annotation>
-              <documentation>11858: Angir hvilken kjøretøykategori kjøretøyet hvor brann oppstod tilhører</documentation>
+              <documentation>11852: Angir skadeomfang på selve tunnelkonstruksjonen</documentation>
               <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11858</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type kjøretøy</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11852</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skadeomfang tunnel</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKjøretøyInvolvert" type="integer">
+            <annotation>
+              <documentation>11847: Angir hvor mange kjøretøy som var involvert i hendelsen</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11847</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Antall kjøretøy involvert</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="skadomfangKjøretøy" type="nvdb:SkadomfangKjøretøyType">
+            <annotation>
+              <documentation>11853: Angir hvilken skade det var på kjøretøy der brann oppstod</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skadomfang kjøretøy</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -81,66 +99,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="antallKjøretøyInvolvert" type="integer">
+          <element minOccurs="0" name="typeKjøretøy" type="nvdb:TypeKjøretøyType">
             <annotation>
-              <documentation>11847: Angir hvor mange kjøretøy som var involvert i hendelsen</documentation>
+              <documentation>11858: Angir hvilken kjøretøykategori kjøretøyet hvor brann oppstod tilhører</documentation>
               <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11847</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Antall kjøretøy involvert</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="personskadeinformasjonOffisieltBekreftet" type="nvdb:PersonskadeinformasjonOffisieltBekreftetType">
-            <annotation>
-              <documentation>11863: Gir informasjon om hvorvidt personskadeinformasjon er offisielt bekreftet eller ikke. Dette er særlig relevant for antall omkommet og alvorlig skadet.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11863</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Personskadeinformasjon offisielt bekreftet</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="antallPersonerOmkommetPgaBrann" type="integer">
-            <annotation>
-              <documentation>11956: Antall personer som har omkommet som følge av at det oppstod brann (inkludert røyk, gass, varme). Personer som har omkommet pga skade i selve kollisjonen skal ikke telles med.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11956</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Antall personer omkommet pga brann</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="antallPersonerAlvorligSkadetPgaBrann" type="integer">
-            <annotation>
-              <documentation>11957: Antall personer med alvorlig eller meget alvorlig skade (skadegrad 2 eller 3) som følge av at det oppstod brann ((inkludert røyk, gass, varme). Personer som er blitt alvorlig skadet i selve kollisjonen skal ikke telles med.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11957</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Antall personer alvorlig skadet pga brann</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="antallPersonerLettereSkadetPgaBrann" type="integer">
-            <annotation>
-              <documentation>11958: Antall personer med lettere skade (skadegrad 4) som følge av at det oppstod brann ((inkludert røyk, gass, varme). Personer som er blitt lettere skadet i selve kollisjonen skal ikke telles med.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11958</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Antall personer lettere skadet pga brann</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skadeomfangTunnel" type="nvdb:SkadeomfangTunnelType">
-            <annotation>
-              <documentation>11852: Angir skadeomfang på selve tunnelkonstruksjonen</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11852</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skadeomfang tunnel</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skadomfangKjøretøy" type="nvdb:SkadomfangKjøretøyType">
-            <annotation>
-              <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skadomfang kjøretøy</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11858</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Type kjøretøy</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -231,7 +195,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="bensin">
+      <enumeration value="Bensin">
         <annotation>
           <documentation>20040: Bensin</documentation>
           <appinfo>
@@ -240,7 +204,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="diesel">
+      <enumeration value="Diesel">
         <annotation>
           <documentation>20041: Diesel</documentation>
           <appinfo>
@@ -249,7 +213,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="elektrisk">
+      <enumeration value="Elektrisk">
         <annotation>
           <documentation>20042: Elektrisk</documentation>
           <appinfo>
@@ -258,7 +222,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="hybrid">
+      <enumeration value="Hybrid">
         <annotation>
           <documentation>20459: Bensin/elektrisk eller diesel/elektrisk</documentation>
           <appinfo>
@@ -267,7 +231,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="hydrogen">
+      <enumeration value="Hydrogen">
         <annotation>
           <documentation>20043: Hydrogen</documentation>
           <appinfo>
@@ -276,7 +240,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="annetDrivstoff">
+      <enumeration value="Annet drivstoff">
         <annotation>
           <documentation>20044: Annet drivstoff</documentation>
           <appinfo>
@@ -285,7 +249,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20045: Ukjent</documentation>
           <appinfo>
@@ -297,52 +261,6 @@
     </restriction>
   </simpleType>
   <simpleType name="DrivstoffOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="PersonskadeinformasjonOffisieltBekreftetType">
-    <annotation>
-      <documentation>11863: Gir informasjon om hvorvidt personskadeinformasjon er offisielt bekreftet eller ikke. Dette er særlig relevant for antall omkommet og alvorlig skadet.</documentation>
-      <appinfo>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11863</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11863</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Personskadeinformasjon offisielt bekreftet</taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:PersonskadeinformasjonOffisieltBekreftetEnumerationType nvdb:PersonskadeinformasjonOffisieltBekreftetOtherType"/>
-  </simpleType>
-  <simpleType name="PersonskadeinformasjonOffisieltBekreftetEnumerationType">
-    <annotation>
-      <documentation>11863: Gir informasjon om hvorvidt personskadeinformasjon er offisielt bekreftet eller ikke. Dette er særlig relevant for antall omkommet og alvorlig skadet.</documentation>
-      <appinfo>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11863</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11863</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Personskadeinformasjon offisielt bekreftet</taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="ja">
-        <annotation>
-          <documentation>20074: Antall som er oppgitt er offisielt bekreftet</documentation>
-          <appinfo>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20074</taggedValue>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="nei">
-        <annotation>
-          <documentation>20075: Antall som er oppgitt er ikke offisielt bekreftet</documentation>
-          <appinfo>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20075</taggedValue>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="PersonskadeinformasjonOffisieltBekreftetOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -368,7 +286,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="mindreEllerIngenSkade">
+      <enumeration value="Mindre eller ingen skade">
         <annotation>
           <documentation>20059: Mindre eller ingen skade</documentation>
           <appinfo>
@@ -377,7 +295,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="noeSkade">
+      <enumeration value="Noe skade">
         <annotation>
           <documentation>20060: Noe skade</documentation>
           <appinfo>
@@ -386,7 +304,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="omfattendeSkade">
+      <enumeration value="Omfattende skade">
         <annotation>
           <documentation>20061: Omfattende skade</documentation>
           <appinfo>
@@ -395,7 +313,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20062: Ukjent</documentation>
           <appinfo>
@@ -413,7 +331,7 @@
   </simpleType>
   <simpleType name="SkadomfangKjøretøyType">
     <annotation>
-      <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
+      <documentation>11853: Angir hvilken skade det var på kjøretøy der brann oppstod</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
@@ -424,7 +342,7 @@
   </simpleType>
   <simpleType name="SkadomfangKjøretøyEnumerationType">
     <annotation>
-      <documentation>11853: Angir hvilken skade det var på kjøretøy som forårsaka hendelse</documentation>
+      <documentation>11853: Angir hvilken skade det var på kjøretøy der brann oppstod</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11853</taggedValue>
@@ -432,7 +350,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="mindreEllerIngenSkade">
+      <enumeration value="Mindre eller ingen skade">
         <annotation>
           <documentation>20055: Mindre eller ingen skade</documentation>
           <appinfo>
@@ -441,7 +359,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="reparerbarSkade">
+      <enumeration value="Reparerbar skade">
         <annotation>
           <documentation>20056: Reparerbar skade</documentation>
           <appinfo>
@@ -450,7 +368,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="totalvrak">
+      <enumeration value="Totalvrak">
         <annotation>
           <documentation>20057: Totalvrak</documentation>
           <appinfo>
@@ -459,7 +377,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20058: Ukjent</documentation>
           <appinfo>
@@ -496,7 +414,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="ikkeStengtKortStoppITrafikkavvikling">
+      <enumeration value="Ikke stengt/kort stopp i trafikkavvikling">
         <annotation>
           <documentation>20063: Ikke stengt/kort stopp i trafikkavvikling</documentation>
           <appinfo>
@@ -505,7 +423,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stengtInntil3Timer">
+      <enumeration value="Stengt inntil 3 timer">
         <annotation>
           <documentation>20460: Tunnel er stengt inntil 3 timer</documentation>
           <appinfo>
@@ -514,7 +432,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stengtInntil24Timer">
+      <enumeration value="Stengt inntil 24 timer">
         <annotation>
           <documentation>20064: Stengt inntil 24 timer</documentation>
           <appinfo>
@@ -523,7 +441,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stengt1til6Døgn">
+      <enumeration value="Stengt 1-6 døgn">
         <annotation>
           <documentation>20065: Stengt 1-6 døgn</documentation>
           <appinfo>
@@ -532,7 +450,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stengt1til4Uker">
+      <enumeration value="Stengt 1-4 uker">
         <annotation>
           <documentation>20066: Stengt 1-4 uker</documentation>
           <appinfo>
@@ -541,7 +459,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stengtMerEnn1Mnd">
+      <enumeration value="Stengt mer enn 1 mnd">
         <annotation>
           <documentation>20067: Stengt mer enn 1 mnd</documentation>
           <appinfo>
@@ -550,7 +468,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20068: Ukjent</documentation>
           <appinfo>
@@ -587,7 +505,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="ja">
+      <enumeration value="Ja">
         <annotation>
           <documentation>20046: Ja</documentation>
           <appinfo>
@@ -596,7 +514,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nei">
+      <enumeration value="Nei">
         <annotation>
           <documentation>20047: Nei</documentation>
           <appinfo>
@@ -605,7 +523,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20048: Ukjent</documentation>
           <appinfo>
@@ -642,7 +560,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="brann">
+      <enumeration value="Brann">
         <annotation>
           <documentation>20022: Brann i form av åpen flamme</documentation>
           <appinfo>
@@ -651,7 +569,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="hendelseMedPotensialeForBrann">
+      <enumeration value="Hendelse med potensiale for brann">
         <annotation>
           <documentation>20023: Hendelse med potensiale for brann. Kan f.eks være drivstofflekkasje, varmeutvikling, mm. Gi mer info under tilleggsinformasjon</documentation>
           <appinfo>
@@ -660,7 +578,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="hendelseMedPotensialeForAnnenStorulykke">
+      <enumeration value="Hendelse med potensiale for annen storulykke">
         <annotation>
           <documentation>20069: Hendelse med potensiale for storulykke, uten spesiell fare for brann. Kan for eksempel være gasslekkasje, lekkasje av farlige væsker, tap av usikret tung last, kollisjon med installasjoner i heng i tunnel.  Gi mer info under tilleggsinformasjon</documentation>
           <appinfo>
@@ -697,7 +615,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="personbil">
+      <enumeration value="Personbil">
         <annotation>
           <documentation>20028: Personbil</documentation>
           <appinfo>
@@ -706,7 +624,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="motorsykkel">
+      <enumeration value="Motorsykkel">
         <annotation>
           <documentation>20029: Motorsykkel</documentation>
           <appinfo>
@@ -715,7 +633,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="varebil">
+      <enumeration value="Varebil">
         <annotation>
           <documentation>20030: Varebil</documentation>
           <appinfo>
@@ -724,7 +642,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="lastebil">
+      <enumeration value="Lastebil">
         <annotation>
           <documentation>20031: Lastebil</documentation>
           <appinfo>
@@ -733,7 +651,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="vogntog">
+      <enumeration value="Vogntog">
         <annotation>
           <documentation>20032: Forutsetter at det er med tilhenger</documentation>
           <appinfo>
@@ -742,7 +660,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="vogntogADR">
+      <enumeration value="Vogntog ADR">
         <annotation>
           <documentation>20033: Forutsetter at det er med tilhenger</documentation>
           <appinfo>
@@ -751,7 +669,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="buss">
+      <enumeration value="Buss">
         <annotation>
           <documentation>20034: Buss</documentation>
           <appinfo>
@@ -760,7 +678,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="minibuss">
+      <enumeration value="Minibuss">
         <annotation>
           <documentation>20035: Minibuss</documentation>
           <appinfo>
@@ -769,7 +687,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="anleggsmaskin">
+      <enumeration value="Anleggsmaskin">
         <annotation>
           <documentation>20036: Anleggsmaskin</documentation>
           <appinfo>
@@ -778,7 +696,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="spesialtransportMFølgebil">
+      <enumeration value="Spesialtransport m følgebil">
         <annotation>
           <documentation>20037: Spesialtransport m følgebil</documentation>
           <appinfo>
@@ -787,7 +705,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="bobilBilMedCampingvogn">
+      <enumeration value="Bobil/bil med campingvogn">
         <annotation>
           <documentation>20038: Gjelder bobil eller bil med campingvogn. Det skal i tillegg angis tilhenger = Ja dersom det er bil med campingvogn eller bobil med tilhenger/campingvogn. Det angis Tilhenger = Nei dersom det er bobil uten tilhenger/campingvogn.</documentation>
           <appinfo>
@@ -796,7 +714,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="annetKjøretøy">
+      <enumeration value="Annet kjøretøy">
         <annotation>
           <documentation>20039: Annet kjøretøy</documentation>
           <appinfo>
@@ -833,7 +751,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="kjøretøytekniskÅrsak">
+      <enumeration value="Kjøretøyteknisk årsak">
         <annotation>
           <documentation>20024: Teknisk feil ved kjøretøy er årsak til hendelse</documentation>
           <appinfo>
@@ -842,7 +760,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kollisjonTrafikkulykke">
+      <enumeration value="Kollisjon/trafikkulykke">
         <annotation>
           <documentation>20025: Kollisjon er årsak til hendelse</documentation>
           <appinfo>
@@ -851,7 +769,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="tekniskUtstyrITunnel">
+      <enumeration value="Teknisk utstyr i tunnel">
         <annotation>
           <documentation>20026: Teknisk feil ved tunnelutstyr er årsak til hendelse</documentation>
           <appinfo>
@@ -860,7 +778,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ukjent">
+      <enumeration value="Ukjent">
         <annotation>
           <documentation>20027: Ukjent årssak</documentation>
           <appinfo>

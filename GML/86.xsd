@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -20,7 +20,7 @@
         <sequence>
           <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeBelysningsstrekningType">
             <annotation>
-              <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+              <documentation>1271: Angir hva som er hovedbruksområdet for det belysningsstrekning.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1271</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bruksområde</taggedValue>
@@ -158,20 +158,6 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertTunnelløpUtenTrafikk" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløpUtenTrafikk</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertElektriskAnlegg" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktElektriskAnlegg</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
             <annotation>
               <appinfo>
@@ -179,10 +165,24 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="assosiertTunnelløpUtenTrafikk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløpUtenTrafikk</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertElektriskAnlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktElektriskAnlegg</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -213,7 +213,7 @@
   </complexType>
   <simpleType name="BruksområdeBelysningsstrekningType">
     <annotation>
-      <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+      <documentation>1271: Angir hva som er hovedbruksområdet for det belysningsstrekning.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1271</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1271</taggedValue>
@@ -224,7 +224,7 @@
   </simpleType>
   <simpleType name="BruksområdeBelysningsstrekningEnumerationType">
     <annotation>
-      <documentation>1271: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+      <documentation>1271: Angir hva som er hovedbruksområdet for det belysningsstrekning.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1271</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">1271</taggedValue>
@@ -232,7 +232,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="belysningVegGate">
+      <enumeration value="Belysning veg/gate">
         <annotation>
           <documentation>2954: Belysning av veg og gate. Kan også benyttes for belysning av gangfelt og vegkryss når det er sammenehngende belysning.</documentation>
           <appinfo>
@@ -241,7 +241,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningOmrådePlass">
+      <enumeration value="Belysning område/plass">
         <annotation>
           <documentation>2956: Belysning av område eller plass</documentation>
           <appinfo>
@@ -250,7 +250,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningGangfelt">
+      <enumeration value="Belysning gangfelt">
         <annotation>
           <documentation>2960: Belysning for gangfelt. Benyttes i tilfeller der belysningsstrekning er satt opp med hovedformål å belyse gangfelt</documentation>
           <appinfo>
@@ -259,7 +259,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningTunnel">
+      <enumeration value="Belysning tunnel">
         <annotation>
           <documentation>2962: Belysning i tunnel</documentation>
           <appinfo>
@@ -268,7 +268,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningGangSykkelveg">
+      <enumeration value="Belysning gang/sykkelveg">
         <annotation>
           <documentation>2952: Belysning på gang- og sykkelveg</documentation>
           <appinfo>
@@ -277,7 +277,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningBru">
+      <enumeration value="Belysning bru">
         <annotation>
           <documentation>3318: Brukes kun for spesiell belysning av bru. Vanlig vegbelysning settes som Belysning veg/gate</documentation>
           <appinfo>
@@ -286,7 +286,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningFerjeleie">
+      <enumeration value="Belysning ferjeleie">
         <annotation>
           <documentation>16258: Belysning på ferjeleie</documentation>
           <appinfo>
@@ -295,7 +295,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privatOmråde">
+      <enumeration value="Privat område">
         <annotation>
           <documentation>3855: Belysniong på privat område</documentation>
           <appinfo>
@@ -304,7 +304,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belysningVegkryss">
+      <enumeration value="Belysning vegkryss">
         <annotation>
           <documentation>2958: Belysning i vegkryss. Benyttes i tilfeller der belysningsstrekning er satt opp med hovedformål å belyse vegkryss.</documentation>
           <appinfo>
@@ -341,7 +341,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="ja">
+      <enumeration value="Ja">
         <annotation>
           <documentation>16259: Ja</documentation>
           <appinfo>
@@ -350,7 +350,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nei">
+      <enumeration value="Nei">
         <annotation>
           <documentation>16260: Nei</documentation>
           <appinfo>
@@ -387,7 +387,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="stat_StatensVegvesen">
+      <enumeration value="Stat, Statens vegvesen">
         <annotation>
           <documentation>8205: Stat, Statens vegvesen</documentation>
           <appinfo>
@@ -396,7 +396,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stat_NyeVeier">
+      <enumeration value="Stat, Nye Veier">
         <annotation>
           <documentation>18587: Stat, Nye Veier</documentation>
           <appinfo>
@@ -405,7 +405,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>10697: Fylkeskommune</documentation>
           <appinfo>
@@ -414,7 +414,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>8231: Kommune</documentation>
           <appinfo>
@@ -423,7 +423,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>8257: Privat</documentation>
           <appinfo>
@@ -432,7 +432,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>17596: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
           <appinfo>
@@ -469,7 +469,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="ja">
+      <enumeration value="Ja">
         <annotation>
           <documentation>4719: Ja</documentation>
           <appinfo>
@@ -478,7 +478,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nei">
+      <enumeration value="Nei">
         <annotation>
           <documentation>4720: Nei</documentation>
           <appinfo>
@@ -515,7 +515,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="manuell">
+      <enumeration value="Manuell">
         <annotation>
           <documentation>11342: Manuell</documentation>
           <appinfo>
@@ -524,7 +524,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fotocelle">
+      <enumeration value="Fotocelle">
         <annotation>
           <documentation>11343: Fotocelle</documentation>
           <appinfo>
@@ -533,7 +533,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="ur">
+      <enumeration value="Ur">
         <annotation>
           <documentation>11344: Ur</documentation>
           <appinfo>
@@ -542,7 +542,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="signal">
+      <enumeration value="Signal">
         <annotation>
           <documentation>11345: Signal/frekvens</documentation>
           <appinfo>
@@ -551,7 +551,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kontaktor">
+      <enumeration value="Kontaktor">
         <annotation>
           <documentation>11346: Kontaktor</documentation>
           <appinfo>
@@ -560,7 +560,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="radiotenner">
+      <enumeration value="Radiotenner">
         <annotation>
           <documentation>11347: Radiotenner</documentation>
           <appinfo>
@@ -569,7 +569,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="slave">
+      <enumeration value="Slave">
         <annotation>
           <documentation>17568: Slave</documentation>
           <appinfo>
@@ -578,7 +578,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="datekstyring">
+      <enumeration value="Datekstyring">
         <annotation>
           <documentation>18318: Datekstyring</documentation>
           <appinfo>
@@ -615,7 +615,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="belPktEnSideAvVeg">
+      <enumeration value="Bel.pkt en side av veg">
         <annotation>
           <documentation>3761: Bel.pkt en side av veg</documentation>
           <appinfo>
@@ -624,7 +624,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belPktBeggeSiderAvVeg">
+      <enumeration value="Bel.pkt. begge sider av veg">
         <annotation>
           <documentation>3762: Bel.pkt. begge sider av veg</documentation>
           <appinfo>
@@ -633,7 +633,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belPkt_Senter">
+      <enumeration value="Bel.pkt, senter">
         <annotation>
           <documentation>3764: Bel.pkt, senter</documentation>
           <appinfo>
@@ -642,7 +642,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="belPkt_Senter_2Armet">
+      <enumeration value="Bel.pkt, senter, 2-armet">
         <annotation>
           <documentation>3763: Bel.pkt, senter, 2-armet</documentation>
           <appinfo>
@@ -679,7 +679,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="statensVegvesen">
+      <enumeration value="Statens vegvesen">
         <annotation>
           <documentation>2141: Statens vegvesen</documentation>
           <appinfo>
@@ -688,7 +688,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nyeVeier">
+      <enumeration value="Nye Veier">
         <annotation>
           <documentation>18716: Nye Veier</documentation>
           <appinfo>
@@ -697,7 +697,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>19893: Fylkeskommune</documentation>
           <appinfo>
@@ -715,7 +715,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>2145: Kommune</documentation>
           <appinfo>
@@ -724,7 +724,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="lokaltE_Verk">
+      <enumeration value="Lokalt e-verk">
         <annotation>
           <documentation>3716: Lokalt e-verk</documentation>
           <appinfo>
@@ -733,7 +733,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>2149: Privat</documentation>
           <appinfo>
@@ -742,7 +742,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>17671: Uavklart</documentation>
           <appinfo>

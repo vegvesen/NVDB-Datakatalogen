@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -131,10 +131,24 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSystemobjekt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSystemobjekt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Strekning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Strekning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Strekning</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -152,17 +166,10 @@
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Strekning" type="gml:ReferenceType">
+          <element minOccurs="0" name="assosiertBygning" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSystemobjekt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSystemobjekt</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktBygning</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -198,7 +205,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="stat_StatensVegvesen">
+      <enumeration value="Stat, Statens vegvesen">
         <annotation>
           <documentation>10301: Stat, Statens vegvesen</documentation>
           <appinfo>
@@ -207,7 +214,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stat_NyeVeier">
+      <enumeration value="Stat, Nye Veier">
         <annotation>
           <documentation>18647: Stat, Nye Veier</documentation>
           <appinfo>
@@ -216,7 +223,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>10762: Fylkeskommune</documentation>
           <appinfo>
@@ -225,7 +232,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>10365: Kommune</documentation>
           <appinfo>
@@ -234,7 +241,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>10429: Privat</documentation>
           <appinfo>
@@ -243,7 +250,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>17656: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
           <appinfo>
@@ -280,7 +287,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="optiskt">
+      <enumeration value="Optiskt">
         <annotation>
           <documentation>4834: Sensor som registrerer røyk optisk</documentation>
           <appinfo>
@@ -289,7 +296,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="gass">
+      <enumeration value="Gass">
         <annotation>
           <documentation>16015: Sensor som måler tilstedeværelse av en eller flere gasser</documentation>
           <appinfo>
@@ -298,7 +305,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="termisk">
+      <enumeration value="Termisk">
         <annotation>
           <documentation>4835: Sensor som registrerer endring i temperatur</documentation>
           <appinfo>
@@ -307,7 +314,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="IR_Kamera">
+      <enumeration value="IR-kamera">
         <annotation>
           <documentation>16016: Infrarødt kamera for detektering av brann ut fra bildeanalyse</documentation>
           <appinfo>
@@ -316,7 +323,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kombinert">
+      <enumeration value="Kombinert">
         <annotation>
           <documentation>16027: Brannvarsler som kombinerer flere metoder for registrering av brann</documentation>
           <appinfo>
@@ -325,7 +332,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="manuell">
+      <enumeration value="Manuell">
         <annotation>
           <documentation>4833: Manuell brannmelder</documentation>
           <appinfo>
@@ -362,7 +369,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="statensVegvesen">
+      <enumeration value="Statens vegvesen">
         <annotation>
           <documentation>10504: Statens vegvesen</documentation>
           <appinfo>
@@ -371,7 +378,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nyeVeier">
+      <enumeration value="Nye Veier">
         <annotation>
           <documentation>18774: Nye Veier</documentation>
           <appinfo>
@@ -380,7 +387,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>19968: Fylkeskommune</documentation>
           <appinfo>
@@ -398,7 +405,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>10582: Kommune</documentation>
           <appinfo>
@@ -407,7 +414,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>10660: Privat</documentation>
           <appinfo>
@@ -416,7 +423,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>17751: Uavklart</documentation>
           <appinfo>

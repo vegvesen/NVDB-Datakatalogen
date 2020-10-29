@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -122,10 +122,10 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertStreknings_ATK" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKamera" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktStreknings_ATK</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKamera</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -136,24 +136,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKamera" type="gml:ReferenceType">
+          <element minOccurs="0" name="assosiertStreknings_ATK" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKamera</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktStreknings_ATK</targetElement>
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDetektor_Trafikk" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDetektor_Trafikk</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -164,10 +157,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDetektor_Trafikk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDetektor_Trafikk</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -210,7 +210,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="stat_StatensVegvesen">
+      <enumeration value="Stat, Statens vegvesen">
         <annotation>
           <documentation>13448: Stat, Statens vegvesen</documentation>
           <appinfo>
@@ -219,7 +219,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stat_NyeVeier">
+      <enumeration value="Stat, Nye Veier">
         <annotation>
           <documentation>18649: Stat, Nye Veier</documentation>
           <appinfo>
@@ -228,7 +228,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>17620: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
           <appinfo>
@@ -265,7 +265,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="DR_410">
+      <enumeration value="DR 410">
         <annotation>
           <documentation>13444: DR 410</documentation>
           <appinfo>
@@ -274,7 +274,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="axspeed">
+      <enumeration value="Axspeed">
         <annotation>
           <documentation>13445: Axspeed</documentation>
           <appinfo>
@@ -311,7 +311,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="medMetreringsretning">
+      <enumeration value="Med metreringsretning">
         <annotation>
           <documentation>13446: Kontrollerer trafikk som kjører i samme retning som vegens metreringsretning.</documentation>
           <appinfo>
@@ -320,7 +320,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="motMetreringsretning">
+      <enumeration value="Mot metreringsretning">
         <annotation>
           <documentation>13447: Kontrollerer trafikk som kjører i motsatt retning av vegens metreringsretning.</documentation>
           <appinfo>

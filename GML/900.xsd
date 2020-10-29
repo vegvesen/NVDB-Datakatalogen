@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -200,6 +200,15 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="tillattForModulvogntog" type="nvdb:TillattForModulvogntogType">
+            <annotation>
+              <documentation>12057: Angir om det er tillatt å kjøre modulvogntog på strekningen</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12057</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tillatt for modulvogntog</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="strekningsbeskrivelse" type="string">
             <annotation>
               <documentation>10915: Beskrivelse av aktuell vegstrekning.  Denne teksten blir henta direkte inn i veglistene.</documentation>
@@ -333,7 +342,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="12_40">
+      <enumeration value="12,40">
         <annotation>
           <documentation>18239: 12,40</documentation>
           <appinfo>
@@ -342,7 +351,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="15_00">
+      <enumeration value="15,00">
         <annotation>
           <documentation>18424: 15,00</documentation>
           <appinfo>
@@ -351,7 +360,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="19_50">
+      <enumeration value="19,50">
         <annotation>
           <documentation>18423: 19,50</documentation>
           <appinfo>
@@ -360,7 +369,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="22_00">
+      <enumeration value="22,00">
         <annotation>
           <documentation>18237: 22,00</documentation>
           <appinfo>
@@ -369,7 +378,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="24_00">
+      <enumeration value="24,00">
         <annotation>
           <documentation>18238: 24,00</documentation>
           <appinfo>
@@ -378,7 +387,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="spesiellBegrensning">
+      <enumeration value="Spesiell begrensning">
         <annotation>
           <documentation>18240: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til vogntog-/kjøretøylengde.  Nedsatte verdier gis i egne egenskapstyper</documentation>
           <appinfo>
@@ -390,6 +399,52 @@
     </restriction>
   </simpleType>
   <simpleType name="MaksVogntoglengdeBruksklasse_TømmertransportOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TillattForModulvogntogType">
+    <annotation>
+      <documentation>12057: Angir om det er tillatt å kjøre modulvogntog på strekningen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12057</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12057</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tillatt for modulvogntog</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TillattForModulvogntogEnumerationType nvdb:TillattForModulvogntogOtherType"/>
+  </simpleType>
+  <simpleType name="TillattForModulvogntogEnumerationType">
+    <annotation>
+      <documentation>12057: Angir om det er tillatt å kjøre modulvogntog på strekningen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12057</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12057</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tillatt for modulvogntog</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>20911: Indikerer at det er lovlig å kjøre modulvogntog på strekningen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20911</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>20912: Indikerer at det ikke er lovlig å kjøre modulvogntog på strekningen</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20912</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TillattForModulvogntogOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

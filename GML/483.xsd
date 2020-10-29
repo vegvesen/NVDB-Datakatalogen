@@ -1,9 +1,82 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.21">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BruksområdeRadarType">
+    <annotation>
+      <documentation>12081: Angir hva som er hovedbruksområde til radaren</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12081</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12081</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bruksområde</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeRadarEnumerationType nvdb:BruksområdeRadarOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeRadarEnumerationType">
+    <annotation>
+      <documentation>12081: Angir hva som er hovedbruksområde til radaren</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12081</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12081</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bruksområde</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Hendelsesdetektering/trafikkovervåkning">
+        <annotation>
+          <documentation>20990: Radar registrerer bevegelsesmønster i trafikken og kan melde fra om avvik</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20990</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Hendelsesdetektering/trafikkovervåkning</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Fartsmåling">
+        <annotation>
+          <documentation>20989: Fartsmåling</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20989</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fartsmåling</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Trafikkdetektering for å styre veglys">
+        <annotation>
+          <documentation>20991: Detekterer trafikk. Veglys blir tent når radar har registrert trafikk. Aktuelt både i tunneler og på frie vegstrekninger.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20991</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Trafikkdetektering for å styre veglys</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Trafikkdetektering for å styre signalanlegg">
+        <annotation>
+          <documentation>20993: Radar detekterer trafikk. Signalanlegg styres ut fra detektert trafikk.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20993</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Trafikkdetektering for å styre signalanlegg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nivåmåling i bassenger">
+        <annotation>
+          <documentation>20992: Radar benyttes for å overvåke vannstand i bassenger. Vanligvis i forbindelse med pumpestasjoner.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">20992</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nivåmåling i bassenger</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeRadarOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="EierRadarType">
     <annotation>
       <documentation>10988: Angir hvem som er eier av vegobjektet.</documentation>
@@ -25,7 +98,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="stat_StatensVegvesen">
+      <enumeration value="Stat, Statens vegvesen">
         <annotation>
           <documentation>18378: Stat, Statens vegvesen</documentation>
           <appinfo>
@@ -34,7 +107,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="stat_NyeVeier">
+      <enumeration value="Stat, Nye Veier">
         <annotation>
           <documentation>18667: Stat, Nye Veier</documentation>
           <appinfo>
@@ -43,7 +116,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>18379: Fylkeskommune</documentation>
           <appinfo>
@@ -52,7 +125,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>18380: Kommune</documentation>
           <appinfo>
@@ -61,7 +134,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>18381: Privat</documentation>
           <appinfo>
@@ -70,7 +143,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>18382: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
           <appinfo>
@@ -88,7 +161,7 @@
   </simpleType>
   <element name="Radar" substitutionGroup="nvdb:AbstraktRadar" type="nvdb:RadarType">
     <annotation>
-      <documentation>483: Instrument for å registrere fart</documentation>
+      <documentation>483: Instrument for å registrere fart/bevegelse. Benyttes fortrinnsvis mot trafikk, men kan også benyttes til å registrere endring i vannivå</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">483</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">483</taggedValue>
@@ -100,6 +173,15 @@
     <complexContent>
       <extension base="nvdb:AbstraktRadarType">
         <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeRadarType">
+            <annotation>
+              <documentation>12081: Angir hva som er hovedbruksområde til radaren</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12081</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bruksområde</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="etableringsår" type="integer">
             <annotation>
               <documentation>10341: Angir hvilket år vegobjektet ble etablert på stedet</documentation>
@@ -195,17 +277,17 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -241,7 +323,7 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="statensVegvesen">
+      <enumeration value="Statens vegvesen">
         <annotation>
           <documentation>18330: Statens vegvesen</documentation>
           <appinfo>
@@ -250,7 +332,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="nyeVeier">
+      <enumeration value="Nye Veier">
         <annotation>
           <documentation>18704: Nye Veier</documentation>
           <appinfo>
@@ -259,7 +341,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="fylkeskommune">
+      <enumeration value="Fylkeskommune">
         <annotation>
           <documentation>20008: Fylkeskommune</documentation>
           <appinfo>
@@ -277,7 +359,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="kommune">
+      <enumeration value="Kommune">
         <annotation>
           <documentation>18331: Kommune</documentation>
           <appinfo>
@@ -286,7 +368,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="privat">
+      <enumeration value="Privat">
         <annotation>
           <documentation>18332: Privat</documentation>
           <appinfo>
@@ -295,7 +377,7 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="uavklart">
+      <enumeration value="Uavklart">
         <annotation>
           <documentation>18333: Uavklart</documentation>
           <appinfo>
