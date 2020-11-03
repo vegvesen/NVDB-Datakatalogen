@@ -141,7 +141,7 @@ Sub main
 						end select
 					end if
 					
-					definition = replace(element.Notes, """","'")
+					definition = replace(element.Notes, """","\""")
 					definition = replace(definition, vbCrLf," ")
 					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf				
 					objOTLFile.WriteText vbCrLf
@@ -216,7 +216,7 @@ Sub main
 							set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 							nvdb_navn = ""
 							if not aTag is nothing then nvdb_navn=aTag.Value
-							nvdb_navn = Replace(nvdb_navn,"""","'")
+							nvdb_navn = Replace(nvdb_navn,"""","\""")
 
 							'Template for properties
 							objOTLFile.WriteText "### " & owlURI & "#et" & eAttributt.Alias & vbCrLf
@@ -255,7 +255,8 @@ Sub main
 							set atV = eAttributt.TaggedValues.GetByName("Sensitiv")
 							if not atV is nothing then objOTLFile.WriteText "         :sensitiv ""Tilgjengelig kun for UREG-brukere""@no ;" & vbCrLf																	
 							
-							definition = replace(eAttributt.Notes, """","'")
+							definition = replace(eAttributt.Notes, "\","\\")
+							definition = replace(definition, """","\""")
 							definition = replace(definition, vbCrLf," ")
 							
 							objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf					
@@ -321,7 +322,7 @@ Sub main
 					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         :sosi_navn """ & element.Name & """@no ;" & vbCrLf
 					
-					definition = replace(element.Notes, """","'")
+					definition = replace(element.Notes, """","\""")
 					definition = replace(definition, vbCrLf," ")			
 					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
@@ -331,14 +332,14 @@ Sub main
 						set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 						nvdb_navn = ""
 						if not aTag is nothing then nvdb_navn=aTag.Value
-						nvdb_navn = Replace(nvdb_navn,"""","'")
+						nvdb_navn = Replace(nvdb_navn,"""","\""")
 						
 						objOTLFile.WriteText "### " & owlURI & "#tv" & eAttributt.Alias & vbCrLf
 						objOTLFile.WriteText ":tv" & eAttributt.Alias & " rdf:type :kl" & element.Alias & " ;" & vbCrLf
 						objOTLFile.WriteText "         :nvdb_id " & eAttributt.Alias & " ;" & vbCrLf
 						objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
-						objOTLFile.WriteText "         :sosi_navn """ & eAttributt.Name & """@no ;" & vbCrLf
+						objOTLFile.WriteText "         :sosi_navn """ & Replace(eAttributt.Name,"""","\""") & """@no ;" & vbCrLf
 						
 						rsTVKat.Filter = "ID_TILLATT_VERDI = " & eAttributt.Alias
 						do until rsTVKat.EOF
@@ -355,7 +356,7 @@ Sub main
 						objOTLFile.WriteText "         :kortnavn """ & eAttributt.Default & """ ;" & vbCrLf
 						end if
 
-						definition = replace(eAttributt.Notes, """","'")
+						definition = replace(eAttributt.Notes, """","\""")
 						definition = replace(definition, vbCrLf," ")			
 						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
@@ -375,7 +376,12 @@ Sub main
 
 	next
 	
-	objOTLFile.SaveToFile owlPath & "\" & "nvdb_owl.ttl", 2
+	dim filetime
+	filetime = replace(Now, ".","")
+	filetime = replace(filetime, ":","")
+	filetime = replace(filetime, " ","_")
+	
+	objOTLFile.SaveToFile owlPath & "\" & filetime & "_nvdb-owl.ttl", 2
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
