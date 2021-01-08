@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+  <include schemaLocation="AbstraktNVDB.xsd"/>
+  <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Fylke" substitutionGroup="nvdb:AbstraktFylke" type="nvdb:FylkeType">
+    <annotation>
+      <documentation>945: Gjeldende fylkesinndeling</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">945</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">945</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylke</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="FylkeType">
+    <complexContent>
+      <extension base="nvdb:AbstraktFylkeType">
+        <sequence>
+          <element minOccurs="0" name="fylkesnummer" type="integer">
+            <annotation>
+              <documentation>11764: Angir fylkesnummer</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11764</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkesnummer</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="fylkesnavn" type="string">
+            <annotation>
+              <documentation>11765: Angir fylkesnavn</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11765</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkesnavn</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="koordinatsystem" type="nvdb:KoordinatsystemType">
+            <annotation>
+              <documentation>11768: Angir hvilket koordinatsystem som primært benyttes for gitt område</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11768</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Koordinatsystem</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11767: Gir punkt som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11767</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, punkt</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+            <annotation>
+              <documentation>11766: Gir flate/polygon som geometrisk avgrenser området</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11766</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geometri, flate</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>Angivelse av objektets posisjon</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommune" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommune</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FylkePropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fylke"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="KoordinatsystemType">
+    <annotation>
+      <documentation>11768: Angir hvilket koordinatsystem som primært benyttes for gitt område</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11768</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11768</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Koordinatsystem</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:KoordinatsystemEnumerationType nvdb:KoordinatsystemOtherType"/>
+  </simpleType>
+  <simpleType name="KoordinatsystemEnumerationType">
+    <annotation>
+      <documentation>11768: Angir hvilket koordinatsystem som primært benyttes for gitt område</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11768</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11768</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Koordinatsystem</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="NGO-akse I">
+        <annotation>
+          <documentation>19685: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19685</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse I</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse II">
+        <annotation>
+          <documentation>19686: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19686</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse II</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse III">
+        <annotation>
+          <documentation>19687: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19687</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse III</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse IV">
+        <annotation>
+          <documentation>19688: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19688</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse IV</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse V">
+        <annotation>
+          <documentation>19689: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19689</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse V</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse VI">
+        <annotation>
+          <documentation>19690: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19690</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse VI</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse VII">
+        <annotation>
+          <documentation>19691: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19691</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse VII</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-akse VIII">
+        <annotation>
+          <documentation>19692: datum NGO1948, projeksjon Gauss-Krüger</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19692</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-akse VIII</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 31 (EUREF89)">
+        <annotation>
+          <documentation>19694: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19694</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 31 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 32 (EUREF89)">
+        <annotation>
+          <documentation>19696: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19696</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 32 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 33 (EUREF89)">
+        <annotation>
+          <documentation>19698: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19698</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 33 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 34 (EUREF89)">
+        <annotation>
+          <documentation>19700: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19700</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 34 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 35 (EUREF89)">
+        <annotation>
+          <documentation>19702: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19702</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 35 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 36 (EUREF89)">
+        <annotation>
+          <documentation>19704: datum EUREF89/WGS84</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19704</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 36 (EUREF89)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 31 (ED50)">
+        <annotation>
+          <documentation>19693: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19693</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 31 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 32 (ED50)">
+        <annotation>
+          <documentation>19695: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19695</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 32 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 33 (ED50)">
+        <annotation>
+          <documentation>19697: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19697</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 33 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 34 (ED50)">
+        <annotation>
+          <documentation>19699: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19699</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 34 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 35 (ED50)">
+        <annotation>
+          <documentation>19701: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19701</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 35 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="UTM sone 36 (ED50)">
+        <annotation>
+          <documentation>19703: datum ED50</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19703</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">UTM sone 36 (ED50)</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-64A, Møre">
+        <annotation>
+          <documentation>19683: datum NGO1948</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19683</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-64A, Møre</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="NGO-64B, Møre">
+        <annotation>
+          <documentation>19684: datum NGO1948</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19684</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">NGO-64B, Møre</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KoordinatsystemOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>
