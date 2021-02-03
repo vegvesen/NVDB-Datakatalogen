@@ -50,7 +50,7 @@ Sub updateDiagramObjectsAssociations(eD, el, mothers, strST)
 		set con = el.Connectors.GetAt(idxC)
 		set elementB = Nothing
 		'Tar med alle assosiasjoner dersom det er angitt (mothers = true), ellers kun der aktuelt element er "Supplier" (con.SupplierID = element.ElementID)
-		If con.Type <> "NoteLink" Then
+		If con.type = "Aggregation" or con.Type = "Association" or con.type = "Generalization" or con.Type = "Generalisation" Then
 			'Finner assosiert element
 			If con.SupplierID = el.ElementID Then
 				set elementB = Repository.GetElementByID(con.ClientID)
