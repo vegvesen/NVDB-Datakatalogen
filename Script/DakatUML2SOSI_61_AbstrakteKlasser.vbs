@@ -65,11 +65,8 @@ sub abstractClasses()
 						set absElement = absPck.Elements.AddNew("Abstrakt" & element.Name, "Class")
 						Repository.WriteOutput "Script", Now & " Lager abstrakt klasse: " & absElement.Name, 0 
 						absElement.Alias = element.Alias
-						absElement.Version= element.Version
 						absElement.Stereotype = "featureType"
 						absElement.Abstract = True
-						absElement.Update
-						absPck.Elements.Refresh
 						lstAbsCls.Add absElement.Alias, absElement.ElementGUID
 					else
 						keyIndex = lstAbsCls.IndexofKey(element.Alias)
@@ -77,7 +74,11 @@ sub abstractClasses()
 						set absElement = Repository.GetElementByGuid(guid)
 						Repository.WriteOutput "Script", Now & " Abstrakt klasse eksisterer: " & absElement.Name, 0					
 					end if
-
+					absElement.Name = "Abstrakt" & element.Name
+					absElement.Version= element.Version
+					absElement.Update
+					absPck.Elements.Refresh
+					
 					'Arv fra abstrakt klasse til opprinnelig klasse 
 					dim lstAss
 					Set lstAss = CreateObject("System.Collections.SortedList")
@@ -102,8 +103,8 @@ sub abstractClasses()
 		end if
 	next
 	
-	'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-	'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
+	'Mulighet for å hoppe ut av løkka - fjernes når scriptet fungerer....
+	'msgAnsw = MsgBox("Sjekk arv i modellen nå. OK for å gå videre, avbryt for å stoppe", vbOkCancel, "Abstrakte klasser med generalisering")
 	'if msgAnsw = 2 then
 	'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 	'	exit sub
@@ -214,8 +215,8 @@ sub abstractClasses()
 			next
 		end if
 		
-		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
+		'Mulighet for å hoppe ut av løkka - fjernes når scriptet fungerer...
+		'msgAnsw = MsgBox("Sjekk assosiasjoner i modellen nå. OK for å gå videre, avbryt for å stoppe", vbOkCancel, "Abstrakte klasser med assosiasjoner")
 		'if msgAnsw = 2 then
 		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		'	exit sub
@@ -240,6 +241,7 @@ sub abstractClasses()
 							end if
 							if assEl.Abstract = 0 then
 								'Assosiasjon til konkret klasse, slettes
+								Repository.WriteOutput "Script", Now & " Assosiasjon til konkret vegobjekttype fjernes: " & assEl.Name, 0 
 								element.Connectors.DeleteAt idxC, false
 							end if	
 						end if	
@@ -249,8 +251,8 @@ sub abstractClasses()
 			next
 		end if
 		
-		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "Abstrakte klasser")
+		'Mulighet for å hoppe ut av løkka - fjernes når scriptet fungerer.
+		'msgAnsw = MsgBox("Sjekk assosiasjoner til konkrete klasser i modellen nå. OK for å fortsette, avbryt for å stoppe.", vbOkCancel, "Assosiasjoner til konkrete klasser")
 		'if msgAnsw = 2 then
 		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 		'	exit sub
