@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -118,6 +118,15 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="plassertITunnel" type="nvdb:PlassertITunnelType">
+            <annotation>
+              <documentation>12095: Angir om nødstasjon er plassert i tunnel eller ute i dagen</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12095</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plassert i tunnel</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="plassering" type="nvdb:PlasseringNødstasjonType">
             <annotation>
               <appinfo>
@@ -233,17 +242,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertTunnelløpUtenTrafikk" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløpUtenTrafikk</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertTunnelløpUtenTrafikk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløpUtenTrafikk</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -321,6 +330,52 @@
     </restriction>
   </simpleType>
   <simpleType name="PlasseringNødstasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlassertITunnelType">
+    <annotation>
+      <documentation>12095: Angir om nødstasjon er plassert i tunnel eller ute i dagen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12095</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12095</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plassert i tunnel</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:PlassertITunnelEnumerationType nvdb:PlassertITunnelOtherType"/>
+  </simpleType>
+  <simpleType name="PlassertITunnelEnumerationType">
+    <annotation>
+      <documentation>12095: Angir om nødstasjon er plassert i tunnel eller ute i dagen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12095</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12095</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plassert i tunnel</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21021: Nødstasjon er plasser inne i en tunnel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21021</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21022: Nødstasjon er plassert ute under åpen himmel</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21022</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="PlassertITunnelOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -141,7 +141,7 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="NedfresingVegoppmerking_TverrgåendeType">
+  <simpleType name="NedfresingType">
     <annotation>
       <documentation>10930: Angir hvorvidt det er frest ned en plan forsenkning i asfalten for å legge vegmerkingen i. Hensikten med dette er bla at vegmerkingen blir mindre utsatt for brøyteskader.</documentation>
       <appinfo>
@@ -150,9 +150,9 @@
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nedfresing</taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:NedfresingVegoppmerking_TverrgåendeEnumerationType nvdb:NedfresingVegoppmerking_TverrgåendeOtherType"/>
+    <union memberTypes="nvdb:NedfresingEnumerationType nvdb:NedfresingOtherType"/>
   </simpleType>
-  <simpleType name="NedfresingVegoppmerking_TverrgåendeEnumerationType">
+  <simpleType name="NedfresingEnumerationType">
     <annotation>
       <documentation>10930: Angir hvorvidt det er frest ned en plan forsenkning i asfalten for å legge vegmerkingen i. Hensikten med dette er bla at vegmerkingen blir mindre utsatt for brøyteskader.</documentation>
       <appinfo>
@@ -182,7 +182,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="NedfresingVegoppmerking_TverrgåendeOtherType">
+  <simpleType name="NedfresingOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -635,7 +635,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="nedfresing" type="nvdb:NedfresingVegoppmerking_TverrgåendeType">
+          <element minOccurs="0" name="nedfresing" type="nvdb:NedfresingType">
             <annotation>
               <documentation>10930: Angir hvorvidt det er frest ned en plan forsenkning i asfalten for å legge vegmerkingen i. Hensikten med dette er bla at vegmerkingen blir mindre utsatt for brøyteskader.</documentation>
               <appinfo>
@@ -817,17 +817,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertFartsdemper" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFartsdemper</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertFartsdemper" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFartsdemper</targetElement>
               </appinfo>
             </annotation>
           </element>

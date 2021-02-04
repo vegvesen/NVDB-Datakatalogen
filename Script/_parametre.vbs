@@ -14,7 +14,8 @@ const owlURI = "http://rdf.vegdata.no/nvdb/nvdb-owl"
 
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
-const scProject = "SC_NVDB.eap"
+const scProject = "SC_NVDB_4.eap"
+const scTemplate = "SC_Core.eap"
 
 'GUID-er for pakker mm
 const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML

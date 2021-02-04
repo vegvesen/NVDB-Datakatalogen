@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -99,7 +99,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="målemetodeHøydebegrensning" type="nvdb:HøydebegrensningMålemetodeType">
+          <element minOccurs="0" name="målemetodeHøydebegrensning" type="nvdb:MålemetodeType">
             <annotation>
               <documentation>9490: Angir målemetode som er brukt for å måle høyder</documentation>
               <appinfo>
@@ -161,17 +161,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertUndergang" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUndergang</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertUndergang" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUndergang</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -186,7 +186,7 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <simpleType name="HøydebegrensningMålemetodeType">
+  <simpleType name="MålemetodeType">
     <annotation>
       <documentation>9490: Angir målemetode som er brukt for å måle høyder</documentation>
       <appinfo>
@@ -195,9 +195,9 @@
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Målemetode</taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:HøydebegrensningMålemetodeEnumerationType nvdb:HøydebegrensningMålemetodeOtherType"/>
+    <union memberTypes="nvdb:MålemetodeEnumerationType nvdb:MålemetodeOtherType"/>
   </simpleType>
-  <simpleType name="HøydebegrensningMålemetodeEnumerationType">
+  <simpleType name="MålemetodeEnumerationType">
     <annotation>
       <documentation>9490: Angir målemetode som er brukt for å måle høyder</documentation>
       <appinfo>
@@ -245,7 +245,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="HøydebegrensningMålemetodeOtherType">
+  <simpleType name="MålemetodeOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

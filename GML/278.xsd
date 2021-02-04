@@ -1,9 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AutomatiskOppstartAvBrannventilasjonType">
+    <annotation>
+      <documentation>12105: Angir at brannventilasjonen starter automatisk uten innblanding av en operatør, ved f.eks fjerning av brannslokker. Gjelder ikke ved styring fra VTS, bruk av brannplaner</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12105</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12105</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Automatisk oppstart av brannventilasjon</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:AutomatiskOppstartAvBrannventilasjonEnumerationType nvdb:AutomatiskOppstartAvBrannventilasjonOtherType"/>
+  </simpleType>
+  <simpleType name="AutomatiskOppstartAvBrannventilasjonEnumerationType">
+    <annotation>
+      <documentation>12105: Angir at brannventilasjonen starter automatisk uten innblanding av en operatør, ved f.eks fjerning av brannslokker. Gjelder ikke ved styring fra VTS, bruk av brannplaner</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12105</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12105</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Automatisk oppstart av brannventilasjon</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21045: Ja</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21045</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21046: Nei</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21046</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AutomatiskOppstartAvBrannventilasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="DimensjonerendeBranneffektType">
     <annotation>
       <documentation>11820: Dimensjonerende branneffekt iht N500</documentation>
@@ -161,7 +207,7 @@
   </simpleType>
   <simpleType name="LokalStyringType">
     <annotation>
-      <documentation>3694: Angir om det er mulighet for lokal styring</documentation>
+      <documentation>3694: Angir om det er mulighet for lokal styring. Lokal styring vil si styring fra nødstyreskap</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3694</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3694</taggedValue>
@@ -172,7 +218,7 @@
   </simpleType>
   <simpleType name="LokalStyringEnumerationType">
     <annotation>
-      <documentation>3694: Angir om det er mulighet for lokal styring</documentation>
+      <documentation>3694: Angir om det er mulighet for lokal styring. Lokal styring vil si styring fra nødstyreskap</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3694</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3694</taggedValue>
@@ -385,10 +431,19 @@
           </element>
           <element minOccurs="0" name="lokalStyring" type="nvdb:LokalStyringType">
             <annotation>
-              <documentation>3694: Angir om det er mulighet for lokal styring</documentation>
+              <documentation>3694: Angir om det er mulighet for lokal styring. Lokal styring vil si styring fra nødstyreskap</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3694</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Lokal styring</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="automatiskOppstartAvBrannventilasjon" type="nvdb:AutomatiskOppstartAvBrannventilasjonType">
+            <annotation>
+              <documentation>12105: Angir at brannventilasjonen starter automatisk uten innblanding av en operatør, ved f.eks fjerning av brannslokker. Gjelder ikke ved styring fra VTS, bruk av brannplaner</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12105</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Automatisk oppstart av brannventilasjon</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -467,17 +522,17 @@
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVifteVentilator" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVifteVentilator</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
             <annotation>
               <appinfo>
                 <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVifteVentilator" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVifteVentilator</targetElement>
               </appinfo>
             </annotation>
           </element>

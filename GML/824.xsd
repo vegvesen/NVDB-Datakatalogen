@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.22">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -304,24 +304,24 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="PlannivåType">
+  <simpleType name="PlanstatusType">
     <annotation>
       <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9382</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9382</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plannivå</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Planstatus</taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:PlannivåEnumerationType nvdb:PlannivåOtherType"/>
+    <union memberTypes="nvdb:PlanstatusEnumerationType nvdb:PlanstatusOtherType"/>
   </simpleType>
-  <simpleType name="PlannivåEnumerationType">
+  <simpleType name="PlanstatusEnumerationType">
     <annotation>
       <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9382</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9382</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plannivå</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Planstatus</taggedValue>
       </appinfo>
     </annotation>
     <restriction base="string">
@@ -349,6 +349,15 @@
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">13114</taggedValue>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skisse/forprosjekt</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Konseptvalgutredning">
+        <annotation>
+          <documentation>21026: Konseptvalgutredning</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21026</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Konseptvalgutredning</taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
@@ -381,7 +390,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="PlannivåOtherType">
+  <simpleType name="PlanstatusOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -452,7 +461,7 @@
   </simpleType>
   <element name="Skredpunkt" substitutionGroup="nvdb:AbstraktSkredpunkt" type="nvdb:SkredpunktType">
     <annotation>
-      <documentation>824: Strekning som er utsatt for skred og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres fysisk uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt</documentation>
+      <documentation>824: Strekning som er utsatt for skred fra naturlig sideterreng og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">824</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">824</taggedValue>
@@ -473,12 +482,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="databaseID" type="string">
+          <element minOccurs="0" name="ID" type="string">
             <annotation>
-              <documentation>9344: Referanse til gammel databasenummerering</documentation>
+              <documentation>9344: ID-nummer/løpenummer for egen nummerering av skredpunkt.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9344</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">DatabaseID</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">ID</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -500,12 +509,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="snøskred_Frekvens" type="double">
+          <element minOccurs="0" name="snøskred_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9346: Angir årlig frekvens av snøskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9346: Angir forventet årlig nominell sannsynlighet for snøskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9346</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Snøskred, frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Snøskred, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -518,12 +527,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="sørpeskred_Frekvens" type="double">
+          <element minOccurs="0" name="sørpeskred_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9348: Angir årlig frekvens av sørpeskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9348: Angir forventet årlig nominell sannsynlighet for sørpeskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9348</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sørpeskred, frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sørpeskred, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -536,48 +545,48 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="steinsprangFjellskred_Frekvens" type="double">
+          <element minOccurs="0" name="steinsprang_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9349: Angir årlig frekvens av steinsprang/fjellskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9349: Angir forventet årlig nominell sannsynglihet for steinsprang/steinskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9349</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Steinsprang/fjellskred, frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Steinsprang, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="steinsprangFjellskred_Bredde" type="integer">
+          <element minOccurs="0" name="steinsprang_Bredde" type="integer">
             <annotation>
-              <documentation>9356: Angir gjennomsnittlig bredde av alle steinsprang/fjellskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9356: Angir gjennomsnittlig bredde av alle steinsprang/steinskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9356</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Steinsprang/fjellskred, bredde</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Steinsprang, bredde</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="isnedfall_Frekvens" type="double">
+          <element minOccurs="0" name="isskred_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9351: Angir årlig frekvens av isnedfall. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9351: Angir forventet årlig nominell sannsynglihet for Isskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9351</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Isnedfall, frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Isskred, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="isnedfall_Bredde" type="integer">
+          <element minOccurs="0" name="isskred_Bredde" type="integer">
             <annotation>
               <documentation>9357: Angir gjennomsnittlig bredde av alle isnedfall/isskred/isproblem. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9357</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Isnedfall, bredde</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Isskred, bredde</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="jordLøsmasseskredFrekvens" type="double">
+          <element minOccurs="0" name="jordLøsmasseskred_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9353: Angir årlig frekvens av jord-/løsmasseskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9353: Angir forventet årlig nominell sannsynglihet for jord-/løsmasseskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor..</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9353</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Jord-/løsmasseskred,frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Jord-/løsmasseskred, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -590,12 +599,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="flomskred_Frekvens" type="double">
+          <element minOccurs="0" name="flomskred_Sannsynlighet" type="double">
             <annotation>
-              <documentation>9354: Angir årlig frekvens av flomskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+              <documentation>9354: Angir forventet årlig nominell sannsynglihet for flomskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9354</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Flomskred, frekvens</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Flomskred, sannsynlighet</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -619,7 +628,7 @@
           </element>
           <element minOccurs="0" name="stengningsfrekvens_Skred" type="double">
             <annotation>
-              <documentation>9365: Angir hvor mange ganger per år vegen i gjennomsnitt er stengt på grunn av skred. Brukes ved beregning av F4 Stengningsfaktor.</documentation>
+              <documentation>9365: Angir hvor mange ganger per år vegen i gjennomsnitt er stengt på grunn av skred. Tar ikke hensyn til varighet av stengningen. Brukes ved beregning av F4 Stengningsfaktor.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9365</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Stengningsfrekvens, skred</taggedValue>
@@ -716,48 +725,84 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="plannivå" type="nvdb:PlannivåType">
+          <element minOccurs="0" name="planstatus" type="nvdb:PlanstatusType">
             <annotation>
               <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9382</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Plannivå</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Planstatus</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="oppstartHandlingsprogram" type="integer">
+          <element minOccurs="0" name="sikringstiltakA" type="string">
             <annotation>
-              <documentation>9381: Angir hvilket år sikring er planlagt startet, hvis det er med i handlingsprogram.</documentation>
+              <documentation>10180: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet</documentation>
               <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9381</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Oppstart handlingsprogram</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10180</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sikringstiltak A</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnadsoverslag_MillKr_ForSikringstiltakA" type="double">
+            <annotation>
+              <documentation>9372: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak A. Avrundet i henhold egne regler.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9372</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak A</taggedValue>
               </appinfo>
             </annotation>
           </element>
           <element minOccurs="0" name="kostnadsnivåÅr" type="integer">
             <annotation>
-              <documentation>9371: Hvilken kroneverdi (årstall) kostnader er angitt i.</documentation>
+              <documentation>9371: Hvilken kroneverdi (årstall) kostnader er angitt i. Hvis det er foreslått to ulike sikringstiltak må disse ha samme kostnadsnivå, ev. avvik angis i merknad.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9371</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kostnadsnivå år</taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="kostnadsoverslag_MillKr" type="double">
-            <annotation>
-              <documentation>9372: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt. Avrudet i henhold egne regler.</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9372</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kostnadsoverslag (mill kr)</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="usikkerhetKostnad" type="integer">
             <annotation>
-              <documentation>9373: Angir prosentvis usikkerhet i kostnad +/- (forutsatt like mye oppover og nedover)</documentation>
+              <documentation>9373: Angir prosentvis usikkerhet i kostnad +/- (forutsatt like mye oppover og nedover). Hvis det er foreslått to ulike sikringstiltak må disse ha samme usikkerhet. Ev. avvik angis i merknad.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9373</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Usikkerhet kostnad</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="restrisikoForSikringstiltakA" type="double">
+            <annotation>
+              <documentation>10181: Anslått restrisiko etter at foreslått tiltak A er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et årsannsynlighet for skred i løpet av et år</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10181</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Restrisiko for sikringstiltak A</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sikringstiltakB" type="string">
+            <annotation>
+              <documentation>12100: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12100</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sikringstiltak B</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kostnadsoverslag_MillKr_ForSikringstiltakB" type="double">
+            <annotation>
+              <documentation>12099: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak B. Avrundet i henhold egne regler.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12099</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak B</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="restrisikoForSikringstiltakB" type="double">
+            <annotation>
+              <documentation>12101: Anslått restrisiko etter at foreslått tiltak B er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et årsannsynlighet for skred i løpet av et år</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12101</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Restrisiko for sikringstiltak B</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -770,21 +815,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="planlagtTiltak" type="string">
+          <element minOccurs="0" name="oppstartHandlingsprogram" type="integer">
             <annotation>
-              <documentation>10180: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet</documentation>
+              <documentation>9381: Angir hvilket år sikring er planlagt startet, hvis det er med i handlingsprogram.</documentation>
               <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10180</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Planlagt tiltak</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="sikringsnivå" type="double">
-            <annotation>
-              <documentation>10181: Anslått risiko etter at foreslått tiltak er utført. Oppgis som nominell sannsynlighet for skred. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">10181</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sikringsnivå</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9381</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Oppstart handlingsprogram</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -830,15 +866,6 @@
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9345</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Merknad</taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="arkivnummer" type="string">
-            <annotation>
-              <documentation>9343: Gir referanse til relevant sak i vegeiers arkivsystem</documentation>
-              <appinfo>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">9343</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Arkivnummer</taggedValue>
               </appinfo>
             </annotation>
           </element>

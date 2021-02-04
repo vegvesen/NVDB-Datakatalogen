@@ -19,33 +19,73 @@ dim objFS
 dim lstTags
 dim absClasses as EA.Package
 
-sub createSCmodel
-'Lager ShapeChange-EA-prosjekt og modell
+sub createSCmodel(newOrCopy)
+'Lager eller kobler til ShapeChange-EA-prosjekt og modell
 	Repository.WriteOutput "Script", Now & " Lager ShapeChange-prosjektet " & scPath & "\" & scProject, 0 
 	'Sletter eventuelt gammel fil
 	If objFS.FileExists(scPath & "\" & scProject) then objFS.DeleteFile scPath & "\" & scProject, true
 	'msgAnsw = MsgBox("Sjekk SC-modellen nå", vbOkCancel, "GML-applikasjonsskjema")
 
-	'Create and connect to model. 
 	set scRep = CreateObject("EA.Repository")
-	scRep.CreateModel cmEAPFromBase, scPath & "\" & scProject,1
+
+	if newOrCopy = "copy" then
+		'Copy template project
+		objFS.CopyFile scPath & "\" & scTemplate, scPath & "\" & scProject
+	else 
+		'Create and connect to model. 
+		scRep.CreateModel cmEAPFromBase, scPath & "\" & scProject,1
+	end if
+
 	scRep.OpenFile(scPath & "\" & scProject)
 	set pI = scRep.GetProjectInterface()
+		
+	'Lager eller kobler til basismodell og hovedpakker
+	if newOrCopy = "copy" then
+		set scMod = scRep.Models.GetByName("ShapeChange")
+		if scMod is Nothing then 
+			Repository.WriteOutput "Script", Now & " Finner ikke basismodellen ShapeChange", 0 
+			exit sub
+		end if	
+		set scPck = scMod.Packages.GetByName("NVDB")
+		if scPck is Nothing then 
+			Repository.WriteOutput "Script", Now & " Finner ikke hovedpakken NVDB", 0 
+			exit sub
+		end if	
+		set pkSOSIfelles = scPck.Packages.GetByName("SOSI Fellesegenskaper")
+		if not pkSOSIfelles is nothing then
+			Repository.WriteOutput "Script", Now & " Pakken SOSI Fellesegenskaper er funnet i prosjektet (" & pkSOSIfelles.PackageGUID & ")", 0 
+		else
+			Repository.WriteOutput "Script", Now & " Finner ikke pakken SOSI Fellesegenskaper", 0 
+			scRep.Exit
+			exit sub
+		end if 
+		set absClasses = scRep.GetPackageByGuid(guidAbstrakteKlasser)  ' scPck.Packages.GetByName("_AbstrakteKlasser")
+		if not absClasses is nothing then
+			Repository.WriteOutput "Script", Now & " Pakken med abstrakte klasser er funnet i prosjektet (" & absClasses.PackageGUID & ")", 0 
+		else
+			Repository.WriteOutput "Script", Now & " Finner ikke pakken _AbstrakteKlasser", 0 
+			scRep.Exit
+			exit sub
+		end if	
+	else
+		Repository.WriteOutput "Script", Now & " Lager modellen ShapeChange", 0 
+		set scMod = scRep.Models.AddNew("ShapeChange","")
+		scMod.Update	
+		scRep.Models.Refresh	
 	
-	'Lager basismodell ShapeChange
-	Repository.WriteOutput "Script", Now & " Lager modellen ShapeChange", 0 
-	set scMod = scRep.Models.AddNew("ShapeChange","")
-	scMod.Update	
-	scRep.Models.Refresh	
-	
-	'Lager hovedpakke i modellen ShapeChange
-	Repository.WriteOutput "Script", Now & " Lager hovedpakke NVDB", 0 
-	set scPck = scMod.Packages.AddNew("NVDB","")
-	scPck.Update
-	scMod.Packages.Refresh
-	scPck.StereotypeEx="applicationSchema"
-	scPck.Update
-	
+		'Lager hovedpakke i modellen ShapeChange
+		Repository.WriteOutput "Script", Now & " Lager hovedpakke NVDB", 0 
+		set scPck = scMod.Packages.AddNew("NVDB","")
+		scPck.Update
+		scMod.Packages.Refresh
+		scPck.StereotypeEx="applicationSchema"
+		scPck.Update
+		'Importerer SOSI Fellesegenskaper-pakken til modellen ShapeChange
+		importSOSIFelles
+		'Importerer Abstrakte klasser-pakken til modellen ShapeChange
+		importAbstrakteKlasser
+	end if 	
+		
 	'Legger på GML-tagger på hovedpakka. Litt komplekst pga tagger både i og utenfor profil
 	dim tagVal as EA.TaggedValue
 	dim tagFound
@@ -76,7 +116,7 @@ sub createSCmodel
 	next
 
 	scPck.Element.TaggedValues.Refresh
-	scMod.Packages.Refresh			
+	scMod.Packages.Refresh	
 end sub
 
 sub importSOSIFelles
@@ -226,6 +266,8 @@ sub Fellesskjema()
 	if not thePackage is nothing and thePackage.ParentID <> 0 then
 		Repository.WriteOutput "Script", Now & " Hovedpakke: " & thePackage.Name & " (" & thePackage.PackageGUID & ")", 0 
 
+		'****************** Lager først SOSIFelles.xsd og AbstraktNVDB.xsd *******************
+
 		'Liste med GML-tagger til hovedpakke
 		Set lstTags = CreateObject("System.Collections.SortedList")
 		lstTags.Add "targetNamespace", strTargetNamespace
@@ -233,12 +275,8 @@ sub Fellesskjema()
 		lstTags.Add "xmlns", "nvdb"
 		lstTags.Add "xsdDocument", "AbstraktNVDB.xsd"
 
-		'Lager modell og hovedpakke
-		createSCmodel
-		'Importerer SOSI Fellesegenskaper-pakken til modellen ShapeChange
-		importSOSIFelles
-		'Importerer Abstrakte klasser-pakken til modellen ShapeChange
-		importAbstrakteKlasser
+		'Lager modell og hovedpakke, og importerer fellespakker
+		createSCmodel("new")
 		'Legger til arv fra SOSI Fellesegenskaper for abstrakte klasser og rydder i tagger
 		Repository.WriteOutput "Script", Now & " Legger til arv fra SOSI Fellesegenskaper for abstrakte klasser og rydder i tagger", 0 
 
@@ -284,8 +322,13 @@ sub Fellesskjema()
 		scRep.CloseFile
 		scRep.Exit
 		set scRep = nothing	
-		'Delete SC
-		'objFS.DeleteFile scPath & "\" & scProject, true
+		
+		'Lag kopi av SC-prosjektet, for bruk som mal for prosessen med enkeltvise skjema.
+		'Sletter eventuelt gammel fil
+		If objFS.FileExists(scPath & "\" & scMal) then objFS.DeleteFile scPath & "\" & scMal, true
+		objFS.CopyFile scPath & "\" & scProject, scPath & "\" & scTemplate
+			
+		'***************** Skjema pr vegobjekttype *****************************
 
 		'Hardkoda liste over objekttyper som ikke skal være med i GML-eksporten
 		dim lstOmit
@@ -297,6 +340,8 @@ sub Fellesskjema()
 		lstOmit.Add "621" 'Oppgave_Vegnett
 		lstOmit.Add "622" 'SOSI-Bestilling
 		lstOmit.Add "793" 'NVDBDokumentasjon
+		'lstOmit.Add "871" 'Historisk Bruksklasse
+		
 		
 		'Hardkoda liste over datatyper som skal fjernes fra den enkelte pakken, ettersom de finnes i SOSI Fellesegenskaper.
 		dim lstDTOmit
@@ -307,7 +352,7 @@ sub Fellesskjema()
 
 		'Løkke for kjøring pr vegobjekttype
 		for each pck in thePackage.Packages
-			if not lstOmit.Contains(pck.Alias) and pck.PackageGUID <> guidAbstrakteKlasser then 'Vegreferanse skal ikke være med
+			if not lstOmit.Contains(pck.Alias) and pck.PackageGUID <> guidAbstrakteKlasser then 'Vegreferanse m.fl. skal ikke være med
 				Repository.WriteOutput "Script", Now & " ", 0 
 				Repository.WriteOutput "Script", Now & " Lager applikasjonsskjemamodell for delpakken " & pck.Name & " (" & pck.PackageGUID & ")", 0 
 
@@ -318,10 +363,10 @@ sub Fellesskjema()
 				lstTags.Add "xmlns", "nvdb"
 				lstTags.Add "xsdDocument", pck.Alias & ".xsd"
 
-				'Lager modell og hovedpakke
-				createSCmodel
+				'Kobler til modell og hovedpakker
+				createSCmodel("copy")
 				'Importerer SOSI Fellesegenskaper-pakken til modellen ShapeChange
-				importSOSIFelles
+				'importSOSIFelles
 
 				'Importerer aktuell objekttype sin pakke til modellen ShapeChange
 				Repository.WriteOutput "Script", Now & " Importerer pakke for hovedobjekttypen " & pck.Name & " (fil: " & sosiPath & "\" & pck.Alias & ".xml)", 0 
@@ -330,7 +375,7 @@ sub Fellesskjema()
 				scPck.Packages.Refresh			
 
 				'Importerer Abstrakte klasser-pakken til modellen ShapeChange
-				importAbstrakteKlasser
+				'importAbstrakteKlasser
 				set tagVal = absClasses.Element.TaggedValues.AddNew("xsdDocument", "AbstraktNVDB.xsd")
 				tagVal.Update				
 
