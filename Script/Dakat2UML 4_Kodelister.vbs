@@ -136,6 +136,14 @@ sub updateKodelister()
 		Next
 	Next
 	
+	'Kjør gjennom SOSI Fellesegenskaper, finn alle kodelister og legg til navnet i listen
+	For each element in pkSOSIFelles.elements
+		If UCase(element.Stereotype) = "CODELIST" then
+			lstCodeListNames.Add element.Name
+			Repository.WriteOutput "Script", Now & " Legger til SOSI-kodeliste " & element.Name & " i liste",0
+		end if
+	Next
+	
 	For idxP = 0 To pkObjekttyper.Packages.Count - 1
 		Set lstAlias = CreateObject("System.Collections.ArrayList")
 		set pkOT_Sub = pkObjekttyper.Packages.GetAt(idxP)

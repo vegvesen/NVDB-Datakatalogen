@@ -340,7 +340,7 @@ sub Fellesskjema()
 		lstOmit.Add "621" 'Oppgave_Vegnett
 		lstOmit.Add "622" 'SOSI-Bestilling
 		lstOmit.Add "793" 'NVDBDokumentasjon
-		'lstOmit.Add "871" 'Historisk Bruksklasse
+		lstOmit.Add "871" 'Historisk Bruksklasse
 		
 		
 		'Hardkoda liste over datatyper som skal fjernes fra den enkelte pakken, ettersom de finnes i SOSI Fellesegenskaper.
