@@ -4,10 +4,10 @@
 !INC NVDB._felles
 !INC NVDB._parametre
 
-' Script Name: DakatUML2SOSI2PS
+' Script Name: DakatUML2SOSI2PS_1_Klasser_i_kategorier
 ' Author: Knut Jetlund
-' Purpose: Generer produktspesifikasjon ut i fra koblingstabeller mot vegobjekttypekategori
-' Date: 20210212
+' Purpose: Lager hovedpakke for  produktspesifikasjon for valgte vegobjekttypekategorier, ut fra koblingstabeller
+' Date: 20210216
 '
 
 const votkatId = "302,303"
@@ -24,16 +24,12 @@ sub main
 	'Lager koblingstabell for vegobjekttyper og vegobjekttypekategorier	
 	set rsVTKat = CreateObject("ADODB.Recordset")
 	rsVTKat.Open "SELECT * FROM KOPL_VOT_KAT", dbDakat, 3, 1
-	'Lager koblingstabell for egenskapstyper og vegobjekttypekategorier	
-	set rsETKat = CreateObject("ADODB.Recordset")
-	rsETKat.Open "SELECT * FROM KOPL_ET_KAT", dbDakat, 3, 1
-	'Lager koblingstabell for kodelisteverdier og vegobjekttypekategorier	
-	set rsTVKat = CreateObject("ADODB.Recordset")
-	rsTVKat.Open "SELECT * FROM KOPL_TV_KAT", dbDakat, 3, 1
 	
 	'Hent valgt hovedpakke
 	dim thePackage as EA.Package
 	set thePackage = Repository.GetTreeSelectedPackage()
+	Repository.WriteOutput "Script", Now & " Hovedpakke: " & thePackage.Name & " (" & thePackage.PackageGUID & ")", 0 
+
 	dim pI as EA.Project					
 	set pI = Repository.GetProjectInterface()
 	Set objFS = CreateObject("Scripting.FileSystemObject")
@@ -56,6 +52,11 @@ sub main
 			If rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value <> "" then element.Notes = rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value
 			element.Update
 			
+			'TODO: Importer SOSIFelles og Abstrakte klasser
+			'TODO: Legge til arv fra SOSIFelles til abstrakte klasser
+			'TODO: Rydde i abstrakte klasser og assosiasjoner. Howto?
+			
+			
 			'For hver VOT i kategorien:
 			rsVTKat.Filter = "ID_VOBJ_TYP_KAT = " & votkatId
 			Do Until rsVTKat.EOF
@@ -65,24 +66,12 @@ sub main
 				if objFS.FileExists(strFileName) then
 
 					Repository.WriteOutput "Script", Now & " Importerer Vegobjekttype-XMI: " & strFileName,0
-					'pI.ImportPackageXMI katPackage.PackageGUID, strFileName, 1,1
-					'katPackage.Packages.Refresh			
+					pI.ImportPackageXMI katPackage.PackageGUID, strFileName, 1,1
+					katPackage.Packages.Refresh			
 
 				end if
 				rsVTKat.MoveNext()
 			Loop	
-
-					'For hver attributt i VOT
-					'rsETKat.Filter = = "ID_VOBJ_TYP_KAT = " & votkatId
-					'Sjekk om den inngår i koblingsliste
-					'Ja--> Obligatorisk.
-					'Nei-->Slett. Inkludert tilhørende kodeliste
-
-					'For hver kodelisteverdi
-					'rsTVKat.Filter = = "ID_VOBJ_TYP_KAT = " & votkatId
-					'Sjekk om den inngår i koblingsliste
-					'Nei-->Slett. 
-
 			rsVOTKategorier.MoveNext()
 		Loop
 	next

@@ -18,6 +18,7 @@ dim pkOT as EA.Package
 dim pkOT_NVDB as EA.Package
 dim pkOT_Sub as EA.Package
 
+dim diagramElement as EA.Element
 dim element as EA.Element
 dim elNVDB as EA.Element
 dim elementA as EA.Element

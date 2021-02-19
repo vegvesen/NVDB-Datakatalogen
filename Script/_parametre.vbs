@@ -14,7 +14,7 @@ const owlURI = "http://rdf.vegdata.no/nvdb/nvdb-owl"
 
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
-const scProject = "SC_NVDB_4.eap"
+const scProject = "SC_NVDB.eap"
 const scTemplate = "SC_Core.eap"
 
 'GUID-er for pakker mm
@@ -35,6 +35,7 @@ const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
 const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
 
 
+'***************************************************************************
 
 'Parametre for konvertering til SOSI - stort sett utgått pga nye script.
 
