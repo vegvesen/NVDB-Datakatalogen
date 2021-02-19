@@ -29,6 +29,19 @@ sub main
 	dim thePackage as EA.Package
 	set thePackage = Repository.GetTreeSelectedPackage()
 	Repository.WriteOutput "Script", Now & " Hovedpakke: " & thePackage.Name & " (" & thePackage.PackageGUID & ")", 0 
+	
+	'Mulighet for å stoppe prosessen i tilfelle feil hovedpakke...
+	dim msgAnsw
+	msgAnsw = MsgBox("Slette gamle pakker fra hovedpakken " & thePackage.Name & "?", vbOkCancel, "Produktspesifikasjoner")
+	if msgAnsw <> 2 then
+		Repository.WriteOutput "Script", Now & " Sletter gamle pakker i hovedpakken...", 0 
+		for idxP = 0 to thePackage.Packages.Count - 1
+			set katPackage = thePackage.Packages.GetAt(idxP)
+			Repository.WriteOutput "Script", Now & " Sletter pakken " & katPackage.Name & "...", 0 
+			thePackage.Packages.DeleteAt idxP, 0
+		next
+		thePackage.Packages.Refresh
+	end if	
 
 	dim pI as EA.Project					
 	set pI = Repository.GetProjectInterface()
@@ -47,15 +60,46 @@ sub main
 			Repository.WriteOutput "Script", Now & " Vegobjekttypekategori: " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & " (" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & ")",0
 			set katPackage = thePackage.Packages.AddNew(rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value,"Package")
 			katPackage.Update
+			katPackage.StereotypeEx="applicationSchema"
+			katPackage.Update
 			set element = katPackage.Element
-			element.Alias = rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value
+			element.Alias = rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value
 			If rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value <> "" then element.Notes = rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value
 			element.Update
 			
-			'TODO: Importer SOSIFelles og Abstrakte klasser
-			'TODO: Legge til arv fra SOSIFelles til abstrakte klasser
-			'TODO: Rydde i abstrakte klasser og assosiasjoner. Howto?
-			
+			'Liste med GML-tagger til hovedpakke
+			Set lstTags = CreateObject("System.Collections.SortedList")
+			'targetnamespace fra kortnavn og versjonsnummer
+			lstTags.Add "targetNamespace", strTargetNamespace & "/PS/" & rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value & "/" & FC_version
+			lstTags.Add "version", FC_version
+			lstTags.Add "xmlns", "nvdb"
+			'Skjemanavn fra kategorien sitt kortnavn
+			lstTags.Add "xsdDocument", rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value & ".xsd"
+
+			'Legger på GML-tagger på hovedpakka. Litt komplekst pga tagger både i og utenfor UML-profil
+			dim tagFound
+			for idxT = 0 to lstTags.Count - 1
+				dim tName
+				tName = lstTags.GetKey(idxT)
+				dim tValue
+				tValue = lstTags.GetByIndex(idxT)
+
+				tagFound = false
+				for each tagVal in katPackage.Element.TaggedValues
+					if tagVal.Name = tName then 
+						tagVal.Value = tValue
+						tagVal.Update
+						tagFound= true
+						Repository.WriteOutput "Script", Now & " Fant tagged value " & tagVal.Name & ", settes til " & tagVal.Value, 0 
+					end if
+				next
+				if not tagFound then 
+					Repository.WriteOutput "Script", Now & " Mangler tag " & tName, 0 
+					set tagVal = katPackage.Element.TaggedValues.AddNew(tName, tValue)
+					tagVal.Update
+				end if
+			next
+			katPackage.Element.TaggedValues.Refresh
 			
 			'For hver VOT i kategorien:
 			rsVTKat.Filter = "ID_VOBJ_TYP_KAT = " & votkatId

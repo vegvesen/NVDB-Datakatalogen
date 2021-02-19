@@ -18,9 +18,6 @@ sub main
 	outputTabs
 	'Kobler til modell og database
 	connect2models
-	'Henter tabell for vegobjekttypekategorier
-	set rsVOTKategorier = CreateObject("ADODB.Recordset")
-	rsVOTKategorier.Open "SELECT * FROM VEGOB_TYPE_KAT", dbDakat, 3, 1
 
 	'Hent valgt hovedpakke
 	dim thePackage as EA.Package
@@ -157,9 +154,30 @@ sub main
 				next
 				'Repository.WriteOutput "Script", Now & " Assosiasjonsdiagram: " & eASDiagram.Name, 0 
 				Repository.WriteOutput "Script", Now & " Rydder i betingelsessdiagrammet: " & eBDiagram.Name, 0 
+				'Fjerner klassen og legger til på nytt for å få automatisk tilpasset størrelse
+				for idxD = 0 to eBDiagram.DiagramObjects.Count - 1
+					Set diagramObject = eBDiagram.DiagramObjects.GetAt(idxD)
+					set element = Repository.GetElementByID(diagramObject.ElementID)
+					eBDiagram.DiagramObjects.DeleteAt idxD, 0
+					set diagramObject = eBDiagram.DiagramObjects.AddNew("", "")
+					diagramObject.ElementID = element.ElementID
+					diagramObject.Update()
+				next
+				eBDiagram.DiagramObjects.Refresh
 				ePIF.LayoutDiagramEx eBDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eBDiagram.DiagramID)
+
 				Repository.WriteOutput "Script", Now & " Rydder i kodelistediagrammet: " & eTVDiagram.Name, 0 
+				'Fjerner klasser og legger til på nytt for å få automatisk tilpasset størrelse
+				for idxD = 0 to eTVDiagram.DiagramObjects.Count - 1
+					Set diagramObject = eTVDiagram.DiagramObjects.GetAt(idxD)
+					set element = Repository.GetElementByID(diagramObject.ElementID)
+					eTVDiagram.DiagramObjects.DeleteAt idxD, 0
+					set diagramObject = eTVDiagram.DiagramObjects.AddNew("", "")
+					diagramObject.ElementID = element.ElementID
+					diagramObject.Update()
+				next
+				eTVDiagram.DiagramObjects.Refresh
 				ePIF.LayoutDiagramEx eTVDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eTVDiagram.DiagramID)
 	
@@ -183,25 +201,28 @@ sub main
 							diagramObject.ElementID = elementB.ElementID
 							diagramObject.Update
 						end if
+					elseif element.Alias = pkOT.Alias then
+						'Hovedklassen - fjerner og legger til på nytt for å få automatisk tilpasset størrelse
+						eASDiagram.DiagramObjects.DeleteAt idxD, 0
+						set diagramObject = eASDiagram.DiagramObjects.AddNew("", "")
+						diagramObject.ElementID = element.ElementID
+						diagramObject.Update()
 					end if	
 				next
 				eASDiagram.DiagramObjects.Refresh
 				ePIF.LayoutDiagramEx eASDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eASDiagram.DiagramID)
 
-
-				'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-				dim msgAnsw
-				msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "OWL")
-				if msgAnsw = 2 then
-					Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
-					exit sub
-				end if	
 			end if	
 		next
-		
-		
-		'TODO: Sette tagged values for kategoripakke og delpakker?
+
+		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
+		'dim msgAnsw
+		'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "OWL")
+		'if msgAnsw = 2 then
+		'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
+		'	exit sub
+		'end if	
 	
 	next
 

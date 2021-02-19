@@ -112,14 +112,6 @@ sub main
 				end if	
 			next
 			pkOT.elements.Refresh
-		
-			'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
-			'dim msgAnsw
-			'msgAnsw = MsgBox("Sjekk modellen nå", vbOkCancel, "OWL")
-			'if msgAnsw = 2 then
-			'	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
-			'	exit sub
-			'end if	
 		next
 	next
 
