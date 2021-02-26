@@ -4,13 +4,12 @@ option explicit
 !INC NVDB._felles
 !INC NVDB._parametre
 '
-' Script Name: NVDB2OWL_0_Komplett med kategorier
+' Script Name: NVDB2OWL_0_KunOTL
 ' Author: Knut Jetlund
-' Purpose: Generering av OWL-OTL for komplett NVDB Datakatalog, inkludert kobling mellom vegobjekttyper og kategorier
-' Date: 20210212
+' Purpose: Generering av OWL-OTL for komplett NVDB Datakatalog, uten kobling mellom vegobjekttyper og kategorier
+' Date: 20210225
 '
 
-Dim rsVOTKategorier, rsVTKat, rsETKat, rsTVKat
 dim objFSO, objOTLFile, objTemplate
 dim nvdb_navn, definition
 dim tV as EA.TaggedValue
@@ -24,23 +23,6 @@ Sub main
 	outputTabs
 	'Kobler til modell og database
 	connect2models
-	'Henter tabell for vegobjekttypekategorier
-	set rsVOTKategorier = CreateObject("ADODB.Recordset")
-	rsVOTKategorier.Open "SELECT * FROM VEGOB_TYPE_KAT", dbDakat, 3, 1
-	rsVOTKategorier.Filter = "NAVN_VOBJ_TYP_KAT <> ""*Utgått*"""
-	'Lager koblingstabell for vegobjekttyper og vegobjekttypekategorier	
-	set rsVTKat = CreateObject("ADODB.Recordset")
-	rsVTKat.Open "SELECT * FROM KOPL_VOT_KAT", dbDakat, 3, 1
-	'rsVTKat.Filter = "Dato_fra <> NULL"
-	'Lager koblingstabell for egenskapstyper og vegobjekttypekategorier	
-	set rsETKat = CreateObject("ADODB.Recordset")
-	rsETKat.Open "SELECT * FROM KOPL_ET_KAT", dbDakat, 3, 1
-	'rsETKat.Filter = "Dato_fra <> NULL"
-	'Lager koblingstabell for kodelisteverdier og vegobjekttypekategorier	
-	set rsTVKat = CreateObject("ADODB.Recordset")
-	rsTVKat.Open "SELECT * FROM KOPL_TV_KAT", dbDakat, 3, 1
-	'rsTVKat.Filter = "Dato_fra <> NULL"
-	
 
 	'Hent NVDB-SOSI-modellen		
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
@@ -76,22 +58,6 @@ Sub main
 	'Repository.EnsureOutputVisible "Script"
 	'exit sub
 
-	'Løkke for alle vegobjektkategorier
-	Do Until rsVOTKategorier.EOF
-		'Lager OWL-klasse for vegobjekttypekategorien
-		Repository.WriteOutput "Script", Now & " Vegobjekttypekategori: " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & " (" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & ")",0
-		objOTLFile.WriteText "### " & owlURI & "#votkat" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & vbCrLf
-		objOTLFile.WriteText ":votkat" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & " rdf:type owl:Class ;" & vbCrLf
-		objOTLFile.WriteText "         rdfs:subClassOf :Vegobjekttypekategori ;" & vbCrLf
-		objOTLFile.WriteText "         :nvdb_id " & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
-		objOTLFile.WriteText "         :nvdb_navn """ & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ;" & vbCrLf					
-		objOTLFile.WriteText "         rdfs:label """ & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & """@no ;" & vbCrLf					
-		objOTLFile.WriteText "         skos:definition """ & rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value & """@no ." & vbCrLf
-		objOTLFile.WriteText vbCrLf
-		objOTLFile.WriteText vbCrLf
-		rsVOTKategorier.MoveNext()
-	Loop
-	
 	'Kjører gjennom alle pakker i NVDB-SOSI-modellen og skriver OWL-representasjon
 	for each pkOT in pkSOSINVDB.Packages
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
@@ -110,13 +76,6 @@ Sub main
 					objOTLFile.WriteText "### " & owlURI & "#vot" & element.Alias & vbCrLf
 					objOTLFile.WriteText ":vot" & element.Alias & " rdf:type owl:Class ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:subClassOf :Vegobjekttype ;" & vbCrLf
-					'Lager subclass-tilknytning til vegobjektkategorier ut fra filtrert recordset med koblingstabellen VOT-VOTKAT
-					rsVTKat.Filter = "ID_VOBJ_TYPE = " & element.Alias
-					do until rsVTKat.EOF
-						Repository.WriteOutput "Script", Now & " Subklasse av vegobjekttypekategori :votkat" & rsVTKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
-						objOTLFile.WriteText "         rdfs:subClassOf :votkat" & rsVTKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
-						rsVTKat.MoveNext()
-					loop
 					
 					'Restriksjoner pr attributt
 					'rdfs:subClassOf 
@@ -264,14 +223,6 @@ Sub main
 							'Attributte med geometridatatype --> subProperty av hasGeometry fra GeoSPARQL
 							if gT then objOTLFile.WriteText "         rdfs:subPropertyOf gsp:hasGeometry ;" & vbCrLf
 							
-							'Kobler attributter (properties) og vegobjekttypekategorier ut fra filtrert koblingstabell
-							'TODO: Legger foreløpig bare på ObjectProperty med kobling til vegobjektkategorien. Løsningen kan nok forbedres.
-							rsETKat.Filter = "ID_EGENSKAPSTYPE = " & eAttributt.Alias
-							do until rsETKat.EOF
-								Repository.WriteOutput "Script", Now & " Medlem av vegobjekttypekategori :votkat" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
-								objOTLFile.WriteText "         :medlem_av_VOTKategori :votkat" & rsETKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
-								rsETKat.MoveNext()
-							loop
 							'Domain og range for properties. 						
 							objOTLFile.WriteText "         rdfs:domain :vot" & pkOT.Alias & ";" & vbCrLf
 							objOTLFile.WriteText "         rdfs:range " & range & ";" & vbCrLf
@@ -383,16 +334,7 @@ Sub main
 						objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         :sosi_navn """ & Replace(eAttributt.Name,"""","\""") & """@no ;" & vbCrLf
-						
-						'Kobler kodelisteverdier (instanser) og vegobjekttypekategorier ut fra filtrert koblingstabell
-						'TODO: Legger foreløpig bare på ObjectProperty med kobling til vegobjektkategorien. Løsningen kan nok forbedres.
-						rsTVKat.Filter = "ID_TILLATT_VERDI = " & eAttributt.Alias
-						do until rsTVKat.EOF
-							Repository.WriteOutput "Script", Now & " Medlem av vegobjekttypekategori :votkat" & rsTVKat.Fields("ID_VOBJ_TYP_KAT").Value, 0 
-							objOTLFile.WriteText "         :medlem_av_VOTKategori :votkat" & rsTVKat.Fields("ID_VOBJ_TYP_KAT").Value & " ;" & vbCrLf
-							rsTVKat.MoveNext()
-						loop
-						
+												
 						'Skriver kortnavn dersom dette er angitt
 						if IsNull(eAttributt.Default) or eAttributt.Default = "" then
 							Repository.WriteOutput "Script", Now & " Kodeverdi: " & eAttributt.Name, 0 
