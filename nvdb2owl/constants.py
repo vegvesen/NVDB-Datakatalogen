@@ -11,6 +11,7 @@ nvdbVnPath = "http://rdf.vegdata.no/nvdb/vegnett#"
 nvdbOTLPath = "http://rdf.vegdata.no/nvdb/nvdb-owl#"
 gdfOTLPath = "http://rdf.gdf.org/gdf-owl#"
 nvdb_otl_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-owl.ttl'
+nvdb_kat_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/nvdb-kategorier.ttl'
 gdf_otl_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
 lr_set_gh = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/LRS_NVDB_GDF.ttl'
 rdfsUri = "http://www.w3.org/2000/01/rdf-schema#"
