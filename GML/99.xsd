@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.23">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.24">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -244,21 +244,39 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="Over 50 Km/t (9+3.. osv)">
+      <enumeration value="Standard over 50 km/t">
         <annotation>
-          <documentation>5333: Benyttes ved fartsgrense over 50</documentation>
+          <documentation>5333: Angir at det skal benyttes standard linjemønster for fartsgrense over 50 km/t. Dvs 3+9 for kjørefeltlinje, 9+3 for varsellinje, 9+3 for dobbel varsellinje, 2+2 for skillelinje, 1+1 for ledelinje og 3+3 for stiplet kantlinje</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5333</taggedValue>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Over 50 Km/t (9+3.. osv)</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Standard over 50 km/t</taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Tom 50 km/t (3+1 ..osv)">
+      <enumeration value="Standard tom 50 km/t">
         <annotation>
-          <documentation>5334: Benyttes når fartsgrense er 50 eller mindre</documentation>
+          <documentation>5334: Angir at det skal benyttes standard linjemønster for fartsgrense 50 km/t eller lavere. Dvs 1+3 for kjørefeltlinje, 3+1 for varsellinje, 3+1 for dobbel varsellinje, 2+2 for skillelinje, 1+1 for ledelinje og 3+3 for stiplet kantlinje</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">5334</taggedValue>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Tom 50 km/t (3+1 ..osv)</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Standard tom 50 km/t</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Standard lomme og kryss/avkjørsel">
+        <annotation>
+          <documentation>21099: Kun aktuell om det er angitt linjetype 1012.2 Stiplet kantlinje. Indikerer da linjemønster 2+2 mot busslomme og mot sideveg i forkjørsregulerte kryss/avkjørsler.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21099</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Standard lomme og kryss/avkjørsel</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Standard sykkel">
+        <annotation>
+          <documentation>21091: Angir at det skal benyttes standard oppmerkingsmønster for sykkel. Benyttes for varsellinje på sykkelveg og gang-/sykkelveg (0,75+0,25) eller for skillelinje mot sykkelfelt (1+1)</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21091</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Standard sykkel</taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
@@ -819,6 +837,15 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="breddeLinjeISperreområdet">
+            <annotation>
+              <documentation>12146: Bredde på enkeltlinjene i i sperreområdet.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12146</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bredde linje i sperreområdet</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="lengdeOmslutningslinje" type="integer">
             <annotation>
               <documentation>4515: Angir lengde av sperreområdets omslutningspunkt.</documentation>
@@ -876,48 +903,6 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTrafikkdeler" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTrafikkdeler</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTrafikkøy" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTrafikkøy</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>
