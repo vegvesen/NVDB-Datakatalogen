@@ -314,7 +314,7 @@ Sub main
 					objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         :sosi_navn """ & element.Name & """@no ;" & vbCrLf
-					'Håndtering av "fnutter" i definisjonen
+					'Håndtering av "fnutter" og linjeskift i definisjonen
 					definition = replace(element.Notes, """","\""")
 					definition = replace(definition, vbCrLf," ")			
 					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
@@ -342,9 +342,11 @@ Sub main
 							Repository.WriteOutput "Script", Now & " Kodeverdi: " & eAttributt.Name & " (" & eAttributt.Default & ")", 0 
 							objOTLFile.WriteText "         :kortnavn """ & eAttributt.Default & """ ;" & vbCrLf
 						end if
-						'Håndtering av "fnutter" i definisjonen
+						'Håndtering av "fnutter" og linjeskift i definisjonen
 						definition = replace(eAttributt.Notes, """","\""")
-						definition = replace(definition, vbCrLf," ")			
+						definition = replace(definition, vbCrLf," ")	
+						'Repository.WriteOutput "Endringer", Now & " Kodeverdi: " & eAttributt.Name & " Definisjon: " & definition, 0 
+						
 						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
 						objOTLFile.WriteText vbCrLf

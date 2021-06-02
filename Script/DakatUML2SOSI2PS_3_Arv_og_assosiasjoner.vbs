@@ -10,7 +10,7 @@
 ' Date: 20210217
 '
 
-const votkatId = "302,303"
+const votkatId = "303,304"
 
 sub main
 

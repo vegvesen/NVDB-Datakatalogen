@@ -56,7 +56,7 @@ cntRes = 0
 for row in q_res:
 
     # Gjør greiene dine.
-    if str(row.kid) == '302' or str(row.kid) == '303':
+    if str(row.kid) == '303' or str(row.kid) == '304':
         print(str(datetime.datetime.now()) + ' Vegobjekttypekategori : ', row.k, ' ', row.kn, '(', row.kid, ')')
 
         kat_o=Graph()
