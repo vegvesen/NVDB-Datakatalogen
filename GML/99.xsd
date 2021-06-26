@@ -1,9 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.24">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.25">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="BreddeLinjeISperreområdetType">
+    <annotation>
+      <documentation>12146: Bredde på enkeltlinjene i i sperreområdet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12146</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12146</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bredde linje i sperreområdet</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:BreddeLinjeISperreområdetEnumerationType nvdb:BreddeLinjeISperreområdetOtherType"/>
+  </simpleType>
+  <simpleType name="BreddeLinjeISperreområdetEnumerationType">
+    <annotation>
+      <documentation>12146: Bredde på enkeltlinjene i i sperreområdet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12146</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12146</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Bredde linje i sperreområdet</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0,25">
+        <annotation>
+          <documentation>21097: Bredde benyttes ved fartsgrense 70 km/t eller lavere</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21097</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">0,25</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="0,50">
+        <annotation>
+          <documentation>21098: Bredde benyttes ved fartsgrense 80 km eller høyere</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21098</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">0,50</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BreddeLinjeISperreområdetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="Bredde_EnkeltlinjeType">
     <annotation>
       <documentation>4514: Angir normal bredde av enkeltlinje.  For sperreområde gjelder bredde omslutningslinje.</documentation>
@@ -837,7 +883,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="breddeLinjeISperreområdet">
+          <element minOccurs="0" name="breddeLinjeISperreområdet" type="nvdb:BreddeLinjeISperreområdetType">
             <annotation>
               <documentation>12146: Bredde på enkeltlinjene i i sperreområdet.</documentation>
               <appinfo>

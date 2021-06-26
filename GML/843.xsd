@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.24">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.25">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -164,6 +164,15 @@
     <complexContent>
       <extension base="nvdb:AbstraktKabelgrøftType">
         <sequence>
+          <element minOccurs="0" name="spenningsnivå" type="nvdb:SpenningsnivåType">
+            <annotation>
+              <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12182</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Spenningsnivå</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="dybde" type="double">
             <annotation>
               <documentation>9577: Angir dybde av vegobjektet. Dybde måles ned til topp fundament</documentation>
@@ -252,6 +261,61 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="SpenningsnivåType">
+    <annotation>
+      <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12182</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12182</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Spenningsnivå</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:SpenningsnivåEnumerationType nvdb:SpenningsnivåOtherType"/>
+  </simpleType>
+  <simpleType name="SpenningsnivåEnumerationType">
+    <annotation>
+      <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12182</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12182</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Spenningsnivå</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Elkraft">
+        <annotation>
+          <documentation>21238: Det finnes strømførende kabler i kabelgrøft</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21238</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Elkraft</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Signal">
+        <annotation>
+          <documentation>21239: Det finnes ikke strømførende kabler i kabelgrøft, kun signalkabler eller tisvarende</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21239</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Signal</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Elkraft/signal">
+        <annotation>
+          <documentation>21240: Det finnes både strømførende ledninger og signalkabler i grøft</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21240</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Elkraft/signal</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpenningsnivåOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="VedlikeholdsansvarligKabelgrøftType">
     <annotation>
       <documentation>10979: Angir hvem som er ansvarlig for vedlikehold av vegobjektet</documentation>

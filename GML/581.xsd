@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.24">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.25">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -462,6 +462,52 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
+  <simpleType name="TEN_TType">
+    <annotation>
+      <documentation>12183: Indikerer at tunnel inngår i TEN-T vegnett. Avledes fra informasjon gitt i egen vegobjekttype "TEN-T veg" (852).</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12183</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12183</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">TEN-T</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TEN_TEnumerationType nvdb:TEN_TOtherType"/>
+  </simpleType>
+  <simpleType name="TEN_TEnumerationType">
+    <annotation>
+      <documentation>12183: Indikerer at tunnel inngår i TEN-T vegnett. Avledes fra informasjon gitt i egen vegobjekttype "TEN-T veg" (852).</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12183</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12183</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">TEN-T</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21241: Tunnel inngår i TENT-T veg</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21241</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21242: Tunnel inngår ikke i TEN-T</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21242</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TEN_TOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <element name="Tunnel" substitutionGroup="nvdb:AbstraktTunnel" type="nvdb:TunnelType">
     <annotation>
       <documentation>581: Sted hvor veg passerer gjennom jord/fjell eller under større lokk.  Består av ett eller flere tunnelløp.</documentation>
@@ -548,12 +594,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="sikkerhetsgodkjenningsdato" type="date">
+          <element minOccurs="0" name="datoForBrukstillatelse" type="date">
             <annotation>
-              <documentation>11448: Gir dato for når tunnel sist ble sikkerhetsgodkjent.</documentation>
+              <documentation>11448: Gir dato for godkjent brukstillatelse.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11448</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sikkerhetsgodkjenningsdato</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Dato for brukstillatelse</taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -626,6 +672,15 @@
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">3913</taggedValue>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Merknad syklende</taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="TEN_T" type="nvdb:TEN_TType">
+            <annotation>
+              <documentation>12183: Indikerer at tunnel inngår i TEN-T vegnett. Avledes fra informasjon gitt i egen vegobjekttype "TEN-T veg" (852).</documentation>
+              <appinfo>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12183</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">TEN-T</taggedValue>
               </appinfo>
             </annotation>
           </element>
