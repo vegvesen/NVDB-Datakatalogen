@@ -32,14 +32,14 @@ otl = otl_nvdb + otl_gdf + otl_lset
 
 # Leser graf med NVDB-data
 g_nvdb = Graph()
-vegobjekttype=174
-område='FronSel'
+# vegobjekttype=174
+# område='FronSel'
 # Alt.1: Fra NVDB-API
-for knr in range (3436,3438):
+for knr in range (knrfrom,knrto):
     print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
     try:
         # Lager graf fra NVDB-data
-        g_nvdb=g_nvdb + nvdb2graph(vegobjekttype,knr,otl_nvdb)
+        g_nvdb=g_nvdb + nvdb2graph(featuretypeid,knr,otl_nvdb)
     except:
         print(str(datetime.datetime.now()) + ' Ukjent kommune: ' + str(knr))
 
@@ -60,7 +60,7 @@ gdf_g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
 
 #gdf_g = gdf_g + otl_gdf
 print('')
-gdffile=localPath + "\\data\\gdf_" + område + "_" + str(vegobjekttype) + ".ttl."
+gdffile=localPath + "\\data\\gdf_" + areaname + "_" + str(featuretypeid) + ".ttl."
 print(str(datetime.datetime.now()) + ' Skriver til GDF-Turtle-fil ' + gdffile)
 gdf_g.serialize(destination=gdffile, format="turtle")
 

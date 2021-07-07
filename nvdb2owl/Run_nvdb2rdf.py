@@ -24,15 +24,15 @@ g_nvdb.bind("nvdb_otl",Namespace(nvdbOTLPath))
 g_nvdb.bind("gsp",'http://www.opengis.net/ont/geosparql#')
 
 # Filnavn
-vegobjekttype=174
-område='Innlandet'
-nvdbfile=localPath + "\\data\\" + område + "_" + str(vegobjekttype) + ".ttl."
+# vegobjekttype=featuretypeid
+# område=areaname
+nvdbfile=localPath + "\\data\\" + areaname + "_" + str(featuretypeid) + ".ttl."
 # Løkke for kommuner
-for knr in range (3400,3499):
+for knr in range (knrfrom,knrto):
     print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
     try:
         # Lager graf fra NVDB-data
-        g_nvdb=g_nvdb + nvdb2graph(vegobjekttype,knr,otl_nvdb)
+        g_nvdb=g_nvdb + nvdb2graph(featuretypeid,knr,otl_nvdb)
     except:
         print(str(datetime.datetime.now()) + ' Ukjent kommune: ' + str(knr))
 

@@ -56,7 +56,7 @@ def get_nvdb_enum(vot_id,oGraph):
     return qres
 
 def nvdb2graph(vot, kommune,oGraph):
-    # Konvertering av en objekttype i en kommune fra NVDB-API til RDf i henhold til NVDB-OTL
+    # Konvertering av en objekttype i en kommune fra NVDB-API til RDF i henhold til NVDB-OTL
     # Henter data fra NVDB-API
     sokeobjekt = nvdbFagdata(vot)
     sokeobjekt.filter({'kommune': kommune})
@@ -83,7 +83,7 @@ def nvdb2graph(vot, kommune,oGraph):
 
         classURI = URIRef(uri)
         # Endre objekttypenavn
-        print(str(datetime.datetime.now()) + ' Setter lagnavn: ' + sosinavn + ' (' + str(uri) + ')')
+        print(str(datetime.datetime.now()) + ' Setter objekttypenavn: ' + sosinavn + ' (' + str(uri) + ')')
         lagnavn = sosinavn
 
         # Slå opp egenskaps-uri-er og enum-uri-er i NVDB-OT (SPARQL)
