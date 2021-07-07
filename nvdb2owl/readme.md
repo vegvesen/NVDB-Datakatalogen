@@ -37,4 +37,5 @@ sparqlMapping.py
 	- sqFileProcess: Sekvensiell prosessering av queries fra fil
 	
 gdf.sparql
-SPARQL-spørringer for konvertering fra NVDB til GDF![image](https://user-images.githubusercontent.com/7501876/124784438-38e26d00-df46-11eb-8fc4-b07e5b9edd06.png)
+	- SPARQL-spørringer for konvertering fra NVDB til GDF
+
