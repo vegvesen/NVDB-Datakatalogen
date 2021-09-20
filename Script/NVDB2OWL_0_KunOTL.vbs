@@ -58,12 +58,22 @@ Sub main
 	'Repository.EnsureOutputVisible "Script"
 	'exit sub
 
+	dim strDjVOT
+	strDjVOT = ":Vegobjekttype owl:disjointUnionOf (" & vbCrLf
+	dim strDjKL
+	strDjKL = ":Kodeliste owl:disjointUnionOf (" & vbCrLf
+	dim strDjFtKl
+	
 	'Kjører gjennom alle pakker i NVDB-SOSI-modellen og skriver OWL-representasjon
 	for each pkOT in pkSOSINVDB.Packages
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
 			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
 			Repository.WriteOutput "Script", Now & " Vegobjekttypepakke: " & pkOT.Name, 0 
 			'Løkke for alle elementer i pakken
+			' ###### Fyll opp disjoint-strenger
+			strDjVOT = strDjVOT & ":vot" & pkOT.Alias & " " 'vbCrLf
+			strDjKL = strDjKL & ":kl_vot" & pkOT.Alias & " " 'vbCrLf
+			strDjFtKl = ":kl_vot" & pkOT.Alias & " owl:disjointUnionOf (" & vbCrLf
 			for each element in pkOT.elements
 				nvdb_navn = ""	
 				set tagVal = element.TaggedValues.GetByName("NVDB_navn")
@@ -72,6 +82,8 @@ Sub main
 				If UCase(element.Stereotype)="FEATURETYPE" then
 					'Håndtering av vegobjekttyper (featuretypes)
 					Repository.WriteOutput "Script", Now & " FeatureType: " & element.Name & " (" & nvdb_navn & ")", 0 
+					
+
 					'Skriver vegobjekttypen sin representasjon som OWL-klasse
 					objOTLFile.WriteText "### " & owlURI & "#vot" & element.Alias & vbCrLf
 					objOTLFile.WriteText ":vot" & element.Alias & " rdf:type owl:Class ;" & vbCrLf
@@ -306,6 +318,10 @@ Sub main
 				else
 					'Håndtering av kodelister (codelist)
 					Repository.WriteOutput "Script", Now & " Kodeliste: " & element.Name & " (" & nvdb_navn & ")", 0 
+					
+					'Disjointstreng for kodelister under pakken
+					strDjFtKl = strDjFtKl & ":kl" & element.Alias & " " 'vbCrLf			
+					
 					'Skriver kodelisten som OWL-klasse som er subclass av hovedklassen for kodelister for den aktuelle vegobjekttypen 
 					objOTLFile.WriteText "### " & owlURI & "#kl" & element.Alias & vbCrLf
 					objOTLFile.WriteText ":kl" & element.Alias & " rdf:type owl:Class ;" & vbCrLf
@@ -352,7 +368,9 @@ Sub main
 						objOTLFile.WriteText vbCrLf
 					Next				
 				end if
-			next	
+			next
+			strDjFtKl = strDjFtKl & "    ) ; ."
+			objOTLFile.WriteText strDjFtKl & vbCrLf			
 		end if
 		
 		'Mulighet for å hoppe ut av løkka - fjernes når scriptet er ferdig.
@@ -364,6 +382,12 @@ Sub main
 		'end if	
 
 	next
+	
+	'Skriv disjoint-setninger
+	strDjVOT = strDjVOT & "    ) ; ."
+	objOTLFile.WriteText strDjVOT & vbCrLf
+	strDjKL = strDjKL & "    ) ; ."
+	objOTLFile.WriteText strDjKL & vbCrLf
 	
 	'dim filetime
 	filetime = replace(Now, ".","")
