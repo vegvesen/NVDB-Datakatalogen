@@ -339,7 +339,7 @@ Sub main
 					
 					'Løkke for kodelisteverdier
 					dim strClOneOf
-					strClOneOf = ":kl" & element.Alias & " owl:oneOf (" 
+					strClOneOf = ":kl" & element.Alias & " owl:oneOf (" & vbCrLf
 					
 					For each eAttributt in element.Attributes
 						strClOneOf = strClOneOf & ":tv" & eAttributt.Alias & vbCrLf
