@@ -71,8 +71,8 @@ Sub main
 			Repository.WriteOutput "Script", Now & " Vegobjekttypepakke: " & pkOT.Name, 0 
 			'Løkke for alle elementer i pakken
 			' ###### Fyll opp disjoint-strenger
-			strDjVOT = strDjVOT & ":vot" & pkOT.Alias & " " 'vbCrLf
-			strDjKL = strDjKL & ":kl_vot" & pkOT.Alias & " " 'vbCrLf
+			strDjVOT = strDjVOT & ":vot" & pkOT.Alias & vbCrLf
+			strDjKL = strDjKL & ":kl_vot" & pkOT.Alias & vbCrLf
 			strDjFtKl = ":kl_vot" & pkOT.Alias & " owl:disjointUnionOf (" & vbCrLf
 			for each element in pkOT.elements
 				nvdb_navn = ""	
@@ -320,7 +320,7 @@ Sub main
 					Repository.WriteOutput "Script", Now & " Kodeliste: " & element.Name & " (" & nvdb_navn & ")", 0 
 					
 					'Disjointstreng for kodelister under pakken
-					strDjFtKl = strDjFtKl & ":kl" & element.Alias & " " 'vbCrLf			
+					strDjFtKl = strDjFtKl & ":kl" & element.Alias & vbCrLf			
 					
 					'Skriver kodelisten som OWL-klasse som er subclass av hovedklassen for kodelister for den aktuelle vegobjekttypen 
 					objOTLFile.WriteText "### " & owlURI & "#kl" & element.Alias & vbCrLf
@@ -338,7 +338,12 @@ Sub main
 					objOTLFile.WriteText vbCrLf
 					
 					'Løkke for kodelisteverdier
+					dim strClOneOf
+					strClOneOf = ":kl" & element.Alias & " owl:oneOf (" 
+					
 					For each eAttributt in element.Attributes
+						strClOneOf = strClOneOf & ":tv" & eAttributt.Alias & vbCrLf
+					
 						set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 						nvdb_navn = ""
 						if not aTag is nothing then nvdb_navn=aTag.Value
@@ -366,7 +371,10 @@ Sub main
 						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
 						objOTLFile.WriteText vbCrLf
-					Next				
+					Next	
+
+					strClOneOf = strClOneOf & "    ) ; ."
+					objOTLFile.WriteText strClOneOf & vbCrLf			
 				end if
 			next
 			strDjFtKl = strDjFtKl & "    ) ; ."
