@@ -27,13 +27,13 @@ Sub main
 	'Hent NVDB-SOSI-modellen		
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
 	Repository.WriteOutput "Script", Now & " Hovedpakke: " & pkSOSINVDB.Name & " (" & pkSOSINVDB.PackageGUID & ")", 0 
-	
+	'--------------------------------------------------------------------------------------------
 	'Lag strømmen som all tekst skal skrives til
 	Set objFSO=CreateObject("Scripting.FileSystemObject")
 	Set objOTLFile = CreateObject("ADODB.Stream")
 	objOTLFile.CharSet = "utf-8"
 	objOTLFile.Open
-
+	'----------------------------------------------------------------------------------------------------------
 	'Les kjerneontologien nvdb_core.ttl
 	Set objTemplate = CreateObject("ADODB.Stream")
 	objTemplate.CharSet = "utf-8"
@@ -64,6 +64,7 @@ Sub main
 	strDjKL = ":Kodeliste owl:disjointUnionOf (" & vbCrLf
 	dim strDjFtKl
 	
+	'---------------------------------------------------------------------------------
 	'Kjører gjennom alle pakker i NVDB-SOSI-modellen og skriver OWL-representasjon
 	for each pkOT in pkSOSINVDB.Packages
 		if pkOT.PackageGUID <> guidAbstrakteKlasser then 
@@ -81,6 +82,7 @@ Sub main
 				if not tagVal is nothing then nvdb_navn=tagVal.Value
 				'Klasser i NVDB-SOSI-modellen er enten featuretype eller codelist. 
 				If UCase(element.Stereotype)="FEATURETYPE" then
+					'---------------------------------------------------------------------------------------------
 					'Håndtering av vegobjekttyper (featuretypes)
 					Repository.WriteOutput "Script", Now & " FeatureType: " & element.Name & " (" & nvdb_navn & ")", 0 
 					
@@ -160,7 +162,8 @@ Sub main
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
 				
-					'Løkke for alle attributter under vegobjekttypen
+					'------------------------------------------------------------------------------------------------
+					'Håndtering av attributter under vegobjekttypen som properties 
 					For each eAttributt in element.Attributes
 						'Skriver kun attributter som har alias, dvs de som ligger i original Datakatalog-database. Andre egenskaper, som lineærPosisjon osv, ligger i nvdb_core.ttl
 						if eAttributt.Alias <> "" then
@@ -170,6 +173,7 @@ Sub main
 							range = ""
 							dim gT 
 							gT = false
+							'------------------------------------------------------------------------------------------------
 							'Konverteringsregler fra ISO/TC 211-datatyper og interne NVDB-datatyper til XSD-datatyper
 							Select Case eAttributt.Type
 								Case "CharacterString": 
@@ -203,7 +207,8 @@ Sub main
 							nvdb_navn = ""
 							if not aTag is nothing then nvdb_navn=aTag.Value
 							nvdb_navn = Replace(nvdb_navn,"""","\""")
-
+							
+							'-----------------------------------------------------------------------------------------------			
 							'Lager enten data property eller object property av attributten
 							objOTLFile.WriteText "### " & owlURI & "#et" & eAttributt.Alias & vbCrLf
 							if pType = "d" then
@@ -214,7 +219,7 @@ Sub main
 							objOTLFile.WriteText "         rdfs:subPropertyOf :et_" & pType & "_vot" & pkOT.Alias & " ;" & vbCrLf
 							'Attributte med geometridatatype --> subProperty av hasGeometry fra GeoSPARQL
 							if gT then objOTLFile.WriteText "         rdfs:subPropertyOf gsp:hasGeometry ;" & vbCrLf
-							
+							'--------------------------------------------------------------------------------------------
 							'Domain og range for properties. 						
 							objOTLFile.WriteText "         rdfs:domain :vot" & pkOT.Alias & ";" & vbCrLf
 							objOTLFile.WriteText "         rdfs:range " & range & ";" & vbCrLf
@@ -271,9 +276,11 @@ Sub main
 						end if	
 					Next
 					
+					'----------------------------------------------------------------------------------------------------------------
 					'Løkke for alle assosiasjoner for vegobjekttypen
 					for each con in element.Connectors
 						if (con.type = "Aggregation" or con.Type = "Association") then
+							'-------------------------------------------------------------------------------------------------
 							'Finner de to elementene (vegobjekttypene) som er involvert i assosiasjonen. elementA er aktuell vegobjekttype, elementB er den assosierte vegobjekttypen
 							if con.ClientID = element.ElementID then
 								set elementA = Repository.GetElementByID(con.ClientID)
@@ -285,8 +292,11 @@ Sub main
 								set conEnd = con.ClientEnd
 							end if
 							
-							'I SOSI-modellen er assosiasjoner angitt til de abstrakte klassene, mens i OWL skal de ligge direkte.
-							'Finner derfor den ikke-abstrakte klassen (elementC) for assosiasjonen, for tagged values og korrekt navn
+							'---------------------------------------------------------------------------------------------
+							'Håndtering av abstrakte klasser
+							'I SOSI-modellen er assosiasjoner angitt fra den enkelte klassen til en abstrakt klasse over den egentlige assosie klassen av hensyn til lasting av XML-skjema
+							'I OWL skal assosiasjonene ligge som properties mellom de konkrete klassene, 
+							'Finner derfor den ikke-abstrakte klassen (elementC) for assosiasjonen, der tagged values og korrekt navn finnes
 							dim spesCon as EA.Connector
 							dim elementC as EA.Element
 							for each spesCon in elementB.Connectors
@@ -295,6 +305,7 @@ Sub main
 								end if
 							next
 							
+							'--------------------------------------------------------------------------------------------------------
 							'Skriver assosiasjonen som object property under hovedklassen for object properties for den aktuelle vegobjekttypen
 							Repository.WriteOutput "Script", Now & " Assosiasjon: " & elementA.Name & " - " & elementC.Name, 0 
 							objOTLFile.WriteText "### " & owlURI & "#as" & elementA.Alias & "_" & elementB.Alias & vbCrLf
@@ -322,19 +333,29 @@ Sub main
 							objOTLFile.WriteText vbCrLf
 							
 							'-------------------------------------------------------
-							'Knytt assosiasjonen til objekttypen som restriksjon
-							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
-							objOTLFile.WriteText "         owl:onProperty :as" & elementA.Alias & "_" & elementB.Alias & ";" & vbCrLf 	
-							objOTLFile.WriteText "         owl:onClass :vot" & elementB.Alias & ";" & vbCrLf 		
-							Select case conEnd.Cardinality
-								case "1" or "1..1":
-									objOTLFile.WriteText "       owl:qualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 
-								case "0..1":
-									objOTLFile.WriteText "       owl:maxQualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 
-								case "1..*":
-									objOTLFile.WriteText "       owl:minQualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 	
-							end select
-							objOTLFile.WriteText "         ] ." & vbCrLf
+							'Knytter assosiasjonen til objekttypen som restriksjon
+							'Finner kardinalitet
+							dim crdArr
+							crdArr = split(conEnd.Cardinality,"..")
+							dim lower, upper
+							lower = crdArr(0)
+							if Ubound(crdArr) = 0 then upper = lower else upper = crdArr(1)				
+							if conEnd.Cardinality <> "0..*" then 'Ingen krav til kardinalitet ved 0..*
+								objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
+								objOTLFile.WriteText "         owl:onProperty :as" & elementA.Alias & "_" & elementB.Alias & ";" & vbCrLf 	
+								objOTLFile.WriteText "         owl:onClass :vot" & elementB.Alias & ";" & vbCrLf 	
+								'Eksakt kardinalitet 1..1 eller lignende	
+								if lower = upper then 
+									objOTLFile.WriteText "       owl:qualifiedCardinality """ & lower & """^^xsd:nonNegativeInteger ;" & vbCrLf 
+								else	
+									'Krav til minimum, ikke eksakt
+									if lower <> "0" then objOTLFile.WriteText "       owl:minQualifiedCardinality """ & lower & """^^xsd:nonNegativeInteger ;" & vbCrLf 	
+									'Begrensning på maksimum, ikke eksakt
+									if upper <> "*" then objOTLFile.WriteText "       owl:maxQualifiedCardinality """ & upper & """^^xsd:nonNegativeInteger ;" & vbCrLf 	
+								end if
+
+								objOTLFile.WriteText "         ] ." & vbCrLf
+							end if	
 							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
 							objOTLFile.WriteText "         owl:onProperty :as" & elementA.Alias & "_" & elementB.Alias & ";" & vbCrLf 	
 							objOTLFile.WriteText "         owl:allValuesFrom :vot" & elementB.Alias & ";" & vbCrLf 	
@@ -343,12 +364,13 @@ Sub main
 						end if	
 					next
 				else
+					'---------------------------------------------------------------------------
 					'Håndtering av kodelister (codelist)
 					Repository.WriteOutput "Script", Now & " Kodeliste: " & element.Name & " (" & nvdb_navn & ")", 0 
 					'-------------------------------------------------------
 					'Disjointstreng for kodelister under pakken
 					strDjFtKl = strDjFtKl & "         :kl" & element.Alias & vbCrLf			
-					
+					'-----------------------------------------------------------------------
 					'Skriver kodelisten som OWL-klasse som er subclass av hovedklassen for kodelister for den aktuelle vegobjekttypen 
 					objOTLFile.WriteText "### " & owlURI & "#kl" & element.Alias & vbCrLf
 					objOTLFile.WriteText ":kl" & element.Alias & " rdf:type owl:Class ;" & vbCrLf
@@ -364,27 +386,27 @@ Sub main
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
 					
-					'Løkke for kodelisteverdier
+					'----------------------------------------------------------------------------------------
+					'Håndtering av kodelisteverdier
 					dim strClOneOf
 					strClOneOf = ":kl" & element.Alias & " owl:oneOf (" & vbCrLf
 					
 					For each eAttributt in element.Attributes
 						'---------------------------------------------
-						'OneOf for kodelisteverdier
+						'OneOf-setning for kodelisteverdier
 						strClOneOf = strClOneOf & "         :tv" & eAttributt.Alias & vbCrLf
-					
+						'----------------------------------------------------------------------------------
+						'Skriver kodelisteverdiene som instanser av kodelisten 
 						set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 						nvdb_navn = ""
 						if not aTag is nothing then nvdb_navn=aTag.Value
 						nvdb_navn = Replace(nvdb_navn,"""","\""")
-						'Skriver kodelisteverdiene som instanser av kodelisten 
 						objOTLFile.WriteText "### " & owlURI & "#tv" & eAttributt.Alias & vbCrLf
 						objOTLFile.WriteText ":tv" & eAttributt.Alias & " rdf:type :kl" & element.Alias & " ;" & vbCrLf
 						objOTLFile.WriteText "         :nvdb_id " & eAttributt.Alias & " ;" & vbCrLf
 						objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         :sosi_navn """ & Replace(eAttributt.Name,"""","\""") & """@no ;" & vbCrLf
-												
 						'Skriver kortnavn dersom dette er angitt
 						if IsNull(eAttributt.Default) or eAttributt.Default = "" then
 							Repository.WriteOutput "Script", Now & " Kodeverdi: " & eAttributt.Name, 0 
@@ -396,16 +418,18 @@ Sub main
 						definition = replace(eAttributt.Notes, """","\""")
 						definition = replace(definition, vbCrLf," ")	
 						'Repository.WriteOutput "Endringer", Now & " Kodeverdi: " & eAttributt.Name & " Definisjon: " & definition, 0 
-						
 						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
 						objOTLFile.WriteText vbCrLf
 					Next	
-
+					'-------------------------------------------------------------------------------------------
+					'Fullfører disjontsetning for kodelister i pakken 
 					strClOneOf = strClOneOf & "    ) ; ." & vbCrLf
 					objOTLFile.WriteText strClOneOf & vbCrLf			
 				end if
 			next
+			'---------------------------------------------------------------------------------------
+			'Fullfører disjontsetning for kodelistepakker
 			strDjFtKl = strDjFtKl & "    ) ; ."
 			objOTLFile.WriteText strDjFtKl & vbCrLf			
 		end if
@@ -419,25 +443,24 @@ Sub main
 		'end if	
 
 	next
-	
-	'Skriv disjoint-setninger
+	'----------------------------------------------------------------------------
+	'Skriv disjoint-setninger på øverste nivå 
 	strDjVOT = strDjVOT & "    ) ; ." & vbCrLf
 	objOTLFile.WriteText strDjVOT & vbCrLf
 	strDjKL = strDjKL & "    ) ; ." & vbCrLf
 	objOTLFile.WriteText strDjKL & vbCrLf
 	
+	'--------------------------------------------------------------------------------
+	'Skriv til fil 
 	'dim filetime
 	filetime = replace(Now, ".","")
 	filetime = replace(filetime, ":","")
 	filetime = replace(filetime, " ","_")
-	
 	objOTLFile.SaveToFile owlPath & "\" & filetime & "_nvdb-owl.ttl", 2
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-
-
 
 End Sub
 
