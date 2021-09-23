@@ -70,9 +70,10 @@ Sub main
 			Repository.WriteOutput "Script", Now & " ------------------------------------------------------------------------------", 0 
 			Repository.WriteOutput "Script", Now & " Vegobjekttypepakke: " & pkOT.Name, 0 
 			'Løkke for alle elementer i pakken
-			' ###### Fyll opp disjoint-strenger
-			strDjVOT = strDjVOT & ":vot" & pkOT.Alias & vbCrLf
-			strDjKL = strDjKL & ":kl_vot" & pkOT.Alias & vbCrLf
+			'----------------------------------------------------------------------------------- 
+			'Fyll opp disjoint-strenger for vegobjekttyper og kodelister 
+			strDjVOT = strDjVOT & "         :vot" & pkOT.Alias & vbCrLf
+			strDjKL = strDjKL & "         :kl_vot" & pkOT.Alias & vbCrLf
 			strDjFtKl = ":kl_vot" & pkOT.Alias & " owl:disjointUnionOf (" & vbCrLf
 			for each element in pkOT.elements
 				nvdb_navn = ""	
@@ -87,28 +88,7 @@ Sub main
 					'Skriver vegobjekttypen sin representasjon som OWL-klasse
 					objOTLFile.WriteText "### " & owlURI & "#vot" & element.Alias & vbCrLf
 					objOTLFile.WriteText ":vot" & element.Alias & " rdf:type owl:Class ;" & vbCrLf
-					objOTLFile.WriteText "         rdfs:subClassOf :Vegobjekttype ;" & vbCrLf
-					
-					'Restriksjoner pr attributt
-					'rdfs:subClassOf 
-					' Opsjonell attributt med kodeliste
-					'	[ rdf:type owl:Restriction ;
-					'	  owl:onProperty :et6981 ;
-					'	  owl:allValuesFrom :kl6981
-					'	 ] ;
-					'Påkrevd attributt med kodeliste
-					'	[ rdf:type owl:Restriction ;
-                    '      owl:onProperty :et2021 ;
-                    '      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                    '      owl:onClass :kl2021
-                    '    ]
-					'Påkrevd attributt uten kodeliste
-					'	[ rdf:type owl:Restriction ;
-                    '      owl:onProperty :et2021 ;
-                    '      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                    '      owl:onDataRange xsd:integer
-                    '    ]
-					
+					objOTLFile.WriteText "         rdfs:subClassOf :Vegobjekttype ;" & vbCrLf				
 					objOTLFile.WriteText "         :nvdb_id " & element.Alias & " ;" & vbCrLf
 					objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
@@ -261,6 +241,33 @@ Sub main
 							objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf					
 							objOTLFile.WriteText vbCrLf
 							objOTLFile.WriteText vbCrLf
+							
+							' ------------------------------------------------------
+							'Knytt attributten til objekttypen som restriksjon
+							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
+							objOTLFile.WriteText "         owl:onProperty :et" & eAttributt.Alias & ";" & vbCrLf 	
+							if pType = "d" then
+								'Attributt uten kodeliste (dataproperty)
+								objOTLFile.WriteText "         owl:onDataRange " & range & ";" & vbCrLf 		
+							else
+								'objectproperty
+								objOTLFile.WriteText "         owl:onClass " & range & ";" & vbCrLf 		
+							end if
+							if eAttributt.LowerBound = 0 then 
+								'Opsjonell attributt --> maks 1 (ingen multiple i NVDB)
+								objOTLFile.WriteText "         owl:maxQualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf
+							else
+								'Påkrevd attributt --> eksakt 1 (ingen multiple i NVDB)
+								'objOTLFile.WriteText "         owl:minQualifiedCardinality """ & eAttributt.LowerBound & """^^xsd:nonNegativeInteger ;" & vbCrLf
+								'objOTLFile.WriteText "         owl:maxQualifiedCardinality """ & eAttributt.UpperBound & """^^xsd:nonNegativeInteger ;" & vbCrLf
+								objOTLFile.WriteText "         owl:qualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf
+							end if
+							objOTLFile.WriteText "         ] ." & vbCrLf
+							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
+							objOTLFile.WriteText "         owl:onProperty :et" & eAttributt.Alias & ";" & vbCrLf 	
+							objOTLFile.WriteText "         owl:allValuesFrom " & range & ";" & vbCrLf 	
+							objOTLFile.WriteText "         ] ." & vbCrLf
+							objOTLFile.WriteText vbCrLf
 						end if	
 					Next
 					
@@ -313,14 +320,34 @@ Sub main
 							objOTLFile.WriteText "         owl:inverseOf :as" & elementB.Alias & "_" & elementA.Alias & "."
 							objOTLFile.WriteText vbCrLf
 							objOTLFile.WriteText vbCrLf
+							
+							'-------------------------------------------------------
+							'Knytt assosiasjonen til objekttypen som restriksjon
+							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
+							objOTLFile.WriteText "         owl:onProperty :as" & elementA.Alias & "_" & elementB.Alias & ";" & vbCrLf 	
+							objOTLFile.WriteText "         owl:onClass :vot" & elementB.Alias & ";" & vbCrLf 		
+							Select case conEnd.Cardinality
+								case "1" or "1..1":
+									objOTLFile.WriteText "       owl:qualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 
+								case "0..1":
+									objOTLFile.WriteText "       owl:maxQualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 
+								case "1..*":
+									objOTLFile.WriteText "       owl:minQualifiedCardinality ""1""^^xsd:nonNegativeInteger ;" & vbCrLf 	
+							end select
+							objOTLFile.WriteText "         ] ." & vbCrLf
+							objOTLFile.WriteText ":vot" & pkOT.Alias & " rdfs:subClassOf [ rdf:type owl:Restriction ;" & vbCrLf
+							objOTLFile.WriteText "         owl:onProperty :as" & elementA.Alias & "_" & elementB.Alias & ";" & vbCrLf 	
+							objOTLFile.WriteText "         owl:allValuesFrom :vot" & elementB.Alias & ";" & vbCrLf 	
+							objOTLFile.WriteText "         ] ." & vbCrLf
+							objOTLFile.WriteText vbCrLf
 						end if	
 					next
 				else
 					'Håndtering av kodelister (codelist)
 					Repository.WriteOutput "Script", Now & " Kodeliste: " & element.Name & " (" & nvdb_navn & ")", 0 
-					
+					'-------------------------------------------------------
 					'Disjointstreng for kodelister under pakken
-					strDjFtKl = strDjFtKl & ":kl" & element.Alias & vbCrLf			
+					strDjFtKl = strDjFtKl & "         :kl" & element.Alias & vbCrLf			
 					
 					'Skriver kodelisten som OWL-klasse som er subclass av hovedklassen for kodelister for den aktuelle vegobjekttypen 
 					objOTLFile.WriteText "### " & owlURI & "#kl" & element.Alias & vbCrLf
@@ -342,7 +369,9 @@ Sub main
 					strClOneOf = ":kl" & element.Alias & " owl:oneOf (" & vbCrLf
 					
 					For each eAttributt in element.Attributes
-						strClOneOf = strClOneOf & ":tv" & eAttributt.Alias & vbCrLf
+						'---------------------------------------------
+						'OneOf for kodelisteverdier
+						strClOneOf = strClOneOf & "         :tv" & eAttributt.Alias & vbCrLf
 					
 						set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 						nvdb_navn = ""
@@ -373,7 +402,7 @@ Sub main
 						objOTLFile.WriteText vbCrLf
 					Next	
 
-					strClOneOf = strClOneOf & "    ) ; ."
+					strClOneOf = strClOneOf & "    ) ; ." & vbCrLf
 					objOTLFile.WriteText strClOneOf & vbCrLf			
 				end if
 			next
@@ -392,9 +421,9 @@ Sub main
 	next
 	
 	'Skriv disjoint-setninger
-	strDjVOT = strDjVOT & "    ) ; ."
+	strDjVOT = strDjVOT & "    ) ; ." & vbCrLf
 	objOTLFile.WriteText strDjVOT & vbCrLf
-	strDjKL = strDjKL & "    ) ; ."
+	strDjKL = strDjKL & "    ) ; ." & vbCrLf
 	objOTLFile.WriteText strDjKL & vbCrLf
 	
 	'dim filetime
