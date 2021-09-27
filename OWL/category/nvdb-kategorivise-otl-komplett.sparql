@@ -1,0 +1,204 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX nvdb: <http://rdf.vegdata.no/nvdb/nvdb-owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+/
+#NAME Lag kategorivise kodelister (eksempeltid 0:00:00.729017)
+# Finn kodelister (klasser) som skal være med
+# lag kopi for kategorien som subtype under eksisterende kodeliste
+# Angi egen label på den kopierte kodelista
+# Knytt kodeverdier til den kopierte kodelista
+CONSTRUCT {
+    ?votkat_kl a owl:Class .
+    ?votkat_kl rdfs:subClassOf ?kl .
+    ?votkat_kl rdfs:label ?votkat_kln .
+}
+WHERE { 
+    ?k nvdb:nvdb_id [kid] .
+    #?k rdfs:subClassOf nvdb:Vegobjekttypekategori .
+    ?k nvdb:nvdb_navn ?kn .
+    ?et nvdb:medlem_av_VOTKategori ?k .
+    ?et rdfs:range ?kl .
+    ?kl nvdb:nvdb_navn ?kln .    
+    BIND (URI(CONCAT(str(?kl),"_votkat",str([kid]))) AS ?votkat_kl) .
+    BIND (CONCAT(str(?kln)," (",str(?kn),")") AS ?votkat_kln) .
+} 
+
+/
+#NAME Kodeverdier i kategorivise kodelister (eksempeltid 0:04:30.886657)
+CONSTRUCT {
+    ?tv a ?votkat_kl .
+}
+WHERE { 
+    ?k nvdb:nvdb_id [kid] .
+	?tv nvdb:medlem_av_VOTKategori ?k .
+    ?tv a ?kl .
+    ?kl rdfs:subClassOf+ nvdb:Kodeliste .
+	#?k rdfs:subClassOf nvdb:Vegobjekttypekategori .
+    BIND (URI(CONCAT(str(?kl),"_votkat",str([kid]))) AS ?votkat_kl) .
+}
+
+/
+#NAME Sett datatype for alle data properties pr kategori (eksempeltid 0:00:00.935001)
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:allValuesFrom ?dt
+               ] .
+}
+WHERE { 
+    #Finn data properties tilhørende vegobjekttypekategori
+    ?p a owl:DatatypeProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    ?k nvdb:nvdb_id [kid] .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn datatypen for property
+    ?p rdfs:range ?dt .
+} 
+
+/
+#NAME Sett restriksjoner for alle opsjonelle data properties
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [ rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                owl:onDataRange ?dt
+            ] .
+}
+WHERE { 
+    #Finn data properties tilhørende vegobjekttypekategori
+    ?p a owl:DatatypeProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    ?k nvdb:nvdb_id [kid] .
+    #?k rdfs:subClassOf+ nvdb:Vegobjekttypekategori .
+    #Finn viktighet
+    ?p nvdb:viktighet ?v .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn datatypen for property
+    ?p rdfs:range ?dt .
+    FILTER (str(?v) != "Påkrevd i database") .
+    FILTER (str(?v) != "Påkrevd ved nyregistrering")  .
+} 
+
+/
+#NAME Sett restriksjoner for alle påkrevde data properties
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [ rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                owl:onDataRange ?dt
+            ] .
+}
+WHERE { 
+	#Finn data properties tilhørende vegobjekttypekategori
+    ?p a owl:DatatypeProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    ?k nvdb:nvdb_id [kid] .
+    #?k rdfs:subClassOf+ nvdb:Vegobjekttypekategori .
+    #Finn viktighet
+    ?p nvdb:viktighet ?v .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn datatypen for property
+    ?p rdfs:range ?dt .
+    FILTER (str(?v) = "Påkrevd i database" || str(?v) = "Påkrevd ved nyregistrering")  .
+} 
+
+/
+#NAME Sett datatype for alle object properties med kodeliste pr kategori
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:allValuesFrom ?votkat_kl
+               ] .
+}
+WHERE { 
+	#Finn object properties tilhørende vegobjekttypekategori
+    ?p a owl:ObjectProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    ?k nvdb:nvdb_id [kid] .
+    #?k rdfs:subClassOf+ nvdb:Vegobjekttypekategori .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn kodelisten for property og lag referanse til kategoritilpasset kodeliste
+    ?p rdfs:range ?kl .
+	?kl nvdb:nvdb_navn ?kln .
+    #?kl rdfs:subClassOf+ nvdb:Kodeliste .
+    BIND (URI(CONCAT(str(?kl),"_votkat",str([kid]))) AS ?votkat_kl) .
+	# Filtrerer bort geometriegenskaper (de eneste object properties som ikke er kodelister)
+	FILTER (str(?kln) != "Flate") .
+    FILTER (str(?kln) != "Kurve") .
+	FILTER (str(?kln) != "Punkt") .
+} 
+
+/
+#NAME Sett restriksjoner for alle påkrevde object properties med kodeliste
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [ rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                owl:onClass ?votkat_kl
+            ] .
+}
+WHERE { 
+	#Finn object properties tilhørende vegobjekttypekategori
+    ?p a owl:ObjectProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    #?k rdfs:subClassOf+ nvdb:Vegobjekttypekategori .
+    ?k nvdb:nvdb_id [kid] .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn kodelisten for property og lag referanse til kategoritilpasset kodeliste
+    ?p rdfs:range ?kl .
+	?kl nvdb:nvdb_navn ?kln .
+    #?kl rdfs:subClassOf+ nvdb:Kodeliste .
+    #Finn viktighet
+    ?p nvdb:viktighet ?v .
+    BIND (URI(CONCAT(str(?kl),"_votkat",str([kid]))) AS ?votkat_kl) .
+    FILTER (str(?v) = "Påkrevd i database" || str(?v) = "Påkrevd ved nyregistrering")  .
+	FILTER (str(?kln) != "Flate") .
+    FILTER (str(?kln) != "Kurve") .
+	FILTER (str(?kln) != "Punkt") .
+} 
+
+/
+#NAME Sett restriksjoner for alle opsjonelle object properties med kodeliste
+CONSTRUCT {
+	?t rdfs:subClassOf 
+            [ rdf:type owl:Restriction ;
+                owl:onProperty ?p ;
+                owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                owl:onClass ?votkat_kl
+            ] .
+}
+WHERE { 
+	#Finn object properties tilhørende vegobjekttypekategori
+    ?p a owl:ObjectProperty .
+    ?p nvdb:medlem_av_VOTKategori ?k .
+    #?k rdfs:subClassOf+ nvdb:Vegobjekttypekategori .
+    ?k nvdb:nvdb_id [kid] .
+    #Finn vegobjekttypen property tilhører
+    ?p rdfs:domain ?t .
+    #Finn kodelisten for property og lag referanse til kategoritilpasset kodeliste
+    ?p rdfs:range ?kl .
+	?kl nvdb:nvdb_navn ?kln .
+    #?kl rdfs:subClassOf+ nvdb:Kodeliste .
+    #Finn viktighet
+    ?p nvdb:viktighet ?v .
+    BIND (URI(CONCAT(str(?kl),"_votkat",str([kid]))) AS ?votkat_kl) .
+    FILTER (str(?v) != "Påkrevd i database") .
+    FILTER (str(?v) != "Påkrevd ved nyregistrering")  .
+	FILTER (str(?kln) != "Flate") .
+    FILTER (str(?kln) != "Kurve") .
+	FILTER (str(?kln) != "Punkt") .
+}
+
+#Gjenstår: Sett datatype og restriksjoner for geometriegenskaper
