@@ -38,7 +38,7 @@ Sub main
 	Set objTemplate = CreateObject("ADODB.Stream")
 	objTemplate.CharSet = "utf-8"
 	objTemplate.Open
-	objTemplate.LoadFromFile(owlPath & "\" & "nvdb_core.ttl")
+	objTemplate.LoadFromFile(owlPath & "\" & "nvdb-core.ttl")
 	dim strTemplate
 	strTemplate = objTemplate.ReadText()
 	objTemplate.Close
@@ -139,7 +139,7 @@ Sub main
 					objOTLFile.WriteText "### " & owlURI & "#kl_vot" & pkOT.Alias & vbCrLf
 					objOTLFile.WriteText ":kl_vot" & pkOT.Alias & " rdf:type owl:Class ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:subClassOf :Kodeliste ;" & vbCrLf
-					objOTLFile.WriteText "         rdfs:label ""Kodelister for " & nvdb_navn & """@no ;" & vbCrLf					
+					objOTLFile.WriteText "         rdfs:label ""Tillatt verdi for " & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         skos:definition ""Rotklasse for kodelister tilhørende vegobjekttypen " & nvdb_navn & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
@@ -148,7 +148,7 @@ Sub main
 					objOTLFile.WriteText ":et_o_vot" & pkOT.Alias & " rdf:type owl:ObjectProperty ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:subPropertyOf :vot_o_properties ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:domain :vot" & element.Alias & ";" & vbCrLf
-					objOTLFile.WriteText "         rdfs:label ""Object Properties for " & nvdb_navn & """@no ;" & vbCrLf					
+					objOTLFile.WriteText "         rdfs:label ""Object property for " & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         skos:definition ""Rotklasse for object properties tilhørende vegobjekttypen " & nvdb_navn & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
@@ -157,7 +157,7 @@ Sub main
 					objOTLFile.WriteText ":et_d_vot" & pkOT.Alias & " rdf:type owl:DatatypeProperty ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:subPropertyOf :vot_d_properties ;" & vbCrLf
 					objOTLFile.WriteText "         rdfs:domain :vot" & element.Alias & ";" & vbCrLf
-					objOTLFile.WriteText "         rdfs:label ""Datatype Properties for " & nvdb_navn & """@no ;" & vbCrLf					
+					objOTLFile.WriteText "         rdfs:label ""Data property for " & nvdb_navn & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         skos:definition ""Rotklasse for data properties tilhørende vegobjekttypen " & nvdb_navn & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					objOTLFile.WriteText vbCrLf
@@ -223,6 +223,8 @@ Sub main
 							'Domain og range for properties. 						
 							objOTLFile.WriteText "         rdfs:domain :vot" & pkOT.Alias & ";" & vbCrLf
 							objOTLFile.WriteText "         rdfs:range " & range & ";" & vbCrLf
+							'Alle properties i NVDB har maksimal mulitplisitet 1 --> FunctionalProperty (FunctionalDataProperty eller FunctionalObjectProperty)
+							objOTLFile.WriteText "         rdf:type owl:FunctionalProperty;" & vbCrLf
 							objOTLFile.WriteText "         :nvdb_id " & eAttributt.Alias & " ;" & vbCrLf
 							objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 							objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
@@ -246,6 +248,7 @@ Sub main
 							objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf					
 							objOTLFile.WriteText vbCrLf
 							objOTLFile.WriteText vbCrLf
+							
 							
 							' ------------------------------------------------------
 							'Knytt attributten til objekttypen som restriksjon
@@ -377,7 +380,7 @@ Sub main
 					objOTLFile.WriteText "         rdfs:subClassOf :kl_vot" & pkOT.Alias & " ;" & vbCrLf
 					objOTLFile.WriteText "         :nvdb_id " & element.Alias & " ;" & vbCrLf
 					objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
-					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					
+					objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & " (" & pkOT.Name & ")" & """@no ;" & vbCrLf					
 					objOTLFile.WriteText "         :sosi_navn """ & element.Name & """@no ;" & vbCrLf
 					'Håndtering av "fnutter" og linjeskift i definisjonen
 					definition = replace(element.Notes, """","\""")

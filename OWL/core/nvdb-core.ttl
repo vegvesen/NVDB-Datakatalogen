@@ -13,7 +13,9 @@
 @base <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl> .
 
 <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl> rdf:type owl:Ontology ;
-                                                             owl:imports <http://www.w3.org/2004/02/skos/core> ;
+                                                             owl:imports <http://schemas.opengis.net/geosparql/1.0/geosparql_vocab_all.rdf> ,
+                                                                         <http://www.w3.org/2004/02/skos/core> ,
+                                                                         <https://www.roadotl.eu/static/eurotl-ontologies/iso19148_doc/ontology.ttl> ;
                                                              dc:date "2020-06-19" ;
                                                              dc:description "Ontologi for NVDB Datakatalogen"@no ;
                                                              dcterms:title "NVDB Datakatalogen"@no .
@@ -166,7 +168,7 @@ dc:description rdf:type owl:AnnotationProperty .
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#vot_o_properties
 :vot_o_properties rdf:type owl:ObjectProperty ;
-                  rdfs:label "Object properties pr vegobjekttype"@no ;
+                  rdfs:label "Object property pr vegobjekttype"@no ;
                   skos:definition "Rotklasse for object properties pr vegobjekttype"@no .
 
 
@@ -183,7 +185,7 @@ dc:description rdf:type owl:AnnotationProperty .
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#vot_d_properties
 :vot_d_properties rdf:type owl:DatatypeProperty ;
-                  rdfs:label "Data properties pr vegobjekttype"@no ;
+                  rdfs:label "Data property pr vegobjekttype"@no ;
                   skos:definition "Rotklasse for data properties pr vegobjekttype"@no .
 
 
@@ -227,16 +229,16 @@ sf:Point rdf:type owl:Class .
 sf:Polygon rdf:type owl:Class .
 
 
-###  http://www.roadotl.eu/iso19148/def#LinearAtLocation
-lr:LinearAtLocation rdf:type owl:Class .
+###  http://www.roadotl.eu/iso19148/def/LinearAtLocation
+<http://www.roadotl.eu/iso19148/def/LinearAtLocation> rdf:type owl:Class .
 
 
-###  http://www.roadotl.eu/iso19148/def#LinearEventLocation
-lr:LinearEventLocation rdf:type owl:Class .
+###  http://www.roadotl.eu/iso19148/def/LinearEventLocation
+<http://www.roadotl.eu/iso19148/def/LinearEventLocation> rdf:type owl:Class .
 
 
-###  http://www.roadotl.eu/iso19148/def#LinearFromToLocation
-lr:LinearFromToLocation rdf:type owl:Class .
+###  http://www.roadotl.eu/iso19148/def/LinearFromToLocation
+<http://www.roadotl.eu/iso19148/def/LinearFromToLocation> rdf:type owl:Class .
 
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#Flate
@@ -264,6 +266,7 @@ lr:LinearFromToLocation rdf:type owl:Class .
            rdfs:subClassOf :NVDB_Rot ;
            owl:disjointWith :Vegobjekttype ,
                             :Vegobjekttypekategori ;
+           rdfs:label "Tillatt verdi" ;
            skos:definition "Rotklasse for alle kodelister fra NVDB"@no .
 
 
@@ -277,7 +280,7 @@ lr:LinearFromToLocation rdf:type owl:Class .
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#LineærPosisjon
 :LineærPosisjon rdf:type owl:Class ;
-                rdfs:subClassOf lr:LinearEventLocation ,
+                rdfs:subClassOf <http://www.roadotl.eu/iso19148/def/LinearEventLocation> ,
                                 :Stedfesting ;
                 owl:disjointUnionOf ( :LineærPosisjonPunkt
                                       :LineærPosisjonStrekning
@@ -287,7 +290,7 @@ lr:LinearFromToLocation rdf:type owl:Class .
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#LineærPosisjonPunkt
 :LineærPosisjonPunkt rdf:type owl:Class ;
-                     rdfs:subClassOf lr:LinearAtLocation ,
+                     rdfs:subClassOf <http://www.roadotl.eu/iso19148/def/LinearAtLocation> ,
                                      :LineærPosisjon ;
                      owl:disjointWith :LineærPosisjonStrekning ;
                      rdfs:label "Lineær punktposisjon"@no .
@@ -295,7 +298,7 @@ lr:LinearFromToLocation rdf:type owl:Class .
 
 ###  https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#LineærPosisjonStrekning
 :LineærPosisjonStrekning rdf:type owl:Class ;
-                         rdfs:subClassOf lr:LinearFromToLocation ,
+                         rdfs:subClassOf <http://www.roadotl.eu/iso19148/def/LinearFromToLocation> ,
                                          :LineærPosisjon ;
                          rdfs:label "Lineær strekningsposisjon"@no .
 
@@ -332,6 +335,7 @@ lr:LinearFromToLocation rdf:type owl:Class .
                                gsp:Feature ,
                                :NVDB_Rot ;
                owl:disjointWith :Vegobjekttypekategori ;
+               rdfs:label "Vegobjekt" ;
                skos:definition "Rotklasse for alle vegobjekttyper fra NVDB"@no .
 
 
