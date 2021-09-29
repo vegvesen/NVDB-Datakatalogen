@@ -15,13 +15,11 @@ targetOtl = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl
 targetOTLPath = "http://rdf.gdf.org/gdf-owl#"
 targetNs = "gdf"
 targetFile=localPath + "\\data\\" + targetNs + "_" + areaname + "_" + str(featuretypeid) + ".ttl."
+sqFileName=localPath + '\\lrs\\nvdb2gdf.sparql'
 
 
 #linking rule set
-lr_set = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/linkset/LRS_NVDB_GDF.ttl'
-
-rdfFile = localPath + "\\data\\gdf_Innlandet_174.ttl"
-sqFileName=localPath + '\\linkset\\nvdb2gdf.sparql'
+lr_set = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/lrs/lrs_nvdb_gdf.ttl'
 
 #proxies = {}
 proxies = {'http': 'http://proxy.vegvesen.no:8080'}
