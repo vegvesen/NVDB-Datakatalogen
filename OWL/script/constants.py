@@ -1,6 +1,6 @@
 #Globale parametere
 featuretypeid = 174
-areaname = 'Innlandet'
+areaname = 'innlandet'
 knrfrom = 3400
 knrto=3499
 
@@ -8,7 +8,7 @@ localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\owl"
 scriptPath = localPath + "\\script"
 
 # NVDB-filnavn ut fra utvalgsparametre
-nvdbfile=localPath + "\\data\\NVDB_" + areaname + "_" + str(featuretypeid) + ".ttl."
+nvdbfile=localPath + "\\data\\nvdb_" + areaname + "_" + str(featuretypeid) + ".ttl."
 
 #målontologi
 targetOtl = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
@@ -26,9 +26,9 @@ sqFileName=localPath + '\\linkset\\nvdb2gdf.sparql'
 #proxies = {}
 proxies = {'http': 'http://proxy.vegvesen.no:8080'}
 
-nvdbVoPath = "https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl/vegobjekt#"
-nvdbVnPath = "https://ontologi.utv.atlas.vegvesen.no/nvdb/core/vegnett#"
-nvdbOTLPath = "https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#"
+nvdbVoPath = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl/vegobjekt#"
+nvdbVnPath = "https://ontologi.atlas.vegvesen.no/nvdb/core/vegnett#"
+nvdbOTLPath = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#"
 gdfOTLPath = "http://rdf.gdf.org/gdf-owl#"
 nvdb_otl_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/core/nvdb-owl.ttl'
 nvdb_kat_gh = 'https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/core/nvdb-kategorier.ttl'

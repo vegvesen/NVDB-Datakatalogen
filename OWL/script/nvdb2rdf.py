@@ -13,7 +13,7 @@ from nvdbapiv3 import nvdbFagdata
 # ---------------------------------------------------------------------------------------------
 # SPARQL-oppslag på en vegobjekttype
 def get_nvdb_ft(vot_id,oGraph):
-    query = """PREFIX nvdb: <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
+    query = """PREFIX nvdb: <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
                 SELECT DISTINCT ?uri ?sosinavn
                 WHERE {
                 ?uri rdfs:subClassOf+ nvdb:Vegobjekttype .
@@ -26,7 +26,7 @@ def get_nvdb_ft(vot_id,oGraph):
 # SPARQL-oppslag på egenskapstyper for en objekttype
 def get_nvdb_pt(vot_id,oGraph):
     query = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-               PREFIX nvdb: <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
+               PREFIX nvdb: <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                SELECT DISTINCT ?uri ?nvdb_id ?label
                WHERE {
@@ -43,7 +43,7 @@ def get_nvdb_pt(vot_id,oGraph):
 # SPARQL-oppslag på enumerations for en objekttype
 def get_nvdb_enum(vot_id,oGraph):
     query = """PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-               PREFIX nvdb: <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
+               PREFIX nvdb: <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                SELECT DISTINCT ?uri ?property_id ?enum_id
                WHERE {
@@ -201,7 +201,7 @@ def nvdb2graph(vot, kommune,oGraph):
                for stedfestingen in objektet['lokasjon']['stedfestinger']:
                    #print(stedfestingen)
                    lrCount += 1
-                   #Definer objekt med type https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl##LineærPosisjonPunkt eller https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl##LineærPosisjonStrekning
+                   #Definer objekt med type https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl##LineærPosisjonPunkt eller https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl##LineærPosisjonStrekning
                    lrURI = URIRef(nvdbVoPath + str(objektet['id']) + '_lr' + str(lrCount))
                    if str(stedfestingen['type']) == 'Punkt':
                        g.add((lrURI, RDF.type, URIRef(nvdbOTLPath + 'LineærPosisjonPunkt')))

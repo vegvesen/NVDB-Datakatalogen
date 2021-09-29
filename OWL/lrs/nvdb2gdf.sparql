@@ -1,0 +1,184 @@
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX gdf: <http://rdf.gdf.org/gdf-owl#>
+PREFIX nvdb: <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX gsp: <http://www.opengis.net/ont/geosparql#> 
+PREFIX nvdb_vo: <https://ontologi.utv.atlas.vegvesen.no/nvdb/core/vegobjekt#>
+
+/
+#NAME Create GDF Features 
+# GDF Features are generated from NVDB features based on the equivalentClass axiom
+CONSTRUCT {
+	?individual a ?gdf_cls .
+}
+WHERE { 
+    ?gdf_cls owl:equivalentClass ?nvdb_cls .
+    ?individual a ?nvdb_cls .
+}
+/
+#NAME Create GDF Geometry location objects with geometry asWKT
+# GDF Geometry objects are derived from NVDB Geometries
+CONSTRUCT {
+	?individual gdf:locationReference ?geoobject .
+	?geoobject a gdf:GeometryLocationReference .
+	?geoobject gsp:asWKT ?wkt .
+}	
+WHERE { 
+    # the individual and the related geometry object 
+	?geoobject a nvdb:Geometri .
+    ?individual nvdb:geometriposisjon ?geoobject .
+	# The WKT geometry from NVDB 
+	?geoobject gsp:asWKT ?wkt .
+    ?individual a ?nvdb_cls .
+    ?gdf_cls owl:equivalentClass ?nvdb_cls .
+    #FILTER regex(str(?gdf_cls), "http://rdf.gdf.org/gdf-owl") .  
+}
+/
+#NAME Create GDF Linear location reference objects
+# GDF linear locations (based on TN-ITS) are derived from NVDB linear locations.
+# Extra level in GDF: Linearlocationreference.
+CONSTRUCT {
+	?individual gdf:locationReference ?lrobject .
+	?lrobject a gdf:LinearLocationReference .
+}
+WHERE {
+    #?nvdb_cls rdfs:subClassOf+ nvdb:Vegobjekttype .
+    ?gdf_cls owl:equivalentClass ?nvdb_cls .
+    ?individual a ?nvdb_cls .
+    ?individual nvdb:lrposisjon ?nrobject .
+	?individual nvdb:nvdb_id ?nvdb_id .
+    ?nrobject a ?lrtype .
+    ?lrtype rdfs:subClassOf+ nvdb:LineærPosisjon .
+    #FILTER regex(str(?gdf_cls), "http://rdf.gdf.org/gdf-owl") .
+	BIND (URI(CONCAT(str(?individual),"_llref")) AS ?lrobject) .
+}
+/
+#NAME Create GDF Point Link reference objects with properties
+CONSTRUCT {
+	?lrobject gdf:networkReference ?nrobject .
+	?nrobject a gdf:SimplePointReference .
+	?de a gdf:DistanceExpression .
+	?nrobject gdf:atPosition ?de .
+	?de gdf:distanceAlong ?pos .
+}
+WHERE {
+    ?gdf_cls owl:equivalentClass ?nvdb_cls .
+    ?individual a ?nvdb_cls .
+    ?individual nvdb:lrposisjon ?nrobject .
+	?individual nvdb:nvdb_id ?nvdb_id .
+    ?nrobject a nvdb:LineærPosisjonPunkt .
+	?nrobject nvdb:påPosisjon ?pos .
+    #FILTER regex(str(?gdf_cls), "http://rdf.gdf.org/gdf-owl") .
+	BIND (URI(CONCAT(str(?individual),"_llref")) AS ?lrobject) .
+	BIND (URI(CONCAT(str(?nrobject),"_de")) AS ?de) .
+}
+/
+#NAME Create GDF Line Link reference objects with properties
+CONSTRUCT {
+	?lrobject gdf:networkReference ?nrobject .
+	?nrobject a gdf:SimpleLinearReference .
+	?def a gdf:DistanceExpression .
+	?det a gdf:DistanceExpression .
+	?nrobject gdf:fromPosition ?def .
+	?nrobject gdf:toPosition ?det .
+	?def gdf:distanceAlong ?fpos .
+	?det gdf:distanceAlong ?tpos .
+}
+WHERE {
+    ?gdf_cls owl:equivalentClass ?nvdb_cls .
+    ?individual a ?nvdb_cls .
+    ?individual nvdb:lrposisjon ?nrobject .
+	?individual nvdb:nvdb_id ?nvdb_id .
+    ?nrobject a nvdb:LineærPosisjonStrekning .
+	?nrobject nvdb:fraPosisjon ?fpos .
+	?nrobject nvdb:tilPosisjon ?tpos .
+    #FILTER regex(str(?gdf_cls), "http://rdf.gdf.org/gdf-owl") .
+	BIND (URI(CONCAT(str(?individual),"_llref")) AS ?lrobject) .
+	BIND (URI(CONCAT(str(?nrobject),"_def")) AS ?def) .
+	BIND (URI(CONCAT(str(?nrobject),"_det")) AS ?det) .
+}
+/
+#NAME Create LRM
+CONSTRUCT{
+	?lrm a gdf:InterpolativeLinearReferencingMethod .
+	?lrm rdfs:comment "Linear coordinate shall be a value between min = 0 (start of linear element) and max = 1 (end of linear element)" .
+	?lrm rdfs:label "Normalised linear referencing" .
+}
+WHERE {
+	?nrobject nvdb:lineærReferansemetode ?lrm .
+}
+/
+#NAME Create common LR properties: overridingLRM and nrElement 
+CONSTRUCT {
+	?nrobject gdf:overridingLRM ?lrm .
+	?nrobject gdf:nrElement ?rlink .
+}
+WHERE {
+    ?individual nvdb:lrposisjon ?nrobject .
+	?nrobject nvdb:lineærReferansemetode ?lrm .
+	?nrobject nvdb:lrposNettverkselement ?rlink .
+}
+/
+#NAME Create LR direction inDirection (MED)
+CONSTRUCT {
+	?nrobject gdf:applicableDirection gdf:inDirection .
+}
+WHERE {
+    ?individual nvdb:lrposisjon ?nrobject .
+	?nrobject nvdb:lrRetning "MED"^^xsd:string .
+#    ?nrobject nvdb:lrRetning ?retning .
+}
+/
+#NAME Create LR direction inOppositeDirection (MOT)
+CONSTRUCT {
+	?nrobject gdf:applicableDirection gdf:inOppositeDirection .
+}
+WHERE {
+    ?individual nvdb:lrposisjon ?nrobject .
+    ?nrobject nvdb:lrRetning "MOT"^^xsd:string .
+}
+/
+#NAME Create GDF Object Properties from sameAs axioms for code list values (individuals)
+CONSTRUCT {
+	?individual ?gdf_prop ?gdf_val .
+}
+WHERE { 
+    # Same individual
+    ?gdf_val owl:sameAs ?nvdb_val .
+    # The GDF individual is of a type which is the range for a GDF property
+    ?gdf_val a ?gdf_type .
+    ?gdf_prop rdfs:range ?gdf_type .
+    # The NVDB feature with the individual as a property value
+    ?individual ?nvdb_prop ?nvdb_val .
+    #?gdf_prop owl:equivalentProperty ?nvdb_prop .
+    FILTER regex(str(?individual), "http://rdf.vegdata.no/nvdb/vegobjekt") .
+} 
+/
+#NAME Special for PedestrianCrossing: Set all to level=streetLevelCrossing
+# All NVDB Gangfelt are at street level
+CONSTRUCT {
+	?individual gdf:OTP_XD gdf:VAL_XD_1 .
+}
+WHERE { 
+    ?nvdb_cls nvdb:nvdb_id 174 .
+    ?individual a ?nvdb_cls .
+} 
+/
+#NAME Special for PedestrianCrossing: Set signage=passiveTrafficSigns from combination of (skiltet=ja and lysregulert=nei)
+CONSTRUCT {
+	?individual gdf:OTP_XB gdf:VAL_XB_1 .
+}
+WHERE {  
+    ?nvdb_cls nvdb:nvdb_id 174 .
+    ?individual a ?nvdb_cls .
+    # Skiltet (et2033) = ja (tv3538)
+    ?individual nvdb:et2033 nvdb:tv3538 .
+    # Lysregulert (et2034) = nei (tv3577)
+    ?individual nvdb:et2034 nvdb:tv3577 .
+} 
+
+
+
+
