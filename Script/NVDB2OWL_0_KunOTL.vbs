@@ -426,7 +426,7 @@ Sub main
 						objOTLFile.WriteText vbCrLf
 					Next	
 					'-------------------------------------------------------------------------------------------
-					'Fullfører disjontsetning for kodelister i pakken 
+					'Fullfører oneof-setning for kodelister i pakken 
 					strClOneOf = strClOneOf & "    ) ; ." & vbCrLf
 					objOTLFile.WriteText strClOneOf & vbCrLf			
 				end if
