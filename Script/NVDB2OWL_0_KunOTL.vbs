@@ -387,6 +387,14 @@ Sub main
 					definition = replace(definition, vbCrLf," ")			
 					objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
+					
+					'---------------------------------------------------------------------------------------------------------
+					'Lag concept schemes for kodelisten
+					objOTLFile.WriteText "### " & owlURI & "#kl" & element.Alias & "CS" & vbCrLf
+					objOTLFile.WriteText ":kl" & element.Alias & "CS a skos:ConceptScheme ;" & vbCrLf		
+					objOTLFile.WriteText "         rdfs:label ""Konseptskjema " & nvdb_navn & " (" & pkOT.Name & ")" & """@no ;" & vbCrLf					
+					objOTLFile.WriteText "         skos:definition """ & definition & """@no ;" & vbCrLf
+					objOTLFile.WriteText "       dc:isFormatOf :kl" & element.Alias & " ." & vbCrLf
 					objOTLFile.WriteText vbCrLf
 					
 					'----------------------------------------------------------------------------------------
@@ -399,13 +407,14 @@ Sub main
 						'OneOf-setning for kodelisteverdier
 						strClOneOf = strClOneOf & "         :tv" & eAttributt.Alias & vbCrLf
 						'----------------------------------------------------------------------------------
-						'Skriver kodelisteverdiene som instanser av kodelisten 
+						'Skriver kodelisteverdiene som instanser av kodelisten og som konsept
 						set aTag=eAttributt.TaggedValues.GetByName("NVDB_navn")
 						nvdb_navn = ""
 						if not aTag is nothing then nvdb_navn=aTag.Value
 						nvdb_navn = Replace(nvdb_navn,"""","\""")
 						objOTLFile.WriteText "### " & owlURI & "#tv" & eAttributt.Alias & vbCrLf
-						objOTLFile.WriteText ":tv" & eAttributt.Alias & " rdf:type :kl" & element.Alias & " ;" & vbCrLf
+						objOTLFile.WriteText ":tv" & eAttributt.Alias & " rdf:type :kl" & element.Alias & ", skos:Concept ;" & vbCrLf
+						objOTLFile.WriteText "         skos:inScheme :kl" &  element.Alias & "CS ;" & vbCrLf					
 						objOTLFile.WriteText "         :nvdb_id " & eAttributt.Alias & " ;" & vbCrLf
 						objOTLFile.WriteText "         :nvdb_navn """ & nvdb_navn & """@no ;" & vbCrLf					
 						objOTLFile.WriteText "         rdfs:label """ & nvdb_navn & """@no ;" & vbCrLf					

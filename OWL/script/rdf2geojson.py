@@ -41,9 +41,9 @@ ft_query = q_prefix + """
 print(str(datetime.datetime.now()) + ' Reading GDF-OTL from ', gdf_otl_gh)
 otl_gdf = Graph()
 otl_gdf.parse(gdf_otl_gh, format="turtle")
-print(str(datetime.datetime.now()) + ' Reading GDF-RDF-dataset from ', rdfFile)
+print(str(datetime.datetime.now()) + ' Reading GDF-RDF-dataset from ', targetFile)
 ds_gdf = Graph()
-ds_gdf.parse(rdfFile, format="turtle")
+ds_gdf.parse(targetFile, format="turtle")
 
 #Slår sammen datasett og OTL
 g = Graph()

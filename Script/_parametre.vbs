@@ -9,9 +9,9 @@ const strSOSIVersjon = "4.5"
 const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
-const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL"
+const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\core"
 
-const owlURI = "https://ontologi.utv.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http://rdf.vegdata.no/nvdb/nvdb-owl"
+const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http://rdf.vegdata.no/nvdb/nvdb-owl"
 
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
