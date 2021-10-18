@@ -123,7 +123,6 @@ sub main
 										'Assosiert klasse finnes ikke i denne modellen, assosasjon slettes
 										Repository.WriteOutput "Script", Now & " Assosiasjon skal slettes: Original klasse med alias " & assEl.Alias & " er ikke i denne modellen", 0 
 										element.Connectors.DeleteAt idxC, false
-										eASDiagram.DiagramObjects.Refresh
 									end if
 								end if	
 							elseif con.Type = "Generalization" and assEl.Alias = element.Alias and assEl.Abstract = 1 then

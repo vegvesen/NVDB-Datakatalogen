@@ -32,15 +32,19 @@ sub main
 	
 	'Mulighet for å stoppe prosessen i tilfelle feil hovedpakke...
 	dim msgAnsw
-	msgAnsw = MsgBox("Slette gamle pakker fra hovedpakken " & thePackage.Name & "?", vbOkCancel, "Produktspesifikasjoner")
-	if msgAnsw <> 2 then
-		Repository.WriteOutput "Script", Now & " Sletter gamle pakker i hovedpakken...", 0 
-		for idxP = 0 to thePackage.Packages.Count - 1
-			set katPackage = thePackage.Packages.GetAt(idxP)
-			Repository.WriteOutput "Script", Now & " Sletter pakken " & katPackage.Name & "...", 0 
-			thePackage.Packages.DeleteAt idxP, 0
-		next
-		thePackage.Packages.Refresh
+	if thePackage.Packages.Count > 0 then 
+		msgAnsw = MsgBox("Slette gamle pakker fra hovedpakken " & thePackage.Name & "?", vbOkCancel, "Produktspesifikasjoner")
+		if msgAnsw <> 2 then
+			Repository.WriteOutput "Script", Now & " Sletter gamle pakker i hovedpakken...", 0 
+			for idxP = 0 to thePackage.Packages.Count - 1
+				set katPackage = thePackage.Packages.GetAt(idxP)
+				Repository.WriteOutput "Script", Now & " Sletter pakken " & katPackage.Name & "...", 0 
+				thePackage.Packages.DeleteAt idxP, 0
+			next
+			thePackage.Packages.Refresh
+		else
+			exit sub
+		end if	
 	end if	
 
 	dim pI as EA.Project					
@@ -52,6 +56,7 @@ sub main
 	lstVOTK = Split(votkatId,",")
 	dim vk
 	for each vk in lstVOTK
+		Repository.WriteOutput "Script", Now & " Vegobjekttypekategori: " &  vk,0
 		rsVOTKategorier.Filter = "ID_VOBJ_TYP_KAT = " & VK
 		
 		'Lag ny PS-pakke for kategorien. Navn = Kategorinavn + Datakat-versjon

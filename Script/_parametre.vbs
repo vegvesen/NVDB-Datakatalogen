@@ -1,6 +1,6 @@
 'Datakatalogversjon
-const FC_version = "2.25"
-const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V225.mdb"
+const FC_version = "2.26"
+const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V226.mdb"
 const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
 
 const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
@@ -9,7 +9,7 @@ const strSOSIVersjon = "4.5"
 const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
-const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\core"
+const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\"
 
 const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http://rdf.vegdata.no/nvdb/nvdb-owl"
 

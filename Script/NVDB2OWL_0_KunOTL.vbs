@@ -468,7 +468,7 @@ Sub main
 	filetime = replace(Now, ".","")
 	filetime = replace(filetime, ":","")
 	filetime = replace(filetime, " ","_")
-	objOTLFile.SaveToFile owlPath & "\" & filetime & "_nvdb-owl.ttl", 2
+	objOTLFile.SaveToFile owlPath & "\core\" & filetime & "_nvdb-owl.ttl", 2
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 

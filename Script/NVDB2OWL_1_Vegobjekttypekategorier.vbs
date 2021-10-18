@@ -53,7 +53,7 @@ Sub main
 
 	'Lag heading med korrekt dato og versjon og til strømmen
 	objOTLFile.WriteText "" & vbCrLf
-	objOTLFile.WriteText "@prefix : <http://rdf.vegdata.no/nvdb/nvdb-owl#> ." & vbCrLf
+	objOTLFile.WriteText "@prefix : <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#> ." & vbCrLf
 	objOTLFile.WriteText "@prefix dc: <http://purl.org/dc/elements/1.1/> ." & vbCrLf
 	objOTLFile.WriteText "@prefix lr: <http://www.roadotl.eu/iso19148/def/> ." & vbCrLf
 	objOTLFile.WriteText "@prefix sf: <http://www.opengis.net/ont/sf#> ." & vbCrLf
@@ -67,9 +67,9 @@ Sub main
 	objOTLFile.WriteText "@prefix dcterms: <http://purl.org/dc/terms/> ." & vbCrLf
 	
 	objOTLFile.WriteText vbCrLf
-	objOTLFile.WriteText "<http://rdf.vegdata.no/nvdb/nvdb-kategorier> a owl:Ontology ;" & vbCrLf
+	objOTLFile.WriteText "<https://ontologi.atlas.vegvesen.no/nvdb/category/nvdb-kategorier> a owl:Ontology ;" & vbCrLf
 	objOTLFile.WriteText "	owl:imports <http://www.w3.org/2004/02/skos/core> ;" & vbCrLf
-	objOTLFile.WriteText "	owl:imports <http://rdf.vegdata.no/nvdb/nvdb-owl> ;" & vbCrLf
+	objOTLFile.WriteText "	owl:imports <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl> ;" & vbCrLf
 	objOTLFile.WriteText "	owl:versionInfo ""2.23"" ;" & vbCrLf
 	objOTLFile.WriteText "	dc:creator :SVV ;" & vbCrLf
 	objOTLFile.WriteText "	dc:date """ & left(Now,10) & """ ;" & vbCrLf
@@ -201,7 +201,7 @@ Sub main
 	filetime = replace(filetime, ":","")
 	filetime = replace(filetime, " ","_")
 	
-	objOTLFile.SaveToFile owlPath & "\" & filetime & "_nvdb-kategorier.ttl", 2
+	objOTLFile.SaveToFile owlPath & "\category\" & filetime & "_nvdb-kategorier.ttl", 2
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
