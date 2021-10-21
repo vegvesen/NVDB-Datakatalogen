@@ -15,7 +15,7 @@ const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http:/
 
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
-const scProject = "SC_NVDB4.eap"
+const scProject = "SC_NVDB.eap"
 const scTemplate = "SC_Core.eap"
 
 'GUID-er for pakker mm

@@ -38,7 +38,7 @@ Sub main
 	Set objTemplate = CreateObject("ADODB.Stream")
 	objTemplate.CharSet = "utf-8"
 	objTemplate.Open
-	objTemplate.LoadFromFile(owlPath & "\" & "nvdb-core.ttl")
+	objTemplate.LoadFromFile(owlPath & "\core\" & "nvdb-core.ttl")
 	dim strTemplate
 	strTemplate = objTemplate.ReadText()
 	objTemplate.Close
