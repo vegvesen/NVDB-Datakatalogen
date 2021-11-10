@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.26">
+  <include schemaLocation="AbstraktNVDB.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdskilteLøpType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Adskilte løp</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:AdskilteLøpEnumerationType nvdb:AdskilteLøpOtherType"/>
+  </simpleType>
+  <simpleType name="AdskilteLøpEnumerationType">
+    <annotation>
+      <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Adskilte løp</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="med">
+        <annotation>
+          <documentation>19035: Medstrekning for adskilte løp der kjøreretning er med metreringsretning.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19035</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Med</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="mot">
+        <annotation>
+          <documentation>19091: Motstrekning for adskilte løp der kjøreretning er mot metreringsretning.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19091</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Mot</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdskilteLøpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="DT_Kryssystem" substitutionGroup="gml:AbstractObject" type="nvdb:DT_KryssystemType">
+    <annotation>
+      <documentation>917: Angir hvilke deler av et kryss som forvaltningsmessig sett hører sammen</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">917</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kryssystem</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="DT_KryssystemType">
+    <sequence>
+      <element name="kryssdel" type="integer">
+        <annotation>
+          <documentation>11286: Nummer for den enkelte del av kryssystemet</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11286</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Del</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start kryssdel</documentation>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt kryssdel</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="DT_KryssystemPropertyType">
+    <sequence>
+      <element ref="nvdb:DT_Kryssystem"/>
+    </sequence>
+  </complexType>
+  <element name="DT_Sideanlegg" substitutionGroup="gml:AbstractObject" type="nvdb:DT_SideanleggType">
+    <annotation>
+      <documentation>919: Sideanlegg som trenger egne referanselenker forvaltningsmessig sett fordi disse ikke er en del av vegen for øvrig</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">919</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Sideanlegg</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="DT_SideanleggType">
+    <sequence>
+      <element name="sideanleggsdel" type="integer">
+        <annotation>
+          <documentation>11288: Nummer for den enkelte del av sidealegget</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11288</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Del</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start sideanleggsdel</documentation>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt sideanleggsdel</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="DT_SideanleggPropertyType">
+    <sequence>
+      <element ref="nvdb:DT_Sideanlegg"/>
+    </sequence>
+  </complexType>
+  <element name="DT_Vegstrekning" substitutionGroup="gml:AbstractObject" type="nvdb:DT_VegstrekningType">
+    <annotation>
+      <documentation>916: Deler inn vegsystemet i praktisk håndterbare størrelser nummerert i stigende rekkefølge i vegens retning</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">916</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Strekning</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="DT_VegstrekningType">
+    <sequence>
+      <element name="strekningNummer" type="integer">
+        <annotation>
+          <documentation>11281: Nummer for den enkelte strekning i et vegsystem</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11281</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Strekning</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="delstrekningNummer" type="integer">
+        <annotation>
+          <documentation>11284: Inndeling av Strekning i forhold til delstrekningens funksjon, f.eks. hovedløp, armer, gang- og sykkelveger. Nummeret er unikt innenfor strekningen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11284</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Delstrekning</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="fraMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved start veglenke</documentation>
+        </annotation>
+      </element>
+      <element name="tilMeter" type="integer">
+        <annotation>
+          <documentation>meterverdi ved slutt veglenke</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="adskilteLøp" type="nvdb:AdskilteLøpType">
+        <annotation>
+          <documentation>11283: Angir at delstrekningen har så fysisk adskilte løp eller kjørebaner at disse referansemessig må håndteres hver for seg.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11283</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Adskilte løp</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="adskilteLøpNummer" type="string">
+        <annotation>
+          <documentation>11314: Unik nummerering innenfor strekningen for adskilte løp som hører sammen, f.eks. 1-1, 1-2.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11314</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Adskilte løp nummer</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="DT_VegstrekningPropertyType">
+    <sequence>
+      <element ref="nvdb:DT_Vegstrekning"/>
+    </sequence>
+  </complexType>
+  <element name="DT_Vegsystem" substitutionGroup="gml:AbstractObject" type="nvdb:DT_VegsystemType">
+    <annotation>
+      <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">915</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegsystem</taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="DT_VegsystemType">
+    <sequence>
+      <element name="vegkategori" type="nvdb:VegkategoriType">
+        <annotation>
+          <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="vegfase" type="nvdb:VegfaseType">
+        <annotation>
+          <documentation>11278: Angir vegens fase i livet.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fase</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegnummer" type="integer">
+        <annotation>
+          <documentation>11277: Angir hvilke deler av vegnettet som rutemessig hører sammen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11277</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegnummer</taggedValue>
+          </appinfo>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="DT_VegsystemPropertyType">
+    <sequence>
+      <element ref="nvdb:DT_Vegsystem"/>
+    </sequence>
+  </complexType>
+  <element name="Endringsflagg" substitutionGroup="gml:AbstractObject" type="nvdb:EndringsflaggType">
+    <annotation>
+      <documentation>endringsinformasjon om et objekt
+
+Merknad: 
+Inntil videre vil hele objektet merkes med endringsflagget.
+I det videre arbeidet (framtidige versjoner) vil denne kunne utvides, f.eks ved å angi om endringen er knyttet til geometrien, egenskapene eller relasjoner</documentation>
+    </annotation>
+  </element>
+  <complexType name="EndringsflaggType">
+    <sequence>
+      <element name="typeEndring" type="nvdb:TypeEndringType">
+        <annotation>
+          <documentation>endringsstatus for objektet</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/TypeEndring.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element name="tidspunktEndring" type="date">
+        <annotation>
+          <documentation>tidspunkt for endring av objektet</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="EndringsflaggPropertyType">
+    <sequence>
+      <element ref="nvdb:Endringsflagg"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="Fellesegenskaper" substitutionGroup="gml:AbstractFeature" type="nvdb:FellesegenskaperType">
+    <annotation>
+      <documentation>abstrakt objekt som bærer en rekke egenskaper som er fagområde-uavhengige og kan benyttes for alle objekttyper
+
+Merknad:
+Spesielt i produktspesifikasjonsarbeid vil en velge egenskaper og av grensningslinjer fra denne klassen.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="FellesegenskaperType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="identifikasjon" type="nvdb:IdentifikasjonPropertyType">
+            <annotation>
+              <documentation>unik identifikasjon av et objekt</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="endringsflagg" type="nvdb:EndringsflaggPropertyType">
+            <annotation>
+              <documentation>endringsinformasjon om et objekt 
+
+Merknad: 
+Reglene knyttet til bruken av endringsflagg er for denne versjonen ikke avklart. Utdypes nærmere i produktspesifikasjonen basert på 4.0.
+
+Merknad: 
+Endringsflagg kan benyttes til å merke slettede "objekter".
+
+Eksempel: 
+Dersom en eiendomsgrense endres skal endringsflagg også legges inn på eiendomsteigen</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="datafangstdato" type="date">
+            <annotation>
+              <documentation>dato når objektet siste gang ble registrert/observert/målt i terrenget
+
+Merknad: I mange tilfeller er denne forskjellig fra Oppdateringsdato, da registrerte endringer kan bufres i en kortere eller lengre periode før disse legges inn i databasen.
+Ved førstegangsregistrering settes Datafangstdato lik førsteDatafangstdato.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="oppdateringsdato" type="date">
+            <annotation>
+              <documentation>dato for siste endring på objektetdataene 
+
+Merknad: 
+Oppdateringsdato kan være forskjellig fra Datafangsdato ved at data som er registrert kan bufres en kortere eller lengre periode før disse legges inn i datasystemet (databasen).
+
+-Definition-
+Date and time at which this version of the spatial object was inserted or changed in the spatial data set.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="kvalitet" type="nvdb:PosisjonskvalitetPropertyType">
+            <annotation>
+              <documentation>beskrivelse av kvaliteten på stedfestingen
+
+Merknad: Denne er identisk med ..KVALITET i tidligere versjoner av SOSI.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosesshistorie" type="string">
+            <annotation>
+              <documentation>beskrivelse av de prosesser som dataene er gått gjennom som kan ha betydning for kvaliteten og bruken av dataene
+
+Merknad:
+Prosesshistorie vil kunne inneholde informasjon om transformasjoner. Hva slags informasjon som angis er ofte gitt i andre standarder, f.eks kvalitet og kvalitetsikring.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="høydereferanse" type="nvdb:HøydereferanseType">
+            <annotation>
+              <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+              <appinfo>
+                <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Høydereferanse.xml</defaultCodeSpace>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="sideposisjon" type="nvdb:SideposisjonType">
+            <annotation>
+              <documentation>Angir sideposisjon i for vegobjekt i forhold til vegens metreringsretning</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegsystemreferanse" type="nvdb:VegsystemreferansePropertyType">
+            <annotation>
+              <documentation>sammensatt identifikator for vegreferanse</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="FellesegenskaperPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Fellesegenskaper"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="HøydereferanseType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+    </annotation>
+    <union memberTypes="nvdb:HøydereferanseEnumerationType nvdb:HøydereferanseOtherType"/>
+  </simpleType>
+  <simpleType name="HøydereferanseEnumerationType">
+    <annotation>
+      <documentation>koordinatregistering utført på topp eller bunn av et objekt</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="topp">
+        <annotation>
+          <documentation>Høyden målt til toppen av objektet</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="fot">
+        <annotation>
+          <documentation>Høyden målt til  foten av objektet</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="HøydereferanseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Identifikasjon" substitutionGroup="gml:AbstractObject" type="nvdb:IdentifikasjonType">
+    <annotation>
+      <documentation>Identification: Unik identifikasjon av et objekt, ivaretatt av den ansvarlige produsent/forvalter, som kan benyttes av eksterne applikasjoner som referanse til objektet. 
+
+NOTE1 Denne eksterne objektidentifikasjonen må ikke forveksles med en tematisk objektidentifikasjon, slik som f.eks bygningsnummer. 
+
+NOTE 2 Denne unike identifikatoren vil ikke endres i løpet av objektets levetid.</documentation>
+    </annotation>
+  </element>
+  <complexType name="IdentifikasjonType">
+    <sequence>
+      <element name="lokalId" type="string">
+        <annotation>
+          <documentation>localId: lokal identifikator, tildelt av dataleverendør/dataforvalter. Den lokale identifikatoren er unik innenfor navnerommet, ingen andre objekter har samme identifikator.
+
+NOTE: Det er data leverendørens ansvar å sørge for at denne lokale identifikatoren er unik innenfor navnerommet.</documentation>
+        </annotation>
+      </element>
+      <element name="navnerom" type="string">
+        <annotation>
+          <documentation>namespace: navnerom som unikt identifiserer datakilden til objektet, starter med to bokstavs kode jfr ISO 3166. Benytter understreking  ("_") dersom data produsenten ikke er assosiert med bare et land.
+
+NOTE 1 : Verdien for nanverom vil eies av den dataprodusent som har ansvar for de unike identifikatorene og vil registreres i "INSPIRE external  Object Identifier Namespaces Register"
+
+Eksempel: NO for Norge.</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="versjonId" type="string">
+        <annotation>
+          <documentation>versionId: identifikasjon av en spesiell versjon av et geografisk objekt (instans), maksimum lengde på 25 karakterers. Dersom spesifikasjonen av et geografisk objekt med en identifikasjon inkludererer livsløpssyklusinformasjon, benyttes denne versjonId for å skille mellom ulike versjoner av samme objekt. versjonId er en unik  identifikasjon av versjonen. 
+
+NOTE Maksimum lengde er valgt for å tillate tidsregistrering i henhold til  ISO 8601, slik som  "2007-02-12T12:12:12+05:30" som versjonId.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="IdentifikasjonPropertyType">
+    <sequence>
+      <element ref="nvdb:Identifikasjon"/>
+    </sequence>
+  </complexType>
+  <element abstract="true" name="LineærPosisjon" substitutionGroup="gml:AbstractObject" type="nvdb:LineærPosisjonType">
+    <annotation>
+      <documentation>Angivelse av en posisjon langs et nettverkselement
+
+Realisering av ISO19148: LE_EventLocation</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="LineærPosisjonType">
+    <sequence>
+      <element minOccurs="0" name="lineærReferanseMetode" type="nvdb:LineærReferanseMetodeType">
+        <annotation>
+          <documentation>metode som er brukt for å angi lineære referanser
+
+Merknad: Dersom verdi er angitt overstyrer denne standard metode for det refererte nettverkselementet. 
+
+ISO19148: overridingLRM</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="retning" type="nvdb:RetningskodeType">
+        <annotation>
+          <documentation>Posisjonens retning i forhold til nettverkselementet sin retning</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="avstandSide" type="double">
+        <annotation>
+          <documentation>Forskyvning til side for nettverkselementet. Positivt tall betyr høyre side, negativt tall betyr venstre side.
+ISO19148: offsetLateralDistance</documentation>
+        </annotation>
+      </element>
+      <element name="nettverkselement" type="nvdb:NettverkselementPropertyType"/>
+    </sequence>
+  </complexType>
+  <complexType name="LineærPosisjonPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjon"/>
+    </sequence>
+  </complexType>
+  <element name="LineærPosisjonPunkt" substitutionGroup="nvdb:LineærPosisjon" type="nvdb:LineærPosisjonPunktType">
+    <annotation>
+      <documentation>lineær posisjon som et punkt
+
+Merknad:
+Dette er en forenkling i forhold til ISO19148, der posisjonsangivelsene er en egen datatype LR_DistanceExpression som har igjen egenskapen DistanceAlong.
+LR_DistanceExpression har også en subtype LRO_LateralOffsetDistanceExpression, som inneholder egenskapen offsetLateralDistance (avstandSide).
+
+Realisering av ISO19148: LE_AtLocation</documentation>
+    </annotation>
+  </element>
+  <complexType name="LineærPosisjonPunktType">
+    <complexContent>
+      <extension base="nvdb:LineærPosisjonType">
+        <sequence>
+          <element name="posisjon" type="double">
+            <annotation>
+              <documentation>posisjon langs nettverkselementet, i henhold til referansemetoden 
+
+Merknad: Ref ISO19148: atPosition -  distanceAlong</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LineærPosisjonPunktPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjonPunkt"/>
+    </sequence>
+  </complexType>
+  <element name="LineærPosisjonStrekning" substitutionGroup="nvdb:LineærPosisjon" type="nvdb:LineærPosisjonStrekningType">
+    <annotation>
+      <documentation>lineær posisjon som en strekning
+
+Merknad: 
+Dette er en forenkling i forhold til ISO19148, der posisjonsangivelsene er en egen datatype LR_DistanceExpression som har igjen egenskapen DistanceAlong.
+LR_DistanceExpression har også en subtype LRO_LateralOffsetDistanceExpression, som inneholder egenskapen offsetLateralDistance (avstandSide).
+
+Realisering av ISO19148: LE_FromToLocation</documentation>
+    </annotation>
+  </element>
+  <complexType name="LineærPosisjonStrekningType">
+    <complexContent>
+      <extension base="nvdb:LineærPosisjonType">
+        <sequence>
+          <element name="fraPosisjon" type="double">
+            <annotation>
+              <documentation>startposisjon langs nettverkselementet, i henhold til referansemetoden 
+
+Merknad: Ref ISO19148: fromPosition -  distanceAlong</documentation>
+            </annotation>
+          </element>
+          <element name="tilPosisjon" type="double">
+            <annotation>
+              <documentation>sluttposisjon langs nettverkselementet, i henhold til referansemetoden
+
+Merknad: Ref ISO19148: toPosition -  distanceAlong</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="LineærPosisjonStrekningPropertyType">
+    <sequence>
+      <element ref="nvdb:LineærPosisjonStrekning"/>
+    </sequence>
+  </complexType>
+  <simpleType name="LineærReferanseMetodeType">
+    <annotation>
+      <documentation>Metode brukt for lineære referanser
+
+Merknad:
+
+Dersom offset er i bruk så angis også positiv offsetretning til side (høyre eller venstre) og vertikalt (opp/ned). 
+Felles for alle metoder i Norge:
+	- offsetUnits: "meter" 
+	- positiveLateralOffsetDirection: "right" 
+positiveVerticalOffsetDirection: "up"
+
+Dette er en kodeliste basert på en forenkling av ISO19148: LR_LinearReferencingMethod, som benytter 4 attributter
+	- navn 
+	- type (absolutt, relativ eller interpolert) 
+	- måleenhet 
+	- restriksjoner/regler (constraints)</documentation>
+    </annotation>
+    <union memberTypes="nvdb:LineærReferanseMetodeEnumerationType nvdb:LineærReferanseMetodeOtherType"/>
+  </simpleType>
+  <simpleType name="LineærReferanseMetodeEnumerationType">
+    <annotation>
+      <documentation>Metode brukt for lineære referanser
+
+Merknad:
+
+Dersom offset er i bruk så angis også positiv offsetretning til side (høyre eller venstre) og vertikalt (opp/ned). 
+Felles for alle metoder i Norge:
+	- offsetUnits: "meter" 
+	- positiveLateralOffsetDirection: "right" 
+positiveVerticalOffsetDirection: "up"
+
+Dette er en kodeliste basert på en forenkling av ISO19148: LR_LinearReferencingMethod, som benytter 4 attributter
+	- navn 
+	- type (absolutt, relativ eller interpolert) 
+	- måleenhet 
+	- restriksjoner/regler (constraints)</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="metrering">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet (lenken), angitt i meter
+
+Merknad: Kan ta utgangspunkt i en angitt startverdi for nettverkselementet.
+
+ISO19148: LR_LinearReferencingMethod:
+	- type: "absolute"  
+	- units: "meter"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="kilometrering">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt i kilometer. 
+
+Merknad: Kan ta utgangspunkt i en angitt startverdi for nettverkselementet (lenken).
+
+ISO19148: LR_LinearReferencingMethod:
+	- type: "absolute" 
+	- units: "kilometer"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="normalisert">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt som et desimaltall mellom 0 og 1, i forhold til start (0) og slutt (1) på nettverkselementet (lenken)
+
+Merknad: 
+ISO19148: LR_LinearReferencingMethod:
+	- type: "Interpolative"  
+	- units: "0..1"</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="prosent">
+        <annotation>
+          <documentation>posisjon fra start av nettverkselementet, angitt i prosent av lengden på nettverkselementet (lenken)
+
+Merknad: 
+ISO19148: LR_LinearReferencingMethod:
+	- type: "Interpolative"  
+	- units: "percent"</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="LineærReferanseMetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Link" substitutionGroup="gml:AbstractObject" type="nvdb:LinkType">
+    <annotation>
+      <documentation>referanse  til et informasjonselement, enten lokalt eller globalt
+
+Eksempel:
+Som lokal : //skrisrv2/tjenester/sosiforv/web/welcome.htm
+Som global: http://www.statkart.no/standard/sosi/ACCESS/welcome.htm</documentation>
+    </annotation>
+  </element>
+  <complexType name="LinkType">
+    <sequence/>
+  </complexType>
+  <complexType name="LinkPropertyType">
+    <sequence>
+      <element ref="nvdb:Link"/>
+    </sequence>
+  </complexType>
+  <simpleType name="MålemetodeType">
+    <annotation>
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MålemetodeEnumerationType nvdb:MålemetodeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeEnumerationType">
+    <annotation>
+      <documentation>MeasuringMethod: metode som ligger til grunn for registrering av posisjon
+
+
+-- Definition - - 
+method on which registration of position is based</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10">
+        <annotation>
+          <documentation>Measured in terrain: Målt i terrenget , uspesifisert metode/måleinstrument</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="82">
+        <annotation>
+          <documentation>Directly input on screen: Digitalisert ut fra frihåndstegning (direkte på skjerm). Frihåndstegning er basert på svært grovt grunnlag eller ikke noe grunnlag</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="96">
+        <annotation>
+          <documentation>GPS phase measurement RTK: Innmålt med satellittbaserte systemer for navigasjon og posisjonering med global dekning (f.eks GPS, GLONASS, GALILEO).: Fasemåling RTK (realtids kinematisk måling)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+    </annotation>
+    <union memberTypes="nvdb:MålemetodeHøydeEnumerationType nvdb:MålemetodeHøydeOtherType"/>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeEnumerationType">
+    <annotation>
+      <documentation>metode for å måle objekttypens høydeverdi</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="10"/>
+      <enumeration value="96"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="MålemetodeHøydeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element abstract="true" name="Nettverkselement" substitutionGroup="gml:AbstractFeature" type="nvdb:NettverkselementType">
+    <annotation>
+      <documentation>Abstrakt objekttype som representerer et element i et nettverk, med generelle egenskaper som muliggjør lineære referanser til elementene, 
+Realisering av INSPIRE Network:NetworkElement og ISO19148 LR_Feature.</documentation>
+    </annotation>
+  </element>
+  <complexType abstract="true" name="NettverkselementType">
+    <complexContent>
+      <extension base="gml:AbstractFeatureType">
+        <sequence>
+          <element minOccurs="0" name="standardLRM" type="nvdb:LineærReferanseMetodeType">
+            <annotation>
+              <documentation>STANDARDLRM: Standard metode som brukes for å angi lineære referanser til nettverkselementet
+
+Merknad: Kan overstyres for den enkelte posisjonsangivelse. 
+
+ISO19148: LR_ILinearElement ::defaultLRM() : LR_LinearReferencingMethod</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="NettverkselementPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Nettverkselement"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <element name="Posisjonskvalitet" substitutionGroup="gml:AbstractObject" type="nvdb:PosisjonskvalitetType">
+    <annotation>
+      <documentation>beskrivelse av kvaliteten på stedfestingen</documentation>
+    </annotation>
+  </element>
+  <complexType name="PosisjonskvalitetType">
+    <sequence>
+      <element name="målemetode" type="nvdb:MålemetodeType">
+        <annotation>
+          <documentation>metode for måling i grunnriss (x,y), og høyde (z) når metoden er den samme som ved måling i grunnriss</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Målemetode.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighet" type="integer">
+        <annotation>
+          <documentation>punktstandardavviket i grunnriss for punkter samt tverravvik for linjer
+
+Merknad:
+Oppgitt i cm</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="synbarhet" type="nvdb:SynbarhetType">
+        <annotation>
+          <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/Synbarhet.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="målemetodeHøyde" type="nvdb:MålemetodeHøydeType">
+        <annotation>
+          <documentation>metode for å måle høyden</documentation>
+          <appinfo>
+            <defaultCodeSpace xmlns="http://www.opengis.net/gml/3.2">http://www.jetlundweb.no/geomatikk/GML/NIFS/MålemetodeHøyde.xml</defaultCodeSpace>
+          </appinfo>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="nøyaktighetHøyde" type="integer">
+        <annotation>
+          <documentation>nøyaktighet for høyden i cm</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="maksimaltAvvik" type="integer">
+        <annotation>
+          <documentation>absolutt toleranse for geometriske avvik</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="PosisjonskvalitetPropertyType">
+    <sequence>
+      <element ref="nvdb:Posisjonskvalitet"/>
+    </sequence>
+  </complexType>
+  <simpleType name="RetningskodeType">
+    <annotation>
+      <documentation>Kodeliste for å angi retning i forrhold til nettverkselementets geometri.</documentation>
+    </annotation>
+    <union memberTypes="nvdb:RetningskodeEnumerationType nvdb:RetningskodeOtherType"/>
+  </simpleType>
+  <simpleType name="RetningskodeEnumerationType">
+    <annotation>
+      <documentation>Kodeliste for å angi retning i forrhold til nettverkselementets geometri.</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="med">
+        <annotation>
+          <documentation>Retning med geometrien</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="mot">
+        <annotation>
+          <documentation>Retning mot geometrien</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="RetningskodeOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SideposisjonType">
+    <annotation>
+      <documentation>Angir sideposisjon for vegobjekt, i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SideposisjonEnumerationType nvdb:SideposisjonOtherType"/>
+  </simpleType>
+  <simpleType name="SideposisjonEnumerationType">
+    <annotation>
+      <documentation>Angir sideposisjon for vegobjekt, i forhold til vegens metreringsretning</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="V"/>
+      <enumeration value="H"/>
+      <enumeration value="B"/>
+      <enumeration value="M"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SideposisjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+    </annotation>
+    <union memberTypes="nvdb:SynbarhetEnumerationType nvdb:SynbarhetOtherType"/>
+  </simpleType>
+  <simpleType name="SynbarhetEnumerationType">
+    <annotation>
+      <documentation>hvor godt den kartlagte detalj var synbar ved kartleggingen</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="0">
+        <annotation>
+          <documentation>Default</documentation>
+        </annotation>
+      </enumeration>
+      <enumeration value="1">
+        <annotation>
+          <documentation>Forøvrig grei å innmåle. (Benyttes bl.a. for innmåling av ledninger på lukket grøft)</documentation>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SynbarhetOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeEndringEnumerationType nvdb:TypeEndringOtherType"/>
+  </simpleType>
+  <simpleType name="TypeEndringEnumerationType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E"/>
+      <enumeration value="N"/>
+      <enumeration value="S"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegfaseType">
+    <annotation>
+      <documentation>11278: Angir vegens fase i livet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fase</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VegfaseEnumerationType nvdb:VegfaseOtherType"/>
+  </simpleType>
+  <simpleType name="VegfaseEnumerationType">
+    <annotation>
+      <documentation>11278: Angir vegens fase i livet.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11278</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fase</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="P">
+        <annotation>
+          <documentation>19030: Planlagt veg, vedtatt trasé.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19030</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Planlagt</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="A">
+        <annotation>
+          <documentation>19031: Veg under bygging</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19031</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Under bygging</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="V">
+        <annotation>
+          <documentation>19032: Veg som er del av operativt vegnett</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19032</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Eksisterende</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegfaseOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VegkategoriEnumerationType nvdb:VegkategoriOtherType"/>
+  </simpleType>
+  <simpleType name="VegkategoriEnumerationType">
+    <annotation>
+      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+      <appinfo>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">11276</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Vegkategori</taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="E">
+        <annotation>
+          <documentation>19024: SVV er vegmyndighet. Unik nummerering iht. europeisk avtale om internasjonale trafikkårer, AGR</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19024</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Europaveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="R">
+        <annotation>
+          <documentation>19025: SVV er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19025</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Riksveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="F">
+        <annotation>
+          <documentation>19026: Fylkeskommunen er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19026</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Fylkesveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="K">
+        <annotation>
+          <documentation>19027: Kommunen er vegmyndighet. Unik nummerering innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19027</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Kommunal veg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="P">
+        <annotation>
+          <documentation>19028: Private veger. Evt. nummerering er unik innenfor kommunen.</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19028</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Privat veg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="S">
+        <annotation>
+          <documentation>19029: Private landbruksveger som brukes til skogbruksformål. Nummerering iht. landbruksforvaltningens fagsystem ØKS</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">19029</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Skogsveg</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VegkategoriOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Vegsystemreferanse" substitutionGroup="gml:AbstractObject" type="nvdb:VegsystemreferanseType">
+    <annotation>
+      <documentation>sammensatt identifikator for vegsystemreferanse</documentation>
+    </annotation>
+  </element>
+  <complexType name="VegsystemreferanseType">
+    <sequence>
+      <element name="vegsystem" type="nvdb:DT_VegsystemPropertyType">
+        <annotation>
+          <documentation>hvilke deler av vegnettet som forvaltningsmessig hører sammen</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegstrekning" type="nvdb:DT_VegsystemPropertyType">
+        <annotation>
+          <documentation>deler inn vegsystemet i praktisk håndterbare størrelser nummerert i stigende rekkefølge i vegens retning</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="sideanlegg" type="nvdb:DT_SideanleggPropertyType">
+        <annotation>
+          <documentation>sideanlegg som trenger egne referanselenker forvaltningsmessig sett fordi disse ikke er en del av vegen for øvrig</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="kryssystem" type="nvdb:DT_KryssystemPropertyType">
+        <annotation>
+          <documentation>angir hvilke deler av et kryss som forvaltningsmessig sett hører sammen</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegsystemreferanseFraDato" type="date">
+        <annotation>
+          <documentation>gyldighetsdato fra for vegsystemreferanse (startdato)</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="vegsystemreferanseTilDato" type="date">
+        <annotation>
+          <documentation>gyldighetsdato til for vegsystemreferanse (avslutningsdato)</documentation>
+        </annotation>
+      </element>
+      <element name="referanseretning" type="nvdb:RetningskodeType">
+        <annotation>
+          <documentation>retning for metrering, med eller mot koordinatrekkefølgen. Merknad: Egenskapen finnes ikke i NVDB, men avledes ut fra stedfesting og lenkenes geometri.</documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  <complexType name="VegsystemreferansePropertyType">
+    <sequence>
+      <element ref="nvdb:Vegsystemreferanse"/>
+    </sequence>
+  </complexType>
+</schema>

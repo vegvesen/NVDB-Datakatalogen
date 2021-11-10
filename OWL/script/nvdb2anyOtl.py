@@ -37,7 +37,7 @@ otl = otl_nvdb + otl_target + otl_lset
 g_nvdb = Graph()
 if alt == 1:
     # Alt.1: Fra NVDB-API
-    for knr in range (knrfrom,knrto):
+    for knr in lstKnr:
         print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
         try:
             # Lager graf fra NVDB-data
@@ -46,7 +46,6 @@ if alt == 1:
             print(str(datetime.datetime.now()) + ' Ukjent kommune: ' + str(knr))
 else:
     # Alt.2: Fra fil
-    # nvdbfile = localPath + "\\data\\NVDB_" + areaname + "_" + str(featuretypeid) + ".ttl."
     print(str(datetime.datetime.now()) + ' Leser NVDB-RDF fra ', nvdbfile)
     g_nvdb.parse(nvdbfile, format="turtle")
 # ---------------------------------------------------------------------------------------------
@@ -65,7 +64,6 @@ target_g.bind("gsp",'http://www.opengis.net/ont/geosparql#')
 #Skriver til fil
 #gdf_g = gdf_g + otl_gdf
 print('')
-#targetFile=localPath + "\\data\\" + targetNs + "_" + areaname + "_" + str(featuretypeid) + ".ttl."
 print(str(datetime.datetime.now()) + ' Skriver til målfil ' + targetFile)
 target_g.serialize(destination=targetFile, format="turtle")
 

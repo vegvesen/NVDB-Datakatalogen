@@ -43,7 +43,7 @@ Sub main
 	strTemplate = objTemplate.ReadText()
 	objTemplate.Close
 	'Sett korrekt dato og versjon og skriv kjerneontologien til strømmen
-	strTemplate = Replace(strTemplate,"dc:date ""yyyy-mm-dd""","dc:date """ & left(Now,10) & """")
+	strTemplate = Replace(strTemplate,"dc:date ""2020-06-19""","dc:date """ & left(Now,10) & """")
 	strTemplate = Replace(strTemplate,"dcterms:title ""NVDB Datakatalogen""","dcterms:title ""NVDB Datakatalogen" & " versjon " & FC_version & """")
 	strTemplate = Replace(strTemplate,"owl:versionInfo ""n.mm""","owl:versionInfo """ & FC_version & """")
 	objOTLFile.WriteText strTemplate & vbCrLf

@@ -1,8 +1,7 @@
 #Globale parametere
 featuretypeid = 174
-areaname = 'innlandet'
-knrfrom = 3400
-knrto=3499
+areaname = 'hamar'
+lstKnr= range(3403,3404)
 
 localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\owl"
 scriptPath = localPath + "\\script"

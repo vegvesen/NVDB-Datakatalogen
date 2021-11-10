@@ -24,9 +24,10 @@ g_nvdb.bind("nvdb_vo", Namespace(nvdbVoPath))
 g_nvdb.bind("nvdb_otl",Namespace(nvdbOTLPath))
 g_nvdb.bind("gsp",'http://www.opengis.net/ont/geosparql#')
 # ---------------------------------------------------------------------------------------------
-# nvdbfile=localPath + "\\data\\NVDB_" + areaname + "_" + str(featuretypeid) + ".ttl."
 # Løkke lesing fra API pr kommune
-for knr in range (knrfrom,knrto):
+for knr in lstKnr:
+    print(' ')
+    print('-----------------------------------------------------')
     print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
     try:
         # Lager graf fra NVDB-data
