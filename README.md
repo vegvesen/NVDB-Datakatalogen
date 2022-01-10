@@ -1,12 +1,12 @@
 # NVDB Datakatalogen
 
-Et repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatalogen.vegdata.no/) i alternative og standardiserte formater. 
+Repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatalogen.vegdata.no/) i alternative og standardiserte strukturer og formater. 
 
 ## Innhold:
 
 ### [UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML)
-[XMI-filer](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML/XMI) for orginal UML-representasjon av NVDB Datakatalogen.
-[PNG-rasterfiler](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML/PNG) for alle diagrammer i UML-modellen.
+- [XMI-filer](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML/XMI) for orginal UML-representasjon av NVDB Datakatalogen.
+- [PNG-rasterfiler](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML/PNG) for alle diagrammer i UML-modellen.
 
 ### [SOSI-UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SOSI-UML)
 XMI-filer for den SOSI-tilpassede UML-modellen avledet av den originale UML-representasjonen.
