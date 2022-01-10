@@ -4,7 +4,7 @@ Et repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatal
 
 ## Innhold:
 
-### [UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/GML)
+### [UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/UML)
 XMI-filer for orginal UML-representasjon av NVDB Datakatalogen
 
 ### [SOSI-UML](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SOSI-UML)

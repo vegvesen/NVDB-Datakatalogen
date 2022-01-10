@@ -1,4 +1,4 @@
-# Konvertering av data fra NVDB-API til RDF-format i henhold til NVDB Objekttypebibliotek
+# Sekvensiell lesing og konvertering av data fra NVDB-API til RDF-format i henhold til NVDB Objekttypebibliotek
 # ---------------------------------------------------------------------------------------------
 #Importerer biblioteker
 import sys, datetime
@@ -9,6 +9,12 @@ from constants import *
 #   print('Føyer til', scriptPath, 'som søkesti')
 #    sys.path.append(scriptPath)
 from nvdb2rdf import *
+
+def print_turtle(fileName):
+    # Skriver grafen til turtle-fil
+    print(str(datetime.datetime.now()) + ' Skriver til NVDB-Turtle-fil: ' + fileName)
+    g_nvdb.serialize(destination=fileName, format="turtle")
+
 
 # ---------------------------------------------------------------------------------------------
 startTime = datetime.datetime.now()
@@ -31,13 +37,18 @@ for knr in lstKnr:
     print(str(datetime.datetime.now()) + ' Kommune: ' + str(knr))
     try:
         # Lager graf fra NVDB-data
-        g_nvdb=g_nvdb + nvdb2graph(featuretypeid,knr,otl_nvdb)
+        if oneFile is False:
+            g_nvdb = nvdb2graph(featuretypeid, knr, otl_nvdb)
+            #Kommunevise filer
+            print_turtle(localPath + "\\data\\nvdb_" + str(featuretypeid) + "_" + str(knr) + ".ttl.")
+        else:
+            g_nvdb = g_nvdb + nvdb2graph(featuretypeid, knr, otl_nvdb)
     except:
         print(str(datetime.datetime.now()) + ' Feil i prosessering for kommune: ' + str(knr))
 # ---------------------------------------------------------------------------------------------
-# Skriver til fil (turtle)
-print(str(datetime.datetime.now()) + ' Skriver til NVDB-Turtle-fil: ' + nvdbfile)
-g_nvdb.serialize(destination=nvdbfile, format="turtle")
+#Samlefil
+if oneFile is True: print_turtle(localPath + "\\data\\nvdb_" + str(featuretypeid) + "_" + areaname + ".ttl.")
+
 timePassed =datetime.datetime.now() - startTime
 print(str(datetime.datetime.now()) + ' Ferdig! Tidsforbruk: ' + str(timePassed) + ')')
 

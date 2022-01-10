@@ -1,7 +1,9 @@
 #Globale parametere
 featuretypeid = 174
 areaname = 'hamar'
-lstKnr= range(3403,3404)
+lstKnr=[3403,3438]   #range(3403,3404)
+oneFile = False
+
 
 localPath = "C:\\DATA\\GitHub\\vegvesen\\NVDB-Datakatalogen\\owl"
 scriptPath = localPath + "\\script"
@@ -13,7 +15,7 @@ nvdbfile=localPath + "\\data\\nvdb_" + areaname + "_" + str(featuretypeid) + ".t
 targetOtl = 'https://raw.githubusercontent.com/jetgeo/GIS2OWL/master/GDF/gdf-owl.ttl'
 targetOTLPath = "http://rdf.gdf.org/gdf-owl#"
 targetNs = "gdf"
-targetFile=localPath + "\\data\\" + targetNs + "_" + areaname + "_" + str(featuretypeid) + ".ttl."
+targetFile= localPath + "\\data\\" + targetNs + "_" + areaname + "_" + str(featuretypeid) + ".ttl."
 sqFileName=localPath + '\\lrs\\nvdb2gdf.sparql'
 
 
