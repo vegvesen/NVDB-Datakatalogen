@@ -8,7 +8,7 @@ option explicit
 ' Purpose: Export diagrams to image files. Uses alias as prefix.
 ' Date: 20150411
 '
-const path = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\PNG\"
+const path = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\UML\PNG\"
 dim dgr as EA.Diagram
 dim ePIF as EA.Project
 
