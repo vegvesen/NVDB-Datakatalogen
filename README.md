@@ -26,14 +26,20 @@ GML-Applikasjonsskjema for NVDB Datakatalogen, avleda fra SOSI-UML-modellen.
 ### [OWL](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL)
 OWL-Ontologi for NVDB Datakatalogen, avleda fra SOSI-UML-modellen.
 
+- [Komplett ontologi](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/core) for NVDB Datakatalogen.
+- [Kategorisering](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/category) av vegobjekttyper.
+- [Linking Rules Sets](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/lrs) for kobling til andre ontologier.
+
 
 
 ------
 
 
 
-### [Script](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/Script)
+### Andre mapper:
+
+#### [Script](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/Script)
 Enterprise Architect-script for transformasjon mellom modellrepresentasjoner.
 
-### [SC](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SC)
+#### [SC](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/SC)
 Konfigureringsfiler for ShapeChange.
