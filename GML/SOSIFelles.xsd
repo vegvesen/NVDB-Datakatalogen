@@ -241,7 +241,7 @@ I det videre arbeidet (framtidige versjoner) vil denne kunne utvides, f.eks ved 
   </element>
   <complexType name="EndringsflaggType">
     <sequence>
-      <element name="typeEndring" type="nvdb:TypeEndringType">
+      <element name="typeEndring" type="nvdb:TypeEndringNVDBType">
         <annotation>
           <documentation>endringsstatus for objektet</documentation>
           <appinfo>
@@ -877,6 +877,29 @@ Oppgitt i cm</documentation>
     </restriction>
   </simpleType>
   <simpleType name="TypeEndringOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringNVDBType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+    </annotation>
+    <union memberTypes="nvdb:TypeEndringNVDBEnumerationType nvdb:TypeEndringNVDBOtherType"/>
+  </simpleType>
+  <simpleType name="TypeEndringNVDBEnumerationType">
+    <annotation>
+      <documentation>endringsstatus for objektet</documentation>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="opprett"/>
+      <enumeration value="korriger"/>
+      <enumeration value="oppdater"/>
+      <enumeration value="lukk"/>
+      <enumeration value="slett"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeEndringNVDBOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
