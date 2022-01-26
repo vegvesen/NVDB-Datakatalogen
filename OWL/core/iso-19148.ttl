@@ -1,0 +1,476 @@
+@prefix : <http://www.roadotl.eu/iso19148/def/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.roadotl.eu/iso19148/def/> .
+
+<http://www.roadotl.eu/iso19148/def/> rdf:type owl:Ontology ;
+                                       owl:imports <http://inspire.ec.europa.eu/ont/base> ,
+                                                   <http://schemas.opengis.net/geosparql/1.0/geosparql_vocab_all.rdf> ;
+                                       <http://purl.org/dc/elements/1.1/creator> "<http://www.roadotl.eu>"^^xsd:string ;
+                                       <http://purl.org/dc/elements/1.1/description> "Ontology representing the ISO 19148 - Linear Referencing standard. The standard provides ways to specify locations along linear elements such as transport network links or alignments. In essence, any object where a location can be referenced using one measure (linear coordinate) may be referenced."@en ;
+                                       <http://purl.org/dc/elements/1.1/title> "ISO 19148 - Linear Referencing"^^xsd:string ;
+                                       <http://purl.org/dc/terms/abstract> "This ontology provides means for locating objects (assets) along elements of a network, alignments or other linear elements. Using this ontology enables NRAs to locate and find assets using an ISO vocabulary for linear referencing"@en ;
+                                       <http://purl.org/dc/terms/created> "2018-08-31"^^xsd:string ;
+                                       <http://purl.org/vocab/vann/preferredNamespacePrefix> "iso19148"^^xsd:string ;
+                                       <http://purl.org/vocab/vann/preferredNamespaceUri> "http://www.roadotl.eu/iso19148/def/"^^xsd:string ;
+                                       rdfs:comment "Ontology representing the ISO 19148 - Linear Referencing standard"@en ;
+                                       rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                                       owl:versionInfo "Version 0.91"^^xsd:string .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2002/07/owl#qualifiedCardinality
+owl:qualifiedCardinality rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.roadotl.eu/iso19148/def/atPosition
+:atPosition rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :linearPosition .
+
+
+###  http://www.roadotl.eu/iso19148/def/fromPosition
+:fromPosition rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :linearPosition .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasDefaultLRM
+:hasDefaultLRM rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasLRM ;
+               rdfs:range :LinearReferencingMethod ;
+               rdfs:comment "Specifies a default Linear Referencing Method. This is used for all measurements made along a LinearElement unless specified otherwise explicitly overridden"@en ;
+               rdfs:label "hasDefaultLRM"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasDistanceAlong
+:hasDistanceAlong rdf:type owl:ObjectProperty ;
+                  rdfs:range <http://inspire.ec.europa.eu/ont/base#Measure> ;
+                  rdfs:comment "Specifies a measure (usually a distance) for a distance expression"@en ;
+                  rdfs:label "hasDistanceAlong"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasDistanceExpression
+:hasDistanceExpression rdf:type owl:ObjectProperty ;
+                       rdfs:range :DistanceExpression .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasFromReferent
+:hasFromReferent rdf:type owl:ObjectProperty ;
+                 rdfs:range :Referent ;
+                 rdfs:comment "Specifies where along the LinearElement measuring begins for a distance expression when the Linear Referencing Method is of type “relative”"@en ;
+                 rdfs:label "hasFromReferent"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasLRM
+:hasLRM rdf:type owl:ObjectProperty ;
+        rdfs:range :LinearReferencingMethod .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasLateralOffsetExpression
+:hasLateralOffsetExpression rdf:type owl:ObjectProperty ;
+                            rdfs:range :LateralOffsetExpression .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasLinearElement
+:hasLinearElement rdf:type owl:ObjectProperty ;
+                  rdfs:range :LinearElement .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasOffsetLateralDistance
+:hasOffsetLateralDistance rdf:type owl:ObjectProperty .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasOffsetVerticalDistance
+:hasOffsetVerticalDistance rdf:type owl:ObjectProperty .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasOverridingLRM
+:hasOverridingLRM rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasLRM ;
+                  rdfs:comment "Specifies a Linear Referencing Method for a location other than the default Linear Referencing Method of the locating or attributed feature being measured."@en ;
+                  rdfs:label "hasOverridingLRM"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasPosition
+:hasPosition rdf:type owl:ObjectProperty .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasPositiveLateralOffsetDirection
+:hasPositiveLateralOffsetDirection rdf:type owl:ObjectProperty ;
+                                   rdfs:range :LateralOffsetDirection .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasPositiveVerticalOffsetDirection
+:hasPositiveVerticalOffsetDirection rdf:type owl:ObjectProperty ;
+                                    rdfs:range :VerticalOffsetDirection .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasReferentLocation
+:hasReferentLocation rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Referent ;
+                     rdfs:range :PositionExpression ;
+                     rdfs:comment "The location of a referent given as a linearly referenced location along the feature that owns the referent"@en ;
+                     rdfs:label "hasLocation"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasTowardsReferent
+:hasTowardsReferent rdf:type owl:ObjectProperty ;
+                    rdfs:range :Referent .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasVerticalOffsetExpression
+:hasVerticalOffsetExpression rdf:type owl:ObjectProperty ;
+                             rdfs:range :VerticalOffsetExpression .
+
+
+###  http://www.roadotl.eu/iso19148/def/linearPosition
+:linearPosition rdf:type owl:ObjectProperty ;
+                rdfs:range :DistanceExpression .
+
+
+###  http://www.roadotl.eu/iso19148/def/toPosition
+:toPosition rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :linearPosition .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.roadotl.eu/iso19148/def/constraint
+:constraint rdf:type owl:DatatypeProperty .
+
+
+###  http://www.roadotl.eu/iso19148/def/hasUnits
+:hasUnits rdf:type owl:DatatypeProperty .
+
+
+###  http://www.roadotl.eu/iso19148/def/name
+:name rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://inspire.ec.europa.eu/ont/base#Measure
+<http://inspire.ec.europa.eu/ont/base#Measure> rdf:type owl:Class .
+
+###  http://www.roadotl.eu/iso19148/def/AbsoluteLinearReferencingMethod
+:AbsoluteLinearReferencingMethod rdf:type owl:Class ;
+                                 rdfs:subClassOf :LinearReferencingMethod ;
+                                 owl:disjointWith :InterpolativeLinearReferencingMethod ,
+                                                  :RelativeLinearReferencingMethod ;
+                                 rdfs:comment "Linear referencing method where measurements are made from the start of the linear element being measured, in the direction of the linear element. This class corresponds to the \"absolute\" code list value of the LR_LRMType class in ISO 19148."@en ;
+                                 rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                                 rdfs:label "AbsoluteLinearReferencingMethod"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/Boundary
+:Boundary rdf:type owl:Class ;
+          rdfs:subClassOf :Referent ;
+          owl:disjointWith :Intersection ,
+                           :Landmark ,
+                           :ReferenceMarker ;
+          rdfs:comment "Represents where an administrative or maintenance boundary crosses the linear element being measured. This is typically the first time the boundary crosses the linear element. If the boundary runs along the linear element, it would be the point at which they first become collinear. The Linear Referencing System should include specific rules about how boundaries are handled if this type of referent is permitted. If the linear element changes at the boundary as for a county route beginning at the county boundary, then the Linear Referencing method is more correctly categorized as absolute. This class corresponds to the \"boundary\" code list value of the LR_ReferentType class in ISO 19148"@en ;
+          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> .
+
+
+###  http://www.roadotl.eu/iso19148/def/Codelist
+:Codelist rdf:type owl:Class ;
+          rdfs:subClassOf owl:Thing ;
+          rdfs:comment "A code list is used to describe an open enumeration"@en ;
+          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+          rdfs:label "Codelist"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/DistanceExpression
+:DistanceExpression rdf:type owl:Class ;
+                    rdfs:subClassOf owl:Thing ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasDistanceAlong ;
+                                      owl:cardinality "1"^^xsd:nonNegativeInteger
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasFromReferent ;
+                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Referent
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasTowardsReferent ;
+                                      owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :Referent
+                                    ] ;
+                    rdfs:comment "Specifies the linear referenced measure value. This shall include the distance measured along the linear element. If the Linear Referencing Method LR_LRMType is “relative”, the distance expression may also include an along referent to specify where the measuring begins. Otherwise, measuring begins at the start of the linear element. Measuring is in the direction of the linear element, unless a towards referent is provided. Class name in ISO 19148 is LR_DistanceExpression"@en ;
+                    rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                    rdfs:label "DistanceExpression"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "The measured value which defines the location along the linear element in accordance with the Linear Referencing Method"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/InterpolativeLinearReferencingMethod
+:InterpolativeLinearReferencingMethod rdf:type owl:Class ;
+                                      rdfs:subClassOf :LinearReferencingMethod ;
+                                      owl:disjointWith :RelativeLinearReferencingMethod ;
+                                      rdfs:comment "Linear referencing merthod where measurements are interpolated in accordance with the default length of the linear element. This class corresponds to the \"interpolative\" code list value of the LR_LRMType class in ISO 19148."@en ;
+                                      rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                                      rdfs:label "InterpolativeLinearReferencingMethod"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/Intersection
+:Intersection rdf:type owl:Class ;
+              rdfs:subClassOf :Referent ;
+              owl:disjointWith :Landmark ,
+                               :ReferenceMarker ;
+              rdfs:comment "Represents the location of an intersection specified by the referent name. The intersection location is typically taken as the location of the intersection of the reference lines of the streets comprising the intersection and is, therefore, not necessarily precise or deterministic. Physical markers may be installed to remedy this. The Linear Referencing System should include specific rules about how intersection locations are determined if this type of referent is permitted. This class corresponds to the \"intersection\" code list value of the LR_ReferentType class in ISO 19148"@en ;
+              rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> .
+
+
+###  http://www.roadotl.eu/iso19148/def/LRMWithOffset
+:LRMWithOffset rdf:type owl:Class ;
+               rdfs:subClassOf :LinearReferencingMethod ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasPositiveLateralOffsetDirection ;
+                                 owl:cardinality "1"^^xsd:nonNegativeInteger
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :hasPositiveVerticalOffsetDirection ;
+                                 owl:cardinality "1"^^xsd:nonNegativeInteger
+                               ] ;
+               rdfs:comment "Extends LinearReferencingMethod by adding attributes relevant to Linear Referencing Methods that allow offsets. These include units of measure and positive directions for perpendicular lateral and vertical offsets. This class corresponds to LRO_LRMWithOffset in ISO 19148"@en ;
+               rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+               rdfs:label "LRMWithOffset"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LRMWithTowardsReferent
+:LRMWithTowardsReferent rdf:type owl:Class ;
+                        rdfs:subClassOf :LinearReferencingMethod ;
+                        rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                        rdfs:label "LRMWithTowardsReferent"@en ;
+                        <http://www.w3.org/2004/02/skos/core#definition> "Extends LinearReferencingMethod by adding a subtype of Linear Referencing Method that allows towards referents, such as the Cross Street Linear Referencing Method. This class corresponds to the class LRTR_LRMWithTowardsReferent in ISO 19148"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/Landmark
+:Landmark rdf:type owl:Class ;
+          rdfs:subClassOf :Referent ;
+          owl:disjointWith :ReferenceMarker ;
+          rdfs:comment "Represents the location of a physical landmark visible in the field.. This class corresponds to the \"landmark\" code list value of the LR_ReferentType class in ISO 19148"@en ;
+          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> .
+
+
+###  http://www.roadotl.eu/iso19148/def/LateralOffsetDirection
+:LateralOffsetDirection rdf:type owl:Class ;
+                        rdfs:subClassOf :Codelist ;
+                        rdfs:comment "Gives options for positive lateral offset direction. Class name in ISO 19148 is LRO_LateralOffsetDirection"@en ;
+                        rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                        rdfs:label "LateralOffsetDirection"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LateralOffsetExpression
+:LateralOffsetExpression rdf:type owl:Class ;
+                         rdfs:subClassOf owl:Thing ;
+                         rdfs:comment "Describes the lateral offset for a linearly referenced location. Class name in ISO 19148 is LRO_LateralOffsetExpression. The class in the standard specifies that an offsetexpression specifies a measure and an offset referent. To generalize the concept (e.g. to include other means for offsets such as Lanes), these properties were omitted in this ontology."@en ;
+                         rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                         rdfs:label "LateralOffsetDirection"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LinearAtLocation
+:LinearAtLocation rdf:type owl:Class ;
+                  rdfs:subClassOf :LinearEventLocation ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :atPosition ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass :DistanceExpression
+                                  ] ;
+                  rdfs:comment "Specifies a single position along the locating or attributed feature. Class name in ISO 19148 is LE_AtLocation"@en ;
+                  rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                  rdfs:label "LinearAtLocation"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LinearElement
+:LinearElement rdf:type owl:Class ;
+               rdfs:comment "1-dimensional object that serves as the axis along which linear referencing is performed"@en ,
+                            "1-dimensionellt objekt som fungerar som axeln längs vilken linjära referenser görs"@se ;
+               rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+               rdfs:label "LinearElement"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LinearEventLocation
+:LinearEventLocation rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasLinearElement ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :LinearElement
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasOverridingLRM ;
+                                       owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :LinearReferencingMethod
+                                     ] ;
+                     rdfs:comment "Specifies the linearly referenced location of a linearly located event along a locating or attributed feature. Class name in ISO 19148 is LE_EventLocation"@en ;
+                     rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                     rdfs:label "LinearEventLocation"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LinearFromToLocation
+:LinearFromToLocation rdf:type owl:Class ;
+                      rdfs:subClassOf :LinearEventLocation ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :fromPosition ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :DistanceExpression
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :toPosition ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass :DistanceExpression
+                                      ] ;
+                      rdfs:comment "Specifies a contiguous spatial interval along the locating or attributed feature. Class name in ISO 19148 is LE_FromToLocation"@en ;
+                      rdfs:label "LinearFromToLocation"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/LinearReferencingMethod
+:LinearReferencingMethod rdf:type owl:Class ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty :constraint ;
+                                           owl:allValuesFrom xsd:string
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :name ;
+                                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                           owl:onDataRange xsd:string
+                                         ] ;
+                         rdfs:comment "Manner in which measurements are made along (and optionally offset from) a linear element. Class name in ISO 19148 is LR_LinearReferencingMethod"@en ;
+                         rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                         rdfs:label "LinearReferencingMethod"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/OffsetDistanceExpression
+:OffsetDistanceExpression rdf:type owl:Class ;
+                          rdfs:subClassOf :DistanceExpression ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hasLateralOffsetExpression ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hasVerticalOffsetExpression ;
+                                            owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                          ] ;
+                          rdfs:comment "A DistanceExpression, allowing the specification of lateral and vertical offsets. If either is provided, it shall include a distance measured from and perpendicular to the linear element or offset referent. The Linear Referencing Method shall be of type LRMWithOffset. Class name in ISO 19148 is LRO_LateralOffsetDirection. In this ontology name was changed to OffsetDistanceExpression since it includes both possible lateral and vertical offsets."@en ;
+                          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                          rdfs:label "OffsetDistanceExpression"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/PositionExpression
+:PositionExpression rdf:type owl:Class ;
+                    rdfs:subClassOf owl:Thing ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasDistanceExpression ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :DistanceExpression
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasLRM ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :LinearReferencingMethod
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :hasLinearElement ;
+                                      owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :LinearElement
+                                    ] ;
+                    rdfs:comment "Fully describes a linearly referenced location given by the linear element being measured, the method of measurement and a measure value specified with a distance expression. This class corresponds to the LR_PositionExpression class in ISO 19148"@en ;
+                    rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                    rdfs:label "PositionExpression"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/ReferenceMarker
+:ReferenceMarker rdf:type owl:Class ;
+                 rdfs:subClassOf :Referent ;
+                 rdfs:comment "Represents a reference marker typically located in the right of way of the road, rail or other transportation system. Usually reference markers are initially spaced at a uniform distance along the linear element being measured, though subsequent re-alignments can result in uneven spacing between the markers. Specifying their location with a relative Linear Referencing Method a distance from the preceding marker minimizes the impact of such changes. This class corresponds to the \"referenceMarker\" code list value of the LR_ReferentType class in ISO 19148"@en ;
+                 rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                 rdfs:label "ReferenceMarker"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/Referent
+:Referent rdf:type owl:Class ;
+          rdfs:subClassOf owl:Thing ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasPosition ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass <http://www.opengis.net/ont/sf#Point>
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasReferentLocation ;
+                            owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :PositionExpression
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :name ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onDataRange xsd:string
+                          ] ;
+          rdfs:comment "For from and towards referents, specifies a known location along the LinearElement. This class corresponds to the LR_Referent class in ISO 19148"@en ;
+          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+          rdfs:label "Referent"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/RelativeLinearReferencingMethod
+:RelativeLinearReferencingMethod rdf:type owl:Class ;
+                                 rdfs:subClassOf :LinearReferencingMethod ;
+                                 rdfs:comment "Linear referencing method where measurements are made from the specified “from referent” location, in the direction of the linear element unless overridden by a towards referent, in which case the direction is from the from referent towards the towards referent. This class corresponds to the \"relative\" code list value of the LR_LRMType class in ISO 19148."@en ;
+                                 rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                                 rdfs:label "RelativeLinearReferencingMethod"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/VerticalOffsetDirection
+:VerticalOffsetDirection rdf:type owl:Class ;
+                         rdfs:subClassOf :Codelist ;
+                         rdfs:comment "Gives the options for positive vertical offset direction. Class name in ISO 19148 is LRO_LateralOffsetDirection"@en ;
+                         rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                         rdfs:label "VerticalOffsetDirection"@en .
+
+
+###  http://www.roadotl.eu/iso19148/def/VerticalOffsetExpression
+:VerticalOffsetExpression rdf:type owl:Class ;
+                          rdfs:subClassOf owl:Thing ;
+                          rdfs:comment "Describes the vertical offset for a linearly referenced location. Class name in ISO 19148 is LRO_VerticalOffsetExpression. The class in the standard specifies that an offsetexpression specifies a measure and an offset referent. To generalize the concept (e.g. to include other means for offsets), these properties were omitted in this ontology."@en ;
+                          rdfs:isDefinedBy <https://www.iso.org/standard/32566.html> ;
+                          rdfs:label "VeticalOffsetExpression"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.roadotl.eu/iso19148/def/LateralOffsetDirection_left
+:LateralOffsetDirection_left rdf:type owl:NamedIndividual ,
+                                      :LateralOffsetDirection .
+
+
+###  http://www.roadotl.eu/iso19148/def/LateralOffsetDirection_right
+:LateralOffsetDirection_right rdf:type owl:NamedIndividual ,
+                                       :LateralOffsetDirection .
+
+
+###  http://www.roadotl.eu/iso19148/def/VerticalOffsetDirection_down
+:VerticalOffsetDirection_down rdf:type owl:NamedIndividual ,
+                                       :VerticalOffsetDirection .
+
+
+###  http://www.roadotl.eu/iso19148/def/VerticalOffsetDirection_up
+:VerticalOffsetDirection_up rdf:type owl:NamedIndividual ,
+                                     :VerticalOffsetDirection .
+
+
+[ owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+###  Generated by the OWL API (version 5.1.0) https://github.com/owlcs/owlapi/
