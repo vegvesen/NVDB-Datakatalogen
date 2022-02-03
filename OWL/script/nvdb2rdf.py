@@ -1,4 +1,4 @@
-# Funksjoner for konvertering fra NVDB-API til Graf (RDF)
+# Funksjoner for konvertering fra NVDB-API til RDf-graf
 # ---------------------------------------------------------------------------------------------
 #Importerer biblioteker
 import sys, datetime
