@@ -219,25 +219,19 @@ dcterms:title rdf:type owl:AnnotationProperty .
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#applicabillity
 :applicabillity rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf :psddtproperty ;
-                rdfs:range xsd:string ;
-                rdfs:comment "The description of applicability and usecases, i.e., \"IfcDoor entity\", \"Common Pset of Ifc...\"."@en ;
-                rdfs:label "Applicabillity"@en .
+                rdfs:range xsd:string .
 
 
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#applicabletypevalue
 :applicabletypevalue rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf :psddtproperty ;
-                     rdfs:range xsd:string ;
-                     rdfs:comment "The format of applicable type value is ENTITY_TYPE/PREDEFINED_TYPE. Multiple value is accepted, and format is: \"TYPE_1 | TYPE_2 ...\"."@en ;
-                     rdfs:label "Applicable Type Value"@en .
+                     rdfs:range xsd:string .
 
 
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#classname
 :classname rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf :psddtproperty ;
-           rdfs:range xsd:string ;
-           rdfs:comment "The element of applicable entity type, i.e., \"IfcWallStandardCase\". The multiple value is accepted, and format is: \"ENTYT_TYPE_1, ENTITY_TYPE_2, ...\"."@en ;
-           rdfs:label "Class Name"@en .
+           rdfs:range xsd:string .
 
 
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#definition
@@ -299,8 +293,7 @@ dcterms:title rdf:type owl:AnnotationProperty .
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#schema
 :schema rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf :psddtproperty ;
-        rdfs:range xsd:string ;
-        rdfs:label "Schema"@en .
+        rdfs:range xsd:string .
 
 
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#sectionref
@@ -332,8 +325,7 @@ dcterms:title rdf:type owl:AnnotationProperty .
 ###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#version
 :version rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf :psddtproperty ;
-         rdfs:range xsd:string ;
-         rdfs:label "Version"@en .
+         rdfs:range xsd:string .
 
 
 #################################################################
@@ -498,8 +490,20 @@ ifc:IfcValue rdf:type owl:Class .
 :propertysetdefelement rdf:type owl:Class ;
                        rdfs:subClassOf :psdclass ,
                                        [ rdf:type owl:Restriction ;
+                                         owl:onProperty :applicabillity ;
+                                         owl:allValuesFrom xsd:string
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
                                          owl:onProperty :applicableclasses ;
                                          owl:allValuesFrom :ApplicableClassesElement
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :applicabletypevalue ;
+                                         owl:allValuesFrom xsd:string
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty :definition ;
+                                         owl:allValuesFrom xsd:string
                                        ] ,
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty :ifcversion ;
@@ -516,18 +520,6 @@ ifc:IfcValue rdf:type owl:Class .
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty :psetdefaliases ;
                                          owl:allValuesFrom :aliaseselement
-                                       ] ,
-                                       [ rdf:type owl:Restriction ;
-                                         owl:onProperty :applicabillity ;
-                                         owl:allValuesFrom xsd:string
-                                       ] ,
-                                       [ rdf:type owl:Restriction ;
-                                         owl:onProperty :applicabletypevalue ;
-                                         owl:allValuesFrom xsd:string
-                                       ] ,
-                                       [ rdf:type owl:Restriction ;
-                                         owl:onProperty :definition ;
-                                         owl:allValuesFrom xsd:string
                                        ] ,
                                        [ rdf:type owl:Restriction ;
                                          owl:onProperty :name ;
@@ -845,14 +837,64 @@ ifc:IfcValue rdf:type owl:Class .
 
 
 #################################################################
+#    Individuals
+#################################################################
+
+###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#dt_text
+:dt_text rdf:type owl:NamedIndividual ,
+                  :datatypeelement ;
+         rdfs:label "PSD Datatype Text"@en ;
+		 :type ifc:IfcText.
+
+###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#dt_integer
+:dt_integer rdf:type owl:NamedIndividual ,
+                  :datatypeelement ;
+         rdfs:label "PSD Datatype Integer"@en ;
+		 :type ifc:IfcInteger.
+
+###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#dt_real
+:dt_real rdf:type owl:NamedIndividual ,
+                  :datatypeelement ;
+         rdfs:label "PSD Datatype Real"@en ;
+		 :type ifc:IfcReal.
+		 
+
+###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#dt_datetime
+::dt_datetime rdf:type owl:NamedIndividual ,
+                  :datatypeelement ;
+         rdfs:label "PSD Datatype DateTime"@en ;
+		 :type ifc:IfcDateTime.		 
+		 
+
+###  https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#dt_binary
+:dt_binary rdf:type owl:NamedIndividual ,
+                  :datatypeelement ;
+         rdfs:label "PSD Datatype Binary"@en ;
+		 :type ifc:IfcBinary.		 
+
+
+
+#################################################################
 #    Annotations
 #################################################################
+
+:applicabillity rdfs:label "Applicabillity"@en ;
+                rdfs:comment "The description of applicability and usecases, i.e., \"IfcDoor entity\", \"Common Pset of Ifc...\"."@en .
+
+
+:applicabletypevalue rdfs:label "Applicable Type Value"@en ;
+                     rdfs:comment "The format of applicable type value is ENTITY_TYPE/PREDEFINED_TYPE. Multiple value is accepted, and format is: \"TYPE_1 | TYPE_2 ...\"."@en .
+
+
+:classname rdfs:comment "The element of applicable entity type, i.e., \"IfcWallStandardCase\". The multiple value is accepted, and format is: \"ENTYT_TYPE_1, ENTITY_TYPE_2, ...\"."@en ;
+           rdfs:label "Class Name"@en .
+
 
 :definition rdfs:label "Definition"@en .
 
 
-:enumitem rdfs:label "Enumerated Item"@en ;
-          rdfs:comment "The enumerated item"@en .
+:enumitem rdfs:comment "The enumerated item"@en ;
+          rdfs:label "Enumerated Item"@en .
 
 
 :guid rdfs:comment "The GUID for reference."@en ;
@@ -874,6 +916,9 @@ ifc:IfcValue rdf:type owl:Class .
 :name rdfs:label "Name"@en .
 
 
+:schema rdfs:label "Schema"@en .
+
+
 :sectionref rdfs:comment "The section information of reference."@en ;
             rdfs:label "Section Reference"@en .
 
@@ -884,6 +929,9 @@ ifc:IfcValue rdf:type owl:Class .
 
 :valueitem rdfs:label "Simple Value Item"@en ;
            rdfs:comment "One simple value in a list"@en .
+
+
+:version rdfs:label "Version"@en .
 
 
 #################################################################
