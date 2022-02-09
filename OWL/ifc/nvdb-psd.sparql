@@ -1,0 +1,94 @@
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX nvdb: <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#>
+PREFIX psd: <https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#>
+PREFIX ifc: <http://standards.buildingsmart.org/IFC/DEV/IFC4_1/OWL#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+/
+#NAME Lag IFC PropertySetDefinitions
+CONSTRUCT {
+    ?psd a psd:propertysetdefelement .
+    ?psd psd:name ?psdn .
+    ?psd psd:definition ?psddef .
+    ?psd rdfs:label ?vt_navn .
+# Legg til SameAs her!
+}
+WHERE { 
+    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+	?vt rdfs:subClassOf ?vtk .
+    ?vt nvdb:nvdb_id ?id .
+    ?vt nvdb:sosi_navn ?sn .
+    ?vt nvdb:nvdb_navn ?vt_navn .
+    ?vt skos:definition ?def .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#psd_",str(?id))) AS ?psd) .
+    BIND (CONCAT("Pset_NVDB_",str(?sn)) AS ?psdn) .
+    BIND (CONCAT("Egenskaper for NVDB-Vegobjekttypen ",str(?sn),": ", ?def) AS ?psddef) .
+} 
+
+/
+#NAME Lag IFC PropertyDefinitions
+# Basert på domain for properties
+CONSTRUCT {
+    ?pd a psd:propertydefelement .
+    ?psd psd:propertydefs ?pd .
+    ?pd psd:name ?pdn .
+    ?pd psd:definition ?pddef .
+    ?pd rdfs:label ?pdname .
+# Legg til SameAs her!
+}
+WHERE {
+    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+	?vt rdfs:subClassOf ?vtk .
+    ?vt nvdb:nvdb_id ?vtid .
+    ?vt nvdb:nvdb_navn ?vtn .
+	?et rdfs:domain ?vt .
+    ?et nvdb:nvdb_id ?etid .
+    ?et nvdb:sosi_navn ?pdn .
+    ?et nvdb:nvdb_navn ?et_navn .
+    ?et skos:definition ?pddef .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pd_",str(?etid))) AS ?pd) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#psd_",str(?vtid))) AS ?psd) .
+    BIND (CONCAT(str(?vtn),": ",str(?et_navn)) AS ?pdname) .
+}
+
+/
+#NAME Definer propertytype og datatyper for PropertyDefinitions
+CONSTRUCT {
+    ?pt a psd:typepropertysinglevalue .
+    ?pd psd:propertytype ?pt .
+    ?pt psd:datatype ?dt .
+    ?pt rdfs:label ?ptname .
+}
+
+WHERE {
+    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+	?vt rdfs:subClassOf ?vtk .
+    ?vt nvdb:nvdb_navn ?vtn .
+	?et rdfs:domain ?vt .
+	?et a owl:DatatypeProperty .
+    ?et rdfs:range ?r .
+    ?et nvdb:nvdb_id ?etid .
+    ?et nvdb:nvdb_navn ?et_navn .
+
+    BIND (
+        COALESCE(
+            IF(?r = URI(CONCAT("http://www.w3.org/2001/XMLSchema#","string")),URI(CONCAT("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#","dt_text")),1/0),
+            IF(?r = URI(CONCAT("http://www.w3.org/2001/XMLSchema#","integer")),URI(CONCAT("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#","dt_integer")),1/0),
+            IF(?r = URI(CONCAT("http://www.w3.org/2001/XMLSchema#","double")),URI(CONCAT("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#","dt_real")),1/0),
+            IF(?r = URI(CONCAT("http://www.w3.org/2001/XMLSchema#","dateTime")),URI(CONCAT("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#","dt_datetime")),1/0),
+            IF(?r = URI(CONCAT("http://www.w3.org/2001/XMLSchema#","base64Binary")),URI(CONCAT("https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/OWL/ifc/psd-owl#","dt_binary")),1/0),
+            "No datatype"
+        )
+            AS ?dt
+    )
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pd_",str(?etid))) AS ?pd) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pt_",str(?etid))) AS ?pt) .
+    BIND (CONCAT("PT ",str(?vtn),": ",str(?et_navn)) AS ?ptname) .
+
+    }
+
+
+
+
+#SameAs for enumerations!

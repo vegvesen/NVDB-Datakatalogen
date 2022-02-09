@@ -64,7 +64,7 @@ def sqFileProcess(fn,oGraph,replaceText="[rt]",replaceWith="?rt"):
             #print(replaceWith)
             queryStartTime = datetime.datetime.now()
             query=query.replace(replaceText,replaceWith)
-            # print(query)
+            print(query)
             # Kjører spørring og lager ny graf som resultat
 
             q_res=oGraph.query(query)
