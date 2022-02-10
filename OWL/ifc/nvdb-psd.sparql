@@ -12,10 +12,10 @@ CONSTRUCT {
     ?psd psd:name ?psdn .
     ?psd psd:definition ?psddef .
     ?psd rdfs:label ?vt_navn .
-# Legg til SameAs her!
+    ?psd owl:SameAs ?vt .
 }
 WHERE { 
-    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+    ?vtk nvdb:nvdb_id [kid]  . #Valgt kategori fra NVDB
 	?vt rdfs:subClassOf ?vtk .
     ?vt nvdb:nvdb_id ?id .
     ?vt nvdb:sosi_navn ?sn .
@@ -35,10 +35,10 @@ CONSTRUCT {
     ?pd psd:name ?pdn .
     ?pd psd:definition ?pddef .
     ?pd rdfs:label ?pdname .
-# Legg til SameAs her!
+    ?pd owl:sameAs ?et .
 }
 WHERE {
-    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+    ?vtk nvdb:nvdb_id [kid]  . #Valgt kategori fra NVDB
 	?vt rdfs:subClassOf ?vtk .
     ?vt nvdb:nvdb_id ?vtid .
     ?vt nvdb:nvdb_navn ?vtn .
@@ -53,7 +53,45 @@ WHERE {
 }
 
 /
-#NAME Definer propertytype og datatyper for PropertyDefinitions
+#NAME Definer propertytype og datatyper for Enumerated Value PropertyDefinitions
+CONSTRUCT {
+    ?pt a psd:typepropertyenumeratedvalue .
+    ?pd psd:propertytype ?pt .
+    ?pt rdfs:label ?ptname .
+	?eve a psd:enumlistelement .
+    ?eve rdfs:label ?ename .
+    ?eve owl:sameAs ?r .
+    ?pt psd:enumlist ?eve .
+    ?ei a psd:valueselement .
+    ?ei psd:valueitem ?sn .
+    ?ei rdfs:label ?sn .
+    ?ei owl:sameAs ?ev .
+    ?pt psd:enumitem ?ei .
+}
+
+WHERE {
+    ?vtk nvdb:nvdb_id [kid]  . #Valgt kategori fra NVDB
+	?vt rdfs:subClassOf ?vtk .
+    ?vt nvdb:nvdb_navn ?vtn .
+	?et rdfs:domain ?vt .
+    ?et rdfs:range ?r .
+  	?r rdfs:subClassOf+ nvdb:Kodeliste .
+    ?et nvdb:nvdb_id ?etid .
+    ?et nvdb:nvdb_navn ?et_navn .
+    ?ev a ?r .
+    ?ev nvdb:sosi_navn ?sn .
+    ?ev nvdb:nvdb_id ?evid .
+
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pd_",str(?etid))) AS ?pd) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pt_",str(?etid))) AS ?pt) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#en_",str(?etid))) AS ?eve) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#ev_",str(?evid))) AS ?ei) .
+    BIND (CONCAT("PT ",str(?vtn),": ",str(?et_navn)) AS ?ptname) .
+    BIND (CONCAT("EN ",str(?vtn),": ",str(?et_navn)) AS ?ename) .
+    }
+
+/
+#NAME Definer propertytype og datatyper for Single Value PropertyDefinitions
 CONSTRUCT {
     ?pt a psd:typepropertysinglevalue .
     ?pd psd:propertytype ?pt .
@@ -62,12 +100,12 @@ CONSTRUCT {
 }
 
 WHERE {
-    ?vtk nvdb:nvdb_id [kid]  . #NVDB-Data SVV
+    ?vtk nvdb:nvdb_id [kid]  . #Valgt kategori fra NVDB
 	?vt rdfs:subClassOf ?vtk .
     ?vt nvdb:nvdb_navn ?vtn .
 	?et rdfs:domain ?vt .
-	?et a owl:DatatypeProperty .
     ?et rdfs:range ?r .
+	?et a owl:DatatypeProperty .
     ?et nvdb:nvdb_id ?etid .
     ?et nvdb:nvdb_navn ?et_navn .
 
@@ -89,6 +127,6 @@ WHERE {
     }
 
 
+#NAME Definer NVDB-enheter som IfcNamedUnit
 
-
-#SameAs for enumerations!
+#NAME Definer Unit for SingleValue PropertyDefinitions
