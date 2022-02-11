@@ -126,7 +126,27 @@ WHERE {
 
     }
 
-
+/
 #NAME Definer NVDB-enheter som IfcNamedUnit
+CONSTRUCT {
+    ?ue a psd:unittypeelement .
+    ?ue psd:type ?u .
+    ?ue rdfs:label ?u .
+    ?pt psd:unittype ?ue .
+}
+
+WHERE {
+    ?vtk nvdb:nvdb_id [kid] . #NVDB-Data SVV
+	?vt rdfs:subClassOf ?vtk .
+	?et rdfs:domain ?vt .
+    ?et nvdb:enhet ?u .
+    ?et nvdb:nvdb_id ?etid .
+
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#pt_",str(?etid))) AS ?pt) .
+    BIND (URI(CONCAT("https://ontologi.atlas.vegvesen.no/nvdb/psd/nvdb-psd#ptu_",str(?etid))) AS ?ue) .
+
+    }
+
+
 
 #NAME Definer Unit for SingleValue PropertyDefinitions
