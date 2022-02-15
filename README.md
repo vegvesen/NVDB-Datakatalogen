@@ -29,6 +29,13 @@ OWL-Ontologi for NVDB Datakatalogen, avleda fra SOSI-UML-modellen.
 - [Komplett ontologi](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/core) for NVDB Datakatalogen.
 - [Kategorisering](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/category) av vegobjekttyper.
 - [Linking Rules Sets](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/lrs) for kobling til andre ontologier.
+- IFC [PropertySetDefinitions for NVDB](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/OWL/ifc) som OWL-Ontologi .
+
+### [IFC-PSD](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/IFC-PSD)
+
+IFC PropertySetDefinitions i XML-format, i henhold til buildingSMART sitt XML-skjema
+
+
 
 
 
