@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.27">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.28">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeType">
+  <simpleType name="GeografiskOppløsningType">
     <annotation>
       <documentation>6067: Angir hva statistikken omfatter.</documentation>
       <appinfo>
@@ -13,9 +13,9 @@
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Geografisk oppløsning</taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeEnumerationType nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeOtherType"/>
+    <union memberTypes="nvdb:GeografiskOppløsningEnumerationType nvdb:GeografiskOppløsningOtherType"/>
   </simpleType>
-  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeEnumerationType">
+  <simpleType name="GeografiskOppløsningEnumerationType">
     <annotation>
       <documentation>6067: Angir hva statistikken omfatter.</documentation>
       <appinfo>
@@ -153,24 +153,24 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="GeografiskOppløsningStatistikk_TrafikkmengdeOtherType">
+  <simpleType name="GeografiskOppløsningOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <element name="Statistikk_Trafikkmengde" substitutionGroup="nvdb:AbstraktStatistikk_Trafikkmengde" type="nvdb:Statistikk_TrafikkmengdeType">
+  <element name="Historisk_Statistikk_Trafikkmengde" substitutionGroup="nvdb:AbstraktHistorisk_Statistikk_Trafikkmengde" type="nvdb:Historisk_Statistikk_TrafikkmengdeType">
     <annotation>
-      <documentation>643: Aggregert informasjon ifbm PMS-rapport 2603</documentation>
+      <documentation>643: Aggregert informasjon ifbm PMS-rapport 2603. 20220228:Benyttes kun for historiske data.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">643</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">643</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Statistikk, trafikkmengde</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Historisk_Statistikk, trafikkmengde</taggedValue>
       </appinfo>
     </annotation>
   </element>
-  <complexType name="Statistikk_TrafikkmengdeType">
+  <complexType name="Historisk_Statistikk_TrafikkmengdeType">
     <complexContent>
-      <extension base="nvdb:AbstraktStatistikk_TrafikkmengdeType">
+      <extension base="nvdb:AbstraktHistorisk_Statistikk_TrafikkmengdeType">
         <sequence>
           <element minOccurs="0" name="opprettetDato" type="date">
             <annotation>
@@ -189,7 +189,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element name="geografiskOppløsning" type="nvdb:GeografiskOppløsningStatistikk_TrafikkmengdeType">
+          <element name="geografiskOppløsning" type="nvdb:GeografiskOppløsningType">
             <annotation>
               <documentation>6067: Angir hva statistikken omfatter.</documentation>
               <appinfo>
@@ -314,9 +314,9 @@
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="Statistikk_TrafikkmengdePropertyType">
+  <complexType name="Historisk_Statistikk_TrafikkmengdePropertyType">
     <sequence minOccurs="0">
-      <element ref="nvdb:Statistikk_Trafikkmengde"/>
+      <element ref="nvdb:Historisk_Statistikk_Trafikkmengde"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>

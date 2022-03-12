@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.27">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.28">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -209,7 +209,7 @@
     <restriction base="string">
       <enumeration value="Ja">
         <annotation>
-          <documentation>15868: Ja</documentation>
+          <documentation>15868: Det er ledig kapasitet</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">15868</taggedValue>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
@@ -218,10 +218,28 @@
       </enumeration>
       <enumeration value="Nei">
         <annotation>
-          <documentation>15869: Nei</documentation>
+          <documentation>15869: Det er ikke ledig kapasitet for tiden</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">15869</taggedValue>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Uavklart">
+        <annotation>
+          <documentation>21523: Det er ikke avklart om det er ledig plass</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21523</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Uavklart</taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ikke relevant">
+        <annotation>
+          <documentation>21522: Vil aldri være relevant med ledig plass</documentation>
+          <appinfo>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21522</taggedValue>
+            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ikke relevant</taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
@@ -405,30 +423,30 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="PubliseresIEkomportalenTrekkerørKanalType">
+  <simpleType name="RelevantForEkomportalenTrekkerørKanalType">
     <annotation>
-      <documentation>12452: Angir om vegobjektet skal publiseres i Ekomportalen eller ikke.</documentation>
+      <documentation>12452: Angir om vegobjektet er relevant for overføring til Ekomportalen eller ikke.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12452</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12452</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Publiseres i Ekomportalen</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Relevant for Ekomportalen</taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:PubliseresIEkomportalenTrekkerørKanalEnumerationType nvdb:PubliseresIEkomportalenTrekkerørKanalOtherType"/>
+    <union memberTypes="nvdb:RelevantForEkomportalenTrekkerørKanalEnumerationType nvdb:RelevantForEkomportalenTrekkerørKanalOtherType"/>
   </simpleType>
-  <simpleType name="PubliseresIEkomportalenTrekkerørKanalEnumerationType">
+  <simpleType name="RelevantForEkomportalenTrekkerørKanalEnumerationType">
     <annotation>
-      <documentation>12452: Angir om vegobjektet skal publiseres i Ekomportalen eller ikke.</documentation>
+      <documentation>12452: Angir om vegobjektet er relevant for overføring til Ekomportalen eller ikke.</documentation>
       <appinfo>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12452</taggedValue>
         <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12452</taggedValue>
-        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Publiseres i Ekomportalen</taggedValue>
+        <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Relevant for Ekomportalen</taggedValue>
       </appinfo>
     </annotation>
     <restriction base="string">
       <enumeration value="Ja">
         <annotation>
-          <documentation>21372: Indikerer at vegobjektet skal overføres til Ekomportelen</documentation>
+          <documentation>21372: Indikerer at vegobjektet er relevant for overføring til Ekomportelen</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21372</taggedValue>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ja</taggedValue>
@@ -437,25 +455,16 @@
       </enumeration>
       <enumeration value="Nei">
         <annotation>
-          <documentation>21373: Indikerer at vegobjektet ikke skal overføres til Ekomportelen på nåværende tidspunkt. Om det aldri kan bli aktuelt gis verdi "ikke relevant"</documentation>
+          <documentation>21373: Indikerer at vegobjektet er relevant for overføring til Ekomportelen. Klient for overføring av data fra NVDB til Ekom-portalen vil ikke kunne overføre denne forekomsten.</documentation>
           <appinfo>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21373</taggedValue>
             <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Nei</taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Ikke relevant">
-        <annotation>
-          <documentation>21375: Indikerer at vegobjektet ikke er relevant for overføring til Ekomportalen</documentation>
-          <appinfo>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">21375</taggedValue>
-            <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Ikke relevant</taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="PubliseresIEkomportalenTrekkerørKanalOtherType">
+  <simpleType name="RelevantForEkomportalenTrekkerørKanalOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -672,12 +681,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="publiseresIEkomportalen" type="nvdb:PubliseresIEkomportalenTrekkerørKanalType">
+          <element minOccurs="0" name="relevantForEkomportalen" type="nvdb:RelevantForEkomportalenTrekkerørKanalType">
             <annotation>
-              <documentation>12452: Angir om vegobjektet skal publiseres i Ekomportalen eller ikke.</documentation>
+              <documentation>12452: Angir om vegobjektet er relevant for overføring til Ekomportalen eller ikke.</documentation>
               <appinfo>
                 <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_ID">12452</taggedValue>
-                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Publiseres i Ekomportalen</taggedValue>
+                <taggedValue xmlns="http://www.interactive-instruments.de/ShapeChange/AppInfo" tag="NVDB_navn">Relevant for Ekomportalen</taggedValue>
               </appinfo>
             </annotation>
           </element>
