@@ -60,15 +60,15 @@ def sqFileProcess(fn,oGraph,replaceText="[rt]",replaceWith="?rt"):
             print(str(datetime.datetime.now()) + ' Konverteringsspørring : ', qName)
             query = prefix + '\n' + queryList[i][1]
             #Tilpasser query til input fra script
-            #print(replaceText)
-            #print(replaceWith)
             queryStartTime = datetime.datetime.now()
             query=query.replace(replaceText,replaceWith)
             print(query)
             # Kjører spørring og lager ny graf som resultat
 
             q_res=oGraph.query(query)
-            newg = Graph().parse(data=q_res.serialize(format='xml'))
+            #for r in q_res:
+            #    print(r)
+            newg = Graph().parse(data=q_res.serialize(format='turtle'))
             print(str(datetime.datetime.now()) + ' Antall genererte tripler: ',len(newg))
             res_g += newg
             # cntRes = 0
