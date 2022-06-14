@@ -1,6 +1,6 @@
 'Datakatalogversjon
-const FC_version = "2.28"
-const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V228.mdb"
+const FC_version = "2.29"
+const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V229.mdb"
 const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
 
 const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
@@ -16,8 +16,11 @@ const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http:/
 
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
-const scProject = "SC_NVDB.eap"
-const scTemplate = "SC_Core.eap"
+const scProject = "SC_NVDB.qea"
+const scTemplate = "SC_Core.qea"
+
+const JRE ="JAVA"
+const ShCh ="C:\Pogramfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"
 
 'GUID-er for pakker mm
 const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML

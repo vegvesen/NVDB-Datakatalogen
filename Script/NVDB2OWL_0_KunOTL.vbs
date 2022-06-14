@@ -49,13 +49,10 @@ Sub main
 	objOTLFile.WriteText strTemplate & vbCrLf
 	
 	dim filetime
-	filetime = replace(Now, ".","")
-	filetime = replace(filetime, ":","")
-	filetime = replace(filetime, " ","_")
-	'objOTLFile.SaveToFile owlPath & "\" & filetime & "_nvdb-owl.ttl", 2
+	'Repository.WriteOutput "Script", Now & " Skriver innledning til fil " & owlPath & "core\heading_nvdb-owl.ttl", 0 
+	'objOTLFile.SaveToFile owlPath & "core\heading_nvdb-owl.ttl", 2
 	'objOTLFile.Close
 	'Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
-	'Repository.EnsureOutputVisible "Script"
 	'exit sub
 
 	dim strDjVOT

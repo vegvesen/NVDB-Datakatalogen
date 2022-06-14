@@ -70,7 +70,7 @@ Sub main
 	objOTLFile.WriteText "<https://ontologi.atlas.vegvesen.no/nvdb/category/nvdb-kategorier> a owl:Ontology ;" & vbCrLf
 	objOTLFile.WriteText "	owl:imports <http://www.w3.org/2004/02/skos/core> ;" & vbCrLf
 	objOTLFile.WriteText "	owl:imports <https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl> ;" & vbCrLf
-	objOTLFile.WriteText "	owl:versionInfo ""2.23"" ;" & vbCrLf
+	objOTLFile.WriteText "	owl:versionInfo """ & FC_Version & """ ;" & vbCrLf
 	objOTLFile.WriteText "	dc:creator :SVV ;" & vbCrLf
 	objOTLFile.WriteText "	dc:date """ & left(Now,10) & """ ;" & vbCrLf
 	objOTLFile.WriteText "	dc:description ""Ontologi for kategorisering av NVDB Datakatalogen""@no ;" & vbCrLf

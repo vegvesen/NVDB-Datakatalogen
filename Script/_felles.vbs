@@ -111,7 +111,10 @@ function connect2models()
 	Repository.WriteOutput "Script", Now, 0 
 	Repository.WriteOutput "Script", Now & " Kobler til Datakatalog-accessdatabasen",0
     Dim strDakatAccessConnect
-    strDakatAccessConnect = "Driver={Microsoft Access Driver (*.mdb)};" & "Dbq=" & FC_db & ";DefaultDir=;" & "Uid=Admin;Pwd=;"
+    'strDakatAccessConnect = "Driver={Microsoft Access Driver (*.mdb)};" & "Dbq=" & FC_db & ";DefaultDir=;" & "Uid=Admin;Pwd=;"
+    'strDakatAccessConnect = "Driver={Microsoft Access Driver (*.mdb)};" & "Dbq=" & FC_db & ";DefaultDir=;" & "Uid=Admin;Pwd=;"
+    strDakatAccessConnect = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};" & "Dbq=" & FC_db & ";DefaultDir=;" & "Uid=Admin;Pwd=;"	
+	Repository.WriteOutput "Script", Now & " Databasekobling: " & strDakatAccessConnect,0
 	set dbDakat = CreateObject("ADODB.Connection")
     dbDakat.Open strDakatAccessConnect
 	

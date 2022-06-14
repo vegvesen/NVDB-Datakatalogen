@@ -223,8 +223,7 @@ sub runSC
 	'Kjører ShapeChange, venter på fullføring
 	Repository.WriteOutput "Script", Now & " Kjører ShapeChange...", 0 
 	dim strLine
-	strLine = """C:\Program Files (x86)\AdoptOpenJDK\jre-14.0.1.7-hotspot\bin\java.exe"" -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar "
-	strLine = strLine & """C:\DATA\Programvare\ShapeChange-2.9.1\ShapeChange-2.9.1.jar"" -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
+	strLine = """" & JRE & " -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar " & ShCc & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
 	dim shell
 	set shell=createobject("wscript.shell") 
 	shell.run strLine, 1, true
