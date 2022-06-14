@@ -1,7 +1,7 @@
 #Globale parametere
-featuretypeid = 174
+featuretypeid = 105
 areaname = 'hamar'
-lstKnr=[3403,3438]   #range(3403,3404)
+lstKnr=[3403]   #range(3403,3404)
 oneFile = False
 
 
