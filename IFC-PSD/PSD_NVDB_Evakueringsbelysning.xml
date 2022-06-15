@@ -2,66 +2,80 @@
 <PropertySetDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xsi:noNamespaceSchemaLocation="http://standards.buildingsmart.org/IFC/RELEASE/IFC4/FINAL/PSD/PSD_IFC4.xsd"> 
   <IfcVersion/>
-  <Name>Pset_NVDB_Vegbom</Name>
-  <Definition>Fysisk hinder for å kunne stenge en veg.  F.eks i forbindelse med rasfare, tunnel, høgfjell etc.</Definition>
+  <Name>Pset_NVDB_Evakueringsbelysning</Name>
+  <Definition>En rekke med lys satt opp i den hensikt å lede trafikkanter ut av en tunnel i en nødsituasjon. Evakueringslysene skal normalt være festet på tunnelvegg i bestemt høyde over veg og med fast innbyrdes avstand Det forutsettes at de enkelt evakueringslysene som inngår er av samme type. (Vegobjekttype ble tom v 2.28 benevnt "Rømningslysstrekning")</Definition>
   <Applicability/>
   <ApplicableClasses/>
   <ApplicableTypeValue/>
   <PropertyDefs>
     <PropertyDef>
-      <Name>bruksområde</Name>
-      <Definition>Angir hva vegobjektet brukes til, hvilken funksjon det har.</Definition>
+      <Name>typeLyskilde</Name>
+      <Definition>Angir type lyskilde.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Bruksområde">
-                <EnumItem>Høyfjellsovergang</EnumItem>
-                <EnumItem>Tunnel</EnumItem>
-                <EnumItem>Vanlig vegstrekning</EnumItem>
-                <EnumItem>Bomstasjon</EnumItem>
-                <EnumItem>Ferjekai</EnumItem>
-                <EnumItem>Gang-/sykkelveg, sluse</EnumItem>
-                <EnumItem>Jernbane</EnumItem>
-                <EnumItem>Annet bruksområde</EnumItem>
+             <EnumList name="PEnum_Evakueringsbelysning_TypeLyskilde">
+                <EnumItem>LED-armatur</EnumItem>
+                <EnumItem>LED-list</EnumItem>
+                <EnumItem>Lysstoffrør</EnumItem>
+                <EnumItem>Glødelamper</EnumItem>
              </EnumList>
          </TypePropertyEnumeratedValue>
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>type</Name>
-      <Definition>Angir hvilken type vegobjektet er av.</Definition>
+      <Name>antallEvakueringslyspunkt</Name>
+      <Definition>Angir hvor mange evakueringslyspunkt som inngår i evakueringsbelysningen. Der det er flere lyskilder på samme oppsetting telles det som ett evakueringslyspunkt. Dersom Type lyskilde = LED-list gis antall=1.</Definition>
+      <PropertyType>
+         <TypePropertySingleValue>
+             <DataType type="IfcInteger"/>
+         </TypePropertySingleValue>
+      </PropertyType>
+    </PropertyDef>
+    <PropertyDef>
+      <Name>antallLyskilderIPunkt</Name>
+      <Definition>Angir hvor mange lyskilder (pærer) det er per evakueringslyspunkt.</Definition>
+      <PropertyType>
+         <TypePropertySingleValue>
+             <DataType type="IfcInteger"/>
+         </TypePropertySingleValue>
+      </PropertyType>
+    </PropertyDef>
+    <PropertyDef>
+      <Name>avstandInnbyrdes</Name>
+      <Definition>Angir innbyrdes avstand mellom de enkelte evakueringslyspunktene som ligger etter hverandre i rekke.</Definition>
+      <PropertyType>
+         <TypePropertySingleValue>
+             <DataType type="IfcInteger"/>
+         </TypePropertySingleValue>
+      </PropertyType>
+    </PropertyDef>
+    <PropertyDef>
+      <Name>montasje</Name>
+      <Definition>Angir hvor lys er montert.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Type">
-                <EnumItem>Heve-/senkebom</EnumItem>
-                <EnumItem>Svingbom</EnumItem>
-                <EnumItem>Stolpe/pullert/kjegle</EnumItem>
-                <EnumItem>Rørgelender</EnumItem>
-                <EnumItem>Steinblokk</EnumItem>
-                <EnumItem>New jersey</EnumItem>
-                <EnumItem>Annen type vegbom/sperring</EnumItem>
+             <EnumList name="PEnum_Evakueringsbelysning_Montasje">
+                <EnumItem>På tunnelvegg</EnumItem>
+                <EnumItem>I håndlist</EnumItem>
              </EnumList>
          </TypePropertyEnumeratedValue>
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>materialtype</Name>
-      <Definition>Angir materialtype.</Definition>
+      <Name>dynamisk</Name>
+      <Definition>.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Materialtype">
-                <EnumItem>Stål</EnumItem>
-                <EnumItem>Aluminium</EnumItem>
-                <EnumItem>Tre</EnumItem>
-                <EnumItem>Plast</EnumItem>
-                <EnumItem>Betong</EnumItem>
-                <EnumItem>Stein</EnumItem>
+             <EnumList name="PEnum_Evakueringsbelysning_Dynamisk">
+                <EnumItem>Ja</EnumItem>
+                <EnumItem>Nei</EnumItem>
              </EnumList>
          </TypePropertyEnumeratedValue>
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>stedsnavn</Name>
-      <Definition>Gir offisielt stedsnavn der vegbommen står.</Definition>
+      <Name>farge</Name>
+      <Definition>Farge på lys.</Definition>
       <PropertyType>
          <TypePropertySingleValue>
              <DataType type="IfcText"/>
@@ -69,50 +83,11 @@
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>typeÅpningLukking</Name>
-      <Definition>Angir hvordan åpning/lukking foregår.</Definition>
-      <PropertyType>
-         <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_TypeÅpningLukking">
-                <EnumItem>Automatisert/elektrisk</EnumItem>
-                <EnumItem>Manuell</EnumItem>
-                <EnumItem>Ikke åpne-/lukkemulighet</EnumItem>
-             </EnumList>
-         </TypePropertyEnumeratedValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
-      <Name>markeringsskiltPåmontert</Name>
-      <Definition>Angir om det er montert markeringsskilt på vegbom/stengsel.</Definition>
-      <PropertyType>
-         <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_MarkeringsskiltPåmontert">
-                <EnumItem>Ja</EnumItem>
-                <EnumItem>Nei</EnumItem>
-                <EnumItem>Ikke relevant</EnumItem>
-             </EnumList>
-         </TypePropertyEnumeratedValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
-      <Name>varselblinkPåmontert</Name>
-      <Definition>Angir om det er montert varselblink på vegbom/stengsel.</Definition>
-      <PropertyType>
-         <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_VarselblinkPåmontert">
-                <EnumItem>Ja</EnumItem>
-                <EnumItem>Nei</EnumItem>
-                <EnumItem>Ikke relevant</EnumItem>
-             </EnumList>
-         </TypePropertyEnumeratedValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
       <Name>fjernstyring</Name>
-      <Definition>Angir om vegobjektet kan fjernstyres.</Definition>
+      <Definition>Angir om evakueringslys kan fjernstyres.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Fjernstyring">
+             <EnumList name="PEnum_Evakueringsbelysning_Fjernstyring">
                 <EnumItem>Ja</EnumItem>
                 <EnumItem>Nei</EnumItem>
              </EnumList>
@@ -120,8 +95,17 @@
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>lengde</Name>
-      <Definition>Angir lengde av vegobjekt. Ikke relevant for alle typer. For delte bommer angis lenge av enkelt-bom.</Definition>
+      <Name>effekt</Name>
+      <Definition>Angir effekt for ett evakueringslyspunkt. For LED-list angis effekt per 25 meter.</Definition>
+      <PropertyType>
+         <TypePropertySingleValue>
+             <DataType type="IfcInteger"/>
+         </TypePropertySingleValue>
+      </PropertyType>
+    </PropertyDef>
+    <PropertyDef>
+      <Name>driftsstrøm</Name>
+      <Definition>Angir driftsstrøm for en lyskilde ved full lysstyrke.</Definition>
       <PropertyType>
          <TypePropertySingleValue>
              <DataType type="IfcReal"/>
@@ -129,13 +113,16 @@
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>fjernesIVintersesong</Name>
-      <Definition>Angir hvorvidt vegbom/stengsel fjernes i vintersesong, eller settes ut av drift i vintersesong.</Definition>
+      <Name>spenning</Name>
+      <Definition>Driftspenning for lysene.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_FjernesIVintersesong">
-                <EnumItem>Ja</EnumItem>
-                <EnumItem>Nei</EnumItem>
+             <EnumList name="PEnum_Evakueringsbelysning_Spenning">
+                <EnumItem>12</EnumItem>
+                <EnumItem>24</EnumItem>
+                <EnumItem>230</EnumItem>
+                <EnumItem>400</EnumItem>
+                <EnumItem>690</EnumItem>
              </EnumList>
          </TypePropertyEnumeratedValue>
       </PropertyType>
@@ -150,26 +137,8 @@
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
-      <Name>driftsmerking</Name>
-      <Definition>Identitet/navn på forekomst, normalt synlig på stedet.</Definition>
-      <PropertyType>
-         <TypePropertySingleValue>
-             <DataType type="IfcText"/>
-         </TypePropertySingleValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
-      <Name>SCADA_Merking</Name>
-      <Definition>Driftsmerking rettet spesifikt mot systemet SCADA.</Definition>
-      <PropertyType>
-         <TypePropertySingleValue>
-             <DataType type="IfcText"/>
-         </TypePropertySingleValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
-      <Name>produsent</Name>
-      <Definition>Angir navn på produsent/fabrikant av vegobjektet.</Definition>
+      <Name>produsent_Lysarmatur</Name>
+      <Definition>Angir navn på produsent/fabrikant av de enkelte lysarmaturene.</Definition>
       <PropertyType>
          <TypePropertySingleValue>
              <DataType type="IfcText"/>
@@ -178,7 +147,7 @@
     </PropertyDef>
     <PropertyDef>
       <Name>produktnavn</Name>
-      <Definition>Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</Definition>
+      <Definition>Angir produktnavn for lysarmatur. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og evt. serienummer.</Definition>
       <PropertyType>
          <TypePropertySingleValue>
              <DataType type="IfcText"/>
@@ -188,15 +157,6 @@
     <PropertyDef>
       <Name>tilleggsinformasjon</Name>
       <Definition>Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</Definition>
-      <PropertyType>
-         <TypePropertySingleValue>
-             <DataType type="IfcText"/>
-         </TypePropertySingleValue>
-      </PropertyType>
-    </PropertyDef>
-    <PropertyDef>
-      <Name>arkivreferanse</Name>
-      <Definition>Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem. Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument.</Definition>
       <PropertyType>
          <TypePropertySingleValue>
              <DataType type="IfcText"/>
@@ -226,7 +186,7 @@
       <Definition>Angir hvem som er eier av vegobjektet.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Eier">
+             <EnumList name="PEnum_Evakueringsbelysning_Eier">
                 <EnumItem>Stat, Statens vegvesen</EnumItem>
                 <EnumItem>Stat, Nye Veier</EnumItem>
                 <EnumItem>Fylkeskommune</EnumItem>
@@ -238,11 +198,20 @@
       </PropertyType>
     </PropertyDef>
     <PropertyDef>
+      <Name>eier_Navn</Name>
+      <Definition>Navn på eier av vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</Definition>
+      <PropertyType>
+         <TypePropertySingleValue>
+             <DataType type="IfcText"/>
+         </TypePropertySingleValue>
+      </PropertyType>
+    </PropertyDef>
+    <PropertyDef>
       <Name>vedlikeholdsansvarlig</Name>
       <Definition>Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</Definition>
       <PropertyType>
          <TypePropertyEnumeratedValue>
-             <EnumList name="PEnum_Vegbom_Vedlikeholdsansvarlig">
+             <EnumList name="PEnum_Evakueringsbelysning_Vedlikeholdsansvarlig">
                 <EnumItem>Statens vegvesen</EnumItem>
                 <EnumItem>Nye Veier</EnumItem>
                 <EnumItem>Fylkeskommune</EnumItem>
