@@ -18,8 +18,8 @@
                                                                      <https://ontologi.atlas.vegvesen.no/nvdb/core/iso-19148.ttl> ;
                                                          dc:date "2020-06-19" ;
                                                          dc:description "Ontologi for NVDB Datakatalogen"@no ;
- 													 	 owl:versionInfo "n.mm" ;
-                                                         dcterms:title "NVDB Datakatalogen"@no .
+                                                         dcterms:title "NVDB Datakatalogen"@no ;
+                                                         owl:versionInfo "n.mm" .
 
 #################################################################
 #    Annotation properties
@@ -184,6 +184,50 @@ dc:description rdf:type owl:AnnotationProperty .
 #    Data properties
 #################################################################
 
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#Identifier
+:Identifier rdf:type owl:DatatypeProperty .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#OID
+:OID rdf:type owl:DatatypeProperty ;
+     rdfs:subPropertyOf :Identifier ;
+     rdfs:range xsd:string .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#beginLifespanVersion
+:beginLifespanVersion rdf:type owl:DatatypeProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain :Vegobjekttype ;
+                      rdfs:range xsd:dateTime ;
+                      rdfs:label "beginLifespanVersion"@en ;
+                      skos:definition "Date and time at which this version of the spatial object was inserted or changed in the spatial data set. "@en .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#endLifespanVersion
+:endLifespanVersion rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Vegobjekttype ;
+                    rdfs:range xsd:dateTime ;
+                    rdfs:label "endLifespanVersion"@en ;
+                    skos:definition "Date and time at which this version of the spatial object was superseded or retired in the spatial data set. "@en .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#validFrom
+:validFrom rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Vegobjekttype ;
+           rdfs:range xsd:date ;
+           rdfs:label "validFrom"@en ;
+           skos:definition "The date from which this road feature is valid and in use "@en .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#validTo
+:validTo rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Vegobjekttype ;
+         rdfs:range xsd:date ;
+         rdfs:label "validTo"@en ;
+         skos:definition "The date from which this road feature is no longer valid "@en .
+
+
 ###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#vot_d_properties
 :vot_d_properties rdf:type owl:DatatypeProperty ;
                   rdfs:label "Data property pr vegobjekttype"@no ;
@@ -335,7 +379,48 @@ sf:Polygon rdf:type owl:Class .
 :Vegobjekttype rdf:type owl:Class ;
                rdfs:subClassOf <http://def.isotc211.org/iso19109/2015/GeneralFeatureModel#AnyFeature> ,
                                gsp:Feature ,
-                               :NVDB_Rot ;
+                               :NVDB_Rot ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :beginLifespanVersion ;
+                                 owl:allValuesFrom xsd:dateTime
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :endLifespanVersion ;
+                                 owl:allValuesFrom xsd:dateTime
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :validFrom ;
+                                 owl:allValuesFrom xsd:date
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :validTo ;
+                                 owl:allValuesFrom xsd:date
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :OID ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange xsd:string
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :beginLifespanVersion ;
+                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange xsd:dateTime
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :endLifespanVersion ;
+                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange xsd:dateTime
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :validFrom ;
+                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange xsd:date
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :validTo ;
+                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onDataRange xsd:date
+                               ] ;
                owl:disjointWith :Vegobjekttypekategori ;
                rdfs:label "Vegobjekt" ;
                skos:definition "Rotklasse for alle vegobjekttyper fra NVDB"@no .
