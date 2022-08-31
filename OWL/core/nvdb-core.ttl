@@ -143,6 +143,15 @@ dc:description rdf:type owl:AnnotationProperty .
        skos:definition "Angivelse av posisjon relativt til et  lineært objekt."@no .
 
 
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#lrretning
+:lrretning rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :vot_stedfesting ;
+           rdfs:domain :LineærPosisjon ;
+           rdfs:range :lrretningskode ;
+           rdfs:label "Retning"@no ;
+           skos:definition "Posisjonens retning i forhold til nettverkselementet sin retning"@no .
+
+
 ###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#område
 :område rdf:type owl:ObjectProperty ;
         rdfs:subPropertyOf :vot_stedfesting ;
@@ -209,6 +218,14 @@ dc:description rdf:type owl:AnnotationProperty .
                     rdfs:range xsd:dateTime ;
                     rdfs:label "endLifespanVersion"@en ;
                     skos:definition "Date and time at which this version of the spatial object was superseded or retired in the spatial data set. "@en .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#lravstandside
+:lravstandside rdf:type owl:DatatypeProperty ;
+               rdfs:domain :LineærPosisjon ;
+               rdfs:range xsd:double ;
+               rdfs:label "Avstand side"@no ;
+               skos:definition "Forskyvning til side for nettverkselementet. Positivt tall betyr høyre side, negativt tall betyr venstre side."@no .
 
 
 ###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#validFrom
@@ -327,7 +344,17 @@ sf:Polygon rdf:type owl:Class .
 ###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#LineærPosisjon
 :LineærPosisjon rdf:type owl:Class ;
                 rdfs:subClassOf <http://www.roadotl.eu/iso19148/def/LinearEventLocation> ,
-                                :Stedfesting ;
+                                :Stedfesting ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :lrretning ;
+                                  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :lrretningskode
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :lravstandside ;
+                                  owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:double
+                                ] ;
                 owl:disjointUnionOf ( :LineærPosisjonPunkt
                                       :LineærPosisjonStrekning
                                     ) ;
@@ -431,6 +458,30 @@ sf:Polygon rdf:type owl:Class .
                        rdfs:subClassOf :NVDB_Rot ;
                        rdfs:label "Vegobjekttypekategori"@no ;
                        skos:definition "Kategorisering av vegobjekttyper i NVDB"@no .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#lrretningskode
+:lrretningskode rdf:type owl:Class ;
+                rdfs:label "Retningskode"@no ;
+                skos:definition "Kodeliste for å angi retning i forrhold til nettverkselementets geometri."@no .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#lrretningmed
+:lrretningmed rdf:type owl:NamedIndividual ,
+                       :lrretningskode ;
+              rdfs:label "med"@no ;
+              skos:definition "Retning med geometrien"@no .
+
+
+###  https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl#lrretningmot
+:lrretningmot rdf:type owl:NamedIndividual ,
+                       :lrretningskode ;
+              rdfs:label "mot"@no ;
+              skos:definition "Retning mot geometrien"@no .
 
 
 #################################################################
