@@ -1,26 +1,28 @@
 'Datakatalogversjon
 const FC_version = "2.29"
 const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V229.mdb"
-const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
 
+'Namespace
+const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  
+
+'SOSI Subversion
 const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
 const strSOSIVersjon = "4.5"
 
+'Stier til de områder for lagring for ulike delene av prosessen
 const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
 const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\"
 const ifcPAth = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\IFC-PSD\"
 
-const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  '"http://rdf.vegdata.no/nvdb/nvdb-owl"
-
-const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
-
+'ShapeChange
+const JRE ="JAVA"
+const ShCh ="C:\Programfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"
 const scProject = "SC_NVDB.qea"
 const scTemplate = "SC_Core.qea"
 
-const JRE ="JAVA"
-const ShCh ="C:\Pogramfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"
 
 'GUID-er for pakker mm
 const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML
@@ -43,6 +45,7 @@ const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
 '***************************************************************************
 
 'Parametre for konvertering til SOSI - stort sett utgått pga nye script.
+const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
 const txtSOSIpakke = "NVDB Dokumentasjon"
 const txtShortName = ""

@@ -219,16 +219,7 @@ sub roleTags(e)
 	next
 end sub
 
-sub runSC
-	'Kjører ShapeChange, venter på fullføring
-	Repository.WriteOutput "Script", Now & " Kjører ShapeChange...", 0 
-	dim strLine
-	strLine = """" & JRE & " -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar " & ShCc & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
-	dim shell
-	set shell=createobject("wscript.shell") 
-	shell.run strLine, 1, true
-	set shell=nothing	
-end sub
+
 
 sub movefile(strFileName, strOldPath, strNewPath)
 'Flytter angitt fil fra et område til et annet
@@ -311,7 +302,8 @@ sub Fellesskjema()
 			next
 		
 			'Kjører ShapeChange, venter på fullføring
-			runSC							
+			runSC		
+				
 			'Flytter SOSIFelles.xsd og abstraktNVDB.xsd til riktig område
 			moveFile "SOSIFelles.xsd", scPath & "\XSD\INPUT\",gmlPath & "\"
 			moveFile "AbstraktNVDB.xsd", scPath & "\XSD\INPUT\",gmlPath & "\"	
@@ -321,7 +313,7 @@ sub Fellesskjema()
 		scRep.CloseFile
 		scRep.Exit
 		set scRep = nothing	
-		
+
 		'Lag kopi av SC-prosjektet, for bruk som mal for prosessen med enkeltvise skjema.
 		'Sletter eventuelt gammel fil
 		If objFS.FileExists(scPath & "\" & scMal) then objFS.DeleteFile scPath & "\" & scMal, true

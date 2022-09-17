@@ -138,6 +138,19 @@ function connect2models()
 	'dbDakat.Close
 end function
 
+sub runSC
+	'Kjører ShapeChange, venter på fullføring
+	dim strLine
+	strLine = JRE & " -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar " & ShCh & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
+	dim shell
+	Repository.WriteOutput "Script", Now & " Kjører ShapeChange...", 0 
+	Repository.WriteOutput "Script", Now & " " & strLine, 0 
+	set shell=createobject("wscript.shell") 
+	shell.run strLine, 1, true
+	set shell=nothing	
+    Repository.WriteOutput "Script", Now & " Kjørte ShapeChange!", 0 
+end sub
+
 Sub hideAttributes(eDobj)
 	'Hide attributes for a diagramobject
 	Dim strDOS

@@ -68,7 +68,8 @@ sub main
 			katPackage.StereotypeEx="applicationSchema"
 			katPackage.Update
 			set element = katPackage.Element
-			element.Alias = rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value
+			'set tagVal = element.TaggedValues.AddNew("xsdDocument",rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value)
+			element.Alias = VK
 			If rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value <> "" then element.Notes = rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value
 			element.Update
 			

@@ -33,15 +33,9 @@ OWL-Ontologi for NVDB Datakatalogen, avleda fra SOSI-UML-modellen.
 
 ### [IFC-PSD](https://github.com/vegvesen/NVDB-Datakatalogen/tree/master/IFC-PSD)
 
-IFC PropertySetDefinitions i XML-format, i henhold til buildingSMART sitt XML-skjema
-
-
-
-
+IFC PropertySetDefinitions i XML-format, i henhold til buildingSMART sitt XML-skjema.
 
 ------
-
-
 
 ### Andre mapper:
 

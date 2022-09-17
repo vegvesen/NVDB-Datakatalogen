@@ -33,8 +33,22 @@ sub main
 	for each katPackage in thePackage.Packages
 		Repository.WriteOutput "Script", Now & " Pakke for kategori: " & katPackage.Name & " (" & katPackage.Alias & ")", 0 
 
-		dim strXMI
-		strXMI = sosiPath & "\" & katPackage.Alias & ".xml"
+		'Finner filnavn
+		dim strName, strXMI, tagFound
+		tagFound = false
+		for each tagVal in katPackage.Element.TaggedValues
+			if tagVal.Name = "xsdDocument" then 
+				strName = Replace(tagVal.Value, ".xsd","")
+				strXMI = sosiPath & "\" & strName & ".xml"
+				Repository.WriteOutput "Script", Now & " Fant tagged value " & tagVal.Name & ", XMI-filnavn settes til " & strXMI, 0 
+				tagFound = true
+			end if
+		next
+		if not tagFound then 
+			Repository.WriteOutput "Script", Now & " Mangler tag " & tName, 0 
+			exit sub
+		end if
+
 
 		'Eksporter XMI-fil
 		set pI = Repository.GetProjectInterface()
@@ -97,7 +111,7 @@ sub main
 		dim strFolder
 		strFolder = gmlPath & "\PS" 
 		if not objFS.FolderExists(strFolder) then objFS.CreateFolder strFolder
-		strFolder = strFolder & "\" & katPackage.Alias
+		strFolder = strFolder & "\" & strName
 		if not objFS.FolderExists(strFolder) then objFS.CreateFolder strFolder
 		strFolder = strFolder & "\" & FC_version
 				

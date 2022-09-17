@@ -426,6 +426,8 @@ Sub main
 						'Håndtering av "fnutter" og linjeskift i definisjonen
 						definition = replace(eAttributt.Notes, """","\""")
 						definition = replace(definition, vbCrLf," ")	
+						definition = replace(definition, vbCr," ")	
+						definition = replace(definition, vbLf," ")	
 						'Repository.WriteOutput "Endringer", Now & " Kodeverdi: " & eAttributt.Name & " Definisjon: " & definition, 0 
 						objOTLFile.WriteText "         skos:definition """ & definition & """@no ." & vbCrLf
 						objOTLFile.WriteText vbCrLf
