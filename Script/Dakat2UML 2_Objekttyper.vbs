@@ -4,7 +4,17 @@ option explicit
 !INC NVDB._felles
 !INC NVDB._parametre
 
-'Oppdaterer egenskaper på en objekttype i EA ut i fra Dakat
+
+' Denne filen inneholder funksjoner for oppdatering av klassene for vegobjekttyper i EA-prosjektet. 
+'
+' Script Name: NVDB til UML.Objekttyper
+' Author: Knut Jetlund
+' Purpose: Oppdatering av objekttyper
+' Date: 20220919
+'
+' **************************************************************
+
+'Oppdaterer egenskaper på en enkelt vegobjekttype i EA ut i fra Accessbasen
 Sub updateProperties_Objekttyper()
 
 	'Dim response
@@ -34,13 +44,14 @@ Sub updateProperties_Objekttyper()
 	pkOT_Sub.Element.Status = "Implemented"
 	pkOT_Sub.Element.Update()
 		
-	'Fjerner alle tagged values og legger til på nytt
+	'Fjerner alle eksisterende tagged values 
 	For idxT = 0 To element.TaggedValues.Count - 1
 		element.TaggedValues.DeleteAt idxT, False
 	Next
 	For idxT = 0 To pkOT_Sub.Element.TaggedValues.Count - 1
 		pkOT_Sub.Element.TaggedValues.DeleteAt idxT, False
 	Next
+	'Legg til informasjon i nye tagged values
 	set tagVal = element.TaggedValues.AddNew("ID_VOBJ_TYPE", rsObjekttyper.Fields("ID_VOBJ_TYPE").Value)
 	tagVal.Update()
 	set tagVal = element.TaggedValues.AddNew("NAVN_VOBJ_TYPE", rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value)
@@ -77,8 +88,8 @@ Sub updateProperties_Objekttyper()
 	
 End Sub
 
+'Oppdaterer egenskaper på alle vegobjekttyper i EA ut i fra Accessbasen
 sub updateObjekttyper()
-'Oppdatering av vegobjekttyper
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
 	set rsObjekttyper = CreateObject("ADODB.Recordset")
@@ -87,20 +98,21 @@ sub updateObjekttyper()
     rsObjekttyper.MoveLast()
     Repository.WriteOutput "Script", Now & " Oppdaterer vegobjekttyper og legger til nye", 0 
 
-	'Kjører gjennom alle registrerte objekttyper i EA. Oppdaterer eksisterende, sletter utgåtte
+	'Kjører gjennom alle pakker for vegobjekttyper i EA. Oppdaterer eksisterende pakker og objekttyper, sletter utgåtte
 	id = 0
 	Set lstAlias = CreateObject("System.Collections.ArrayList")
 	For idxP = 0 To pkObjekttyper.Packages.Count - 1
 		set pkOT_Sub = pkObjekttyper.Packages.GetAt(idxP)
 		id = pkOT_Sub.Alias
-		'Tester om objekttypen finnes i Dakat
+		'Tester om objekttypen denne pakken representerer finnes i Dakat
 		rsObjekttyper.MoveFirst()
 		rsObjekttyper.Find("ID_VOBJ_TYPE=" & id)
 		If not rsObjekttyper.EOF Then
-			'Objekttypen eksisterer i Dakat, finner og oppdaterer selve objekttypen i EA
+			'Objekttypen eksisterer i Dakat --> Oppdater pakke og objekttype
+			'Oppdaterer pakkenavnet
 			pkOT_Sub.Name = rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value
 			pkOT_Sub.Update()
-			'Søker etter selve objekttypen
+			'Søker etter selve objekttypen i pakken
 			set element = getElementByAlias(pkOT_Sub, id)
 			if not element is nothing then
 				'Oppdaterer objekttypen
@@ -129,15 +141,14 @@ sub updateObjekttyper()
 	Do Until rsObjekttyper.EOF
 		id = cstr(rsObjekttyper.Fields("ID_VOBJ_TYPE").Value)
 		If Not lstAlias.Contains(id) Then
-			'Pakke med angitt alias finnes ikke i modellen
+			'Pakke med angitt alias finnes ikke i modellen. Må legges til.
 			Repository.WriteOutput "Endringer", Now & " Lager ny vegobjekttype: " & rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value & " (" & rsObjekttyper.Fields("ID_VOBJ_TYPE").Value & ")",0
+			'Legger til pakke som representerer objekttypen
 			set pkOT_Sub = pkObjekttyper.Packages.AddNew(rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value, "Package")
 			pkOT_Sub.Update()
 			pkOT_Sub.Element.Alias = rsObjekttyper.Fields("ID_VOBJ_TYPE").Value
 			pkOT_Sub.Update()
-
-			'Repository.WriteOutput "Endringer", Now & " Setter opp versjonshåndtering for " & pkOT_Sub.Name,0
-			'pkOT_Sub.VersionControlAdd "Datakatalogen", "Vegobjekttyper\" & pkOT_Sub.Alias & ".xml", "Initiell versjonering", True
+			'Legger til selve objekttypen
 			set	element = pkOT_Sub.Elements.AddNew(rsObjekttyper.Fields("NAVN_VOBJ_TYPE").Value, "Class")
 			element.Update()
 			updateProperties_Objekttyper()
@@ -147,9 +158,8 @@ sub updateObjekttyper()
 		rsObjekttyper.MoveNext()
 	Loop
 
-	'Sortering av pakker....
+	'Alfabetisk sortering av pakker, slik at nye eller omdøpte pakker havner på riktig plass i trestrukturen
 	Repository.WriteOutput "Script", Now & " Sorterer pakker etter navn, bygger liste...",0
-
 	pkObjekttyper.Packages.Refresh()
 	dim lstPck
 	set lstPck = CreateObject("System.Collections.Sortedlist")
@@ -157,7 +167,6 @@ sub updateObjekttyper()
 		set pkOT_Sub = pkObjekttyper.Packages.GetAt(idxP)
 		lstPck.Add pkOT_Sub.Name, pkOT_Sub.PackageGUID
 	Next 
-
 	dim i
 	for i = 0 To lstPck.Count - 1
 		set pkOT_Sub = Repository.GetPackageByGuid(lstPck.GetByIndex(i))

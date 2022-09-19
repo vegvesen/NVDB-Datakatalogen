@@ -1,5 +1,13 @@
 !INC NVDB._parametre
 
+' Denne filen inneholder generelle, globale variabler og generelle funksjoner som brukes i flere av scriptene
+'
+' Script Name: NVDB._felles
+' Author: Knut Jetlund
+' Purpose: Felles variabler og funksjoner
+' Date: 20220919
+'
+
 ' **************************************************************
 'Generelle, globale variabler som benyttes av flere av scriptene
 dim ePIF as EA.Project

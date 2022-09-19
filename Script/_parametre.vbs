@@ -1,3 +1,13 @@
+
+' Denne filen inneholder felles parametre som brukes i flere script
+'
+' Script Name: NVDB._parametre
+' Author: Knut Jetlund
+' Purpose: Felles parametre 
+' Date: 20220919
+'
+
+
 'Datakatalogversjon. Må oppdateres ved nye versjoner
 const FC_version = "2.29"
 const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V229.mdb"

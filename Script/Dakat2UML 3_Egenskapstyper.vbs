@@ -4,7 +4,17 @@ option explicit
 !INC NVDB._felles
 !INC NVDB._parametre
 
-'Oppdaterer egenskaper på egenskaper (egenskapstyper) i EA ut i fra Dakat
+
+' Denne filen inneholder funksjoner for oppdatering av attributter (egenskapstyper) for vegobjekttyper i EA-prosjektet. 
+'
+' Script Name: NVDB til UML.Egenskapstyper
+' Author: Knut Jetlund
+' Purpose: Oppdatering av egenskapstyper
+' Date: 20220919
+'
+' **************************************************************
+
+'Oppdaterer egenskaper (properties) på en enkelt egenskapstype (attributt) i EA ut i fra Dakat
 Sub updateProperties_Egenskapstyper()
 
 	Dim idxDataType 
@@ -48,7 +58,7 @@ Sub updateProperties_Egenskapstyper()
 	If Not IsNull(rsEgenskapstyper.Fields("NR_EGENSKAPSTYPE").Value) Then eAttributt.Pos = rsEgenskapstyper.Fields("NR_EGENSKAPSTYPE").Value
 	eAttributt.Update()
 
-	'Fjerner alle tagged values og legger til på nytt
+	'Fjerner alle eksisterende tagged values og legger til på nytt
 	For idxT = 0 To eAttributt.TaggedValues.Count - 1
 		eAttributt.TaggedValues.DeleteAt idxT, False
 	Next 
@@ -111,34 +121,35 @@ Sub updateProperties_Egenskapstyper()
 	eAttributt.TaggedValues.Refresh()
 End Sub
 
-
+'Oppdaterer egenskaper (properties) på alle egenskapstyper (attributter) for alle vegobjekttyper (klasser, objekttyper) i EA ut i fra Dakat
 sub updateEgenskapstyper()
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
-    'Koble til tabellen EGENSKAPSTYPE i Dakat-databasen
+    'Setter opp Recordset som kobles til tabellen EGENSKAPSTYPE i Dakat-databasen
 	set rsEgenskapstyper = CreateObject("ADODB.Recordset")
 	rsEgenskapstyper.Open "SELECT ENHET.navn_enhet, * FROM ENHET RIGHT JOIN EGENSKAPSTYPE ON ENHET.id_enhet = EGENSKAPSTYPE.ID_ENHET WHERE EGENSKAPSTYPE.NAVN_EGENSKAPSTYPE Not Like 'Utgår%'", dbDakat, 3, 1
 	rsEgenskapstyper.Filter = "Dato_fra_nvdb <> NULL AND ID_VEGOB_TYPE <> NULL"
 
-	'Kjører gjennom alle registrerte objekttyper og deres egenskapstyper (egenskaper) i EA, pakke for pakke
+	'Kjører gjennom alle registrerte objekttyper og deres egenskapstyper i EA, pakke for pakke
 	'Oppdaterer eksisterende, og sletter utgåtte
 	Set lstAlias = CreateObject("System.Collections.ArrayList")
 	For idxP = 0 To pkObjekttyper.Packages.Count - 1
 		set pkOT_Sub = pkObjekttyper.Packages.GetAt(idxP)
 		Repository.WriteOutput "Script", Now & " OPPDATERERER EGENSKAPSTYPER FOR VEGOBJEKTTYPEN " & UCase(pkOT_Sub.Name), 0
-		'Datakatalog-egenskapstyper for objekttypen
+		'Filtrerer recordset til aktive egenskapstyper for denne objekttypen
         rsEgenskapstyper.Filter = "Dato_fra_nvdb <> NULL AND ID_VEGOB_TYPE =" & pkOT_Sub.Alias
-        'Finner selve objekttypen i pakka
+        'Finner selve vegobjekttypen i pakka
 		set element = getElementByAlias(pkOT_Sub, pkOT_Sub.Alias)
         if not element is nothing then
-			'Fjerner alle constraints. Disse legges til på nytt fra egenskaper
+			'Fjerner alle constraints. Disse legges til på nytt fra egenskapstypene
 			Repository.WriteOutput "Script", Now & " Fjerner constraints", 0
 			For idxT = 0 To element.Constraints.Count - 1
 				element.Constraints.DeleteAt idxT, False
 			Next 
-			'Løkke for egenskapstyper
+			'Kjører gjennom alle egenskapstyper under vegobjekttypen i EA. Oppdaterer eksisterende, sletter utgåtte
 			For idxA = 0 To element.Attributes.Count - 1
 				set eAttributt = element.Attributes.GetAt(idxA)
+				'Søker etter egenskapstype med samme id som attributten sitt alias (Style)
 				If Not (rsEgenskapstyper.EOF And rsEgenskapstyper.BOF) Then
 					rsEgenskapstyper.MoveFirst()
 					rsEgenskapstyper.Find("ID_EGENSKAPSTYPE=" & eAttributt.Style)
@@ -161,7 +172,7 @@ sub updateEgenskapstyper()
                 Do Until rsEgenskapstyper.EOF
 					id = cstr(rsEgenskapstyper.Fields("ID_EGENSKAPSTYPE").Value)
                     If Not lstAlias.Contains(id) Then
-						'Attributt med angitt alias finnes ikke under objekttypen
+						'Attributt med angitt alias finnes ikke under objekttypen (dvs i listen over alias)
 						Repository.WriteOutput "Endringer", Now & " Lager egenskapstype: " & element.Name & "." & rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value & " (" & rsEgenskapstyper.Fields("ID_EGENSKAPSTYPE").Value & ")",0
 						set eAttributt = element.Attributes.AddNew(rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value, "")
 						eAttributt.Update()

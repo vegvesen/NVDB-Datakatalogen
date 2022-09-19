@@ -4,7 +4,17 @@ option explicit
 !INC NVDB._felles
 !INC NVDB._parametre
 
-'Oppdaterer egenskaper på en datatype i EA ut i fra Dakat
+
+' Denne filen inneholder funksjoner for oppdatering av NVDB-Datatyper i EA-prosjektet. 
+'
+' Script Name: NVDB til UML.Datatyper
+' Author: Knut Jetlund
+' Purpose: Oppdatering av datatyper
+' Date: 20220919
+'
+' **************************************************************
+
+'Prosedyre for å oppdaterer egenskaper på en enkelt datatype i EA ut i fra Accessdatabasen
 Sub updateProperties_Datatyper()
 	element.Name = rsDatatyper.Fields("NAVN_DATATYP").Value
 	element.Alias = rsDatatyper.Fields("ID_DATATYPE").Value
@@ -18,18 +28,18 @@ Sub updateProperties_Datatyper()
 	element.Version = FC_version
 	element.Modified = Now
 	element.Update()
-	'Fjerner alle tagged values og legger til på nytt
+	'Fjerner alle eksisterende tagged values 
 	For idxT = 0 To element.TaggedValues.Count - 1
 		element.TaggedValues.DeleteAt idxT, False
 	Next 
-	
+	'Legger til informasjon i nye tagged values
 	set tagVal = element.TaggedValues.AddNew("Kortnavn", rsDatatyper.Fields("Kortnavn").Value)
 	tagVal.Update()
 	element.TaggedValues.Refresh()
 	set tagVal = element.TaggedValues.AddNew("ID", rsDatatyper.Fields("ID_DATATYPE").Value)
 	tagVal.Update()
 	element.TaggedValues.Refresh()
-	'Konverteringstabell for SOSI-datatyper
+	'Legger til mapping til SOSI-datatype som tagged value
 	Select Case element.Alias
 		Case 1 : set tagVal = element.TaggedValues.AddNew("SOSI_type", "CharacterString")
 		Case 2 : set tagVal = element.TaggedValues.AddNew("SOSI_type", "Real")
@@ -45,6 +55,7 @@ Sub updateProperties_Datatyper()
 	element.TaggedValues.Refresh()
 End Sub
 
+'Prosedyre for å oppdatere alle datatyper i EA ut i fra Accessdatabasen
 sub updateDatatyper()
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
@@ -53,9 +64,11 @@ sub updateDatatyper()
 	Repository.WriteOutput "Script", Now & " Oppdaterer datatyper og legger til nye", 0 
 	Repository.WriteOutput "Script", Now & "", 0   
    
-	'Kjører gjennom alle registrerte datatyper i EA. Oppdaterer eksisterende, sletter utgåtte
+	'Kjører gjennom alle registrerte datatyper i EA og sammenligner med Accessbasen. Oppdaterer eksisterende, sletter utgåtte
 	id = 0
+	'Lager aliasliste for lagring av id-er i EA
 	Set lstAlias = CreateObject("System.Collections.ArrayList")
+	'Løkke for alle datatyper i EA
 	For idxe = 0 To pkDatatyper.Elements.Count - 1
         set element = pkDatatyper.Elements.GetAt(idxe)
         id = element.Alias
@@ -63,26 +76,27 @@ sub updateDatatyper()
         rsDatatyper.MoveFirst()
         rsDatatyper.Find("ID_DATATYPE=" & id)
         If Not rsDatatyper.EOF Then
-			'Oppdater datatypen
+			'Datatypen finnes - oppdater egenskaper
 			Repository.WriteOutput "Script", Now & " Oppdaterer datatype: " & rsDatatyper.Fields("NAVN_DATATYP").Value & " (" & rsDatatyper.Fields("ID_DATATYPE").Value & ")", 0 
             updateProperties_Datatyper()
             lstAlias.Add id
         Else
-            'Datatypen finnes ikke i Dakat
+            'Datatypen finnes ikke i Dakat - slettes
 			Repository.WriteOutput "Endringer", Now & " Sletter utgått datatype: " & element.Name & " (" & id & ")", 0 
             pkDatatyper.Elements.DeleteAt idxe, False
         End If
     Next 
 	
-	'Kjører gjennom alle registrerte datatyper i Dakat, og legger til manglende i EA
+	'Kjører gjennom alle registrerte datatyper i Dakat og sammenligner med EA. Legger til manglende i EA
     Repository.WriteOutput "Script", Now & " Kontroll av manglende datatyper",0
 	rsDatatyper.MoveFirst()
     Do Until rsDatatyper.EOF
 		id = cstr(rsDatatyper.Fields("ID_DATATYPE").Value)
         If lstAlias.Contains(id) Then
+			'Finnes i EA. Ingen endring. 
             Repository.WriteOutput "Script", Now & " Datatypen finnes i modellen: " & rsDatatyper.Fields("NAVN_DATATYP").Value & " (" & rsDatatyper.Fields("ID_DATATYPE").Value & ")",0
         Else
-            'Datatype med angitt alias finnes ikke i modellen
+            'Datatype med angitt alias finnes ikke i EA, må legges til.
             Repository.WriteOutput "Endringer", Now & " Lager datatype: " & rsDatatyper.Fields("NAVN_DATATYP").Value & " (" & rsDatatyper.Fields("ID_DATATYPE").Value & ")",0
             set element = pkDatatyper.Elements.AddNew(rsDatatyper.Fields("NAVN_DATATYP").Value, "Class")
             element.Update()
