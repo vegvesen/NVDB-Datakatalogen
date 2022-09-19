@@ -1,35 +1,35 @@
-'Datakatalogversjon
+'Datakatalogversjon. Må oppdateres ved nye versjoner
 const FC_version = "2.29"
 const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V229.mdb"
 
-'Namespace
+'Namespace for GML og OWL
 const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
 const owlURI = "https://ontologi.atlas.vegvesen.no/nvdb/core/nvdb-owl"  
 
-'SOSI Subversion
+'Sti til lokal klone av SOSI Subversion
 const svnSOSINVDBPath = "C:\DATA\Subversion\SOSI Modell\Andre viktige komponenter\NVDB\NVDB Datakatalogen versjon "
 const strSOSIVersjon = "4.5"
 
-'Stier til de områder for lagring for ulike delene av prosessen
+'Stier til områder for lagring for ulike delene av prosessen, på lokal GitHub-klone
 const scPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC"
 const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
 const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\"
 const ifcPAth = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\IFC-PSD\"
 
-'ShapeChange
+'Innstillinger for ShapeChange
 const JRE ="JAVA"
 const ShCh ="C:\Programfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"
 const scProject = "SC_NVDB.qea"
 const scTemplate = "SC_Core.qea"
 
-
-'GUID-er for pakker mm
+'***************************************************************************
+'GUID-er for pakker mm i EA-prosjektet
 const guidNVDBVegobjekttyper = "{393D4B7A-A14F-4466-B0AF-06C59CB157F8}" 'Pakken Vegobjekttyper i original Datakatalog-UML
 const guidSOSIDatakatalog = "{E7F57FAF-DB3F-4129-BB30-C903F137F599}" 'Pakken NVDB Datakatalog i SOSI-modellregister
 const guidAbstrakteKlasser = "{B758BAF9-4870-4811-9AEB-28366B6CAB4D}" 'Pakken _AbstrakteKlasser i NVDB Datakatalog-hovedpakken i SOSI-modellregister
 
-' GUID for SOSI-datatyper
+'GUID-er for SOSI-datatyper mm i EA-prosjektet
 const guidCharacterString = "{453EB6B1-D543-4f3d-BC53-E79283F6736C}"
 const guidInteger = "{992C4B6C-785C-48a4-81A2-5F957E9C8A6B}"
 const guidReal = "{281080FD-4373-4bf1-8F9E-606805BF9A0D}"
@@ -41,10 +41,13 @@ const guidFlate = "{46B26A69-F04C-4d11-B363-F3490340F5B7}"
 const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
 const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
 
-
 '***************************************************************************
 
-'Parametre for konvertering til SOSI - stort sett utgått pga nye script.
+
+
+'***************************************************************************
+'Eldre parametre for konvertering til SOSI - stort sett utgått pga nye script. Men har ikke tatt sjansen på å fjerne dem...
+'***************************************************************************
 const csvPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\CSV"
 
 const txtSOSIpakke = "NVDB Dokumentasjon"

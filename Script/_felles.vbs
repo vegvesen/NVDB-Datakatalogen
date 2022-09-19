@@ -1,6 +1,7 @@
 !INC NVDB._parametre
 
-'Generelle variabler
+' **************************************************************
+'Generelle, globale variabler som benyttes av flere av scriptene
 dim ePIF as EA.Project
 dim modDakat as EA.Package
 dim pkObjekttyper as EA.Package
@@ -72,8 +73,10 @@ Dim strStedfesting
 Dim retning 
 Dim kjorefelt
 
-'Generelle funksjoner
+' *******************************************************
+'Generelle funksjoner som benyttes av flere av scriptene
 
+'Denne funksjonen setter opp koblinger til de sentrale modellpakkene for NVDB og SOSI
 function connect2UMLmodels()
 	outputTabs
 	set ePIF = Repository.GetProjectInterface
@@ -90,18 +93,7 @@ function connect2UMLmodels()
 	end if
 end function
 
-function outputTabs()
-	'Faner for informasjon om kjøringen
-	Repository.EnsureOutputVisible "Script"
-	Repository.ClearOutput "Script"
-	Repository.CreateOutputTab "Error"
-	Repository.ClearOutput "Error"
-	Repository.CreateOutputTab "Endringer"
-	Repository.ClearOutput "Endringer"
-	Repository.CreateOutputTab "SOSI"
-	Repository.ClearOutput "SOSI"
-end function
-
+'Funksjon som setter opp kobling til Access-databasen og sentrale pakker i UML-modellen
 function connect2models()
 	'Setter opp kobling til modeller
 	outputTabs
@@ -131,15 +123,26 @@ function connect2models()
 	Repository.WriteOutput "Script", Now & " Pakke med SOSI Fellesegenskaper: " & pkSOSIFelles.Name,0   
 	'set pkNVDBSOSImain = modDakat.Packages.GetByName(strNVDBSOSIPakke)
 	'Repository.WriteOutput "Script", Now & " Pakke med NVDB-SOSI-modeller: " & pkNVDBSOSImain.Name,0
-
 	'set modSOSI = Repository.Models.GetByName(strSOSIModell)
 	'Repository.WriteOutput "Script", Now & " Hovedmodell for SOSI: " & modSOSI.Name,0
 	Repository.WriteOutput "Script", Now, 0 
 	'dbDakat.Close
 end function
 
+'Funksjon som åpner og tømmer faner for logging
+function outputTabs()
+	Repository.EnsureOutputVisible "Script"
+	Repository.ClearOutput "Script"
+	Repository.CreateOutputTab "Error"
+	Repository.ClearOutput "Error"
+	Repository.CreateOutputTab "Endringer"
+	Repository.ClearOutput "Endringer"
+	Repository.CreateOutputTab "SOSI"
+	Repository.ClearOutput "SOSI"
+end function
+
+'Funksjon som kjører ShapeChange og venter på at den skal fullføre
 sub runSC
-	'Kjører ShapeChange, venter på fullføring
 	dim strLine
 	strLine = JRE & " -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar " & ShCh & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
 	dim shell
@@ -151,8 +154,40 @@ sub runSC
     Repository.WriteOutput "Script", Now & " Kjørte ShapeChange!", 0 
 end sub
 
+
+'Sortering av elementer i en pakke
+Sub sortElementsInPackage(p)
+	Dim lstEl 
+	set lstEl = CreateObject("System.Collections.Sortedlist")
+	Dim el As EA.Element
+	For Each el In p.Elements
+		Select Case el.Stereotype
+			Case "featureType" : lstEl.Add "1." & el.Name, el.ElementID
+			Case "Vegobjekttype" : lstEl.Add "1." & el.Name, el.ElementID
+			Case "dataType" : lstEl.Add "2." & el.Name, el.ElementID
+			Case "codeList" : lstEl.Add "3." & el.Name, el.ElementID
+			Case "Tillatte verdier" : lstEl.Add "3." & el.Name, el.ElementID
+			Case Else
+				'writeLog(repDakat, "Datakatalog", el.Stereotype & "." & el.Name)
+				'lstEl.Add "4." & el.name, el.ElementID			
+		End Select
+		'writeLog(repDakat, "Datakatalog", el.Stereotype & "." & el.Name)
+	Next
+
+	Dim i
+	For i = 0 To lstEl.Count - 1
+		set el = Repository.GetElementByID(lstEl.GetByIndex(i))
+		el.TreePos = i + 1
+		el.Update()
+		Repository.WriteOutput "Script", Now & " Element: " & el.Name & " Ny posisjon: " & i , 0 
+	Next
+	set lstEl = Nothing
+	'Repository.RefreshModelView(p.PackageID)
+End Sub
+
+
+'Gjemmer attributter i et diagramobjekt
 Sub hideAttributes(eDobj)
-	'Hide attributes for a diagramobject
 	Dim strDOS
 	strDOS = eDobj.Style
 	If InStr(strDOS, "AttPub=1") > 0 Then
@@ -163,15 +198,15 @@ Sub hideAttributes(eDobj)
 	eDobj.Update()
 End Sub
 
+'Setter størrelse på et diagramobjekt
 Sub setSize(eDobj, h, w)
-	'Set size for diagram objects
 	eDobj.bottom = eDobj.top - h
 	eDobj.right = eDobj.left + w
 	eDobj.Update()
 End Sub
 
-function getPackageByAlias(pck, strAlias)
 'Finner et angitt element i en pakke, ut fra alias
+function getPackageByAlias(pck, strAlias)
 	Dim idx 
 	set getPackageByAlias = Nothing
 	For idx = 0 To pck.Packages.Count - 1
@@ -182,8 +217,8 @@ function getPackageByAlias(pck, strAlias)
 	Next
 End Function
 
-function getElementByAlias(pck, strAlias)
 'Finner et angitt element i en pakke, ut fra alias
+function getElementByAlias(pck, strAlias)
 	Dim idx 
 	set getElementByAlias = Nothing
 	For idx = 0 To pck.Elements.Count - 1
@@ -194,8 +229,8 @@ function getElementByAlias(pck, strAlias)
 	Next
 End Function
 
+'Finner en angitt attributt under et element, ut fra alias
 function getAttributeByAlias(el, strAlias)
-'Finner en angitt attributt under et elementn , ut fra alias
 	Dim idx 
 	set getAttributeByAlias = Nothing
 	For idx = 0 To el.Attributes.Count - 1
@@ -206,8 +241,8 @@ function getAttributeByAlias(el, strAlias)
 	Next
 End Function
 
+'Lager SOSI-navn av NVDB-navn
 Public Function createSOSInavn(str,ul,maxLength,delimiter)
-	'Lager SOSI-navn av NVDB-navn
 	
 	dim strOrg
 	strOrg = str 
@@ -388,34 +423,3 @@ Public Function createSOSInavn(str,ul,maxLength,delimiter)
 	createSOSInavn = strTmp
 	Repository.WriteOutput "SOSI", Now & " Nytt SOSI-navn for " & strOrg & ": " & createSOSInavn , 0 
 End Function
-
-Sub sortElementsInPackage(p)
-'Sortering av elementer i en pakke
-	Dim lstEl 
-	set lstEl = CreateObject("System.Collections.Sortedlist")
-	Dim el As EA.Element
-	For Each el In p.Elements
-		Select Case el.Stereotype
-			Case "featureType" : lstEl.Add "1." & el.Name, el.ElementID
-			Case "Vegobjekttype" : lstEl.Add "1." & el.Name, el.ElementID
-			Case "dataType" : lstEl.Add "2." & el.Name, el.ElementID
-			Case "codeList" : lstEl.Add "3." & el.Name, el.ElementID
-			Case "Tillatte verdier" : lstEl.Add "3." & el.Name, el.ElementID
-			Case Else
-				'writeLog(repDakat, "Datakatalog", el.Stereotype & "." & el.Name)
-				'lstEl.Add "4." & el.name, el.ElementID			
-		End Select
-		'writeLog(repDakat, "Datakatalog", el.Stereotype & "." & el.Name)
-	Next
-
-	Dim i
-	For i = 0 To lstEl.Count - 1
-		set el = Repository.GetElementByID(lstEl.GetByIndex(i))
-		el.TreePos = i + 1
-		el.Update()
-		Repository.WriteOutput "Script", Now & " Element: " & el.Name & " Ny posisjon: " & i , 0 
-	Next
-	set lstEl = Nothing
-	'Repository.RefreshModelView(p.PackageID)
-
-End Sub
