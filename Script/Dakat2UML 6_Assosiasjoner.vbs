@@ -5,8 +5,17 @@ option explicit
 !INC NVDB._parametre
 
 
+' Denne filen inneholder funksjoner for oppdatering av assosiasjoner mellom vegobjekttyper i EA-prosjektet. 
+'
+' Script Name: NVDB til UML.Assosiasjoner
+' Author: Knut Jetlund
+' Purpose: Oppdatering av assosiasjoner
+' Date: 20220919
+'
+' **************************************************************
+
+'Oppdaterer egenskaper på en enkelt assosiasjon i EA ut i fra Dakat
 Sub updateProperties_Assosiasjoner()
-	'Oppdaterer egenskaper på en assosiasjon i EA ut i fra Dakat
 	'Type assosiasjon
 	Dim sr, dr, Contype, subtype 
 	Dim min, maks, sourceCard, destCard
@@ -98,10 +107,11 @@ Sub updateProperties_Assosiasjoner()
 	Repository.WriteOutput "Script", Now & " Assosiasjonsdetaljer: " & supplier.Role & " [" & supplier.Cardinality & "] - " & client.Role & " [" & client.Cardinality & "]",0
 End Sub
 
-
+'Oppdaterer alle assosiasjoner for alle vegobjekttyper
 sub updateAssosiasjoner()
-'Oppdatering av assosiasjoner
+	'Setter opp kobling til modeller og databaser
 	connect2models
+	'Recordset for aktive assosiasjoner
 	set rsSammenhenger = CreateObject("ADODB.Recordset")
 	rsSammenhenger.Open "SELECT TILLATT_SAMMENHENG.* FROM VEGOB_TYPE INNER JOIN TILLATT_SAMMENHENG ON VEGOB_TYPE.ID_VOBJ_TYPE = TILLATT_SAMMENHENG.VOBJ_TYP_B WHERE VEGOB_TYPE.Dato_fra_nvdb Is Not Null", dbDakat, 3, 1
     rsSammenhenger.Filter = "Dato_fra_nvdb <> NULL"
@@ -117,24 +127,25 @@ sub updateAssosiasjoner()
 		set elementA = getElementByAlias(pkOT_Sub, pkOT_Sub.Alias)
         if not elementA is nothing then
             Repository.WriteOutput "Script", Now & " OPPDATERER ASSOSIASJONER FOR VEGOBJEKTTYPEN " & UCase(elementA.Name),0
-			'Løkke for assosiasjoner på objekttypen
+			'Kjører gjennom alle assosiasjoner på objekttypen i EA, og sammenligner med Dakat
 			For idxC = 0 To elementA.Connectors.Count - 1
 				set con = elementA.Connectors.GetAt(idxC)
 				'Tar kun med de assosiasjonene der aktuelt element er "Supplier"
 				If con.SupplierID = elementA.ElementID And con.Type <> "NoteLink" Then
 					'Finner objekttypen i den andre enden
 					set elementB = Repository.GetElementByID(con.ClientID)
+					'Sjekker om aktuell assosiasjon finnes i Dakat.
 					If Not (rsSammenhenger.EOF And rsSammenhenger.BOF) Then
 						rsSammenhenger.MoveFirst()
 						rsSammenhenger.Find("VOBJ_TYP_B=" & elementB.Alias)
 					End If
 					If Not rsSammenhenger.EOF Then
-						'Oppdaterer assosiasjonen
+						'Assosiasjonen finnes i Dakat --> Oppdaterer egenskaper for assosiasjonen
 						Repository.WriteOutput "Script", Now & " Oppdaterer assosiasjon til: " & elementB.Name,0
 						updateProperties_Assosiasjoner()
 						lstAlias.Add(elementB.Alias)
 					Else
-						'Assosiasjonen finnes ikke, sletter
+						'Assosiasjonen finnes ikke i Dakat --> sletter
 						Repository.WriteOutput "Endringer", Now & " Sletter utgått assosiasjon fra " & elementA.Name & " til: " & elementB.Name, 0
 						elementA.Connectors.DeleteAt idxC, False
 					End If
@@ -142,11 +153,12 @@ sub updateAssosiasjoner()
 			Next 
 			elementA.Connectors.Refresh()
 
-            'Kjører gjennom alle registrerte sammenhenger for objekttypen i Dakat, og legger til manglende i EA
+            'Kjører gjennom alle registrerte sammenhenger Æ(assosiasjoner) for objekttypen i Dakat, og legger til manglende i EA
             If Not (rsSammenhenger.EOF And rsSammenhenger.BOF) Then
                 rsSammenhenger.MoveFirst()
                 Do Until rsSammenhenger.EOF
 					id = cstr(rsSammenhenger.Fields("VOBJ_TYP_B").Value)
+					'Sjekker om assosiasjonen finnes i EA
 					If Not lstAlias.Contains(id) Then
 						Repository.WriteOutput "Script", Now & " Assosiasjonen mangler: " & elementA.Name & " - Vegobjekttype " & rsSammenhenger.Fields("VOBJ_TYP_B").Value,0
 						set elementB = Nothing
@@ -159,10 +171,12 @@ sub updateAssosiasjoner()
 							'Repository.WriteOutput "Endringer", Now & " Søk etter pakke for ny assosiasjon fra " & elementA.Name & " : " & locPck.Name & " (" & locPck.Alias & ")",0
 							If locPck.Alias = id Then
 								'Repository.WriteOutput "Endringer", Now & " Funnet pakke for ny assosiasjon fra " & elementA.Name & " : " & locPck.Name & " (" & locPck.Alias & ")",0
+								'Finner den assosierte objekttypen
 								set elementB = getElementByAlias(locPck, cstr(rsSammenhenger.Fields("VOBJ_TYP_B").Value))
 								locPidx = pkObjekttyper.Packages.Count - 1
 							End If
 						Next
+						'Lager assosiasjonen i EA
 						if not elementB is nothing then
 							Repository.WriteOutput "Endringer", Now & " Lager ny assosiasjon fra " & elementA.Name & " til: " & elementB.Name,0
 							set con = elementB.Connectors.AddNew("", "Association")

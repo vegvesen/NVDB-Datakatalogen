@@ -4,8 +4,19 @@ option explicit
 !INC NVDB._felles
 !INC NVDB._parametre
 
+
+' Denne filen inneholder funksjoner for oppdatering av diagrammer for vegobjekttyper i EA-prosjektet. 
+' Alle vegobjekttyper skal ha tre diagrammer: "... betingelser", "... assosiasjoner" og "... tillatte verdier"
+'
+' Script Name: NVDB til UML.Diagrammer
+' Author: Knut Jetlund
+' Purpose: Oppdatering av diagrammer
+' Date: 20220919
+'
+' **************************************************************
+
+'Oppdaterer egenskaper på et enkelt diagra,
 Sub updateProperties_Diagram(eD)
-	'Oppdaterer egenskaper for et diagram
 	eD.ShowDetails = 0
 	eD.Author = "Dakat"
 	eD.Version = FC_version
@@ -14,7 +25,7 @@ Sub updateProperties_Diagram(eD)
 	Repository.Execute("UPDATE T_DIAGRAM SET SHOWFOREIGN=FALSE WHERE DIAGRAM_ID=" & eD.DiagramID)
 End Sub
 
-'Kontroll av om alle elementer i pakka finnes i det aktuelle diagrammet
+'Kontroll av om alle elementer i pakka finnes i et diagram
 Sub updateDiagramObjects(eD)
 	For idxE = 0 To pkOT_Sub.Elements.Count - 1
 		set elementB = pkOT_Sub.Elements.GetAt(idxE)
@@ -38,9 +49,8 @@ Sub updateDiagramObjects(eD)
 	Next 
 End Sub
 
-
+'Oppdatering av assosierte vegobjekttyper for angitt element i angitt diagram. 
 Sub updateDiagramObjectsAssociations(eD, el, mothers, strST)
-	'Oppdatering av assosierte vegobjekttyper for angitt element i angitt diagram. 
 	Dim strDiagramObjectStyle 
 	strDiagramObjectStyle  = ""
 	set diagramObjekt =  Nothing
@@ -127,35 +137,42 @@ Sub updateDiagramObjectsAssociations(eD, el, mothers, strST)
 	Next 
 End Sub
 
+'Oppdatering av alle diagrammer for alle vegobjekttyper. 
 sub updateDiagrammer()
-'Oppdatering av diagrammer
+	'Kobler til modeller og databaser
 	connect2models
     Repository.WriteOutput "Script", Now & " Oppdaterer diagrammer", 0 
 	Dim nyttDiagram 
+	'Kjører gjennom alle diagrammer for alle pakker i EA.
 	For idxP = 0 To pkObjekttyper.Packages.Count - 1
 		set pkOT_Sub = pkObjekttyper.Packages.GetAt(idxP)
 		Repository.WriteOutput "Script", Now & " OPPDATERER DIAGRAMMER FOR VEGOBJEKTTYPEN " & UCase(pkOT_Sub.Name), 0
+		'Finner selve objekttypen
 		set element = getElementByAlias(pkOT_Sub, pkOT_Sub.Alias)
 		if not element is nothing then	
-			'Skal bare ha diagrammer som heter "... betingelser", "... assosiasjoner" og "... tillatte verdier"
+			'Sjekker hvilke digrammer som finnes i pakken. Skal bare ha diagrammer som heter "... betingelser", "... assosiasjoner" og "... tillatte verdier"
+			'Alle andre slettes
 			i = 0
 			For Each eDiagram In pkOT_Sub.Diagrams
 				If eDiagram.Name <> pkOT_Sub.Name & " Betingelser" And eDiagram.Name <> pkOT_Sub.Name & " Assosiasjoner" And eDiagram.Name <> pkOT_Sub.Name & " Tillatte verdier" Then
 					Repository.WriteOutput "Endringer", Now & " Sletter diagrammet " & eDiagram.Name,0
+					'Ugyldig navn --> Diagrammet slettes
 					pkOT_Sub.Diagrams.DeleteAt i, False
 				End If
 				i = i + 1
 			Next
 			pkOT_Sub.Diagrams.Refresh()
 			
+			'---------------
 			'Oppdatering av diagram med pakkenavnet + " betingelser". Skal ha med bare selve vegobjekttypen med egenskaper og betingelser
 			Repository.WriteOutput "Script", Now & " Oppdaterer diagrammet " & pkOT_Sub.Name & " Betingelser",0
 			set eBDiagram = pkOT_Sub.Diagrams.GetByName(pkOT_Sub.Name & " Betingelser")
 			if not eBDiagram is nothing then
+				'Diagrammet finnes
 				set diagramObjekt = eBDiagram.DiagramObjects.GetAt(0)
 				nyttDiagram = False
 			else
-				'Lager nytt
+				'Diagrammet finnes ikke --> Lager nytt og legger til selve vegobjekttypen
 				Repository.WriteOutput "Endringer", Now & " Lager diagrammet " & pkOT_Sub.Name & " Betingelser",0
 				set eBDiagram = pkOT_Sub.Diagrams.AddNew(pkOT_Sub.Name & " Betingelser", "Logical")
 				eBDiagram.Update()
@@ -175,49 +192,56 @@ sub updateDiagrammer()
 			End If
 			diagramObjekt.Update()
 			updateProperties_Diagram eBDiagram
+			'Kjører autolayout hvis nytt diagram
 			If nyttDiagram=True Then 
 				ePIF.LayoutDiagramEx eBDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eBDiagram.DiagramID)
 				pkOT_Sub.Diagrams.Refresh()
 			end if
 				
-			'Kontroll og oppdatering av diagram med tillatte verdier. skal ha med alle elementer i aktuell pakke (vegobjekttypen og kodelister), men ikke assosierte vegobjekktyper
+			'---------------
+			'Kontroll og oppdatering av diagram med tillatte verdier. Skal ha med alle elementer i aktuell pakke (vegobjekttypen og kodelister), men ikke assosierte vegobjekktyper
 			Repository.WriteOutput "Script", Now & " Oppdaterer diagrammet " & pkOT_Sub.Name & " Tillatte verdier",0
 			set eTVDiagram = Nothing
 			For Each eDiagram In pkOT_Sub.Diagrams
 				If eDiagram.Name = pkOT_Sub.Name & " Tillatte verdier" Then
+					'Diagrammet finnes
 					set eTVDiagram = eDiagram
 					nyttDiagram = False
 				End If
 			Next
 
 			if eTVDiagram is nothing then
-				'Lager nytt
+				'diagrammet finnes ikke --> Lager nytt
 				set eTVDiagram = pkOT_Sub.Diagrams.AddNew(pkOT_Sub.Name & " Tillatte verdier", "Logical")
 				eTVDiagram.Update()
 				Repository.WriteOutput "Endringer", Now & " Lager diagrammet " & eTVDiagram.Name,0
 				nyttDiagram = True
 			End if
+			'Legger til alle klasser fra pakka
 			updateDiagramObjects(eTVDiagram)
 			updateProperties_Diagram eTVDiagram
+			'Autolayout hvis nytt diagram
 			If nyttDiagram Then 
 				ePIF.LayoutDiagramEx eTVDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eTVDiagram.DiagramID)
 				pkOT_Sub.Diagrams.Refresh()
 			end if	
 			
-			'Kontroll og oppdatering av diagram med assosiasjoner. Skal ha med alle assosierte vegobjekktyper, men ikke kodelister
+			'---------------
+			'Kontroll og oppdatering av diagram med assosiasjoner. Skal ha med alle assosierte vegobjekttyper, men ikke kodelister
 			Repository.WriteOutput "Script", Now & " Oppdaterer diagrammet " & pkOT_Sub.Name & " Assosiasjoner", 0
 			set eASDiagram = Nothing
 			For Each eDiagram In pkOT_Sub.Diagrams
 				If eDiagram.Name = pkOT_Sub.Name & " Assosiasjoner" Then
+					'Diagrammet finnes
 					set eASDiagram = eDiagram
 					nyttDiagram = False
 				End If
 			Next
 
 			if eASDiagram is nothing then
-				'Lager nytt, uten kodelister
+				'Diagrammet finnes ikke --> Lager nytt
 				set eASDiagram = pkOT_Sub.Diagrams.AddNew(pkOT_Sub.Name & " Assosiasjoner", "Logical")
 				eASDiagram.Update()
 				'Legger til selve objekttypen
@@ -227,13 +251,15 @@ sub updateDiagrammer()
 				Repository.WriteOutput "Endringer", Now & " Lager diagrammet " & eASDiagram.Name, 0 
 				nyttDiagram = True
 			End if
+			'Spesiell håndtering for Dokumentasjon, Kommentar, Systemobjekt og Tilstand*. Skal ikke ha med morobjekt
 			If element.Name = "Dokumentasjon" Or element.Name = "Kommentar" Or element.Name = "Systemobjekt" Or Mid(element.Name, 1, 8) = "Tilstand" Then
 				updateDiagramObjectsAssociations eASDiagram, element, False, "Vegobjekttype"
 			Else
-				'Tar med morobjekter på alle andre enn Dokumentasjon, Kommentar og Systemobjekt
+				'Tar med morobjekter i diagrammet for alle andre vegobjekttyper
 				updateDiagramObjectsAssociations eASDiagram, element, True, "Vegobjekttype"
 			End If
 			updateProperties_Diagram eASDiagram
+			'Autolayout hvis nytt
 			If nyttDiagram Then 
 				ePIF.LayoutDiagramEx eASDiagram.DiagramGUID, 4, 4, 20, 20, True
 				repository.CloseDiagram(eASDiagram.DiagramID)

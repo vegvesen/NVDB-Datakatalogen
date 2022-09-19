@@ -5,8 +5,17 @@ option explicit
 !INC NVDB._parametre
 
 
+' Denne filen inneholder funksjoner for oppdatering av kodelister (lister med tillatte verdier) for vegobjekttyper i EA-prosjektet. 
+'
+' Script Name: NVDB til UML.Kodelister
+' Author: Knut Jetlund
+' Purpose: Oppdatering av lister med tillatte verdier
+' Date: 20220919
+'
+' **************************************************************
+
+'Oppdaterer klassen for en kodeliste i EA ut i fra Dakat. Kun klassen, ikke verdier.
 Sub updateProperties_Kodelister()
-	'Oppdaterer kodelister (ikke verdier)
 	element.Name = rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value
 	If Not IsNull(rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value) Then element.Notes = rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value
 	element.StereotypeEx = ""
@@ -110,10 +119,9 @@ Sub updateProperties_Kodelister()
 
 End Sub
 
-
-'Oppdaterer kodelister (lister med tillatte verdier)
+'Oppdaterer kodelisteklasser for alle vegobjekttyper i EA ut i fra Dakat. Kun klassene, ikke verdier
 sub updateKodelister()
-	'Setter opp spørring som viser egenskaper med tillatte verdier i Dakat-databasen
+	'Setter opp spørring som viser aktive egenskaper med tillatte verdier i Dakat-databasen
 	connect2models
 	set rsEgenskapstyper = CreateObject("ADODB.Recordset")
 	rsEgenskapstyper.Open "SELECT DISTINCT EGENSKAPSTYPE.* FROM EGENSKAPSTYPE INNER JOIN TILLATT_VERDI ON EGENSKAPSTYPE.ID_EGENSKAPSTYPE = TILLATT_VERDI.ID_EGENSKAPSTYPE WHERE NAVN_EGENSKAPSTYPE NOT LIKE 'Utgår%'", dbDakat, 3, 1
@@ -122,7 +130,7 @@ sub updateKodelister()
 	rsEgenskapstyper.MoveLast()
     Repository.WriteOutput "Script", Now & " Oppdaterer kodelister og legger til nye", 0 
 	Set lstCodeListNames = CreateObject("System.Collections.ArrayList")
-	'Kjør gjennom alle pakker, finn alle vegobjekttyper sine SOSI-navn og legg til i listen
+	'Kjør gjennom alle pakker, finn alle vegobjekttyper sine SOSI-navn og legg til i liste med brukte SOSI-navn.
 	Repository.WriteOutput "Script", Now & " Lager liste med brukte SOSI-navn",0
 	For each pkOT_Sub in pkObjekttyper.Packages
 		For each element in pkOT_Sub.elements
@@ -136,7 +144,7 @@ sub updateKodelister()
 		Next
 	Next
 	
-	'Kjør gjennom SOSI Fellesegenskaper, finn alle kodelister og legg til navnet i listen
+	'Kjør gjennom SOSI Fellesegenskaper, finn alle kodelister og legg til navnet i listen med brukte SOSI-navn
 	For each element in pkSOSIFelles.elements
 		If UCase(element.Stereotype) = "CODELIST" then
 			lstCodeListNames.Add element.Name
@@ -151,22 +159,23 @@ sub updateKodelister()
 		rsEgenskapstyper.Filter = "Dato_fra_nvdb <> NULL AND ID_VEGOB_TYPE =" & pkOT_Sub.Alias
 		Repository.WriteOutput "Script", Now & " OPPDATERER KODELISTER FOR VEGOBJEKTTYPEN " & UCase(pkOT_Sub.Name),0
 		
-		'Løkke for kodelister i pakka
+		'Kjører gjennom alle registrerte kodelister for denne pakken i EA, og sammenligner med Dakat
 		For idxE = 0 To pkOT_Sub.Elements.Count - 1
 			set element = pkOT_Sub.Elements.GetAt(idxE)
 			If element.Stereotype = "Tillatte verdier" Then
-				'Tester om egenskapstypen finnes med tillatte verdier i Dakat
+				'Tester om egenskapstypen finnes og har tillatte verdier i Dakat
+				'NB! Dakat har ikke kodelister, kun tillatte verdier knytta til egenskapstyper. Sjekker derfor om egenskapstypen finnes. 
 				If Not (rsEgenskapstyper.EOF And rsEgenskapstyper.BOF) Then
 					rsEgenskapstyper.MoveFirst()
 					rsEgenskapstyper.Find("ID_EGENSKAPSTYPE=" & element.Alias)
 				End If
 				If Not rsEgenskapstyper.EOF Then
-					'Oppdaterer egenskapstypen
+					'Egenskapstypen finnes og har tillatte verdier i Dakat --> Oppdaterer kodelisteklassen
 					Repository.WriteOutput "Script", Now & " Oppdaterer kodeliste: " & rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value & " (" & rsEgenskapstyper.Fields("ID_EGENSKAPSTYPE").Value & ")",0
 					updateProperties_Kodelister()
 					lstAlias.Add(element.Alias)
 				Else
-					'Egenskapstypen finnes ikke med tillatte verdier i Dakat
+					'Egenskapstypen finnes ikke med tillatte verdier i Dakat --> Slett kodelisteklassen
 					Repository.WriteOutput "Endringer", Now & " Sletter utgått kodeliste: " & pkOT_Sub.Name & "." & element.Name & " (" & element.Alias & ")",0
 					pkOT_Sub.Elements.DeleteAt idxE, False
 				End If
@@ -180,7 +189,7 @@ sub updateKodelister()
 			Do Until rsEgenskapstyper.EOF
 				id = cstr(rsEgenskapstyper.Fields("ID_EGENSKAPSTYPE").Value	)
 				If Not lstAlias.Contains(id) Then
-					'Kodelisten finnes ikke 
+					'Kodelisten finnes ikke i EA. Legger til kodelisteklassen.
 					Repository.WriteOutput "Endringer", Now & " Lager kodeliste: " & pkOT_Sub.Name & "." & rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value & " (" & rsEgenskapstyper.Fields("ID_EGENSKAPSTYPE").Value & ")",0
 					set element = pkOT_Sub.Elements.AddNew(rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value, "Class")
 					element.Update()
@@ -192,7 +201,7 @@ sub updateKodelister()
 			Loop
 		End If
 		
-		'Sorterer objekter (featuretype og codelists) i pakka
+		'Sorterer objekter (featuretype og codelists) i pakka i samsvar med sortering i Dakat
 		sortElementsInPackage(pkOT_Sub)
 		
 	Next

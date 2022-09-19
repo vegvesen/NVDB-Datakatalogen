@@ -3,7 +3,7 @@ option explicit
 !INC Local Scripts.EAConstants-VBScript
 
 '
-' Script Name: Export diagrams as images
+' Script Name: NVDB til UML.DOC Export diagrams as images
 ' Author: Knut Jetlund	
 ' Purpose: Export diagrams to image files. Uses alias as prefix.
 ' Date: 20150411
