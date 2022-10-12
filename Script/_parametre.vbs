@@ -9,8 +9,8 @@
 
 
 'Datakatalogversjon. Må oppdateres ved nye versjoner
-const FC_version = "2.29"
-const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V229.mdb"
+const FC_version = "2.30"
+const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V230.mdb"
 
 'Namespace for GML og OWL
 const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
