@@ -63,7 +63,10 @@ sub updateDatatyper()
 	rsDatatyper.Open "DATATYPE", dbDakat, 3, 1
 	Repository.WriteOutput "Script", Now & " Oppdaterer datatyper og legger til nye", 0 
 	Repository.WriteOutput "Script", Now & "", 0   
-   
+   	'Sett versjon på hovedpakka
+	pkDatatyper.Element.Status = "Implemented"
+	pkDatatyper.Element.Version = FC_version
+	pkDatatyper.Element.Update
 	'Kjører gjennom alle registrerte datatyper i EA og sammenligner med Accessbasen. Oppdaterer eksisterende, sletter utgåtte
 	id = 0
 	'Lager aliasliste for lagring av id-er i EA

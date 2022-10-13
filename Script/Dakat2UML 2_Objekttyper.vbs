@@ -41,7 +41,9 @@ Sub updateProperties_Objekttyper()
 	element.Alias = rsObjekttyper.Fields("ID_VOBJ_TYPE").Value
 	element.Modified = Now
 	element.Update()
+	'Sett versjon på objekttypepakke
 	pkOT_Sub.Element.Status = "Implemented"
+	pkOT_Sub.Element.Version = FC_version
 	pkOT_Sub.Element.Update()
 		
 	'Fjerner alle eksisterende tagged values 
@@ -97,6 +99,11 @@ sub updateObjekttyper()
     rsObjekttyper.Filter = "Dato_fra_nvdb <> NULL"
     rsObjekttyper.MoveLast()
     Repository.WriteOutput "Script", Now & " Oppdaterer vegobjekttyper og legger til nye", 0 
+
+   	'Sett versjon på hovedpakka
+	pkObjekttyper.Element.Status = "Implemented"
+	pkObjekttyper.Element.Version = FC_version
+	pkObjekttyper.Element.Update
 
 	'Kjører gjennom alle pakker for vegobjekttyper i EA. Oppdaterer eksisterende pakker og objekttyper, sletter utgåtte
 	id = 0
