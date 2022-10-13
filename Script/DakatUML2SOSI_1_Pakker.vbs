@@ -87,6 +87,11 @@ sub updatePackages()
 		lstNVDBpck.Add pkOT.Alias,pkOT.packageGUID
 	Next
 
+   	'Sett versjon på hovedpakka i SOSI
+	pkSOSINVDB.Element.Status = "Implemented"
+	pkSOSINVDB.Element.Version = FC_version
+	pkSOSINVDB.Element.Update
+
 	'Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen
 	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
 	Repository.WriteOutput "Script", Now & " Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen", 0 

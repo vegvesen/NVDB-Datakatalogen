@@ -6,11 +6,13 @@ option explicit
 
 
 ' Denne filen inneholder funksjoner for oppdatering av kodelister (lister med tillatte verdier) for vegobjekttyper i EA-prosjektet. 
+' NB! Scriptet stopper etter enkelte slettinger av kodelister. Årsaken til dette er ikke identifisert. 
+' Slik det er nå må det derfor kjøres flere ganger for å komme gjennom alt.
 '
 ' Script Name: NVDB til UML.Kodelister
 ' Author: Knut Jetlund
 ' Purpose: Oppdatering av lister med tillatte verdier
-' Date: 20220919
+' Date: 20221013
 '
 ' **************************************************************
 

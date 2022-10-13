@@ -23,10 +23,17 @@ sub abstractClasses()
 
 	set ePIF = Repository.GetProjectInterface
 
-	'Hent hovedpakken for NVDB Datakatalogen i SOSI-modellregister
+	'Hent hovedpakken for NVDB Datakatalogen og pakken med abstrakte klasser i SOSI-modellregister
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
 	dim absPck as EA.Package
 	set absPck = Repository.GetPackageByGuid(guidAbstrakteKlasser)
+
+   	'Sett versjon på pakken med abstrakte klasser i SOSI
+	absPck.Element.Status = "Implemented"
+	absPck.Element.Version = FC_version
+	absPck.Element.Update
+
+	
 	dim absElement as EA.Element
 	
 	dim lstAbsCls

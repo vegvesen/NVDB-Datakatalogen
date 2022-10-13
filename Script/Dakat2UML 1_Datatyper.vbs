@@ -10,7 +10,7 @@ option explicit
 ' Script Name: NVDB til UML.Datatyper
 ' Author: Knut Jetlund
 ' Purpose: Oppdatering av datatyper
-' Date: 20220919
+' Date: 20221013
 '
 ' **************************************************************
 

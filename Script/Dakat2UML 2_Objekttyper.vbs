@@ -10,7 +10,7 @@ option explicit
 ' Script Name: NVDB til UML.Objekttyper
 ' Author: Knut Jetlund
 ' Purpose: Oppdatering av objekttyper
-' Date: 20220919
+' Date: 20221013
 '
 ' **************************************************************
 
