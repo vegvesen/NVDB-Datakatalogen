@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.29">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.30">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -6,7 +6,7 @@
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="FrittståendeKamerastasjon" substitutionGroup="nvdb:AbstraktFrittståendeKamerastasjon" type="nvdb:FrittståendeKamerastasjonType">
     <annotation>
-      <documentation>910: Stasjon der det er plassert et kamera for observasjon av trafikkforhold, vær og føre, eller annet</documentation>
+      <documentation>910: Stasjon der det er plassert et kamera for observasjon av trafikkforhold, vær og føre, eller annet.</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">910</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">910</sc:taggedValue>
@@ -42,6 +42,15 @@
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">11184</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Sist oppdatert fra MSR</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="status" type="nvdb:StatusFrittståendeKamerastasjonType">
+            <annotation>
+              <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -95,4 +104,68 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="StatusFrittståendeKamerastasjonType">
+    <annotation>
+      <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:StatusFrittståendeKamerastasjonEnumerationType nvdb:StatusFrittståendeKamerastasjonOtherType"/>
+  </simpleType>
+  <simpleType name="StatusFrittståendeKamerastasjonEnumerationType">
+    <annotation>
+      <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Operativ">
+        <annotation>
+          <documentation>21673: Stasjonen er operativ og registrerer data.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21673</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Operativ</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Midlertidig ute av drift">
+        <annotation>
+          <documentation>21674: Stasjonen er ute av drift i en periode, datainnsamling vil bli gjenopptatt.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21674</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Midlertidig ute av drift</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nedlagt, kan gjenopprettes">
+        <annotation>
+          <documentation>21676: Stasjonen er nedlagt, men det er ikke utelukket at den kan bli tatt i bruk igjen for datainnsamling i framtiden.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21676</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nedlagt, kan gjenopprettes</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nedlagt, ikke lov å bruke">
+        <annotation>
+          <documentation>21675: Stasjonen er nedlagt og vil ikke bli brukt for datainnsamling i framtiden.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21675</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nedlagt, ikke lov å bruke</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StatusFrittståendeKamerastasjonOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
 </schema>
