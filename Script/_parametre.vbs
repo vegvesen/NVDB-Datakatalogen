@@ -50,6 +50,7 @@ const guidKurve = "{0708BC74-CF46-4cfe-93BE-878EC504768D}"
 const guidFlate = "{46B26A69-F04C-4d11-B363-F3490340F5B7}"
 const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
 const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
+const guidTime = "{83CE9250-D6C5-4ad2-AFB9-75408DD203E8}"
 
 '***************************************************************************
 

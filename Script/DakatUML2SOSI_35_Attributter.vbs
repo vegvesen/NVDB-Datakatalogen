@@ -155,6 +155,9 @@ sub updateAttributeProperties()
 						Case "Date"
 							guidDT = guidDate
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "DATO")
+						Case "Time"
+							guidDT = guidTime
+							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "T")
 						Case "Boolean"
 							guidDT = guidBoolean
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "Boolsk")

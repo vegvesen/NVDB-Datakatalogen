@@ -91,7 +91,9 @@ Sub main
 							Case "Real":
 								range = "IfcReal"
 							Case "Date":
-								range = "IfcDateTime"
+								range = "IfcDate"
+							Case "Time":
+								range = "IfcTime"
 							Case "Boolean":
 								range = "IfcBoolean"
 							Case "BinærObjekt", "BinærObjekt, TSF", "BinærObjekt, Tekst", "BinærObjekt, Lyd"

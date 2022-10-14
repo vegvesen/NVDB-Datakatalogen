@@ -2,7 +2,7 @@
 
 Repository for  tilgjengeliggjøring av NVDB Datakatalogen (https://datakatalogen.vegdata.no/) i alternative og standardiserte strukturer og teknologier. Tilretteleggingen er basert på modell-dreven arkitektur (MDA) i henhold til ISO 19103, ISO 19109, ISO 19136 og ISO 19150-2. 
 
-Sammenhenger og prosesser er illustrert i [denne figuren](https://github.com/vegvesen/NVDB-Datakatalogen/blob/master/Wiki/NVDB%20Datakatalogen-Prosess.png).
+Sammenhenger og prosesser er illustrert i [denne figuren](https://github.com/vegvesen/NVDB-Datakatalogen/blob/master/Wiki/NVDB%20Datakatalogen-Prosess.png) og i [denne presentasjonen](https://github.com/vegvesen/NVDB-Datakatalogen/blob/master/Wiki/NVDB%20Datakatalogen%20i%20standardiserte%20strukturer%20og%20formater.pdf).
 
 ## Innhold:
 
