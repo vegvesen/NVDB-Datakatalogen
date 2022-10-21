@@ -185,9 +185,9 @@ Sub main
 								Case "Real":
 									range = "xsd:double"
 								Case "Date":
-									range = "xsd:Date"
+									range = "xsd:date"
 								Case "Time":
-									range = "xsd:Time"							
+									range = "xsd:time"							
 								Case "Boolean":
 									range = "xsd:boolean"
 								Case "BinærObjekt", "BinærObjekt, TSF", "BinærObjekt, Tekst", "BinærObjekt, Lyd"
