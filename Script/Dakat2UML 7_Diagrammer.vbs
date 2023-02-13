@@ -138,7 +138,7 @@ Sub updateDiagramObjectsAssociations(eD, el, mothers, strST)
 End Sub
 
 'Oppdatering av alle diagrammer for alle vegobjekttyper. 
-sub updateDiagrammer()
+function updateDiagrammer()
 	'Kobler til modeller og databaser
 	connect2models
     Repository.WriteOutput "Script", Now & " Oppdaterer diagrammer", 0 
@@ -271,6 +271,5 @@ sub updateDiagrammer()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateDiagrammer

@@ -21,12 +21,12 @@ sub updateDiagramProperties
 	Repository.Execute("UPDATE T_DIAGRAM SET SHOWFOREIGN=FALSE WHERE DIAGRAM_ID=" & eDiagram.DiagramID)
 end sub 
 
-sub updateDiagrams()
+function updateDiagrams()
 	'Oppdatering av diagrammer
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub			  
+	If not connect then exit function			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av diagrammer i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -304,6 +304,5 @@ sub updateDiagrams()
 		
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-updateDiagrams()

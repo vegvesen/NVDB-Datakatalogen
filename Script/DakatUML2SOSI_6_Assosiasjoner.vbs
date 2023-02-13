@@ -91,12 +91,12 @@ Sub updateAssociationProperties()
 End Sub
 
 
-sub updateAssociations()
+function updateAssociations()
 	'Oppdatering av assosiasjoner
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub			  
+	If not connect then exit function			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av assosiasjoner mellom vegobjekttyper i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -140,7 +140,7 @@ sub updateAssociations()
 				Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 				'Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
 			else
-				exit sub
+				exit function
 			end if
 
 			For each element in pkOT.Elements
@@ -221,6 +221,5 @@ sub updateAssociations()
 				
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-updateAssociations()

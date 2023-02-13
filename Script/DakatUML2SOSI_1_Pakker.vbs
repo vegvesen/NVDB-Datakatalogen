@@ -69,12 +69,12 @@ sub updatePackage()
 
 end sub
 
-sub updatePackages()
+function updatePackages()
 	'Oppdatering av pakker 
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub			  
+	If not connect then exit function			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av NVDB-vegobjekttypepakker i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -86,11 +86,6 @@ sub updatePackages()
 		Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 		lstNVDBpck.Add pkOT.Alias,pkOT.packageGUID
 	Next
-
-   	'Sett versjon på hovedpakka i SOSI
-	pkSOSINVDB.Element.Status = "Implemented"
-	pkSOSINVDB.Element.Version = FC_version
-	pkSOSINVDB.Element.Update
 
 	'Spoler gjennom alle NVDB Datakatalog-delpakker i SOSI-modellregister og sjekker om de finnes i NVDB Datakatalogen
 	Set lstSOSIpck = CreateObject("System.Collections.SortedList")
@@ -150,6 +145,5 @@ sub updatePackages()
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-updatePackages()

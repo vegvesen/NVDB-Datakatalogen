@@ -81,6 +81,18 @@ Dim strStedfesting
 Dim retning 
 Dim kjorefelt
 
+'IFC OWL etc
+dim objFSO, objOTLFile, objTemplate 
+dim nvdb_navn, definition
+dim tV as EA.TaggedValue
+dim atV as EA.AttributeTag
+dim ctV as EA.ConnectorTag
+dim conEnd as EA.ConnectorEnd
+
+dim scRep as EA.Repository
+dim scMod as EA.Package
+dim scPck as EA.Package
+
 ' *******************************************************
 'Generelle funksjoner som benyttes av flere av scriptene
 
@@ -152,7 +164,7 @@ end function
 'Funksjon som kjører ShapeChange og venter på at den skal fullføre
 sub runSC
 	dim strLine
-	strLine = JRE & " -Xms256m -Xmx1024m -Dfile.encoding=UTF-8 -jar " & ShCh & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
+	strLine = JRE & " -Xms1024m -Xmx2048m -Dfile.encoding=UTF-8 -jar " & ShCh & " -c ""C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SC\config\ShapeChangeConfiguration.xml"""
 	dim shell
 	Repository.WriteOutput "Script", Now & " Kjører ShapeChange...", 0 
 	Repository.WriteOutput "Script", Now & " " & strLine, 0 
@@ -162,6 +174,12 @@ sub runSC
     Repository.WriteOutput "Script", Now & " Kjørte ShapeChange!", 0 
 end sub
 
+'Funksjon som kjører python scriptet for OWL
+sub runPython
+set shell=createobject("wscript.shell") 
+shell.run "cmd /K cd C:\DATA\Github\vegvesen\NVDB-Datakatalogen\OWL\script\ & python nvdbKategoriOTL.py & exit()", 1, true
+set shell = nothing
+end sub
 
 'Sortering av elementer i en pakke
 Sub sortElementsInPackage(p)
@@ -248,6 +266,16 @@ function getAttributeByAlias(el, strAlias)
 		End If
 	Next
 End Function
+
+'Loops though a package/Collection and returns the package that matches a given alias.
+function getPackage(collectionPackages, packageAlias)
+	for each package in collectionPackages
+		if package.Alias = packageAlias then
+			set getPackage = package
+			exit function
+		end if
+	Next	
+end function
 
 'Lager SOSI-navn av NVDB-navn
 Public Function createSOSInavn(str,ul,maxLength,delimiter)

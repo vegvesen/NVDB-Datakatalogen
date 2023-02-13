@@ -9,8 +9,8 @@
 
 
 'Datakatalogversjon. Må oppdateres ved nye versjoner
-const FC_version = "2.30"
-const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalogen_V230.mdb"
+const FC_version = "2.31"
+const FC_db = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\Access\NVDB_Datakatalog_V231.mdb"
 
 'Namespace for GML og OWL
 const strTargetNamespace = "https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
@@ -26,10 +26,11 @@ const sosiPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\SOSI-UML"
 const gmlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\GML"
 const owlPath = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\OWL\"
 const ifcPAth = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\IFC-PSD\"
+const umlPath = "C:\DATA\Github\vegvesen\NVDB-Datakatalogen\UML\XMI\Vegobjekttyper"
 
 'Innstillinger for ShapeChange
 const JRE ="JAVA"
-const ShCh ="C:\Programfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"
+const ShCh ="""C:\Programfiler\ShapeChange-2.11.0\ShapeChange-2.11.0.jar"""
 const scProject = "SC_NVDB.qea"
 const scTemplate = "SC_Core.qea"
 
@@ -50,7 +51,6 @@ const guidKurve = "{0708BC74-CF46-4cfe-93BE-878EC504768D}"
 const guidFlate = "{46B26A69-F04C-4d11-B363-F3490340F5B7}"
 const guidLRStrekning = "{3F3753C2-8665-4de7-AF70-4E8E833CE75D}"
 const guidLRPunkt = "{4322CE4D-5CD6-4f58-949B-BF82F712762F}"
-const guidTime = "{83CE9250-D6C5-4ad2-AFB9-75408DD203E8}"
 
 '***************************************************************************
 
@@ -93,4 +93,16 @@ const strSOSIFelles = "SOSI Fellesegenskaper"
 const strSOSIModell = "SOSI Modell"
 const strSOSIGK = "SOSI Generelle konsepter"
 const strSOSIGO = "SOSI Generell objektkatalog"
+
+'Diverse strenger for MasterScripts
+const nvdbPackageGuid = "{4ED93AFE-938D-4b01-962C-8D8F76F1650E}"
+const datayperPackageGuid = "{AB97FAF3-CF34-4e15-9DDD-8F05AE72B6E5}" 
+const problempakkerGuid = "{ABE80D12-F1F9-47da-903A-D655ACAB08CC}"
+const dokumentasjonGuid = "{107B6B4D-2A42-4d14-AE93-A719650A828B}"
+const kommentarGuid = "{19680B15-9B80-4756-8CA6-F59351AA3F7D}"
+const nvdbSosiProduktspesifikasjoner = "{D66DB805-410C-4ee3-8477-307F1533B6CC}"
+
+const nvdbKategoriOTLLocationCommand = "cd C:\DATA\Github\vegvesen\NVDB-Datakatalogen\OWL\script\"
+const runNvdbKategoriOTL = "python3 nvdbKategoriOTL.py"
+const votkatId = "303,304"
 

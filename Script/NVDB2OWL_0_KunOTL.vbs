@@ -10,14 +10,14 @@ option explicit
 ' Date: 20210225
 '
 
-dim objFSO, objOTLFile, objTemplate
-dim nvdb_navn, definition
-dim tV as EA.TaggedValue
-dim atV as EA.AttributeTag
-dim ctV as EA.ConnectorTag
-dim conEnd as EA.ConnectorEnd
+'dim objOTLFile, objTemplate
+'dim nvdb_navn, definition
+'dim tV as EA.TaggedValue
+'dim atV as EA.AttributeTag
+'dim ctV as EA.ConnectorTag
+'dim conEnd as EA.ConnectorEnd
 
-Sub main
+function generateOTL
 
 	'Vise og tøm scriptvinduer
 	outputTabs
@@ -185,9 +185,7 @@ Sub main
 								Case "Real":
 									range = "xsd:double"
 								Case "Date":
-									range = "xsd:date"
-								Case "Time":
-									range = "xsd:time"							
+									range = "xsd:dateTime"
 								Case "Boolean":
 									range = "xsd:boolean"
 								Case "BinærObjekt", "BinærObjekt, TSF", "BinærObjekt, Tekst", "BinærObjekt, Lyd"
@@ -466,17 +464,16 @@ Sub main
 	'--------------------------------------------------------------------------------
 	'Skriv til fil 
 	'dim filetime
-	filetime = replace(Now, ".","")
+	filetime = replace(Now, "/","")
+	filetime = replace(filetime, ".","")
 	filetime = replace(filetime, ":","")
 	filetime = replace(filetime, " ","_")
-	objOTLFile.SaveToFile owlPath & "\core\" & filetime & "_nvdb-owl.ttl", 2
+	objOTLFile.SaveToFile owlPath & "\core\" & filetime & "_nvdb-owl.ttl", 2 
 	objOTLFile.Close
 	
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-End Sub
+End function
 
 
-
-main()

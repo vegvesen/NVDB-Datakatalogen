@@ -108,7 +108,7 @@ Sub updateProperties_Assosiasjoner()
 End Sub
 
 'Oppdaterer alle assosiasjoner for alle vegobjekttyper
-sub updateAssosiasjoner()
+function updateAssosiasjoner()
 	'Setter opp kobling til modeller og databaser
 	connect2models
 	'Recordset for aktive assosiasjoner
@@ -196,6 +196,6 @@ sub updateAssosiasjoner()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateAssosiasjoner
+

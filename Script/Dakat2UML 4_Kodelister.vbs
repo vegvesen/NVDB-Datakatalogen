@@ -6,18 +6,17 @@ option explicit
 
 
 ' Denne filen inneholder funksjoner for oppdatering av kodelister (lister med tillatte verdier) for vegobjekttyper i EA-prosjektet. 
-' NB! Scriptet stopper etter enkelte slettinger av kodelister. Årsaken til dette er ikke identifisert. 
-' Slik det er nå må det derfor kjøres flere ganger for å komme gjennom alt.
 '
 ' Script Name: NVDB til UML.Kodelister
 ' Author: Knut Jetlund
 ' Purpose: Oppdatering av lister med tillatte verdier
-' Date: 20221013
+' Date: 20220919
 '
 ' **************************************************************
 
 'Oppdaterer klassen for en kodeliste i EA ut i fra Dakat. Kun klassen, ikke verdier.
-Sub updateProperties_Kodelister()
+
+function updateProperties_Kodelister()
 	element.Name = rsEgenskapstyper.Fields("NAVN_EGENSKAPSTYPE").Value
 	If Not IsNull(rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value) Then element.Notes = rsEgenskapstyper.Fields("BSKR_EGENSKAPSTYPE").Value
 	element.StereotypeEx = ""
@@ -84,15 +83,18 @@ Sub updateProperties_Kodelister()
 		'Søker gjennom pakka for å finne selve objekttypen og den egenskapen kodelista tilhører
 		If el.Stereotype = "Vegobjekttype" Then
 			'finner SOSI-navn for objekttypen, til bruk som eventuell suffix. For eksempel: "Basseng/Magasin" => "BassengMagasin"
-			set tagVal = el.TaggedValues.GetByName("SOSI_navn")
+			set tagVal = el.TaggedValues.GetByName("SOSI_navn")		
+			
 			Dim strSOSI_OT 
 			strSOSI_OT = tagVal.Value
 			dim attr as EA.Attribute
+			
 			For Each attr In el.Attributes
 				'Finner attributten som kodelisten tilhører
 				If attr.Style = element.Alias Then
 					'finner SOSI-navn for attributten
 					set aTag = attr.TaggedValues.GetByName("SOSI_navn")
+					
 					If not aTag is Nothing then
 						'Lager så velformulert og unikt SOSI-navn, med suffix dersom det er nødvendig for å få det unikt i SOSI. For eksempel: "Eier" => "EierBassengMagasin"
 						Dim strSOSInavn
@@ -119,10 +121,10 @@ Sub updateProperties_Kodelister()
 	End If
 	element.TaggedValues.Refresh()
 
-End Sub
+End function
 
 'Oppdaterer kodelisteklasser for alle vegobjekttyper i EA ut i fra Dakat. Kun klassene, ikke verdier
-sub updateKodelister()
+function updateKodelister()
 	'Setter opp spørring som viser aktive egenskaper med tillatte verdier i Dakat-databasen
 	connect2models
 	set rsEgenskapstyper = CreateObject("ADODB.Recordset")
@@ -162,7 +164,12 @@ sub updateKodelister()
 		Repository.WriteOutput "Script", Now & " OPPDATERER KODELISTER FOR VEGOBJEKTTYPEN " & UCase(pkOT_Sub.Name),0
 		
 		'Kjører gjennom alle registrerte kodelister for denne pakken i EA, og sammenligner med Dakat
-		For idxE = 0 To pkOT_Sub.Elements.Count - 1
+		dim count
+		count = pkOT_Sub.Elements.Count - 1
+		For idxE = 0 To count step 1
+			if idxE > count then
+				exit for
+			end if
 			set element = pkOT_Sub.Elements.GetAt(idxE)
 			If element.Stereotype = "Tillatte verdier" Then
 				'Tester om egenskapstypen finnes og har tillatte verdier i Dakat
@@ -179,7 +186,9 @@ sub updateKodelister()
 				Else
 					'Egenskapstypen finnes ikke med tillatte verdier i Dakat --> Slett kodelisteklassen
 					Repository.WriteOutput "Endringer", Now & " Sletter utgått kodeliste: " & pkOT_Sub.Name & "." & element.Name & " (" & element.Alias & ")",0
-					pkOT_Sub.Elements.DeleteAt idxE, False
+					pkOT_Sub.Elements.DeleteAt idxE, true				
+					idxE = idxE - 1
+					count = count - 1
 				End If
 			End If
 		Next 
@@ -211,6 +220,6 @@ sub updateKodelister()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateKodelister
+

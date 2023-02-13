@@ -15,7 +15,7 @@ dim absCon as EA.Connector
 dim absAssEl as EA.Element
 dim assEl as EA.Element
 
-sub abstractClasses()
+function abstractClasses()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
 	Repository.CreateOutputTab "Error"
@@ -23,17 +23,10 @@ sub abstractClasses()
 
 	set ePIF = Repository.GetProjectInterface
 
-	'Hent hovedpakken for NVDB Datakatalogen og pakken med abstrakte klasser i SOSI-modellregister
+	'Hent hovedpakken for NVDB Datakatalogen i SOSI-modellregister
 	set pkSOSINVDB = Repository.GetPackageByGuid(guidSOSIDatakatalog)
 	dim absPck as EA.Package
 	set absPck = Repository.GetPackageByGuid(guidAbstrakteKlasser)
-
-   	'Sett versjon på pakken med abstrakte klasser i SOSI
-	absPck.Element.Status = "Implemented"
-	absPck.Element.Version = FC_version
-	absPck.Element.Update
-
-	
 	dim absElement as EA.Element
 	
 	dim lstAbsCls
@@ -324,6 +317,5 @@ sub abstractClasses()
 	next
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-abstractClasses()

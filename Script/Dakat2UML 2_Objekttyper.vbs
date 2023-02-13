@@ -10,7 +10,7 @@ option explicit
 ' Script Name: NVDB til UML.Objekttyper
 ' Author: Knut Jetlund
 ' Purpose: Oppdatering av objekttyper
-' Date: 20221013
+' Date: 20220919
 '
 ' **************************************************************
 
@@ -41,9 +41,7 @@ Sub updateProperties_Objekttyper()
 	element.Alias = rsObjekttyper.Fields("ID_VOBJ_TYPE").Value
 	element.Modified = Now
 	element.Update()
-	'Sett versjon på objekttypepakke
 	pkOT_Sub.Element.Status = "Implemented"
-	pkOT_Sub.Element.Version = FC_version
 	pkOT_Sub.Element.Update()
 		
 	'Fjerner alle eksisterende tagged values 
@@ -91,7 +89,7 @@ Sub updateProperties_Objekttyper()
 End Sub
 
 'Oppdaterer egenskaper på alle vegobjekttyper i EA ut i fra Accessbasen
-sub updateObjekttyper()
+function updateObjekttyper()
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
 	set rsObjekttyper = CreateObject("ADODB.Recordset")
@@ -99,11 +97,6 @@ sub updateObjekttyper()
     rsObjekttyper.Filter = "Dato_fra_nvdb <> NULL"
     rsObjekttyper.MoveLast()
     Repository.WriteOutput "Script", Now & " Oppdaterer vegobjekttyper og legger til nye", 0 
-
-   	'Sett versjon på hovedpakka
-	pkObjekttyper.Element.Status = "Implemented"
-	pkObjekttyper.Element.Version = FC_version
-	pkObjekttyper.Element.Update
 
 	'Kjører gjennom alle pakker for vegobjekttyper i EA. Oppdaterer eksisterende pakker og objekttyper, sletter utgåtte
 	id = 0
@@ -186,6 +179,6 @@ sub updateObjekttyper()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateObjekttyper
+

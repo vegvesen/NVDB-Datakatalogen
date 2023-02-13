@@ -15,6 +15,7 @@ option explicit
 ' **************************************************************
 
 'Prosedyre for å oppdaterer egenskaper på en enkelt datatype i EA ut i fra Accessdatabasen
+
 Sub updateProperties_Datatyper()
 	element.Name = rsDatatyper.Fields("NAVN_DATATYP").Value
 	element.Alias = rsDatatyper.Fields("ID_DATATYPE").Value
@@ -56,7 +57,8 @@ Sub updateProperties_Datatyper()
 End Sub
 
 'Prosedyre for å oppdatere alle datatyper i EA ut i fra Accessdatabasen
-sub updateDatatyper()
+function updateDatatyper()
+
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
 	set rsDatatyper = CreateObject("ADODB.Recordset")
@@ -111,6 +113,6 @@ sub updateDatatyper()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateDatatyper
+

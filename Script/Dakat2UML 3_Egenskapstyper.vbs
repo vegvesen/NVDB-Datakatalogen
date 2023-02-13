@@ -28,7 +28,7 @@ Sub updateProperties_Egenskapstyper()
 	end if	
 
 	For idxDataType = 0 To pkDatatyper.Elements.Count - 1
-		set elementDT = pkDatatyper.Elements.GetAt(idxDataType)
+		set elementDT = pkDatatyper.Elements.GetAt(idxDataType)				
 		If elementDT.Alias = cstr(rsEgenskapstyper.Fields("ID_DATATYPE").Value) Then
 			eAttributt.Type = elementDT.Name
 			eAttributt.ClassifierID = elementDT.ElementID
@@ -122,7 +122,7 @@ Sub updateProperties_Egenskapstyper()
 End Sub
 
 'Oppdaterer egenskaper (properties) på alle egenskapstyper (attributter) for alle vegobjekttyper (klasser, objekttyper) i EA ut i fra Dakat
-sub updateEgenskapstyper()
+function updateEgenskapstyper()
 	'Setter opp kobling til modeller og databasetabell
 	connect2models
     'Setter opp Recordset som kobles til tabellen EGENSKAPSTYPE i Dakat-databasen
@@ -189,6 +189,6 @@ sub updateEgenskapstyper()
     Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateEgenskapstyper
+

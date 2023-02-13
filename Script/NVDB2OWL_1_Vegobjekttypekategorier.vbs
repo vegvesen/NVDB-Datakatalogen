@@ -11,14 +11,13 @@ option explicit
 '
 
 Dim rsVOTKategorier, rsVTKat, rsETKat, rsTVKat
-dim objFSO, objOTLFile, objTemplate
-dim nvdb_navn, definition
-dim tV as EA.TaggedValue
-dim atV as EA.AttributeTag
-dim ctV as EA.ConnectorTag
-dim conEnd as EA.ConnectorEnd
+'dim nvdb_navn, definition
+'dim tV as EA.TaggedValue
+'dim atV as EA.AttributeTag
+'dim ctV as EA.ConnectorTag
+'dim conEnd as EA.ConnectorEnd
 
-Sub main
+function generateOWLVegobjekttypekategorier
 
 	'Vise og tøm scriptvinduer
 	outputTabs
@@ -197,7 +196,8 @@ Sub main
 	next
 	
 	'dim filetime
-	filetime = replace(Now, ".","")
+	filetime = replace(Now, "/","")
+	filetime = replace(filetime, ".","")
 	filetime = replace(filetime, ":","")
 	filetime = replace(filetime, " ","_")
 	
@@ -209,8 +209,7 @@ Sub main
 
 
 
-End Sub
+End function
 
 
 
-main()

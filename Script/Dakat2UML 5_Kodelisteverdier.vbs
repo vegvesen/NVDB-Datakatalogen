@@ -63,7 +63,7 @@ End Sub
 
 
 'Oppdaterer alle kodelisteverdier (tillatte verdier) for alle vegobjekttyper
-sub updateKodelisteverdier()
+function updateKodelisteverdier()
 	'Setter opp spørring som viser alle aktive tillatte verdier i Dakat-databasen
 	connect2models
 	set rsKodelister = CreateObject("ADODB.Recordset")
@@ -127,6 +127,5 @@ sub updateKodelisteverdier()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-updateKodelisteverdier

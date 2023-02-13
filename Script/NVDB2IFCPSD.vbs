@@ -10,15 +10,16 @@ option explicit
 ' Date: 20220214
 '
 
-dim objFSO, objPSDFile
-dim nvdb_navn, sosi_navn, definition
-dim tV as EA.TaggedValue
-dim atV as EA.AttributeTag
-dim ctV as EA.ConnectorTag
-dim conEnd as EA.ConnectorEnd
+'dim objPSDFile
+dim sosi_navn
+'dim nvdb_navn, definition
+'dim tV as EA.TaggedValue
+'dim atV as EA.AttributeTag
+'dim ctV as EA.ConnectorTag
+'dim conEnd as EA.ConnectorEnd
 dim XMLstring 
 
-Sub main
+function generateIFC
 
 	'Vise og tøm scriptvinduer
 	outputTabs
@@ -91,9 +92,7 @@ Sub main
 							Case "Real":
 								range = "IfcReal"
 							Case "Date":
-								range = "IfcDate"
-							Case "Time":
-								range = "IfcTime"
+								range = "IfcDateTime"
 							Case "Boolean":
 								range = "IfcBoolean"
 							Case "BinærObjekt", "BinærObjekt, TSF", "BinærObjekt, Tekst", "BinærObjekt, Lyd"
@@ -132,6 +131,7 @@ Sub main
 								dim klNavn
 								klNavn = "PEnum_" & element.name & "_" & Ucase(Left(eAttributt.Name,1)) & mid(eAttributt.Name,2,len(eAttributt.Name)-1)
 								
+								Repository.WriteOutput "Script", Now & " eAttributt sin ClassifierID: " & eAttributt.ClassifierID, 0
 								'Finn kodeliste tilhørende egenskapstypen vha ClassifierID
 								if eAttributt.ClassifierID <> 0 then
 									set elementB= Repository.GetElementByID(eAttributt.ClassifierID)
@@ -180,8 +180,5 @@ Sub main
 	Repository.EnsureOutputVisible "Script"
 
 
-End Sub
+End function
 
-
-
-main()

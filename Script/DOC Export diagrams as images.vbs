@@ -10,7 +10,6 @@ option explicit
 '
 const path = "C:\DATA\GitHub\vegvesen\NVDB-Datakatalogen\UML\PNG\"
 dim dgr as EA.Diagram
-dim ePIF as EA.Project
 
 'Save current diagram
 sub saveDiagram(strName)

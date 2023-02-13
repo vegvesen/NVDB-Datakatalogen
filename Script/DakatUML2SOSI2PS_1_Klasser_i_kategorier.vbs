@@ -10,9 +10,7 @@
 ' Date: 20210216
 '
 
-const votkatId = "303,304"
-
-sub main
+function ObjektlisteKlasser
 
 	'Vise og tøm scriptvinduer
 	outputTabs
@@ -27,25 +25,26 @@ sub main
 	
 	'Hent valgt hovedpakke
 	dim thePackage as EA.Package
-	set thePackage = Repository.GetTreeSelectedPackage()
+	set thePackage = Repository.GetPackageByGuid(guidSOSIDatakatalog)
+	'set thePackage = Repository.GetTreeSelectedPackage()
 	Repository.WriteOutput "Script", Now & " Hovedpakke: " & thePackage.Name & " (" & thePackage.PackageGUID & ")", 0 
 	
 	'Mulighet for å stoppe prosessen i tilfelle feil hovedpakke...
-	dim msgAnsw
-	if thePackage.Packages.Count > 0 then 
-		msgAnsw = MsgBox("Slette gamle pakker fra hovedpakken " & thePackage.Name & "?", vbOkCancel, "Produktspesifikasjoner")
-		if msgAnsw <> 2 then
-			Repository.WriteOutput "Script", Now & " Sletter gamle pakker i hovedpakken...", 0 
-			for idxP = 0 to thePackage.Packages.Count - 1
-				set katPackage = thePackage.Packages.GetAt(idxP)
-				Repository.WriteOutput "Script", Now & " Sletter pakken " & katPackage.Name & "...", 0 
-				thePackage.Packages.DeleteAt idxP, 0
-			next
-			thePackage.Packages.Refresh
-		else
-			exit sub
-		end if	
-	end if	
+	'dim msgAnsw
+	'if thePackage.Packages.Count > 0 then 
+	'	msgAnsw = MsgBox("Slette gamle pakker fra hovedpakken " & thePackage.Name & "?", vbOkCancel, "Produktspesifikasjoner")
+	'	if msgAnsw <> 2 then
+	'		Repository.WriteOutput "Script", Now & " Sletter gamle pakker i hovedpakken...", 0 
+	'		for idxP = 0 to thePackage.Packages.Count - 1
+	'			set katPackage = thePackage.Packages.GetAt(idxP)
+	'			Repository.WriteOutput "Script", Now & " Sletter pakken " & katPackage.Name & "...", 0 
+	'			thePackage.Packages.DeleteAt idxP, 0
+	'		next
+	'		thePackage.Packages.Refresh
+	'	else
+	'		exit function
+	'	end if	
+	'end if	
 
 	dim pI as EA.Project					
 	set pI = Repository.GetProjectInterface()
@@ -63,14 +62,14 @@ sub main
 		dim katPackage as EA.Package
 		Do Until rsVOTKategorier.EOF
 			Repository.WriteOutput "Script", Now & " Vegobjekttypekategori: " & rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value & " (" & rsVOTKategorier.Fields("ID_VOBJ_TYP_KAT").Value & ")",0
-			set katPackage = thePackage.Packages.AddNew(rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value,"Package")
+			set katPackage = thePackage.Packages.AddNew(rsVOTKategorier.Fields("NAVN_VOBJ_TYP_KAT").Value,"Package") 'Add NV and SVV package to NVDB Datakatalogen
 			katPackage.Update
 			katPackage.StereotypeEx="applicationSchema"
 			katPackage.Update
 			set element = katPackage.Element
 			'set tagVal = element.TaggedValues.AddNew("xsdDocument",rsVOTKategorier.Fields("kortn_VOBJ_TYP_KAT").Value)
 			element.Alias = VK
-			If rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value <> "" then element.Notes = rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value
+			If rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value <> "" then element.Notes = rsVOTKategorier.Fields("BSKR_VOBJ_TYP_KAT").Value 'Hvis tredje kolonne VK_Beskrivelse ikke er tom.
 			element.Update
 			
 			'Liste med GML-tagger til hovedpakke
@@ -108,7 +107,7 @@ sub main
 			katPackage.Element.TaggedValues.Refresh
 			
 			'For hver VOT i kategorien:
-			rsVTKat.Filter = "ID_VOBJ_TYP_KAT = " & votkatId
+			rsVTKat.Filter = "ID_VOBJ_TYP_KAT = " & vk
 			Do Until rsVTKat.EOF
 				'Importer VOT sin XMI, strip GUIDs
 				dim strFileName
@@ -128,6 +127,4 @@ sub main
 
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 
-end sub
-
-main()
+end function

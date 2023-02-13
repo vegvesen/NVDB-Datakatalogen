@@ -131,12 +131,12 @@ end sub
 
 
 
-sub updateClasses()
+function updateClasses()
 	'Oppdatering av klasser (vegobjekttyper og kodelister) 
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub			  
+	If not connect then exit function			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av vegobjekttyper i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -165,7 +165,7 @@ sub updateClasses()
 			Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 			'Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
 		else
-			exit sub
+			exit function
 		end if
 		
 		'Løkke for alle klasser i SOSI-Modellen, sjekk for om de finnes i NVDB Datakatalogen
@@ -201,6 +201,5 @@ sub updateClasses()
 		
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-updateClasses()

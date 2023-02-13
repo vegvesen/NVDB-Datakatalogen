@@ -12,15 +12,15 @@ option explicit
 ' Date: 2020-05-27
 
 
-sub exportPackages()
+function exportPackages()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
 	Repository.CreateOutputTab "Error"
 	Repository.ClearOutput "Error"
 
-	' Get the currently selected package in the tree to work on
+	' Get the "ApplicationSchema" NVDB Datakatalogen package
 	dim thePackage as EA.Package
-	set thePackage = Repository.GetTreeSelectedPackage()
+	set thePackage = Repository.GetPackageByGuid(guidSOSIDatakatalog)
 		
 	if not thePackage is nothing and thePackage.ParentID <> 0 then
 		
@@ -30,15 +30,11 @@ sub exportPackages()
 		set pI = Repository.GetProjectInterface()
 		'Eksporterer alle pakker 
 		for each pck in thePackage.Packages	
-			if pck.PackageGUID <> guidAbstrakteKlasser then 
-				Repository.WriteOutput "Script", Now & " Eksporter filen " & sosiPath & "\" & pck.Alias & ".xml", 0 
-				pI.ExportPackageXMI pck.PackageGUID, 12, 1, -1, 1, 0, sosiPath & "\" & pck.Alias & ".xml"		
-			end if		
+			Repository.WriteOutput "Script", Now & " Eksporter filen " & sosiPath & "\" & pck.Alias & ".xml", 0 
+			pI.ExportPackageXMI pck.PackageGUID, 12, 1, -1, 1, 0, sosiPath & "\" & pck.Alias & ".xml"		
 		next
 	
 		Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	end if
 	Repository.EnsureOutputVisible "Script"
-end sub
-
-exportPackages()
+end function

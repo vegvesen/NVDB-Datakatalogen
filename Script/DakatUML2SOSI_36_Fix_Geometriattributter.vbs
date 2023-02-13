@@ -12,7 +12,7 @@ option explicit
 ' Date: 2020-06-61
 
 
-sub exportPackages()
+function fixGeometricAttributes()
 	Repository.EnsureOutputVisible "Script"
 	Repository.ClearOutput "Script"
 	Repository.CreateOutputTab "Error"
@@ -143,6 +143,5 @@ sub exportPackages()
 
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-exportPackages()

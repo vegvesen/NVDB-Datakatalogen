@@ -6,7 +6,7 @@ option explicit
 !INC NVDB._parametre
 								 
 
-' Script Name: DakatUML2SOSI_3_Attributter
+' Script Name: DakatUML2SOSI_35_Attributter
 ' Author: Knut Jetlund
 ' Purpose: Oppdater SOSI-UML for attributter og kodelisteverdier fra oppdatert NVDB-UML
 ' Date: 2020-04-28
@@ -155,9 +155,6 @@ sub updateAttributeProperties()
 						Case "Date"
 							guidDT = guidDate
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "DATO")
-						Case "Time"
-							guidDT = guidTime
-							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "T")
 						Case "Boolean"
 							guidDT = guidBoolean
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "Boolsk")
@@ -175,9 +172,10 @@ sub updateAttributeProperties()
 							guidDT = guidFlate
 							eAttributt.Name = "område"
 							set aTag = eAttributt.TaggedValues.AddNew("SOSI_datatype", "FLATE")
-					End Select
-					aTag.Update
+					End Select				
+					
 					if not guidDT = "0" then
+						aTag.Update 'aTag is usually updated outside this if, but i don't know if it needs to
 						set elementB = Repository.GetElementByGuid(guidDT)
 						eAttributt.ClassifierID = elementB.ElementID
 						Repository.WriteOutput "SOSI", Now & " Datatype og SOSI-tag for " & element.stereotype & " " & element.Name &  "." & eAttributt.Name & ": " & eAttributt.Type & " SOSI_datatype " & aTag.Value, 0 
@@ -192,12 +190,12 @@ end sub
 
 
 
-sub updateAttributes()
+function updateAttributes()
 	'Oppdatering av attributter (egenskapstyper og kodelisteverdier)  
 	'Setter opp kobling til modeller og databasetabell
 	dim connect 
 	connect = connect2UMLmodels()
-	If not connect then exit sub			  
+	If not connect then exit function			  
   
 	Repository.WriteOutput "Script", Now & " Oppdatering av vegobjekttyper i SOSI-modellregister", 0 
 	Repository.WriteOutput "Script", Now & " ", 0 
@@ -226,7 +224,7 @@ sub updateAttributes()
 			Repository.WriteOutput "Script", Now & " SOSI-pakke: " & pkOT.Name &  " (" & pkOT.Alias & ")", 0 
 			'Repository.WriteOutput "Script", Now & " NVDB-pakke: " & pkOT_NVDB.Name &  " (" & pkOT_NVDB.Alias & ")", 0 
 		else
-			exit sub
+			exit function
 		end if
 		
 		'Løkke for alle klasser i SOSI-Modellen
@@ -411,6 +409,5 @@ sub updateAttributes()
 
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
-end sub
+end function
 
-updateAttributes()

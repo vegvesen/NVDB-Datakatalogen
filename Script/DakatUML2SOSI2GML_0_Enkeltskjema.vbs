@@ -11,15 +11,12 @@
 '
 ' NOTE: Requires a package to be selected in the Project Browser
 ' 
-dim scRep as EA.Repository
-dim scMod as EA.Package
-dim scPck as EA.Package
 dim pI as EA.Project					
 dim objFS
 dim lstTags
 dim absClasses as EA.Package
 
-sub createSCmodel(newOrCopy)
+function createSCmodel(newOrCopy)
 'Lager eller kobler til ShapeChange-EA-prosjekt og modell
 	Repository.WriteOutput "Script", Now & " Lager ShapeChange-prosjektet " & scPath & "\" & scProject, 0 
 	'Sletter eventuelt gammel fil
@@ -44,12 +41,12 @@ sub createSCmodel(newOrCopy)
 		set scMod = scRep.Models.GetByName("ShapeChange")
 		if scMod is Nothing then 
 			Repository.WriteOutput "Script", Now & " Finner ikke basismodellen ShapeChange", 0 
-			exit sub
+			exit function
 		end if	
 		set scPck = scMod.Packages.GetByName("NVDB")
 		if scPck is Nothing then 
 			Repository.WriteOutput "Script", Now & " Finner ikke hovedpakken NVDB", 0 
-			exit sub
+			exit function
 		end if	
 		set pkSOSIfelles = scPck.Packages.GetByName("SOSI Fellesegenskaper")
 		if not pkSOSIfelles is nothing then
@@ -57,7 +54,7 @@ sub createSCmodel(newOrCopy)
 		else
 			Repository.WriteOutput "Script", Now & " Finner ikke pakken SOSI Fellesegenskaper", 0 
 			scRep.Exit
-			exit sub
+			exit function
 		end if 
 		set absClasses = scRep.GetPackageByGuid(guidAbstrakteKlasser)  ' scPck.Packages.GetByName("_AbstrakteKlasser")
 		if not absClasses is nothing then
@@ -65,7 +62,7 @@ sub createSCmodel(newOrCopy)
 		else
 			Repository.WriteOutput "Script", Now & " Finner ikke pakken _AbstrakteKlasser", 0 
 			scRep.Exit
-			exit sub
+			exit function
 		end if	
 	else
 		Repository.WriteOutput "Script", Now & " Lager modellen ShapeChange", 0 
@@ -117,7 +114,7 @@ sub createSCmodel(newOrCopy)
 
 	scPck.Element.TaggedValues.Refresh
 	scMod.Packages.Refresh	
-end sub
+end function
 
 sub importSOSIFelles
 	'Importerer SOSI Fellesegenskaper-pakken til modellen ShapeChange
@@ -226,9 +223,8 @@ sub movefile(strFileName, strOldPath, strNewPath)
 	if objFS.FileExists(strNewPath & strFileName) then
 		Repository.WriteOutput "Script", Now & " Filen " & strNewPath & strFileName & " finnes fra før slettes", 0 
 		objFS.DeleteFile strNewPath & strFileName
-	else
-		'Repository.WriteOutput "Script", Now & " Filen finnes ikke fra før", 0 
 	end if
+	
 	if objFS.FileExists(strOldPath & strFileName) then
 		Repository.WriteOutput "Script", Now & " Flytter " & strOldPath & strFileName & " til " & strNewPath, 0 
 		objFS.MoveFile strOldPath & strFileName, strNewPath
@@ -237,7 +233,7 @@ sub movefile(strFileName, strOldPath, strNewPath)
 	end if
 end sub
 
-sub Fellesskjema()
+function Enkeltskjema()
 
 	dim msgAnsw
 	dim pck as EA.Package
@@ -248,9 +244,8 @@ sub Fellesskjema()
 	Repository.CreateOutputTab "Error"
 	Repository.ClearOutput "Error"
 
-	' Get the currently selected package in the tree to work on
 	dim thePackage as EA.Package
-	set thePackage = Repository.GetTreeSelectedPackage()
+	set thePackage = Repository.GetPackageByGuid(guidSOSIDatakatalog)
 	Set objFS = CreateObject("Scripting.FileSystemObject")
 		
 	if not thePackage is nothing and thePackage.ParentID <> 0 then
@@ -316,7 +311,7 @@ sub Fellesskjema()
 
 		'Lag kopi av SC-prosjektet, for bruk som mal for prosessen med enkeltvise skjema.
 		'Sletter eventuelt gammel fil
-		If objFS.FileExists(scPath & "\" & scMal) then objFS.DeleteFile scPath & "\" & scMal, true
+		If objFS.FileExists(scPath & "\" & scTemplate) then objFS.DeleteFile scPath & "\" & scTemplate, true
 		objFS.CopyFile scPath & "\" & scProject, scPath & "\" & scTemplate
 			
 		'***************** Skjema pr vegobjekttype *****************************
@@ -427,6 +422,6 @@ sub Fellesskjema()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk resultatfilene...", 0 
 	Repository.EnsureOutputVisible "Script"
 
-end sub
+end function
 
-Fellesskjema
+Enkeltskjema()
