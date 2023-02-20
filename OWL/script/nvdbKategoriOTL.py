@@ -26,7 +26,7 @@ import sys, datetime
 from rdflib import Graph, Namespace, URIRef,  Literal
 from rdflib.namespace import RDF, RDFS, XSD, OWL,DC
 #from constants import *
-from script.sparqlMapping import *
+from sparqlMapping import *
 
 # *********************************
 # Her begynner selve moroa!

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.31" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.31" version="2.31">
+  <annotation>
+    <documentation>828: benyttes for å sikre grøfter etc.</documentation>
+  </annotation>
+  <include schemaLocation="OLFV_SVV.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="MaterialtypeRistType">
+    <annotation>
+      <documentation>9388: .</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">9388</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">9388</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:MaterialtypeRistEnumerationType nvdb:MaterialtypeRistOtherType"/>
+  </simpleType>
+  <simpleType name="MaterialtypeRistEnumerationType">
+    <annotation>
+      <documentation>9388: .</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">9388</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">9388</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Stål">
+        <annotation>
+          <documentation>13129: Stål</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13129</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Aluminium">
+        <annotation>
+          <documentation>13130: Aluminium</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13130</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Kompositt">
+        <annotation>
+          <documentation>13131: Kompositt</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13131</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kompositt</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="MaterialtypeRistOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Rist" substitutionGroup="nvdb:Fellesegenskaper" type="nvdb:RistType">
+    <annotation>
+      <documentation>828: benyttes for å sikre grøfter etc.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">828</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">828</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Rist</sc:taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="RistType">
+    <complexContent>
+      <extension base="nvdb:FellesegenskaperType">
+        <sequence>
+          <element name="areal" type="integer">
+            <annotation>
+              <documentation>9387: Angir areal.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">9387</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="materialtype" type="nvdb:MaterialtypeRistType">
+            <annotation>
+              <documentation>9388: .</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">9388</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="etableringsår" type="integer">
+            <annotation>
+              <documentation>10349: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">10349</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>11203: Gir punkt som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">11203</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="RistPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Rist"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>
