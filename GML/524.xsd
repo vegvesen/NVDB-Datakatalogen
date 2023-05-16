@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -77,7 +77,7 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="MåleformålSpormåling_AvledaPr20MType">
+  <simpleType name="MåleformålType">
     <annotation>
       <documentation>4464: Angir formal med spormåling.</documentation>
       <appinfo>
@@ -86,9 +86,9 @@
         <sc:taggedValue tag="NVDB_navn">Måleformål</sc:taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:MåleformålSpormåling_AvledaPr20MEnumerationType nvdb:MåleformålSpormåling_AvledaPr20MOtherType"/>
+    <union memberTypes="nvdb:MåleformålEnumerationType nvdb:MåleformålOtherType"/>
   </simpleType>
-  <simpleType name="MåleformålSpormåling_AvledaPr20MEnumerationType">
+  <simpleType name="MåleformålEnumerationType">
     <annotation>
       <documentation>4464: Angir formal med spormåling.</documentation>
       <appinfo>
@@ -217,7 +217,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="MåleformålSpormåling_AvledaPr20MOtherType">
+  <simpleType name="MåleformålOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -300,7 +300,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element name="måleformål" type="nvdb:MåleformålSpormåling_AvledaPr20MType">
+          <element name="måleformål" type="nvdb:MåleformålType">
             <annotation>
               <documentation>4464: Angir formal med spormåling.</documentation>
               <appinfo>
@@ -544,7 +544,7 @@
           </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
             <annotation>
-              <documentation>5024: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet. Geometrien benyttes kun i forbindelse med etablering av vegobjektet og skal normalt ikke lagres i NVDB.</documentation>
+              <documentation>5024: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">5024</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
@@ -554,20 +554,6 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element name="assosiertDekketilstandsmåling" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDekketilstandsmåling</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>

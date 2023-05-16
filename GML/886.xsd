@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -128,7 +128,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="retning" type="nvdb:RetningType">
+          <element minOccurs="0" name="retning" type="nvdb:RetningOmkjøringsruteType">
             <annotation>
               <documentation>10704: Angir om omkjøringsruta gjelder for begge kjøreretninger eller kun en veg. Utfyllende informasjon kan gis i merknadsfelt.</documentation>
               <appinfo>
@@ -192,34 +192,6 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertOmkjøringsruteinnsats_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktOmkjøringsruteinnsats_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertOmkjøringsruteinnsats_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktOmkjøringsruteinnsats_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertStengningslenke" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktStengningslenke</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -231,7 +203,7 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <simpleType name="RetningType">
+  <simpleType name="RetningOmkjøringsruteType">
     <annotation>
       <documentation>10704: Angir om omkjøringsruta gjelder for begge kjøreretninger eller kun en veg. Utfyllende informasjon kan gis i merknadsfelt.</documentation>
       <appinfo>
@@ -240,9 +212,9 @@
         <sc:taggedValue tag="NVDB_navn">Retning</sc:taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:RetningEnumerationType nvdb:RetningOtherType"/>
+    <union memberTypes="nvdb:RetningOmkjøringsruteEnumerationType nvdb:RetningOmkjøringsruteOtherType"/>
   </simpleType>
-  <simpleType name="RetningEnumerationType">
+  <simpleType name="RetningOmkjøringsruteEnumerationType">
     <annotation>
       <documentation>10704: Angir om omkjøringsruta gjelder for begge kjøreretninger eller kun en veg. Utfyllende informasjon kan gis i merknadsfelt.</documentation>
       <appinfo>
@@ -272,7 +244,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="RetningOtherType">
+  <simpleType name="RetningOmkjøringsruteOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

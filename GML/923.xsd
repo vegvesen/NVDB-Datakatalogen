@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -18,6 +18,15 @@
     <complexContent>
       <extension base="nvdb:AbstraktBeredskapsvegType">
         <sequence>
+          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeBeredskapsvegType">
+            <annotation>
+              <documentation>12599: Angir hvilket bruksområde beredskapsvegen i hovedsak benyttes til.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12599</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
             <annotation>
               <documentation>Angivelse av objektets posisjon</documentation>
@@ -39,4 +48,59 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="BruksområdeBeredskapsvegType">
+    <annotation>
+      <documentation>12599: Angir hvilket bruksområde beredskapsvegen i hovedsak benyttes til.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12599</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12599</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:BruksområdeBeredskapsvegEnumerationType nvdb:BruksområdeBeredskapsvegOtherType"/>
+  </simpleType>
+  <simpleType name="BruksområdeBeredskapsvegEnumerationType">
+    <annotation>
+      <documentation>12599: Angir hvilket bruksområde beredskapsvegen i hovedsak benyttes til.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12599</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12599</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Sykkelrute">
+        <annotation>
+          <documentation>21732: Benyttes der beredskapsveg utenfor tunnel også skal benyttes som sykkelrute der sykling i tunnel er forbudt. Dette kan også være aktuelt utenom tunnel.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21732</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelrute</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Driftsåpning">
+        <annotation>
+          <documentation>21733: Åpning i rekkverk eller eget sideanlegg for å lede trafikk igjennom når hovedveg blir stengt.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21733</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Driftsåpning</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Beredskapsferjestrekning">
+        <annotation>
+          <documentation>21734: Benyttes der ferjestrekningen kun er i bruk i beredskapssammenheng.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21734</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Beredskapsferjestrekning</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="BruksområdeBeredskapsvegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
 </schema>

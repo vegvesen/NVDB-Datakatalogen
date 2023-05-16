@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -164,21 +164,30 @@
     <complexContent>
       <extension base="nvdb:AbstraktTilstandSkade_DekkeType">
         <sequence>
-          <element minOccurs="0" name="antall" type="integer">
-            <annotation>
-              <documentation>2205: Vegobjektet kan representere flere objekt av samme type. Vi angir her hvor mange objekt dette objektet representerer.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">2205</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Antall</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="skadetype" type="nvdb:SkadetypeTilstandSkade_DekkeType">
             <annotation>
               <documentation>1162: Angir hvilken type skade det er tale om.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">1162</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Skadetype</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="alvorlighetsgrad" type="nvdb:AlvorlighetsgradType">
+            <annotation>
+              <documentation>1998: Angir hvor alvorlig en skade/tilstand er.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1998</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Alvorlighetsgrad</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="utbredelse" type="nvdb:UtbredelseType">
+            <annotation>
+              <documentation>2000: Angir hvor utbredt en skade/tilstand er.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">2000</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Utbredelse</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -209,6 +218,15 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="antall" type="integer">
+            <annotation>
+              <documentation>2205: Vegobjektet kan representere flere objekt av samme type. Vi angir her hvor mange objekt dette objektet representerer.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">2205</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Antall</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="tilleggsinformasjon" type="string">
             <annotation>
               <documentation>7852: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
@@ -236,48 +254,9 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="alvorlighetsgrad" type="nvdb:AlvorlighetsgradType">
-            <annotation>
-              <documentation>1998: Angir hvor alvorlig en skade/tilstand er.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1998</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Alvorlighetsgrad</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="utbredelse" type="nvdb:UtbredelseType">
-            <annotation>
-              <documentation>2000: Angir hvor utbredt en skade/tilstand er.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">2000</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Utbredelse</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertFortau" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFortau</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertVegdekke" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVegdekke</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>

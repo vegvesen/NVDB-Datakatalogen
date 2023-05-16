@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -100,7 +100,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="spor" type="nvdb:SporNedbøyningsmåleserieType">
+          <element minOccurs="0" name="spor" type="nvdb:SporType">
             <annotation>
               <documentation>7916: Angir hvor nedbøyning er foretatt.</documentation>
               <appinfo>
@@ -164,20 +164,6 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element minOccurs="0" name="assosiertNedbøyningsmåling" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktNedbøyningsmåling</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -189,7 +175,7 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
-  <simpleType name="SporNedbøyningsmåleserieType">
+  <simpleType name="SporType">
     <annotation>
       <documentation>7916: Angir hvor nedbøyning er foretatt.</documentation>
       <appinfo>
@@ -198,9 +184,9 @@
         <sc:taggedValue tag="NVDB_navn">Spor</sc:taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:SporNedbøyningsmåleserieEnumerationType nvdb:SporNedbøyningsmåleserieOtherType"/>
+    <union memberTypes="nvdb:SporEnumerationType nvdb:SporOtherType"/>
   </simpleType>
-  <simpleType name="SporNedbøyningsmåleserieEnumerationType">
+  <simpleType name="SporEnumerationType">
     <annotation>
       <documentation>7916: Angir hvor nedbøyning er foretatt.</documentation>
       <appinfo>
@@ -239,7 +225,7 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="SporNedbøyningsmåleserieOtherType">
+  <simpleType name="SporOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

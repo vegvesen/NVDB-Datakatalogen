@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -224,6 +224,98 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
+  <simpleType name="InnsnakkFraVTSType">
+    <annotation>
+      <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:InnsnakkFraVTSEnumerationType nvdb:InnsnakkFraVTSOtherType"/>
+  </simpleType>
+  <simpleType name="InnsnakkFraVTSEnumerationType">
+    <annotation>
+      <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21862: Ja</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21862</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21863: Nei</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21863</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnsnakkFraVTSOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnsnakkLokaltType">
+    <annotation>
+      <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:InnsnakkLokaltEnumerationType nvdb:InnsnakkLokaltOtherType"/>
+  </simpleType>
+  <simpleType name="InnsnakkLokaltEnumerationType">
+    <annotation>
+      <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21860: Ja</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21860</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21861: Nei</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21861</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="InnsnakkLokaltOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="KringkastingType">
     <annotation>
       <documentation>10795: Angir om det er kringkasting.</documentation>
@@ -375,6 +467,24 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="innsnakkLokalt" type="nvdb:InnsnakkLokaltType">
+            <annotation>
+              <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="innsnakkFraVTS" type="nvdb:InnsnakkFraVTSType">
+            <annotation>
+              <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="etableringsår" type="integer">
             <annotation>
               <documentation>10791: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
@@ -441,13 +551,6 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -317,54 +317,36 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="Sittegruppe">
+      <enumeration value="Sittegruppe med bord">
         <annotation>
-          <documentation>2518: Sittegruppe</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2518</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sittegruppe</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sittegruppe, bord/benk">
-        <annotation>
-          <documentation>2519: Sittegruppe, bord/benk</documentation>
+          <documentation>2519: Benker/stoler plassert sammen i en sittegruppe. Det inngår bord i sittegruppen. Sittegruppe har ikke takoverbygg.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">2519</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sittegruppe, bord/benk</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittegruppe med bord</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Sittegruppe, bord/benk m tak">
+      <enumeration value="Sittegruppe med bord og takoverbygg">
         <annotation>
-          <documentation>2520: Sittegruppe, bord/benk m tak</documentation>
+          <documentation>2520: Benker/stoler plassert sammen i en sittegruppe. Det inngår bord i sittegruppen. Sittegruppe har takoverbygg.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">2520</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sittegruppe, bord/benk m tak</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittegruppe med bord og takoverbygg</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Sittegruppe, bord/stoler">
+      <enumeration value="Sittegruppe uten bord">
         <annotation>
-          <documentation>2521: Sittegruppe, bord/stoler</documentation>
+          <documentation>21789: Benker/stoler plassert sammen i en sittegruppe. Det inngår ikke bord i sittegruppen. Sittegruppe har ikke takoverbygg.</documentation>
           <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2521</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sittegruppe, bord/stoler</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sittegruppe, bord/stoler m tak">
-        <annotation>
-          <documentation>13316: Sittegruppe, bord/stoler m tak</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13316</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sittegruppe, bord/stoler m tak</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">21789</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittegruppe uten bord</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="Benk">
         <annotation>
-          <documentation>3793: Benk</documentation>
+          <documentation>3793: Sittemøbel. Merknad: Benk i tilknytning til sittegruppe inngår som del av denne og skal ikke registreres som eget vegobjekt.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">3793</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Benk</sc:taggedValue>
@@ -403,7 +385,7 @@
           </element>
           <element minOccurs="0" name="antall" type="integer">
             <annotation>
-              <documentation>2195: Vegobjektet kan representere flere objekt av samme type. Vi angir her hvor mange objekt dette objektet representerer.</documentation>
+              <documentation>2195: Det angis her hvor mange forekomster av utemøbler dette vegobjektet representerer. Merknad: Denne måten å registrere på ønskes ikke videreført. Det skal registreres ett vegobjekt per forekomst av utemøbler, antall vil da bli 1.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">2195</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Antall</sc:taggedValue>
@@ -548,62 +530,6 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertFerjekai" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFerjekai</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertRasteplass" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktRasteplass</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertHoldeplassutrustning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktHoldeplassutrustning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSystemobjekt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSystemobjekt</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>

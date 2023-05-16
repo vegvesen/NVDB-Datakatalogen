@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -69,15 +69,6 @@
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">9414</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Innkrevningsretning</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="bompengeanlegg_Id" type="integer">
-            <annotation>
-              <documentation>9596: Angir ID på bompengeanlegget. Er grunnlag for å få overført takstinformasjon fra CS-Norge.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9596</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bompengeanlegg_Id</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -282,41 +273,6 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSkiltpunkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSkiltpunkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBygning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktBygning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSystemobjekt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSystemobjekt</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>
@@ -635,27 +591,27 @@
       </appinfo>
     </annotation>
     <restriction base="string">
-      <enumeration value="Standard timesregel">
+      <enumeration value="Første passering gjelder">
         <annotation>
-          <documentation>13257: Det gis fritak/rabatt ved passering av mer enn en bomstasjon innenfor et avgrenset tidsrom.</documentation>
+          <documentation>13257: Det gis fritak/rabatt ved passering av mer enn en bomstasjon innenfor et avgrenset tidsrom (vanligvis 1 time). Det belastes kun for første passering innenfor tidsrommet.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">13257</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Standard timesregel</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Første passering gjelder</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Omvendt timesregel">
+      <enumeration value="Dyreste passering gjelder">
         <annotation>
-          <documentation>18299: Det gis fritak/rabatt om kun en av to eller flere angitte bomstasjon passeres innenfor et gitt tidsrom. Må passere minst to bomstasjoner for å bli belastet.</documentation>
+          <documentation>21834: Det gis fritak/rabatt ved passering av mer enn en bomstasjon innenfor et avgrenset tidsrom (vanligvis 1 time). Det belastes kun for dyreste passering innenfor tidsrommet.</documentation>
           <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18299</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Omvendt timesregel</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">21834</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dyreste passering gjelder</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
       <enumeration value="Ikke timesregel">
         <annotation>
-          <documentation>13258: Ikke timesregel</documentation>
+          <documentation>13258: Alle passeringer blir belastet uansett hvor kort tid det er mellom dem.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">13258</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Ikke timesregel</sc:taggedValue>

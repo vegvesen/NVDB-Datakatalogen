@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -88,7 +88,7 @@
   </simpleType>
   <element name="Hydrant" substitutionGroup="nvdb:AbstraktHydrant" type="nvdb:HydrantType">
     <annotation>
-      <documentation>209: Objekt som kan brukes til å koble til slangesystemer i forbindelse med brann eller vask av gater/områder.</documentation>
+      <documentation>209: Fastmontert utstyr over eller under bakken, med kopling for slangesystem for uttak av vann til brannslukking eller vask av gater/områder. Dersom hydrant er forbundet med kum, skal kum registreres i tillegg. Som vann- eller brannkum.</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">209</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">209</sc:taggedValue>
@@ -100,12 +100,30 @@
     <complexContent>
       <extension base="nvdb:AbstraktHydrantType">
         <sequence>
+          <element minOccurs="0" name="plassering" type="nvdb:PlasseringHydrantType">
+            <annotation>
+              <documentation>3736: Angir plassering.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">3736</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="kapasitet" type="double">
             <annotation>
               <documentation>3875: Angir vannkapasitet.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">3875</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Kapasitet</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vaskevann" type="nvdb:VaskevannType">
+            <annotation>
+              <documentation>12614: Angir om uttaket kan brukes av driftsentreprenør til vannfylling i forbindelse med tunnelvask.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12614</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Vaskevann</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -217,53 +235,9 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="plassering" type="nvdb:PlasseringHydrantType">
-            <annotation>
-              <documentation>3736: Angir plassering.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">3736</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSystemobjekt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSystemobjekt</targetElement>
-              </appinfo>
             </annotation>
           </element>
         </sequence>
@@ -319,6 +293,52 @@
     </restriction>
   </simpleType>
   <simpleType name="PlasseringHydrantOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaskevannType">
+    <annotation>
+      <documentation>12614: Angir om uttaket kan brukes av driftsentreprenør til vannfylling i forbindelse med tunnelvask.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12614</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12614</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Vaskevann</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:VaskevannEnumerationType nvdb:VaskevannOtherType"/>
+  </simpleType>
+  <simpleType name="VaskevannEnumerationType">
+    <annotation>
+      <documentation>12614: Angir om uttaket kan brukes av driftsentreprenør til vannfylling i forbindelse med tunnelvask.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12614</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12614</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Vaskevann</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>21790: Ja</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21790</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>21791: Nei</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21791</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="VaskevannOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -102,7 +102,7 @@
         <sequence>
           <element minOccurs="0" name="navn" type="string">
             <annotation>
-              <documentation>1077: Angir navn på kontroll-/veieplassen..</documentation>
+              <documentation>1077: Angir navn på kontroll-/veieplassen.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">1077</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
@@ -138,7 +138,7 @@
           </element>
           <element minOccurs="0" name="areal" type="integer">
             <annotation>
-              <documentation>1360: Angir total areal av vegobjektet. Arealet inkluderer kjørbart, ikke kjørbart og bebygd areal.</documentation>
+              <documentation>1360: Angir totalt areal av vegobjektet. Arealet inkluderer kjørbart, ikke kjørbart og bebygd areal.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">1360</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
@@ -156,7 +156,7 @@
           </element>
           <element minOccurs="0" name="vinterdriftsklasse" type="nvdb:VinterdriftsklasseKontrollVeieplassType">
             <annotation>
-              <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse).</documentation>
+              <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
@@ -226,15 +226,6 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>8932: Gir linje/kurve som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">8932</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
             <annotation>
               <documentation>10963: Gir flate/polygon som geometrisk avgrenser området.</documentation>
@@ -249,24 +240,31 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKamera" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKamera</targetElement>
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSignalpunkt" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSignalpunkt</targetElement>
               </appinfo>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVekt" type="gml:ReferenceType">
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSkiltpunkt" type="gml:ReferenceType">
             <annotation>
               <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVekt</targetElement>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSkiltpunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertTrafikkstasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTrafikkstasjon</targetElement>
               </appinfo>
             </annotation>
           </element>
@@ -514,7 +512,7 @@
       </enumeration>
       <enumeration value="I åpningstid">
         <annotation>
-          <documentation>21709: Vekt er tilgjengelig innenfor åpningstid. Gjelder typisk for kontrollstasjoner i tilkntning til Trafikkstasjoner hvor det da henspeiler på trafkkstasjonens åpningstid.</documentation>
+          <documentation>21709: Vekt er tilgjengelig innenfor åpningstid. Gjelder typisk for kontrollstasjoner i tilknytning til trafikkstasjoner hvor det da henviser til trafikkstasjonens åpningstid.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">21709</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">I åpningstid</sc:taggedValue>
@@ -539,7 +537,7 @@
   </simpleType>
   <simpleType name="VinterdriftsklasseKontrollVeieplassType">
     <annotation>
-      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse).</documentation>
+      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
@@ -550,7 +548,7 @@
   </simpleType>
   <simpleType name="VinterdriftsklasseKontrollVeieplassEnumerationType">
     <annotation>
-      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 819-Vinterdriftsklasse).</documentation>
+      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>

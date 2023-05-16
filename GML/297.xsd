@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
+  <include schemaLocation="AbstraktNVDB.xsd"/>
+  <include schemaLocation="SOSIFelles.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <element name="Kommentar" substitutionGroup="nvdb:AbstraktKommentar" type="nvdb:KommentarType">
+    <annotation>
+      <documentation>297: Vegobjekt beskriver spesielle forhold for det objektet det er knyttet til.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">297</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">297</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Kommentar</sc:taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="KommentarType">
+    <complexContent>
+      <extension base="nvdb:AbstraktKommentarType">
+        <sequence>
+          <element minOccurs="0" name="beskrivelse" type="string">
+            <annotation>
+              <documentation>1086: Gir beskrivelse til vegobjektet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1086</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+            <annotation>
+              <documentation>4894: Gir punkt som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">4894</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertTrafikklomme" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTrafikklomme</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="KommentarPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Kommentar"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+</schema>

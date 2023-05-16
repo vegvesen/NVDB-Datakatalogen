@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -154,7 +154,7 @@
       </enumeration>
       <enumeration value="Annen">
         <annotation>
-          <documentation>13899: Annen overvåkningstype.</documentation>
+          <documentation>13899: Annen overvåkningstype. Utdypes under Tilleggsinformasjon</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">13899</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Annen</sc:taggedValue>
@@ -170,7 +170,7 @@
   </simpleType>
   <element name="Skred_VarslingOvervåkning" substitutionGroup="nvdb:AbstraktSkred_VarslingOvervåkning" type="nvdb:Skred_VarslingOvervåkningType">
     <annotation>
-      <documentation>849: Område som blir overvåket med hensyn på skred.</documentation>
+      <documentation>849: Område som blir overvåket av et skredvarslingssystem.</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">849</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">849</sc:taggedValue>
@@ -200,12 +200,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="varslingPåVeg" type="nvdb:VarslingPåVegType">
+          <element minOccurs="0" name="stengningAvVeg" type="nvdb:StengningAvVegType">
             <annotation>
-              <documentation>9650: Angir type varsling som er satt opp synlig for trafikanter.</documentation>
+              <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Varsling på veg</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -254,15 +254,6 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>9652: Gir linje/kurve som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9652</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
           <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
             <annotation>
               <documentation>9651: Gir flate/polygon som geometrisk avgrenser området.</documentation>
@@ -277,34 +268,6 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSkredtekniskObjekt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSkredtekniskObjekt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -316,6 +279,61 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="StengningAvVegType">
+    <annotation>
+      <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:StengningAvVegEnumerationType nvdb:StengningAvVegOtherType"/>
+  </simpleType>
+  <simpleType name="StengningAvVegEnumerationType">
+    <annotation>
+      <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Stengning med lys">
+        <annotation>
+          <documentation>13981: Varsling om stengning vved hejelp av lys.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13981</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengning med lys</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Stengning med bommer">
+        <annotation>
+          <documentation>13982: Stengning ved hjelp av bommer.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13982</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengning med bommer</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Ingen stengning">
+        <annotation>
+          <documentation>15963: Ingen stengning eller varsling er satt opp.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">15963</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ingen stengning</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="StengningAvVegOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="TypeNaturfareSkred_VarslingOvervåkningType">
     <annotation>
       <documentation>9647: Angir hvilken type naturfare overvåkning/varsling gjelder for.</documentation>
@@ -382,73 +400,18 @@
           </appinfo>
         </annotation>
       </enumeration>
-      <enumeration value="Flere skredtyper">
+      <enumeration value="Flere naturfarer">
         <annotation>
-          <documentation>21023: Indikerer at det varsles/overvåkes flere skredtyper. Kan suppleres under tilleggsinformasjon.</documentation>
+          <documentation>21023: Varsling/overvåkning av flere typer naturfare. Utdypes under Tilleggsinformasjon.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">21023</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Flere skredtyper</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Flere naturfarer</sc:taggedValue>
           </appinfo>
         </annotation>
       </enumeration>
     </restriction>
   </simpleType>
   <simpleType name="TypeNaturfareSkred_VarslingOvervåkningOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VarslingPåVegType">
-    <annotation>
-      <documentation>9650: Angir type varsling som er satt opp synlig for trafikanter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Varsling på veg</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VarslingPåVegEnumerationType nvdb:VarslingPåVegOtherType"/>
-  </simpleType>
-  <simpleType name="VarslingPåVegEnumerationType">
-    <annotation>
-      <documentation>9650: Angir type varsling som er satt opp synlig for trafikanter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Varsling på veg</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Lys">
-        <annotation>
-          <documentation>13981: Varsling ved hjelp av lys.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13981</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lys</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Bommer">
-        <annotation>
-          <documentation>13982: Varsling ved hjelp av bommer.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13982</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bommer</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ingen">
-        <annotation>
-          <documentation>15963: Ingen varsling er satt opp.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15963</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VarslingPåVegOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -336,6 +336,15 @@
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="spesiellStatus" type="nvdb:SpesiellStatusType">
+            <annotation>
+              <documentation>12619: Angir at kabelen har en annen status enn å være i daglig drift.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12619</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Spesiell status</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="lengde" type="double">
             <annotation>
               <documentation>1327: Angir virkelig/målt lengde av vegobjektet. Inkludert.</documentation>
@@ -503,41 +512,6 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertKabelgrøft" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKabelgrøft</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertKabelbr_Uten_Stige" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKabelbr_Uten_Stige</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertLukketRørgrøft" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktLukketRørgrøft</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -549,6 +523,61 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="SpesiellStatusType">
+    <annotation>
+      <documentation>12619: Angir at kabelen har en annen status enn å være i daglig drift.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12619</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12619</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Spesiell status</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:SpesiellStatusEnumerationType nvdb:SpesiellStatusOtherType"/>
+  </simpleType>
+  <simpleType name="SpesiellStatusEnumerationType">
+    <annotation>
+      <documentation>12619: Angir at kabelen har en annen status enn å være i daglig drift.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12619</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12619</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Spesiell status</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Reservekabel">
+        <annotation>
+          <documentation>21792: Kabel er ikke i daglig drift, men ligger klar til å tas i bruk om behov.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21792</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Reservekabel</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Vraket">
+        <annotation>
+          <documentation>21793: Kabel er defekt og kan ikke brukes.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21793</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vraket</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Uavklart">
+        <annotation>
+          <documentation>21794: Kabel er ikke i bruk. Endelig status ikke avklart.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21794</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="SpesiellStatusOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <simpleType name="UtleidTilType">
     <annotation>
       <documentation>11523: Angir hvem kabel er utleid til.</documentation>

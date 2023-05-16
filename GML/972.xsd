@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -6,7 +6,7 @@
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="Tilstandsindikator_Test" substitutionGroup="nvdb:AbstraktTilstandsindikator_Test" type="nvdb:Tilstandsindikator_TestType">
     <annotation>
-      <documentation>972: Strekning for beregning av tilstandsindikator. Strekning bestemmes ut fra skjønn og et sett med kriterier. Disse kriterierene er ikke avklart, men strekningerne bør være minst 2-3 km, gjerne kunne sees på som en enhetlig strekning mhp utbedring, m.m. Vegobjekttypen har både egenskapsdata som er inndata til beregning og egenskapsdata som er resultat av beregning. Beregningsregler er under utvikling.</documentation>
+      <documentation>972: Strekning for beregning av tilstandsindikator. For hver strekning beregnes det enkeltindikatorer for ulike tema. Beregningsregler for enkeltindikatorer er under utvikling. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. Prinsippene for klassifisering er: 1: Svært god - Tilfredsstiller krav. 2: God - Tilfredsstiller krav, men ligger i nedre del / i grenseland mot klasse 3. 3: Middels - Tilfredsstiller ikke krav, ligger inntil 15% under krav. 4: Dårlig - Tilfredsstiller ikke krav, ligger inntil 30% under krav. 5: Svært dårlig - Tilfredsstiller ikke krav, ligger over 30% under krav. 98: Mangler data. 99: Utenfor utvalg. Faktisk klassifisering vil variere mellom de ulike temaer/indikatorer.</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">972</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">972</sc:taggedValue>
@@ -20,7 +20,7 @@
         <sequence>
           <element minOccurs="0" name="navn" type="string">
             <annotation>
-              <documentation>12512: Gir navn på strekning. Foreløpig regel for navn: Stedsnavn der veg starter - Stedsnavn der veg slutter (metreringsretning). Eksempel "Alvdal - Tynset".</documentation>
+              <documentation>12512: Gir navn på strekning.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12512</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
@@ -29,7 +29,7 @@
           </element>
           <element minOccurs="0" name="kortnavn" type="string">
             <annotation>
-              <documentation>12513: Gir kortnavn på strekning. Foreløpig regel for kortnavn: Firesifret tall. Stigende rekkefølge. Unikt innenfor en veg. Eksempel "2200".</documentation>
+              <documentation>12513: Gir kortnavn på strekning.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12513</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Kortnavn</sc:taggedValue>
@@ -47,7 +47,7 @@
           </element>
           <element minOccurs="0" name="tilstandsindikator_Samlet" type="integer">
             <annotation>
-              <documentation>12514: Samlet tilstandsindikator. Beregningsregler er under utvikling.</documentation>
+              <documentation>12514: Samlet tilstandsindikator. Beregningsregler er under utvikling. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. Prinsippene for klassifisering er: 1: Svært god - Tilfredsstiller krav. 2: God - Tilfredsstiller krav, men ligger i nedre del / i grenseland mot klasse 3. 3: Middels - Tilfredsstiller ikke krav, ligger inntil 15% under krav. 4: Dårlig - Tilfredsstiller ikke krav, ligger inntil 30% under krav. 5: Svært dårlig - Tilfredsstiller ikke krav, ligger over 30% under krav. 98: Mangler data. 99: Utenfor utvalg av veger. Faktisk klassifisering vil variere mellom de ulike temaer/indikatorer.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12514</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, samlet</sc:taggedValue>
@@ -56,16 +56,97 @@
           </element>
           <element minOccurs="0" name="tilstandsindikator_Vegbredde" type="integer">
             <annotation>
-              <documentation>12515: Tilstandsindikator for vegbredde. Beregningsregler er under utvikling.</documentation>
+              <documentation>12515: Tilstandsindikator for vegbredde. Basererer seg på registrert dekkebredde. Beregningsregler er under utvikling. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. 1: Svært god - minst 5 % over krav. 2: God - Tilfredsstiller krav innenfor intervall 0 - 5 % over krav. 3: Middels - Tilfredsstiller ikke krav, ligger inntil 15% under krav. 4: Dårlig - Tilfredsstiller ikke krav, ligger inntil 30% under krav. 5: Svært dårlig - Tilfredsstiller ikke krav, ligger over 30% under krav. 98: Mangler data. 99: Utenfor foreløpig utvalg av veger.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12515</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, vegbredde</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
+          <element minOccurs="0" name="vegbredde_ProsentandelUnderKrav" type="integer">
+            <annotation>
+              <documentation>12616: Angir hvor stor andel av strekning som ikke oppfyller dagens krav til vegbredde.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12616</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Vegbredde, prosentandel under krav</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="vegbredde_DårligsteIndikatorverdi" type="integer">
+            <annotation>
+              <documentation>12617: Angir dårligste indikatorverdi for vegbredde på strekning. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. 1: Svært god - minst 5 % over krav. 2: God - Tilfredsstiller krav innenfor intervall 0 - 5 % over krav. 3: Middels - Tilfredsstiller ikke krav, ligger inntil 15% under krav. 4: Dårlig - Tilfredsstiller ikke krav, ligger inntil 30% under krav. 5: Svært dårlig - Tilfredsstiller ikke krav, ligger over 30% under krav. 98: Mangler data. 99: Utenfor foreløpig utvalg av veger.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12617</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Vegbredde, dårligste indikatorverdi</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilstandsindikator_Bæreevne" type="integer">
+            <annotation>
+              <documentation>12518: Tilstandsindikator for bæreevne. Beregningsregler er under utvikling. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. 1: Svært god - B (bæreevne)  &lt; 16 tonn. 2: God - 14 tonn &lt; B ≤  16 tonn. 3: Middels - 12 tonn &lt; B ≤  14 tonn: Dårlig - 10 tonn &lt; B ≤  12 tonn. 5: Svært dårlig - B ≤  10 tonn. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12518</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bæreevne</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bæreevne_ProsentandelUnderKrav" type="integer">
+            <annotation>
+              <documentation>12611: Angir hvor stor andel av strekning som ikke oppfyller krav til bæreevne.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12611</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Bæreevne, prosentandel under krav</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="bæreevne_DårligsteIndikatorverdi" type="integer">
+            <annotation>
+              <documentation>12615: Angir dårligste indikatorverdi for bæreevne på strekningen. Tilstand angis med verdi fra 1 til 5, samt 98 og 99. 1: Svært god - B (bæreevne)  &lt; 16 tonn. 2: God - 14 tonn &lt; B ≤  16 tonn. 3: Middels - 12 tonn &lt; B ≤  14 tonn: Dårlig - 10 tonn &lt; B ≤  12 tonn. 5: Svært dårlig - B ≤  10 tonn. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12615</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Bæreevne, dårligste indikatorverdi</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilstandsindikator_Tunnel" type="integer">
+            <annotation>
+              <documentation>12519: Tilstandsindikator for tunnel. Baserer seg på informasjon om tunnelen sammenlignet med krav i tunnelsikkerhetsforskriften. Beregningsregler er under utvikling. Tilstand angis med verdi 1, 3 og 5, samt 98 og 99. Dette vil bli videreutviklet og supplert med verdi 2 og 4 våren 2023. 1: Svært god - Tunnelen har brukstillatelse, dvs. tilfredsstiller kravene i tunnelsikkerhetsforskriften. 3: Middels -  Tunnelen er oppgradert, men mangler brukstillatelse. 5: Svært dårlig - Tunnelen mangler brukstillatelse og er ikke oppgradetert. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12519</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, tunnel</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilstandsindikator_Skredsikring_TilVurdering" type="integer">
+            <annotation>
+              <documentation>12521: Tilstandsindikator for skredsikring. Metodeutvikling ikke startet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12521</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, skred</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilstandsindikator_GåendeSyklende" type="integer">
+            <annotation>
+              <documentation>12522: Tilstandsindikator for gående og syklende.  Metodeutvikling ikke startet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12522</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, gående/syklende</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="tilstandsindikator_Bru" type="integer">
+            <annotation>
+              <documentation>12520: Tilstandsindikator for bru.  Metodeutvikling ikke startet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12520</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bru</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element minOccurs="0" name="tilstandsindikator_Horisontalkurvatur" type="integer">
             <annotation>
-              <documentation>12516: Tilstandsindikator for horisontalkurvatur. Beregningsregler er under utvikling.</documentation>
+              <documentation>12516: Tilstandsindikator for horisontalkurvatur.  Metodeutvikling ikke startet.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12516</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, horisontalkurvatur</sc:taggedValue>
@@ -74,64 +155,19 @@
           </element>
           <element minOccurs="0" name="tilstandsindikator_Vertikalkurvatur" type="integer">
             <annotation>
-              <documentation>12517: Tilstandsindikator for vertikalkurvatur/stigning. Beregningsregler er under utvikling.</documentation>
+              <documentation>12517: Tilstandsindikator for vertikalkurvatur/stigning.  Metodeutvikling ikke startet.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12517</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, vertikalkurvatur</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="tilstandsindikator_Bæreevne" type="integer">
+          <element minOccurs="0" name="tilstandsindikator_Test" type="integer">
             <annotation>
-              <documentation>12518: Tilstandsindikator for bæreevne. Beregningsregler er under utvikling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12518</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bæreevne</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilstandsindikator_Tunnel" type="integer">
-            <annotation>
-              <documentation>12519: Tilstandsindikator for tunnel. Beregningsregler er under utvikling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12519</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, tunnel</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilstandsindikator_Bru" type="integer">
-            <annotation>
-              <documentation>12520: Tilstandsindikator for bru. Beregningsregler er under utvikling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12520</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bru</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilstandsindikator_Skredsikring" type="integer">
-            <annotation>
-              <documentation>12521: Tilstandsindikator for skredsikring. Beregningsregler er under utvikling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12521</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, skredsikring</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilstandsindikator_GåendeSyklende" type="integer">
-            <annotation>
-              <documentation>12522: Tilstandsindikator for gående og syklende. Beregningsregler er under utvikling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12522</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, gående/syklende</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilstandsindikator_Annet" type="integer">
-            <annotation>
-              <documentation>12523: Tilstandsindikator for annet formål, benyttes til testing av nye metoder.  Beregningsregler er under utvikling.</documentation>
+              <documentation>12523: Tilstandsindikator for testformål, benyttes til testing av nye metoder.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">12523</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, annet</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, test</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>

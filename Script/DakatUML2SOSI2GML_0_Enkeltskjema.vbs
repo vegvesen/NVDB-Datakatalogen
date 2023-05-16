@@ -424,4 +424,4 @@ function Enkeltskjema()
 
 end function
 
-Enkeltskjema()
+'Enkeltskjema()

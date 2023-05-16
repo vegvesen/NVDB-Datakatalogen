@@ -1,9 +1,64 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.31">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="AdskilteLøpFeltstrekningType">
+    <annotation>
+      <documentation>12633: Angir om det er adskilte løp på strekningen. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12633</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12633</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Adskilte løp</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:AdskilteLøpFeltstrekningEnumerationType nvdb:AdskilteLøpFeltstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="AdskilteLøpFeltstrekningEnumerationType">
+    <annotation>
+      <documentation>12633: Angir om det er adskilte løp på strekningen. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12633</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12633</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Adskilte løp</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Uten">
+        <annotation>
+          <documentation>21829: Uten</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21829</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Uten</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Med">
+        <annotation>
+          <documentation>21830: Med</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21830</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Med</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Mot">
+        <annotation>
+          <documentation>21831: Mot</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21831</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Mot</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="AdskilteLøpFeltstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
   <element name="Feltstrekning" substitutionGroup="nvdb:AbstraktFeltstrekning" type="nvdb:FeltstrekningType">
     <annotation>
       <documentation>616: Strekning med enhetlig feltinndeling.</documentation>
@@ -18,12 +73,75 @@
     <complexContent>
       <extension base="nvdb:AbstraktFeltstrekningType">
         <sequence>
+          <element minOccurs="0" name="feltoversikt" type="string">
+            <annotation>
+              <documentation>12647: Angir total feltoversikt for gitt strekning. Hvert felt er separert med #-tegn. De enkelte feltkoder er relatert til vegens metreringsretning. Felt med feltkode 1, 3, 5 osv har trafikk i metreringsretning, mens felt med feltkode 2, 4, 6 osv har trafikk mot metreringsretning.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12647</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Feltoversikt, metreringsretning</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
           <element name="feltoversikt" type="string">
             <annotation>
-              <documentation>5528: Angir total feltoversikt for gitt strekning. Hvert felt er separert med #-tegn. De enkelte feltkoder er relatert til vegnettets retning. På strekninger der vegnettsretning er motsatt av metreringsretning kan det i noen tilfeller være behov for å regne om feltkoden, f.eks. vil 1#2#3 da bli 1#2#4.</documentation>
+              <documentation>5528: Angir total feltoversikt for gitt strekning. Hvert felt er separert med #-tegn. De enkelte feltkoder er relatert til vegnettets lenkeretning. Felt med feltkode 1, 3, 5 osv har trafikk i veglenkeretning, mens felt med feltkode 2, 4, 6 osv har trafikk mot veglenkeretningen.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">5528</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Feltoversikt</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Feltoversikt, veglenkeretning</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="type" type="nvdb:TypeFeltstrekningType">
+            <annotation>
+              <documentation>12628: Angir hvilken type veg strekning kan karakteriseres som. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12628</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallStandardKjørefelt" type="integer">
+            <annotation>
+              <documentation>12629: Angir antall standard kjørefelt i et tverrsnitt på strekningen, dvs kjørefelt som ikke har bokstav K, S, H, V, O i seg. Beregnes automatisk ut fra vegnettsinformasjon,</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12629</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Antall standard kjørefelt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallKollektivfelt" type="integer">
+            <annotation>
+              <documentation>12630: Angir antall kollektivfelt i et tverrsnitt på strekningen, dvs kjørefelt som har bokstav K i seg. Beregnes automatisk ut fra vegnettsinformasjon,</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12630</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Antall kollektivfelt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallSykkelfelt" type="integer">
+            <annotation>
+              <documentation>12631: Angir antall sykkelfelt i et tverrsnitt på strekningen, dvs kjørefelt som har bokstav S i seg. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12631</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Antall sykkelfelt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="antallAvPåkjøringsfelt" type="integer">
+            <annotation>
+              <documentation>12632: Angir antall av- og påsvingningsfelt, dvs kjørefelt som har bokstav V eller H i seg. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12632</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Antall av-/påkjøringsfelt</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="adskilteLøp" type="nvdb:AdskilteLøpFeltstrekningType">
+            <annotation>
+              <documentation>12633: Angir om det er adskilte løp på strekningen. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12633</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Adskilte løp</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -48,4 +166,95 @@
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>
   </complexType>
+  <simpleType name="TypeFeltstrekningType">
+    <annotation>
+      <documentation>12628: Angir hvilken type veg strekning kan karakteriseres som. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12628</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12628</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TypeFeltstrekningEnumerationType nvdb:TypeFeltstrekningOtherType"/>
+  </simpleType>
+  <simpleType name="TypeFeltstrekningEnumerationType">
+    <annotation>
+      <documentation>12628: Angir hvilken type veg strekning kan karakteriseres som. Beregnes automatisk ut fra vegnettsinformasjon.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">12628</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">12628</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="1-feltsveg">
+        <annotation>
+          <documentation>21822: Veg bestående av et kjørefelt med trafikk i bare den ene kjøreretningen.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21822</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">1-feltsveg</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="2-feltsveg, envegskjørt">
+        <annotation>
+          <documentation>21827: Veg bestående av 2 kjørefelt. De to feltene har trafikk i samme retning.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21827</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">2-feltsveg, envegskjørt</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="2-feltsveg">
+        <annotation>
+          <documentation>21823: Veg bestående av to kjørefelt. For tverrsnittet av vegen er det trafikk i begge kjøreretninger. Svingefelt og sykkelfelt telles ikke med.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21823</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">2-feltsveg</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="3-feltsveg">
+        <annotation>
+          <documentation>21824: Veg bestående av tre kjørefelt.  For tverrsnittet av vegen er det trafikk i begge kjøreretninger.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21824</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">3-feltsveg</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="4-feltsveg eller mer">
+        <annotation>
+          <documentation>21825: Veg bestående av fire kjørefelt eller mer. For tverrsnittet av vegen skal det være minst to felt i hver kjøreretning.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21825</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">4-feltsveg eller mer</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Del av 4-feltsveg">
+        <annotation>
+          <documentation>21826: Del av veg bestående av fire kjørefelt eller mer, men der kjøreretningene er adskilt fra hverandre. Det skal minst være to felt i hvert av de adskilte kjøreretningene.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21826</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Del av 4-feltsveg</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Annen type">
+        <annotation>
+          <documentation>21828: Strekning med annen feltkonfigurasjon, dvs feltinndeling kommer ikke innenfor noen av de øvrige kategoriene.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">21828</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Annen type</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeFeltstrekningOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
 </schema>

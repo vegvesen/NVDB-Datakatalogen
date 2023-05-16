@@ -35,7 +35,7 @@ function NVDBTilUML()
 	updateKodelisteverdier
 	updateAssosiasjoner
 	updateDiagrammer
-	exportDiagramsFromPackage
+	'exportDiagramsFromPackage
 	'exportPackages
 
 Repository.WriteOutput "Script", "NVDB til UML ferdig med å kjøre...", 0
