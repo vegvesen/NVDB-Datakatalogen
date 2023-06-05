@@ -305,4 +305,3 @@ function updateDiagrams()
 	Repository.WriteOutput "Script", Now & " Ferdig, sjekk logg", 0 
 	Repository.EnsureOutputVisible "Script"
 end function
-
