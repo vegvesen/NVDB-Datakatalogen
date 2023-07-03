@@ -77,7 +77,7 @@ function NVDBTilSOSI()
 	kommentarPackage.Update
 
 	'Generate GML application schema for "ApplicationSchema" NVDB Datakatalogen (GitHub)
-	Enkeltskjema
+	'Enkeltskjema
 
 	'Moving packages "Dokumentasjon" and "Kommentar" back to ApplicationSchema NVDB Datakatalogen
 	Repository.WriteOutput "Script", "Moving Dokumentasjon and Kommentar back to ApplicationSchema NVDB Datakatlogen...", 0
@@ -88,15 +88,15 @@ function NVDBTilSOSI()
 
 	'6
 	'Generate IFC-PSD, PropertySetDefinitions for IFC (GitHub)
-	generateIFC
+	'generateIFC
 
 	'7 and 8
 	'Generate OWL ontologies (GitHub, BitBucket, ontologiserver and GraphDB)
-	generateOTL
-	generateOWLVegobjekttypekategorier
+	'generateOTL
+	'generateOWLVegobjekttypekategorier
 
 	'Run the python script from a shell...
-	runPython
+	'runPython
 
 	'Moving _AbstrakteKlasser back to NVDB - NB! Do this at the end of step 9.
 	Repository.WriteOutput "Script", "Moving _AbstrakteKlasser package to: NVDB...", 0
@@ -115,3 +115,5 @@ function NVDBTilSOSI()
 	Repository.WriteOutput "Script", "NVDB til SOSI ferdig med å kjøre...", 0
 	
 end function
+
+NVDBTilSOSI
