@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_NV/2.33" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_NV/2.33" version="2.33">
+  <annotation>
+    <documentation>67: Utgravd eller utstøpt passasje gjennom jord/berg eller under større lokk. Har normalt inngang og utgang i dagen. I spesielle tilfeller, f.eks. når forgreninger eller kryss, kan det være utgang mot annet tunnelløp eller inngang fra annet tunnelløp. Se også Undergang, Skredoverbygg og Høydebegrensning.</documentation>
+  </annotation>
+  <include schemaLocation="OLFV_NV.xsd"/>
+  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+  <simpleType name="KategoriTunnelløpType">
+    <annotation>
+      <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:KategoriTunnelløpEnumerationType nvdb:KategoriTunnelløpOtherType"/>
+  </simpleType>
+  <simpleType name="KategoriTunnelløpEnumerationType">
+    <annotation>
+      <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Hovedløp">
+        <annotation>
+          <documentation>11801: Tunnelløp som fører hovedveg. Hovedveg har vanligvis "normale" hovedparsellnummer (ikke ramper, armer, etc.).</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11801</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Hovedløp</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Rampe">
+        <annotation>
+          <documentation>11802: Tunnelløp som fører rampe.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11802</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Rampe</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Sekundærløp">
+        <annotation>
+          <documentation>12091: Tunnelløp som fører sekundærveg eller vegarm. Aktuelt for tunnel med kryss.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12091</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sekundærløp</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Rundkjøring">
+        <annotation>
+          <documentation>11804: Tunnelløp med rundkjøring.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11804</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Rundkjøring</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="KategoriTunnelløpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <element name="Tunnelløp" substitutionGroup="nvdb:Fellesegenskaper" type="nvdb:TunnelløpType">
+    <annotation>
+      <documentation>67: Utgravd eller utstøpt passasje gjennom jord/berg eller under større lokk. Har normalt inngang og utgang i dagen. I spesielle tilfeller, f.eks. når forgreninger eller kryss, kan det være utgang mot annet tunnelløp eller inngang fra annet tunnelløp. Se også Undergang, Skredoverbygg og Høydebegrensning.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">67</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">67</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Tunnelløp</sc:taggedValue>
+      </appinfo>
+    </annotation>
+  </element>
+  <complexType name="TunnelløpType">
+    <complexContent>
+      <extension base="nvdb:FellesegenskaperType">
+        <sequence>
+          <element name="navn" type="string">
+            <annotation>
+              <documentation>1081: Angir navn på tunnelløp.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1081</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="kategori" type="nvdb:KategoriTunnelløpType">
+            <annotation>
+              <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="tunnelprofil" type="nvdb:TunnelprofilType">
+            <annotation>
+              <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="typeTunnelløp" type="nvdb:TypeTunnelløpType">
+            <annotation>
+              <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="lengde" type="double">
+            <annotation>
+              <documentation>1317: Angir lengde av tunnelløpet. Et tunnelløp sees på som et rør. Eventuelle portaler regnes som del av tunnelløpet. Lengde av tunnelløp blir lik lengde av "røret". Eksempelvis vil lengde av et rampe-løp strekker seg til der rampen kommer inn i hovedløpet selv om rampeparsell kan fortsette et stykke parallelt med hovedvegen i hovedløpet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">1317</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element name="åpningsår" type="integer">
+            <annotation>
+              <documentation>8356: Angir hvilket år tunnelløpet ble åpnet for trafikk.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">8356</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Åpningsår</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektreferanse" type="string">
+            <annotation>
+              <documentation>11060: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">11060</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+            <annotation>
+              <documentation>12299: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">12299</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+            <annotation>
+              <documentation>4769: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+              <appinfo>
+                <sc:taggedValue tag="NVDB_ID">4769</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+            <annotation>
+              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSnuplass" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Snuplass</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertStøtpute" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Støtpute</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTaljerLøfteutstyr" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:TaljerLøfteutstyr</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTelefonsentral" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Telefonsentral</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTemperaturmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Temperaturmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTrafikklomme" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Trafikklomme</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTrafo" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Trafo</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTrekkekum" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Trekkekum</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTrekkerørKanal" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:TrekkerørKanal</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertTunnel" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Tunnel</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVifteVentilator" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:VifteVentilator</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTunnelport" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Tunnelport</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVegbom" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Vegbom</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVannstandsmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Vannstandsmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVentilasjonsanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Ventilasjonsanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTunnelportal" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Tunnelportal</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVindmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Vindmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertUPS" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:UPS</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVannOgFrostsikring" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:VannOgFrostsikring</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSkiltpunkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Skiltpunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSkap_Teknisk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Skap_Teknisk</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSiktmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Siktmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSignalpunkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Signalpunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSignalanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Signalanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertSidearealTunnel" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:SidearealTunnel</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertRadioanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Radioanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertPumpestasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Pumpestasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertPortDør" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:PortDør</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertNødutgang" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Nødutgang</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertNødtelefon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Nødtelefon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertNødstrømsaggregat" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Nødstrømsaggregat</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertNødstasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Nødstasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertMobiltelefonsamband" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Mobiltelefonsamband</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertLysmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Lysmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertLukketRørgrøft" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:LukketRørgrøft</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertLedelysstrekning_Optisk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Ledelysstrekning_Optisk</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKum" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kum</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKondensmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kondensmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKlimaanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Klimaanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKantstolperRefleks" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:KantstolperRefleks</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKamera" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kamera</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKabelgrøft" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kabelgrøft</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKabelbr_Uten_Stige" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kabelbr_Uten_Stige</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertInspeksjonsluke" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Inspeksjonsluke</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertHøydemåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Høydemåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertHøydehinder" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Høydehinder</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertHøydebegrensning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Høydebegrensning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertHydrant" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Hydrant</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertGrøft_Åpen" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Grøft_Åpen</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertGassmåler" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Gassmåler</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertFordeling" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Fordeling</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertEvakueringsbelysning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Evakueringsbelysning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertElektriskAnlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:ElektriskAnlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDyresperre" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Dyresperre</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDetektor_Trafikk" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Detektor_Trafikk</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBrannvarslingsanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Brannvarslingsanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBrannslokningsapparat" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Brannslokningsapparat</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBrannslokkingsanlegg" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Brannslokkingsanlegg</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBranndetektor" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Branndetektor</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBevegelsessensor" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Bevegelsessensor</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBetongutstøping" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Betongutstøping</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBergsikring" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Bergsikring</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBergrom" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Bergrom</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBelysningsstrekning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Belysningsstrekning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertBelysningspunkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Belysningspunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertAntenne" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Antenne</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <complexType name="TunnelløpPropertyType">
+    <sequence minOccurs="0">
+      <element ref="nvdb:Tunnelløp"/>
+    </sequence>
+    <attributeGroup ref="gml:AssociationAttributeGroup"/>
+    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+  </complexType>
+  <simpleType name="TunnelprofilType">
+    <annotation>
+      <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TunnelprofilEnumerationType nvdb:TunnelprofilOtherType"/>
+  </simpleType>
+  <simpleType name="TunnelprofilEnumerationType">
+    <annotation>
+      <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="T4">
+        <annotation>
+          <documentation>3404: T4</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3404</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T4</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T5">
+        <annotation>
+          <documentation>3406: T5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3406</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T5,5">
+        <annotation>
+          <documentation>8169: T5,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8169</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T5,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T6">
+        <annotation>
+          <documentation>3408: T6</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3408</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T6</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T7">
+        <annotation>
+          <documentation>8170: T7</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8170</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T7</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T7,5">
+        <annotation>
+          <documentation>17531: T7,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">17531</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T7,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8">
+        <annotation>
+          <documentation>12911: T8</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12911</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T8</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T8,5">
+        <annotation>
+          <documentation>3410: T8,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3410</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T8,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T9">
+        <annotation>
+          <documentation>3412: T9</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3412</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T9</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T9,5">
+        <annotation>
+          <documentation>8171: T9,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8171</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T9,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T10">
+        <annotation>
+          <documentation>4350: T10</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4350</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T10</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T10,5">
+        <annotation>
+          <documentation>17532: T10,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">17532</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T10,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T11">
+        <annotation>
+          <documentation>3414: T11</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3414</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T11</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T11,5">
+        <annotation>
+          <documentation>8172: T11,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8172</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T11,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T12">
+        <annotation>
+          <documentation>3416: T12</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3416</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T12</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T12,5">
+        <annotation>
+          <documentation>8173: T12,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8173</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T12,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T13">
+        <annotation>
+          <documentation>12237: T13</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12237</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T13</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T13,5">
+        <annotation>
+          <documentation>17533: T13,5</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">17533</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T13,5</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="T14">
+        <annotation>
+          <documentation>12238: T14</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12238</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">T14</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Rektangulært tverrsnitt">
+        <annotation>
+          <documentation>3421: Rektangulært tverrsnitt</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3421</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Rektangulært tverrsnitt</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TunnelprofilOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeTunnelløpType">
+    <annotation>
+      <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:TypeTunnelløpEnumerationType nvdb:TypeTunnelløpOtherType"/>
+  </simpleType>
+  <simpleType name="TypeTunnelløpEnumerationType">
+    <annotation>
+      <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Berg">
+        <annotation>
+          <documentation>3386: Tunnelløp som hovedsakelig går i berg.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3386</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Berg</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Løsmasse">
+        <annotation>
+          <documentation>3387: Tunnelløp som går i løsmasser.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3387</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Løsmasse</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Berg/løsmasse">
+        <annotation>
+          <documentation>3388: Tunnelløp som delvis går i berg og delvis i løsmasser.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3388</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Berg/løsmasse</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Lokk">
+        <annotation>
+          <documentation>4843: Tunnelløp som går under bygning/lokk.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4843</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lokk</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Senketunnel">
+        <annotation>
+          <documentation>13001: Tunnelløp under vann som er satt sammen av ferdigbygde seksjoner som har blitt senka på plass.</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13001</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Senketunnel</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="TypeTunnelløpOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+</schema>

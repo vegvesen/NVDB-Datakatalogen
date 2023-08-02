@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -111,7 +111,7 @@
           </element>
           <element minOccurs="0" name="tømmebehov" type="double">
             <annotation>
-              <documentation>2046: Angir hvor ofte det er behov for tømming.</documentation>
+              <documentation>2046: Angir hvor ofte det er behov for tømming. Tømmebehov gis som desimaltall. 2.0 betyr tømming 2 ganger per uke, 1.0 betyr tømming en gang per uke, 0.5 betyer tømming hver 2. uke, 0, 25 betyr tømming hver 4. uke</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">2046</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Tømmebehov</sc:taggedValue>
@@ -129,7 +129,7 @@
           </element>
           <element minOccurs="0" name="volum" type="double">
             <annotation>
-              <documentation>1384: Angir volum av vegobjektet.</documentation>
+              <documentation>1384: Angir volum (kubikkmeter) av vegobjektet.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">1384</sc:taggedValue>
                 <sc:taggedValue tag="NVDB_navn">Volum</sc:taggedValue>
@@ -231,6 +231,55 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
+          <element minOccurs="0" name="assosiertFerjekai" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFerjekai</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertHoldeplassutrustning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktHoldeplassutrustning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertRasteplass" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktRasteplass</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Punkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Punkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
@@ -265,7 +314,7 @@
     <restriction base="string">
       <enumeration value="Kurv/liten dunk">
         <annotation>
-          <documentation>2514: Mindre beholder hvor det kan plasseres avfall. Vanligvis er volumet under 80 liter. Kan henge på vegg, i eget stativ eller på gulvet.</documentation>
+          <documentation>2514: Mindre beholder hvor det kan plasseres avfall. Vanligvis er volumet under 0,08 kubikkmeter (80 liter). Kan henge på vegg, i eget stativ eller på gulvet.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">2514</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Kurv/liten dunk</sc:taggedValue>
@@ -274,7 +323,7 @@
       </enumeration>
       <enumeration value="Avfallsdunk">
         <annotation>
-          <documentation>2513: Beholder hvor det kan plasseres avfall. Vanligvis er volumet i størrelsesorden 100-1600 liter. Har gjerne 2 eller 4 hjul slik at den kan trilles.</documentation>
+          <documentation>2513: Beholder hvor det kan plasseres avfall. Kan inneholde sekkestativ med plass til flere sekker. Vanligvis er volumet i størrelsesorden 0,1 til 1,6 kubikkmeter (100-1600 liter). Har gjerne 2 eller 4 hjul slik at den kan trilles.</documentation>
           <appinfo>
             <sc:taggedValue tag="NVDB_ID">2513</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Avfallsdunk</sc:taggedValue>

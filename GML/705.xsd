@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -204,7 +204,7 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="SkiltetSykkelrute_TurFritidType">
+  <simpleType name="SkiltetSykkelrute_NasjonalType">
     <annotation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
@@ -212,9 +212,9 @@
         <sc:taggedValue tag="NVDB_navn">Skiltet</sc:taggedValue>
       </appinfo>
     </annotation>
-    <union memberTypes="nvdb:SkiltetSykkelrute_TurFritidEnumerationType nvdb:SkiltetSykkelrute_TurFritidOtherType"/>
+    <union memberTypes="nvdb:SkiltetSykkelrute_NasjonalEnumerationType nvdb:SkiltetSykkelrute_NasjonalOtherType"/>
   </simpleType>
-  <simpleType name="SkiltetSykkelrute_TurFritidEnumerationType">
+  <simpleType name="SkiltetSykkelrute_NasjonalEnumerationType">
     <annotation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
@@ -252,24 +252,24 @@
       </enumeration>
     </restriction>
   </simpleType>
-  <simpleType name="SkiltetSykkelrute_TurFritidOtherType">
+  <simpleType name="SkiltetSykkelrute_NasjonalOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <element name="Sykkelrute_TurFritid" substitutionGroup="nvdb:AbstraktSykkelrute_TurFritid" type="nvdb:Sykkelrute_TurFritidType">
+  <element name="Sykkelrute_Nasjonal" substitutionGroup="nvdb:AbstraktSykkelrute_Nasjonal" type="nvdb:Sykkelrute_NasjonalType">
     <annotation>
-      <documentation>705: Fastlagt rute for sykling, primært for tur/fritidssykling.</documentation>
+      <documentation>705: Fastlagt rute for sykling. Status som nasjonal sykkelrute for tur/fritidssykling.</documentation>
       <appinfo>
         <sc:taggedValue tag="NVDB_ID">705</sc:taggedValue>
         <sc:taggedValue tag="NVDB_ID">705</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Sykkelrute, tur/fritid</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Sykkelrute, nasjonal</sc:taggedValue>
       </appinfo>
     </annotation>
   </element>
-  <complexType name="Sykkelrute_TurFritidType">
+  <complexType name="Sykkelrute_NasjonalType">
     <complexContent>
-      <extension base="nvdb:AbstraktSykkelrute_TurFritidType">
+      <extension base="nvdb:AbstraktSykkelrute_NasjonalType">
         <sequence>
           <element minOccurs="0" name="beskrivelse" type="string">
             <annotation>
@@ -297,7 +297,7 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="skiltet" type="nvdb:SkiltetSykkelrute_TurFritidType">
+          <element minOccurs="0" name="skiltet" type="nvdb:SkiltetSykkelrute_NasjonalType">
             <annotation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
@@ -337,13 +337,27 @@
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
             </annotation>
           </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <complexType name="Sykkelrute_TurFritidPropertyType">
+  <complexType name="Sykkelrute_NasjonalPropertyType">
     <sequence minOccurs="0">
-      <element ref="nvdb:Sykkelrute_TurFritid"/>
+      <element ref="nvdb:Sykkelrute_Nasjonal"/>
     </sequence>
     <attributeGroup ref="gml:AssociationAttributeGroup"/>
     <attributeGroup ref="gml:OwnershipAttributeGroup"/>

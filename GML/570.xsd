@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.32">
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
   <include schemaLocation="AbstraktNVDB.xsd"/>
   <include schemaLocation="SOSIFelles.xsd"/>
   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -492,6 +492,52 @@
     </restriction>
   </simpleType>
   <simpleType name="ForsterketVegoppmerkingOtherType">
+    <restriction base="string">
+      <pattern value="other: \w{2,}"/>
+    </restriction>
+  </simpleType>
+  <simpleType name="FysiskMidtdelerMidtrekkverkType">
+    <annotation>
+      <documentation>5758: Angir om det var midtdeler på vegen hvor ulykka skjedde.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Fysisk midtdeler/midtrekkverk</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <union memberTypes="nvdb:FysiskMidtdelerMidtrekkverkEnumerationType nvdb:FysiskMidtdelerMidtrekkverkOtherType"/>
+  </simpleType>
+  <simpleType name="FysiskMidtdelerMidtrekkverkEnumerationType">
+    <annotation>
+      <documentation>5758: Angir om det var midtdeler på vegen hvor ulykka skjedde.</documentation>
+      <appinfo>
+        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
+        <sc:taggedValue tag="NVDB_navn">Fysisk midtdeler/midtrekkverk</sc:taggedValue>
+      </appinfo>
+    </annotation>
+    <restriction base="string">
+      <enumeration value="Ja">
+        <annotation>
+          <documentation>7997: Ja</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7997</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+      <enumeration value="Nei">
+        <annotation>
+          <documentation>7998: Nei</documentation>
+          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7998</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+          </appinfo>
+        </annotation>
+      </enumeration>
+    </restriction>
+  </simpleType>
+  <simpleType name="FysiskMidtdelerMidtrekkverkOtherType">
     <restriction base="string">
       <pattern value="other: \w{2,}"/>
     </restriction>
@@ -1322,52 +1368,6 @@
       <pattern value="other: \w{2,}"/>
     </restriction>
   </simpleType>
-  <simpleType name="MidtdelerType">
-    <annotation>
-      <documentation>5758: Angir om det var midtdeler på vegen hvor ulykka skjedde.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Midtdeler</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:MidtdelerEnumerationType nvdb:MidtdelerOtherType"/>
-  </simpleType>
-  <simpleType name="MidtdelerEnumerationType">
-    <annotation>
-      <documentation>5758: Angir om det var midtdeler på vegen hvor ulykka skjedde.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Midtdeler</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ja">
-        <annotation>
-          <documentation>7997: Ja</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">7997</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nei">
-        <annotation>
-          <documentation>7998: Nei</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">7998</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="MidtdelerOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
   <simpleType name="ReguleringGangfelt_NyType">
     <annotation>
       <documentation>11904: Angir regulering av gangfelt.</documentation>
@@ -1936,12 +1936,12 @@
               </appinfo>
             </annotation>
           </element>
-          <element minOccurs="0" name="midtdeler" type="nvdb:MidtdelerType">
+          <element minOccurs="0" name="fysiskMidtdelerMidtrekkverk" type="nvdb:FysiskMidtdelerMidtrekkverkType">
             <annotation>
               <documentation>5758: Angir om det var midtdeler på vegen hvor ulykka skjedde.</documentation>
               <appinfo>
                 <sc:taggedValue tag="NVDB_ID">5758</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Midtdeler</sc:taggedValue>
+                <sc:taggedValue tag="NVDB_navn">Fysisk midtdeler/midtrekkverk</sc:taggedValue>
               </appinfo>
             </annotation>
           </element>
@@ -2477,6 +2477,48 @@
           <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
             <annotation>
               <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" name="assosiertUlykkesinvolvertEnhet" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUlykkesinvolvertEnhet</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertUlykkespunkt" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUlykkespunkt</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertUlykkesstrekning" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUlykkesstrekning</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element minOccurs="0" name="assosiertUlykkesstrekning_Egendefinert" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktUlykkesstrekning_Egendefinert</targetElement>
+              </appinfo>
+            </annotation>
+          </element>
+          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+            <annotation>
+              <appinfo>
+                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
+              </appinfo>
             </annotation>
           </element>
         </sequence>
