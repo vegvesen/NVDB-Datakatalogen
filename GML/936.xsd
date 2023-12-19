@@ -1,269 +1,350 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="DynamikkType">
-    <annotation>
-      <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:DynamikkEnumerationType nvdb:DynamikkOtherType"/>
-  </simpleType>
-  <simpleType name="DynamikkEnumerationType">
-    <annotation>
-      <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ja">
-        <annotation>
-          <documentation>19529: Det kan gis forskjellig beskjed i høyttalerne.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19529</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nei">
-        <annotation>
-          <documentation>19530: Det gis samme beskjed i alle høyttalere.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19530</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="DynamikkOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierHøyttalersystemType">
-    <annotation>
-      <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierHøyttalersystemEnumerationType nvdb:EierHøyttalersystemOtherType"/>
-  </simpleType>
-  <simpleType name="EierHøyttalersystemEnumerationType">
-    <annotation>
-      <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>19527: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19527</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>19526: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19526</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19523: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19523</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>19524: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19524</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>19525: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19525</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>19528: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19528</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierHøyttalersystemOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Høyttalersystem" substitutionGroup="nvdb:AbstraktHøyttalersystem" type="nvdb:HøyttalersystemType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>936: Anlegg for varsling til trafikantene i tunnel.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">936</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">936</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Høyttalersystem</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="HøyttalersystemType">
-    <complexContent>
-      <extension base="nvdb:AbstraktHøyttalersystemType">
-        <sequence>
-          <element minOccurs="0" name="dynamikk" type="nvdb:DynamikkType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="DynamikkHøyttalersystemType">
+      <annotation>
+         <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DynamikkHøyttalersystemEnumerationType nvdb:DynamikkHøyttalersystemOtherType"/>
+   </simpleType>
+   <simpleType name="DynamikkHøyttalersystemEnumerationType">
+      <annotation>
+         <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
             <annotation>
-              <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19529</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="N">
             <annotation>
-              <documentation>11493: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11493</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19530</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="driftsmerking" type="string">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DynamikkHøyttalersystemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierHøyttalersystemType">
+      <annotation>
+         <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierHøyttalersystemEnumerationType nvdb:EierHøyttalersystemOtherType"/>
+   </simpleType>
+   <simpleType name="EierHøyttalersystemEnumerationType">
+      <annotation>
+         <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11496: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11496</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19523</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="SCADA_Merking" type="string">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11743: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11743</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">SCADA-merking</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19524</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>11653: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11653</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19525</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="arkivreferanse" type="string">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>11704: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem. Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11704</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Arkivreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19526</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>11491: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11491</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19527</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>12446: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12446</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19528</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierHøyttalersystemType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierHøyttalersystemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Høyttalersystem"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:HøyttalersystemType">
+      <annotation>
+         <documentation>936: Anlegg for varsling til trafikantene i tunnel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">936</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høyttalersystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="HøyttalersystemType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="dynamikk" type="nvdb:DynamikkHøyttalersystemType">
+                  <annotation>
+                     <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11492</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>11493: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11493</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>11496: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11496</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="SCADA_Merking" type="string">
+                  <annotation>
+                     <documentation>11743: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11743</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">SCADA-merking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11653: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11653</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="arkivreferanse" type="string">
+                  <annotation>
+                     <documentation>11704: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem. Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11704</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Arkivreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11491: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11491</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12446: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12446</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierHøyttalersystemType">
+                  <annotation>
+                     <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligHøyttalersystemType">
+                  <annotation>
+                     <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12817</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>11494: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11494</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="HøyttalersystemPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Høyttalersystem"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VedlikeholdsansvarligHøyttalersystemType">
+      <annotation>
+         <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12817</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligHøyttalersystemEnumerationType nvdb:VedlikeholdsansvarligHøyttalersystemOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligHøyttalersystemEnumerationType">
+      <annotation>
+         <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12817</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11495</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22111</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11494: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11494</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22113</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22110</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertHøyttaler" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="OPS">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktHøyttaler</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22112</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnel" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnel</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22114</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="HøyttalersystemPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Høyttalersystem"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22109</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22115</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligHøyttalersystemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

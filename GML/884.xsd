@@ -1,233 +1,224 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Feierode" substitutionGroup="nvdb:AbstraktFeierode" type="nvdb:FeierodeType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>884: Strekning som inngår i spesifikk rode for feiing/renhold.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">884</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">884</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Feierode</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="FeierodeType">
-    <complexContent>
-      <extension base="nvdb:AbstraktFeierodeType">
-        <sequence>
-          <element minOccurs="0" name="nummer" type="integer">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Feierode"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:FeierodeType">
+      <annotation>
+         <documentation>884: Strekning som inngår i spesifikk rode for feiing/renhold.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">884</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Feierode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="FeierodeType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="nummer" type="double">
+                  <annotation>
+                     <documentation>10681: Angir nummer på rode.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10681</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>10682: Angir navn på rode.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10682</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prioritet" type="nvdb:PrioritetFeierodeType">
+                  <annotation>
+                     <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="renholdsintervall"
+                        type="nvdb:RenholdsintervallFeierodeType">
+                  <annotation>
+                     <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>10684: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks. informasjon knyttet til rode.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10684</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>11245: Gir flate/polygon som geometrisk avgrenser tilleggsareal som skal feies, dvs. sideareal, plasser, fortau, etc.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11245</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>12143: Gir linje/kurve som geometrisk representerer objektet. Benyttes kun i tilfeller der det skal inngå veg som ikke har eget vegnett i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12143</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="FeierodePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Feierode"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="PrioritetFeierodeType">
+      <annotation>
+         <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PrioritetFeierodeEnumerationType nvdb:PrioritetFeierodeOtherType"/>
+   </simpleType>
+   <simpleType name="PrioritetFeierodeEnumerationType">
+      <annotation>
+         <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
             <annotation>
-              <documentation>10681: Angir nummer på rode.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10681</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Nummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17247</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">A</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="navn" type="string">
+         </enumeration>
+         <enumeration value="B">
             <annotation>
-              <documentation>10682: Angir navn på rode.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10682</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17248</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">B</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prioritet" type="nvdb:PrioritetFeierodeType">
+         </enumeration>
+         <enumeration value="C">
             <annotation>
-              <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17249</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">C</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="renholdsintervall" type="nvdb:RenholdsintervallType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PrioritetFeierodeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="RenholdsintervallFeierodeType">
+      <annotation>
+         <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:RenholdsintervallFeierodeEnumerationType nvdb:RenholdsintervallFeierodeOtherType"/>
+   </simpleType>
+   <simpleType name="RenholdsintervallFeierodeEnumerationType">
+      <annotation>
+         <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="2g">
             <annotation>
-              <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19088</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2 ganger årlig</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="D">
             <annotation>
-              <documentation>10684: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks. informasjon knyttet til rode.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10684</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19085</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Daglig</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+         </enumeration>
+         <enumeration value="M">
             <annotation>
-              <documentation>11245: Gir flate/polygon som geometrisk avgrenser tilleggsareal som skal feies, dvs. sideareal, plasser, fortau, etc.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11245</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19087</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Månedlig</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>12143: Gir linje/kurve som geometrisk representerer objektet. Benyttes kun i tilfeller der det skal inngå veg som ikke har eget vegnett i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12143</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19086</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukentlig</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FeierodePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Feierode"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="PrioritetFeierodeType">
-    <annotation>
-      <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:PrioritetFeierodeEnumerationType nvdb:PrioritetFeierodeOtherType"/>
-  </simpleType>
-  <simpleType name="PrioritetFeierodeEnumerationType">
-    <annotation>
-      <documentation>10683: Angir hvilken prioritet som gjelder for aktuell rode.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10683</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Prioritet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="A">
-        <annotation>
-          <documentation>17247: Høyest prioritet.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17247</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">A</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="B">
-        <annotation>
-          <documentation>17248: Middels prioritet.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17248</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">B</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="C">
-        <annotation>
-          <documentation>17249: Lavest prioritet.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17249</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">C</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="PrioritetFeierodeOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="RenholdsintervallType">
-    <annotation>
-      <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:RenholdsintervallEnumerationType nvdb:RenholdsintervallOtherType"/>
-  </simpleType>
-  <simpleType name="RenholdsintervallEnumerationType">
-    <annotation>
-      <documentation>11308: Angir hvor ofte det er planlagt å utføre feiing/renhold på strekning.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11308</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Renholdsintervall</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Daglig">
-        <annotation>
-          <documentation>19085: Daglig</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19085</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Daglig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ukentlig">
-        <annotation>
-          <documentation>19086: Ukentlig</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19086</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ukentlig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Månedlig">
-        <annotation>
-          <documentation>19087: Månedlig</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19087</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Månedlig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="2 ganger årlig">
-        <annotation>
-          <documentation>19088: 2 ganger årlig</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19088</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">2 ganger årlig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="RenholdsintervallOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="RenholdsintervallFeierodeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

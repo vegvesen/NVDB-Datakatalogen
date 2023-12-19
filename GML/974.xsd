@@ -1,119 +1,129 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="DriftsstatusFerjelemType">
-    <annotation>
-      <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:DriftsstatusFerjelemEnumerationType nvdb:DriftsstatusFerjelemOtherType"/>
-  </simpleType>
-  <simpleType name="DriftsstatusFerjelemEnumerationType">
-    <annotation>
-      <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ordinær drift">
-        <annotation>
-          <documentation>21738: Ferjelem benyttes i ordinær drift.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21738</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ordinær drift</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Reserveferjelem">
-        <annotation>
-          <documentation>21739: Ferjelem benyttes som reserveferjelem.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21739</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Reserveferjelem</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="DriftsstatusFerjelemOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Ferjelem" substitutionGroup="nvdb:AbstraktFerjelem" type="nvdb:FerjelemType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>974: Bru mellom ferje og kai. Kan heves/senkes. Benevnes også ferjekaibru.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">974</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">974</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Ferjelem</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="FerjelemType">
-    <complexContent>
-      <extension base="nvdb:AbstraktFerjelemType">
-        <sequence>
-          <element minOccurs="0" name="NSR_Quay_ID" type="string">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="DriftsstatusFerjelemType">
+      <annotation>
+         <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DriftsstatusFerjelemEnumerationType nvdb:DriftsstatusFerjelemOtherType"/>
+   </simpleType>
+   <simpleType name="DriftsstatusFerjelemEnumerationType">
+      <annotation>
+         <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="OD">
             <annotation>
-              <documentation>12552: Unik ID på ferjelem i Nasjonalt Stoppestedsregister NSR. NSR administreres av Entur AS. NSR_Quay_ID er basis ID for synkronisering mot NSR. ID er sammensatt av prefiks "NSR:Quay:" og et løpenummer. Eksempel: "NSR:Quay:66976".</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12552</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">NSR_Quay_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21738</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ordinær drift</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="ferjeTil" type="string">
+         </enumeration>
+         <enumeration value="RF">
             <annotation>
-              <documentation>12554: Beskriver hvor det går ferje til.  Dersom ferje går til flere anløpssteder oppgis disse med semikolon mellom.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12554</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Ferje til</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21739</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Reserveferjelem</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="driftsstatus" type="nvdb:DriftsstatusFerjelemType">
-            <annotation>
-              <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>12553: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12553</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FerjelemPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Ferjelem"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DriftsstatusFerjelemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Ferjelem"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:FerjelemType">
+      <annotation>
+         <documentation>974: Bru mellom ferje og kai. Kan heves/senkes. Benevnes også ferjekaibru.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">974</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ferjelem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="FerjelemType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="NSR_Quay_ID" type="string">
+                  <annotation>
+                     <documentation>12552: Unik ID på ferjelem i Nasjonalt Stoppestedsregister NSR. NSR administreres av Entur AS. NSR_Quay_ID er basis ID for synkronisering mot NSR. ID er sammensatt av prefiks "NSR:Quay:" og et løpenummer. Eksempel: "NSR:Quay:66976".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12552</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">NSR_Quay_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="ferjeTil" type="string">
+                  <annotation>
+                     <documentation>12554: Beskriver hvor det går ferje til.  Dersom ferje går til flere anløpssteder oppgis disse med semikolon mellom.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12554</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ferje til</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsstatus" type="nvdb:DriftsstatusFerjelemType">
+                  <annotation>
+                     <documentation>12603: Angir hvilken driftsstatus ferjelem har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12603</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsstatus</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>12553: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12553</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="FerjelemPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Ferjelem"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

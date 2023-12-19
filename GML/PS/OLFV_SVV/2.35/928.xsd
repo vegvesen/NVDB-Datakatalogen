@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
+      <documentation>928: Område hvor det er installert vertikaldren for å påskynde setninger. Benyttes vanligvis under fyllinger, og bør kombineres med forbelastning med overhøyde.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="TypeVertikaldrenType">
+      <annotation>
+         <documentation>11386: Angir hva slags type vertikaldren som er installert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11386</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeVertikaldrenEnumerationType nvdb:TypeVertikaldrenOtherType"/>
+   </simpleType>
+   <simpleType name="TypeVertikaldrenEnumerationType">
+      <annotation>
+         <documentation>11386: Angir hva slags type vertikaldren som er installert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11386</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="PP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19229</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Prefabrikkerte-/plastdren</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19228</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sand/grus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVertikaldrenOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Vertikaldren"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:VertikaldrenType">
+      <annotation>
+         <documentation>928: Område hvor det er installert vertikaldren for å påskynde setninger. Benyttes vanligvis under fyllinger, og bør kombineres med forbelastning med overhøyde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">928</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vertikaldren</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VertikaldrenType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="type" type="nvdb:TypeVertikaldrenType">
+                  <annotation>
+                     <documentation>11386: Angir hva slags type vertikaldren som er installert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11386</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="innbyrdesAvstand" type="double">
+                  <annotation>
+                     <documentation>11387: .</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11387</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Innbyrdes avstand</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybdeTilBunn" type="double">
+                  <annotation>
+                     <documentation>11388: .</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11388</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde til bunn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="double">
+                  <annotation>
+                     <documentation>11389: Angir areal av område med vertikaldren.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11389</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>11390: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11390</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>11351: Gir flate/polygon som geometrisk avgrenser område med vertikaldren.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11351</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VertikaldrenPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vertikaldren"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

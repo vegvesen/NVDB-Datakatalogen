@@ -1,380 +1,360 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="EierVegsperringType">
-    <annotation>
-      <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierVegsperringEnumerationType nvdb:EierVegsperringOtherType"/>
-  </simpleType>
-  <simpleType name="EierVegsperringEnumerationType">
-    <annotation>
-      <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="StatensVegvesen">
-        <annotation>
-          <documentation>13378: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13378</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NyeVeier">
-        <annotation>
-          <documentation>18561: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18561</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="fylkeskommune">
-        <annotation>
-          <documentation>13379: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13379</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="kommune">
-        <annotation>
-          <documentation>13380: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13380</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="privat">
-        <annotation>
-          <documentation>13381: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13381</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="uavklart">
-        <annotation>
-          <documentation>17619: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17619</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierVegsperringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="FunksjonVegsperringType">
-    <annotation>
-      <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:FunksjonVegsperringEnumerationType nvdb:FunksjonVegsperringOtherType"/>
-  </simpleType>
-  <simpleType name="FunksjonVegsperringEnumerationType">
-    <annotation>
-      <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="betalingssperring">
-        <annotation>
-          <documentation>19674: Bom eller annen type vegsperring som kan åpnes ved betaling.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19674</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Betalingssperre</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="bussluse">
-        <annotation>
-          <documentation>19675: Grop i vegen som hindrer biltrafikk. Tilgjengelig for buss (brede kjøretøy).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19675</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bussluse</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="fjernstyrtSperring">
-        <annotation>
-          <documentation>19676: Bom eller annen type vegsperring som kan åpnes vha. SMS, bombrikke, oppringning, vaktsentral e.l.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19676</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fjernstyrt sperring</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="låstSperring">
-        <annotation>
-          <documentation>19677: Bom eller annen type vegsperring som kan åpnes med nøkkel eller kode.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19677</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Låst sperring</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="trafikkavviser">
-        <annotation>
-          <documentation>19678: Stein, blokk, pullert, rørgelender eller andre vegsperringer som ikke kan flyttes eller åpnes uten verktøy eller store kjøretøyer.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19678</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Trafikkavviser</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="ulåstSperring">
-        <annotation>
-          <documentation>19679: Bom eller annen type vegsperring som kan åpnes manuelt uten nøkkel eller kode.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19679</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ulåst Sperring</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="FunksjonVegsperringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeVegsperringType">
-    <annotation>
-      <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TypeVegsperringEnumerationType nvdb:TypeVegsperringOtherType"/>
-  </simpleType>
-  <simpleType name="TypeVegsperringEnumerationType">
-    <annotation>
-      <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="låstBom">
-        <annotation>
-          <documentation>9975: Bom på tvers av vegen. I permanent låst posisjon.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9975</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Låst bom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="bomMedAutomatiskÅpner">
-        <annotation>
-          <documentation>13369: Heve-/senkebommer åpnes og lukkes ved å heve/senke vegbommen. Heve-/senkebom kan sperre hele eller deler av vegbanen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13369</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Heve-/senkebom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="bilsperre">
-        <annotation>
-          <documentation>11800: Svingbommer åpnes og lukkes ved at de svinges til side. Svingbommer kan sperre hele eller deler av vegbanen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">11800</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Svingbom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="rørgelender">
-        <annotation>
-          <documentation>9971: Disse vegbommene kan være sammensatt av en eller flere deler, f.eks. som to parallelle sideforskyvde gelender/trafikkgjerder med passasje for myke trafikanter mellom. Denne type vegbom må normalt løftes til side eller demonteres for å åpne for biltrafikk.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9971</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rørgelender</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="newJersey">
-        <annotation>
-          <documentation>9973: En eller flere betongblokker plassert på tvers av veg. Normalt mulig for myke trafikanter å passere.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9973</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Betongblokk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="steinblokk">
-        <annotation>
-          <documentation>9972: En eller flere steinblokker plassert på tvers av veg. Normalt mulig for myke trafikanter å passere.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9972</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Steinblokk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="betongkjegle">
-        <annotation>
-          <documentation>9970: En eller flere stolper, pullerter eller kjegler satt opp på rekke med innbyrdes avstand slik at veg sperres for biltrafikk. Kan være permanent, fjernes manuelt eller fjernes ved automatisk nedsenkning.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9970</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stolpe/pullert/kjegle</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="bussluse">
-        <annotation>
-          <documentation>9974: Grop i vegen som hindrer biltrafikk. Tilgjengelig for buss (brede kjøretøy).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9974</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bussluse</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="trafikkavviser">
-        <annotation>
-          <documentation>11799: Stolper, steiner, blokker etc. plassert i vegen eller i overgang mellom veg og fotgjengerareal for å stenge for biltrafikk (egen). Benyttes om vegbommer/sperringer som ikke dekkes av de øvrige verdiene. Beskrivelse skal angis under merknad.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">11799</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Annen type vegbom/sperring</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeVegsperringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Vegsperring" substitutionGroup="nvdb:AbstraktVegsperring" type="nvdb:VegsperringType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>607: Angir at veg er fysisk sperret.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">607</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">607</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vegsperring</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="VegsperringType">
-    <complexContent>
-      <extension base="nvdb:AbstraktVegsperringType">
-        <sequence>
-          <element name="type" type="nvdb:TypeVegsperringType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierVegsperringType">
+      <annotation>
+         <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierVegsperringEnumerationType nvdb:EierVegsperringOtherType"/>
+   </simpleType>
+   <simpleType name="EierVegsperringEnumerationType">
+      <annotation>
+         <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13379</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="funksjon" type="nvdb:FunksjonVegsperringType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13380</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="gjeldertidsrom" type="string">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>11543: Angir tidsrommet (hhmm-hhmm) eller (mnd-mnd) vegsperringen gjelder.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11543</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Gjelder tidsrom</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13381</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="merknad" type="string">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>5478: Opplysning om spesielle forhold knyttet til fysisk sperring.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">5478</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18561</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierVegsperringType">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13378</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>7930: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7930</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierVegsperringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="FunksjonVegsperringType">
+      <annotation>
+         <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FunksjonVegsperringEnumerationType nvdb:FunksjonVegsperringOtherType"/>
+   </simpleType>
+   <simpleType name="FunksjonVegsperringEnumerationType">
+      <annotation>
+         <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="BS">
             <annotation>
-              <documentation>6837: Gir linje/kurve som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">6837</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19674</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betalingssperre</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+         <enumeration value="BU">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19675</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bussluse</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="FS">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19676</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fjernstyrt sperring</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="VegsperringPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Vegsperring"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+         <enumeration value="LS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19677</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Låst sperring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19678</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkavviser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="US">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19679</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ulåst Sperring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FunksjonVegsperringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVegsperringType">
+      <annotation>
+         <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeVegsperringEnumerationType nvdb:TypeVegsperringOtherType"/>
+   </simpleType>
+   <simpleType name="TypeVegsperringEnumerationType">
+      <annotation>
+         <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="TA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11799</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen type vegbom/sperring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NJ">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9973</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongblokk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BU">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9974</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bussluse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13369</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Heve-/senkebom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9975</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Låst bom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="RG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9971</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rørgelender</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9972</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Steinblokk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9970</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stolpe/pullert/kjegle</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11800</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Svingbom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVegsperringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Vegsperring"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:VegsperringType">
+      <annotation>
+         <documentation>607: Angir at veg er fysisk sperret.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">607</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegsperring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VegsperringType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="type" type="nvdb:TypeVegsperringType">
+                  <annotation>
+                     <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7861</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="funksjon" type="nvdb:FunksjonVegsperringType">
+                  <annotation>
+                     <documentation>11542: Angir hvilken funksjon sperringen har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11542</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Funksjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjeldertidsrom" type="string">
+                  <annotation>
+                     <documentation>11543: Angir tidsrommet (hhmm-hhmm) eller (mnd-mnd) vegsperringen gjelder.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11543</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder tidsrom</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknad" type="string">
+                  <annotation>
+                     <documentation>5478: Opplysning om spesielle forhold knyttet til fysisk sperring.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5478</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierVegsperringType">
+                  <annotation>
+                     <documentation>9498: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9498</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>7930: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7930</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>6837: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6837</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VegsperringPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vegsperring"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

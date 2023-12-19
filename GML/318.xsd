@@ -1,323 +1,304 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="BortkjøringType">
-    <annotation>
-      <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:BortkjøringEnumerationType nvdb:BortkjøringOtherType"/>
-  </simpleType>
-  <simpleType name="BortkjøringEnumerationType">
-    <annotation>
-      <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ja">
-        <annotation>
-          <documentation>17903: Snø/is må normalt lastes over på annet kjøretøy og kjøres bort fra stedet da det ikke er tilstrekkelig opplagringsplass i umiddelbar nærhet.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17903</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nei">
-        <annotation>
-          <documentation>17904: Det er plass til opplagring av snø i nærheten slik at snø kan flyttes uten omlasting til annet kjøretøy for bortkjøring.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17904</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17905: Informasjon om hvorvidt det er behov for bortkjøring er ikke innhentet.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17905</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="BortkjøringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="SnøIsrydding" substitutionGroup="nvdb:AbstraktSnøIsrydding" type="nvdb:SnøIsryddingType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>318: Sted/område hvor det er behov for å snø-/isrydding utover det som tas med brøytekjøretøy.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">318</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">318</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Snø-/isrydding</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="SnøIsryddingType">
-    <complexContent>
-      <extension base="nvdb:AbstraktSnøIsryddingType">
-        <sequence>
-          <element minOccurs="0" name="type" type="nvdb:TypeSnøIsryddingType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BortkjøringSnø-isryddingType">
+      <annotation>
+         <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BortkjøringSnø-isryddingEnumerationType nvdb:BortkjøringSnø-isryddingOtherType"/>
+   </simpleType>
+   <simpleType name="BortkjøringSnø-isryddingEnumerationType">
+      <annotation>
+         <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
             <annotation>
-              <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17903</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="beskrivelse" type="string">
+         </enumeration>
+         <enumeration value="N">
             <annotation>
-              <documentation>10719: Tilleggsbeskrivelse. Kan f.eks. være bakgrunn for snøryddingsbehov, om snø må kjøres bort, Hvor stort omfang snørydding har osv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10719</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17904</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="bortkjøring" type="nvdb:BortkjøringType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17905</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="hyppighet" type="integer">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BortkjøringSnø-isryddingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Snø-isrydding"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Snø-isryddingType">
+      <annotation>
+         <documentation>318: Sted/område hvor det er behov for å snø-/isrydding utover det som tas med brøytekjøretøy.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">318</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Snø-isrydding</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Snø-isryddingType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="type" type="nvdb:TypeSnø-isryddingType">
+                  <annotation>
+                     <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="beskrivelse" type="string">
+                  <annotation>
+                     <documentation>10719: Tilleggsbeskrivelse. Kan f.eks. være bakgrunn for snøryddingsbehov, om snø må kjøres bort, Hvor stort omfang snørydding har osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10719</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="bortkjøring"
+                        type="nvdb:BortkjøringSnø-isryddingType">
+                  <annotation>
+                     <documentation>10863: Angir om det er nødvendig å laste snø/is over på annet kjøretøy (lastebil/traktor) og kjøre det bort fra stedet eller ikke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10863</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bortkjøring</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="hyppighet" type="integer">
+                  <annotation>
+                     <documentation>10864: Angir anslag for hvor ofte det er behov for å foreta rydding per vintersesong.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10864</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Hyppighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="makshøydeIs" type="integer">
+                  <annotation>
+                     <documentation>10865: Angir hvor høyt over veg det er nødvendig med isrensk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10865</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Makshøyde is</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="integer">
+                  <annotation>
+                     <documentation>10866: Angir areal av område som skal snø-/isryddes.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10866</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4909: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4909</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Snø-isryddingPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Snø-isrydding"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeSnø-isryddingType">
+      <annotation>
+         <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeSnø-isryddingEnumerationType nvdb:TypeSnø-isryddingOtherType"/>
+   </simpleType>
+   <simpleType name="TypeSnø-isryddingEnumerationType">
+      <annotation>
+         <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="isdag">
             <annotation>
-              <documentation>10864: Angir anslag for hvor ofte det er behov for å foreta rydding per vintersesong.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10864</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Hyppighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5483</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Isrensk i bergskjæring/skråning</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="makshøydeIs" type="integer">
+         </enumeration>
+         <enumeration value="istunn">
             <annotation>
-              <documentation>10865: Angir hvor høyt over veg det er nødvendig med isrensk.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10865</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Makshøyde is</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5484</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Isrensk i tunnel</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="areal" type="integer">
+         </enumeration>
+         <enumeration value="sr1">
             <annotation>
-              <documentation>10866: Angir areal av område som skal snø-/isryddes.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10866</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4075</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="fokk">
             <annotation>
-              <documentation>4909: Gir linje/kurve som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4909</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17901</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, fokksnø</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+         <enumeration value="fortau">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9830</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, fortau</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="fresfelt">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9833</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, fresefelt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="leskur">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9834</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, leskur</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="SnøIsryddingPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:SnøIsrydding"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="TypeSnøIsryddingType">
-    <annotation>
-      <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TypeSnøIsryddingEnumerationType nvdb:TypeSnøIsryddingOtherType"/>
-  </simpleType>
-  <simpleType name="TypeSnøIsryddingEnumerationType">
-    <annotation>
-      <documentation>2224: Angir hvilken type snørydding det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">2224</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Snørydding">
-        <annotation>
-          <documentation>4075: Benyttes om ikke annen verdi passer. Skal suppleres med informasjon under «Beskrivelse».</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">4075</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, manglende snøopplager">
-        <annotation>
-          <documentation>17899: Snørydding pga. manglende snøopplager generelt. Eksempel bysenter.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17899</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, manglende snøopplager</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, sikt">
-        <annotation>
-          <documentation>9840: Snørydding for å opprettholde tilstrekkelige siktforhold. Gjelder kryss, rekkverk, kurver m.m.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9840</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, sikt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, trafikkdeler/øy">
-        <annotation>
-          <documentation>9831: Ekstra snørydding i tilknytning til trafikkdelere og trafikkøyer. Kan være både fysiske og malte.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9831</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, trafikkdeler/øy</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, fortau">
-        <annotation>
-          <documentation>9830: Snørydding i tilknytning til fortau. Kan være parti med smale passasjer eller manglende snøopplager.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9830</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, fortau</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, leskur">
-        <annotation>
-          <documentation>9834: Snørydding i tilknytning til leskur.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9834</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, leskur</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, trafikklomme">
-        <annotation>
-          <documentation>9832: Snørydding i tilknytning til trafikklommer. F.eks. ved manglende plass til snøopplager.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9832</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, trafikklomme</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, sideanlegg/naboeiendom">
-        <annotation>
-          <documentation>17900: Snørydding i tilknytning til sideanlegg, naboeiendom, mot annen vegholder.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17900</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, sideanlegg/naboeiendom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, skjæring/mur">
-        <annotation>
-          <documentation>9839: Snørydding i forbindelse med skjæringer/murer for å sikre plass til snø fra kommende brøyting og hindre at det raser snø fra skråning ut i kjørebanen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9839</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, skjæring/mur</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, nedfresing av brøytekanter">
-        <annotation>
-          <documentation>17902: Strekning hvor det erfaringsmessig er behov for å frese ned brøytekanter for å få plass til å brøyte bort ny snø.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17902</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, nedfresing av brøytekanter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, fokksnø">
-        <annotation>
-          <documentation>17901: Snørydding på strekning som er spesielt utsatt for at det bygger seg opp snøfonner ved bestemte værforhold.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17901</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, fokksnø</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snørydding, fresefelt">
-        <annotation>
-          <documentation>9833: Strekning hvor det freses bort snø i en viss bredde ved siden av vegen undervegs i vintersesongen for å gi plass til store snømengder.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9833</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snørydding, fresefelt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Isrensk i bergskjæring/skråning">
-        <annotation>
-          <documentation>5483: Bergskjæringer eller bratte skråninger/fjellsider hvor det erfaringsmessig må fjernes is for å hindre at det raser ned på vegen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5483</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Isrensk i bergskjæring/skråning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Isrensk i tunnel">
-        <annotation>
-          <documentation>5484: Sted hvor det erfaringsmessig må foretas isrensk i tunnel.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5484</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Isrensk i tunnel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeSnøIsryddingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="sr2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17899</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, manglende snøopplager</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kant">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17902</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, nedfresing av brøytekanter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="side">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17900</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, sideanlegg/naboeiendom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sikt">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9840</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, sikt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="skraa">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9839</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, skjæring/mur</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="deler">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9831</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, trafikkdeler/øy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lomme">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9832</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snørydding, trafikklomme</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeSnø-isryddingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

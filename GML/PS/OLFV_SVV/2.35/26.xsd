@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
+      <documentation>26: Utstyr satt opp på f.eks. rasteplasser brukt til lek m.m.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FastmontertLekeapparatType">
+      <annotation>
+         <documentation>9452: Angir om lekeapparatet er fastmontert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9452</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fastmontert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FastmontertLekeapparatEnumerationType nvdb:FastmontertLekeapparatOtherType"/>
+   </simpleType>
+   <simpleType name="FastmontertLekeapparatEnumerationType">
+      <annotation>
+         <documentation>9452: Angir om lekeapparatet er fastmontert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9452</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fastmontert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13317</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13318</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FastmontertLekeapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Lekeapparat"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:LekeapparatType">
+      <annotation>
+         <documentation>26: Utstyr satt opp på f.eks. rasteplasser brukt til lek m.m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">26</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lekeapparat</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="LekeapparatType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="type" type="nvdb:TypeLekeapparatType">
+                  <annotation>
+                     <documentation>1107: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1107</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="fastmontert" type="nvdb:FastmontertLekeapparatType">
+                  <annotation>
+                     <documentation>9452: Angir om lekeapparatet er fastmontert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9452</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fastmontert</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materialtype" type="nvdb:MaterialtypeLekeapparatType">
+                  <annotation>
+                     <documentation>9453: Angir primær materialtype for vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9453</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="overflatebehandling"
+                        type="nvdb:OverflatebehandlingLekeapparatType">
+                  <annotation>
+                     <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9454</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Overflatebehandling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="underlag" type="nvdb:UnderlagLekeapparatType">
+                  <annotation>
+                     <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1740</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10321: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10321</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4734: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4734</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="LekeapparatPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Lekeapparat"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="MaterialtypeLekeapparatType">
+      <annotation>
+         <documentation>9453: Angir primær materialtype for vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9453</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialtypeLekeapparatEnumerationType nvdb:MaterialtypeLekeapparatOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialtypeLekeapparatEnumerationType">
+      <annotation>
+         <documentation>9453: Angir primær materialtype for vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9453</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="betong">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13319</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="glassfib">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13320</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Glassfiber</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="metall">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13321</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Metall</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="plast">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13322</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tre">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13323</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialtypeLekeapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OverflatebehandlingLekeapparatType">
+      <annotation>
+         <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9454</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Overflatebehandling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OverflatebehandlingLekeapparatEnumerationType nvdb:OverflatebehandlingLekeapparatOtherType"/>
+   </simpleType>
+   <simpleType name="OverflatebehandlingLekeapparatEnumerationType">
+      <annotation>
+         <documentation>9454: Angir hvordan vegobjektet er overflatebehandlet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9454</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Overflatebehandling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="beiset">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13325</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Beiset</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="emaljert">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13329</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Emaljert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="impregn">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13326</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Impregnert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19081</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen overflatebehandling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lakkert">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13328</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lakkert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="malt">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13324</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Malt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="oljet">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13327</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Oljet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OverflatebehandlingLekeapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeLekeapparatType">
+      <annotation>
+         <documentation>1107: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1107</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeLekeapparatEnumerationType nvdb:TypeLekeapparatOtherType"/>
+   </simpleType>
+   <simpleType name="TypeLekeapparatEnumerationType">
+      <annotation>
+         <documentation>1107: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1107</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="h">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2507</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Huske</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9821</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Klatrestativ</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2510</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lekehus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2512</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Minigolf</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2511</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rutsjebane</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2508</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sandkasse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2509</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vippe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeLekeapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UnderlagLekeapparatType">
+      <annotation>
+         <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1740</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UnderlagLekeapparatEnumerationType nvdb:UnderlagLekeapparatOtherType"/>
+   </simpleType>
+   <simpleType name="UnderlagLekeapparatEnumerationType">
+      <annotation>
+         <documentation>1740: Angir hvilket underlag der er i tilknytning til lekeapparatet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1740</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="as">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3818</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt/stein/betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gummi">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13330</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gummimatte</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2087</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sand/gress</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4016</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UnderlagLekeapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

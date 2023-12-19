@@ -1,296 +1,275 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="FellesruteType">
-    <annotation>
-      <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:FellesruteEnumerationType nvdb:FellesruteOtherType"/>
-  </simpleType>
-  <simpleType name="FellesruteEnumerationType">
-    <annotation>
-      <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Primær">
-        <annotation>
-          <documentation>8861: Primær</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8861</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Primær</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sekundær">
-        <annotation>
-          <documentation>8862: Sekundær</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8862</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sekundær</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="FellesruteOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Riksvegrute" substitutionGroup="nvdb:AbstraktRiksvegrute" type="nvdb:RiksvegruteType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>704: Riksveger inndelt i ruter som i hovedsak benyttes i arbeidet med riksvegutredninger og NTP.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">704</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">704</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="RiksvegruteType">
-    <complexContent>
-      <extension base="nvdb:AbstraktRiksvegruteType">
-        <sequence>
-          <element minOccurs="0" name="riksvegrute" type="nvdb:RiksvegruteRiksvegruteType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FellesruteRiksvegruteType">
+      <annotation>
+         <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FellesruteRiksvegruteEnumerationType nvdb:FellesruteRiksvegruteOtherType"/>
+   </simpleType>
+   <simpleType name="FellesruteRiksvegruteEnumerationType">
+      <annotation>
+         <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="p">
             <annotation>
-              <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8861</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Primær</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="fellesrute" type="nvdb:FellesruteType">
+         </enumeration>
+         <enumeration value="s">
             <annotation>
-              <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8862</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sekundær</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FellesruteRiksvegruteOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Riksvegrute"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:RiksvegruteType">
+      <annotation>
+         <documentation>704: Riksveger inndelt i ruter som i hovedsak benyttes i arbeidet med riksvegutredninger og NTP.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">704</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="RiksvegruteType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="riksvegrute" type="nvdb:RiksvegruteRiksvegruteType">
+                  <annotation>
+                     <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="fellesrute"
+                        type="nvdb:FellesruteRiksvegruteType">
+                  <annotation>
+                     <documentation>6834: Angir om ruta er primær eller sekundær på strekninger der det er to felles ruter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6834</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fellesrute</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="RiksvegrutePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Riksvegrute"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="RiksvegruteRiksvegruteType">
+      <annotation>
+         <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:RiksvegruteRiksvegruteEnumerationType nvdb:RiksvegruteRiksvegruteOtherType"/>
+   </simpleType>
+   <simpleType name="RiksvegruteRiksvegruteEnumerationType">
+      <annotation>
+         <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1">
             <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20286</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 1: E6 Riksgrensen/Svinesund - Oslo</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+         <enumeration value="2a">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20287</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 2a: E18 Riksgrensen/Ørje - Oslo</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="RiksvegrutePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Riksvegrute"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="RiksvegruteRiksvegruteType">
-    <annotation>
-      <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:RiksvegruteRiksvegruteEnumerationType nvdb:RiksvegruteRiksvegruteOtherType"/>
-  </simpleType>
-  <simpleType name="RiksvegruteRiksvegruteEnumerationType">
-    <annotation>
-      <documentation>11953: Angir nummer og navn på riksvegrute.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11953</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Riksvegrute</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Rute 1: E6 Riksgrensen/Svinesund - Oslo">
-        <annotation>
-          <documentation>20286: Rute 1: E6 Riksgrensen/Svinesund - Oslo</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20286</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 1: E6 Riksgrensen/Svinesund - Oslo</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 2a: E18 Riksgrensen/Ørje - Oslo">
-        <annotation>
-          <documentation>20287: Rute 2a: E18 Riksgrensen/Ørje - Oslo</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20287</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 2a: E18 Riksgrensen/Ørje - Oslo</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 2b: E16 Riksgrensen - Hønefoss og Rv35 Hønefoss - Hokksund">
-        <annotation>
-          <documentation>20288: Rute 2b: E16 Riksgrensen/Riksåsen – Hønefoss og rv 35 Hønefoss – Hokksund med tilknytninger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20288</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 2b: E16 Riksgrensen - Hønefoss og Rv35 Hønefoss - Hokksund</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 3: E18 Oslo - Kristiansand - Stavanger">
-        <annotation>
-          <documentation>20289: Rute 3: E18 Oslo - Kristiansand - Stavanger</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20289</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 3: E18 Oslo - Kristiansand - Stavanger</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 4a: E39 Stavanger - Bergen - Ålesund">
-        <annotation>
-          <documentation>20290: Rute 4a: E39 Stavanger - Bergen - Ålesund</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20290</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 4a: E39 Stavanger - Bergen - Ålesund</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 4b: E39 Ålesund - Trondheim">
-        <annotation>
-          <documentation>20291: Rute 4b: E39 Ålesund - Trondheim</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20291</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 4b: E39 Ålesund - Trondheim</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 4c: Rv 9 Kristiansand - Haukeligrend og Rv 13/55 Jøsendal - Sogndal">
-        <annotation>
-          <documentation>20292: Rute 4c: Rv 9 Kristiansand - Haukeligrend og Rv 13/55 Jøsendal - Sogndal</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20292</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 4c: Rv 9 Kristiansand - Haukeligrend og Rv 13/55 Jøsendal - Sogndal</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 5a: E134 Drammen - Haugesund">
-        <annotation>
-          <documentation>20293: Rute 5a: E134 Drammen - Haugesund</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20293</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 5a: E134 Drammen - Haugesund</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 5b: Rv 7 Hønefoss - Bu og Rv52 Gol - Borlaug">
-        <annotation>
-          <documentation>20294: Rute 5b: Rv 7 Hønefoss - Bu og Rv52 Gol - Borlaug</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20294</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 5b: Rv 7 Hønefoss - Bu og Rv52 Gol - Borlaug</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 5c: E16 Sandvika - Bergen">
-        <annotation>
-          <documentation>20295: Rute 5c: E16 Sandvika - Bergen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20295</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 5c: E16 Sandvika - Bergen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 6a: E6 Oslo - Trondheim">
-        <annotation>
-          <documentation>20296: Rute 6a: E6 Oslo - Trondheim</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20296</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 6a: E6 Oslo - Trondheim</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 6b: Rv3 Kolomoen - Ulsberg">
-        <annotation>
-          <documentation>20297: Rute 6b: Rv3 Kolomoen - Ulsberg</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20297</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 6b: Rv3 Kolomoen - Ulsberg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 6c: Rv15 Otta - Måløy">
-        <annotation>
-          <documentation>20298: Rute 6c: Rv15 Otta - Måløy</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20298</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 6c: Rv15 Otta - Måløy</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 6d: E136 Dombås - Ålesund">
-        <annotation>
-          <documentation>20299: Rute 6d: E136 Dombås - Ålesund</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20299</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 6d: E136 Dombås - Ålesund</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 6e: Rv70 Oppdal - Kristiansund">
-        <annotation>
-          <documentation>20300: Rute 6e: Rv70 Oppdal - Kristiansund</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20300</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 6e: Rv70 Oppdal - Kristiansund</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 7: E6 Trondheim - Fauske">
-        <annotation>
-          <documentation>20301: Rute 7: E6 Trondheim - Fauske</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20301</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 7: E6 Trondheim - Fauske</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 8a: E6 Fauske - Nordkjosbotn">
-        <annotation>
-          <documentation>20302: Rute 8a: E6 Fauske - Nordkjosbotn</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20302</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 8a: E6 Fauske - Nordkjosbotn</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Rute 8b: E6 Nordkjosbotn - Kirkenes">
-        <annotation>
-          <documentation>20303: Rute 8b: E6 Nordkjosbotn - Kirkenes</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20303</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Rute 8b: E6 Nordkjosbotn - Kirkenes</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="RiksvegruteRiksvegruteOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="2b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20288</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 2b: E16 Riksgrensen - Hønefoss og Rv35 Hønefoss - Hokksund</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20289</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 3: E18 Oslo - Kristiansand - Stavanger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20290</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 4a: E39 Stavanger - Bergen - Ålesund</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20291</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 4b: E39 Ålesund - Trondheim</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4c">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20292</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 4c: Rv 9 Kristiansand - Haukeligrend og Rv 13/55 Jøsendal - Sogndal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20293</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 5a: E134 Drammen - Haugesund</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20294</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 5b: Rv 7 Hønefoss - Bu og Rv52 Gol - Borlaug</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5c">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20295</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 5c: E16 Sandvika - Bergen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20296</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 6a: E6 Oslo - Trondheim</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20297</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 6b: Rv3 Kolomoen - Ulsberg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6c">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20298</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 6c: Rv15 Otta - Måløy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6d">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20299</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 6d: E136 Dombås - Ålesund</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6e">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20300</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 6e: Rv70 Oppdal - Kristiansund</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20301</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 7: E6 Trondheim - Fauske</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="8a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20302</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 8a: E6 Fauske - Nordkjosbotn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="8b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20303</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rute 8b: E6 Nordkjosbotn - Kirkenes</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="RiksvegruteRiksvegruteOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

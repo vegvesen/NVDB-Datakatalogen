@@ -1,327 +1,299 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Kommune" substitutionGroup="nvdb:AbstraktKommune" type="nvdb:KommuneType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>946: Gjeldende kommuneinndeling.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">946</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">946</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="KommuneType">
-    <complexContent>
-      <extension base="nvdb:AbstraktKommuneType">
-        <sequence>
-          <element name="kommunenummer" type="integer">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kommune"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:KommuneType">
+      <annotation>
+         <documentation>946: Gjeldende kommuneinndeling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">946</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KommuneType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="kommunenummer" type="integer">
+                  <annotation>
+                     <documentation>11769: Angir kommunenummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11769</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kommunenummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kommunenavn" type="string">
+                  <annotation>
+                     <documentation>11770: Angir kommunenavn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11770</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kommunenavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="koordinatsystem" type="nvdb:KoordinatsystemKommuneType">
+                  <annotation>
+                     <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="organisasjonsnummer" type="double">
+                  <annotation>
+                     <documentation>12682: Organisasjonsnummer for aktuell kommune. Organisasjonsnummer er en entydig ni-sifret indikator for en organisasjon tildelt av Enhetsregisteret ved Brønnøysundregistrene.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12682</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Organisasjonsnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>11772: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11772</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="geometri_Flate">
+                  <annotation>
+                     <documentation>11771: Gir flate/polygon som geometrisk avgrenser området. (mulighet for multiflate).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11771</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KommunePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kommune"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="KoordinatsystemKommuneType">
+      <annotation>
+         <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KoordinatsystemKommuneEnumerationType nvdb:KoordinatsystemKommuneOtherType"/>
+   </simpleType>
+   <simpleType name="KoordinatsystemKommuneEnumerationType">
+      <annotation>
+         <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="53">
             <annotation>
-              <documentation>11769: Angir kommunenummer.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11769</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kommunenummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19705</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-64A, Møre</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="kommunenavn" type="string">
+         </enumeration>
+         <enumeration value="54">
             <annotation>
-              <documentation>11770: Angir kommunenavn.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11770</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kommunenavn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19706</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-64B, Møre</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="koordinatsystem" type="nvdb:KoordinatsystemKommuneType">
+         </enumeration>
+         <enumeration value="1">
             <annotation>
-              <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19707</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse I</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+         <enumeration value="2">
             <annotation>
-              <documentation>11772: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11772</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19708</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse II</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="geometri_Flate" type="gml:SurfacePropertyType">
+         </enumeration>
+         <enumeration value="3">
             <annotation>
-              <documentation>11771: Gir flate/polygon som geometrisk avgrenser området. (mulighet for multiflate).</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11771</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19709</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse III</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="4">
             <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19710</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse IV</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+         <enumeration value="5">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19711</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse V</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertFylke" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="6">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktFylke</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19712</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse VI</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertVeglenkeadresse" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="7">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVeglenkeadresse</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19713</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse VII</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="KommunePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Kommune"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="KoordinatsystemKommuneType">
-    <annotation>
-      <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:KoordinatsystemKommuneEnumerationType nvdb:KoordinatsystemKommuneOtherType"/>
-  </simpleType>
-  <simpleType name="KoordinatsystemKommuneEnumerationType">
-    <annotation>
-      <documentation>11773: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="NGO-akse I">
-        <annotation>
-          <documentation>19707: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19707</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse I</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse II">
-        <annotation>
-          <documentation>19708: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19708</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse II</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse III">
-        <annotation>
-          <documentation>19709: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19709</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse III</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse IV">
-        <annotation>
-          <documentation>19710: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19710</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse IV</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse V">
-        <annotation>
-          <documentation>19711: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19711</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse V</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse VI">
-        <annotation>
-          <documentation>19712: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19712</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse VI</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse VII">
-        <annotation>
-          <documentation>19713: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19713</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse VII</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-akse VIII">
-        <annotation>
-          <documentation>19714: datum NGO1948, projeksjon Gauss-Krüger.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19714</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-akse VIII</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 31 (EUREF89)">
-        <annotation>
-          <documentation>19716: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19716</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 31 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 32 (EUREF89)">
-        <annotation>
-          <documentation>19718: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19718</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 32 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 33 (EUREF89)">
-        <annotation>
-          <documentation>19720: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19720</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 33 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 34 (EUREF89)">
-        <annotation>
-          <documentation>19722: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19722</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 34 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 35 (EUREF89)">
-        <annotation>
-          <documentation>19724: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19724</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 35 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 36 (EUREF89)">
-        <annotation>
-          <documentation>19726: datum EUREF89/WGS84.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19726</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 36 (EUREF89)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 31 (ED50)">
-        <annotation>
-          <documentation>19715: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19715</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 31 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 32 (ED50)">
-        <annotation>
-          <documentation>19717: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19717</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 32 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 33 (ED50)">
-        <annotation>
-          <documentation>19719: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19719</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 33 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 34 (ED50)">
-        <annotation>
-          <documentation>19721: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19721</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 34 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 35 (ED50)">
-        <annotation>
-          <documentation>19723: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19723</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 35 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="UTM sone 36 (ED50)">
-        <annotation>
-          <documentation>19725: datum ED50.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19725</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UTM sone 36 (ED50)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-64A, Møre">
-        <annotation>
-          <documentation>19705: datum NGO1948.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19705</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-64A, Møre</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="NGO-64B, Møre">
-        <annotation>
-          <documentation>19706: datum NGO1948.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19706</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">NGO-64B, Møre</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="KoordinatsystemKommuneOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="8">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19714</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NGO-akse VIII</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="31">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19715</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 31 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="21">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19716</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 31 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="32">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19717</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 32 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="22">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19718</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 32 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="33">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19719</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 33 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="23">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19720</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 33 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="34">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19721</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 34 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="24">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19722</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 34 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="35">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19723</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 35 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="25">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19724</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 35 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="36">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19725</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 36 (ED50)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="26">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19726</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM sone 36 (EUREF89)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KoordinatsystemKommuneOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

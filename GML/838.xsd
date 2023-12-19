@@ -1,290 +1,298 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="GrunnlagType">
-    <annotation>
-      <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:GrunnlagEnumerationType nvdb:GrunnlagOtherType"/>
-  </simpleType>
-  <simpleType name="GrunnlagEnumerationType">
-    <annotation>
-      <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="FKB">
-        <annotation>
-          <documentation>13456: FKB</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13456</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">FKB</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Laserdata, dekketilstand">
-        <annotation>
-          <documentation>13457: Laserdata, dekketilstand</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13457</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Laserdata, dekketilstand</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Manuell måling">
-        <annotation>
-          <documentation>13458: Manuell måling</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13458</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Manuell måling</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fra plan/prosjektering">
-        <annotation>
-          <documentation>20910: Vegbreddedata er hentet fra plan/prosjektering. Kan være direkte fra normalprofil.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20910</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fra plan/prosjektering</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="GrunnlagOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Vegbredde_Beregnet" substitutionGroup="nvdb:AbstraktVegbredde_Beregnet" type="nvdb:Vegbredde_BeregnetType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>838: Vegbredde beregnet på basis av grunnlagsdata, f.eks. FKB, dekketilstandsdata etc. Merknad: Disse dataene er i første omgang tiltenkt bruksområder hvor det ikke stilles veldig nøyaktige krav til breddenøyaktighet, bl.a. analyser knyttet til NTP.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">838</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">838</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vegbredde, beregnet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="Vegbredde_BeregnetType">
-    <complexContent>
-      <extension base="nvdb:AbstraktVegbredde_BeregnetType">
-        <sequence>
-          <element minOccurs="0" name="dekkebredde" type="double">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="GrunnlagVegbredde, beregnetType">
+      <annotation>
+         <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GrunnlagVegbredde, beregnetEnumerationType nvdb:GrunnlagVegbredde, beregnetOtherType"/>
+   </simpleType>
+   <simpleType name="GrunnlagVegbredde, beregnetEnumerationType">
+      <annotation>
+         <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FKB">
             <annotation>
-              <documentation>9537: Angir gjennomsnittsverdi for dekkebredde på gitt strekning. Basert på enkeltberegninger. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9537</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dekkebredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13456</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">FKB</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dekkebredde_Min" type="double">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>9538: Angir minste dekkebredde på gitt strekning. Denne bredden er basert på minste beregna verdi av alle enkeltberegningene. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9538</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dekkebredde, min</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20910</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fra plan/prosjektering</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dekkebredde_Maks" type="double">
+         </enumeration>
+         <enumeration value="lasDekke">
             <annotation>
-              <documentation>9536: Angir største beregna dekkebredde på gitt strekning. Denne bredden er basert på største beregna verdi av alle enkeltberegningene. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9536</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dekkebredde, maks</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13457</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Laserdata, dekketilstand</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dekkebredde_Median" type="double">
+         </enumeration>
+         <enumeration value="mm">
             <annotation>
-              <documentation>10248: Angir medianverdi for dekkebredde på gitt strekning. Denne bredden er basert på  enkeltberegningene for strekningen. Enkeltberegningene sorteres etter beregna dekkebredde. Dekkebredde, median er lik dekkebredde for midterste enkeltberegning . Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10248</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dekkebredde, median</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13458</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Manuell måling</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dekkebredde_Normal" type="double">
-            <annotation>
-              <documentation>10249: Angir normal dekkebredde for gitt strekning. Denne bredden er basert på enkeltberegningene for strekningen. Normalbredde er den dekkebredden som opptrer for flest antall enkeltberegninger etter at de er avrundet i henhold til oppgitt avrundingsintervall.  Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10249</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dekkebredde, normal</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="vegbredde" type="double">
-            <annotation>
-              <documentation>9797: Angir total vegbredde.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9797</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vegbredde</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="vegbredde_Min" type="double">
-            <annotation>
-              <documentation>9798: Angir minimum vegbredde på gitt strekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9798</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vegbredde, min</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="vegbredde_Maks" type="double">
-            <annotation>
-              <documentation>9796: Angir maks vegbredde på gitt strekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9796</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vegbredde, maks</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kjørebanebredde" type="double">
-            <annotation>
-              <documentation>9800: Angir total kjørebanebredde.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9800</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kjørebanebredde</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kjørebanebredde_Min" type="double">
-            <annotation>
-              <documentation>9801: Angir minimum kjørebanebredde på gitt strekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9801</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kjørebanebredde, min</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kjørebanebredde_Maks" type="double">
-            <annotation>
-              <documentation>9799: Angir maks kjørebanebredde på gitt strekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9799</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kjørebanebredde, maks</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="grunnlag" type="nvdb:GrunnlagType">
-            <annotation>
-              <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="målemetodeGrunnlag" type="string">
-            <annotation>
-              <documentation>9535: Angir hvilken målemetode som er benyttet for å framskaffe grunnlagsdata. Verdier fra SOSI målemetode.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9535</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Målemetode grunnlag</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="datoGrunnlag" type="date">
-            <annotation>
-              <documentation>9533: Angir opprinnelsesdato for eldste grunnlagsdata.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9533</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dato grunnlag</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="nøyaktighetGrunnlag" type="integer">
-            <annotation>
-              <documentation>9539: Nøyaktighet på grunnlagsdata i grunnriss.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9539</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Nøyaktighet grunnlag</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skulderbreddeTotal_Høyre" type="double">
-            <annotation>
-              <documentation>12581: Angir gjennomsnittlig skulderbredde på høyre side. Inkluderer asfalt- og grusskulder.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12581</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skulderbredde total, høyre</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skulderbreddeTotal_Venstre" type="double">
-            <annotation>
-              <documentation>12580: Angir gjennomsnittlig skulderbredde på venstre side. Inkluderer asfalt- og grusskulder.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12580</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skulderbredde total, venstre</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skulderbreddeAsfalt_Høyre" type="double">
-            <annotation>
-              <documentation>12579: Angir gjennomsnittlig asfaltert skulderbredde på høyre side.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12579</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skulderbredde asfalt, høyre</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="skulderbreddeAsfalt_Venstre" type="double">
-            <annotation>
-              <documentation>12578: Angir gjennomsnittlig asfaltert skulderbredde på venstre side.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12578</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skulderbredde asfalt, venstre</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="beregningsinfo" type="string">
-            <annotation>
-              <documentation>9540: Informasjon knyttet til vegbreddeberegningen. bd=beregningsdato (dato vegnett ble lest inn fra NVDB). kv=kurvgenversjon. pa=profilavstand. gp=prosentvis godkjente profiler. bf=maks aksepterte breddefaktor. sd=Søkedistanse. ar=Avrundingsverdi. mk=merknad - tekst som bruker selv kan legge inn. maks 30 tegn.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9540</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Beregningsinfo</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>12577: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12577</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="Vegbredde_BeregnetPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Vegbredde_Beregnet"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GrunnlagVegbredde, beregnetOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Vegbredde, beregnet"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Vegbredde, beregnetType">
+      <annotation>
+         <documentation>838: Vegbredde beregnet på basis av grunnlagsdata, f.eks. FKB, dekketilstandsdata etc. Merknad: Disse dataene er i første omgang tiltenkt bruksområder hvor det ikke stilles veldig nøyaktige krav til breddenøyaktighet, bl.a. analyser knyttet til NTP.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">838</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegbredde, beregnet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Vegbredde, beregnetType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="dekkebredde" type="double">
+                  <annotation>
+                     <documentation>9537: Angir gjennomsnittsverdi for dekkebredde på gitt strekning. Basert på enkeltberegninger. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9537</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dekkebredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dekkebredde_Min" type="double">
+                  <annotation>
+                     <documentation>9538: Angir minste dekkebredde på gitt strekning. Denne bredden er basert på minste beregna verdi av alle enkeltberegningene. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9538</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dekkebredde, min</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dekkebredde_Maks" type="double">
+                  <annotation>
+                     <documentation>9536: Angir største beregna dekkebredde på gitt strekning. Denne bredden er basert på største beregna verdi av alle enkeltberegningene. Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9536</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dekkebredde, maks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dekkebredde_Median" type="double">
+                  <annotation>
+                     <documentation>10248: Angir medianverdi for dekkebredde på gitt strekning. Denne bredden er basert på  enkeltberegningene for strekningen. Enkeltberegningene sorteres etter beregna dekkebredde. Dekkebredde, median er lik dekkebredde for midterste enkeltberegning . Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10248</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dekkebredde, median</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dekkebredde_Normal" type="double">
+                  <annotation>
+                     <documentation>10249: Angir normal dekkebredde for gitt strekning. Denne bredden er basert på enkeltberegningene for strekningen. Normalbredde er den dekkebredden som opptrer for flest antall enkeltberegninger etter at de er avrundet i henhold til oppgitt avrundingsintervall.  Antall enkeltberegninger framkommer av beregningsinfo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10249</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dekkebredde, normal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vegbredde" type="double">
+                  <annotation>
+                     <documentation>9797: Angir total vegbredde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9797</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegbredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vegbredde_Min" type="double">
+                  <annotation>
+                     <documentation>9798: Angir minimum vegbredde på gitt strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9798</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegbredde, min</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vegbredde_Maks" type="double">
+                  <annotation>
+                     <documentation>9796: Angir maks vegbredde på gitt strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9796</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegbredde, maks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kjørebanebredde" type="double">
+                  <annotation>
+                     <documentation>9800: Angir total kjørebanebredde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9800</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kjørebanebredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kjørebanebredde_Min" type="double">
+                  <annotation>
+                     <documentation>9801: Angir minimum kjørebanebredde på gitt strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9801</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kjørebanebredde, min</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kjørebanebredde_Maks" type="double">
+                  <annotation>
+                     <documentation>9799: Angir maks kjørebanebredde på gitt strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9799</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kjørebanebredde, maks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="grunnlag" type="nvdb:GrunnlagVegbredde, beregnetType">
+                  <annotation>
+                     <documentation>9534: Angir hvilke kilde dataene kommer fra.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9534</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Grunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="målemetodeGrunnlag" type="string">
+                  <annotation>
+                     <documentation>9535: Angir hvilken målemetode som er benyttet for å framskaffe grunnlagsdata. Verdier fra SOSI målemetode.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9535</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målemetode grunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="datoGrunnlag" type="date">
+                  <annotation>
+                     <documentation>9533: Angir opprinnelsesdato for eldste grunnlagsdata.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9533</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dato grunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nøyaktighetGrunnlag" type="double">
+                  <annotation>
+                     <documentation>9539: Nøyaktighet på grunnlagsdata i grunnriss.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9539</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nøyaktighet grunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skulderbreddeTotal_Høyre" type="double">
+                  <annotation>
+                     <documentation>12581: Angir gjennomsnittlig skulderbredde på høyre side. Inkluderer asfalt- og grusskulder.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12581</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skulderbredde total, høyre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skulderbreddeTotal_Venstre" type="double">
+                  <annotation>
+                     <documentation>12580: Angir gjennomsnittlig skulderbredde på venstre side. Inkluderer asfalt- og grusskulder.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12580</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skulderbredde total, venstre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skulderbreddeAsfalt_Høyre" type="double">
+                  <annotation>
+                     <documentation>12579: Angir gjennomsnittlig asfaltert skulderbredde på høyre side.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12579</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skulderbredde asfalt, høyre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skulderbreddeAsfalt_Venstre" type="double">
+                  <annotation>
+                     <documentation>12578: Angir gjennomsnittlig asfaltert skulderbredde på venstre side.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12578</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skulderbredde asfalt, venstre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="beregningsinfo" type="string">
+                  <annotation>
+                     <documentation>9540: Informasjon knyttet til vegbreddeberegningen. bd=beregningsdato (dato vegnett ble lest inn fra NVDB). kv=kurvgenversjon. pa=profilavstand. gp=prosentvis godkjente profiler. bf=maks aksepterte breddefaktor. sd=Søkedistanse. ar=Avrundingsverdi. mk=merknad - tekst som bruker selv kan legge inn. maks 30 tegn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9540</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beregningsinfo</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>12577: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12577</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Vegbredde, beregnetPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vegbredde, beregnet"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

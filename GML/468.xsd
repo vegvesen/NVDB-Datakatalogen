@@ -1,621 +1,583 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="BruksområdeUPSType">
-    <annotation>
-      <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:BruksområdeUPSEnumerationType nvdb:BruksområdeUPSOtherType"/>
-  </simpleType>
-  <simpleType name="BruksområdeUPSEnumerationType">
-    <annotation>
-      <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Nødstrøm">
-        <annotation>
-          <documentation>16363: UPS brukes til nødstrøm.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16363</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nødstrøm</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Reservestrøm">
-        <annotation>
-          <documentation>16364: UPS brukes til reservestrøm.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16364</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Reservestrøm</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nødnett">
-        <annotation>
-          <documentation>19681: Nødnett</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19681</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="BruksområdeUPSOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierUPSType">
-    <annotation>
-      <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierUPSEnumerationType nvdb:EierUPSOtherType"/>
-  </simpleType>
-  <simpleType name="EierUPSEnumerationType">
-    <annotation>
-      <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>10296: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10296</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>18642: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18642</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>10757: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10757</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10360: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10360</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10424: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10424</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17652: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17652</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierUPSOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="IntegrerteBatterierType">
-    <annotation>
-      <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:IntegrerteBatterierEnumerationType nvdb:IntegrerteBatterierOtherType"/>
-  </simpleType>
-  <simpleType name="IntegrerteBatterierEnumerationType">
-    <annotation>
-      <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ja">
-        <annotation>
-          <documentation>21070: Ja</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21070</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nei">
-        <annotation>
-          <documentation>21071: Nei</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21071</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="IntegrerteBatterierOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="SpenningUPSType">
-    <annotation>
-      <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:SpenningUPSEnumerationType nvdb:SpenningUPSOtherType"/>
-  </simpleType>
-  <simpleType name="SpenningUPSEnumerationType">
-    <annotation>
-      <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="12">
-        <annotation>
-          <documentation>16359: 12 volt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16359</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">12</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="24">
-        <annotation>
-          <documentation>16360: 24 volt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16360</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">24</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="230">
-        <annotation>
-          <documentation>16361: 230 volt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16361</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="400">
-        <annotation>
-          <documentation>16362: 400 volt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16362</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="690">
-        <annotation>
-          <documentation>16716: 690 volt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16716</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">690</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="SpenningUPSOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="UPS" substitutionGroup="nvdb:AbstraktUPS" type="nvdb:UPSType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>468: Reservestrømskilde bl.a. i forbindelse med tunneler.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">468</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">468</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">UPS</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="UPSType">
-    <complexContent>
-      <extension base="nvdb:AbstraktUPSType">
-        <sequence>
-          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeUPSType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeUPSType">
+      <annotation>
+         <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeUPSEnumerationType nvdb:BruksområdeUPSOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeUPSEnumerationType">
+      <annotation>
+         <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="NN">
             <annotation>
-              <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19681</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="totalEffekt" type="double">
+         </enumeration>
+         <enumeration value="nød">
             <annotation>
-              <documentation>3852: Angir total effekt UPS kan levere.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">3852</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Total effekt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16363</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nødstrøm</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="spenning" type="nvdb:SpenningUPSType">
+         </enumeration>
+         <enumeration value="res">
             <annotation>
-              <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16364</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Reservestrøm</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dimensjonerendeDriftstid" type="integer">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierUPSType">
+      <annotation>
+         <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierUPSEnumerationType nvdb:EierUPSOtherType"/>
+   </simpleType>
+   <simpleType name="EierUPSEnumerationType">
+      <annotation>
+         <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>10046: Angir hvor lang tid batteriene er beregnet å kunne levere strøm til anlegget.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10046</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dimensjonerende driftstid</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10757</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="kapasitet" type="integer">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>10043: Angir totalt kapasitet for alle batterier.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10043</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kapasitet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10360</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="batteripakke_Spenning" type="integer">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>10044: Angir spenningen på hver batteripakke.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10044</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Batteripakke, spenning</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10424</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="batteripakke_Antall" type="integer">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>3844: Angir hvor mange batteripakker UPS har tilkoblet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">3844</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Batteripakke, antall</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18642</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="antallEnkeltbatteri" type="integer">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>10893: Angir hvor mange enkeltbatteri UPS har tilkoplet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10893</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Antall enkeltbatteri</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10296</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="integrerteBatterier" type="nvdb:IntegrerteBatterierType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17652</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="batteripakke_SkiftetÅr" type="integer">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="IntegrerteBatterierUPSType">
+      <annotation>
+         <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:IntegrerteBatterierUPSEnumerationType nvdb:IntegrerteBatterierUPSOtherType"/>
+   </simpleType>
+   <simpleType name="IntegrerteBatterierUPSEnumerationType">
+      <annotation>
+         <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
             <annotation>
-              <documentation>11220: Angir hvilket år batteripakke var ny/skiftet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11220</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Batteripakke, skiftet år</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21070</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="skilletrafo" type="string">
+         </enumeration>
+         <enumeration value="N">
             <annotation>
-              <documentation>10050: Angir produsent og typebetegnelse for eventuell skilletrafo.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10050</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skilletrafo</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21071</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="IntegrerteBatterierUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningUPSType">
+      <annotation>
+         <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningUPSEnumerationType nvdb:SpenningUPSOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningUPSEnumerationType">
+      <annotation>
+         <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="12">
             <annotation>
-              <documentation>4077: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4077</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16359</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">12</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="driftsmerking" type="string">
+         </enumeration>
+         <enumeration value="230">
             <annotation>
-              <documentation>10047: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10047</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16361</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="SCADA_Merking" type="string">
+         </enumeration>
+         <enumeration value="24">
             <annotation>
-              <documentation>11732: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11732</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">SCADA-merking</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16360</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">24</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="produsent_UPS" type="string">
+         </enumeration>
+         <enumeration value="400">
             <annotation>
-              <documentation>10042: Angir navn på produsent/fabrikant av UPS-enheten.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10042</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Produsent, UPS</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16362</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="produktnavn_UPS" type="string">
+         </enumeration>
+         <enumeration value="690">
             <annotation>
-              <documentation>10041: Angir produktnavn for UPS-enheten. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10041</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Produktnavn, UPS</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16716</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">690</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="UPS"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:UPSType">
+      <annotation>
+         <documentation>468: Reservestrømskilde bl.a. i forbindelse med tunneler.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">468</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">UPS</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="UPSType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeUPSType">
+                  <annotation>
+                     <documentation>10051: Angir hva vegobjektet brukes til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10051</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="totalEffekt" type="double">
+                  <annotation>
+                     <documentation>3852: Angir total effekt UPS kan levere.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3852</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Total effekt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="spenning" type="nvdb:SpenningUPSType">
+                  <annotation>
+                     <documentation>10049: Angir spenningen som leveres ut fra enheten.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10049</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dimensjonerendeDriftstid" type="double">
+                  <annotation>
+                     <documentation>10046: Angir hvor lang tid batteriene er beregnet å kunne levere strøm til anlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10046</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dimensjonerende driftstid</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kapasitet" type="double">
+                  <annotation>
+                     <documentation>10043: Angir totalt kapasitet for alle batterier.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10043</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kapasitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="batteripakke_Spenning" type="double">
+                  <annotation>
+                     <documentation>10044: Angir spenningen på hver batteripakke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10044</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Batteripakke, spenning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="batteripakke_Antall" type="integer">
+                  <annotation>
+                     <documentation>3844: Angir hvor mange batteripakker UPS har tilkoblet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3844</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Batteripakke, antall</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="antallEnkeltbatteri" type="double">
+                  <annotation>
+                     <documentation>10893: Angir hvor mange enkeltbatteri UPS har tilkoplet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10893</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall enkeltbatteri</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="integrerteBatterier">
+                  <annotation>
+                     <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="batteripakke_SkiftetÅr" type="double">
+                  <annotation>
+                     <documentation>11220: Angir hvilket år batteripakke var ny/skiftet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11220</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Batteripakke, skiftet år</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skilletrafo" type="string">
+                  <annotation>
+                     <documentation>10050: Angir produsent og typebetegnelse for eventuell skilletrafo.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10050</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skilletrafo</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>4077: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4077</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10047: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10047</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="SCADA_Merking" type="string">
+                  <annotation>
+                     <documentation>11732: Driftsmerking rettet spesifikt mot systemet SCADA.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11732</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">SCADA-merking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent_UPS" type="string">
+                  <annotation>
+                     <documentation>10042: Angir navn på produsent/fabrikant av UPS-enheten.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10042</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent, UPS</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn_UPS" type="string">
+                  <annotation>
+                     <documentation>10041: Angir produktnavn for UPS-enheten. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10041</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn, UPS</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11616: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11616</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="arkivreferanse" type="string">
+                  <annotation>
+                     <documentation>11690: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem. Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11690</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Arkivreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11130: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11130</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12377: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12377</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierUPSType">
+                  <annotation>
+                     <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier_Navn" type="string">
+                  <annotation>
+                     <documentation>10048: Navn på eier av vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10048</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier, navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligUPSType">
+                  <annotation>
+                     <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4985: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4985</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="UPSPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:UPS"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VedlikeholdsansvarligUPSType">
+      <annotation>
+         <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligUPSEnumerationType nvdb:VedlikeholdsansvarligUPSOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligUPSEnumerationType">
+      <annotation>
+         <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11616: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11616</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19963</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="arkivreferanse" type="string">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11690: Gir referanse/link til ytterligere informasjon om vegobjektet. Fortrinnsvis til vegeiers eget arkivsystem. Kan være til mappe/sak med tilgang til ulik informasjon eller direkte til et dokument.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11690</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Arkivreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10576</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>11130: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11130</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18787</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+         </enumeration>
+         <enumeration value="OPS">
             <annotation>
-              <documentation>12377: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12377</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18916</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierUPSType">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>8030: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">8030</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10654</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier_Navn" type="string">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>10048: Navn på eier av vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10048</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier, navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10498</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligUPSType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17746</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>4985: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4985</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="UPSPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:UPS"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="VedlikeholdsansvarligUPSType">
-    <annotation>
-      <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedlikeholdsansvarligUPSEnumerationType nvdb:VedlikeholdsansvarligUPSOtherType"/>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligUPSEnumerationType">
-    <annotation>
-      <documentation>8104: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8104</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Statens vegvesen">
-        <annotation>
-          <documentation>10498: Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10498</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nye Veier">
-        <annotation>
-          <documentation>18787: Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18787</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19963: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19963</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="OPS">
-        <annotation>
-          <documentation>18916: OPS</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18916</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10576: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10576</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10654: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10654</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17746: Uavklart</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17746</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligUPSOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

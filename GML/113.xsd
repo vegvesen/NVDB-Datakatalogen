@@ -1,174 +1,156 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Høydemåling" substitutionGroup="nvdb:AbstraktHøydemåling" type="nvdb:HøydemålingType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>113: Strekning med gitt høyde relatert til bestemt vegobjektforekomst. Inneholder egenhøyde start/slutt, samt høyde over vegkant.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">113</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">113</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Høydemåling</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="HøydemålingType">
-    <complexContent>
-      <extension base="nvdb:AbstraktHøydemålingType">
-        <sequence>
-          <element minOccurs="0" name="høyde_Start" type="double">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Høydemåling"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:HøydemålingType">
+      <annotation>
+         <documentation>113: Strekning med gitt høyde relatert til bestemt vegobjektforekomst. Inneholder egenhøyde start/slutt, samt høyde over vegkant.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">113</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høydemåling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="HøydemålingType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="høyde_Start" type="double">
+                  <annotation>
+                     <documentation>1591: Angir høyde (egenhøyde) i start av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1591</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde, start</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høyde_Slutt" type="double">
+                  <annotation>
+                     <documentation>7568: Angir høyde (egenhøyde) i slutt av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7568</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde, slutt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høydeOverVeg_Start" type="double">
+                  <annotation>
+                     <documentation>2252: Angir høyde relativt til vegkant i start av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2252</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde over veg, start</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høydeOverVeg_Slutt" type="double">
+                  <annotation>
+                     <documentation>7569: Angir høyde relativt til vegkant i slutt av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7569</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde over veg, slutt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kvalitet">
+                  <annotation>
+                     <documentation>2109: Angir kvalitet på måling.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="måltÅr" type="integer">
+                  <annotation>
+                     <documentation>10310: Angir årstall målingen er utført.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10310</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målt år</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4809: Gir linje/kurve som geometrisk representerer objektet. Kan benyttes for arvet geoemetri fra morobjekt eller alternativt som hjelpelinje ved etablering av forekomst.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4809</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="HøydemålingPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Høydemåling"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="HøydemålingKvalitetType">
+      <annotation>
+         <documentation>2109: Angir kvalitet på måling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HøydemålingKvalitetEnumerationType nvdb:HøydemålingKvalitetOtherType"/>
+   </simpleType>
+   <simpleType name="HøydemålingKvalitetEnumerationType">
+      <annotation>
+         <documentation>2109: Angir kvalitet på måling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="mt">
             <annotation>
-              <documentation>1591: Angir høyde (egenhøyde) i start av målestrekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1591</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Høyde, start</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4627</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Målt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="høyde_Slutt" type="double">
+         </enumeration>
+         <enumeration value="sk">
             <annotation>
-              <documentation>7568: Angir høyde (egenhøyde) i slutt av målestrekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7568</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Høyde, slutt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4626</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skjønn</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="høydeOverVeg_Start" type="double">
-            <annotation>
-              <documentation>2252: Angir høyde relativt til vegkant i start av målestrekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">2252</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Høyde over veg, start</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="høydeOverVeg_Slutt" type="double">
-            <annotation>
-              <documentation>7569: Angir høyde relativt til vegkant i slutt av målestrekning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7569</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Høyde over veg, slutt</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kvalitetHøydemåling" type="nvdb:KvalitetHøydemålingType">
-            <annotation>
-              <documentation>2109: Angir kvalitet på måling.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="måltÅr" type="integer">
-            <annotation>
-              <documentation>10310: Angir årstall målingen er utført.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10310</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Målt år</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>4809: Gir linje/kurve som geometrisk representerer objektet. Kan benyttes for arvet geoemetri fra morobjekt eller alternativt som hjelpelinje ved etablering av forekomst.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4809</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertGjerde" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktGjerde</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertSkjerm" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktSkjerm</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertStøttekonstruksjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktStøttekonstruksjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="HøydemålingPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Høydemåling"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="KvalitetHøydemålingType">
-    <annotation>
-      <documentation>2109: Angir kvalitet på måling.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:KvalitetHøydemålingEnumerationType nvdb:KvalitetHøydemålingOtherType"/>
-  </simpleType>
-  <simpleType name="KvalitetHøydemålingEnumerationType">
-    <annotation>
-      <documentation>2109: Angir kvalitet på måling.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">2109</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kvalitet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Skjønn">
-        <annotation>
-          <documentation>4626: Skjønn</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">4626</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skjønn</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Målt">
-        <annotation>
-          <documentation>4627: Målt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">4627</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Målt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="KvalitetHøydemålingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøydemålingKvalitetOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

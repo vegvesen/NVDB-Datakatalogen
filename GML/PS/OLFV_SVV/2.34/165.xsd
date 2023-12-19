@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.34">
+   <annotation>
+      <documentation>165: Måleinstrument for å måle vindstyrke og vindretning.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Vindmåler"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:VindmålerType">
+      <annotation>
+         <documentation>165: Måleinstrument for å måle vindstyrke og vindretning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vindmåler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VindmålerType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10406: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10406</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10492: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10492</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>1538: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1538</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>1459: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1459</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="leverandør" type="string">
+                  <annotation>
+                     <documentation>1499: Angir navn på firma som har levert vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1499</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4831: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4831</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="assosiertSignalanlegg" type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Signalanlegg</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VindmålerPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vindmåler"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
+      <documentation>624: Tavle som viser fart til kjøretøy som passerer.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Fartstavle"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:FartstavleType">
+      <annotation>
+         <documentation>624: Tavle som viser fart til kjøretøy som passerer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">624</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fartstavle</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="FartstavleType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="stasjonering" type="nvdb:StasjoneringFartstavleType">
+                  <annotation>
+                     <documentation>9531: Angir om fartstavle er mobil eller ikke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9531</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stasjonering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeMåling">
+                  <annotation>
+                     <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9532</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type måling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10463: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10463</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>6885: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6885</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="FartstavlePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Fartstavle"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="StasjoneringFartstavleType">
+      <annotation>
+         <documentation>9531: Angir om fartstavle er mobil eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9531</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stasjonering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StasjoneringFartstavleEnumerationType nvdb:StasjoneringFartstavleOtherType"/>
+   </simpleType>
+   <simpleType name="StasjoneringFartstavleEnumerationType">
+      <annotation>
+         <documentation>9531: Angir om fartstavle er mobil eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9531</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stasjonering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13452</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13453</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mobil</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StasjoneringFartstavleOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeMålingFartstavleType">
+      <annotation>
+         <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9532</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type måling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeMålingFartstavleEnumerationType nvdb:TypeMålingFartstavleOtherType"/>
+   </simpleType>
+   <simpleType name="TypeMålingFartstavleEnumerationType">
+      <annotation>
+         <documentation>9532: Angir hvilken type fartsmåling det er benyttet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9532</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type måling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13455</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Radar</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13454</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sløyfe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeMålingFartstavleOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

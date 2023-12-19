@@ -1,948 +1,880 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Avkjørsel" substitutionGroup="nvdb:AbstraktAvkjørsel" type="nvdb:AvkjørselType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>46: Kjørbar tilknytning til vegnettet for en eiendom eller et begrenset antall eiendommer (1). Merknad: Det regnes som vegkryss om tilknytningsveg er offentlig veg.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">46</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">46</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Avkjørsel</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="AvkjørselType">
-    <complexContent>
-      <extension base="nvdb:AbstraktAvkjørselType">
-        <sequence>
-          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Avkjørsel"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:AvkjørselType">
+      <annotation>
+         <documentation>46: Kjørbar tilknytning til vegnettet for en eiendom eller et begrenset antall eiendommer (1). Merknad: Det regnes som vegkryss om tilknytningsveg er offentlig veg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">46</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Avkjørsel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="AvkjørselType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeAvkjørselType">
+                  <annotation>
+                     <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="primæraktivitet"
+                        type="nvdb:PrimæraktivitetAvkjørselType">
+                  <annotation>
+                     <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="avstandPersonaktivitet" type="integer">
+                  <annotation>
+                     <documentation>1823: Angir korteste avstand fra en avkjørsel til personaktivitet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1823</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Avstand personaktivitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stigning" type="double">
+                  <annotation>
+                     <documentation>1825: Angir stigning på avkjørselveg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1825</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stigning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bredde" type="double">
+                  <annotation>
+                     <documentation>1682: Angir fast bredde av avkjørselsvegen (ikke inkludert breddeutvidelse i kryssområdet).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1682</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="dreneringsforhold"
+                        type="nvdb:DreneringsforholdAvkjørselType">
+                  <annotation>
+                     <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="siktforhold" type="string">
+                  <annotation>
+                     <documentation>12051: Gir informasjon rundt siktforhold.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12051</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Siktforhold</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="saksnummer" type="string">
+                  <annotation>
+                     <documentation>1822: Angir saksnummer til sak i vegeiers arkivsystem som omhandler avkjørselen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1822</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Saksnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="arkivreferanse_URL" type="string">
+                  <annotation>
+                     <documentation>12050: Gir URL til arkivreferanse.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12050</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Arkivreferanse, URL</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="søknadMottattDato" type="date">
+                  <annotation>
+                     <documentation>12048: Angir dato for når søknad ble mottatt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12048</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Søknad mottatt dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vedtak" type="nvdb:VedtakAvkjørselType">
+                  <annotation>
+                     <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vedtaksdato" type="date">
+                  <annotation>
+                     <documentation>11444: Dato da det sist ble gjort vedtak i tilknytning til avkjørsel.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11444</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedtaksdato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tillatelseGjelderTilDato" type="date">
+                  <annotation>
+                     <documentation>12049: Angir hvilken dato tillatelse til å etablere avkjørselen gjelder til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12049</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tillatelse gjelder til dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kontrollertOgGodkjentdato" type="date">
+                  <annotation>
+                     <documentation>11445: Dato da ferdig avkjørsel ble kontrollert og godkjent.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11445</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kontrollert- og godkjentdato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10267: Angir hvilket år avkjørsel ble godkjent.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10267</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11566: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11566</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="eier" type="nvdb:EierAvkjørselType">
+                  <annotation>
+                     <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligAvkjørselType">
+                  <annotation>
+                     <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4753: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4753</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="AvkjørselPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Avkjørsel"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="BruksområdeAvkjørselType">
+      <annotation>
+         <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeAvkjørselEnumerationType nvdb:BruksområdeAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeAvkjørselEnumerationType">
+      <annotation>
+         <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="b">
             <annotation>
-              <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3164</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bolig</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="primæraktivitet" type="nvdb:PrimæraktivitetType">
+         </enumeration>
+         <enumeration value="dm">
             <annotation>
-              <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3167</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dyrkamark/jordbruk</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="avstandPersonaktivitet" type="integer">
+         </enumeration>
+         <enumeration value="fo">
             <annotation>
-              <documentation>1823: Angir korteste avstand fra en avkjørsel til personaktivitet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1823</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Avstand personaktivitet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3169</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Forretning</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="stigning" type="double">
+         </enumeration>
+         <enumeration value="fa">
             <annotation>
-              <documentation>1825: Angir stigning på avkjørselveg.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1825</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Stigning</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3173</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fritidsaktivitet</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="bredde" type="double">
+         </enumeration>
+         <enumeration value="g">
             <annotation>
-              <documentation>1682: Angir fast bredde av avkjørselsvegen (ikke inkludert breddeutvidelse i kryssområdet).</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1682</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3166</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gardsbruk</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="dreneringsforhold" type="nvdb:DreneringsforholdType">
+         </enumeration>
+         <enumeration value="h">
             <annotation>
-              <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3165</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hytte</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="siktforhold" type="string">
+         </enumeration>
+         <enumeration value="I">
             <annotation>
-              <documentation>12051: Gir informasjon rundt siktforhold.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12051</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Siktforhold</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3170</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Industri</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="saksnummer" type="string">
+         </enumeration>
+         <enumeration value="n">
             <annotation>
-              <documentation>1822: Angir saksnummer til sak i vegeiers arkivsystem som omhandler avkjørselen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1822</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Saksnummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3174</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naust</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="arkivreferanse_URL" type="string">
+         </enumeration>
+         <enumeration value="sc">
             <annotation>
-              <documentation>12050: Gir URL til arkivreferanse.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12050</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Arkivreferanse, URL</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3171</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Service</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="søknadMottattDato" type="date">
+         </enumeration>
+         <enumeration value="sb">
             <annotation>
-              <documentation>12048: Angir dato for når søknad ble mottatt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12048</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Søknad mottatt dato</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3168</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skog/skogbruk</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedtak" type="nvdb:VedtakType">
+         </enumeration>
+         <enumeration value="sk">
             <annotation>
-              <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3172</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skole/Barnehage</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedtaksdato" type="date">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="DreneringsforholdAvkjørselType">
+      <annotation>
+         <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DreneringsforholdAvkjørselEnumerationType nvdb:DreneringsforholdAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="DreneringsforholdAvkjørselEnumerationType">
+      <annotation>
+         <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ok">
             <annotation>
-              <documentation>11444: Dato da det sist ble gjort vedtak i tilknytning til avkjørsel.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11444</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedtaksdato</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3598</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ok</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tillatelseGjelderTilDato" type="date">
+         </enumeration>
+         <enumeration value="tb">
             <annotation>
-              <documentation>12049: Angir hvilken dato tillatelse til å etablere avkjørselen gjelder til.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12049</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tillatelse gjelder til dato</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3607</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tiltaksbehov</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="kontrollertOgGodkjentdato" type="date">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DreneringsforholdAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierAvkjørselType">
+      <annotation>
+         <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierAvkjørselEnumerationType nvdb:EierAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="EierAvkjørselEnumerationType">
+      <annotation>
+         <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11445: Dato da ferdig avkjørsel ble kontrollert og godkjent.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11445</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kontrollert- og godkjentdato</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10721</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>10267: Angir hvilket år avkjørsel ble godkjent.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10267</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10323</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>11566: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11566</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10387</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierAvkjørselType">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18557</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligAvkjørselType">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10259</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>4753: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4753</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17576</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PrimæraktivitetAvkjørselType">
+      <annotation>
+         <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PrimæraktivitetAvkjørselEnumerationType nvdb:PrimæraktivitetAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="PrimæraktivitetAvkjørselEnumerationType">
+      <annotation>
+         <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="gd1">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3182</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1 gardsbruk i drift</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="hy1">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3179</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1-2 hytter</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="l1">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3175</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1-2leiligheter</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="AvkjørselPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Avkjørsel"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="BruksområdeType">
-    <annotation>
-      <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:BruksområdeEnumerationType nvdb:BruksområdeOtherType"/>
-  </simpleType>
-  <simpleType name="BruksområdeEnumerationType">
-    <annotation>
-      <documentation>1256: Angir hva som er primært bruksområde for avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1256</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Bolig">
-        <annotation>
-          <documentation>3164: Bolig</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3164</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bolig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Hytte">
-        <annotation>
-          <documentation>3165: Hytte</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3165</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Hytte</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Gardsbruk">
-        <annotation>
-          <documentation>3166: Gardsbruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3166</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gardsbruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Dyrkamark/jordbruk">
-        <annotation>
-          <documentation>3167: Dyrkamark/jordbruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3167</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Dyrkamark/jordbruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skog/skogbruk">
-        <annotation>
-          <documentation>3168: Skog/skogbruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3168</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skog/skogbruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Forretning">
-        <annotation>
-          <documentation>3169: Forretning</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3169</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Forretning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Industri">
-        <annotation>
-          <documentation>3170: Industri</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3170</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Industri</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Service">
-        <annotation>
-          <documentation>3171: Service</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3171</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Service</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skole/Barnehage">
-        <annotation>
-          <documentation>3172: Skole/Barnehage</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3172</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skole/Barnehage</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fritidsaktivitet">
-        <annotation>
-          <documentation>3173: Fritidsaktivitet</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3173</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fritidsaktivitet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Naust">
-        <annotation>
-          <documentation>3174: Naust</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3174</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Naust</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="BruksområdeOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="DreneringsforholdType">
-    <annotation>
-      <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:DreneringsforholdEnumerationType nvdb:DreneringsforholdOtherType"/>
-  </simpleType>
-  <simpleType name="DreneringsforholdEnumerationType">
-    <annotation>
-      <documentation>1828: Angir hvordan dreneringsforhold er ved avkjørsel.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1828</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Dreneringsforhold</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ok">
-        <annotation>
-          <documentation>3598: Ok</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3598</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ok</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tiltaksbehov">
-        <annotation>
-          <documentation>3607: Tiltaksbehov</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3607</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tiltaksbehov</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="DreneringsforholdOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierAvkjørselType">
-    <annotation>
-      <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierAvkjørselEnumerationType nvdb:EierAvkjørselOtherType"/>
-  </simpleType>
-  <simpleType name="EierAvkjørselEnumerationType">
-    <annotation>
-      <documentation>7993: Angir hvem som er eier av avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7993</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>10259: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10259</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>18557: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18557</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>10721: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10721</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10323: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10323</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10387: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10387</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17576: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17576</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierAvkjørselOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="PrimæraktivitetType">
-    <annotation>
-      <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:PrimæraktivitetEnumerationType nvdb:PrimæraktivitetOtherType"/>
-  </simpleType>
-  <simpleType name="PrimæraktivitetEnumerationType">
-    <annotation>
-      <documentation>1824: Angir hva som er primær aktivitet langs avkjørselsveg.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Primæraktivitet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="1-2leiligheter">
-        <annotation>
-          <documentation>3175: 1-2leiligheter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3175</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">1-2leiligheter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="3-5 leiligheter">
-        <annotation>
-          <documentation>3176: 3-5 leiligheter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3176</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">3-5 leiligheter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="6-10 leiligheter">
-        <annotation>
-          <documentation>3177: 6-10 leiligheter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3177</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">6-10 leiligheter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="&gt; 10 leiligheter">
-        <annotation>
-          <documentation>3178: &gt; 10 leiligheter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3178</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">&gt; 10 leiligheter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="1-2 hytter">
-        <annotation>
-          <documentation>3179: 1-2 hytter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3179</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">1-2 hytter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="3-5 hytter">
-        <annotation>
-          <documentation>3180: 3-5 hytter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3180</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">3-5 hytter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="&gt; 5 hytter">
-        <annotation>
-          <documentation>3181: &gt; 5 hytter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3181</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">&gt; 5 hytter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="1 gardsbruk i drift">
-        <annotation>
-          <documentation>3182: 1 gardsbruk i drift</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3182</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">1 gardsbruk i drift</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="2-3 gardsbruk i drift">
-        <annotation>
-          <documentation>3183: 2-3 gardsbruk i drift</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3183</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">2-3 gardsbruk i drift</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nedlagt gardsbruk">
-        <annotation>
-          <documentation>3184: Nedlagt gardsbruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3184</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nedlagt gardsbruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Beiteområde/dyrehold">
-        <annotation>
-          <documentation>21716: Beiteområde/dyrehold</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21716</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Beiteområde/dyrehold</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Jord/grustak">
-        <annotation>
-          <documentation>3185: Naturlige grus/jordmasser</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3185</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Jord/grustak</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Grustak/steinbrudd">
-        <annotation>
-          <documentation>3187: Knuseverk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3187</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Grustak/steinbrudd</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tømmeropplagring/velteplass">
-        <annotation>
-          <documentation>3186: Tømmeropplagring/velteplass</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3186</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tømmeropplagring/velteplass</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Liten forretning">
-        <annotation>
-          <documentation>3188: Liten forretning</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3188</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten forretning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels landhandel">
-        <annotation>
-          <documentation>3189: Middels landhandel</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3189</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels landhandel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stort forretningssenter">
-        <annotation>
-          <documentation>3190: Stort forretningssenter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3190</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stort forretningssenter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kiosk/gatekjøkken">
-        <annotation>
-          <documentation>3191: Kiosk/gatekjøkken</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3191</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kiosk/gatekjøkken</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Hotell &lt; 50 plasser">
-        <annotation>
-          <documentation>3192: Hotell &lt; 50 plasser</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3192</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Hotell &lt; 50 plasser</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Hotell &gt; 50 plasser">
-        <annotation>
-          <documentation>3193: Hotell &gt; 50 plasser</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3193</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Hotell &gt; 50 plasser</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Bensinstasjon, bilverksted">
-        <annotation>
-          <documentation>3194: Bensinstasjon, bilverksted</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3194</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bensinstasjon, bilverksted</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sykehus &lt; 50 plasser">
-        <annotation>
-          <documentation>3195: Sykehus &lt; 50 plasser</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3195</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sykehus &lt; 50 plasser</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sykehus &gt; 50 plasser">
-        <annotation>
-          <documentation>3196: Sykehus &gt; 50 plasser</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3196</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sykehus &gt; 50 plasser</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kirke/menighetshus/gravplass">
-        <annotation>
-          <documentation>21714: Kirke/menighetshus/gravplass</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21714</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kirke/menighetshus/gravplass</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Samfunnshus/grendahus">
-        <annotation>
-          <documentation>21715: Samfunnshus/grendahus</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21715</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Samfunnshus/grendahus</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stoppested kollektivtrafikk">
-        <annotation>
-          <documentation>21713: Jernbanestasjon, kollektivterminal, m.m.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21713</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stoppested kollektivtrafikk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Parkering">
-        <annotation>
-          <documentation>21717: Parkering</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21717</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Parkering</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Utfartsplass, skitrekk">
-        <annotation>
-          <documentation>3197: Utfartsplass, skitrekk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3197</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utfartsplass, skitrekk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fritid, kino">
-        <annotation>
-          <documentation>3198: Fritid, kino</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3198</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fritid, kino</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Lekeplass/løkke">
-        <annotation>
-          <documentation>3199: Lekeplass/løkke</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3199</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lekeplass/løkke</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="PrimæraktivitetOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligAvkjørselType">
-    <annotation>
-      <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedlikeholdsansvarligAvkjørselEnumerationType nvdb:VedlikeholdsansvarligAvkjørselOtherType"/>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligAvkjørselEnumerationType">
-    <annotation>
-      <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Statens vegvesen">
-        <annotation>
-          <documentation>10450: Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10450</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nye Veier">
-        <annotation>
-          <documentation>18675: Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18675</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19926: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19926</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="OPS">
-        <annotation>
-          <documentation>18804: OPS</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18804</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10528: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10528</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10606: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10606</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17709: Uavklart</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17709</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligAvkjørselOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedtakType">
-    <annotation>
-      <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedtakEnumerationType nvdb:VedtakOtherType"/>
-  </simpleType>
-  <simpleType name="VedtakEnumerationType">
-    <annotation>
-      <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Varig tillatelse">
-        <annotation>
-          <documentation>17225: Varig tillatelse</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17225</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Varig tillatelse</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Midlertidig tillatelse">
-        <annotation>
-          <documentation>17224: Midlertidig tillatelse</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17224</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Midlertidig tillatelse</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Endret bruk">
-        <annotation>
-          <documentation>17227: Endret bruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17227</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Endret bruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Utvidet bruk">
-        <annotation>
-          <documentation>17226: Utvidet bruk</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17226</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utvidet bruk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Avslag">
-        <annotation>
-          <documentation>19469: Ikke tillatelse til å etablere avkjørsel.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19469</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Avslag</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Avslag etter klage">
-        <annotation>
-          <documentation>19470: Avslag på nytt etter klage på første avslag.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19470</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Avslag etter klage</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedtakOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="gd2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3183</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2-3 gardsbruk i drift</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hy2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3180</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3-5 hytter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="l2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3176</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3-5 leiligheter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="l3">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3177</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6-10 leiligheter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="l4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3178</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">&gt; 10 leiligheter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hy3">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3181</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">&gt; 5 hytter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bd">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21716</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Beiteområde/dyrehold</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3194</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bensinstasjon, bilverksted</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3198</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fritid, kino</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3187</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grustak/steinbrudd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="h2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3192</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hotell &lt; 50 plasser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="h1">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3193</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hotell &gt; 50 plasser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="jg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3185</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jord/grustak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3191</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kiosk/gatekjøkken</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kmg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21714</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kirke/menighetshus/gravplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LL">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3199</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lekeplass/løkke</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3188</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten forretning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ml">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3189</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels landhandel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ng">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3184</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nedlagt gardsbruk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21717</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Parkering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21715</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Samfunnshus/grendahus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21713</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stoppested kollektivtrafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3190</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stort forretningssenter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s1">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3195</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sykehus &lt; 50 plasser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3196</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sykehus &gt; 50 plasser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tv">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3186</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tømmeropplagring/velteplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="us">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3197</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utfartsplass, skitrekk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PrimæraktivitetAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligAvkjørselType">
+      <annotation>
+         <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligAvkjørselEnumerationType nvdb:VedlikeholdsansvarligAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligAvkjørselEnumerationType">
+      <annotation>
+         <documentation>8056: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8056</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19926</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10528</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18675</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18804</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10606</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10450</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17709</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedtakAvkjørselType">
+      <annotation>
+         <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedtakAvkjørselEnumerationType nvdb:VedtakAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="VedtakAvkjørselEnumerationType">
+      <annotation>
+         <documentation>10670: Angir hva som er siste vedtak for denne avkjørselen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10670</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedtak</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19469</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Avslag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="AK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19470</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Avslag etter klage</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="EB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17227</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Endret bruk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MT">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17224</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Midlertidig tillatelse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="UB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17226</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utvidet bruk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VT">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17225</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Varig tillatelse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedtakAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

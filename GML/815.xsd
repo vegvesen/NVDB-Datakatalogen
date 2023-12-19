@@ -1,142 +1,136 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Avkjørsel_Holdningsklasse" substitutionGroup="nvdb:AbstraktAvkjørsel_Holdningsklasse" type="nvdb:Avkjørsel_HoldningsklasseType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>815: Angir hvilken offisiell holdning det er til opprettelse av avkjørsler på strekningen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">815</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">815</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Avkjørsel, holdningsklasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="Avkjørsel_HoldningsklasseType">
-    <complexContent>
-      <extension base="nvdb:AbstraktAvkjørsel_HoldningsklasseType">
-        <sequence>
-          <element name="klasse" type="nvdb:KlasseType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Avkjørsel, holdningsklasse"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Avkjørsel, holdningsklasseType">
+      <annotation>
+         <documentation>815: Angir hvilken offisiell holdning det er til opprettelse av avkjørsler på strekningen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">815</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Avkjørsel, holdningsklasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Avkjørsel, holdningsklasseType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="klasse" type="nvdb:KlasseAvkjørsel, holdningsklasseType">
+                  <annotation>
+                     <documentation>9320: Angir holdningsklasse.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11640: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11640</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>9321: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9321</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Avkjørsel, holdningsklassePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Avkjørsel, holdningsklasse"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="KlasseAvkjørsel, holdningsklasseType">
+      <annotation>
+         <documentation>9320: Angir holdningsklasse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KlasseAvkjørsel, holdningsklasseEnumerationType nvdb:KlasseAvkjørsel, holdningsklasseOtherType"/>
+   </simpleType>
+   <simpleType name="KlasseAvkjørsel, holdningsklasseEnumerationType">
+      <annotation>
+         <documentation>9320: Angir holdningsklasse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="LS">
             <annotation>
-              <documentation>9320: Angir holdningsklasse.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13012</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lite streng</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="MS">
             <annotation>
-              <documentation>11640: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11640</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13009</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Meget streng</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="MiS">
             <annotation>
-              <documentation>9321: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9321</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13011</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mindre streng</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+         <enumeration value="S">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13010</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Streng</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="Avkjørsel_HoldningsklassePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Avkjørsel_Holdningsklasse"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="KlasseType">
-    <annotation>
-      <documentation>9320: Angir holdningsklasse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:KlasseEnumerationType nvdb:KlasseOtherType"/>
-  </simpleType>
-  <simpleType name="KlasseEnumerationType">
-    <annotation>
-      <documentation>9320: Angir holdningsklasse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9320</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Klasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Meget streng">
-        <annotation>
-          <documentation>13009: Meget streng</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13009</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Meget streng</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Streng">
-        <annotation>
-          <documentation>13010: Streng</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13010</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Streng</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Mindre streng">
-        <annotation>
-          <documentation>13011: Mindre streng</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13011</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Mindre streng</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Lite streng">
-        <annotation>
-          <documentation>13012: Lite streng</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13012</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lite streng</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="KlasseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KlasseAvkjørsel, holdningsklasseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

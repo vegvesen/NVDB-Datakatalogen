@@ -1,953 +1,907 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="AntallLøsneområderType">
-    <annotation>
-      <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:AntallLøsneområderEnumerationType nvdb:AntallLøsneområderOtherType"/>
-  </simpleType>
-  <simpleType name="AntallLøsneområderEnumerationType">
-    <annotation>
-      <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="1">
-        <annotation>
-          <documentation>13780: 1</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13780</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">1</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="2">
-        <annotation>
-          <documentation>13781: 2</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13781</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">2</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="3">
-        <annotation>
-          <documentation>13782: 3</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13782</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">3</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Flere">
-        <annotation>
-          <documentation>13783: Flere</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13783</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Flere</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="AntallLøsneområderOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="NaboskredType">
-    <annotation>
-      <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:NaboskredEnumerationType nvdb:NaboskredOtherType"/>
-  </simpleType>
-  <simpleType name="NaboskredEnumerationType">
-    <annotation>
-      <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ingen">
-        <annotation>
-          <documentation>13093: Ingen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13093</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="To skredløp, liten samtidighet">
-        <annotation>
-          <documentation>13094: To skredløp, liten samtidighet</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13094</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">To skredløp, liten samtidighet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="To skredløp, stor samtidighet">
-        <annotation>
-          <documentation>13095: To skredløp, stor samtidighet</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13095</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">To skredløp, stor samtidighet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Flere skredløp">
-        <annotation>
-          <documentation>13096: Flere skredløp</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13096</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Flere skredløp</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="NaboskredOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="OmkjøringType">
-    <annotation>
-      <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:OmkjøringEnumerationType nvdb:OmkjøringOtherType"/>
-  </simpleType>
-  <simpleType name="OmkjøringEnumerationType">
-    <annotation>
-      <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Under 1 min.">
-        <annotation>
-          <documentation>13204: Under 1 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13204</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Under 1 min.</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="5 min">
-        <annotation>
-          <documentation>13190: 5 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13190</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">5 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="15 min">
-        <annotation>
-          <documentation>13191: 15 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13191</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">15 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="30 min">
-        <annotation>
-          <documentation>13192: 30 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13192</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">30 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="45 min">
-        <annotation>
-          <documentation>13193: 45 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13193</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">45 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="60 min">
-        <annotation>
-          <documentation>13194: 60 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13194</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">60 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="75 min">
-        <annotation>
-          <documentation>13195: 75 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13195</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">75 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="90 min">
-        <annotation>
-          <documentation>13196: 90 min.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13196</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">90 min</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="2 t">
-        <annotation>
-          <documentation>13197: 2 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13197</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">2 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="3 t">
-        <annotation>
-          <documentation>13198: 3 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13198</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">3 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="4 t">
-        <annotation>
-          <documentation>13199: 4 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13199</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">4 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="5 t">
-        <annotation>
-          <documentation>13200: 5 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13200</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">5 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="6 t">
-        <annotation>
-          <documentation>13201: 6 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13201</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">6 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="7 t">
-        <annotation>
-          <documentation>13202: 7 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13202</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">7 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="8 t">
-        <annotation>
-          <documentation>13203: 8 t.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13203</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">8 t</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ingen omkjøringsmulighet">
-        <annotation>
-          <documentation>13205: Ingen omkjøringsmulighet. Dersom omkjøring tar mer enn 8 timer regnes det også som ingen omkjøring.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13205</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ingen omkjøringsmulighet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="OmkjøringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="PlanstatusType">
-    <annotation>
-      <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:PlanstatusEnumerationType nvdb:PlanstatusOtherType"/>
-  </simpleType>
-  <simpleType name="PlanstatusEnumerationType">
-    <annotation>
-      <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ikke vurdert">
-        <annotation>
-          <documentation>13112: Ikke vurdert</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13112</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ikke vurdert</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Idé">
-        <annotation>
-          <documentation>13113: Idé</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13113</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Idé</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skisse/forprosjekt">
-        <annotation>
-          <documentation>13114: Skisse/forprosjekt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13114</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skisse/forprosjekt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Konseptvalgutredning">
-        <annotation>
-          <documentation>21026: Konseptvalgutredning</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21026</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Konseptvalgutredning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommunedelplan">
-        <annotation>
-          <documentation>13115: Kommunedelplan</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13115</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommunedelplan</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Reguleringsplan">
-        <annotation>
-          <documentation>13116: Reguleringsplan</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13116</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Reguleringsplan</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Byggeplan">
-        <annotation>
-          <documentation>13117: Byggeplan</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13117</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Byggeplan</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="PlanstatusOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="SkredfaktorkategoriType">
-    <annotation>
-      <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:SkredfaktorkategoriEnumerationType nvdb:SkredfaktorkategoriOtherType"/>
-  </simpleType>
-  <simpleType name="SkredfaktorkategoriEnumerationType">
-    <annotation>
-      <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Høy">
-        <annotation>
-          <documentation>13109: Høy</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13109</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Høy</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>13110: Middels</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13110</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Lav">
-        <annotation>
-          <documentation>13111: Lav</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13111</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lav</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sikring utført">
-        <annotation>
-          <documentation>16762: Angir at dette skredpunktet er sikret. Det er med for å ha historikk.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16762</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sikring utført</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="SkredfaktorkategoriOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Skredpunkt" substitutionGroup="nvdb:AbstraktSkredpunkt" type="nvdb:SkredpunktType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>824: Strekning som er utsatt for skred fra naturlig sideterreng og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">824</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Skredpunkt</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="SkredpunktType">
-    <complexContent>
-      <extension base="nvdb:AbstraktSkredpunktType">
-        <sequence>
-          <element name="navn" type="string">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AntallLøsneområderSkredpunktType">
+      <annotation>
+         <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AntallLøsneområderSkredpunktEnumerationType nvdb:AntallLøsneområderSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="AntallLøsneområderSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1">
             <annotation>
-              <documentation>9342: Navn på skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9342</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13780</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="ID" type="string">
+         </enumeration>
+         <enumeration value="2">
             <annotation>
-              <documentation>9344: ID-nummer/løpenummer for egen nummerering av skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9344</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13781</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="ÅDT" type="integer">
+         </enumeration>
+         <enumeration value="3">
             <annotation>
-              <documentation>9362: Angir hvilken ÅDT-verdi som er benyttet i beregning. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9362</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ÅDT</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13782</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="ÅDTÅr" type="integer">
+         </enumeration>
+         <enumeration value="fl">
             <annotation>
-              <documentation>9363: Angir hvilket år ÅDT-verdien gjelder for. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9363</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ÅDT år</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13783</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flere</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="snøskred_Sannsynlighet" type="double">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AntallLøsneområderSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="NaboskredSkredpunktType">
+      <annotation>
+         <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:NaboskredSkredpunktEnumerationType nvdb:NaboskredSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="NaboskredSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
             <annotation>
-              <documentation>9346: Angir forventet årlig nominell sannsynlighet for snøskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9346</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Snøskred, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13096</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flere skredløp</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="snøskred_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="I">
             <annotation>
-              <documentation>9347: Angir gjennomsnittlig bredde av alle snøskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9347</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Snøskred, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13093</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="sørpeskred_Sannsynlighet" type="double">
+         </enumeration>
+         <enumeration value="2l">
             <annotation>
-              <documentation>9348: Angir forventet årlig nominell sannsynlighet for sørpeskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9348</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sørpeskred, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13094</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">To skredløp, liten samtidighet</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="sørpeskred_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="2s">
             <annotation>
-              <documentation>9355: Angir gjennomsnittlig bredde av alle sørpeskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9355</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sørpeskred, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13095</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">To skredløp, stor samtidighet</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="steinsprang_Sannsynlighet" type="double">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NaboskredSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmkjøringSkredpunktType">
+      <annotation>
+         <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmkjøringSkredpunktEnumerationType nvdb:OmkjøringSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmkjøringSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="15m">
             <annotation>
-              <documentation>9349: Angir forventet årlig nominell sannsynlighet for steinsprang/steinskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9349</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Steinsprang, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13191</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">15 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="steinsprang_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="2t">
             <annotation>
-              <documentation>9356: Angir gjennomsnittlig bredde av alle steinsprang/steinskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9356</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Steinsprang, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13197</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="isskred_Sannsynlighet" type="double">
+         </enumeration>
+         <enumeration value="3t">
             <annotation>
-              <documentation>9351: Angir forventet årlig nominell sannsynlighet for isskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9351</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Isskred, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13198</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="isskred_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="30m">
             <annotation>
-              <documentation>9357: Angir gjennomsnittlig bredde av alle isnedfall/isskred/isproblem. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9357</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Isskred, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13192</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">30 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="jordLøsmasseskred_Sannsynlighet" type="double">
+         </enumeration>
+         <enumeration value="4t">
             <annotation>
-              <documentation>9353: Angir forventet årlig nominell sannsynlighet for jord-/løsmasseskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9353</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Jord-/løsmasseskred, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13199</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="jordLøsmasseskred_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="45m">
             <annotation>
-              <documentation>9359: Angir gjennomsnittlig bredde av alle jord-/løsmasseskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9359</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Jord-/løsmasseskred, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13193</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">45 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="flomskred_Sannsynlighet" type="double">
+         </enumeration>
+         <enumeration value="5m">
             <annotation>
-              <documentation>9354: Angir forventet årlig nominell sannsynlighet for flomskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9354</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Flomskred, sannsynlighet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13190</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="flomskred_Bredde" type="integer">
+         </enumeration>
+         <enumeration value="5t">
             <annotation>
-              <documentation>9360: Angir gjennomsnittlig bredde av alle flomskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9360</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Flomskred, bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13200</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="omkjøring" type="nvdb:OmkjøringType">
+         </enumeration>
+         <enumeration value="6t">
             <annotation>
-              <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13201</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="stengningsfrekvens_Skred" type="double">
+         </enumeration>
+         <enumeration value="60m">
             <annotation>
-              <documentation>9365: Angir hvor mange ganger per år vegen i gjennomsnitt er stengt på grunn av skred. Tar ikke hensyn til varighet av stengningen. Brukes ved beregning av F4 Stengningsfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9365</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Stengningsfrekvens, skred</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13194</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">60 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="stengningdøgn_Skredfare" type="double">
+         </enumeration>
+         <enumeration value="7t">
             <annotation>
-              <documentation>9366: Angir hvor mange døgn per år vegen i gjennomsnitt er stengt på grunn av skredfare. Benyttes kun når omkjøringstid er over 2 timer. Brukes i beregning av F5 Skredfarestengningsfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9366</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Stengningdøgn, skredfare</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13202</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">7 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="naboskred" type="nvdb:NaboskredType">
+         </enumeration>
+         <enumeration value="75m">
             <annotation>
-              <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13195</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">75 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F1_Trafikkmengde_Faktor" type="double">
+         </enumeration>
+         <enumeration value="8t">
             <annotation>
-              <documentation>9374: Beregnet faktor som gir uttrykk for hvor mye trafikkmengde virker inn på skredfaktoren for gitt skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9374</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F1 Trafikkmengde-faktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13203</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">8 t</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F2_Skredfarefaktor" type="double">
+         </enumeration>
+         <enumeration value="90m">
             <annotation>
-              <documentation>9375: Beregnet faktor som gir uttrykk for hvor mye skredfrekvens og skredbredde virker inn på skredfaktoren for gitt skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9375</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F2 Skredfarefaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13196</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">90 min</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F3_Omkjøringsfaktor" type="double">
+         </enumeration>
+         <enumeration value="IO">
             <annotation>
-              <documentation>9376: Beregnet faktor som gir uttrykk for hvor mye omkjøringstiden virker inn på skredfaktoren for gitt skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9376</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F3 Omkjøringsfaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13205</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen omkjøringsmulighet</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F4_Stengningsfaktor" type="double">
+         </enumeration>
+         <enumeration value="1m">
             <annotation>
-              <documentation>9368: Beregnet faktor som gir uttrykk for hvor mye vegens stengningsfrekvens virker inn på skredpunktets skredfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9368</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F4 Stengningsfaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13204</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Under 1 min.</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F5_Skredfarestengningsfaktor" type="double">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmkjøringSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlanstatusSkredpunktType">
+      <annotation>
+         <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlanstatusSkredpunktEnumerationType nvdb:PlanstatusSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="PlanstatusSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Bp">
             <annotation>
-              <documentation>9377: Beregnet faktor som gir uttrykk for hvor mye stengning av vegen pga. skredfare virker inn på skredfaktoren for gitt skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9377</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F5 Skredfarestengningsfaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13117</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Byggeplan</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="F6_Naboskredfaktor" type="double">
+         </enumeration>
+         <enumeration value="I">
             <annotation>
-              <documentation>9378: Beregnet faktor som gir uttrykk for hvor mye fare for naboskred virker inn på skredfaktoren for gitt skredpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9378</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">F6 Naboskredfaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13113</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Idé</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="skredfaktor" type="double">
+         </enumeration>
+         <enumeration value="IV">
             <annotation>
-              <documentation>9379: Beregnet tall som brukes for sammenligning mellom ulike skredutsatte punkt, basert på faktorene F1-F6.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9379</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skredfaktor</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13112</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke vurdert</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="skredfaktorkategori" type="nvdb:SkredfaktorkategoriType">
+         </enumeration>
+         <enumeration value="KDP">
             <annotation>
-              <documentation>9380: Angir hvilken kategori skredpunktet tilhører. Beregnes fra skredfaktor.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13115</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommunedelplan</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="planstatus" type="nvdb:PlanstatusType">
+         </enumeration>
+         <enumeration value="KU">
             <annotation>
-              <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21026</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Konseptvalgutredning</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="sikringstiltakA" type="string">
+         </enumeration>
+         <enumeration value="RP">
             <annotation>
-              <documentation>10180: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10180</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sikringstiltak A</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13116</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Reguleringsplan</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="kostnadsoverslag_MillKr_ForSikringstiltakA" type="double">
+         </enumeration>
+         <enumeration value="SF">
             <annotation>
-              <documentation>9372: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak A. Avrundet i henhold egne regler.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9372</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak A</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13114</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skisse/forprosjekt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="kostnadsnivåÅr" type="integer">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlanstatusSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkredfaktorkategoriSkredpunktType">
+      <annotation>
+         <documentation>9380: Angir hvilken kategori skredpunktet tilhører. "Høy", "Middels" og "Lav" beregnes fra verdien på egenskapen "Skredfaktor". Dersom årstall er angitt for egenskapen "Utbedret år" blir verdien satt til "Sikring utført".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SkredfaktorkategoriSkredpunktEnumerationType nvdb:SkredfaktorkategoriSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="SkredfaktorkategoriSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9380: Angir hvilken kategori skredpunktet tilhører. "Høy", "Middels" og "Lav" beregnes fra verdien på egenskapen "Skredfaktor". Dersom årstall er angitt for egenskapen "Utbedret år" blir verdien satt til "Sikring utført".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="H">
             <annotation>
-              <documentation>9371: Hvilken kroneverdi (årstall) kostnader er angitt i. Hvis det er foreslått to ulike sikringstiltak må disse ha samme kostnadsnivå, ev. avvik angis i merknad.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9371</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kostnadsnivå år</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13109</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Høy</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="usikkerhetKostnad" type="integer">
+         </enumeration>
+         <enumeration value="L">
             <annotation>
-              <documentation>9373: Angir prosentvis usikkerhet i kostnad +/- (forutsatt like mye oppover og nedover). Hvis det er foreslått to ulike sikringstiltak må disse ha samme usikkerhet. Ev. avvik angis i merknad.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9373</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Usikkerhet kostnad</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13111</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lav</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="restrisikoForSikringstiltakA" type="double">
+         </enumeration>
+         <enumeration value="M">
             <annotation>
-              <documentation>10181: Anslått restrisiko etter at foreslått tiltak A er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10181</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Restrisiko for sikringstiltak A</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13110</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="sikringstiltakB" type="string">
+         </enumeration>
+         <enumeration value="SU">
             <annotation>
-              <documentation>12100: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12100</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sikringstiltak B</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16762</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sikring utført</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="kostnadsoverslag_MillKr_ForSikringstiltakB" type="double">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkredfaktorkategoriSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Skredpunkt"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:SkredpunktType">
+      <annotation>
+         <documentation>824: Strekning som er utsatt for skred fra naturlig sideterreng og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">824</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skredpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="SkredpunktType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>9342: Navn på skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9342</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="ID" type="string">
+                  <annotation>
+                     <documentation>9344: ID-nummer/løpenummer for egen nummerering av skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9344</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="ÅDT" type="double">
+                  <annotation>
+                     <documentation>9362: Angir hvilken ÅDT-verdi som er benyttet i beregning. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9362</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ÅDT</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="ÅDTÅr" type="integer">
+                  <annotation>
+                     <documentation>9363: Angir hvilket år ÅDT-verdien gjelder for. Blir hentet automatisk fra Trafikkmengderegisteret i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9363</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ÅDT år</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="snøskred_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9346: Angir forventet årlig nominell sannsynlighet for snøskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9346</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Snøskred, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="snøskred_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9347: Angir gjennomsnittlig bredde av alle snøskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9347</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Snøskred, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sørpeskred_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9348: Angir forventet årlig nominell sannsynlighet for sørpeskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9348</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sørpeskred, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sørpeskred_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9355: Angir gjennomsnittlig bredde av alle sørpeskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9355</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sørpeskred, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="steinsprang_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9349: Angir forventet årlig nominell sannsynlighet for steinsprang/steinskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9349</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Steinsprang, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="steinsprang_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9356: Angir gjennomsnittlig bredde av alle steinsprang/steinskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9356</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Steinsprang, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="isskred_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9351: Angir forventet årlig nominell sannsynlighet for isskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9351</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Isskred, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="isskred_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9357: Angir gjennomsnittlig bredde av alle isnedfall/isskred/isproblem. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9357</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Isskred, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="jordLøsmasseskred_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9353: Angir forventet årlig nominell sannsynlighet for jord-/løsmasseskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9353</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jord-/løsmasseskred, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="jordLøsmasseskred_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9359: Angir gjennomsnittlig bredde av alle jord-/løsmasseskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9359</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jord-/løsmasseskred, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="flomskred_Sannsynlighet" type="double">
+                  <annotation>
+                     <documentation>9354: Angir forventet årlig nominell sannsynlighet for flomskred. Baseres i hovedsak på skredhistorikk de siste 30 år. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9354</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Flomskred, sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="flomskred_Bredde" type="integer">
+                  <annotation>
+                     <documentation>9360: Angir gjennomsnittlig bredde av alle flomskred. Brukes i beregning av F2 Skredfarefaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9360</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Flomskred, bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="omkjøring" type="nvdb:OmkjøringSkredpunktType">
+                  <annotation>
+                     <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="stengningsfrekvens_Skred" type="double">
+                  <annotation>
+                     <documentation>9365: Angir hvor mange ganger per år vegen i gjennomsnitt er stengt på grunn av skred. Tar ikke hensyn til varighet av stengningen. Brukes ved beregning av F4 Stengningsfaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9365</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengningsfrekvens, skred</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="stengningdøgn_Skredfare" type="double">
+                  <annotation>
+                     <documentation>9366: Angir hvor mange døgn per år vegen i gjennomsnitt er stengt på grunn av skredfare. Benyttes kun når omkjøringstid er over 2 timer. Brukes i beregning av F5 Skredfarestengningsfaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9366</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengningdøgn, skredfare</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="naboskred" type="nvdb:NaboskredSkredpunktType">
+                  <annotation>
+                     <documentation>9367: Angir i hvilken grad det er fare for naboskred på strekningen, dvs. om ventende biler på grunn av skred kan treffes av nytt skred. Brukes i beregning av F6 Naboskredfaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9367</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Naboskred</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F1_Trafikkmengde_Faktor" type="double">
+                  <annotation>
+                     <documentation>9374: Beregnet faktor som gir uttrykk for hvor mye trafikkmengde virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9374</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F1 Trafikkmengde-faktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F2_Skredfarefaktor" type="double">
+                  <annotation>
+                     <documentation>9375: Beregnet faktor som gir uttrykk for hvor mye skredfrekvens og skredbredde virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9375</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F2 Skredfarefaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F3_Omkjøringsfaktor" type="double">
+                  <annotation>
+                     <documentation>9376: Beregnet faktor som gir uttrykk for hvor mye omkjøringstiden virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9376</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F3 Omkjøringsfaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F4_Stengningsfaktor" type="double">
+                  <annotation>
+                     <documentation>9368: Beregnet faktor som gir uttrykk for hvor mye vegens stengningsfrekvens virker inn på skredpunktets skredfaktor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9368</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F4 Stengningsfaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F5_Skredfarestengningsfaktor" type="double">
+                  <annotation>
+                     <documentation>9377: Beregnet faktor som gir uttrykk for hvor mye stengning av vegen pga. skredfare virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9377</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F5 Skredfarestengningsfaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="F6_Naboskredfaktor" type="double">
+                  <annotation>
+                     <documentation>9378: Beregnet faktor som gir uttrykk for hvor mye fare for naboskred virker inn på skredfaktoren for gitt skredpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9378</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">F6 Naboskredfaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="skredfaktor" type="double">
+                  <annotation>
+                     <documentation>9379: Beregnet tall som brukes for sammenligning mellom ulike skredutsatte punkt, basert på faktorene F1-F6.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9379</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skredfaktor</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="skredfaktorkategori"
+                        type="nvdb:SkredfaktorkategoriSkredpunktType">
+                  <annotation>
+                     <documentation>9380: Angir hvilken kategori skredpunktet tilhører. "Høy", "Middels" og "Lav" beregnes fra verdien på egenskapen "Skredfaktor". Dersom årstall er angitt for egenskapen "Utbedret år" blir verdien satt til "Sikring utført".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="planstatus"
+                        type="nvdb:PlanstatusSkredpunktType">
+                  <annotation>
+                     <documentation>9382: Angir hvor langt man er kommet i planprosessen på aktuelt punkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9382</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Planstatus</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="overordnaProsjekt" type="string">
+                  <annotation>
+                     <documentation>12708: Navn på overordna skredsikringsprosjekt. Kan typisk være NTP-prosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12708</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Overordna prosjekt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sikringstiltakA" type="string">
+                  <annotation>
+                     <documentation>10180: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10180</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sikringstiltak A</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="kostnadsoverslag_MillKr_ForSikringstiltakA"
+                        type="double">
+                  <annotation>
+                     <documentation>9372: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak A. Avrundet i henhold egne regler.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9372</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak A</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kostnadsnivåÅr" type="integer">
+                  <annotation>
+                     <documentation>9371: Hvilken kroneverdi (årstall) kostnader er angitt i. Hvis det er foreslått to ulike sikringstiltak må disse ha samme kostnadsnivå, ev. avvik angis i merknad.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9371</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kostnadsnivå år</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="usikkerhetKostnad" type="integer">
+                  <annotation>
+                     <documentation>9373: Angir prosentvis usikkerhet i kostnad +/- (forutsatt like mye oppover og nedover). Hvis det er foreslått to ulike sikringstiltak må disse ha samme usikkerhet. Ev. avvik angis i merknad.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9373</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Usikkerhet kostnad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="restrisikoForSikringstiltakA" type="double">
+                  <annotation>
+                     <documentation>10181: Anslått restrisiko etter at foreslått tiltak A er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10181</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Restrisiko for sikringstiltak A</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sikringstiltakB" type="string">
+                  <annotation>
+                     <documentation>12100: Kort beskrivelse av planlagt tiltak for utbedring av skredpunktet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12100</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sikringstiltak B</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="kostnadsoverslag_MillKr_ForSikringstiltakB"
+                        type="double">
+                  <annotation>
+                     <documentation>12099: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak B. Avrundet i henhold egne regler.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12099</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak B</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="restrisikoForSikringstiltakB" type="double">
+                  <annotation>
+                     <documentation>12101: Anslått restrisiko etter at foreslått tiltak B er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12101</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Restrisiko for sikringstiltak B</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="utførtAnslag">
+                  <annotation>
+                     <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="oppstartHandlingsprogram" type="integer">
+                  <annotation>
+                     <documentation>9381: Angir hvilket år sikring er planlagt startet, hvis det er med i handlingsprogram.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9381</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppstart handlingsprogram</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="utbedretÅr" type="integer">
+                  <annotation>
+                     <documentation>9369: For punkt som er sikret skal det angis hvilket år det ble sikret. Utfylt årstall medfører at egenskap "Skredfaktorkategori" får verdi «Sikring utført». Merknad: Skal angis hvis skredpunktet anses som sikret.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9369</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utbedret år</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="utløsendeVærforhold" type="string">
+                  <annotation>
+                     <documentation>9571: Beskrivelse av værforhold som kan gi skred i skredløpet. Brukes i naturfareplan.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9571</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utløsende værforhold</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="beskrivelse_Beredskap" type="string">
+                  <annotation>
+                     <documentation>9569: Beskrivelse som er relevant i forhold til beredskap. Brukes i naturfareplan.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9569</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beskrivelse, beredskap</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="antallLøsneområder">
+                  <annotation>
+                     <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknad" type="string">
+                  <annotation>
+                     <documentation>9345: Eventuelt supplerende merknader knyttet til skredsikringsbehov.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9345</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SkredpunktPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Skredpunkt"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="UtførtAnslagSkredpunktType">
+      <annotation>
+         <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UtførtAnslagSkredpunktEnumerationType nvdb:UtførtAnslagSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="UtførtAnslagSkredpunktEnumerationType">
+      <annotation>
+         <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
             <annotation>
-              <documentation>12099: Overslag over totale kostnader knyttet til utbedring av aktuelt skredpunkt med sikringstiltak B. Avrundet i henhold egne regler.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12099</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kostnadsoverslag (mill kr) for sikringstiltak B</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16587</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="restrisikoForSikringstiltakB" type="double">
+         </enumeration>
+         <enumeration value="N">
             <annotation>
-              <documentation>12101: Anslått restrisiko etter at foreslått tiltak B er utført. Oppgis som nominell sannsynlighet for skred etter sikring. 0,1 betyr 1/10 sannsynlighet for skred i løpet av et år.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12101</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Restrisiko for sikringstiltak B</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16588</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="utførtAnslag" type="nvdb:UtførtAnslagType">
-            <annotation>
-              <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="oppstartHandlingsprogram" type="integer">
-            <annotation>
-              <documentation>9381: Angir hvilket år sikring er planlagt startet, hvis det er med i handlingsprogram.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9381</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Oppstart handlingsprogram</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="utbedretÅr" type="integer">
-            <annotation>
-              <documentation>9369: For punkt som er sikret skal det angis hvilket år det ble sikret. Utfylt årstall gir prioriteringskategori «sikring utført».</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9369</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Utbedret år</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="utløsendeVærforhold" type="string">
-            <annotation>
-              <documentation>9571: Beskrivelse av værforhold som kan gi skred i skredløpet. Brukes i naturfareplan.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9571</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Utløsende værforhold</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="beskrivelse_Beredskap" type="string">
-            <annotation>
-              <documentation>9569: Beskrivelse som er relevant i forhold til beredskap. Brukes i naturfareplan.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9569</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Beskrivelse, beredskap</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="antallLøsneområder" type="nvdb:AntallLøsneområderType">
-            <annotation>
-              <documentation>9570: Angir hvor mange ulike løsneområder som leder ned til det aktuelle skredpunktet. Brukes i naturfareplan.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9570</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Antall løsneområder</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="merknad" type="string">
-            <annotation>
-              <documentation>9345: Eventuelt supplerende merknader knyttet til skredsikringsbehov.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9345</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="SkredpunktPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Skredpunkt"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="UtførtAnslagType">
-    <annotation>
-      <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:UtførtAnslagEnumerationType nvdb:UtførtAnslagOtherType"/>
-  </simpleType>
-  <simpleType name="UtførtAnslagEnumerationType">
-    <annotation>
-      <documentation>10179: Angir om kostnadsoverslag er utarbeidet etter Anslagsmetoden.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10179</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Utført anslag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Ja">
-        <annotation>
-          <documentation>16587: Ja</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16587</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nei">
-        <annotation>
-          <documentation>16588: Nei</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">16588</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="UtførtAnslagOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtførtAnslagSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

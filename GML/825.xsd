@@ -1,60 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Kurvatur_Stigning" substitutionGroup="nvdb:AbstraktKurvatur_Stigning" type="nvdb:Kurvatur_StigningType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>825: Angir gjennomsnittlig stigning på strekning. Basert på silingsfunksjon i forhold til primære høydedata. Splitting i ny forekomst når avvik større enn gitt verdi.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">825</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">825</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kurvatur, stigning</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="Kurvatur_StigningType">
-    <complexContent>
-      <extension base="nvdb:AbstraktKurvatur_StigningType">
-        <sequence>
-          <element minOccurs="0" name="stigning" type="double">
-            <annotation>
-              <documentation>9396: Angir stigning. Negativ verdi hvis nedoverbakke i metreringsretning, positiv verdi hvis oppoverbakke i metreringsretning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9396</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Stigning</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="beregningsinfo" type="string">
-            <annotation>
-              <documentation>9962: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata. bd = beregningsdato (dato vegnett ble lest inn fra NVDB) kv = kurvgenversjon. as = Maks avvik stigning (meter). mk=merknad (tekst som bruker selv kan legge inn, maks 30 tegn).</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9962</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Beregningsinfo</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="Kurvatur_StigningPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Kurvatur_Stigning"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kurvatur, stigning"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Kurvatur, stigningType">
+      <annotation>
+         <documentation>825: Angir gjennomsnittlig stigning på strekning. Basert på silingsfunksjon i forhold til primære høydedata. Splitting i ny forekomst når avvik større enn gitt verdi.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">825</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kurvatur, stigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Kurvatur, stigningType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="stigning" type="double">
+                  <annotation>
+                     <documentation>9396: Angir stigning. Negativ verdi hvis nedoverbakke i metreringsretning, positiv verdi hvis oppoverbakke i metreringsretning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9396</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stigning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="beregningsinfo" type="string">
+                  <annotation>
+                     <documentation>9962: Gir informasjon om KurvGen-beregning som er grunnlag for kurvaturdata. bd = beregningsdato (dato vegnett ble lest inn fra NVDB) kv = kurvgenversjon. as = Maks avvik stigning (meter). mk=merknad (tekst som bruker selv kan legge inn, maks 30 tegn).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9962</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beregningsinfo</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Kurvatur, stigningPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kurvatur, stigning"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

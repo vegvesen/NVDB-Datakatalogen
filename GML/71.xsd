@@ -1,334 +1,293 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="ArmeringType">
-    <annotation>
-      <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:ArmeringEnumerationType nvdb:ArmeringOtherType"/>
-  </simpleType>
-  <simpleType name="ArmeringEnumerationType">
-    <annotation>
-      <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Enkel">
-        <annotation>
-          <documentation>12257: Enkel</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12257</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Enkel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Dobbel">
-        <annotation>
-          <documentation>12258: Dobbel</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12258</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Dobbel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ingen armering">
-        <annotation>
-          <documentation>12259: Ingen armering</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12259</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ingen armering</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="ArmeringOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Betongutstøping" substitutionGroup="nvdb:AbstraktBetongutstøping" type="nvdb:BetongutstøpingType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>71: Utstøping i tunnel for sikring mot utrasing.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">71</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">71</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Betongutstøping</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="BetongutstøpingType">
-    <complexContent>
-      <extension base="nvdb:AbstraktBetongutstøpingType">
-        <sequence>
-          <element minOccurs="0" name="lengde" type="double">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="ArmeringBetongutstøpingType">
+      <annotation>
+         <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ArmeringBetongutstøpingEnumerationType nvdb:ArmeringBetongutstøpingOtherType"/>
+   </simpleType>
+   <simpleType name="ArmeringBetongutstøpingEnumerationType">
+      <annotation>
+         <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="d">
             <annotation>
-              <documentation>1318: Angir lengde av vegobjektet, er normalt avledet fra geometri/stedfesting.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1318</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12258</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dobbel</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tykkelse" type="double">
+         </enumeration>
+         <enumeration value="e">
             <annotation>
-              <documentation>1620: Angir standard tykkelse av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1620</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tykkelse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12257</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Enkel</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="armering" type="nvdb:ArmeringType">
+         </enumeration>
+         <enumeration value="ia">
             <annotation>
-              <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12259</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen armering</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="membran" type="nvdb:MembranBetongutstøpingType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ArmeringBetongutstøpingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Betongutstøping"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:BetongutstøpingType">
+      <annotation>
+         <documentation>71: Utstøping i tunnel for sikring mot utrasing.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">71</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Betongutstøping</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="BetongutstøpingType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>1318: Angir lengde av vegobjektet, er normalt avledet fra geometri/stedfesting.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1318</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tykkelse" type="double">
+                  <annotation>
+                     <documentation>1620: Angir standard tykkelse av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1620</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tykkelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="armering"
+                        type="nvdb:ArmeringBetongutstøpingType">
+                  <annotation>
+                     <documentation>9168: Angir om det er armering, og i tilfelle hvilken type.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9168</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="membran" type="nvdb:MembranBetongutstøpingType">
+                  <annotation>
+                     <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="nvdb:PosisjonBetongutstøpingType">
+                  <annotation>
+                     <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10269: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10269</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11571: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11571</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11063: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11063</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12302: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12302</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4773: Gir Linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4773</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="BetongutstøpingPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Betongutstøping"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="MembranBetongutstøpingType">
+      <annotation>
+         <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MembranBetongutstøpingEnumerationType nvdb:MembranBetongutstøpingOtherType"/>
+   </simpleType>
+   <simpleType name="MembranBetongutstøpingEnumerationType">
+      <annotation>
+         <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
             <annotation>
-              <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3429</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfaltmembran</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="nvdb:PosisjonType">
+         </enumeration>
+         <enumeration value="f">
             <annotation>
-              <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3430</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Foliemembran</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="i">
             <annotation>
-              <documentation>10269: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10269</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3431</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke membran</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MembranBetongutstøpingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PosisjonBetongutstøpingType">
+      <annotation>
+         <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PosisjonBetongutstøpingEnumerationType nvdb:PosisjonBetongutstøpingOtherType"/>
+   </simpleType>
+   <simpleType name="PosisjonBetongutstøpingEnumerationType">
+      <annotation>
+         <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="p">
             <annotation>
-              <documentation>11571: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11571</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3294</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hele profilet</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
+         </enumeration>
+         <enumeration value="h">
             <annotation>
-              <documentation>11063: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11063</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3296</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Himling</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+         </enumeration>
+         <enumeration value="s">
             <annotation>
-              <documentation>12302: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12302</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3302</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Såle</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>4773: Gir Linje/kurve som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4773</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Strekning" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Strekning</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnelløp" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløp</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertTunnelløpUtenTrafikk" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTunnelløpUtenTrafikk</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="BetongutstøpingPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Betongutstøping"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="MembranBetongutstøpingType">
-    <annotation>
-      <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:MembranBetongutstøpingEnumerationType nvdb:MembranBetongutstøpingOtherType"/>
-  </simpleType>
-  <simpleType name="MembranBetongutstøpingEnumerationType">
-    <annotation>
-      <documentation>1996: Angir hvilken type membran/drenering det er bak utstøping.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1996</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Asfaltmembran">
-        <annotation>
-          <documentation>3429: Asfaltmembran</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3429</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Asfaltmembran</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Foliemembran">
-        <annotation>
-          <documentation>3430: Foliemembran</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3430</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Foliemembran</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ikke membran">
-        <annotation>
-          <documentation>3431: Ikke membran</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3431</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ikke membran</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="MembranBetongutstøpingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="PosisjonType">
-    <annotation>
-      <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:PosisjonEnumerationType nvdb:PosisjonOtherType"/>
-  </simpleType>
-  <simpleType name="PosisjonEnumerationType">
-    <annotation>
-      <documentation>1650: Angir posisjon til vegobjektet i samleobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1650</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Posisjon</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Hele profilet">
-        <annotation>
-          <documentation>3294: Hele profilet</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3294</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Hele profilet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Himling">
-        <annotation>
-          <documentation>3296: Himling</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3296</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Himling</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Såle">
-        <annotation>
-          <documentation>3302: Såle</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3302</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Såle</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="PosisjonOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PosisjonBetongutstøpingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

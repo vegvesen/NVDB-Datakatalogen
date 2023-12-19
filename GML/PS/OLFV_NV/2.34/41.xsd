@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.33">
+   <annotation>
+      <documentation>41: Område for oppstilling og venting for kjøretøy som skal videre med ferje. Areal til rasting, parkering etc. registreres som rasteplass og parkeringsområde.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_NV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierFerjeoppstillingsplassType">
+      <annotation>
+         <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">7989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierFerjeoppstillingsplassEnumerationType nvdb:EierFerjeoppstillingsplassOtherType"/>
+   </simpleType>
+   <simpleType name="EierFerjeoppstillingsplassEnumerationType">
+      <annotation>
+         <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">7989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Stat, Statens vegvesen">
+            <annotation>
+               <documentation>10255: Stat, Statens vegvesen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10255</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Stat, Nye Veier">
+            <annotation>
+               <documentation>18605: Stat, Nye Veier</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18605</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fylkeskommune">
+            <annotation>
+               <documentation>10717: Fylkeskommune</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10717</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Kommune">
+            <annotation>
+               <documentation>10319: Kommune</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10319</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Privat">
+            <annotation>
+               <documentation>10383: Privat</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10383</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Uavklart">
+            <annotation>
+               <documentation>17615: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17615</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierFerjeoppstillingsplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Ferjeoppstillingsplass"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:FerjeoppstillingsplassType">
+      <annotation>
+         <documentation>41: Område for oppstilling og venting for kjøretøy som skal videre med ferje. Areal til rasting, parkering etc. registreres som rasteplass og parkeringsområde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">41</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">41</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ferjeoppstillingsplass</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="FerjeoppstillingsplassType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="ferjeTil" type="string">
+                  <annotation>
+                     <documentation>1804: Angir hvor det går ferje til. Hvis det er flere steder oppgis de med semikolon mellom.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1804</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ferje til</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsfelt" type="integer">
+                  <annotation>
+                     <documentation>2081: Angir hvor mange oppstillingsfelt det er.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2081</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingsfelt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengdeOppstillingsfelt_Forflytningshemmede" type="integer">
+                  <annotation>
+                     <documentation>10728: Angir total lengde oppstillingsfelt reservert for kjøretøy for forflytningshemmede. Slike felt skal være skiltet og ha ekstra god plass slik at det er mulig å få rullestol ut og inn av bilen. Det skal angis 0 om det ikke finnes slike felt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10728</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde oppstillingsfelt, forflytningshemmede</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengdeOppstillingsfelt_PersonbilKombinert" type="integer">
+                  <annotation>
+                     <documentation>10732: Angir lengde av alle oppstillingsfelt reservert for bare personbil pluss lengde av alle oppstillingsfelt for kombinert trafikk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10732</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde oppstillingsfelt, personbil/kombinert</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengdeOppstillingsfelt_TungeKjøretøy" type="integer">
+                  <annotation>
+                     <documentation>10731: Angir lengde av alle oppstillingsfelt reservert for tunge kjøretøy. Angis som 0 om det kun er kombinerte oppstillingsfelt på ferjeleiet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10731</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde oppstillingsfelt, tunge kjøretøy</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10292: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10292</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11048: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11048</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12285: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12285</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="eier"
+                        type="nvdb:EierFerjeoppstillingsplassType">
+                  <annotation>
+                     <documentation>7989: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7989</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligFerjeoppstillingsplassType">
+                  <annotation>
+                     <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8053</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4748: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4748</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="assosiertFerjekai" type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Ferjekai</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="FerjeoppstillingsplassPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Ferjeoppstillingsplass"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassType">
+      <annotation>
+         <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8053</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">8053</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligFerjeoppstillingsplassEnumerationType nvdb:VedlikeholdsansvarligFerjeoppstillingsplassOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassEnumerationType">
+      <annotation>
+         <documentation>8053: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8053</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">8053</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Statens vegvesen">
+            <annotation>
+               <documentation>10447: Statens vegvesen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10447</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Nye Veier">
+            <annotation>
+               <documentation>18682: Nye Veier</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18682</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fylkeskommune">
+            <annotation>
+               <documentation>19923: Fylkeskommune</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19923</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <documentation>18811: OPS</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18811</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Kommune">
+            <annotation>
+               <documentation>10525: Kommune</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10525</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Privat">
+            <annotation>
+               <documentation>10603: Privat</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10603</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Uavklart">
+            <annotation>
+               <documentation>17706: Uavklart</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17706</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligFerjeoppstillingsplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

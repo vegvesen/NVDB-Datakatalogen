@@ -1,947 +1,895 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="TV01_BruddhendelseType">
-    <annotation>
-      <documentation>11012: Angir type bruddhendelse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV01_BruddhendelseEnumerationType nvdb:TV01_BruddhendelseOtherType"/>
-  </simpleType>
-  <simpleType name="TV01_BruddhendelseEnumerationType">
-    <annotation>
-      <documentation>11012: Angir type bruddhendelse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Veg stengt">
-        <annotation>
-          <documentation>18469: Veg stengt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18469</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Veg stengt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tunnel stengt">
-        <annotation>
-          <documentation>18470: Tunnel stengt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18470</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tunnel stengt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Bru stengt">
-        <annotation>
-          <documentation>18471: Bru stengt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18471</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bru stengt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ferje/ferjekai stengt">
-        <annotation>
-          <documentation>18472: Ferje/ferjekai stengt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18472</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ferje/ferjekai stengt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV01_BruddhendelseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV02_BruddårsakSpesifikkType">
-    <annotation>
-      <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV02_BruddårsakSpesifikkEnumerationType nvdb:TV02_BruddårsakSpesifikkOtherType"/>
-  </simpleType>
-  <simpleType name="TV02_BruddårsakSpesifikkEnumerationType">
-    <annotation>
-      <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Bilberging (Vogntog)">
-        <annotation>
-          <documentation>17410: Brukes i Veg stengt. Brukes der det er eller forventes økt forekomst av fastkjørte vogntog, for eksempel i bratte stigninger vinterstid.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17410</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bilberging (Vogntog)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Brann (i objekter på/nær vegen)">
-        <annotation>
-          <documentation>17411: Brukes i Tunnel stengt eller Veg stengt. Brukes i tunneler eller der vegen ligger nært opp til objekter som kan forårsake storbrann som fører til langvarig stengt veg, for eksempel prosessindustri. Bensinstasjoner og industriområder generelt skal ikke kartlegges her. Brukes kun i særskilte tilfeller.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17411</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Brann (i objekter på/nær vegen)</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Dreneringssvikt">
-        <annotation>
-          <documentation>17413: Brukes i Veg stengt. Brukes der det er skadde og/eller underdimensjonerte stikkrenner eller lukket drenering langs veg som erfaringsvis forårsaker overvann/flom ved store nedbørsmengder.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17413</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Dreneringssvikt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Farlig gods ulykke">
-        <annotation>
-          <documentation>17415: Brukes i Veg stengt. Brukes der det er spesielt høy risiko for ulykker med farlig gods, for eksempel i tilknytning til raffineri/industri.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17415</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Farlig gods ulykke</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Flom">
-        <annotation>
-          <documentation>17417: Brukes i Bru stengt eller Veg stengt. Brukes for bruer, ev. tunneler eller der det er veg langs vassdrag som erfaringsvis er utsatt for flom ved store nedbørsmengder og/eller snøsmelting, eller ved flom i sidebekker på grunn av ekstremnedbør.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17417</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Flom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fundamenteringssvikt">
-        <annotation>
-          <documentation>17418: Brukes i Veg stengt. Brukes der det er økt sannsynlighet for brudd i vegfundamenteringen pga. utvasking etter store nedbørsmengder, slitasje fra tungtrafikk, dårlige grunnforhold eller andre årsaker.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17418</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fundamenteringssvikt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Høyde - lengde - bredde - vekt">
-        <annotation>
-          <documentation>17419: Brukes i Bru stengt, Veg stengt eller Tunnel stengt. Brukes der restriksjoner eller begrensninger kan føre til at kjøretøy som overstiger grensene kjører seg fast, eller skader/ødelegger infrastrukturen eller på annen måte stenger for annen trafikk.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17419</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Høyde - lengde - bredde - vekt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skred kvikkleire">
-        <annotation>
-          <documentation>17421: Brukes i Veg stengt. Punkt eller strekning med fare for kvikkleireskred der vegen ligger i eller nær et område med kvikkleire.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17421</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skred kvikkleire</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skred jord">
-        <annotation>
-          <documentation>17422: Brukes i Veg stengt. Punkt eller strekning som er spesielt utsatt for jordskred. Jordskred er raske utglidninger og bevegelse av vannmettede løsmasser i bratte skråninger, utenfor definerte vannveier. Høyt vanninnhold og oppbygging av vanntrykk i løsmassene er oftest den utløsende faktoren for jordskred. Dette skjer som følge langvarig nedbør, eller etter korte og intense regnskyll eller i kombinasjon med rask snøsmelting, se NVE's faktaark 2013-01 om Jordskred og flomskred.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17422</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skred jord</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skred snø">
-        <annotation>
-          <documentation>17424: Brukes i veg stengt. Punkt eller strekning som er spesielt utsatt for snøskred.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17424</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skred snø</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Skred stein">
-        <annotation>
-          <documentation>17425: Brukes i Veg stengt. Punkt eller strekning som er spesielt utsatt for steinskred.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17425</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skred stein</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nedfall fra fjellskjæring">
-        <annotation>
-          <documentation>18536: Brukes i Veg stengt. Punkt eller strekning der det er fare for nedfall fra fjellskjæring.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18536</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nedfall fra fjellskjæring</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stormflo">
-        <annotation>
-          <documentation>17426: Brukes i Veg stengt, ev. Tunnel stengt, Bru stengt eller Ferje/ferjekai stengt. Brukes der det finnes lavtliggende punkt eller strekning som ligger slik til at det kan bli oversvømt ved stormflo.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17426</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stormflo</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Strømbrudd">
-        <annotation>
-          <documentation>17427: Brukes i Tunnel stengt, Ferje/ferjekai stengt, Veg stengt, Bru stengt. Brukes i tilknytning til mekaniske skilt, bommer, pumpesumper eller lignende, og kun der langvarige strømbrudd er av avgjørende betydning for funksjonsevnen til vegen, brua, tunnelen, ferjekaia.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17427</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Strømbrudd</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ulykkespunkt/-strekning">
-        <annotation>
-          <documentation>17430: Brukes i Veg stengt eller Tunnel stengt. Kartlegging av ulykkespunkt og -strekninger i VegROS skal være et supplement til allerede eksisterende ulykkespunkt i NVDB. Det som spesielt skal registreres er punkt eller strekninger der hyppig forekommende ulykker og utforkjøringer (som oftest uten personskade) er et tegn på potensielle framkommelighetsutfordringer slik de er definert i risikovurderingen i retningslinjene for VegROS. Lokal kunnskap er spesielt viktig i denne kartleggingen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17430</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ulykkespunkt/-strekning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Utglidning">
-        <annotation>
-          <documentation>17431: Brukes i Veg stengt. Utglidning brukes også for å indikere en generell massebevegelse i en skråning og er ofte det første bruddet i et senere jordskred. Utglidninger oppstår i slakere terreng med finkornet, vannmettet jord og leire. De finnes gjerne på dyrket mark eller i naturlige skråninger i terrenget, særlig i de bratte sidekantene langs veier, elver, kunstige/modifiserte skråninger, langs jernbaner og i menneskeskapte fyllinger i bebodde områder.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17431</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utglidning</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Vind">
-        <annotation>
-          <documentation>17432: Brukes i Veg stengt, Bru stengt, eller Ferje/ferjekai stengt. Brukes for strekning som er spesielt sårbar for sterk vind som storm/orkan, for eksempel vinterstormer over fjelloverganger, eller store trær nær vegen som gir økt risiko for vindfall og dermed stengt veg ved sterk vind/storm.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17432</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Vind</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Snø">
-        <annotation>
-          <documentation>17433: Brukes i Veg stengt, Tunnel stengt. Punkt eller strekning som er utsatt for snøfokk o.l.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17433</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Snø</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Annen årsak">
-        <annotation>
-          <documentation>18535: Brukes i Veg stengt, Bru stengt, Tunnel stengt, Ferje stengt. Punkt eller strekning der bruddårsak ikke dekkes av det forhåndsdefinerte utvalget.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18535</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Annen årsak</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV02_BruddårsakSpesifikkOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV05_BruddårsakHovedgruppeType">
-    <annotation>
-      <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV05_BruddårsakHovedgruppeEnumerationType nvdb:TV05_BruddårsakHovedgruppeOtherType"/>
-  </simpleType>
-  <simpleType name="TV05_BruddårsakHovedgruppeEnumerationType">
-    <annotation>
-      <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Natur">
-        <annotation>
-          <documentation>20085: Brukes der naturrelaterte farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20085</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Natur</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Trafikk">
-        <annotation>
-          <documentation>20086: Brukes der trafikkrelaterte farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20086</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Trafikk</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Konstruksjon">
-        <annotation>
-          <documentation>20087: Brukes der konstruksjonsrelaterte farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20087</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Konstruksjon</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV05_BruddårsakHovedgruppeOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV06_BruddårsakUndergruppeType">
-    <annotation>
-      <documentation>11865: Angir undergruppe bruddfare.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV06_BruddårsakUndergruppeEnumerationType nvdb:TV06_BruddårsakUndergruppeOtherType"/>
-  </simpleType>
-  <simpleType name="TV06_BruddårsakUndergruppeEnumerationType">
-    <annotation>
-      <documentation>11865: Angir undergruppe bruddfare.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Skred">
-        <annotation>
-          <documentation>20088: Brukes der skred farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20088</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skred</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Flom">
-        <annotation>
-          <documentation>20089: Brukes der flom farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20089</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Flom</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Vær">
-        <annotation>
-          <documentation>20090: Brukes der vær farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20090</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Vær</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ulykke">
-        <annotation>
-          <documentation>20091: Brukes der ulykker farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20091</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ulykke</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Konstruksjonsfeil">
-        <annotation>
-          <documentation>20092: Brukes der konstruksjonsfeil farer er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20092</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Konstruksjonsfeil</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Teknisk svikt">
-        <annotation>
-          <documentation>20093: Brukes der teknisk svikt er hovedårsak til brudd.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">20093</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Teknisk svikt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV06_BruddårsakUndergruppeOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV10_RisikoType">
-    <annotation>
-      <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV10_RisikoEnumerationType nvdb:TV10_RisikoOtherType"/>
-  </simpleType>
-  <simpleType name="TV10_RisikoEnumerationType">
-    <annotation>
-      <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Liten">
-        <annotation>
-          <documentation>18436: Liten</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18436</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>18437: Middels</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18437</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stor">
-        <annotation>
-          <documentation>18438: Stor</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18438</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV10_RisikoOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV11_TrusselType">
-    <annotation>
-      <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV11_TrusselEnumerationType nvdb:TV11_TrusselOtherType"/>
-  </simpleType>
-  <simpleType name="TV11_TrusselEnumerationType">
-    <annotation>
-      <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Liten">
-        <annotation>
-          <documentation>18427: Liten</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18427</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>18428: Middels</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18428</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stor">
-        <annotation>
-          <documentation>18429: Stor</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18429</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV11_TrusselOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV12_VerdiType">
-    <annotation>
-      <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV12_VerdiEnumerationType nvdb:TV12_VerdiOtherType"/>
-  </simpleType>
-  <simpleType name="TV12_VerdiEnumerationType">
-    <annotation>
-      <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Liten">
-        <annotation>
-          <documentation>18430: Liten</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18430</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>18431: Middels</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18431</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stor">
-        <annotation>
-          <documentation>18432: Stor</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18432</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV12_VerdiOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV13_SårbarhetType">
-    <annotation>
-      <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV13_SårbarhetEnumerationType nvdb:TV13_SårbarhetOtherType"/>
-  </simpleType>
-  <simpleType name="TV13_SårbarhetEnumerationType">
-    <annotation>
-      <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Liten">
-        <annotation>
-          <documentation>18433: Liten</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18433</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>18434: Middels</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18434</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stor">
-        <annotation>
-          <documentation>18435: Stor</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18435</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV13_SårbarhetOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV14_UsikkerhetType">
-    <annotation>
-      <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV14_UsikkerhetEnumerationType nvdb:TV14_UsikkerhetOtherType"/>
-  </simpleType>
-  <simpleType name="TV14_UsikkerhetEnumerationType">
-    <annotation>
-      <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Liten">
-        <annotation>
-          <documentation>18537: Lite usikkerhet. Omfattende faglig grunnlag.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18537</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Middels">
-        <annotation>
-          <documentation>18538: Noe usikkerhet. Noe faglig grunnlag.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18538</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stor">
-        <annotation>
-          <documentation>18539: Stor usikkerhet. Mangelfullt eller svært lite faglig grunnlag.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18539</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV14_UsikkerhetOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV15_FagligGrunnlagType">
-    <annotation>
-      <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TV15_FagligGrunnlagEnumerationType nvdb:TV15_FagligGrunnlagOtherType"/>
-  </simpleType>
-  <simpleType name="TV15_FagligGrunnlagEnumerationType">
-    <annotation>
-      <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Nivå1">
-        <annotation>
-          <documentation>18540: Identifisere og kartlegge områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Liten bruk av fagkompetanse.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18540</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nivå1</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nivå 2">
-        <annotation>
-          <documentation>18541: Identifisere, kartlegge og vurdere områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Noe bruk av fagkompetanse.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18541</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nivå 2</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nivå 3">
-        <annotation>
-          <documentation>18542: Identifisere, kartlegge og detaljvurdere områder, strekninger og vegobjekter der det finnes eller forventes framkommelighetsutfordringer. Utstrakt bruk av fagkompetanse.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18542</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nivå 3</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TV15_FagligGrunnlagOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="VegROS" substitutionGroup="nvdb:AbstraktVegROS" type="nvdb:VegROSType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>895: Punkt/strekning i vegnettet hvor det er økt risiko og sårbarhet for langvarige fremkommelighetsbrudd. Merknad: Skal ha minst 10 meters utstrekning.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">895</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">895</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">VegROS</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="VegROSType">
-    <complexContent>
-      <extension base="nvdb:AbstraktVegROSType">
-        <sequence>
-          <element minOccurs="0" name="a01_Bruddhendelse" type="nvdb:TV01_BruddhendelseType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="01_BruddhendelseVegROSType">
+      <annotation>
+         <documentation>11012: Angir type bruddhendelse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:01_BruddhendelseVegROSEnumerationType nvdb:01_BruddhendelseVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="01_BruddhendelseVegROSEnumerationType">
+      <annotation>
+         <documentation>11012: Angir type bruddhendelse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="BS">
             <annotation>
-              <documentation>11012: Angir type bruddhendelse.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18471</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bru stengt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="a02_BruddårsakSpesifikk" type="nvdb:TV02_BruddårsakSpesifikkType">
+         </enumeration>
+         <enumeration value="FS">
             <annotation>
-              <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18472</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferje/ferjekai stengt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a03_Sted" type="string">
+         </enumeration>
+         <enumeration value="TS">
             <annotation>
-              <documentation>10750: Stedsnavn eller strekningsnavn.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10750</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">03_Sted</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18470</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel stengt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a04_Beskrivelse" type="string">
+         </enumeration>
+         <enumeration value="VS">
             <annotation>
-              <documentation>10751: Beskrivelse av hendelse og særskilte forhold ved denne.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10751</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">04_Beskrivelse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18469</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veg stengt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a05_BruddårsakHovedgruppe" type="nvdb:TV05_BruddårsakHovedgruppeType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="01_BruddhendelseVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="02_BruddårsakSpesifikkVegROSType">
+      <annotation>
+         <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:02_BruddårsakSpesifikkVegROSEnumerationType nvdb:02_BruddårsakSpesifikkVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="02_BruddårsakSpesifikkVegROSEnumerationType">
+      <annotation>
+         <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
             <annotation>
-              <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18535</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen årsak</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a06_BruddårsakUndergruppe" type="nvdb:TV06_BruddårsakUndergruppeType">
+         </enumeration>
+         <enumeration value="Bilberging (Vogntog)">
             <annotation>
-              <documentation>11865: Angir undergruppe bruddfare.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17410</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bilberging (Vogntog)</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a10_Risiko" type="nvdb:TV10_RisikoType">
+         </enumeration>
+         <enumeration value="Brann (i objekter på/nær vegen)">
             <annotation>
-              <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17411</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Brann (i objekter på/nær vegen)</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a11_Trussel" type="nvdb:TV11_TrusselType">
+         </enumeration>
+         <enumeration value="Dreneringssvikt">
             <annotation>
-              <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17413</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dreneringssvikt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a12_Verdi" type="nvdb:TV12_VerdiType">
+         </enumeration>
+         <enumeration value="Farlig gods ulykke">
             <annotation>
-              <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17415</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Farlig gods ulykke</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a13_Sårbarhet" type="nvdb:TV13_SårbarhetType">
+         </enumeration>
+         <enumeration value="Flom">
             <annotation>
-              <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17417</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flom</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a14_Usikkerhet" type="nvdb:TV14_UsikkerhetType">
+         </enumeration>
+         <enumeration value="Fundamenteringssvikt">
             <annotation>
-              <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17418</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fundamenteringssvikt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a15_FagligGrunnlag" type="nvdb:TV15_FagligGrunnlagType">
+         </enumeration>
+         <enumeration value="Høyde - lengde - bredde - vekt">
             <annotation>
-              <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17419</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Høyde - lengde - bredde - vekt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a20_TiltakInvesteringUtbedring" type="string">
+         </enumeration>
+         <enumeration value="nf">
             <annotation>
-              <documentation>11024: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11024</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">20_Tiltak Investering/utbedring</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18536</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nedfall fra fjellskjæring</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a21_TiltakDriftVedlikehold" type="string">
+         </enumeration>
+         <enumeration value="Skred jord">
             <annotation>
-              <documentation>11025: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11025</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">21_Tiltak Drift/vedlikehold</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17422</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skred jord</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a22_TiltakBeredskap" type="string">
+         </enumeration>
+         <enumeration value="Skred kvikkleire">
             <annotation>
-              <documentation>11026: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11026</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">22_Tiltak Beredskap</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17421</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skred kvikkleire</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a23_TiltakKartleggingAnalyse" type="string">
+         </enumeration>
+         <enumeration value="Skred snø">
             <annotation>
-              <documentation>11027: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11027</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">23_Tiltak Kartlegging/analyse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17424</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skred snø</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a50_Merknad" type="string">
+         </enumeration>
+         <enumeration value="Skred stein">
             <annotation>
-              <documentation>10752: Merknad. Kan benyttes ifm. revisjon eller oppdatering eller for å angi spesielle grunner til at dette er et VegROSpunkt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10752</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">50_Merknad</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17425</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skred stein</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a60_Arkivnummer" type="string">
+         </enumeration>
+         <enumeration value="Snø">
             <annotation>
-              <documentation>10754: Referanse til Mime.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10754</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">60_Arkivnummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17433</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snø</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="a70_Metadata" type="string">
+         </enumeration>
+         <enumeration value="Stormflo">
             <annotation>
-              <documentation>10753: Angir hvor det finnes metadata. URL eller filkatalog.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10753</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">70_Metadata</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17426</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stormflo</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="Strømbrudd">
             <annotation>
-              <documentation>11011: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11011</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17427</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Strømbrudd</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+         <enumeration value="Ulykkespunkt/-strekning">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17430</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ulykkespunkt/-strekning</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="VegROSPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:VegROS"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+         <enumeration value="Utglidning">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17431</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utglidning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Vind">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17432</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vind</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="02_BruddårsakSpesifikkVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="05_BruddårsakHovedgruppeVegROSType">
+      <annotation>
+         <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:05_BruddårsakHovedgruppeVegROSEnumerationType nvdb:05_BruddårsakHovedgruppeVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="05_BruddårsakHovedgruppeVegROSEnumerationType">
+      <annotation>
+         <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="k">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20087</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Konstruksjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20085</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Natur</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20086</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="05_BruddårsakHovedgruppeVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="06_BruddårsakUndergruppeVegROSType">
+      <annotation>
+         <documentation>11865: Angir undergruppe bruddfare.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:06_BruddårsakUndergruppeVegROSEnumerationType nvdb:06_BruddårsakUndergruppeVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="06_BruddårsakUndergruppeVegROSEnumerationType">
+      <annotation>
+         <documentation>11865: Angir undergruppe bruddfare.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="f">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20089</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="k">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20092</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Konstruksjonsfeil</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20088</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skred</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20093</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Teknisk svikt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="u">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20091</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ulykke</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20090</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vær</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="06_BruddårsakUndergruppeVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="10_RisikoVegROSType">
+      <annotation>
+         <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:10_RisikoVegROSEnumerationType nvdb:10_RisikoVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="10_RisikoVegROSEnumerationType">
+      <annotation>
+         <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18436</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18437</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18438</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="10_RisikoVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="11_TrusselVegROSType">
+      <annotation>
+         <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:11_TrusselVegROSEnumerationType nvdb:11_TrusselVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="11_TrusselVegROSEnumerationType">
+      <annotation>
+         <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18427</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18428</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18429</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="11_TrusselVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="12_VerdiVegROSType">
+      <annotation>
+         <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:12_VerdiVegROSEnumerationType nvdb:12_VerdiVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="12_VerdiVegROSEnumerationType">
+      <annotation>
+         <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18430</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18431</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18432</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="12_VerdiVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="13_SårbarhetVegROSType">
+      <annotation>
+         <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:13_SårbarhetVegROSEnumerationType nvdb:13_SårbarhetVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="13_SårbarhetVegROSEnumerationType">
+      <annotation>
+         <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18433</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18434</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18435</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="13_SårbarhetVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="14_UsikkerhetVegROSType">
+      <annotation>
+         <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:14_UsikkerhetVegROSEnumerationType nvdb:14_UsikkerhetVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="14_UsikkerhetVegROSEnumerationType">
+      <annotation>
+         <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18537</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18538</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18539</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="14_UsikkerhetVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="15_FagligGrunnlagVegROSType">
+      <annotation>
+         <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:15_FagligGrunnlagVegROSEnumerationType nvdb:15_FagligGrunnlagVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="15_FagligGrunnlagVegROSEnumerationType">
+      <annotation>
+         <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="n2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18541</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nivå 2</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n3">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18542</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nivå 3</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n1">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18540</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nivå1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="15_FagligGrunnlagVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="VegROS"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:VegROSType">
+      <annotation>
+         <documentation>895: Punkt/strekning i vegnettet hvor det er økt risiko og sårbarhet for langvarige fremkommelighetsbrudd. Merknad: Skal ha minst 10 meters utstrekning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">895</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">VegROS</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VegROSType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="01_Bruddhendelse" type="nvdb:01_BruddhendelseVegROSType">
+                  <annotation>
+                     <documentation>11012: Angir type bruddhendelse.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11012</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">01_Bruddhendelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="02_BruddårsakSpesifikk">
+                  <annotation>
+                     <documentation>10749: Angir hva som er årsak til bruddhendelse.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10749</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">02_Bruddårsak spesifikk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="03_Sted" type="string">
+                  <annotation>
+                     <documentation>10750: Stedsnavn eller strekningsnavn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10750</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">03_Sted</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="04_Beskrivelse" type="string">
+                  <annotation>
+                     <documentation>10751: Beskrivelse av hendelse og særskilte forhold ved denne.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10751</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">04_Beskrivelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="05_BruddårsakHovedgruppe">
+                  <annotation>
+                     <documentation>11864: Angir hovedgruppe bruddfare.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11864</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">05_Bruddårsak hovedgruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="06_BruddårsakUndergruppe">
+                  <annotation>
+                     <documentation>11865: Angir undergruppe bruddfare.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11865</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">06_Bruddårsak undergruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="10_Risiko" type="nvdb:10_RisikoVegROSType">
+                  <annotation>
+                     <documentation>11016: Angir grad av fare for og alvorlighet av et framkommelighetsbrudd på dette stedet/denne strekningen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11016</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">10_Risiko</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="11_Trussel" type="nvdb:11_TrusselVegROSType">
+                  <annotation>
+                     <documentation>11013: Samleparameter for enkeltparametrene Sannsynlighet, Omfang og Varighet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11013</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">11_Trussel</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="12_Verdi" type="nvdb:12_VerdiVegROSType">
+                  <annotation>
+                     <documentation>11014: Samleparameter for enkeltparametrene ÅDT, Andel tunge, TBK og Viktighet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11014</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">12_Verdi</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="13_Sårbarhet"
+                        type="nvdb:13_SårbarhetVegROSType">
+                  <annotation>
+                     <documentation>11015: Samleparameter for enkeltparametrene Omkjøring og Beredskap.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11015</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">13_Sårbarhet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="14_Usikkerhet"
+                        type="nvdb:14_UsikkerhetVegROSType">
+                  <annotation>
+                     <documentation>11246: Angir grad av usikkerhet i vurderingene som ligger til grunn for fastsettelse av risiko.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11246</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">14_Usikkerhet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="15_FagligGrunnlag">
+                  <annotation>
+                     <documentation>11247: Angir det faglige grunnlaget for vurderingen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11247</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">15_Faglig grunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="20_TiltakInvesteringUtbedring" type="string">
+                  <annotation>
+                     <documentation>11024: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11024</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">20_Tiltak Investering/utbedring</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="21_TiltakDriftVedlikehold" type="string">
+                  <annotation>
+                     <documentation>11025: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11025</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">21_Tiltak Drift/vedlikehold</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="22_TiltakBeredskap" type="string">
+                  <annotation>
+                     <documentation>11026: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11026</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">22_Tiltak Beredskap</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="23_TiltakKartleggingAnalyse" type="string">
+                  <annotation>
+                     <documentation>11027: Hvis aktuell, beskriv tiltak. Ved flere tiltak, angi tiltakene med 1. , 2. , osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11027</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">23_Tiltak Kartlegging/analyse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="50_Merknad" type="string">
+                  <annotation>
+                     <documentation>10752: Merknad. Kan benyttes ifm. revisjon eller oppdatering eller for å angi spesielle grunner til at dette er et VegROSpunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10752</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">50_Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="60_Arkivnummer" type="string">
+                  <annotation>
+                     <documentation>10754: Referanse til Mime.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10754</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">60_Arkivnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="70_Metadata" type="string">
+                  <annotation>
+                     <documentation>10753: Angir hvor det finnes metadata. URL eller filkatalog.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10753</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">70_Metadata</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>11011: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11011</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VegROSPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:VegROS"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

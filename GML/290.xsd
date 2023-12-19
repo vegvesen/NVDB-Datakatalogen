@@ -1,123 +1,116 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Telehiv" substitutionGroup="nvdb:AbstraktTelehiv" type="nvdb:TelehivType">
-    <annotation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Telehiv</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="TelehivType">
-    <complexContent>
-      <extension base="nvdb:AbstraktTelehivType">
-        <sequence>
-          <element minOccurs="0" name="årsak" type="nvdb:ÅrsakType">
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Telehiv"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:TelehivType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">290</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Telehiv</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="TelehivType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="årsak" type="nvdb:ÅrsakTelehivType">
+                  <annotation>
+                     <documentation>4557: Angir årsak til telehiv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11600: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11600</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4889: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4889</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="TelehivPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Telehiv"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="ÅrsakTelehivType">
+      <annotation>
+         <documentation>4557: Angir årsak til telehiv.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ÅrsakTelehivEnumerationType nvdb:ÅrsakTelehivOtherType"/>
+   </simpleType>
+   <simpleType name="ÅrsakTelehivEnumerationType">
+      <annotation>
+         <documentation>4557: Angir årsak til telehiv.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="g">
             <annotation>
-              <documentation>4557: Angir årsak til telehiv.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5466</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grunnforhold</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="sr">
             <annotation>
-              <documentation>11600: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11600</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5465</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stikkrenne</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>4889: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4889</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="TelehivPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Telehiv"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="ÅrsakType">
-    <annotation>
-      <documentation>4557: Angir årsak til telehiv.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:ÅrsakEnumerationType nvdb:ÅrsakOtherType"/>
-  </simpleType>
-  <simpleType name="ÅrsakEnumerationType">
-    <annotation>
-      <documentation>4557: Angir årsak til telehiv.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">4557</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Årsak</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stikkrenne">
-        <annotation>
-          <documentation>5465: Stikkrenne</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5465</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stikkrenne</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Grunnforhold">
-        <annotation>
-          <documentation>5466: Grunnforhold</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5466</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Grunnforhold</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="ÅrsakOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ÅrsakTelehivOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

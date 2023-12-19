@@ -1,133 +1,121 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="SidevegType">
-    <annotation>
-      <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:SidevegEnumerationType nvdb:SidevegOtherType"/>
-  </simpleType>
-  <simpleType name="SidevegEnumerationType">
-    <annotation>
-      <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="ja">
-        <annotation>
-          <documentation>15943: Ja</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15943</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="nei">
-        <annotation>
-          <documentation>15944: Nei</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15944</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="SidevegOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Veglenkeadresse" substitutionGroup="nvdb:AbstraktVeglenkeadresse" type="nvdb:VeglenkeadresseType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>538: Sammensatt identifikator for veglenkeadresse. Merknad: Komplett vegadresse består i tillegg av husnummer og bokstav.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">538</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">538</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Gate</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="VeglenkeadresseType">
-    <complexContent>
-      <extension base="nvdb:AbstraktVeglenkeadresseType">
-        <sequence>
-          <element minOccurs="0" name="sideveg" type="nvdb:SidevegType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Adresse"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:AdresseType">
+      <annotation>
+         <documentation>538: Sammensatt identifikator for veglenkeadresse. Merknad: Komplett vegadresse består i tillegg av husnummer og bokstav.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">538</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adresse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="AdresseType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="adressekode" type="integer">
+                  <annotation>
+                     <documentation>4588: Nummer som entydig identifiserer adresserbare veglenker i matrikkelen. For hvert adressenavn skal det således foreligge en adressekode, jf. matrikkelforskriften § 51.2. Merknad: Adressekode er unik innenfor kommunen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4588</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Adressekode</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="adressenavn" type="string">
+                  <annotation>
+                     <documentation>4589: Navn på veglenke i matrikkelen (matrikkelforskriften § 2e).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4589</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Adressenavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sideveg" type="nvdb:SidevegAdresseType">
+                  <annotation>
+                     <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kommune" type="string">
+                  <annotation>
+                     <documentation>12622: Kommunenummer, fire siffer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12622</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="AdressePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Adresse"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="SidevegAdresseType">
+      <annotation>
+         <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SidevegAdresseEnumerationType nvdb:SidevegAdresseOtherType"/>
+   </simpleType>
+   <simpleType name="SidevegAdresseEnumerationType">
+      <annotation>
+         <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
             <annotation>
-              <documentation>9793: Angir om en veglenke er sideveg og dermed bruker adresser fra lenken den er sideveg fra. Dersom ikke oppgitt, gir det "Nei"- alternativet, dvs. "Ikke sideveg".</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9793</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sideveg</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15943</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="adressekode" type="integer">
+         </enumeration>
+         <enumeration value="N">
             <annotation>
-              <documentation>4588: Nummer som entydig identifiserer adresserbare veglenker i matrikkelen. For hvert adressenavn (gatenavn) skal det således foreligge en adressekode, jf. matrikkelforskriften § 51.2. Merknad: Adressekode er unik innenfor kommunen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4588</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Gatekode</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15944</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="adressenavn" type="string">
-            <annotation>
-              <documentation>4589: Navn på veglenke i matrikkelen (matrikkelforskriften § 2e).</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4589</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Gatenavn</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="kommune" type="string">
-            <annotation>
-              <documentation>12622: Kommunenummer, fire siffer.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12622</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertKommune" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommune</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element name="assosiertKommune2019" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommune2019</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="VeglenkeadressePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Veglenkeadresse"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SidevegAdresseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

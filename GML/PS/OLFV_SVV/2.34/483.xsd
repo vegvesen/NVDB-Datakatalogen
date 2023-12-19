@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.34">
+   <annotation>
+      <documentation>483: Instrument for å registrere fart/bevegelse. Benyttes fortrinnsvis mot trafikk, men kan også benyttes til å registrere endring i vannivå.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeRadarType">
+      <annotation>
+         <documentation>12081: Angir hva som er hovedbruksområde til radaren.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12081</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">12081</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeRadarEnumerationType nvdb:BruksområdeRadarOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeRadarEnumerationType">
+      <annotation>
+         <documentation>12081: Angir hva som er hovedbruksområde til radaren.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12081</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">12081</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Hendelsesdetektering/trafikkovervåkning">
+            <annotation>
+               <documentation>20990: Radar registrerer bevegelsesmønster i trafikken og kan melde fra om avvik.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20990</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hendelsesdetektering/trafikkovervåkning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fartsmåling">
+            <annotation>
+               <documentation>20989: Fartsmåling</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20989</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fartsmåling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Trafikkdetektering for å styre veglys">
+            <annotation>
+               <documentation>20991: Detekterer trafikk. Veglys blir tent når radar har registrert trafikk. Aktuelt både i tunneler og på frie vegstrekninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20991</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdetektering for å styre veglys</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Trafikkdetektering for å styre signalanlegg">
+            <annotation>
+               <documentation>20993: Radar detekterer trafikk. Signalanlegg styres ut fra detektert trafikk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20993</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdetektering for å styre signalanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Nivåmåling i bassenger">
+            <annotation>
+               <documentation>20992: Radar benyttes for å overvåke vannstand i bassenger. Vanligvis i forbindelse med pumpestasjoner.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20992</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nivåmåling i bassenger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeRadarOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Radar"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:RadarType">
+      <annotation>
+         <documentation>483: Instrument for å registrere fart/bevegelse. Benyttes fortrinnsvis mot trafikk, men kan også benyttes til å registrere endring i vannivå.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">483</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">483</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Radar</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="RadarType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeRadarType">
+                  <annotation>
+                     <documentation>12081: Angir hva som er hovedbruksområde til radaren.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12081</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10341: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10341</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10476: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10476</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>10993: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10993</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12217: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12217</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4998: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4998</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="RadarPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Radar"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
+      <documentation>474: System for automatisk brannslokking. Vanligvis sprinkleranlegg.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Brannslokkingsanlegg"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:BrannslokkingsanleggType">
+      <annotation>
+         <documentation>474: System for automatisk brannslokking. Vanligvis sprinkleranlegg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">474</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Brannslokkingsanlegg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="BrannslokkingsanleggType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="type" type="nvdb:TypeBrannslokkingsanleggType">
+                  <annotation>
+                     <documentation>3777: Angir type.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3777</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengde" type="integer">
+                  <annotation>
+                     <documentation>5485: Angir lengde av sprinkleranlegg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5485</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10274: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10274</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>10079: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10079</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="BrannslokkingsanleggPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Brannslokkingsanlegg"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeBrannslokkingsanleggType">
+      <annotation>
+         <documentation>3777: Angir type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3777</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeBrannslokkingsanleggEnumerationType nvdb:TypeBrannslokkingsanleggOtherType"/>
+   </simpleType>
+   <simpleType name="TypeBrannslokkingsanleggEnumerationType">
+      <annotation>
+         <documentation>3777: Angir type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3777</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="hb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5042</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Halogen brannslokkingsanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5041</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sprinkleranlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VT">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13036</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vanntåke</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBrannslokkingsanleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

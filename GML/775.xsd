@@ -1,129 +1,112 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="ATK_Influensstrekning" substitutionGroup="nvdb:AbstraktATK_Influensstrekning" type="nvdb:ATK_InfluensstrekningType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>775: Strekning hvor det er automatisk overvåkning av fartsnivå. Strekning er definert fra varslingsskilt 556 til 3 km etter siste ATK-punkt for punkt-Atk og til 1 km etter det siste ATK-punktet for streknings-ATK.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">ATK, influensstrekning</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="ATK_InfluensstrekningType">
-    <complexContent>
-      <extension base="nvdb:AbstraktATK_InfluensstrekningType">
-        <sequence>
-          <element minOccurs="0" name="navn" type="string">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="ATK, influensstrekning"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:ATK, influensstrekningType">
+      <annotation>
+         <documentation>775: Strekning hvor det er automatisk overvåkning av fartsnivå. Strekning er definert fra varslingsskilt 556 til 3 km etter siste ATK-punkt for punkt-Atk og til 1 km etter det siste ATK-punktet for streknings-ATK.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">775</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">ATK, influensstrekning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="ATK, influensstrekningType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>7917: Gir navn på strekningen. F.eks. fra - til i kjøreretning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7917</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeTrafikkontroll">
+                  <annotation>
+                     <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknad" type="string">
+                  <annotation>
+                     <documentation>7918: Gir merknad.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7918</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ATK, influensstrekningPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:ATK, influensstrekning"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeTrafikkontrollATK, influensstrekningType">
+      <annotation>
+         <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeTrafikkontrollATK, influensstrekningEnumerationType nvdb:TypeTrafikkontrollATK, influensstrekningOtherType"/>
+   </simpleType>
+   <simpleType name="TypeTrafikkontrollATK, influensstrekningEnumerationType">
+      <annotation>
+         <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="P">
             <annotation>
-              <documentation>7917: Gir navn på strekningen. F.eks. fra - til i kjøreretning.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7917</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13097</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Strekning med ATK-punkter</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="typeTrafikkontroll" type="nvdb:TypeTrafikkontrollType">
+         </enumeration>
+         <enumeration value="S">
             <annotation>
-              <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13098</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Streknings-ATK</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="merknad" type="string">
-            <annotation>
-              <documentation>7918: Gir merknad.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7918</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertATK_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktATK_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="ATK_InfluensstrekningPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:ATK_Influensstrekning"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="TypeTrafikkontrollType">
-    <annotation>
-      <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TypeTrafikkontrollEnumerationType nvdb:TypeTrafikkontrollOtherType"/>
-  </simpleType>
-  <simpleType name="TypeTrafikkontrollEnumerationType">
-    <annotation>
-      <documentation>9370: Angir hvilken type trafikkontroll det er tale om.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9370</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type trafikkontroll</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Strekning med ATK-punkter">
-        <annotation>
-          <documentation>13097: Strekning med ATK-punkter</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13097</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Strekning med ATK-punkter</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Streknings-ATK">
-        <annotation>
-          <documentation>13098: Streknings-ATK</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13098</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Streknings-ATK</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeTrafikkontrollOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTrafikkontrollATK, influensstrekningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

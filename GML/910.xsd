@@ -1,171 +1,350 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="FrittståendeKamerastasjon" substitutionGroup="nvdb:AbstraktFrittståendeKamerastasjon" type="nvdb:FrittståendeKamerastasjonType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>910: Stasjon der det er plassert et kamera for observasjon av trafikkforhold, vær og føre, eller annet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">910</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">910</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Frittstående kamerastasjon</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="FrittståendeKamerastasjonType">
-    <complexContent>
-      <extension base="nvdb:AbstraktFrittståendeKamerastasjonType">
-        <sequence>
-          <element minOccurs="0" name="navn" type="string">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierFrittstående kamerastasjonType">
+      <annotation>
+         <documentation>12828: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12828</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierFrittstående kamerastasjonEnumerationType nvdb:EierFrittstående kamerastasjonOtherType"/>
+   </simpleType>
+   <simpleType name="EierFrittstående kamerastasjonEnumerationType">
+      <annotation>
+         <documentation>12828: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12828</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11182: Angir navn på stasjon.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11182</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22192</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="målestasjonsnummer" type="integer">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11183: Referanse til unikt målestasjonsnummer i Målestasjonsregisteret.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11183</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Målestasjonsnummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22193</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="sistOppdatertFraMSR" type="date">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>11184: Angir dato vegobjekttype sist ble oppdatert fra Målestasjonsregisteret.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11184</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Sist oppdatert fra MSR</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22194</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="status" type="nvdb:StatusFrittståendeKamerastasjonType">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22191</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>12090: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12090</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22190</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>11185: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11185</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22195</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierFrittstående kamerastasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Frittstående kamerastasjon"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Frittstående kamerastasjonType">
+      <annotation>
+         <documentation>910: Stasjon der det er plassert et kamera for observasjon av trafikkforhold, vær og føre, eller annet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">910</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Frittstående kamerastasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Frittstående kamerastasjonType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>11182: Angir navn på stasjon.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11182</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="målestasjonsnummer" type="double">
+                  <annotation>
+                     <documentation>11183: Referanse til unikt målestasjonsnummer i Målestasjonsregisteret.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11183</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målestasjonsnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sistOppdatertFraMSR" type="date">
+                  <annotation>
+                     <documentation>11184: Angir dato vegobjekttype sist ble oppdatert fra Målestasjonsregisteret.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11184</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sist oppdatert fra MSR</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="status" type="nvdb:StatusFrittstående kamerastasjonType">
+                  <annotation>
+                     <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>12090: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12090</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11185: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11185</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="eier"
+                        type="nvdb:EierFrittstående kamerastasjonType">
+                  <annotation>
+                     <documentation>12828: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12828</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligFrittstående kamerastasjonType">
+                  <annotation>
+                     <documentation>12822: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12822</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>11186: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11186</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Frittstående kamerastasjonPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Frittstående kamerastasjon"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="StatusFrittstående kamerastasjonType">
+      <annotation>
+         <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StatusFrittstående kamerastasjonEnumerationType nvdb:StatusFrittstående kamerastasjonOtherType"/>
+   </simpleType>
+   <simpleType name="StatusFrittstående kamerastasjonEnumerationType">
+      <annotation>
+         <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="MUD">
             <annotation>
-              <documentation>11186: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11186</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21674</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Midlertidig ute av drift</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+         <enumeration value="NI">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21675</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nedlagt, ikke lov å bruke</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKamera" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="NG">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKamera</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21676</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nedlagt, kan gjenopprettes</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="FrittståendeKamerastasjonPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:FrittståendeKamerastasjon"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="StatusFrittståendeKamerastasjonType">
-    <annotation>
-      <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:StatusFrittståendeKamerastasjonEnumerationType nvdb:StatusFrittståendeKamerastasjonOtherType"/>
-  </simpleType>
-  <simpleType name="StatusFrittståendeKamerastasjonEnumerationType">
-    <annotation>
-      <documentation>12584: Angir hvilken status kamerastasjonen har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12584</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Operativ">
-        <annotation>
-          <documentation>21673: Stasjonen er operativ og registrerer data.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21673</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Operativ</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Midlertidig ute av drift">
-        <annotation>
-          <documentation>21674: Stasjonen er ute av drift i en periode, datainnsamling vil bli gjenopptatt.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21674</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Midlertidig ute av drift</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nedlagt, kan gjenopprettes">
-        <annotation>
-          <documentation>21676: Stasjonen er nedlagt, men det er ikke utelukket at den kan bli tatt i bruk igjen for datainnsamling i framtiden.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21676</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nedlagt, kan gjenopprettes</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nedlagt, ikke lov å bruke">
-        <annotation>
-          <documentation>21675: Stasjonen er nedlagt og vil ikke bli brukt for datainnsamling i framtiden.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21675</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nedlagt, ikke lov å bruke</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="StatusFrittståendeKamerastasjonOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21673</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Operativ</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusFrittstående kamerastasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligFrittstående kamerastasjonType">
+      <annotation>
+         <documentation>12822: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12822</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligFrittstående kamerastasjonEnumerationType nvdb:VedlikeholdsansvarligFrittstående kamerastasjonOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligFrittstående kamerastasjonEnumerationType">
+      <annotation>
+         <documentation>12822: Angir hvem som er ansvarlig for vedlikehold.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12822</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22146</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22148</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22145</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22147</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22149</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22144</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22150</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligFrittstående kamerastasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

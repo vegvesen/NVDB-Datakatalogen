@@ -1,124 +1,139 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Dataanalyse" substitutionGroup="nvdb:AbstraktDataanalyse" type="nvdb:DataanalyseType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>811: Objekttype som brukes lokalt for å ta vare på midlertidige analysedata, f.eks. mangel, overlapp eller annen inkonsistens. Objekter av denne type kan lagres lokalt i "project"-databaser, men skal ikke lagres i sentral NVDB-database.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">811</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">811</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Dataanalyse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="DataanalyseType">
-    <complexContent>
-      <extension base="nvdb:AbstraktDataanalyseType">
-        <sequence>
-          <element minOccurs="0" name="type" type="nvdb:TypeDataanalyseType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Dataanalyse"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:DataanalyseType">
+      <annotation>
+         <documentation>811: Objekttype som brukes lokalt for å ta vare på midlertidige analysedata, f.eks. mangel, overlapp eller annen inkonsistens. Objekter av denne type kan lagres lokalt i "project"-databaser, men skal ikke lagres i sentral NVDB-database.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">811</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">811</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dataanalyse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="DataanalyseType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="type" type="nvdb:TypeDataanalyseType">
+                  <annotation>
+                     <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vegobjekttypeID" type="integer">
+                  <annotation>
+                     <documentation>9289: Angir vegobjektID for vegobjekter som ble analysert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9289</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VegobjekttypeID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="beskrivelse" type="string">
+                  <annotation>
+                     <documentation>9290: Beskrivelse av det som ble funnet i analysen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9290</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>Angivelse av objektets posisjon</documentation>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="DataanalysePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Dataanalyse"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeDataanalyseType">
+      <annotation>
+         <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeDataanalyseEnumerationType nvdb:TypeDataanalyseOtherType"/>
+   </simpleType>
+   <simpleType name="TypeDataanalyseEnumerationType">
+      <annotation>
+         <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Manglende data">
             <annotation>
-              <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-              </appinfo>
+               <documentation>12980: Manglende data</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12980</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Manglende data</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vegobjekttypeID" type="integer">
+         </enumeration>
+         <enumeration value="Overlappende data">
             <annotation>
-              <documentation>9289: Angir vegobjektID for vegobjekter som ble analysert.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9289</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">VegobjekttypeID</sc:taggedValue>
-              </appinfo>
+               <documentation>12981: Overlappende data</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12981</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overlappende data</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="beskrivelse" type="string">
+         </enumeration>
+         <enumeration value="Generell">
             <annotation>
-              <documentation>9290: Beskrivelse av det som ble funnet i analysen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9290</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
-              </appinfo>
+               <documentation>12982: Generell</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12982</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Generell</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="DataanalysePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Dataanalyse"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="TypeDataanalyseType">
-    <annotation>
-      <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TypeDataanalyseEnumerationType nvdb:TypeDataanalyseOtherType"/>
-  </simpleType>
-  <simpleType name="TypeDataanalyseEnumerationType">
-    <annotation>
-      <documentation>9288: Angir hvilken type dataanalyse som er gjort.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9288</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Manglende data">
-        <annotation>
-          <documentation>12980: Manglende data</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12980</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Manglende data</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Overlappende data">
-        <annotation>
-          <documentation>12981: Overlappende data</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12981</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Overlappende data</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Generell">
-        <annotation>
-          <documentation>12982: Generell</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12982</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Generell</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeDataanalyseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeDataanalyseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

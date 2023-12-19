@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
+      <documentation>90: Signalhoder inkludert stolpe etc. lokalisert til et punkt.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="OppsettingsutstyrSignalpunktType">
+      <annotation>
+         <documentation>1875: Angir hvilken type oppsettingsutstyr vegobjektet er festet på.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1875</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OppsettingsutstyrSignalpunktEnumerationType nvdb:OppsettingsutstyrSignalpunktOtherType"/>
+   </simpleType>
+   <simpleType name="OppsettingsutstyrSignalpunktEnumerationType">
+      <annotation>
+         <documentation>1875: Angir hvilken type oppsettingsutstyr vegobjektet er festet på.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1875</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="es">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2968</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Egen stolpe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ap">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2870</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Halvportal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2873</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Helportal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2971</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Henger i tak/kabelbro</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2966</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lysmast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18487</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiltbjelke/gitterdrager i tak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21655</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiltpunkt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bom">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16737</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegbom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2973</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ws">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2876</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Wirestrekk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppsettingsutstyrSignalpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Signalpunkt"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:SignalpunktType">
+      <annotation>
+         <documentation>90: Signalhoder inkludert stolpe etc. lokalisert til et punkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">90</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Signalpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="SignalpunktType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="oppsettingsutstyr" type="nvdb:OppsettingsutstyrSignalpunktType">
+                  <annotation>
+                     <documentation>1875: Angir hvilken type oppsettingsutstyr vegobjektet er festet på.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1875</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="tilleggsutstyr"
+                        type="nvdb:TilleggsutstyrSignalpunktType">
+                  <annotation>
+                     <documentation>1963: Angir hvilket tilleggsutstyr det finnes i forbindelse med vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1963</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsutstyr</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10355: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10355</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4790: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4790</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SignalpunktPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Signalpunkt"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TilleggsutstyrSignalpunktType">
+      <annotation>
+         <documentation>1963: Angir hvilket tilleggsutstyr det finnes i forbindelse med vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1963</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilleggsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilleggsutstyrSignalpunktEnumerationType nvdb:TilleggsutstyrSignalpunktOtherType"/>
+   </simpleType>
+   <simpleType name="TilleggsutstyrSignalpunktEnumerationType">
+      <annotation>
+         <documentation>1963: Angir hvilket tilleggsutstyr det finnes i forbindelse med vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1963</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilleggsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2990</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Akustisk signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="it">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18308</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke tilleggsutstyr</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2989</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trykknapp for fotgjengere</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2991</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trykknapp for fotgjengere og akustisk signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilleggsutstyrSignalpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -1,215 +1,202 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="VegfaseVegsystemType">
-    <annotation>
-      <documentation>11278: Angir vegens fase i livet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VegfaseVegsystemEnumerationType nvdb:VegfaseVegsystemOtherType"/>
-  </simpleType>
-  <simpleType name="VegfaseVegsystemEnumerationType">
-    <annotation>
-      <documentation>11278: Angir vegens fase i livet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="P">
-        <annotation>
-          <documentation>19030: Planlagt veg, vedtatt trasé.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19030</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Planlagt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="A">
-        <annotation>
-          <documentation>19031: Veg under bygging.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19031</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Under bygging</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="V">
-        <annotation>
-          <documentation>19032: Veg som er del av operativt vegnett.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19032</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Eksisterende</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="F">
-        <annotation>
-          <documentation>19090: Fiktiv veglenke for stedfesting av objekter som ikke kan stedfestes på andre lenker.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19090</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fiktiv</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegfaseVegsystemOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemType">
-    <annotation>
-      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VegkategoriVegsystemEnumerationType nvdb:VegkategoriVegsystemOtherType"/>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemEnumerationType">
-    <annotation>
-      <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="E">
-        <annotation>
-          <documentation>19024: SVV er vegmyndighet. Unik nummerering iht. europeisk avtale om internasjonale trafikkårer, AGR.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19024</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Europaveg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="R">
-        <annotation>
-          <documentation>19025: SVV er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19025</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Riksveg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="F">
-        <annotation>
-          <documentation>19026: Fylkeskommunen er vegmyndighet. Unik nummerering på nasjonalt nivå.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19026</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkesveg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="K">
-        <annotation>
-          <documentation>19027: Kommunen er vegmyndighet. Unik nummerering innenfor kommunen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19027</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommunal veg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="P">
-        <annotation>
-          <documentation>19028: Private veger. Ev. nummerering er unik innenfor kommunen.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19028</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat veg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="S">
-        <annotation>
-          <documentation>19029: Private landbruksveger som brukes til skogbruksformål. Nummerering iht. landbruksforvaltningens fagsystem ØKS.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19029</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skogsveg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VegkategoriVegsystemOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Vegsystem" substitutionGroup="nvdb:AbstraktVegsystem" type="nvdb:VegsystemType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">915</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">915</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vegsystem</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="VegsystemType">
-    <complexContent>
-      <extension base="nvdb:AbstraktVegsystemType">
-        <sequence>
-          <element name="vegkategori" type="nvdb:VegkategoriVegsystemType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="VegfaseVegsystemType">
+      <annotation>
+         <documentation>11278: Angir vegens fase i livet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VegfaseVegsystemEnumerationType nvdb:VegfaseVegsystemOtherType"/>
+   </simpleType>
+   <simpleType name="VegfaseVegsystemEnumerationType">
+      <annotation>
+         <documentation>11278: Angir vegens fase i livet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="V">
             <annotation>
-              <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19032</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Eksisterende</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="vegfase" type="nvdb:VegfaseVegsystemType">
+         </enumeration>
+         <enumeration value="F">
             <annotation>
-              <documentation>11278: Angir vegens fase i livet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19090</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fiktiv</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vegnummer" type="integer">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>11277: Angir hvilke deler av vegnettet som rutemessig hører sammen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11277</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vegnummer</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19030</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Planlagt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+         </enumeration>
+         <enumeration value="A">
             <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19031</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Under bygging</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VegfaseVegsystemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VegkategoriVegsystemType">
+      <annotation>
+         <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VegkategoriVegsystemEnumerationType nvdb:VegkategoriVegsystemOtherType"/>
+   </simpleType>
+   <simpleType name="VegkategoriVegsystemEnumerationType">
+      <annotation>
+         <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="E">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19024</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Europaveg</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="VegsystemPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Vegsystem"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19026</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkesveg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19027</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommunal veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19028</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19025</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Riksveg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19029</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skogsveg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VegkategoriVegsystemOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Vegsystem"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:VegsystemType">
+      <annotation>
+         <documentation>915: Definerer hvilke deler av vegnettet som forvaltningsmessig hører sammen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">915</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VegsystemType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="vegkategori" type="nvdb:VegkategoriVegsystemType">
+                  <annotation>
+                     <documentation>11276: Kategorisering som angir på hvilket nivå vegmyndigheten for strekningen ligger.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11276</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegkategori</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vegfase">
+                  <annotation>
+                     <documentation>11278: Angir vegens fase i livet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11278</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fase</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vegnummer" type="integer">
+                  <annotation>
+                     <documentation>11277: Angir hvilke deler av vegnettet som rutemessig hører sammen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11277</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VegsystemPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vegsystem"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

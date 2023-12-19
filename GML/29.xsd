@@ -1,346 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="EierStrøsandkasseType">
-    <annotation>
-      <documentation>5822: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">5822</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">5822</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierStrøsandkasseEnumerationType nvdb:EierStrøsandkasseOtherType"/>
-  </simpleType>
-  <simpleType name="EierStrøsandkasseEnumerationType">
-    <annotation>
-      <documentation>5822: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">5822</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">5822</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>8217: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8217</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>18547: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18547</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>10709: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10709</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>8243: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8243</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>8269: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8269</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17592: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17592</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierStrøsandkasseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Strøsandkasse" substitutionGroup="nvdb:AbstraktStrøsandkasse" type="nvdb:StrøsandkasseType">
-    <annotation>
-      <documentation>29: Innretning laget for lagring av strøsand.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">29</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">29</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Strøsandkasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="StrøsandkasseType">
-    <complexContent>
-      <extension base="nvdb:AbstraktStrøsandkasseType">
-        <sequence>
-          <element minOccurs="0" name="type" type="string">
-            <annotation>
-              <documentation>1110: Angir hvilken type strøsandkasse det er tale om.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1110</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="volum" type="double">
-            <annotation>
-              <documentation>1385: Angir volum av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1385</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Volum</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
-            <annotation>
-              <documentation>10366: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10366</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="produsent" type="string">
-            <annotation>
-              <documentation>1519: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1519</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="produktnavn" type="string">
-            <annotation>
-              <documentation>1442: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1442</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="leverandør" type="string">
-            <annotation>
-              <documentation>1479: Angir navn på firma som har levert vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1479</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
-            <annotation>
-              <documentation>11558: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11558</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
-            <annotation>
-              <documentation>12115: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12115</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
-            <annotation>
-              <documentation>12281: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12281</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierStrøsandkasseType">
-            <annotation>
-              <documentation>5822: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">5822</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligStrøsandkasseType">
-            <annotation>
-              <documentation>9148: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9148</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
-            <annotation>
-              <documentation>4737: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4737</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Punkt" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Punkt</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="StrøsandkassePropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Strøsandkasse"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="VedlikeholdsansvarligStrøsandkasseType">
-    <annotation>
-      <documentation>9148: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9148</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9148</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedlikeholdsansvarligStrøsandkasseEnumerationType nvdb:VedlikeholdsansvarligStrøsandkasseOtherType"/>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligStrøsandkasseEnumerationType">
-    <annotation>
-      <documentation>9148: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9148</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9148</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Statens vegvesen">
-        <annotation>
-          <documentation>12229: Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12229</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nye Veier">
-        <annotation>
-          <documentation>18796: Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18796</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19981: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19981</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="OPS">
-        <annotation>
-          <documentation>18925: OPS</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18925</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>12230: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12230</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>12231: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12231</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17769: Uavklart</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17769</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligStrøsandkasseOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.28">
+   <annotation>
+      <documentation>29: Innretning laget for lagring av strøsand</documentation>
+   </annotation>
+   <include schemaLocation="304.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Strøsandkasse"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:StrøsandkasseType">
+      <annotation>
+         <documentation>29: Innretning laget for lagring av strøsand</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">29</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">29</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strøsandkasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="StrøsandkasseType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="StrøsandkassePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Strøsandkasse"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
 </schema>

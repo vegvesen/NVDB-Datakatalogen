@@ -1,573 +1,520 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="BruksområdeGjerdeportType">
-    <annotation>
-      <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:BruksområdeGjerdeportEnumerationType nvdb:BruksområdeGjerdeportOtherType"/>
-  </simpleType>
-  <simpleType name="BruksområdeGjerdeportEnumerationType">
-    <annotation>
-      <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Gjennomgang for gående/syklende">
-        <annotation>
-          <documentation>15907: Gjennomgang for gående/syklende</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15907</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjennomgang for gående/syklende</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tilgang landbruksareal">
-        <annotation>
-          <documentation>15908: Tilgang landbruksareal</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15908</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tilgang landbruksareal</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tilkomst til avkjørsel">
-        <annotation>
-          <documentation>15909: Tilkomst til avkjørsel</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15909</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tilkomst til avkjørsel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="BruksområdeGjerdeportOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierGjerdeportType">
-    <annotation>
-      <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierGjerdeportEnumerationType nvdb:EierGjerdeportOtherType"/>
-  </simpleType>
-  <simpleType name="EierGjerdeportEnumerationType">
-    <annotation>
-      <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>15910: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15910</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>18615: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18615</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>15911: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15911</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>15912: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15912</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>15913: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15913</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17624: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17624</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierGjerdeportOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="Gjerdeport" substitutionGroup="nvdb:AbstraktGjerdeport" type="nvdb:GjerdeportType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>855: Passasje i gjerder eller skjermer.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">855</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">855</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Gjerdeport</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="GjerdeportType">
-    <complexContent>
-      <extension base="nvdb:AbstraktGjerdeportType">
-        <sequence>
-          <element minOccurs="0" name="bruksområde" type="nvdb:BruksområdeGjerdeportType">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeGjerdeportType">
+      <annotation>
+         <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeGjerdeportEnumerationType nvdb:BruksområdeGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="GS">
             <annotation>
-              <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15907</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gjennomgang for gående/syklende</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="materiale" type="nvdb:MaterialeGjerdeportType">
+         </enumeration>
+         <enumeration value="L">
             <annotation>
-              <documentation>9778: Angir materiale.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15908</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tilgang landbruksareal</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="bredde" type="double">
+         </enumeration>
+         <enumeration value="A">
             <annotation>
-              <documentation>9772: .</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9772</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15909</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tilkomst til avkjørsel</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="høyde" type="double">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierGjerdeportType">
+      <annotation>
+         <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierGjerdeportEnumerationType nvdb:EierGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="EierGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>9777: Angir egenhøyde av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9777</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15911</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="utforming" type="nvdb:UtformingType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>9781: Angir hvilken utforming grinda har.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15912</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="normalStilling" type="nvdb:NormalStillingType">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15913</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>10302: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10302</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18615</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>11645: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11645</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15910</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>11170: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11170</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17624</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Gjerdeport"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:GjerdeportType">
+      <annotation>
+         <documentation>855: Passasje i gjerder eller skjermer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">855</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gjerdeport</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="GjerdeportType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0"
+                        name="bruksområde"
+                        type="nvdb:BruksområdeGjerdeportType">
+                  <annotation>
+                     <documentation>9773: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9773</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materiale" type="nvdb:MaterialeGjerdeportType">
+                  <annotation>
+                     <documentation>9778: Angir materiale.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bredde" type="double">
+                  <annotation>
+                     <documentation>9772: .</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9772</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høyde" type="double">
+                  <annotation>
+                     <documentation>9777: Angir egenhøyde av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9777</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="utforming" type="nvdb:UtformingGjerdeportType">
+                  <annotation>
+                     <documentation>9781: Angir hvilken utforming grinda har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="normalStilling">
+                  <annotation>
+                     <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10302: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10302</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11645: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11645</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11170: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11170</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12429: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12429</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierGjerdeportType">
+                  <annotation>
+                     <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligGjerdeportType">
+                  <annotation>
+                     <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>9776: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9776</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="GjerdeportPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Gjerdeport"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="MaterialeGjerdeportType">
+      <annotation>
+         <documentation>9778: Angir materiale.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialeGjerdeportEnumerationType nvdb:MaterialeGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialeGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9778: Angir materiale.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Al">
             <annotation>
-              <documentation>12429: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12429</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15914</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierGjerdeportType">
+         </enumeration>
+         <enumeration value="S">
             <annotation>
-              <documentation>9774: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9774</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15915</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligGjerdeportType">
+         </enumeration>
+         <enumeration value="T">
             <annotation>
-              <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15916</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tre</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="NormalStillingGjerdeportType">
+      <annotation>
+         <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:NormalStillingGjerdeportEnumerationType nvdb:NormalStillingGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="NormalStillingGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="LL">
             <annotation>
-              <documentation>9776: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9776</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15917</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lukka, låst</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+         <enumeration value="LU">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15918</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lukka, ulåst</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertGjerde" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="Å">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktGjerde</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15919</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Åpen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NormalStillingGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtformingGjerdeportType">
+      <annotation>
+         <documentation>9781: Angir hvilken utforming grinda har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UtformingGjerdeportEnumerationType nvdb:UtformingGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="UtformingGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9781: Angir hvilken utforming grinda har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="E">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15920</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Enkel</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkade_Punkt" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="D">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkade_Punkt</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15921</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Todelt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertTilstandSkadeFU_Punkt" type="gml:ReferenceType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtformingGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligGjerdeportType">
+      <annotation>
+         <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligGjerdeportEnumerationType nvdb:VedlikeholdsansvarligGjerdeportOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligGjerdeportEnumerationType">
+      <annotation>
+         <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktTilstandSkadeFU_Punkt</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19994</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15927</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="GjerdeportPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Gjerdeport"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="MaterialeGjerdeportType">
-    <annotation>
-      <documentation>9778: Angir materiale.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:MaterialeGjerdeportEnumerationType nvdb:MaterialeGjerdeportOtherType"/>
-  </simpleType>
-  <simpleType name="MaterialeGjerdeportEnumerationType">
-    <annotation>
-      <documentation>9778: Angir materiale.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9778</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Aluminium">
-        <annotation>
-          <documentation>15914: Aluminium</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15914</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stål">
-        <annotation>
-          <documentation>15915: Stål</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15915</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Tre">
-        <annotation>
-          <documentation>15916: Tre</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15916</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tre</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="MaterialeGjerdeportOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="NormalStillingType">
-    <annotation>
-      <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:NormalStillingEnumerationType nvdb:NormalStillingOtherType"/>
-  </simpleType>
-  <simpleType name="NormalStillingEnumerationType">
-    <annotation>
-      <documentation>9780: Angir hva som er normal stilling for dør.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9780</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Lukka, låst">
-        <annotation>
-          <documentation>15917: Lukka, låst</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15917</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lukka, låst</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Lukka, ulåst">
-        <annotation>
-          <documentation>15918: Lukka, ulåst</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15918</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Lukka, ulåst</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Åpen">
-        <annotation>
-          <documentation>15919: Åpen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15919</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Åpen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="NormalStillingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="UtformingType">
-    <annotation>
-      <documentation>9781: Angir hvilken utforming grinda har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:UtformingEnumerationType nvdb:UtformingOtherType"/>
-  </simpleType>
-  <simpleType name="UtformingEnumerationType">
-    <annotation>
-      <documentation>9781: Angir hvilken utforming grinda har.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9781</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Utforming</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Enkel">
-        <annotation>
-          <documentation>15920: Enkel</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15920</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Enkel</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Todelt">
-        <annotation>
-          <documentation>15921: Todelt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15921</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Todelt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="UtformingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligGjerdeportType">
-    <annotation>
-      <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedlikeholdsansvarligGjerdeportEnumerationType nvdb:VedlikeholdsansvarligGjerdeportOtherType"/>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligGjerdeportEnumerationType">
-    <annotation>
-      <documentation>9775: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9775</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Statens vegvesen">
-        <annotation>
-          <documentation>15926: Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15926</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nye Veier">
-        <annotation>
-          <documentation>18677: Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18677</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19994: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19994</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="OPS">
-        <annotation>
-          <documentation>18806: OPS</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18806</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>15927: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15927</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>15928: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15928</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17778: Uavklart</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17778</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligGjerdeportOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18677</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18806</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15928</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15926</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17778</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligGjerdeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

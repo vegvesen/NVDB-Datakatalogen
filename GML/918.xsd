@@ -1,113 +1,103 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <element name="Kryssdel" substitutionGroup="nvdb:AbstraktKryssdel" type="nvdb:KryssdelType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>918: De enkelte delene et kryssystem består av, f.eks. ramper eller deler av en rundkjøring.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">918</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">918</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kryssdel</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="KryssdelType">
-    <complexContent>
-      <extension base="nvdb:AbstraktKryssdelType">
-        <sequence>
-          <element name="kryssdel" type="integer">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kryssdel"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:KryssdelType">
+      <annotation>
+         <documentation>918: De enkelte delene et kryssystem består av, f.eks. ramper eller deler av en rundkjøring.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">918</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kryssdel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KryssdelType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="kryssdel" type="integer">
+                  <annotation>
+                     <documentation>11286: Nummer for den enkelte del av kryssystemet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11286</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Del</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="trafikantgruppe" type="nvdb:TrafikantgruppeKryssdelType">
+                  <annotation>
+                     <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KryssdelPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kryssdel"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TrafikantgruppeKryssdelType">
+      <annotation>
+         <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TrafikantgruppeKryssdelEnumerationType nvdb:TrafikantgruppeKryssdelOtherType"/>
+   </simpleType>
+   <simpleType name="TrafikantgruppeKryssdelEnumerationType">
+      <annotation>
+         <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="G">
             <annotation>
-              <documentation>11286: Nummer for den enkelte del av kryssystemet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11286</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Del</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19040</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gående og syklende</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element name="trafikantgruppe" type="nvdb:TrafikantgruppeType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19042</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kjørende</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
-            <annotation>
-              <documentation>Angivelse av objektets posisjon</documentation>
-            </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonStrekningPropertyType">
-            <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
-            </annotation>
-          </element>
-          <element minOccurs="0" name="assosiertKryssystem" type="gml:ReferenceType">
-            <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKryssystem</targetElement>
-              </appinfo>
-            </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="KryssdelPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:Kryssdel"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="TrafikantgruppeType">
-    <annotation>
-      <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TrafikantgruppeEnumerationType nvdb:TrafikantgruppeOtherType"/>
-  </simpleType>
-  <simpleType name="TrafikantgruppeEnumerationType">
-    <annotation>
-      <documentation>11290: Angir hvilken trafikantgruppe vegen som kryssdelen representerer skal benyttes av.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">11290</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="gåendeOgSyklende">
-        <annotation>
-          <documentation>19040: Gående og syklende</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19040</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gående og syklende</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="kjørende">
-        <annotation>
-          <documentation>19042: Kjørende</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19042</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kjørende</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TrafikantgruppeOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TrafikantgruppeKryssdelOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

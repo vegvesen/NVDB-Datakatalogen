@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        version="2.28">
+   <annotation>
+      <documentation>45: Et punkt i vegnettet hvor det kreves betaling for å kunne kjøre videre.  Kan gjelde i en eller begge retninger.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_SVV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Bomstasjon"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:BomstasjonType">
+      <annotation>
+         <documentation>45: Et punkt i vegnettet hvor det kreves betaling for å kunne kjøre videre.  Kan gjelde i en eller begge retninger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">45</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">45</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bomstasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="BomstasjonType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="bomstasjonstype" type="nvdb:BomstasjonstypeType">
+                  <annotation>
+                     <documentation>9390: Angir hvilken type bomstasjon det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9390</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bomstasjonstype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10271: Angir hvilket år bomstasjonen ble satt i drift.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10271</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4752: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4752</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="assosiertBygning"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Bygning</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="assosiertSkiltpunkt"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Skiltpunkt</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="BomstasjonPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Bomstasjon"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="BomstasjonstypeType">
+      <annotation>
+         <documentation>9390: Angir hvilken type bomstasjon det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9390</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9390</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bomstasjonstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BomstasjonstypeEnumerationType nvdb:BomstasjonstypeOtherType"/>
+   </simpleType>
+   <simpleType name="BomstasjonstypeEnumerationType">
+      <annotation>
+         <documentation>9390: Angir hvilken type bomstasjon det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9390</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9390</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bomstasjonstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="AutoPASS + manuell">
+            <annotation>
+               <documentation>13132: Bomstasjon har Autopass og manuell betaling</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13132</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">AutoPASS + manuell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="AutoPASS + automatisk">
+            <annotation>
+               <documentation>13133: Bomstasjon har autopass og automatisk betaling</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13133</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">AutoPASS + automatisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Kun manuell">
+            <annotation>
+               <documentation>13134: Bomstasjon har kun manuell innkreving</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13134</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kun manuell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BomstasjonstypeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

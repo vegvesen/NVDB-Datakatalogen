@@ -1,631 +1,586 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" elementFormDefault="qualified" targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML" version="2.33">
-  <include schemaLocation="AbstraktNVDB.xsd"/>
-  <include schemaLocation="SOSIFelles.xsd"/>
-  <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo" schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
-  <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
-  <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-  <simpleType name="EierKontrollVeieplassType">
-    <annotation>
-      <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:EierKontrollVeieplassEnumerationType nvdb:EierKontrollVeieplassOtherType"/>
-  </simpleType>
-  <simpleType name="EierKontrollVeieplassEnumerationType">
-    <annotation>
-      <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stat, Statens vegvesen">
-        <annotation>
-          <documentation>10257: Stat, Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10257</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Stat, Nye Veier">
-        <annotation>
-          <documentation>18607: Stat, Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18607</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>10719: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10719</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10321: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10321</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10385: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10385</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17580: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17580</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="EierKontrollVeieplassOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <element name="KontrollVeieplass" substitutionGroup="nvdb:AbstraktKontrollVeieplass" type="nvdb:KontrollVeieplassType">
-    <annotation>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.35">
+   <annotation>
       <documentation>44: Område spesielt tilrettelagt for å foreta ulike typer kontroll av kjøretøy, bl.a. vektkontroll.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">44</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">44</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Kontroll-/veieplass</sc:taggedValue>
-      </appinfo>
-    </annotation>
-  </element>
-  <complexType name="KontrollVeieplassType">
-    <complexContent>
-      <extension base="nvdb:AbstraktKontrollVeieplassType">
-        <sequence>
-          <element minOccurs="0" name="navn" type="string">
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierKontroll-veieplassType">
+      <annotation>
+         <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierKontroll-veieplassEnumerationType nvdb:EierKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="EierKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>1077: Angir navn på kontroll-/veieplassen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1077</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10719</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="type" type="nvdb:TypeKontrollVeieplassType">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10321</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="veiing" type="nvdb:VeiingType">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10385</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vektTilgjengelig" type="nvdb:VektTilgjengeligType">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18607</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="areal" type="integer">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>1360: Angir totalt areal av vegobjektet. Arealet inkluderer kjørbart, ikke kjørbart og bebygd areal.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">1360</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10257</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="antallOppstillingsplasser_Lange" type="integer">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>4522: Angir hvor mange oppstillingsplasser det er for lange kjøretøy. Det er da tale om plasser hvor det er mulighet for å stå parkert ifm. hviletid.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4522</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Antall oppstillingsplasser, lange</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17580</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vinterdriftsklasse" type="nvdb:VinterdriftsklasseKontrollVeieplassType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Kontroll-veieplass"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Kontroll-veieplassType">
+      <annotation>
+         <documentation>44: Område spesielt tilrettelagt for å foreta ulike typer kontroll av kjøretøy, bl.a. vektkontroll.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">44</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kontroll-veieplass</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Kontroll-veieplassType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>1077: Angir navn på kontroll-/veieplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1077</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeKontroll-veieplassType">
+                  <annotation>
+                     <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="veiing" type="nvdb:VeiingKontroll-veieplassType">
+                  <annotation>
+                     <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vektTilgjengelig">
+                  <annotation>
+                     <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="areal" type="integer">
+                  <annotation>
+                     <documentation>1360: Angir totalt areal av vegobjektet. Arealet inkluderer kjørbart, ikke kjørbart og bebygd areal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1360</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplasser_Lange" type="integer">
+                  <annotation>
+                     <documentation>4522: Angir hvor mange oppstillingsplasser det er for lange kjøretøy. Det er da tale om plasser hvor det er mulighet for å stå parkert ifm. hviletid.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4522</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingsplasser, lange</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vinterdriftsklasse"
+                        type="nvdb:VinterdriftsklasseKontroll-veieplassType">
+                  <annotation>
+                     <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10319: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10319</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11564: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11564</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11050: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11050</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12288: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12288</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierKontroll-veieplassType">
+                  <annotation>
+                     <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligKontroll-veieplassType">
+                  <annotation>
+                     <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4751: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4751</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>10963: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10963</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Kontroll-veieplassPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kontroll-veieplass"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeKontroll-veieplassType">
+      <annotation>
+         <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeKontroll-veieplassEnumerationType nvdb:TypeKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="TypeKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="KP">
             <annotation>
-              <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21707</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kontrollplass</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="etableringsår" type="integer">
+         </enumeration>
+         <enumeration value="LK">
             <annotation>
-              <documentation>10319: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10319</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21706</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liten kontrollstasjon</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="tilleggsinformasjon" type="string">
+         </enumeration>
+         <enumeration value="SK">
             <annotation>
-              <documentation>11564: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11564</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21705</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stor kontrollstasjon</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektreferanse" type="string">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKontroll-veieplassType">
+      <annotation>
+         <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligKontroll-veieplassEnumerationType nvdb:VedlikeholdsansvarligKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
             <annotation>
-              <documentation>11050: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">11050</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19925</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+         </enumeration>
+         <enumeration value="K">
             <annotation>
-              <documentation>12288: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">12288</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10527</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="eier" type="nvdb:EierKontrollVeieplassType">
+         </enumeration>
+         <enumeration value="NV">
             <annotation>
-              <documentation>7991: Angir hvem som er eier av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">7991</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18678</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="vedlikeholdsansvarlig" type="nvdb:VedlikeholdsansvarligKontrollVeieplassType">
+         </enumeration>
+         <enumeration value="OPS">
             <annotation>
-              <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18807</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+         </enumeration>
+         <enumeration value="P">
             <annotation>
-              <documentation>4751: Gir punkt som geometrisk representerer objektet.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">4751</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10605</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+         </enumeration>
+         <enumeration value="SVV">
             <annotation>
-              <documentation>10963: Gir flate/polygon som geometrisk avgrenser området.</documentation>
-              <appinfo>
-                <sc:taggedValue tag="NVDB_ID">10963</sc:taggedValue>
-                <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10449</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon" type="nvdb:LineærPosisjonPunktPropertyType">
+         </enumeration>
+         <enumeration value="U">
             <annotation>
-              <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17708</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertKommentar" type="gml:ReferenceType">
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VeiingKontroll-veieplassType">
+      <annotation>
+         <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VeiingKontroll-veieplassEnumerationType nvdb:VeiingKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="VeiingKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="f">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktKommentar</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3923</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fastmontert vekt</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertVekt" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="IT">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktVekt</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21711</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke egnet for veiing</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="assosiertDokumentasjon" type="gml:ReferenceType">
+         </enumeration>
+         <enumeration value="m">
             <annotation>
-              <appinfo>
-                <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:AbstraktDokumentasjon</targetElement>
-              </appinfo>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3924</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mobilt utstyr</sc:taggedValue>
+               </appinfo>
             </annotation>
-          </element>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <complexType name="KontrollVeieplassPropertyType">
-    <sequence minOccurs="0">
-      <element ref="nvdb:KontrollVeieplass"/>
-    </sequence>
-    <attributeGroup ref="gml:AssociationAttributeGroup"/>
-    <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-  </complexType>
-  <simpleType name="TypeKontrollVeieplassType">
-    <annotation>
-      <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:TypeKontrollVeieplassEnumerationType nvdb:TypeKontrollVeieplassOtherType"/>
-  </simpleType>
-  <simpleType name="TypeKontrollVeieplassEnumerationType">
-    <annotation>
-      <documentation>12586: Angir hvilken type kontroll-/veieplass det er</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12586</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Stor kontrollstasjon">
-        <annotation>
-          <documentation>21705: Anlegg som minimum inneholder bygningsmasse med fasiliteter for å kunne gjennomføre utvidet teknisk kontroll etter Direktiv 2014/47/EU og fast brovekt for vektkontroll av tunge kjøretøy</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21705</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Stor kontrollstasjon</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Liten kontrollstasjon">
-        <annotation>
-          <documentation>21706: Anlegg som inneholder mindre bygningsmasse og fast brovekt eller tilpassede groper for å kunne benytte mobile vekter.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21706</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Liten kontrollstasjon</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kontrollplass">
-        <annotation>
-          <documentation>21707: Mindre sideanlegg uten større installasjoner eller bygg</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21707</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kontrollplass</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="TypeKontrollVeieplassOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligKontrollVeieplassType">
-    <annotation>
-      <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VedlikeholdsansvarligKontrollVeieplassEnumerationType nvdb:VedlikeholdsansvarligKontrollVeieplassOtherType"/>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligKontrollVeieplassEnumerationType">
-    <annotation>
-      <documentation>8055: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">8055</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Statens vegvesen">
-        <annotation>
-          <documentation>10449: Statens vegvesen</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10449</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Nye Veier">
-        <annotation>
-          <documentation>18678: Nye Veier</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18678</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Fylkeskommune">
-        <annotation>
-          <documentation>19925: Fylkeskommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">19925</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="OPS">
-        <annotation>
-          <documentation>18807: OPS</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">18807</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Kommune">
-        <annotation>
-          <documentation>10527: Kommune</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10527</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Privat">
-        <annotation>
-          <documentation>10605: Privat</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10605</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Uavklart">
-        <annotation>
-          <documentation>17708: Uavklart</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">17708</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VedlikeholdsansvarligKontrollVeieplassOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VeiingType">
-    <annotation>
-      <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VeiingEnumerationType nvdb:VeiingOtherType"/>
-  </simpleType>
-  <simpleType name="VeiingEnumerationType">
-    <annotation>
-      <documentation>1117: Angir hvilken type veiing som benyttes ved kontroll/veieplassen.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">1117</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Veiing</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Fastmontert vekt">
-        <annotation>
-          <documentation>3923: Fastmontert vekt</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3923</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fastmontert vekt</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Mobilt utstyr">
-        <annotation>
-          <documentation>3924: Vekt/utstyr medbringes i forbindelse med kontroller.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3924</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Mobilt utstyr</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ikke egnet for veiing">
-        <annotation>
-          <documentation>21711: Kontroll-/veieplass er ikke egnet eller tilrettelagt for vektkontroll.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21711</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ikke egnet for veiing</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VeiingOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VektTilgjengeligType">
-    <annotation>
-      <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VektTilgjengeligEnumerationType nvdb:VektTilgjengeligOtherType"/>
-  </simpleType>
-  <simpleType name="VektTilgjengeligEnumerationType">
-    <annotation>
-      <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="Hele døgnet">
-        <annotation>
-          <documentation>21708: Vekt er tilgjengelig hele døgnet</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21708</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Hele døgnet</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="I åpningstid">
-        <annotation>
-          <documentation>21709: Vekt er tilgjengelig innenfor åpningstid. Gjelder typisk for kontrollstasjoner i tilknytning til trafikkstasjoner hvor det da henviser til trafikkstasjonens åpningstid.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21709</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">I åpningstid</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Ikke tilgjengelig">
-        <annotation>
-          <documentation>21710: Vekt er ikke tilgjengelig.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">21710</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Ikke tilgjengelig</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VektTilgjengeligOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
-  <simpleType name="VinterdriftsklasseKontrollVeieplassType">
-    <annotation>
-      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <union memberTypes="nvdb:VinterdriftsklasseKontrollVeieplassEnumerationType nvdb:VinterdriftsklasseKontrollVeieplassOtherType"/>
-  </simpleType>
-  <simpleType name="VinterdriftsklasseKontrollVeieplassEnumerationType">
-    <annotation>
-      <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
-      <appinfo>
-        <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
-        <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
-      </appinfo>
-    </annotation>
-    <restriction base="string">
-      <enumeration value="DkA">
-        <annotation>
-          <documentation>13766: Godkjent føreforhold er bar veg (tørr eller våt). Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13766</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkA</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkB, lav">
-        <annotation>
-          <documentation>13765: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Lavt tidskrav. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13765</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkB, lav</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkB, middels">
-        <annotation>
-          <documentation>13764: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Middels tidskrav. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13764</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkB, middels</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkB, høy">
-        <annotation>
-          <documentation>13763: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Høyt tidskrav. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13763</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkB, høy</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkC">
-        <annotation>
-          <documentation>13762: Godkjent føreforhold er bar veg (tørr eller våt) i milde perioder og hard snø/is i kalde perioder. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13762</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkC</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkD">
-        <annotation>
-          <documentation>13761: Godkjent føreforhold er hard snø/is. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13761</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkD</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="DkE">
-        <annotation>
-          <documentation>13760: Godkjent føreforhold er hard snø/is. Friksjon ned til 0,20 aksepteres. DkE skal ikke nyttes på riksveg. Håndbok R610 (111).</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">13760</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">DkE</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-      <enumeration value="Sideanlegg">
-        <annotation>
-          <documentation>15875: Spesiell standard for sideanlegg.</documentation>
-          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">15875</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sideanlegg</sc:taggedValue>
-          </appinfo>
-        </annotation>
-      </enumeration>
-    </restriction>
-  </simpleType>
-  <simpleType name="VinterdriftsklasseKontrollVeieplassOtherType">
-    <restriction base="string">
-      <pattern value="other: \w{2,}"/>
-    </restriction>
-  </simpleType>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VeiingKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VektTilgjengeligKontroll-veieplassType">
+      <annotation>
+         <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VektTilgjengeligKontroll-veieplassEnumerationType nvdb:VektTilgjengeligKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="VektTilgjengeligKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>12587: Angir i hvilken grad vekt er tilgjengelig for trafikanter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12587</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vekt tilgjengelig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="HD">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21708</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hele døgnet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="I åpningstid">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21709</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I åpningstid</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IR">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21710</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke tilgjengelig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VektTilgjengeligKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseKontroll-veieplassType">
+      <annotation>
+         <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterdriftsklasseKontroll-veieplassEnumerationType nvdb:VinterdriftsklasseKontroll-veieplassOtherType"/>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseKontroll-veieplassEnumerationType">
+      <annotation>
+         <documentation>9556: Beskriver hvilken standard for vinterdrift som skal gjelde for plassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9556</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="DkA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13766</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkA</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13763</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, høy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13765</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, lav</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13764</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkC">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13762</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkC</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkD">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13761</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkD</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkE">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13760</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkE</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="si">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15875</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sideanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseKontroll-veieplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

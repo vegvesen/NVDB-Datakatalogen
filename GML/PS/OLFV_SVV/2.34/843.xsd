@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.34">
+   <annotation>
+      <documentation>843: Lukka grøft med kabler og trekkerør.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kabelgrøft"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:KabelgrøftType">
+      <annotation>
+         <documentation>843: Lukka grøft med kabler og trekkerør.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">843</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">843</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kabelgrøft</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KabelgrøftType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="spenningsnivå" type="nvdb:SpenningsnivåType">
+                  <annotation>
+                     <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybde" type="double">
+                  <annotation>
+                     <documentation>9577: Angir dybde av vegobjektet. Dybde måles ned til topp fundament.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9577</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10314: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10314</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>9578: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9578</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="assosiertKabel"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Kabel</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="assosiertTrekkerørKanal"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:TrekkerørKanal</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="assosiertTunnelløpUtenTrafikk"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:TunnelløpUtenTrafikk</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KabelgrøftPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kabelgrøft"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="SpenningsnivåType">
+      <annotation>
+         <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningsnivåEnumerationType nvdb:SpenningsnivåOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningsnivåEnumerationType">
+      <annotation>
+         <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Elkraft">
+            <annotation>
+               <documentation>21238: Det finnes strømførende kabler i kabelgrøft.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21238</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elkraft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Signal">
+            <annotation>
+               <documentation>21239: Det finnes ikke strømførende kabler i kabelgrøft, kun signalkabler eller tilsvarende.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21239</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Elkraft/signal">
+            <annotation>
+               <documentation>21240: Det finnes både strømførende ledninger og signalkabler i grøft.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21240</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elkraft/signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningsnivåOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>
