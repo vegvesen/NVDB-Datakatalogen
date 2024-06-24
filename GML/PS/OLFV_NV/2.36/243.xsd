@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        version="2.28">
+   <annotation>
+      <documentation>243: Ett eller flere rom i en bygning med ett eller flere klosett/toalettskåler/pissoarer.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_SVV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AvløpTilType">
+      <annotation>
+         <documentation>3987: Angir hvor avløpet føres.  (Ikke aktuelt for tørrklosset).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3987</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">3987</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Avløp til</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AvløpTilEnumerationType nvdb:AvløpTilOtherType"/>
+   </simpleType>
+   <simpleType name="AvløpTilEnumerationType">
+      <annotation>
+         <documentation>3987: Angir hvor avløpet føres.  (Ikke aktuelt for tørrklosset).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3987</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">3987</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Avløp til</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Offentlig nett">
+            <annotation>
+               <documentation>4996: Offentlig nett</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4996</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Offentlig nett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Lukket tank">
+            <annotation>
+               <documentation>4997: Lukket tank</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4997</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lukket tank</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Privat nett">
+            <annotation>
+               <documentation>8191: Privat nett</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8191</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat nett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AvløpTilOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Toalettanlegg"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:ToalettanleggType">
+      <annotation>
+         <documentation>243: Ett eller flere rom i en bygning med ett eller flere klosett/toalettskåler/pissoarer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">243</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">243</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Toalettanlegg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="ToalettanleggType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="type" type="nvdb:TypeToalettanleggType">
+                  <annotation>
+                     <documentation>1217: Angir hvilken type toalett det er i toalettanlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1217</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallKlosett" type="integer">
+                  <annotation>
+                     <documentation>2217: Angir hvor mange klosett/toalettskåler/pissoarer det finnes på toalettanlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2217</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall klosett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="universeltUtformet" type="nvdb:UniverseltUtformetType">
+                  <annotation>
+                     <documentation>2083: Angir om det finnes universelt utformet toalett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2083</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Universelt utformet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="avløpTil" type="nvdb:AvløpTilType">
+                  <annotation>
+                     <documentation>3987: Angir hvor avløpet føres.  (Ikke aktuelt for tørrklosset).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3987</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Avløp til</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10375: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10375</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4868: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4868</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="assosiertRasteplass" type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:Rasteplass</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="assosiertTaktileIndikatorer"
+                        type="gml:ReferenceType">
+                  <annotation>
+                     <appinfo>
+                        <targetElement xmlns="http://www.opengis.net/gml/3.2">nvdb:TaktileIndikatorer</targetElement>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ToalettanleggPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Toalettanlegg"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeToalettanleggType">
+      <annotation>
+         <documentation>1217: Angir hvilken type toalett det er i toalettanlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">1217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeToalettanleggEnumerationType nvdb:TypeToalettanleggOtherType"/>
+   </simpleType>
+   <simpleType name="TypeToalettanleggEnumerationType">
+      <annotation>
+         <documentation>1217: Angir hvilken type toalett det er i toalettanlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">1217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Vannklosett">
+            <annotation>
+               <documentation>3819: Vannklosett</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3819</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vannklosett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Tørrklosett">
+            <annotation>
+               <documentation>3820: Tørrklosett</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3820</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tørrklosett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeToalettanleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UniverseltUtformetType">
+      <annotation>
+         <documentation>2083: Angir om det finnes universelt utformet toalett.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">2083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Universelt utformet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UniverseltUtformetEnumerationType nvdb:UniverseltUtformetOtherType"/>
+   </simpleType>
+   <simpleType name="UniverseltUtformetEnumerationType">
+      <annotation>
+         <documentation>2083: Angir om det finnes universelt utformet toalett.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">2083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Universelt utformet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Ja">
+            <annotation>
+               <documentation>3544: Ja</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3544</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Nei">
+            <annotation>
+               <documentation>3582: Nei</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3582</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UniverseltUtformetOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>100: Sted i vegnettet hvor veg og jernbane krysses.</documentation>
    </annotation>
@@ -35,6 +35,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1153</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="særskiltFare">
+                  <annotation>
+                     <documentation>12915: Særskilte faremoment som trafikantene bør ta hensyn til ved passering av jernbanesporet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12915</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Særskilt fare</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -75,6 +84,41 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="SærskiltFareJernbanekryssingType">
+      <annotation>
+         <documentation>12915: Særskilte faremoment som trafikantene bør ta hensyn til ved passering av jernbanesporet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12915</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Særskilt fare</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SærskiltFareJernbanekryssingEnumerationType nvdb:SærskiltFareJernbanekryssingOtherType"/>
+   </simpleType>
+   <simpleType name="SærskiltFareJernbanekryssingEnumerationType">
+      <annotation>
+         <documentation>12915: Særskilte faremoment som trafikantene bør ta hensyn til ved passering av jernbanesporet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12915</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Særskilt fare</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <documentation>22377: På grunn av uheldig utforming, typisk at jernbanesporet ligger høyere enn vegen, så er det risiko for at lange kjøretøy med lav bakkeklaring kan sette seg fast når de krysser jernbanesporet.2</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22377</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lange og lave kjøretøy kan henge fast på jernbanesporet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SærskiltFareJernbanekryssingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeJernbanekryssingJernbanekryssingType">
       <annotation>
          <documentation>1153: Angir hvilken type vegobjektet er av.</documentation>
@@ -96,6 +140,7 @@
       <restriction base="string">
          <enumeration value="p">
             <annotation>
+               <documentation>2767: Veg og jernbane krysser i samme plan. Ikke kjent om det er lysregulering og/eller bommer.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2767</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan</sc:taggedValue>
@@ -104,6 +149,7 @@
          </enumeration>
          <enumeration value="pb">
             <annotation>
+               <documentation>2770: Veg og jernbane krysser i samme plan. Kryssing er lysregulert og det er bommer for å stenge vegen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2770</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, lysregulert og bommer</sc:taggedValue>
@@ -112,6 +158,7 @@
          </enumeration>
          <enumeration value="g">
             <annotation>
+               <documentation>3907: Veg og jernbane krysser i samme plan. Kryssing er lysregulert og det er grinder for å stenge trafikk inn mot jernbanen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3907</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, lysregulert, grind</sc:taggedValue>
@@ -120,6 +167,7 @@
          </enumeration>
          <enumeration value="b2">
             <annotation>
+               <documentation>3906: Veg og jernbane krysser i samme plan. Kryssing er lysregulert og det er bommer for å stenge vegen for trafikk inn mot jernbanen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3906</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, lysregulert, halve bommer</sc:taggedValue>
@@ -128,6 +176,7 @@
          </enumeration>
          <enumeration value="b1">
             <annotation>
+               <documentation>3905: Veg og jernbane krysser i samme plan. Kryssing er lysregulert og det er bommer for å stenge vegen i hele vegens bredde.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3905</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, lysregulert, hele bommer</sc:taggedValue>
@@ -136,6 +185,7 @@
          </enumeration>
          <enumeration value="pl">
             <annotation>
+               <documentation>2769: Veg og jernbane krysser i samme plan. Kryssing er lysregulert, men det er ikke bommer.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2769</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, lysregulert, uten bommer</sc:taggedValue>
@@ -144,6 +194,7 @@
          </enumeration>
          <enumeration value="pu">
             <annotation>
+               <documentation>2768: Veg og jernbane krysser i samme plan. Det er verken lysregulering eller bommer.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2768</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">I plan, uten lysregulering og bommer</sc:taggedValue>
@@ -152,6 +203,7 @@
          </enumeration>
          <enumeration value="vo">
             <annotation>
+               <documentation>2771: Veg krysser i et plan over jernbanen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2771</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Veg over</sc:taggedValue>
@@ -160,6 +212,7 @@
          </enumeration>
          <enumeration value="vu">
             <annotation>
+               <documentation>2772: Veg krysser i et plan under jernbanen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2772</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Veg under</sc:taggedValue>

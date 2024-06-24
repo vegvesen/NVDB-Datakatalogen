@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>903: Angir bruksklasse for spesialtransport. Foreløpig versjon for intern bruk.</documentation>
    </annotation>
@@ -14,6 +14,72 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AksellastTeleløsningBruksklasse, spesialtransport, uoffisiellType">
+      <annotation>
+         <documentation>12906: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12906</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AksellastTeleløsningBruksklasse, spesialtransport, uoffisiellEnumerationType nvdb:AksellastTeleløsningBruksklasse, spesialtransport, uoffisiellOtherType"/>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, spesialtransport, uoffisiellEnumerationType">
+      <annotation>
+         <documentation>12906: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12906</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22332</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22333</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22334</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22335</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">7 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22336</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">8 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, spesialtransport, uoffisiellOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Bruksklasse, spesialtransport, uoffisiell"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Bruksklasse, spesialtransport, uoffisiellType">
@@ -38,15 +104,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="bruksklasseVinter">
-                  <annotation>
-                     <documentation>10906: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10906</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Bruksklasse vinter</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element name="maksVogntoglengde">
                   <annotation>
                      <documentation>10912: Angir maksimal lengde for vogntog.</documentation>
@@ -63,6 +120,24 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10924</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Veggruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bruksklasseVinter">
+                  <annotation>
+                     <documentation>10906: Angir lovlig bruksklasse (maks aksellast) for vinter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10906</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksklasse vinter</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="AksellastTeleløsning">
+                  <annotation>
+                     <documentation>12906: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12906</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -116,6 +191,7 @@
       <restriction base="string">
          <enumeration value="10-42">
             <annotation>
+               <documentation>18192: Bruksklasse Bk10. Maks totalvekt 42 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18192</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk10 - 42 tonn</sc:taggedValue>
@@ -124,6 +200,7 @@
          </enumeration>
          <enumeration value="10-50">
             <annotation>
+               <documentation>18191: Bruksklasse Bk10. Maks totalvekt 50 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18191</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk10 - 50 tonn</sc:taggedValue>
@@ -132,6 +209,7 @@
          </enumeration>
          <enumeration value="6-28">
             <annotation>
+               <documentation>18196: Bruksklasse Bk6. Maks totalvekt 28 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18196</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk6 - 28 tonn</sc:taggedValue>
@@ -140,6 +218,7 @@
          </enumeration>
          <enumeration value="8-32">
             <annotation>
+               <documentation>18195: Bruksklasse Bk8. Maks totalvekt 32 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18195</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk8 - 32 tonn</sc:taggedValue>
@@ -148,6 +227,7 @@
          </enumeration>
          <enumeration value="T8-40">
             <annotation>
+               <documentation>18194: Bruksklasse BkT8. Maks totalvekt 40 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18194</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">BkT8 - 40 tonn</sc:taggedValue>
@@ -156,6 +236,7 @@
          </enumeration>
          <enumeration value="T8-50">
             <annotation>
+               <documentation>18193: Bruksklasse BkT8. Maks totalvekt 50 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18193</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">BkT8 - 50 tonn</sc:taggedValue>
@@ -164,6 +245,7 @@
          </enumeration>
          <enumeration value="Spes">
             <annotation>
+               <documentation>18197: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til aksellastrestriksjon eller begrensning i totalvekt. Nedsatte verdier gis i egne egenskapstyper.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18197</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Spesiell begrensning</sc:taggedValue>
@@ -198,6 +280,7 @@
       <restriction base="string">
          <enumeration value="10-42">
             <annotation>
+               <documentation>21690: Bruksklasse Bk10. Maks totalvekt 42 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21690</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk10 - 42 tonn</sc:taggedValue>
@@ -206,6 +289,7 @@
          </enumeration>
          <enumeration value="10-50">
             <annotation>
+               <documentation>18228: Bruksklasse Bk10. Maks totalvekt 50 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18228</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk10 - 50 tonn</sc:taggedValue>
@@ -214,6 +298,7 @@
          </enumeration>
          <enumeration value="6-28">
             <annotation>
+               <documentation>21692: Bruksklasse Bk6. Maks totalvekt 28 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21692</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk6 - 28 tonn</sc:taggedValue>
@@ -222,6 +307,7 @@
          </enumeration>
          <enumeration value="8-32">
             <annotation>
+               <documentation>18230: Bruksklasse Bk8. Maks totalvekt 32 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18230</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bk8 - 32 tonn</sc:taggedValue>
@@ -230,6 +316,7 @@
          </enumeration>
          <enumeration value="T8-40">
             <annotation>
+               <documentation>18229: Bruksklasse BkT8. Maks totalvekt 40 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18229</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">BkT8 - 40 tonn</sc:taggedValue>
@@ -238,6 +325,7 @@
          </enumeration>
          <enumeration value="T8-50">
             <annotation>
+               <documentation>21691: Bruksklasse BkT8. Maks totalvekt 50 tonn.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21691</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">BkT8 - 50 tonn</sc:taggedValue>
@@ -296,6 +384,7 @@
          </enumeration>
          <enumeration value="Spes">
             <annotation>
+               <documentation>18252: Benyttes hvis det er spesiell begrensning i vegnettet i forhold til vogntog-/kjøretøylengde. Nedsatte verdier gis i egne egenskapstyper.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18252</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Spesiell begrensning</sc:taggedValue>
@@ -330,6 +419,7 @@
       <restriction base="string">
          <enumeration value="A">
             <annotation>
+               <documentation>18264: Veger som har bruer med flere kjørefelt, nyere bruer med ett kjørefelt eller veger som ikke har bruer. (Vegliste, spesialtransport).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18264</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">A</sc:taggedValue>
@@ -338,6 +428,7 @@
          </enumeration>
          <enumeration value="B">
             <annotation>
+               <documentation>18265: Øvrige bruer med ett kjørefelt (Vegliste, spesialtransport).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18265</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">B</sc:taggedValue>
@@ -346,6 +437,7 @@
          </enumeration>
          <enumeration value="I">
             <annotation>
+               <documentation>18266: Offentlige veger som det må søkes dispensasjon for i hvert enkelt tilfelle.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">18266</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ikke</sc:taggedValue>

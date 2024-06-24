@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.36">
+   <annotation>
+      <documentation>504: Angir punkt der det er mulig å krysse/bevege seg gjennom et fysisk hinder. Eksempelvis kan dette være åpning i et rekkverk, sted hvor en midtdeler kan krysses, m.m.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_NV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeKryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>12943: Angir bruksområde for kryssingsmulighet/åpning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12943</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeKryssingsmulighetÅpningEnumerationType nvdb:BruksområdeKryssingsmulighetÅpningOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeKryssingsmulighetÅpningEnumerationType">
+      <annotation>
+         <documentation>12943: Angir bruksområde for kryssingsmulighet/åpning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12943</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>22501: Annet bruksområde. Utfyllende informasjon gis under tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22501</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet bruksområde</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <documentation>22500: Markert krysningsmulighet/åpning i skille mellom kjøreveg og gang/sykkelveg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22500</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kjøreveg g/s-veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <documentation>22498: Åpning i midteler der trafikken eller et kjøretøy kan komme kontrollert over til motgående kjørefelt. Slike åpninger er normalt sikret med drifts-/katastrofeåpning, demonterbart rekkverk eller bom.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22498</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Midtdeler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SR">
+            <annotation>
+               <documentation>22499: Smal åpning i siderekkverk fortrinnsvis for å sikre gangadkomst til f.eks hytter, badeplass, tursti, etc</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22499</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Smal åpning i siderekkverk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeKryssingsmulighetÅpningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>11982: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11982</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierKryssingsmulighetÅpningEnumerationType nvdb:EierKryssingsmulighetÅpningOtherType"/>
+   </simpleType>
+   <simpleType name="EierKryssingsmulighetÅpningEnumerationType">
+      <annotation>
+         <documentation>11982: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11982</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20595</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20596</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20597</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20594</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20593</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>20598: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20598</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKryssingsmulighetÅpningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="KryssingsmulighetÅpning"
+            substitutionGroup="nvdb:AbstraktKryssingsmulighetÅpning"
+            type="nvdb:KryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>504: Angir punkt der det er mulig å krysse/bevege seg gjennom et fysisk hinder. Eksempelvis kan dette være åpning i et rekkverk, sted hvor en midtdeler kan krysses, m.m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">504</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">KryssingsmulighetÅpning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KryssingsmulighetÅpningType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKryssingsmulighetÅpningType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeKryssingsmulighetÅpningType">
+                  <annotation>
+                     <documentation>12943: Angir bruksområde for kryssingsmulighet/åpning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12943</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavnTypegodkjenning">
+                  <annotation>
+                     <documentation>12920: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for drifts-/katastrofeåpninger godkjent av Statens vegvesen. Se https://www.vegvesen.no/fag/teknologi/vegutstyr/</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12920</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn/typegodkjenning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="sikringAvÅpning">
+                  <annotation>
+                     <documentation>12919: Angir hvordan åpning er sikret.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12919</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sikring av åpning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bredde" type="double">
+                  <annotation>
+                     <documentation>4084: Angir bredde av kryssing/åpning. For åpninger på midtdeler måles bredden i vegens lengderetning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4084</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11473: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11473</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12393: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12393</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="eier"
+                        type="nvdb:EierKryssingsmulighetÅpningType">
+                  <annotation>
+                     <documentation>11982: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11982</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligKryssingsmulighetÅpningType">
+                  <annotation>
+                     <documentation>12011: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12011</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>8927: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8927</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KryssingsmulighetÅpningPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:KryssingsmulighetÅpning"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="ProduktnavnTypegodkjenningKryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>12920: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for drifts-/katastrofeåpninger godkjent av Statens vegvesen. Se https://www.vegvesen.no/fag/teknologi/vegutstyr/</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12920</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Produktnavn/typegodkjenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ProduktnavnTypegodkjenningKryssingsmulighetÅpningEnumerationType nvdb:ProduktnavnTypegodkjenningKryssingsmulighetÅpningOtherType"/>
+   </simpleType>
+   <simpleType name="ProduktnavnTypegodkjenningKryssingsmulighetÅpningEnumerationType">
+      <annotation>
+         <documentation>12920: Refererer til produktnavn og typegodkjenning (samsvarsgodkjenning) for drifts-/katastrofeåpninger godkjent av Statens vegvesen. Se https://www.vegvesen.no/fag/teknologi/vegutstyr/</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12920</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Produktnavn/typegodkjenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="DG1">
+            <annotation>
+               <documentation>22455: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/duo-gate-double/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22455</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Duo-Gate double (H2 - W3)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ECA">
+            <annotation>
+               <documentation>22458: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/e-cado-h2-w2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22458</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">E-CADO (H2-W2)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="GG">
+            <annotation>
+               <documentation>22460: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/gate-guard-h2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22460</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gate-Guard (H2-W7)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MON">
+            <annotation>
+               <documentation>22464: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/monoline-nod-driftsapning-n2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22464</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Monoline nød- driftsåpning (N2-W4)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OB">
+            <annotation>
+               <documentation>22463: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/oslobommen-n2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22463</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Oslobommen (N2-W5)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SAB">
+            <annotation>
+               <documentation>22461: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/sab-rekkverk-apning-h2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22461</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SAB-Rekkverk Åpning (H2-W6)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SAF">
+            <annotation>
+               <documentation>22465: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/safeline-m-nod-og-driftsapning/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22465</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SafeLine M nød-/driftsåpning (H1-W3)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SG">
+            <annotation>
+               <documentation>22457: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/sologuard-rekkverk-apning-h1/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22457</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SoloGuard-Rekkverk Åpning (H1-W1)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>22471: Type som har vært godkjent tidligere, men som ikke er gyldig nå. Legg til info på tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22471</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tidligere godkjent type</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>22472: Ukjent type. Legg til info på tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22472</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VG">
+            <annotation>
+               <documentation>22456: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vario-guard-muf-h2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22456</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vario-Guard MUF (H2-W5)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VE">
+            <annotation>
+               <documentation>22459: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/veva-3/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22459</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">VEVA 3 (H2-W7)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VIK3">
+            <annotation>
+               <documentation>22468: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vik-eo-drifts-katastrofeapning-h2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22468</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vik eo drifts-/katastrofeåpning (H2-W4)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VIK4">
+            <annotation>
+               <documentation>22469: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vik-eo-drifts-katastrofeapning-l2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22469</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vik eo drifts-/katastrofeåpning (L2-W4)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VIK5">
+            <annotation>
+               <documentation>22470: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vik-eo-drifts-katastrofeapning-n2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22470</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vik eo drifts-/katastrofeåpning (N2-W1)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VIK2">
+            <annotation>
+               <documentation>22467: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vik-ep-nodapning-h1-l1/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22467</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">VIK-EP nødåpning (H1/L1-W3)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VIK1">
+            <annotation>
+               <documentation>22466: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vik-ep-nodapning-n2/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22466</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">VIK-EP nødåpning (N2-W3)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VS">
+            <annotation>
+               <documentation>22462: https://www.vegvesen.no/fag/teknologi/vegutstyr/drifts-katastrofeapning/vs-stalpro-h1/</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22462</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">VS-Stalpro (H1-W3)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ProduktnavnTypegodkjenningKryssingsmulighetÅpningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SikringAvÅpningKryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>12919: Angir hvordan åpning er sikret.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12919</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sikring av åpning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SikringAvÅpningKryssingsmulighetÅpningEnumerationType nvdb:SikringAvÅpningKryssingsmulighetÅpningOtherType"/>
+   </simpleType>
+   <simpleType name="SikringAvÅpningKryssingsmulighetÅpningEnumerationType">
+      <annotation>
+         <documentation>12919: Angir hvordan åpning er sikret.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12919</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sikring av åpning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>22454: Sikring som ikke kommer i kategoriene over.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22454</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen type sikring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MB">
+            <annotation>
+               <documentation>22452: Åpning er sikret med bom.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22452</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MR">
+            <annotation>
+               <documentation>22451: Åpning er sikret med demonerbart rekkverk, dvs rekkverk som er forberedt for å enkelt kunne demonteres og monteres opp på nytt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22451</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Demonterbart rekkverk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DK">
+            <annotation>
+               <documentation>22450: Åpning er sikret med drifts-/katastrofeåpning, dvs.et produkt som er konstruert for å lukke nød- og driftsåpninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22450</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drifts-/katastrofeåpning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Side">
+            <annotation>
+               <documentation>22453: Det er ikke satt opp ekstra fysisk sikring i tilknytning til åpningen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22453</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke fysisk sikring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SikringAvÅpningKryssingsmulighetÅpningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKryssingsmulighetÅpningType">
+      <annotation>
+         <documentation>12011: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12011</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligKryssingsmulighetÅpningEnumerationType nvdb:VedlikeholdsansvarligKryssingsmulighetÅpningOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKryssingsmulighetÅpningEnumerationType">
+      <annotation>
+         <documentation>12011: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12011</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20786</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20788</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20785</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20787</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20789</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20784</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20790</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligKryssingsmulighetÅpningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

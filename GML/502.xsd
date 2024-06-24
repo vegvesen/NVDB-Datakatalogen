@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>502: Skap for oppbevaring/installasjon av utstyr.</documentation>
    </annotation>
@@ -14,6 +14,59 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BrøytingAvAdkomstSkap, tekniskType">
+      <annotation>
+         <documentation>12937: Angir om det utføres brøyting av adkamst til Skap, teknisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12937</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Brøyting av adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BrøytingAvAdkomstSkap, tekniskEnumerationType nvdb:BrøytingAvAdkomstSkap, tekniskOtherType"/>
+   </simpleType>
+   <simpleType name="BrøytingAvAdkomstSkap, tekniskEnumerationType">
+      <annotation>
+         <documentation>12937: Angir om det utføres brøyting av adkamst til Skap, teknisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12937</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Brøyting av adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IR">
+            <annotation>
+               <documentation>22497: Det er ikke behov for spesifikk brøyting/strøing i tilknytning til Skap, teknisk. Gjelder f.eks skap i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22497</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J">
+            <annotation>
+               <documentation>22494: Det utføres brøyting/strøing av adkomst til Skap, teknisk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22494</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22495: Det utføres ikke brøyting/strøing av adkomst til Skap, teknisk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22495</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BrøytingAvAdkomstSkap, tekniskOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="EierSkap, tekniskType">
       <annotation>
          <documentation>8039: Angir hvem som er eier av vegobjektet.</documentation>
@@ -75,6 +128,7 @@
          </enumeration>
          <enumeration value="U">
             <annotation>
+               <documentation>17658: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17658</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -118,6 +172,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11313</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høyde over bakken</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="brøytingAvAdkomst">
+                  <annotation>
+                     <documentation>12937: Angir om det utføres brøyting av adkamst til Skap, teknisk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12937</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Brøyting av adkomst</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -271,6 +334,7 @@
       <restriction base="string">
          <enumeration value="p">
             <annotation>
+               <documentation>5056: Skap for automatisk styring eller fjernstyring av f.eks. kommunikasjon, vifter, belysning eller pumpestasjon.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5056</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Automasjonsskap</sc:taggedValue>
@@ -279,6 +343,7 @@
          </enumeration>
          <enumeration value="bs">
             <annotation>
+               <documentation>7455: Skap for betjening og manuell styring av f.eks. kommunikasjon, vifter, belysning eller pumpestasjon.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">7455</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Betjening/styring</sc:taggedValue>
@@ -287,6 +352,7 @@
          </enumeration>
          <enumeration value="BS">
             <annotation>
+               <documentation>5046: Skap med brannslukker/brannslukkingsapparat. Der det finnes en nødtelefon i direkte nærhet, defineres nødtelefon og brannslokkere som Nødstasjon iht. N500. Skapet registreres da ikke.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5046</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Brannslukkerskap</sc:taggedValue>
@@ -295,6 +361,7 @@
          </enumeration>
          <enumeration value="N">
             <annotation>
+               <documentation>12166: Skap for styring av nødsystemet i f.eks. en tunnel.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">12166</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nødstyreskap</sc:taggedValue>
@@ -303,6 +370,7 @@
          </enumeration>
          <enumeration value="Skredteknisk utstyr">
             <annotation>
+               <documentation>21910: Skap som inneholder tekniske komponenter i tilknytning til skredteknisk utstyr.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21910</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Skredteknisk utstyr</sc:taggedValue>
@@ -311,6 +379,7 @@
          </enumeration>
          <enumeration value="TP">
             <annotation>
+               <documentation>11787: Skap i tilknytning til tellepunkt.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">11787</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Tellepunktskap</sc:taggedValue>

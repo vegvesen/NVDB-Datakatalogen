@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.36">
+   <annotation>
+      <documentation>9: Stein som settes for å avgrense trafikkøyer, fortau, midtdeler, etc. (1)</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kantstein"
+            substitutionGroup="nvdb:AbstraktKantstein"
+            type="nvdb:KantsteinType">
+      <annotation>
+         <documentation>9: Stein som settes for å avgrense trafikkøyer, fortau, midtdeler, etc. (1)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kantstein</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KantsteinType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKantsteinType">
+            <sequence>
+               <element name="materialtype" type="nvdb:MaterialtypeKantsteinType">
+                  <annotation>
+                     <documentation>1092: Angir hvilken materialtype vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1092</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>1301: Angir lengde av vegobjektet, er normalt avledet fra geometri/stedfesting.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1301</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10315: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10315</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4717: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4717</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KantsteinPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kantstein"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="MaterialtypeKantsteinType">
+      <annotation>
+         <documentation>1092: Angir hvilken materialtype vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1092</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialtypeKantsteinEnumerationType nvdb:MaterialtypeKantsteinOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialtypeKantsteinEnumerationType">
+      <annotation>
+         <documentation>1092: Angir hvilken materialtype vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1092</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5463</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2199</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3326</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong, plasstøpt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3332</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong, prefabrikkerte element</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="g">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3591</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Granitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3592</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skifer/heller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialtypeKantsteinOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

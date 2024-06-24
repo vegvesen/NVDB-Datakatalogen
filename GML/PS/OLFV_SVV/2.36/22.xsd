@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.36">
+   <annotation>
+      <documentation>22: Konstruksjon med rist eller gitter som er innbygd i vegbanen, og som hindrer krøtter i å komme over. (Jfr. bokmålsordboka).</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Ferist"
+            substitutionGroup="nvdb:AbstraktFerist"
+            type="nvdb:FeristType">
+      <annotation>
+         <documentation>22: Konstruksjon med rist eller gitter som er innbygd i vegbanen, og som hindrer krøtter i å komme over. (Jfr. bokmålsordboka).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">22</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ferist</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="FeristType">
+      <complexContent>
+         <extension base="nvdb:AbstraktFeristType">
+            <sequence>
+               <element name="type" type="nvdb:TypeFeristType">
+                  <annotation>
+                     <documentation>1104: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1104</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="passering_Ved_Ferist">
+                  <annotation>
+                     <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1737</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Passering v ferist</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vinterforberedelse" type="nvdb:VinterforberedelseFeristType">
+                  <annotation>
+                     <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4595</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterforberedelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10290: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10290</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>9425: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9425</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="FeristPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Ferist"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="Passering_Ved_FeristFeristType">
+      <annotation>
+         <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1737</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Passering v ferist</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Passering_Ved_FeristFeristEnumerationType nvdb:Passering_Ved_FeristFeristOtherType"/>
+   </simpleType>
+   <simpleType name="Passering_Ved_FeristFeristEnumerationType">
+      <annotation>
+         <documentation>1737: Angir om det er mulighet for passering for fotgjengere utenom ferist.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1737</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Passering v ferist</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3516</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3554</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Passering_Ved_FeristFeristOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFeristType">
+      <annotation>
+         <documentation>1104: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeFeristEnumerationType nvdb:TypeFeristOtherType"/>
+   </simpleType>
+   <simpleType name="TypeFeristEnumerationType">
+      <annotation>
+         <documentation>1104: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="e">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2494</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elektrisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hi">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2493</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">H/i-bjelker</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="r">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2492</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rør</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFeristOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterforberedelseFeristType">
+      <annotation>
+         <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4595</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterforberedelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterforberedelseFeristEnumerationType nvdb:VinterforberedelseFeristOtherType"/>
+   </simpleType>
+   <simpleType name="VinterforberedelseFeristEnumerationType">
+      <annotation>
+         <documentation>4595: Angir hva som skal gjøres med ferist i forkant av vinter sesongen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4595</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterforberedelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="f">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5534</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fjernes</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5533</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tildekkes</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterforberedelseFeristOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

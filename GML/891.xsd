@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>891: Gjeldende bruksklasse for 12/65 - mobilkran m.m. i vegliste.</documentation>
    </annotation>
@@ -14,6 +14,72 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AksellastTeleløsningBruksklasse, 1265 mobilkran m.m.Type">
+      <annotation>
+         <documentation>12911: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12911</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AksellastTeleløsningBruksklasse, 1265 mobilkran m.m.EnumerationType nvdb:AksellastTeleløsningBruksklasse, 1265 mobilkran m.m.OtherType"/>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, 1265 mobilkran m.m.EnumerationType">
+      <annotation>
+         <documentation>12911: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12911</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22357</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22358</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22359</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22360</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">7 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22361</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">8 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, 1265 mobilkran m.m.OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Bruksklasse, 1265 mobilkran m.m."
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Bruksklasse, 1265 mobilkran m.m.Type">
@@ -29,6 +95,15 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
+               <element minOccurs="0" name="AksellastTeleløsning">
+                  <annotation>
+                     <documentation>12911: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12911</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="strekningsbeskrivelse" type="string">
                   <annotation>
                      <documentation>10739: Beskrivelse av aktuell vegstrekning. Denne teksten blir hentet direkte inn i veglistene.</documentation>
@@ -38,21 +113,21 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="veglisteGjelderAlltid" type="string">
-                  <annotation>
-                     <documentation>10746: Veglister er forskrift og gjelder alltid foran kartvisning.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10746</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vegliste gjelder alltid</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element minOccurs="0" name="merknad" type="string">
                   <annotation>
                      <documentation>12116: Merknad knyttet til aktuell strekning. Kommer med uthevet tekst i veglistene.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12116</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="veglisteGjelderAlltid" type="string">
+                  <annotation>
+                     <documentation>10746: Veglister er forskrift og gjelder alltid foran kartvisning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10746</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vegliste gjelder alltid</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

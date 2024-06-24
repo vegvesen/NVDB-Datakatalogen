@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.36">
+   <annotation>
+      <documentation>145: Vanntett sjikt for å hindre vanngjennomgang.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeMembranType">
+      <annotation>
+         <documentation>1278: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1278</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeMembranEnumerationType nvdb:BruksområdeMembranOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeMembranEnumerationType">
+      <annotation>
+         <documentation>1278: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1278</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Andre konstruksjoner">
+            <annotation>
+               <documentation>22490: Tetning/fuktisolering i forbindelse med andre konstruksjoner som f.eks.overbygg, portaler, bygninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22490</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Andre konstruksjoner</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Bru">
+            <annotation>
+               <documentation>22487: Fuktisolering av bru. Plasseres på topp bru. Vegdekke legges over membran.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22487</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bru</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fylling EPS">
+            <annotation>
+               <documentation>22491: Plastmembran over fylling av ekspandert plystyren (EPS). Legges på topp fylling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22491</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylling EPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Sikring mot jordforurensning">
+            <annotation>
+               <documentation>22489: Membran for å sikre at det ikke trenger forurenset vann ned i grunnen. F.eks i forbindelse med bassang/magasin.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22489</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sikring mot jordforurensning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tt">
+            <annotation>
+               <documentation>22488: Membran for tetning bak betongutstøping og vann- og frostsikring i tunneler.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22488</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeMembranOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Membran"
+            substitutionGroup="nvdb:AbstraktMembran"
+            type="nvdb:MembranType">
+      <annotation>
+         <documentation>145: Vanntett sjikt for å hindre vanngjennomgang.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">145</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Membran</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="MembranType">
+      <complexContent>
+         <extension base="nvdb:AbstraktMembranType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeMembranType">
+                  <annotation>
+                     <documentation>1278: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1278</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10326: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10326</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produsent" type="string">
+                  <annotation>
+                     <documentation>1535: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1535</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>1456: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1456</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4821: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4821</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="MembranPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Membran"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

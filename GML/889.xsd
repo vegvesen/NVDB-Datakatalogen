@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>889: Gjeldende bruksklasse for modulvogntog i vegliste.</documentation>
    </annotation>
@@ -14,6 +14,72 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AksellastTeleløsningBruksklasse, modulvogntogType">
+      <annotation>
+         <documentation>12909: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12909</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AksellastTeleløsningBruksklasse, modulvogntogEnumerationType nvdb:AksellastTeleløsningBruksklasse, modulvogntogOtherType"/>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, modulvogntogEnumerationType">
+      <annotation>
+         <documentation>12909: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12909</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22347</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22348</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22349</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22350</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">7 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22351</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">8 tonn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AksellastTeleløsningBruksklasse, modulvogntogOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Bruksklasse, modulvogntog"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Bruksklasse, modulvogntogType">
@@ -29,15 +95,6 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="strekningsbeskrivelse" type="string">
-                  <annotation>
-                     <documentation>10738: Beskrivelse av aktuell vegstrekning. Denne teksten blir henta direkte inn i veglistene.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10738</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Strekningsbeskrivelse</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element name="maksTotalvekt">
                   <annotation>
                      <documentation>10741: Angir maksimal tillatt totalvekt for modulvogntog.</documentation>
@@ -56,6 +113,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="gjelderIkkeLinksemitrailer">
+                  <annotation>
+                     <documentation>10744: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10744</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder ikke linksemitrailer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="vinterstengtFor60Tonn">
                   <annotation>
                      <documentation>10743: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april.</documentation>
@@ -65,12 +131,21 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="gjelderIkkeLinksemitrailer">
+               <element minOccurs="0" name="AksellastTeleløsning">
                   <annotation>
-                     <documentation>10744: Veger som er merket med L i kolonne for type modulvogntog er ikke tillatt for modulvogntog som nevnt i bokstav b nr. 3.</documentation>
+                     <documentation>12909: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10744</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder ikke linksemitrailer</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">12909</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="strekningsbeskrivelse" type="string">
+                  <annotation>
+                     <documentation>10738: Beskrivelse av aktuell vegstrekning. Denne teksten blir henta direkte inn i veglistene.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10738</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Strekningsbeskrivelse</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -124,6 +199,7 @@
       <restriction base="string">
          <enumeration value="L">
             <annotation>
+               <documentation>17398: Modulvogntog av type Linksemitrailer er IKKE tillatt på strekning.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17398</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">L</sc:taggedValue>
@@ -234,6 +310,7 @@
       <restriction base="string">
          <enumeration value="V">
             <annotation>
+               <documentation>17397: For veger merket V i kolonne for vinterstenging er tillatt totalvekt begrenset til 50 tonn for modulvogntog fra 1. november til første mandag etter 2.påskedag. I Nordland, Troms og Finnmark gjelder tilsvarende fra 16. oktober til 30. april.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17397</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">V</sc:taggedValue>

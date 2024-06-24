@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>573: Angir svingerestriksjon.</documentation>
    </annotation>
@@ -14,6 +14,72 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="GjelderUkedagSvingerestriksjonType">
+      <annotation>
+         <documentation>12929: Svingeforbud gjelder kun angitt ukedag.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12929</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gjelder ukedag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GjelderUkedagSvingerestriksjonEnumerationType nvdb:GjelderUkedagSvingerestriksjonOtherType"/>
+   </simpleType>
+   <simpleType name="GjelderUkedagSvingerestriksjonEnumerationType">
+      <annotation>
+         <documentation>12929: Svingeforbud gjelder kun angitt ukedag.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12929</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gjelder ukedag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22480</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fredag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22476</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mandag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22478</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Onsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ti">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22477</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tirsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="To">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22479</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Torsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GjelderUkedagSvingerestriksjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Svingerestriksjon"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:SvingerestriksjonType">
@@ -29,6 +95,69 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
+               <element minOccurs="0" name="gjelderHverdagerULørdagFraKl" type="time">
+                  <annotation>
+                     <documentation>12923: Gjennomkjøring forbudt gjelder på hverdager unntatt lørdag fra angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12923</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder hverdager u. lørdag fra kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderHverdagerULørdagTilKl" type="time">
+                  <annotation>
+                     <documentation>12924: Svingeforbud gjelder på hverdager unntatt lørdag til angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12924</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder hverdager u. lørdag til kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderLørdagFraKl" type="time">
+                  <annotation>
+                     <documentation>12925: Svingeforbud gjelder på lørdager fra angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12925</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder lørdag fra kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderLørdagTilKl" type="time">
+                  <annotation>
+                     <documentation>12926: Svingeforbud gjelder på lørdager til angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12926</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder lørdag til kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderSøndagFraKl" type="time">
+                  <annotation>
+                     <documentation>12927: Svingeforbud gjelder på søndager fra angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12927</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder søndag fra kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderSøndagTilKl" type="time">
+                  <annotation>
+                     <documentation>12928: Svingeforbud gjelder på søndager til angitt klokkeslett.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12928</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder søndag til kl.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjelderUkedag">
+                  <annotation>
+                     <documentation>12929: Svingeforbud gjelder kun angitt ukedag.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12929</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder ukedag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="merknad" type="string">
                   <annotation>
                      <documentation>5294: Kan gi permanent merknad. F.eks. "høyresving forbudt".</documentation>

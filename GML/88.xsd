@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>88: Lyskilde med innfatning.</documentation>
    </annotation>
@@ -109,6 +109,7 @@
       <restriction base="string">
          <enumeration value="l">
             <annotation>
+               <documentation>3760: Lysarmatur av type lyskaster.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3760</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Lyskaster</sc:taggedValue>
@@ -117,6 +118,7 @@
          </enumeration>
          <enumeration value="p">
             <annotation>
+               <documentation>3759: Lysarmatur som benyttes bl.a. i park.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3759</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Parklys</sc:taggedValue>
@@ -125,6 +127,7 @@
          </enumeration>
          <enumeration value="tn">
             <annotation>
+               <documentation>2750: Vegbelysning i tunnel.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2750</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Tunnellys</sc:taggedValue>
@@ -133,6 +136,7 @@
          </enumeration>
          <enumeration value="v">
             <annotation>
+               <documentation>3758: Veglys i dagen.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3758</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Veglys</sc:taggedValue>
@@ -142,48 +146,6 @@
       </restriction>
    </simpleType>
    <simpleType name="ArmaturtypeLysarmaturOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="Avskjerming_MaterialeLysarmaturType">
-      <annotation>
-         <documentation>8401: Angir hvordan glasset på armaturen er utformet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8401</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Avskjerming, materiale</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:Avskjerming_MaterialeLysarmaturEnumerationType nvdb:Avskjerming_MaterialeLysarmaturOtherType"/>
-   </simpleType>
-   <simpleType name="Avskjerming_MaterialeLysarmaturEnumerationType">
-      <annotation>
-         <documentation>8401: Angir hvordan glasset på armaturen er utformet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">8401</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Avskjerming, materiale</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="B">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">11334</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Buet</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="P">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">11333</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Plant</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="Avskjerming_MaterialeLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -357,6 +319,7 @@
          </enumeration>
          <enumeration value="U">
             <annotation>
+               <documentation>17629: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17629</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -617,15 +580,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="avskjerming_Materiale">
-                  <annotation>
-                     <documentation>8401: Angir hvordan glasset på armaturen er utformet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">8401</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Avskjerming, materiale</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element minOccurs="0" name="fargetemperatur" type="integer">
                   <annotation>
                      <documentation>9564: Angir fargetemperatur.</documentation>
@@ -659,6 +613,26 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11443</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Lyskilde sist skiftet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="ombyggingssett"
+                        type="nvdb:OmbyggingssettLysarmaturType">
+                  <annotation>
+                     <documentation>12921: Lysarmatur er bygd om til å kunne benytte LED-lyskilde. Opprinnelig innfatning er beholdt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12921</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ombyggingssett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="ombyggingsår" type="double">
+                  <annotation>
+                     <documentation>12922: Angir hvilket år lysarmatur ble bygd om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12922</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ombyggingsår</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -919,14 +893,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="OS">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22071</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ombyggingssett</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="QL">
             <annotation>
                <appinfo>
@@ -938,6 +904,50 @@
       </restriction>
    </simpleType>
    <simpleType name="LyskildeTypeLysarmaturOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmbyggingssettLysarmaturType">
+      <annotation>
+         <documentation>12921: Lysarmatur er bygd om til å kunne benytte LED-lyskilde. Opprinnelig innfatning er beholdt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12921</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ombyggingssett</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmbyggingssettLysarmaturEnumerationType nvdb:OmbyggingssettLysarmaturOtherType"/>
+   </simpleType>
+   <simpleType name="OmbyggingssettLysarmaturEnumerationType">
+      <annotation>
+         <documentation>12921: Lysarmatur er bygd om til å kunne benytte LED-lyskilde. Opprinnelig innfatning er beholdt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12921</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ombyggingssett</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22474: Lysarmatur er bygd om til Led.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22474</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22475: Lyskilde er ikke bygd om.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22475</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmbyggingssettLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -963,6 +973,7 @@
       <restriction base="string">
          <enumeration value="dir">
             <annotation>
+               <documentation>13773: Verken reflektor eller linse.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">13773</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Direkte lys</sc:taggedValue>
@@ -1061,6 +1072,7 @@
          </enumeration>
          <enumeration value="Eu">
             <annotation>
+               <documentation>21389: Euroskilt.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21389</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Euroskilt</sc:taggedValue>
@@ -1133,6 +1145,7 @@
          </enumeration>
          <enumeration value="lug">
             <annotation>
+               <documentation>21925: Lug Light Factory</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21925</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">LUG</sc:taggedValue>
@@ -1247,7 +1260,7 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21727</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Strill</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Strihl</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -1288,6 +1301,22 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22287</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Honor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="can">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22308</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Catena</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22473</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SG</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

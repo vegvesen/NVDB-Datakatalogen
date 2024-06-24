@@ -84,8 +84,8 @@
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
-         <Name>NSR_Stopplace_Navn</Name>
-         <Definition>Navn på Stopplace (stoppestedet) som Holdeplassutrustning tilhører. Offisielt navn hentet fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS.</Definition>
+         <Name>navn</Name>
+         <Definition>Angir navn på holdeplassutrustning. Navnet skal samsvare med navn på tilsvarende stoppested i NSR - Nasjonalt Stoppestedsregister (Entur). Om det ikke finnes tilsvarende stoppested i NSR kan det legges inn et uoffisielt navn.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcText"/>
@@ -94,7 +94,7 @@
       </PropertyDef>
       <PropertyDef>
          <Name>NSR_Stopplace_ID</Name>
-         <Definition>Unik ID på Stopplace (stoppestedet) som Holdeplassutrustning tilhører. NSR_Stopplace_ID hentes fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS.</Definition>
+         <Definition>Unik identitet som refererer til det stoppestedet i Nasjonalt Stoppestedregister (NSR) som tilsvarer gitt holdeplassutrustning i NVDB. Identitet benyttes for datautveksling mellom NVDB og NSR. Identiteten skal skives fullt ut på formen: "NSR:StopPlace:xxxxx",  xxxxx er et unikt løpenummer.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcText"/>
@@ -103,7 +103,7 @@
       </PropertyDef>
       <PropertyDef>
          <Name>NSR_Quay_ID</Name>
-         <Definition>Unik ID på Quay (stoppunkt) som Holdeplassutrustning tilhører. NSR_Quai_ID hentes fra NSR - Nasjonalt Stoppestedsregister. NSR administreres av Entur AS. NSR_Quay_ID er basis ID for synkronisering mot NSR.</Definition>
+         <Definition>Unik identitet som refererer til quay i Nasjonalt Stoppestedregister (NSR) som tilsvarer gitt holdeplassutrustning i NVDB. Identitet benyttes for datautveksling mellom NVDB og NSR. Identiteten skal skives fullt ut på formen: "NSR:Quay:xxxxx",  xxxxx er et unikt løpenummer.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcText"/>
@@ -112,7 +112,7 @@
       </PropertyDef>
       <PropertyDef>
          <Name>NSR_Quay_Tag</Name>
-         <Definition>Merking/navn på Quay (Stoppunkt).</Definition>
+         <Definition>Merking/navn på Quay. Hentes fra NSR.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcText"/>
@@ -311,19 +311,6 @@
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
-         <Name>UU_Gangadkomst</Name>
-         <Definition>Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</Definition>
-         <PropertyType>
-            <TypePropertyEnumeratedValue>
-               <EnumList name="PEnum_Holdeplassutrustning_UU_Gangadkomst">
-                  <EnumItem>Delvis</EnumItem>
-                  <EnumItem>Ja</EnumItem>
-                  <EnumItem>Nei</EnumItem>
-               </EnumList>
-            </TypePropertyEnumeratedValue>
-         </PropertyType>
-      </PropertyDef>
-      <PropertyDef>
          <Name>UU_Sykkelparkering</Name>
          <Definition>Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</Definition>
          <PropertyType>
@@ -331,6 +318,19 @@
                <EnumList name="PEnum_Holdeplassutrustning_UU_Sykkelparkering">
                   <EnumItem>Ja, med takoverbygg</EnumItem>
                   <EnumItem>Ja, uten takoverbygg</EnumItem>
+                  <EnumItem>Nei</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>UU_Gangadkomst</Name>
+         <Definition>Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Holdeplassutrustning_UU_Gangadkomst">
+                  <EnumItem>Delvis</EnumItem>
+                  <EnumItem>Ja</EnumItem>
                   <EnumItem>Nei</EnumItem>
                </EnumList>
             </TypePropertyEnumeratedValue>
@@ -379,7 +379,7 @@
       </PropertyDef>
       <PropertyDef>
          <Name>UU_Plattform_Type</Name>
-         <Definition>.Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</Definition>
+         <Definition>Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</Definition>
          <PropertyType>
             <TypePropertyEnumeratedValue>
                <EnumList name="PEnum_Holdeplassutrustning_UU_Plattform_Type">

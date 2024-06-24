@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>92: Elektrisk eller optisk leder.</documentation>
    </annotation>
@@ -157,6 +157,7 @@
          </enumeration>
          <enumeration value="U">
             <annotation>
+               <documentation>17561: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17561</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -255,6 +256,7 @@
          </enumeration>
          <enumeration value="kb">
             <annotation>
+               <documentation>15883: Kabel er lagt i vann/sjø.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">15883</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Vann</sc:taggedValue>
@@ -361,6 +363,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">2023</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Framføringsveg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="luftfartshinderNRL">
+                  <annotation>
+                     <documentation>12917: Angir om kabel er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Egenskap er bare relevant for kabel i luft.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12917</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -511,6 +522,59 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="LuftfartshinderNRLKabelType">
+      <annotation>
+         <documentation>12917: Angir om kabel er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Egenskap er bare relevant for kabel i luft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12917</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LuftfartshinderNRLKabelEnumerationType nvdb:LuftfartshinderNRLKabelOtherType"/>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLKabelEnumerationType">
+      <annotation>
+         <documentation>12917: Angir om kabel er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Egenskap er bare relevant for kabel i luft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12917</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J1">
+            <annotation>
+               <documentation>22443: Kabel er definert som luftfartshinder. Datagrunnlag i NVDB er i henhold til krav fra NRL, bla. krav knyttet til nøyaktighet. Kabel er dermed klar for overføring til NRL.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22443</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J2">
+            <annotation>
+               <documentation>22444: Kabel er definert som luftfartshinder, men datagrunnlag i NVDB er enten ikke i henhold til krav fra NRL eller det er ikke undersøkt om datagrunnlag er i henhold til krav i NRL. Kabel er dermed ikke klar for overføring til NRL.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22444</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, men ikke klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22445: Kabel skal ikke rapporteres til NRL.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22445</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei, ikke relevant for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLKabelOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="SpesiellStatusKabelType">
       <annotation>
          <documentation>12619: Angir at kabelen har en annen status enn å være i daglig drift.</documentation>
@@ -532,6 +596,7 @@
       <restriction base="string">
          <enumeration value="RK">
             <annotation>
+               <documentation>21792: Kabel er ikke i daglig drift, men ligger klar til å tas i bruk om behov.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21792</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Reservekabel</sc:taggedValue>
@@ -540,6 +605,7 @@
          </enumeration>
          <enumeration value="UK">
             <annotation>
+               <documentation>21794: Kabel er ikke i bruk. Endelig status ikke avklart.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21794</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -548,6 +614,7 @@
          </enumeration>
          <enumeration value="VK">
             <annotation>
+               <documentation>21793: Kabel er defekt og kan ikke brukes.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">21793</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Vraket</sc:taggedValue>

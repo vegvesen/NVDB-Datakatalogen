@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.36">
+   <annotation>
+      <documentation>163: Fastmontert video- eller fotokamera for trafikkovervåkning.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeKameraType">
+      <annotation>
+         <documentation>10971: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10971</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeKameraEnumerationType nvdb:BruksområdeKameraOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeKameraEnumerationType">
+      <annotation>
+         <documentation>10971: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10971</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>18314: Kamera som benyttes til andre formål. Det skal angis informasjon om bruksområdet under tilleggsinformasjon (ET11584).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18314</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet formål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18313</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bomstasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hd">
+            <annotation>
+               <documentation>18312: Automatisk hendelsesdetektering, AID (automatic incident detection). Brukes når kamera er installert til det formålet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18312</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hendelsesdetektering, AID</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ob">
+            <annotation>
+               <documentation>20997: Visuell overvåkning av basseng.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20997</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overvåkning, basseng</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="otb">
+            <annotation>
+               <documentation>20998: Visuell overvåkning av teknisk bygg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20998</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overvåkning, teknisk bygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ot">
+            <annotation>
+               <documentation>18316: Visuell overvåkning av trafikk uten AID.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18316</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overvåkning, trafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ov">
+            <annotation>
+               <documentation>20996: Visuell overvåkning av vegbom.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20996</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overvåkning, vegbom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tdv">
+            <annotation>
+               <documentation>20999: Detektering av innkommende trafikk for styring av vegbelysning eller tunnelbelysning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20999</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdetektering, belysning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tds">
+            <annotation>
+               <documentation>18311: Detektering av innkommende trafikk for styring av signalanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18311</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdetektering, signalanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vf">
+            <annotation>
+               <documentation>18310: Overvåkning av vær og føreforhold.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18310</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vær og føreforhold</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeKameraOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Kamera"
+            substitutionGroup="nvdb:AbstraktKamera"
+            type="nvdb:KameraType">
+      <annotation>
+         <documentation>163: Fastmontert video- eller fotokamera for trafikkovervåkning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">163</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kamera</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KameraType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKameraType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeKameraType">
+                  <annotation>
+                     <documentation>10971: Angir hva vegobjektet brukes til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10971</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeKamera">
+                  <annotation>
+                     <documentation>1179: Angir hvilken type kamera det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1179</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type kamera</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeTeknologi">
+                  <annotation>
+                     <documentation>12080: Angir hvilken type teknologi som er benyttet i kameraet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12080</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type teknologi</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeTilkopling">
+                  <annotation>
+                     <documentation>7015: Angir hvilken type tilkopling kameraet har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7015</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type tilkopling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="oppsettingsutstyr" type="nvdb:OppsettingsutstyrKameraType">
+                  <annotation>
+                     <documentation>3734: Angir hva utstyret er festet på.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3734</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="link" type="string">
+                  <annotation>
+                     <documentation>8140: Kan her legge inn url eller ip-adresse til kamera. Benyttes av Visveg for å få fram bilder.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8140</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Link</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>4075: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4075</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10468: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10468</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>1536: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1536</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>1457: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1457</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="leverandør" type="string">
+                  <annotation>
+                     <documentation>1497: Angir navn på firma som har levert vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1497</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4829: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4829</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KameraPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kamera"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="OppsettingsutstyrKameraType">
+      <annotation>
+         <documentation>3734: Angir hva utstyret er festet på.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3734</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OppsettingsutstyrKameraEnumerationType nvdb:OppsettingsutstyrKameraOtherType"/>
+   </simpleType>
+   <simpleType name="OppsettingsutstyrKameraEnumerationType">
+      <annotation>
+         <documentation>3734: Angir hva utstyret er festet på.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3734</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppsettingsutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>16950: Kameraet er festet i selve brukonstruksjonen. F.eks. på brakett festet på brukonstruksjonen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16950</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bru</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="em">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4736</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Egen mast/stolpe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16949</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kabelstige</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4737</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lysmast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16948</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiltportal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ss">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17366</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiltstolpe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4738</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnelportal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4739</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppsettingsutstyrKameraOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKameraKameraType">
+      <annotation>
+         <documentation>1179: Angir hvilken type kamera det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type kamera</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeKameraKameraEnumerationType nvdb:TypeKameraKameraOtherType"/>
+   </simpleType>
+   <simpleType name="TypeKameraKameraEnumerationType">
+      <annotation>
+         <documentation>1179: Angir hvilken type kamera det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type kamera</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="D">
+            <annotation>
+               <documentation>20995: Videokamera som er svingbart/zoombart. (PTZ=Pan, Tilt, Zoom).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20995</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bevegelig videokamera (PTZ/dome)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="D">
+            <annotation>
+               <documentation>9296: Videokamera som har fast innstilt bildeutsnitt. Ikke styrbart mht. vinkel, zoom etc.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9296</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fast videokamera</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <documentation>9297: Kamera som kun benyttes til å ta bilder. F.eks. i forbindelse med ATK eller andre spesielle situasjoner.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9297</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fotokamera</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKameraKameraOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTeknologiKameraType">
+      <annotation>
+         <documentation>12080: Angir hvilken type teknologi som er benyttet i kameraet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12080</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type teknologi</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeTeknologiKameraEnumerationType nvdb:TypeTeknologiKameraOtherType"/>
+   </simpleType>
+   <simpleType name="TypeTeknologiKameraEnumerationType">
+      <annotation>
+         <documentation>12080: Angir hvilken type teknologi som er benyttet i kameraet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12080</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type teknologi</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="O">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20986</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Optisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T">
+            <annotation>
+               <documentation>20987: Kamera som benyttes for å avlese temperatur på en overflate.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20987</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Termisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TO">
+            <annotation>
+               <documentation>20988: Både termisk og optisk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20988</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Termisk/optisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTeknologiKameraOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTilkoplingKameraType">
+      <annotation>
+         <documentation>7015: Angir hvilken type tilkopling kameraet har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7015</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type tilkopling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeTilkoplingKameraEnumerationType nvdb:TypeTilkoplingKameraOtherType"/>
+   </simpleType>
+   <simpleType name="TypeTilkoplingKameraEnumerationType">
+      <annotation>
+         <documentation>7015: Angir hvilken type tilkopling kameraet har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7015</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type tilkopling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>9299: Ikke overføring av bilde via ethernett, men f.eks. ccoax.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9299</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Analog</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="j">
+            <annotation>
+               <documentation>9298: Overfører bilde via Ethernett. IP-kamera.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9298</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Digital</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTilkoplingKameraOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

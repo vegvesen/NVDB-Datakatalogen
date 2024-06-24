@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>48: Del av vegen reservert for gående. Som regel ligger fortau høyere enn kjørebanen og er atskilt fra denne med kantstein (1).</documentation>
    </annotation>
@@ -181,6 +181,7 @@
          </enumeration>
          <enumeration value="U">
             <annotation>
+               <documentation>17575: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17575</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -272,6 +273,17 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0"
+                        name="vinterstengt"
+                        type="nvdb:VinterstengtFortauType">
+                  <annotation>
+                     <documentation>12902: Angir hvorvidt fortauet er stengt i vintersesongen. "Stengt" betyr at det ikke blir utført vinterdrift på fortauet. I noen slike tilfeller benyttes fortauet som snøopplager.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12902</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterstengt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="etableringsår" type="integer">
                   <annotation>
                      <documentation>10295: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
@@ -325,6 +337,17 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">5638</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vinterdriftsansvarlig"
+                        type="nvdb:VinterdriftsansvarligFortauType">
+                  <annotation>
+                     <documentation>12849: Angir hvem som er ansvarlig for vintervedlikeholdet av fortauet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12849</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterdriftsansvarlig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -401,6 +424,7 @@
          </enumeration>
          <enumeration value="ip">
             <annotation>
+               <documentation>19465: Det er ikke punkthinder knyttet til fortauet.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">19465</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ikke punkthinder</sc:taggedValue>
@@ -558,6 +582,132 @@
       </restriction>
    </simpleType>
    <simpleType name="VedlikeholdsansvarligFortauOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsansvarligFortauType">
+      <annotation>
+         <documentation>12849: Angir hvem som er ansvarlig for vintervedlikeholdet av fortauet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12849</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterdriftsansvarligFortauEnumerationType nvdb:VinterdriftsansvarligFortauOtherType"/>
+   </simpleType>
+   <simpleType name="VinterdriftsansvarligFortauEnumerationType">
+      <annotation>
+         <documentation>12849: Angir hvem som er ansvarlig for vintervedlikeholdet av fortauet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12849</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22307</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22302</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22305</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22306</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22303</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22301</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22304</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsansvarligFortauOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterstengtFortauType">
+      <annotation>
+         <documentation>12902: Angir hvorvidt fortauet er stengt i vintersesongen. "Stengt" betyr at det ikke blir utført vinterdrift på fortauet. I noen slike tilfeller benyttes fortauet som snøopplager.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12902</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterstengt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterstengtFortauEnumerationType nvdb:VinterstengtFortauOtherType"/>
+   </simpleType>
+   <simpleType name="VinterstengtFortauEnumerationType">
+      <annotation>
+         <documentation>12902: Angir hvorvidt fortauet er stengt i vintersesongen. "Stengt" betyr at det ikke blir utført vinterdrift på fortauet. I noen slike tilfeller benyttes fortauet som snøopplager.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12902</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterstengt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22315: Fortauet er stengt i vintersesongen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22315</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22316: Fortauet er åpent i vintersesongen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22316</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterstengtFortauOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.35">
+        version="2.36">
    <annotation>
       <documentation>42: Sted i kollektivnettet der kollektivlinjer krysser eller tangerer hverandre. Knutepunktets funksjon er å binde kollektivnettet sammen til et nettverk slik at den reisende ved hjelp av tilrettelagt omstigning/bytte kan nå sitt bestemmelsessted. Et knutepunkt har ofte begrepet terminal eller stasjon i navnet (HB V123).</documentation>
    </annotation>
@@ -43,6 +43,7 @@
          </enumeration>
          <enumeration value="JA">
             <annotation>
+               <documentation>16998: Angir at det er billettsalg i automat.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16998</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ja, automat</sc:taggedValue>
@@ -51,6 +52,7 @@
          </enumeration>
          <enumeration value="JKS">
             <annotation>
+               <documentation>16997: Angir at det er betjent billettsalg i kiosk/skranke</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16997</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ja, kiosk/skranke</sc:taggedValue>
@@ -59,6 +61,7 @@
          </enumeration>
          <enumeration value="JKSA">
             <annotation>
+               <documentation>16999: Angir at det er billettsalg i både kiosk/skranke og i automat.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16999</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ja, kiosk/skranke og automat</sc:taggedValue>
@@ -67,6 +70,7 @@
          </enumeration>
          <enumeration value="N">
             <annotation>
+               <documentation>17000: Ikke fysisk billettsalg i tilknytning til kollektivknutepunktet. Billettsalg via apper/internett.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17000</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
@@ -141,6 +145,7 @@
          </enumeration>
          <enumeration value="U">
             <annotation>
+               <documentation>17638: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17638</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
@@ -465,10 +470,19 @@
             <sequence>
                <element name="navn" type="string">
                   <annotation>
-                     <documentation>1075: Angir navn på kollektivknutepunktet.</documentation>
+                     <documentation>1075: Angir navn på kollektivknutepunktet. Navnet skal samsvare med navn på tilsvarende stoppested i NSR - Nasjonalt Stoppestedsregister (Entur).</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1075</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="NSR_Stopplace_ID" type="string">
+                  <annotation>
+                     <documentation>10956: Unik identitet som refererer til det stoppestedet i Nasjonalt Stoppestedregister (NSR) som tilsvarer gitt kollektivknutepunkt i NVDB. Identitet benyttes for datautveksling mellom NVDB og NSR. Identiteten skal skives fullt ut på formen: "NSR:StopPlace:xxxxx",  xxxxx er et unikt løpenummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10956</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">NSR_Stopplace_ID</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -496,15 +510,6 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Gjelder trikk/bybane</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="NSR_Stopplace_ID" type="string">
-                  <annotation>
-                     <documentation>10956: Unik ID som refererer til Stopplace (stoppested) i Nasjonalt stoppestedsregister (NSR). Benyttes for datautveksling mellom NVDB og NSR.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10956</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">NSR_Stopplace_ID</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -739,6 +744,7 @@
       <restriction base="string">
          <enumeration value="L">
             <annotation>
+               <documentation>16984: Knutepunkter hvorfra man kan reise lokalt innen samme kommune og/eller samme fylke.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16984</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Lokalt</sc:taggedValue>
@@ -747,6 +753,7 @@
          </enumeration>
          <enumeration value="M">
             <annotation>
+               <documentation>16985: Det aller enkleste knutepunktet der det er tilrettelagt for omstigning. I sin enkleste form er et mindre knutepunkt en holdeplass der det er lagt til rette for overgang mellom to eller flere transportmidler i kollektivsystemet (buss, båt, taxi i rute).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16985</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Mindre</sc:taggedValue>
@@ -755,6 +762,7 @@
          </enumeration>
          <enumeration value="nN">
             <annotation>
+               <documentation>16982: Knutepunkter hvorfra man kan reise både lokalt, regionalt og til andre landsdeler i Norge. Noen nasjonale knutepunkter har internasjonale reisemål. Det finnes et fåtall nasjonale knutepunkter som alle krever spesiell utforming.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16982</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nasjonalt</sc:taggedValue>
@@ -763,6 +771,7 @@
          </enumeration>
          <enumeration value="R">
             <annotation>
+               <documentation>16983: Knutepunkter der man kan reise lokalt og regionalt i betydningen i og til de nærmeste fylkene.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16983</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Regionalt</sc:taggedValue>
@@ -931,6 +940,7 @@
          </enumeration>
          <enumeration value="JT">
             <annotation>
+               <documentation>16994: Minst ett toalett er universelt utformet.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16994</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ja, tilgjengelig</sc:taggedValue>
@@ -1063,6 +1073,7 @@
          </enumeration>
          <enumeration value="JT">
             <annotation>
+               <documentation>16991: Venterom er tilgjengelig for alle, universelt utformet.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16991</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ja, tilgjengelig</sc:taggedValue>
