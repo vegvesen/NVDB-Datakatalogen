@@ -5,45 +5,54 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
-      <documentation>983: Informasjon om vegens tilstand med hensyn på bæreevne.</documentation>
+      <documentation>983: Informasjon om vegens tilstand med hensyn på bæreevne. Baseres på kontinuerlige nedbøyningsmålinger med Rapid Pavement Tester (Raptor).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <element name="Tilstandsindikator, bæreevne"
+   <element name="Tilstandsindikator, bæreevne veg"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Tilstandsindikator, bæreevneType">
+            type="nvdb:Tilstandsindikator, bæreevne vegType">
       <annotation>
-         <documentation>983: Informasjon om vegens tilstand med hensyn på bæreevne.</documentation>
+         <documentation>983: Informasjon om vegens tilstand med hensyn på bæreevne. Baseres på kontinuerlige nedbøyningsmålinger med Rapid Pavement Tester (Raptor).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">983</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bæreevne</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, bæreevne veg</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Tilstandsindikator, bæreevneType">
+   <complexType name="Tilstandsindikator, bæreevne vegType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
                <element name="tilstandsindikatorverdi" type="double">
                   <annotation>
-                     <documentation>12690: Tilstandsindikator for bæreevne. Beregningsregler er under utvikling. Tilstand angis med verdi fra 0 til 3, samt 98 og 99. 0: Ingen avvik - B (bæreevne) &gt; 16 tonn. 1: Mindre eller moderate avvik - 14 tonn &lt; B ≤  16 tonn. 2: Vesentlig avvik - 10 tonn &lt; B ≤  14 tonn. 3: Stort eller alvorlig avvik - B ≤  10 tonn. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
+                     <documentation>12690: Tilstandsindikator for bæreevne. Baseres på kontinuerlige nedbøyningsmålinger med Rapid Pavement Tester (Raptor). Tilstand angis med verdi fra 0 til 3, samt 98 og 99. 0: Ingen avvik - B (bæreevne) &gt; 16 tonn. 1: Mindre eller moderate avvik - 14 tonn &lt; B ≤  16 tonn. 2: Vesentlig avvik - 10 tonn &lt; B ≤  14 tonn. 3: Stort eller alvorlig avvik - B ≤  10 tonn. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12690</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="beregningsår" type="double">
+               <element name="beregningsårForIndikator" type="double">
                   <annotation>
                      <documentation>12692: Angir hvilket år beregningene er gjort.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12692</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Beregningsår</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beregningsår for indikator</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>12970: Angir lengde på strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12970</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -60,9 +69,9 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Tilstandsindikator, bæreevnePropertyType">
+   <complexType name="Tilstandsindikator, bæreevne vegPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Tilstandsindikator, bæreevne"/>
+         <element ref="nvdb:Tilstandsindikator, bæreevne veg"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>487: Sted for på og avstigning av kollektivtrafikk.</documentation>
    </annotation>
@@ -122,22 +122,21 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Viktighetsnivå"
-                        type="nvdb:UU_ViktighetsnivåHoldeplassutrustningType">
-                  <annotation>
-                     <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10260</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Viktighetsnivå</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element name="UU_PåOgAvstigning">
                   <annotation>
                      <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">UU_På- og avstigning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="UU_TilrettelagtForOvergangBytte">
+                  <annotation>
+                     <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -324,7 +323,7 @@
                </element>
                <element minOccurs="0" name="UU_Leskur_FriDybdeInnvendig" type="double">
                   <annotation>
-                     <documentation>10263: Angir minste frie bredde innvendig i leskur. Fri bredde måles i leskurets lengderetning, dvs. parallelt med åpning. Innenfor denne bredden skal det være mulig å bevege seg med rullestol, dvs. bredde av ev. benker m.m. er ikke inkludert i fri bredde.</documentation>
+                     <documentation>10263: Angir minste frie dybde innvendig i leskur. Fri dybde måles på tvers av leskuret, dvs. normalt på åpning. Innenfor denne dybden skal det være mulig å bevege seg med rullestol, dvs. dybde av ev. benker m.m. er ikke inkludert i fri dybde.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10263</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">UU_Leskur, fri dybde innvendig</sc:taggedValue>
@@ -519,6 +518,17 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0"
+                        name="stoppknapp"
+                        type="nvdb:StoppknappHoldeplassutrustningType">
+                  <annotation>
+                     <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="etableringsår" type="integer">
                   <annotation>
                      <documentation>10306: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
@@ -621,6 +631,48 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="StoppknappHoldeplassutrustningType">
+      <annotation>
+         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StoppknappHoldeplassutrustningEnumerationType nvdb:StoppknappHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="StoppknappHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22555</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22556</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StoppknappHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="Trafikkretning_GeografiskHoldeplassutrustningType">
       <annotation>
          <documentation>10213: Angir hvilken trafikkretning som betjenes. Angis hvis entydig.</documentation>
@@ -914,19 +966,37 @@
       <restriction base="string">
          <enumeration value="J">
             <annotation>
-               <documentation>17273: Skal angi Ja om det er gangfelt eller tilrettelagt kryssing. Tilrettelagt kryssing vil si at det f.eks. er nedsenket kantstein  eller åpning i rekkverk/gjerde, men uten at det er gangfelt.</documentation>
+               <documentation>17273: Det finnes nærliggende gangfelt eller tilrettelagt kryssing. Tilrettelagt kryssing vil si at det f.eks. er nedsenket kantstein  eller åpning i rekkverk/gjerde, men uten at det er gangfelt.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17273</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gangfelt/tilrettelagt kryssing</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
          <enumeration value="N">
             <annotation>
-               <documentation>17274: Skal angi Nei der det ikke er tilrettelagt kryssing eller gangfelt. Det skal angis Nei også i tilfeller hvor det er kryssing over/under på egen g/s-veg.</documentation>
+               <documentation>17274: Vegen må krysses i samme plan som øvrig trafikk. Det er ikke gangfelt eller tilrettelagt kryssing.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17274</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen tilrettelegging</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IR">
+            <annotation>
+               <documentation>22570: Kryssing av vegen er ikke en relevant problemstilling for denne holdeplassen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22570</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="PK">
+            <annotation>
+               <documentation>22569: Kryssing av vegen på g/s-veg over gangbro eller gjennom undergang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22569</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Planskilt kryssing på g/s-veg</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -1607,7 +1677,7 @@
          </enumeration>
          <enumeration value="eget">
             <annotation>
-               <documentation>16692: Eget areal som brukes som venteareal.</documentation>
+               <documentation>16692: Eget areal som er opphøyet fra kjørebanen, brukes som venteareal.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16692</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Eget areal</sc:taggedValue>
@@ -1616,7 +1686,7 @@
          </enumeration>
          <enumeration value="nei">
             <annotation>
-               <documentation>16689: Det er ikke noe eget tilpasset venteareal. Venteareal utenfor kjørebanen (i avkjørsler, stikkveger, ved postkasser eller lignende).</documentation>
+               <documentation>16689: Det er ikke noe eget tilrettelagt venteareal.  Venteareal utenfor kjørebanen (i avkjørsler, stikkveger, ved postkasser eller lignende).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16689</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ikke plattform</sc:taggedValue>
@@ -1910,6 +1980,50 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningType">
+      <annotation>
+         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UU_TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType nvdb:UU_TilrettelagtForOvergangBytteHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22553: Holdeplassutrustning er tilrettelagt for omstigning mellom kollektivlinjer, men har ikke fasilitetene som et kollektivknutepunkt har. Det kan f.eks. være korrespondanse mellom busslinjer.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22553</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22554: Det kan være mulig å bytte mellom ulike busslinjer, men det er ingen spesiell tilrettelegging.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22554</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="UU_TypeHoldeplassutrustningType">
       <annotation>
          <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om.</documentation>
@@ -2052,77 +2166,6 @@
       </restriction>
    </simpleType>
    <simpleType name="UU_TypeTransportmiddelHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_ViktighetsnivåHoldeplassutrustningType">
-      <annotation>
-         <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10260</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Viktighetsnivå</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_ViktighetsnivåHoldeplassutrustningEnumerationType nvdb:UU_ViktighetsnivåHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_ViktighetsnivåHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10260: Angir hvilket viktighetsnivå holdeplassutrustning har.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10260</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Viktighetsnivå</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="A">
-            <annotation>
-               <documentation>16756: Det aller enkleste knutepunktet der det er tilrettelagt for omstigning. I sin enkleste form er et mindre knutepunkt en holdeplass der det er lagt til rette for overgang mellom to eller flere transportmidler i kollektivsystemet (buss, båt, taxi i rute). Se HB V123.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16756</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Annen viktig holdeplass</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="L">
-            <annotation>
-               <documentation>16755: Knutepunkter hvorfra man kan reise lokalt innen samme kommune og/eller samme fylke. Se HB V123.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16755</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Lokalt knutepunkt</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <documentation>16753: Knutepunkter hvorfra man kan reise både lokalt, regionalt og til andre landsdeler i Norge. Noen nasjonale knutepunkter har internasjonale reisemål. Det finnes et fåtall nasjonale knutepunkter som alle krever spesiell utforming. Se HB V123.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16753</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nasjonalt knutepunkt</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="R">
-            <annotation>
-               <documentation>16754: Knutepunkter der man kan reise lokalt og regionalt i betydningen i og til de nærmeste fylkene. Se HB V123.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16754</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Regionalt knutepunkt</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="std">
-            <annotation>
-               <documentation>16757: Angir at holdeplass ikke har funksjon som knutepunkt, eller av andre grunner karakteriseres som en ekstra viktig holdeplass. Se HB V123.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16757</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Standard holdeplass</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_ViktighetsnivåHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

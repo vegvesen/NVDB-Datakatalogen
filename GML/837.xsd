@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>837: Område utenfor selve kjørebanen som har egen belegning. Kan også være kjørebane på områder/veger som ikke har eget vegnett i NVDB.</documentation>
    </annotation>
@@ -14,22 +14,31 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <element name="Belegning (test)"
+   <element name="Belegning"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Belegning (test)Type">
+            type="nvdb:BelegningType">
       <annotation>
          <documentation>837: Område utenfor selve kjørebanen som har egen belegning. Kan også være kjørebane på områder/veger som ikke har eget vegnett i NVDB.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">837</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Belegning (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belegning</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Belegning (test)Type">
+   <complexType name="BelegningType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="type" type="nvdb:TypeBelegning (test)Type">
+               <element name="bruksområde" type="nvdb:BruksområdeBelegningType">
+                  <annotation>
+                     <documentation>12965: Angir hva belegning brukes til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeBelegningType">
                   <annotation>
                      <documentation>9510: Angir type belegning.</documentation>
                      <appinfo>
@@ -56,7 +65,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierBelegning (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierBelegningType">
                   <annotation>
                      <documentation>9512: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -67,12 +76,48 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligBelegning (test)Type">
+                        type="nvdb:VedlikeholdsansvarligBelegningType">
                   <annotation>
                      <documentation>9513: Angir hvem som er ansvarlig for vedlikehold</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9513</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produsent" type="string">
+                  <annotation>
+                     <documentation>12967: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12967</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12966: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12966</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>12944: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12944</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>12964: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12964</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -89,14 +134,84 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Belegning (test)PropertyType">
+   <complexType name="BelegningPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Belegning (test)"/>
+         <element ref="nvdb:Belegning"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="EierBelegning (test)Type">
+   <simpleType name="BruksområdeBelegningType">
+      <annotation>
+         <documentation>12965: Angir hva belegning brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeBelegningEnumerationType nvdb:BruksområdeBelegningOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeBelegningEnumerationType">
+      <annotation>
+         <documentation>12965: Angir hva belegning brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="GF">
+            <annotation>
+               <documentation>22525: Belegning benyttes på gangveg, fortau eller sti.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22525</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dekke gangveg/fortau</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BT">
+            <annotation>
+               <documentation>22528: Dekke av plasser, byrom torg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22528</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dekke plass/torg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KA">
+            <annotation>
+               <documentation>22526: Benyttes for markering av kant på veg, varsling av fartsdemper, avgrensing av parkering, mm</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22526</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Markering i vegbane/fortau</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TD">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22527</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdeler/trafikkøy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="GP">
+            <annotation>
+               <documentation>22529: Mindre areal med belegning i tilknytning til gater, plasser og parkerr og som ikke passer inn under øvrige bruksområder.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22529</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Øvrig areal by/park</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeBelegningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierBelegningType">
       <annotation>
          <documentation>9512: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -104,9 +219,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierBelegning (test)EnumerationType nvdb:EierBelegning (test)OtherType"/>
+      <union memberTypes="nvdb:EierBelegningEnumerationType nvdb:EierBelegningOtherType"/>
    </simpleType>
-   <simpleType name="EierBelegning (test)EnumerationType">
+   <simpleType name="EierBelegningEnumerationType">
       <annotation>
          <documentation>9512: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -165,12 +280,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierBelegning (test)OtherType">
+   <simpleType name="EierBelegningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TypeBelegning (test)Type">
+   <simpleType name="TypeBelegningType">
       <annotation>
          <documentation>9510: Angir type belegning.</documentation>
          <appinfo>
@@ -178,9 +293,9 @@
             <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TypeBelegning (test)EnumerationType nvdb:TypeBelegning (test)OtherType"/>
+      <union memberTypes="nvdb:TypeBelegningEnumerationType nvdb:TypeBelegningOtherType"/>
    </simpleType>
-   <simpleType name="TypeBelegning (test)EnumerationType">
+   <simpleType name="TypeBelegningEnumerationType">
       <annotation>
          <documentation>9510: Angir type belegning.</documentation>
          <appinfo>
@@ -311,12 +426,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TypeBelegning (test)OtherType">
+   <simpleType name="TypeBelegningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBelegning (test)Type">
+   <simpleType name="VedlikeholdsansvarligBelegningType">
       <annotation>
          <documentation>9513: Angir hvem som er ansvarlig for vedlikehold</documentation>
          <appinfo>
@@ -324,9 +439,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligBelegning (test)EnumerationType nvdb:VedlikeholdsansvarligBelegning (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligBelegningEnumerationType nvdb:VedlikeholdsansvarligBelegningOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBelegning (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligBelegningEnumerationType">
       <annotation>
          <documentation>9513: Angir hvem som er ansvarlig for vedlikehold</documentation>
          <appinfo>
@@ -393,7 +508,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBelegning (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligBelegningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

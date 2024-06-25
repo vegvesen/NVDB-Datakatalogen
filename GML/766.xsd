@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>766: Tavle hvor det kan henges opp rutetabeller. Benyttes i forbindelse med holdeplasser.</documentation>
    </annotation>
@@ -234,6 +234,16 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="ruteinformasjon"
+                        type="nvdb:RuteinformasjonOppslagstavle for rutetabellType">
+                  <annotation>
+                     <documentation>12962: Angir hvilken type informasjon det er om ruter for kollektivtransport.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12962</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ruteinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0"
                         name="oppsettingsutstyr"
                         type="nvdb:OppsettingsutstyrOppslagstavle for rutetabellType">
@@ -313,6 +323,50 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="RuteinformasjonOppslagstavle for rutetabellType">
+      <annotation>
+         <documentation>12962: Angir hvilken type informasjon det er om ruter for kollektivtransport.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12962</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ruteinformasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:RuteinformasjonOppslagstavle for rutetabellEnumerationType nvdb:RuteinformasjonOppslagstavle for rutetabellOtherType"/>
+   </simpleType>
+   <simpleType name="RuteinformasjonOppslagstavle for rutetabellEnumerationType">
+      <annotation>
+         <documentation>12962: Angir hvilken type informasjon det er om ruter for kollektivtransport.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12962</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ruteinformasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="QR">
+            <annotation>
+               <documentation>22522: Det er oppslag som viser QR kode til nettsted hvor det finnes informasjon om rutetabeller.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22522</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">QR-kode</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="RT">
+            <annotation>
+               <documentation>22521: Det er oppslag som viser rutetabell.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22521</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rutetabell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="RuteinformasjonOppslagstavle for rutetabellOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="VedlikeholdsansvarligOppslagstavle for rutetabellType">
       <annotation>
          <documentation>8125: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.37">
+   <annotation>
+      <documentation>451: Angir område tilrettelagt for sykkelparkering.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Sykkelparkering"
+            substitutionGroup="nvdb:AbstraktSykkelparkering"
+            type="nvdb:SykkelparkeringType">
+      <annotation>
+         <documentation>451: Angir område tilrettelagt for sykkelparkering.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">451</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="SykkelparkeringType">
+      <complexContent>
+         <extension base="nvdb:AbstraktSykkelparkeringType">
+            <sequence>
+               <element name="sykkelstativ" type="nvdb:SykkelstativSykkelparkeringType">
+                  <annotation>
+                     <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3126</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sykkelstativ</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="takoverbygg" type="nvdb:TakoverbyggSykkelparkeringType">
+                  <annotation>
+                     <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9848</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallSyklerTotalt" type="integer">
+                  <annotation>
+                     <documentation>3127: Angir hvor mange sykler det er plass til totalt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3127</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall sykler totalt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10369: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10369</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>10962: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10962</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SykkelparkeringPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Sykkelparkering"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="SykkelstativSykkelparkeringType">
+      <annotation>
+         <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3126</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelstativ</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SykkelstativSykkelparkeringEnumerationType nvdb:SykkelstativSykkelparkeringOtherType"/>
+   </simpleType>
+   <simpleType name="SykkelstativSykkelparkeringEnumerationType">
+      <annotation>
+         <documentation>3126: Angir om det er sykkelstativ på sykkelparkeringen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3126</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelstativ</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ms">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4658</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="us">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4659</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SykkelstativSykkelparkeringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TakoverbyggSykkelparkeringType">
+      <annotation>
+         <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9848</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TakoverbyggSykkelparkeringEnumerationType nvdb:TakoverbyggSykkelparkeringOtherType"/>
+   </simpleType>
+   <simpleType name="TakoverbyggSykkelparkeringEnumerationType">
+      <annotation>
+         <documentation>9848: Angir om det er takoverbygg over hele eller deler av sykkelparkeringen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9848</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16059</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16060</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TakoverbyggSykkelparkeringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

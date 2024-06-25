@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.37">
+   <annotation>
+      <documentation>997: Snitt på en veg der det blir registrert trafikkdata.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="InstallasjonstypeTrafikkregistreringspunktType">
+      <annotation>
+         <documentation>12953: Angir om punktet har fast eller mobil installasjon</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12953</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Installasjonstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:InstallasjonstypeTrafikkregistreringspunktEnumerationType nvdb:InstallasjonstypeTrafikkregistreringspunktOtherType"/>
+   </simpleType>
+   <simpleType name="InstallasjonstypeTrafikkregistreringspunktEnumerationType">
+      <annotation>
+         <documentation>12953: Angir om punktet har fast eller mobil installasjon</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12953</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Installasjonstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <documentation>22504: Det er fastmontert utstyr i trafikkregistreringspunktet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22504</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <documentation>22505: Utstyr er mobilt og kan flyttes mellom ulike registreringspunkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22505</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mobilt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="InstallasjonstypeTrafikkregistreringspunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TrafikantgruppeTrafikkregistreringspunktType">
+      <annotation>
+         <documentation>12952: Angir hvilken trafikangruppe det registreres data for i trafikkregistreringspunktet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12952</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TrafikantgruppeTrafikkregistreringspunktEnumerationType nvdb:TrafikantgruppeTrafikkregistreringspunktOtherType"/>
+   </simpleType>
+   <simpleType name="TrafikantgruppeTrafikkregistreringspunktEnumerationType">
+      <annotation>
+         <documentation>12952: Angir hvilken trafikangruppe det registreres data for i trafikkregistreringspunktet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12952</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="MK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22502</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Motorkjøretøy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22503</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sykkel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TrafikantgruppeTrafikkregistreringspunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Trafikkregistreringspunkt"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:TrafikkregistreringspunktType">
+      <annotation>
+         <documentation>997: Snitt på en veg der det blir registrert trafikkdata.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">997</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikkregistreringspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="TrafikkregistreringspunktType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="ID" type="string">
+                  <annotation>
+                     <documentation>12950: Unikt nummer knyttet til trafikkregistreringspunktet. Benyttes som primærnøkkel i Trafikkdatasystemet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12950</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>12951: Angir navn på trafikkregistreringspunktet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12951</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="trafikantgruppe"
+                        type="nvdb:TrafikantgruppeTrafikkregistreringspunktType">
+                  <annotation>
+                     <documentation>12952: Angir hvilken trafikangruppe det registreres data for i trafikkregistreringspunktet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12952</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Trafikantgruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="installasjonstype"
+                        type="nvdb:InstallasjonstypeTrafikkregistreringspunktType">
+                  <annotation>
+                     <documentation>12953: Angir om punktet har fast eller mobil installasjon</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12953</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Installasjonstype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="retningFra" type="string">
+                  <annotation>
+                     <documentation>12954: Navn på sted som trafikk som kjører i metreringsretning kommer fra.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12954</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Retning fra</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="retningTil" type="string">
+                  <annotation>
+                     <documentation>12955: Navn på sted som trafikk som kjører i metreringsretning kjører til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12955</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Retning til</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lenkeTilTrafikkdatasystemet" type="string">
+                  <annotation>
+                     <documentation>12956: Lenke til trafikkregistreringspunktet i trafikkdata.no</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12956</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lenke til Trafikkdatasystemet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>12957: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12957</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="TrafikkregistreringspunktPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Trafikkregistreringspunkt"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

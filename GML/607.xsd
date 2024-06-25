@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>607: Angir at veg er fysisk sperret.</documentation>
    </annotation>
@@ -169,6 +169,112 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="StengtUkedagVegsperringType">
+      <annotation>
+         <documentation>12983: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder alle ukedager.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12983</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengt ukedag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StengtUkedagVegsperringEnumerationType nvdb:StengtUkedagVegsperringOtherType"/>
+   </simpleType>
+   <simpleType name="StengtUkedagVegsperringEnumerationType">
+      <annotation>
+         <documentation>12983: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder alle ukedager.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12983</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengt ukedag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22549</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fredag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="H">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22542</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hverdager</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="HuL">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22543</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hverdager u/lørdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Lø">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22550</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lørdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="HuS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22544</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lørdag og søndag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22545</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mandag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22547</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Onsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Sø">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22551</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søndag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ti">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22546</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tirsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="To">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22548</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Torsdag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StengtUkedagVegsperringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeVegsperringType">
       <annotation>
          <documentation>7861: Angir hvilken type sperring det er tale om.</documentation>
@@ -309,12 +415,48 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjeldertidsrom" type="string">
+               <element minOccurs="0" name="stengtFraDato" type="string">
                   <annotation>
-                     <documentation>11543: Angir tidsrommet (hhmm-hhmm) eller (mnd-mnd) vegsperringen gjelder.</documentation>
+                     <documentation>12990: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder hele året.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">11543</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder tidsrom</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">12990</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengt fra dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stengtTilDato" type="string">
+                  <annotation>
+                     <documentation>12991: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder hele året.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12991</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengt til dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stengtFraKlokkeslett" type="time">
+                  <annotation>
+                     <documentation>12981: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder hele døgnet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12981</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengt fra klokkeslett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stengtTilKlokkeslett" type="time">
+                  <annotation>
+                     <documentation>12982: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder hele døgnet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12982</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengt til klokkeslett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stengtUkedag">
+                  <annotation>
+                     <documentation>12983: Del av tidsrombeskrivelse for når vegsperring er stengt. Benyttes om stengning ikke gjelder alle ukedager.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12983</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengt ukedag</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

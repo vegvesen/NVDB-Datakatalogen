@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>88: Lyskilde med innfatning.</documentation>
    </annotation>
@@ -251,6 +251,22 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="JD">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22516</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, dynamisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="JM">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22515</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, midtpunktdimming</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="DimmingLysarmaturOtherType">
@@ -329,6 +345,75 @@
       </restriction>
    </simpleType>
    <simpleType name="EierLysarmaturOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="FargePåLysLysarmaturType">
+      <annotation>
+         <documentation>12994: Angir farge på lys.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12994</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Farge på lys</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FargePåLysLysarmaturEnumerationType nvdb:FargePåLysLysarmaturOtherType"/>
+   </simpleType>
+   <simpleType name="FargePåLysLysarmaturEnumerationType">
+      <annotation>
+         <documentation>12994: Angir farge på lys.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12994</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Farge på lys</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22575</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Blå</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="G">
+            <annotation>
+               <documentation>22572: Grønn, gjerne benyttet på lyslister i forbindelse med nødutganger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22572</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grønn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="H">
+            <annotation>
+               <documentation>22571: Hvit eller gul/hvit farge</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22571</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hvit</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <documentation>22574: Oransje, rød/gul. Gul.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22574</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Oransje/gul</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22573</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rød</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FargePåLysLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -488,12 +573,30 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>1326: Angir lengde av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1326</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="optikk" type="nvdb:OptikkLysarmaturType">
                   <annotation>
                      <documentation>9563: Angir optikk i lysarmatur.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9563</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Optikk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fargePåLys">
+                  <annotation>
+                     <documentation>12994: Angir farge på lys.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12994</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Farge på lys</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -524,6 +627,26 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="zhagaSocket">
+                  <annotation>
+                     <documentation>12960: Sokkel for tilkopling av styring/kommuniksjon i lysarmatur. Kan blant annet gi mulighet til dynamisk dimming.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12960</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Zhaga socket</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="lysdetektering"
+                        type="nvdb:LysdetekteringLysarmaturType">
+                  <annotation>
+                     <documentation>12989: Angir om lysarmatur har lysdetektering for å kunne slå seg på automatisk når det blir mørkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12989</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lysdetektering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0"
                         name="utstyrsklasse"
                         type="nvdb:UtstyrsklasseLysarmaturType">
@@ -535,21 +658,21 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="lysflux_Lumen" type="double">
+                  <annotation>
+                     <documentation>10011: Total lysmengde fra lysarmaturen, definert som lysmengde målt mot øyets følsomhetskurve.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10011</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lysflux (Lumen)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="driftsstrøm_Udimmet" type="integer">
                   <annotation>
                      <documentation>9562: Angir driftsstrøm for lyskilden.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9562</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Driftsstrøm, udimmet</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="lysflux" type="double">
-                  <annotation>
-                     <documentation>10011: Total lysmengde fra lysarmaturen, definert som lysmengde målt mot øyets følsomhetskurve.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10011</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Lysflux</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -810,6 +933,59 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="LysdetekteringLysarmaturType">
+      <annotation>
+         <documentation>12989: Angir om lysarmatur har lysdetektering for å kunne slå seg på automatisk når det blir mørkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lysdetektering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LysdetekteringLysarmaturEnumerationType nvdb:LysdetekteringLysarmaturOtherType"/>
+   </simpleType>
+   <simpleType name="LysdetekteringLysarmaturEnumerationType">
+      <annotation>
+         <documentation>12989: Angir om lysarmatur har lysdetektering for å kunne slå seg på automatisk når det blir mørkt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12989</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lysdetektering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="E">
+            <annotation>
+               <documentation>22558: Lysarmatur er koplet til ekstern lysdetektor (lysmåler/fotocelle/lyssensor).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22558</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ekstern</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Innebygd">
+            <annotation>
+               <documentation>22557: Lysarmatur har innebygd lysdetektor (lysmåler/fotocelle/lyssensor).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22557</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Innebygd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22559: Lysarmatur har ingen form for lysdetektering.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22559</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LysdetekteringLysarmaturOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="LyskildeTypeLysarmaturType">
       <annotation>
          <documentation>2077: Angir hvilken type lyskildene er av.</documentation>
@@ -898,6 +1074,24 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">12978</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">QL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LL">
+            <annotation>
+               <documentation>22513: Ledbelysning i rekke. Benyttes som evakueringsbelysning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22513</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">LED List</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LR">
+            <annotation>
+               <documentation>22514: Lysrør basert på LED.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22514</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">LED Lysrør</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -1320,6 +1514,14 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="GE">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22552</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gifas Electric</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="Produsent_ArmaturLysarmaturOtherType">
@@ -1547,6 +1749,68 @@
       </restriction>
    </simpleType>
    <simpleType name="VedlikeholdsansvarligLysarmaturOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ZhagaSocketLysarmaturType">
+      <annotation>
+         <documentation>12960: Sokkel for tilkopling av styring/kommuniksjon i lysarmatur. Kan blant annet gi mulighet til dynamisk dimming.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12960</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Zhaga socket</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ZhagaSocketLysarmaturEnumerationType nvdb:ZhagaSocketLysarmaturOtherType"/>
+   </simpleType>
+   <simpleType name="ZhagaSocketLysarmaturEnumerationType">
+      <annotation>
+         <documentation>12960: Sokkel for tilkopling av styring/kommuniksjon i lysarmatur. Kan blant annet gi mulighet til dynamisk dimming.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12960</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Zhaga socket</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="N">
+            <annotation>
+               <documentation>22512: Lysarmatur har ikke slik innretning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22512</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <documentation>22509: Sokkel er plassert på oversiden av lysarmatur.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22509</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Over</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OU">
+            <annotation>
+               <documentation>22511: Det er sokkel både på overside og underside.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22511</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Over og under</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>22510: Sokkel er plassert på undersiden av lysarmatur.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22510</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Under</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ZhagaSocketLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

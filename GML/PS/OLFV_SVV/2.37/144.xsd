@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.37">
+   <annotation>
+      <documentation>144: Tiltak for å hindre overflateerosjon når vann strømmer over en jordflate. Omfatter dekningslag/plastringslag av stein, gradert filter, steinkurver, steinmadrasser e.a. (Definisjonsliste Statens vegvesen håndbøker)</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdePlastringErosjonssikringType">
+      <annotation>
+         <documentation>1277: Angir hvilken type erosjon/glidning det sikres mot.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1277</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdePlastringErosjonssikringEnumerationType nvdb:BruksområdePlastringErosjonssikringOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdePlastringErosjonssikringEnumerationType">
+      <annotation>
+         <documentation>1277: Angir hvilken type erosjon/glidning det sikres mot.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1277</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3281</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bølgeerosjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="E">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3280</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elveerosjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3282</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overflateerosjon i skråning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ss">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3960</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Overflateglidninger i skråning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdePlastringErosjonssikringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="PlastringErosjonssikring"
+            substitutionGroup="nvdb:AbstraktPlastringErosjonssikring"
+            type="nvdb:PlastringErosjonssikringType">
+      <annotation>
+         <documentation>144: Tiltak for å hindre overflateerosjon når vann strømmer over en jordflate. Omfatter dekningslag/plastringslag av stein, gradert filter, steinkurver, steinmadrasser e.a. (Definisjonsliste Statens vegvesen håndbøker)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">144</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">PlastringErosjonssikring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="PlastringErosjonssikringType">
+      <complexContent>
+         <extension base="nvdb:AbstraktPlastringErosjonssikringType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdePlastringErosjonssikringType">
+                  <annotation>
+                     <documentation>1277: Angir hvilken type erosjon/glidning det sikres mot.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1277</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypePlastringErosjonssikringType">
+                  <annotation>
+                     <documentation>1171: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1171</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="double">
+                  <annotation>
+                     <documentation>11392: Angir areal av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11392</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10337: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10337</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>8878: Gir flate/polygon som avgrenser område med plastring/erosjon.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8878</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vannoverdekning"
+                        type="nvdb:VannoverdekningPlastringErosjonssikringType">
+                  <annotation>
+                     <documentation>1873: Angir hvor mye av konstruksjonen som er under vann.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1873</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vannoverdekning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="PlastringErosjonssikringPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:PlastringErosjonssikring"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypePlastringErosjonssikringType">
+      <annotation>
+         <documentation>1171: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1171</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypePlastringErosjonssikringEnumerationType nvdb:TypePlastringErosjonssikringOtherType"/>
+   </simpleType>
+   <simpleType name="TypePlastringErosjonssikringEnumerationType">
+      <annotation>
+         <documentation>1171: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1171</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="GEO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19230</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Geotekstiler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="GKM">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2305</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grus/knuste masser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nat">
+            <annotation>
+               <documentation>21300: Matte som legges på skråning. Blir til jord i løpet av 1-2 sesonger. Benevnes også "Kokosmatte".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21300</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Matte av naturmateriale</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3047</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sprengt stein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SPF">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3807</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sprengt stein m filterlag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypePlastringErosjonssikringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VannoverdekningPlastringErosjonssikringType">
+      <annotation>
+         <documentation>1873: Angir hvor mye av konstruksjonen som er under vann.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1873</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vannoverdekning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VannoverdekningPlastringErosjonssikringEnumerationType nvdb:VannoverdekningPlastringErosjonssikringOtherType"/>
+   </simpleType>
+   <simpleType name="VannoverdekningPlastringErosjonssikringEnumerationType">
+      <annotation>
+         <documentation>1873: Angir hvor mye av konstruksjonen som er under vann.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1873</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vannoverdekning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="at">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3806</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Delvis</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3525</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VannoverdekningPlastringErosjonssikringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

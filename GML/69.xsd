@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
       <documentation>69: Byggverk som benyttes i endene av fjelltunnelene for å beskytte tunnelåpning mot rennende vann og fallende snø, is stein og jord. (HB V440).</documentation>
    </annotation>
@@ -14,6 +14,50 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BærerTrafikklastTunnelportalType">
+      <annotation>
+         <documentation>12978: Angir om tunnelportal skal kunne bære trafikklast. Dette er tilfelle når det går en kryssende veg over tunnelportalen på tvers av hovedvegen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12978</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bærer trafikklast</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BærerTrafikklastTunnelportalEnumerationType nvdb:BærerTrafikklastTunnelportalOtherType"/>
+   </simpleType>
+   <simpleType name="BærerTrafikklastTunnelportalEnumerationType">
+      <annotation>
+         <documentation>12978: Angir om tunnelportal skal kunne bære trafikklast. Dette er tilfelle når det går en kryssende veg over tunnelportalen på tvers av hovedvegen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12978</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bærer trafikklast</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22538: Tunnelportal bærer trafikklast</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22538</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22539: Tunnel bærer ikke trafikklast.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22539</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BærerTrafikklastTunnelportalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Tunnelportal"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:TunnelportalType">
@@ -29,6 +73,15 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
+               <element name="bærerTrafikklast">
+                  <annotation>
+                     <documentation>12978: Angir om tunnelportal skal kunne bære trafikklast. Dette er tilfelle når det går en kryssende veg over tunnelportalen på tvers av hovedvegen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12978</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bærer trafikklast</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="typeTverrsnitt">
                   <annotation>
                      <documentation>1131: Angir hvilken type tverrsnitt tunnelportalen har.</documentation>

@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.37">
+   <annotation>
+      <documentation>461: Matepunkt med måler for lavspentnett som forsyner vegvesenets installasjoner med strøm.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeElektrisk anleggType">
+      <annotation>
+         <documentation>5644: Angir hva som er hovedbruksområdet for det elektriske anlegget. Det bruksområdet som trekker mest strøm regnes som hovedbruksområde. Sekundære bruksområder kan angis under tilleggsinformasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5644</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeElektrisk anleggEnumerationType nvdb:BruksområdeElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>5644: Angir hva som er hovedbruksområdet for det elektriske anlegget. Det bruksområdet som trekker mest strøm regnes som hovedbruksområde. Sekundære bruksområder kan angis under tilleggsinformasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5644</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Annen bruk">
+            <annotation>
+               <documentation>21335: Elektrisk anlegg forsyner andre typer elektriske innretninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21335</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen bruk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vl">
+            <annotation>
+               <documentation>16308: Elektrisk anlegg forsyner primært utstyr og installasjoner i forbindelse med bruer. Elektriske anlegg som primært forsyner belysning av veg på bru skal gis bruksområde "Veglys".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16308</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bru</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="a">
+            <annotation>
+               <documentation>7937: Elektrisk anlegg forsyner primært bygning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7937</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bygning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <documentation>20081: Elektrisk anlegg forsyner primært elektrisk ferist.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20081</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferist</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="FL">
+            <annotation>
+               <documentation>20922: Elektrisk anlegg forsyner primært elektriske installasjoner på ferjeleie, inkludert belysning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20922</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferjeleie</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MU">
+            <annotation>
+               <documentation>21334: Elektrisk anlegg forsyner primært måleutstyr. F.eks. luftkvalitetsmåler.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21334</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Måleutstyr</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vl">
+            <annotation>
+               <documentation>16306: Elektrisk anlegg forsyner primært pumpestasjon/pumper.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16306</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pumper</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="RP">
+            <annotation>
+               <documentation>20923: Elektrisk anlegg forsyner primært elektriske installasjoner på rasteplass, inkludert belysning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20923</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rasteplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Si">
+            <annotation>
+               <documentation>20080: Elektrisk anlegg forsyner primært signalanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20080</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Signalanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vl">
+            <annotation>
+               <documentation>16305: Elektrisk anlegg forsyner primært skilt. Gjelder både variable og ikke variable skilt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16305</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skilting</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SV">
+            <annotation>
+               <documentation>21333: Elektrisk anlegg forsyner primært skredvarslingsanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21333</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skredvarsling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TR">
+            <annotation>
+               <documentation>18475: Elektrisk anlegg forsyner primært trafikkregistreringsstasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18475</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkregistreringsstasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vl">
+            <annotation>
+               <documentation>16307: Elektrisk anlegg forsyner primært utstyr for trafikkregulering/overvåking/ITS.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16307</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkregulering/overvåking/ITS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <documentation>7936: Elektrisk anlegg forsyner primært installasjoner i tunnel, inkludert belysning i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7936</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vl">
+            <annotation>
+               <documentation>7935: Elektrisk anlegg forsyner primært veglys i dagen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7935</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veglys</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="V">
+            <annotation>
+               <documentation>20082: Elektrisk anlegg forsyner primært værstasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20082</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Værstasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ByggetEtterForskriftElektrisk anleggType">
+      <annotation>
+         <documentation>10021: Angir hvilken "Forskrift om elektriske forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10021</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bygget etter forskrift</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ByggetEtterForskriftElektrisk anleggEnumerationType nvdb:ByggetEtterForskriftElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="ByggetEtterForskriftElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10021: Angir hvilken "Forskrift om elektriske forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10021</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bygget etter forskrift</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16314</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1988">
+            <annotation>
+               <documentation>16312: Forskrifter for elektriske anlegg (rødpermen) utgave 1988.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16312</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK FEB 88</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1991">
+            <annotation>
+               <documentation>16313: Forskrifter for elektriske anlegg (rødpermen) utgave 1991.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16313</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK FEB 91</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2006">
+            <annotation>
+               <documentation>16310: Forskrift om elektriske forsyningsanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16310</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK FEF 2006</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1998">
+            <annotation>
+               <documentation>16311: Forskrift om elektriske lavspenningsanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16311</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK FEL 1998</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ByggetEtterForskriftElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ByggetEtterNormElektrisk anleggType">
+      <annotation>
+         <documentation>10022: Angir hvilken "Norm for elektrisk forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10022</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bygget etter norm</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ByggetEtterNormElektrisk anleggEnumerationType nvdb:ByggetEtterNormElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="ByggetEtterNormElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10022: Angir hvilken "Norm for elektrisk forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10022</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bygget etter norm</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16323</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400-1">
+            <annotation>
+               <documentation>16315: NEK 400 er en normsamling utarbeidet av NK64 i Norsk Elektroteknisk Komite (NEK), og omhandler krav til elektriske lavspenningsinstallasjoner. Utgitt 1998.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16315</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400-2">
+            <annotation>
+               <documentation>16316: NEK 400 er en normsamling utarbeidet av NK64 i Norsk Elektroteknisk Komite (NEK), og omhandler krav til elektriske lavspenningsinstallasjoner. Utgitt 2006.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16316</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 400 : 2006</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400-3">
+            <annotation>
+               <documentation>16317: NEK 400 er en normsamling utarbeidet av NK64 i Norsk Elektroteknisk Komite (NEK), og omhandler krav til elektriske lavspenningsinstallasjoner. Utgitt 2010.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16317</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 400 : 2010</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400-4">
+            <annotation>
+               <documentation>18170: NEK 400 er en normsamling utarbeidet av NK64 i Norsk Elektroteknisk Komite (NEK), og omhandler krav til elektriske lavspenningsinstallasjoner. Utgitt 2014.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18170</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 400 : 2014</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400-5">
+            <annotation>
+               <documentation>19727: NEK 400 er en normsamling utarbeidet av NK64 i Norsk Elektroteknisk Komite (NEK), og omhandler krav til elektriske lavspenningsinstallasjoner. Utgitt 2018.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19727</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 400 : 2018</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="440">
+            <annotation>
+               <documentation>16318: Normsamling for spenningsnivåer over 1kV. NEK 440 er en norsk implementering av. NEK EN 61936-1:2010 og NEK EN 50522:2010.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16318</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 440</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="445">
+            <annotation>
+               <documentation>16319: Normen er en fellesnorm for luftledninger over 1 kV, dvs. NEK EN 50341 (luftledninger over 45 kV) og NEK EN 50423 (luftledninger i området 1-45 kV) som er utarbeidet av CENELEC.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16319</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK 445</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="50110">
+            <annotation>
+               <documentation>16321: Norm for sikkerhet ved arbeid i og drift av elektriske anlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16321</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK EN 50110-1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="61936">
+            <annotation>
+               <documentation>16320: Normsamling for spenningsnivåer over 1kV.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16320</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NEK IEC 61936-1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tavle">
+            <annotation>
+               <documentation>16322: Norm (NEK 439) som omhandler generelle krav til og utforming av elektriske lavspenningstavler og kanalskinnesystemer.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16322</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tavlenorm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ByggetEtterNormElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Elektrisk anlegg"
+            substitutionGroup="nvdb:AbstraktElektriskAnlegg"
+            type="nvdb:Elektrisk anleggType">
+      <annotation>
+         <documentation>461: Matepunkt med måler for lavspentnett som forsyner vegvesenets installasjoner med strøm.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">461</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Elektrisk anlegg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Elektrisk anleggType">
+      <complexContent>
+         <extension base="nvdb:AbstraktElektriskAnleggType">
+            <sequence>
+               <element name="målernummer" type="string">
+                  <annotation>
+                     <documentation>5641: Angir unikt målernummer for måleren. Nummer må endres om måler blir byttet. For SVV blir dette feltet oppdatert fra Elhub dersom MålepunktID er fylt ut korrekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5641</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målernummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="målepunktID" type="string">
+                  <annotation>
+                     <documentation>5642: Angir MålepunktID. Energibedriftenes Landsforening (EBL) og EAN NORGE har inngått en rammeavtale om innføring av standard nummerserier for målepunktidentifikasjon. Denne standarden fra kalles Global Service Relation Number (GSRN).Feltet skal fylles ut med 18 sifre. 
+For SVV er dette nøkkelfelt mot Elhub.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5642</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">MålepunktID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bruksområde" type="nvdb:BruksområdeElektrisk anleggType">
+                  <annotation>
+                     <documentation>5644: Angir hva som er hovedbruksområdet for det elektriske anlegget. Det bruksområdet som trekker mest strøm regnes som hovedbruksområde. Sekundære bruksområder kan angis under tilleggsinformasjon.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5644</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="energikilde" type="nvdb:EnergikildeElektrisk anleggType">
+                  <annotation>
+                     <documentation>12061: Angir hvilken type energikilde det elektriske anlegget har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12061</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Energikilde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="byggetEtterForskrift">
+                  <annotation>
+                     <documentation>10021: Angir hvilken "Forskrift om elektriske forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10021</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bygget etter forskrift</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="plassering_Måler" type="string">
+                  <annotation>
+                     <documentation>7908: Plassering av forekomst. Ev. plassering i forhold til veg, bygning eller adresse.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7908</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plassering, måler</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="byggetEtterNorm">
+                  <annotation>
+                     <documentation>10022: Angir hvilken "Norm for elektrisk forsyningsanlegg" anlegget er bygget i forhold til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10022</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bygget etter norm</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="spenning" type="nvdb:SpenningElektrisk anleggType">
+                  <annotation>
+                     <documentation>10038: Angir spenning(er) på lavspentnettet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10038</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="manuellAvlesning">
+                  <annotation>
+                     <documentation>10028: Angir om det er fjernavlesing av målerstand.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10028</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Manuell avlesning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="nettsystem"
+                        type="nvdb:NettsystemElektrisk anleggType">
+                  <annotation>
+                     <documentation>10029: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10029</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="jordelektrode" type="nvdb:JordelektrodeElektrisk anleggType">
+                  <annotation>
+                     <documentation>10032: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10032</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10023: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10023</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10024: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10024</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="nettselskap" type="string">
+                  <annotation>
+                     <documentation>5639: Angir navn på nettselskap som eier nettet inn til måler.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5639</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nettselskap</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4978: Gir punkt som geometrisk representerer måleren.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4978</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Elektrisk anleggPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Elektrisk anlegg"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="EnergikildeElektrisk anleggType">
+      <annotation>
+         <documentation>12061: Angir hvilken type energikilde det elektriske anlegget har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12061</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Energikilde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EnergikildeElektrisk anleggEnumerationType nvdb:EnergikildeElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="EnergikildeElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>12061: Angir hvilken type energikilde det elektriske anlegget har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12061</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Energikilde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>20919: Aggregat som lader batteri.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20919</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aggregat, batteri</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BB">
+            <annotation>
+               <documentation>20920: Batteri byttes med oppladet batteri med jevne mellomrom.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20920</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Batteri som byttes</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20917</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Offentlig nett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <documentation>20918: Solcellepanel som lader batteri.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20918</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Solcelle, batteri</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EnergikildeElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordelektrodeElektrisk anleggType">
+      <annotation>
+         <documentation>10032: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10032</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:JordelektrodeElektrisk anleggEnumerationType nvdb:JordelektrodeElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="JordelektrodeElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10032: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10032</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16337</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="cuwi">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16339</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Cu wiret</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="samm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16341</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sammenkoplet med annet nett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="spyd">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16340</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spyd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordelektrodeElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ManuellAvlesningElektrisk anleggType">
+      <annotation>
+         <documentation>10028: Angir om det er fjernavlesing av målerstand.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10028</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Manuell avlesning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ManuellAvlesningElektrisk anleggEnumerationType nvdb:ManuellAvlesningElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="ManuellAvlesningElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10028: Angir om det er fjernavlesing av målerstand.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10028</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Manuell avlesning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16329</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16328</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ManuellAvlesningElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="NettsystemElektrisk anleggType">
+      <annotation>
+         <documentation>10029: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10029</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:NettsystemElektrisk anleggEnumerationType nvdb:NettsystemElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="NettsystemElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10029: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10029</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IT">
+            <annotation>
+               <documentation>16330: IT-nett (Isolated Terra) er en nett-type der transformatorens nullpunkt ikke er jordet, men er beskyttet med et gnistgap (disneuter) mellom nullpunkt og jord.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16330</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">IT</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-C">
+            <annotation>
+               <documentation>16332: Nett der PEN-leder fremføres fra trafo til forbrukerens første fordeling (sikringsskap). Her splittes PEN-lederen opp i PE-leder (Protective Earth) eller jordleder og N-leder (Neutral). Energien kan tas ut både mellom de tre fasene (400V) og mellom hver av fasene og N-leder (230V). C angir at PEN-lederen frem til første fordeling er en kombinert leder (Combined).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16332</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-C</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-C-S">
+            <annotation>
+               <documentation>16334: TN Nett hvor C angir at PEN-lederen frem til første fordeling er en kombinert leder (Combined). S angir at PEN-leren er delt (Separated) fra første fordeling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16334</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-C-S</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-S">
+            <annotation>
+               <documentation>16333: Nett der PEN-leder fremføres fra trafo til forbrukerens første fordeling (sikringsskap). Her splittes PEN-lederen opp i PE-leder (Protective Earth) eller jordleder og N-leder (Neutral). Energien kan tas ut både mellom de tre fasene (400V) og mellom hver av fasene og N-leder (230V). S angir at PEN-leren er delt (Separated) fra første fordeling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16333</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-S</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TT">
+            <annotation>
+               <documentation>16331: Et TT-nett (Terra Terra) er lik et IT-nett med den vesentlige forskjellen at transformatorens nullpunkt er jordet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16331</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TT</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NettsystemElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningElektrisk anleggType">
+      <annotation>
+         <documentation>10038: Angir spenning(er) på lavspentnettet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10038</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningElektrisk anleggEnumerationType nvdb:SpenningElektrisk anleggOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningElektrisk anleggEnumerationType">
+      <annotation>
+         <documentation>10038: Angir spenning(er) på lavspentnettet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10038</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="12">
+            <annotation>
+               <documentation>16351: 12 volt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16351</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="230">
+            <annotation>
+               <documentation>16352: 230 volt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16352</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="230/400">
+            <annotation>
+               <documentation>16355: 230 og 400 volt (TN-nett).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16355</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230/400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="24">
+            <annotation>
+               <documentation>16353: 24 volt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16353</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">24</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400">
+            <annotation>
+               <documentation>16354: 400 volt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16354</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="690">
+            <annotation>
+               <documentation>16717: 690 volt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16717</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">690</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningElektrisk anleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

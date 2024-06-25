@@ -5,9 +5,9 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.36">
+        version="2.37">
    <annotation>
-      <documentation>482: Angir punkt for registrering av trafikkdata.</documentation>
+      <documentation>482: Sted der det er installert et trafikkregistreringsapparat for registrering av trafikk. Apparatet kan ha tilkopla trafikkregistreringspunkt på en eller flere tilgrensende veger.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -89,22 +89,22 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="RegistreringsnivåTrafikkregistreringsstasjonType">
+   <simpleType name="RegistreringshyppighetTrafikkregistreringsstasjonType">
       <annotation>
-         <documentation>3910: Angir hvilket nivå tellepunktet er på. Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år. Nivå 3 angir 1 uke pr år.</documentation>
+         <documentation>3910: Angir registreringshyppighet for trafikkregistreringsstasjonen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">3910</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Registreringsnivå</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Registreringshyppighet</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:RegistreringsnivåTrafikkregistreringsstasjonEnumerationType nvdb:RegistreringsnivåTrafikkregistreringsstasjonOtherType"/>
+      <union memberTypes="nvdb:RegistreringshyppighetTrafikkregistreringsstasjonEnumerationType nvdb:RegistreringshyppighetTrafikkregistreringsstasjonOtherType"/>
    </simpleType>
-   <simpleType name="RegistreringsnivåTrafikkregistreringsstasjonEnumerationType">
+   <simpleType name="RegistreringshyppighetTrafikkregistreringsstasjonEnumerationType">
       <annotation>
-         <documentation>3910: Angir hvilket nivå tellepunktet er på. Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år. Nivå 3 angir 1 uke pr år.</documentation>
+         <documentation>3910: Angir registreringshyppighet for trafikkregistreringsstasjonen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">3910</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Registreringsnivå</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Registreringshyppighet</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -120,7 +120,7 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">4892</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kontinuerlig (Nivå 1)</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kontinuerlig</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -128,21 +128,13 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">4893</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Periodisk (Nivå 2)</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="P3">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">10245</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Periodisk (Nivå 3)</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Periodisk</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="RegistreringsnivåTrafikkregistreringsstasjonOtherType">
+   <simpleType name="RegistreringshyppighetTrafikkregistreringsstasjonOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -253,7 +245,7 @@
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:TrafikkregistreringsstasjonType">
       <annotation>
-         <documentation>482: Angir punkt for registrering av trafikkdata.</documentation>
+         <documentation>482: Sted der det er installert et trafikkregistreringsapparat for registrering av trafikk. Apparatet kan ha tilkopla trafikkregistreringspunkt på en eller flere tilgrensende veger.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">482</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Trafikkregistreringsstasjon</sc:taggedValue>
@@ -266,36 +258,20 @@
             <sequence>
                <element name="målestasjonsnummer" type="integer">
                   <annotation>
-                     <documentation>4627: Angir er entydig nummer knyttet til trafikkregistreringsstasjon. Målestasjonsnummer skal (på sikt) finnes i Målestasjonsregisteret.</documentation>
+                     <documentation>4627: Angir er unikt nummer knyttet til trafikkregistreringsstasjon. Benyttes som primærnøkkel i Trafikkdatasystemet og Målestasjonsregisteret.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4627</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Målestasjonsnummer</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="med_Retning_Fra" type="string">
+               <element name="registreringshyppighet"
+                        type="nvdb:RegistreringshyppighetTrafikkregistreringsstasjonType">
                   <annotation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">5188</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Med-retning (fra)</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="mot_Retning_Fra" type="string">
-                  <annotation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">5189</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Mot-retning (fra)</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="registreringsnivå"
-                        type="nvdb:RegistreringsnivåTrafikkregistreringsstasjonType">
-                  <annotation>
-                     <documentation>3910: Angir hvilket nivå tellepunktet er på. Nivå 1 angir kontinuerlig datainnsamling, nivå 2 angir 4-5 uker pr år. Nivå 3 angir 1 uke pr år.</documentation>
+                     <documentation>3910: Angir registreringshyppighet for trafikkregistreringsstasjonen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3910</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Registreringsnivå</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Registreringshyppighet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -326,12 +302,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="antallKjørefelt" type="integer">
+               <element name="sistOppdatertFraTrafikkdatasystemet" type="date">
                   <annotation>
-                     <documentation>5192: Angir hvor mange kjørefelt som er knytta til tellepunktet.</documentation>
+                     <documentation>12958: Angir dato vegobjekt sist ble oppdatert fra Trafikkdatasystemet.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">5192</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Antall kjørefelt</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">12958</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sist oppdatert fra Trafikkdatasystemet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -350,6 +326,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9291</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Sist oppdatert fra NorTraf</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="antallKjørefelt" type="integer">
+                  <annotation>
+                     <documentation>5192: Angir hvor mange kjørefelt som er knytta til tellepunktet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5192</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall kjørefelt</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
