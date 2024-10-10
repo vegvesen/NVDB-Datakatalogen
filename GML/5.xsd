@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>5: En anordning som skal hindre at kjøretøy forlater vegen (Håndbok N101).</documentation>
    </annotation>
@@ -87,7 +87,7 @@
          </enumeration>
          <enumeration value="n">
             <annotation>
-               <documentation>2395: Rekkverk satt opp for beskytte mot trafikkfarlige element nær vegen, f.eks. store trær, stolper, brupilarer.</documentation>
+               <documentation>2395: Rekkverk satt opp for beskytte mot trafikkfarlige element nær vegen, f.eks. tunnelportaler, store trær, stolper, brupilarer.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2395</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Naboelement</sc:taggedValue>
@@ -126,6 +126,14 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2396</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Vann</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ft">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22614</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Føringskant tunnel</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -207,6 +215,59 @@
       </restriction>
    </simpleType>
    <simpleType name="EierRekkverkOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HoldereTilBrøytestikkRekkverkType">
+      <annotation>
+         <documentation>13035: Angir om rekkverket har påmonterte holdere/hylser for plassering av brøytestikk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13035</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Holdere til brøytestikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HoldereTilBrøytestikkRekkverkEnumerationType nvdb:HoldereTilBrøytestikkRekkverkOtherType"/>
+   </simpleType>
+   <simpleType name="HoldereTilBrøytestikkRekkverkEnumerationType">
+      <annotation>
+         <documentation>13035: Angir om rekkverket har påmonterte holdere/hylser for plassering av brøytestikk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13035</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Holdere til brøytestikk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IR">
+            <annotation>
+               <documentation>22649: Det er av ulike årsaker ikke relevant med slike holdere for gitt rekkverk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22649</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J">
+            <annotation>
+               <documentation>22647: Det finnes holdere til brøytestikk montert på rekkverket.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22647</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22648: Det finnes ikke holdere til brøytestikk montert på rekkverket.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22648</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HoldereTilBrøytestikkRekkverkOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -3662,6 +3723,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1965</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Elementlengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="holdereTilBrøytestikk">
+                  <annotation>
+                     <documentation>13035: Angir om rekkverket har påmonterte holdere/hylser for plassering av brøytestikk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13035</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Holdere til brøytestikk</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

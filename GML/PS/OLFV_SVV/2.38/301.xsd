@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.38">
+   <annotation>
+      <documentation>301: Angir område med vegetasjon langs vegkant/skråning. Dette er vanligvis vegetasjon som skal skjøttes vha kantklipper (kantslått). Det er mulig å gi bredde i form av tilkopla "breddemåling".</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kantklippareal"
+            substitutionGroup="nvdb:AbstraktKantklippareal"
+            type="nvdb:KantklipparealType">
+      <annotation>
+         <documentation>301: Angir område med vegetasjon langs vegkant/skråning. Dette er vanligvis vegetasjon som skal skjøttes vha kantklipper (kantslått). Det er mulig å gi bredde i form av tilkopla "breddemåling".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">301</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kantklippareal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KantklipparealType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKantklipparealType">
+            <sequence>
+               <element name="klippebredde_Faktisk" type="double">
+                  <annotation>
+                     <documentation>9969: Angir skrå bredde på området som faktisk skal klippes.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9969</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Klippebredde, faktisk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="klippebredde_Kvalitet">
+                  <annotation>
+                     <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9971</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Klippebredde, kvalitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="double">
+                  <annotation>
+                     <documentation>11312: Angir areal av vegobjekttype.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11312</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>11404: Supplerende informasjon som har betydning for kantklipp.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11404</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4898: Ytre avgrensning av kantklippareal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4898</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>9136: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9136</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KantklipparealPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kantklippareal"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="Klippebredde_KvalitetKantklipparealType">
+      <annotation>
+         <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9971</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Klippebredde, kvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Klippebredde_KvalitetKantklipparealEnumerationType nvdb:Klippebredde_KvalitetKantklipparealOtherType"/>
+   </simpleType>
+   <simpleType name="Klippebredde_KvalitetKantklipparealEnumerationType">
+      <annotation>
+         <documentation>9971: Angir kvalitet på verdier for "Klippebredde, faktisk" og ev. "Klippebredde, krav".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9971</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Klippebredde, kvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="gk">
+            <annotation>
+               <documentation>16187: Angir at det er lagt inn verdier ut fra generelle krav til klippebredde, f.eks. kan det da være lagt inn 6 meter på alle steder der det er behov for klipping på gitt strekning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16187</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Basert på generelle krav</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ga">
+            <annotation>
+               <documentation>16186: Angir at det er stor usikkerhet til informasjon, kan f.eks. være basert på diverse gamle data osv.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16186</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Generelt anslag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mf">
+            <annotation>
+               <documentation>16183: Angir at det framkommet basert på en del målinger i felt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16183</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Målt i felt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vf">
+            <annotation>
+               <documentation>16184: Angir at det er vurdert noe grovt i felt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16184</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vurdert i felt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vb">
+            <annotation>
+               <documentation>16185: Angir at det er angitt ut fra bilder og kart uten at det er foretatt vurdering i felt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16185</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vurdert ut fra vegbilder/flyfoto/kart </sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Klippebredde_KvalitetKantklipparealOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

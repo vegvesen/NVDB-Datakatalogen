@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.38">
+   <annotation>
+      <documentation>39: Sted ved vegen der vegtrafikanter kan parkere og hvile. (Ordbok for veg- og Trafikkteknikk).</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FastDekkeRasteplassType">
+      <annotation>
+         <documentation>4564: Angir om det er fast dekke på rasteplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4564</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fast dekke</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FastDekkeRasteplassEnumerationType nvdb:FastDekkeRasteplassOtherType"/>
+   </simpleType>
+   <simpleType name="FastDekkeRasteplassEnumerationType">
+      <annotation>
+         <documentation>4564: Angir om det er fast dekke på rasteplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4564</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fast dekke</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5477</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5478</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FastDekkeRasteplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="LovligAdkomstRasteplassType">
+      <annotation>
+         <documentation>2037: Angir om rasteplassen har lovlig adkomst fra en eller begge kjøreretninger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2037</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lovlig adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LovligAdkomstRasteplassEnumerationType nvdb:LovligAdkomstRasteplassOtherType"/>
+   </simpleType>
+   <simpleType name="LovligAdkomstRasteplassEnumerationType">
+      <annotation>
+         <documentation>2037: Angir om rasteplassen har lovlig adkomst fra en eller begge kjøreretninger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2037</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lovlig adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Begge">
+            <annotation>
+               <documentation>3251: Rasteplassen er tilgjengelig for begge kjøreretninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3251</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Begge retninger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="En">
+            <annotation>
+               <documentation>3252: Det er kun lovlig adkomst til rasteplassen for en kjøreretning. Den andre kjøreretningen har ikke tilgang til rasteplassen pga. enten skilting, vegoppmerking eller fysisk sperring.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3252</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">En retning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LovligAdkomstRasteplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Rasteplass"
+            substitutionGroup="nvdb:AbstraktRasteplass"
+            type="nvdb:RasteplassType">
+      <annotation>
+         <documentation>39: Sted ved vegen der vegtrafikanter kan parkere og hvile. (Ordbok for veg- og Trafikkteknikk).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">39</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Rasteplass</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="RasteplassType">
+      <complexContent>
+         <extension base="nvdb:AbstraktRasteplassType">
+            <sequence>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>1074: Angir navn på rasteplassen. Der det er to rasteplasser på samme sted, en på hver side, kan samme navn brukes med tillegg av 1 og 2 eller himmelretning i forhold til vegen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1074</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeRasteplassType">
+                  <annotation>
+                     <documentation>2036: Angir hvilken type rasteplass det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2036</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplSmåKjt" type="integer">
+                  <annotation>
+                     <documentation>1805: Angir hvor mange plasser som totalt er tilgjengelig for oppstilling av små kjøretøy (personbiler) på rasteplassen. For områder hvor det er lovlig å stå parkert for små kjøretøy, men som ikke har oppmerka oppstillingsplasser må det gjøres et anslag på hvor mange små kjøretøy det er plass til (Dimensjonerende mål på personbil B=2, 5 meter, L=5 meter). I summeringen forutsettes  det at områder hvor det er lovlig å stå både for små og store kjøretøy er fylt opp av små kjøretøy.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1805</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. små kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplStoreKjt" type="integer">
+                  <annotation>
+                     <documentation>1816: Angir hvor mange plasser som totalt er tilgjengelig for oppstilling av store kjøretøy (vogntog) på rasteplassen. For områder hvor det er lovlig å stå parkert for store kjøretøy, men som ikke har oppmerka oppstillingsplasser må det gjøres et anslag på hvor mange store kjøretøy det er plass til (Dimensjonerende mål for store kjøretøy: B=3 meter, L=22 meter). I summeringen forutsettes  det at områder hvor det er lovlig å stå både for små og store kjøretøy er fylt opp av store kjøretøy.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1816</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. store kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplForflytningshemmede" type="integer">
+                  <annotation>
+                     <documentation>9415: Angir hvor mange av oppstillingsplassene som er beregnet for små kjøretøy som er merka for forflytningshemmede.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9415</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. forflytningshemmede</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplMedLading_SmåKjt" type="integer">
+                  <annotation>
+                     <documentation>12843: Angir hvor mange av oppstillingsplassene som er beregnet for små kjøretøy som er tilrettelagt for lading av slike kjøretøy.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12843</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. med lading, små kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallOppstillingsplMedLading_StoreKjt" type="integer">
+                  <annotation>
+                     <documentation>12844: Angir hvor mange av oppstillingsplassene som er beregnet for store kjøretøy som er tilrettelagt for lading av slike kjøretøy.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12844</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. med lading, store kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal_Totalt" type="integer">
+                  <annotation>
+                     <documentation>1355: Angir totalt areal av rasteplassen. Dette inkluderer både kjørbart og ikke kjørbart areal innenfor rasteplassen sin avgrensning. For mer informasjon om ulike arealtyper henvises til aktuelle "datterobjekt".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1355</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal, totalt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="areal_Kjørbart" type="integer">
+                  <annotation>
+                     <documentation>8766: Angir kjørbart areal av rasteplassen, inkludert areal for oppstilling og parkering.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8766</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal, kjørbart</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lovligAdkomst">
+                  <annotation>
+                     <documentation>2037: Angir om rasteplassen har lovlig adkomst fra en eller begge kjøreretninger.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2037</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lovlig adkomst</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="fastDekke">
+                  <annotation>
+                     <documentation>4564: Angir om det er fast dekke på rasteplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4564</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fast dekke</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10343: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10343</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>5131: Gir flate/polygon som geometrisk avgrenser rasteplassen, inkluderer både kjørbart og ikke kjørbart areal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5131</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="RasteplassPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Rasteplass"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeRasteplassType">
+      <annotation>
+         <documentation>2036: Angir hvilken type rasteplass det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2036</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeRasteplassEnumerationType nvdb:TypeRasteplassOtherType"/>
+   </simpleType>
+   <simpleType name="TypeRasteplassEnumerationType">
+      <annotation>
+         <documentation>2036: Angir hvilken type rasteplass det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2036</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="h">
+            <annotation>
+               <documentation>3240: Hovedrasteplass er sideanlegg som er tilrettelagt for rast og pause. De skal ha en gitt standard og tilstrekkelig kapasitet. De har toalett og er døgnåpne og tilgjengelige hele året for alle trafikanter og kjøretøygrupper (Rasteplass-strategidokument 2020).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3240</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hovedrasteplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="l">
+            <annotation>
+               <documentation>3249: Øvrige rasteplasser er andre sideanlegg som er tilrettelagt for rast og pause. De kan være sesongåpne og ha varierende tilbud til ulike trafikanter og kjøretøygrupper (Rasteplass-strategidokument 2020).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3249</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Øvrig rasteplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeRasteplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

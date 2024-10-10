@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>581: Sted hvor veg passerer gjennom jord/fjell eller under større lokk. Består av ett eller flere tunnelløp.</documentation>
    </annotation>
@@ -614,6 +614,50 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="SykkelvarslingTunnelType">
+      <annotation>
+         <documentation>13032: Angir om det er system som varsler kjørende om at det er sykkelist i tunnelen. Eventuell utfyllende beskrivelse kan gis under "Merknad syklende" (ET 13032).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13032</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelvarsling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SykkelvarslingTunnelEnumerationType nvdb:SykkelvarslingTunnelOtherType"/>
+   </simpleType>
+   <simpleType name="SykkelvarslingTunnelEnumerationType">
+      <annotation>
+         <documentation>13032: Angir om det er system som varsler kjørende om at det er sykkelist i tunnelen. Eventuell utfyllende beskrivelse kan gis under "Merknad syklende" (ET 13032).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13032</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelvarsling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22631: Det finnes system for varsling av sykkelist i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22631</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22632: Det finnes ikke system for varsling av sykkelist i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22632</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SykkelvarslingTunnelOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TEN_TTunnelType">
       <annotation>
          <documentation>12183: Indikerer at tunnel inngår i TEN-T vegnett. Avledes fra informasjon gitt i egen vegobjekttype "TEN-T veg" (852).</documentation>
@@ -778,6 +822,17 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3913</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Merknad syklende</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="sykkelvarsling"
+                        type="nvdb:SykkelvarslingTunnelType">
+                  <annotation>
+                     <documentation>13032: Angir om det er system som varsler kjørende om at det er sykkelist i tunnelen. Eventuell utfyllende beskrivelse kan gis under "Merknad syklende" (ET 13032).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13032</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sykkelvarsling</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

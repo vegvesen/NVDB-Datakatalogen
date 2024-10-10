@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>929: Fjerning av uegnede løsmasser som erstattes med masser av ønsket kvalitet.</documentation>
    </annotation>
@@ -89,6 +89,68 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="FormålMasseutskiftingType">
+      <annotation>
+         <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FormålMasseutskiftingEnumerationType nvdb:FormålMasseutskiftingOtherType"/>
+   </simpleType>
+   <simpleType name="FormålMasseutskiftingEnumerationType">
+      <annotation>
+         <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="AU">
+            <annotation>
+               <documentation>22619: Skrå masseutskifting under vegens planum pga andre forhold enn stikkrenne for å hindre at det blir ujevnheter på vegoverflata. Benyttes der vegen ligger på telefarlige grunn.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen utkiling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="FP">
+            <annotation>
+               <documentation>22617: Masser fjernes under vegens planum og erstattes med nye for å sikre god stabilitet for overbygning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22617</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Forsterke planum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TS">
+            <annotation>
+               <documentation>22620: Utskifting av ubrukbare masser i tunnelsåle.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22620</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnelsåle</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="US">
+            <annotation>
+               <documentation>22618: Skrå masseutskifting under vegens planum før og etter stikkrenne for å hindre at det blir ujevnheter på vegoverflate. Benyttes der vegen ligger på telefarlige grunn.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22618</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utkiling stikkrenne</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FormålMasseutskiftingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Masseutskifting"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:MasseutskiftingType">
@@ -104,6 +166,15 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
+               <element name="formål" type="nvdb:FormålMasseutskiftingType">
+                  <annotation>
+                     <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="typeNyeMasser">
                   <annotation>
                      <documentation>11394: Type masser det er skiftet ut til.</documentation>
@@ -119,6 +190,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11395</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Dybde, maksimal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="dybde_Minimum" type="double">
+                  <annotation>
+                     <documentation>13014: Minimum utskiftingsdybde</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13014</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde, minimum</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

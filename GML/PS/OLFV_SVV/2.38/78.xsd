@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.38">
+   <annotation>
+      <documentation>78: Trase med nedgravd(e) rørledning(er) eller pukkstreng. Benyttes i første rekke i forbindelse med drenering av veger, men kan også inneholde andre typer rørledninger. Merknad: Lukket rørgrøft med kun kabler og trekkerør er definert som egen vegobjekttype Kabelgrøft.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="KablerLukket rørgrøftType">
+      <annotation>
+         <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9760</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kabler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KablerLukket rørgrøftEnumerationType nvdb:KablerLukket rørgrøftOtherType"/>
+   </simpleType>
+   <simpleType name="KablerLukket rørgrøftEnumerationType">
+      <annotation>
+         <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9760</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kabler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15884</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15885</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KablerLukket rørgrøftOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Lukket rørgrøft"
+            substitutionGroup="nvdb:AbstraktLukketRørgrøft"
+            type="nvdb:Lukket rørgrøftType">
+      <annotation>
+         <documentation>78: Trase med nedgravd(e) rørledning(er) eller pukkstreng. Benyttes i første rekke i forbindelse med drenering av veger, men kan også inneholde andre typer rørledninger. Merknad: Lukket rørgrøft med kun kabler og trekkerør er definert som egen vegobjekttype Kabelgrøft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">78</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lukket rørgrøft</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Lukket rørgrøftType">
+      <complexContent>
+         <extension base="nvdb:AbstraktLukketRørgrøftType">
+            <sequence>
+               <element name="type" type="nvdb:TypeLukket rørgrøftType">
+                  <annotation>
+                     <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1268</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybde" type="double">
+                  <annotation>
+                     <documentation>1657: Angir dybde av vegobjektet. Dybde måles ned til topp fundament.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1657</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="varmekabler" type="nvdb:VarmekablerLukket rørgrøftType">
+                  <annotation>
+                     <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1831</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Varmekabler</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kabler" type="nvdb:KablerLukket rørgrøftType">
+                  <annotation>
+                     <documentation>9760: Angir om grøften inneholder andre kabler enn varmekabler.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9760</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kabler</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10323: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10323</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4779: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4779</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Lukket rørgrøftPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Lukket rørgrøft"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeLukket rørgrøftType">
+      <annotation>
+         <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1268</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeLukket rørgrøftEnumerationType nvdb:TypeLukket rørgrøftOtherType"/>
+   </simpleType>
+   <simpleType name="TypeLukket rørgrøftEnumerationType">
+      <annotation>
+         <documentation>1268: Angir hvilken type lukka rørgrøft det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1268</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="al">
+            <annotation>
+               <documentation>11581: Grøft som kun har rør for å lede bort overvann/avløpsvann.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11581</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Avløpsgrøft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="d">
+            <annotation>
+               <documentation>5450: Rørgrøft med drensledning og/eller overvannsledning. Frostfri dybde. Se også Håndbok N200 (018).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5450</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drensgrøft, dyp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="g">
+            <annotation>
+               <documentation>5451: Rørgrøft med drensledning. Ikke frostfri dybde. Se også Håndbok N200 (018).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5451</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drensgrøft, grunn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Filter-/rensegrøft">
+            <annotation>
+               <documentation>17232: Grøft fylt med sand. Vann renses ved å renne gjennom sanden. Også benevnt infiltrasjonsgrøft eller sandfiltergrøft. Slike grøfter benyttes bl.a. i forbindelse med rensing av overvann og/eller vaskevann fra tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17232</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Filter-/rensegrøft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <documentation>2924: Jfr. Håndbok N200 (018).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2924</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pukkstreng</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeLukket rørgrøftOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VarmekablerLukket rørgrøftType">
+      <annotation>
+         <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1831</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Varmekabler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VarmekablerLukket rørgrøftEnumerationType nvdb:VarmekablerLukket rørgrøftOtherType"/>
+   </simpleType>
+   <simpleType name="VarmekablerLukket rørgrøftEnumerationType">
+      <annotation>
+         <documentation>1831: Angir om det er varmekabler eller ikke i tilknytning til vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1831</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Varmekabler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3523</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3561</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VarmekablerLukket rørgrøftOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

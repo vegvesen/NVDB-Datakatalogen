@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>963: Gir statistikk om dekketilstand knyttet til en vegstrekning. Informasjon bygger på detaljerte spor- og jevnhetsmålinger utført på strekningen. De enkelte tilstandsparametre er beregnet i fagsystemet Dekkesys og overført derfra til NVDB.</documentation>
    </annotation>
@@ -14,18 +14,18 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <element name="Statistikk, dekketilstand"
+   <element name="Tilstandsindikator, dekketilstand"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Statistikk, dekketilstandType">
+            type="nvdb:Tilstandsindikator, dekketilstandType">
       <annotation>
          <documentation>963: Gir statistikk om dekketilstand knyttet til en vegstrekning. Informasjon bygger på detaljerte spor- og jevnhetsmålinger utført på strekningen. De enkelte tilstandsparametre er beregnet i fagsystemet Dekkesys og overført derfra til NVDB.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">963</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Statistikk, dekketilstand</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilstandsindikator, dekketilstand</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Statistikk, dekketilstandType">
+   <complexType name="Tilstandsindikator, dekketilstandType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -38,12 +38,48 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>13005: Angir lengde på strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13005</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="måledato" type="date">
                   <annotation>
                      <documentation>12157: Angir representativ dato for spor- og jevnhetsmålingene som tilstandsparametrene er beregnet ut fra.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12157</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Måledato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="beregningsårForIndikator" type="double">
+                  <annotation>
+                     <documentation>13007: Angir hvilket år beregningene er gjort.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13007</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beregningsår for indikator</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="ÅDT_Beregningsgrunnlag" type="double">
+                  <annotation>
+                     <documentation>13008: Angir hvilken ÅDT-verdi som er benyttet i fastsettelse av tilstandsindikatorene.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13008</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ÅDT, beregningsgrunnlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="ÅDT_År" type="double">
+                  <annotation>
+                     <documentation>13009: Årstall som benyttet ÅDT-verdi gjelder for.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13009</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ÅDT, år</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -56,12 +92,39 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="spor_50_Persentil" type="double">
+                  <annotation>
+                     <documentation>12998: Spor50persentil. 50-persentil - median - sporverdi basert på 20m medianverdier spordybde for strekning [mm].</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12998</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spor, 50-persentil</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="spor_Vedlikeholdsstandard" type="double">
+                  <annotation>
+                     <documentation>12999: Max tillatt 90-persentil sporverdi ihht vedlikeholdsstandard R610.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12999</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spor, vedlikeholdsstandard</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="spor_AndelAvVedlikeholdsstandard" type="double">
                   <annotation>
                      <documentation>12159: prosentStdSpor. Angir hvor stor andel av vedlikeholdsstandard som er "oppbrukt":. Regnes ut som Spor 90-persentil dividert med maksimal spordybde i henhold til vedlikeholdsstandard. Angis i prosent.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12159</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Spor, andel av vedlikeholdsstandard</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tilstandsindikatorverdi_Spor" type="double">
+                  <annotation>
+                     <documentation>13000: TG - Tilstandsgrad for spor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13000</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi, Spor</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -74,6 +137,24 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="jevnhet_50_Persentil" type="double">
+                  <annotation>
+                     <documentation>13001: Jevnhet50persentil. 50-persentil IRI/jevnhetsverdi - median - basert på IRI 20m medianverdier for strekning [mm/m].</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13001</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jevnhet, 50-persentil</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="jevnhet_Vedlikeholdsstandard" type="double">
+                  <annotation>
+                     <documentation>13002: Max tillatt 90-persentil jevnhetsverdi ihht vedlikeholdsstandard R610.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13002</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jevnhet, vedlikeholdsstandard</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="jevnhet_AndelAvVedlikeholdsstandard" type="double">
                   <annotation>
                      <documentation>12161: prosentStdJevnhet. Angir hvor stor andel av vedlikeholdsstandard som er "oppbrukt":. Regnes ut som jevnhet 90-persentil dividert med maksimal IRI i henhold til vedlikeholdsstandard. Angis i prosent.</documentation>
@@ -83,13 +164,31 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="tilstandsindikatorverdi_Jevnhet" type="double">
+                  <annotation>
+                     <documentation>13003: Tilstandsgrad for jevnhet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13003</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi, Jevnhet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tilstandsindikatorverdi" type="double">
+                  <annotation>
+                     <documentation>13010: Tilstandsindikatorverdi for dekketilstand</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13010</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
             </sequence>
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Statistikk, dekketilstandPropertyType">
+   <complexType name="Tilstandsindikator, dekketilstandPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Statistikk, dekketilstand"/>
+         <element ref="nvdb:Tilstandsindikator, dekketilstand"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>

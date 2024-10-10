@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>487: Sted for på og avstigning av kollektivtrafikk.</documentation>
    </annotation>
@@ -14,6 +14,127 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BelysningHoldeplassutrustningType">
+      <annotation>
+         <documentation>3959: Angir utvendige belysningsforhold. Ev. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3959</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BelysningHoldeplassutrustningEnumerationType nvdb:BelysningHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="BelysningHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>3959: Angir utvendige belysningsforhold. Ev. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3959</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="JG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9954</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, belyst av gatebelysning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="JE">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4978</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, egen belysning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4979</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BelysningHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BilparkeringHoldeplassutrustningType">
+      <annotation>
+         <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10220</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bilparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BilparkeringHoldeplassutrustningEnumerationType nvdb:BilparkeringHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="BilparkeringHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10220</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bilparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16648: Angir at det er bilparkering i tilknytning til holdeplassutrustning, men parkering er uten takoverbygg og det er ikke tilrettelagt for forflytningshemmede.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16648</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tak">
+            <annotation>
+               <documentation>16649: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, men parkering er ikke tilrettelagt for forflytningshemmede.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16649</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med takoverbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="uu">
+            <annotation>
+               <documentation>16650: Angir at det er bilparkering i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede, men det er ikke takoverbygg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16650</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, tilrettelagt for forflytningshemmede</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="takuu">
+            <annotation>
+               <documentation>16651: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16651</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, tilrettelagt for forflytningshemmede og takoverbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16652: Det er ikke parkering i tilknytning til holdeplassutrustning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16652</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BilparkeringHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="EierHoldeplassutrustningType">
       <annotation>
          <documentation>10221: Angir hvem som er eier av vegobjektet.</documentation>
@@ -89,6 +210,241 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="GangadkomstHoldeplassutrustningType">
+      <annotation>
+         <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3963</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GangadkomstHoldeplassutrustningEnumerationType nvdb:GangadkomstHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="GangadkomstHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3963</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="d">
+            <annotation>
+               <documentation>4988: Gangadkomst fra noen av de tilhørende områdene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4988</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Delvis</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ja">
+            <annotation>
+               <documentation>4987: Gangadkomst fra tilnærmet alle tilhørende områder.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4987</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <documentation>4989: Ingen form for egen gangadkomst til holdeplassen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4989</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GangadkomstHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Gangadkomst_KryssingsmulighetHoldeplassutrustningType">
+      <annotation>
+         <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10694</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst, kryssingsmulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Gangadkomst_KryssingsmulighetHoldeplassutrustningEnumerationType nvdb:Gangadkomst_KryssingsmulighetHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Gangadkomst_KryssingsmulighetHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10694</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst, kryssingsmulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>17273: Det finnes nærliggende gangfelt eller tilrettelagt kryssing. Tilrettelagt kryssing vil si at det f.eks. er nedsenket kantstein  eller åpning i rekkverk/gjerde, men uten at det er gangfelt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17273</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gangfelt/tilrettelagt kryssing</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>17274: Vegen må krysses i samme plan som øvrig trafikk. Det er ikke gangfelt eller tilrettelagt kryssing.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17274</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen tilrettelegging</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IR">
+            <annotation>
+               <documentation>22570: Kryssing av vegen er ikke en relevant problemstilling for denne holdeplassen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22570</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="PK">
+            <annotation>
+               <documentation>22569: Kryssing av vegen på g/s-veg over gangbro eller gjennom undergang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22569</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Planskilt kryssing på g/s-veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Gangadkomst_KryssingsmulighetHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Gangadkomst_StigningHoldeplassutrustningType">
+      <annotation>
+         <documentation>10190: Angir største stigningsgrad på slakeste gangadkomst til Holdeplass.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10190</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst, stigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Gangadkomst_StigningHoldeplassutrustningEnumerationType nvdb:Gangadkomst_StigningHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Gangadkomst_StigningHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10190: Angir største stigningsgrad på slakeste gangadkomst til Holdeplass.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10190</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangadkomst, stigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="&gt;1:12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16604</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Brattere enn 1:12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1:12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16603</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1:15">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16602</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:15</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1:20">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16601</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:20</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Gangadkomst_StigningHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HoldeplasskiltHoldeplassutrustningType">
+      <annotation>
+         <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10416</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Holdeplasskilt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HoldeplasskiltHoldeplassutrustningEnumerationType nvdb:HoldeplasskiltHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="HoldeplasskiltHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10416</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Holdeplasskilt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Ja, integrert symbol">
+            <annotation>
+               <documentation>18175: Skilt er integrert ("trykket") som symbol i selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18175</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, integrert symbol</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ja, klistremerke">
+            <annotation>
+               <documentation>18176: Skilt er limt på selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen i form av klistremerke.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18176</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, klistremerke</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ja">
+            <annotation>
+               <documentation>16791: Det er standard skiltplate i tilknytning til holdeplass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16791</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, standard skiltplate</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>16792: Det er ingen former for holdeplasskilt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16792</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HoldeplasskiltHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Holdeplassutrustning"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:HoldeplassutrustningType">
@@ -104,39 +460,39 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element minOccurs="0" name="UU_TypeTransportmiddel">
+               <element minOccurs="0" name="typeTransportmiddel">
                   <annotation>
                      <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10259</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Type transportmiddel</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type transportmiddel</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Type" type="nvdb:UU_TypeHoldeplassutrustningType">
+               <element name="type" type="nvdb:TypeHoldeplassutrustningType">
                   <annotation>
                      <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3956</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Type</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_PåOgAvstigning">
+               <element name="påOgAvstigning">
                   <annotation>
                      <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_På- og avstigning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">På- og avstigning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_TilrettelagtForOvergangBytte">
+               <element minOccurs="0" name="tilrettelagtForOvergangBytte">
                   <annotation>
                      <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -194,327 +550,323 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_poeng_Beregnet_Mulig" type="double">
+               <element minOccurs="0" name="poeng_Beregnet_Mulig" type="double">
                   <annotation>
                      <documentation>10261: Angir hvor mange poeng det er mulig å oppnå. Verdi beregnes på basis av andre UU-egenskapstyper.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10261</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_poeng, beregnet, mulig</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Poeng, beregnet, mulig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_poeng_Beregnet_Faktisk" type="double">
+               <element minOccurs="0" name="poeng_Beregnet_Faktisk" type="double">
                   <annotation>
                      <documentation>10188: Beregnet antall Universell utforming poeng for Holdeplassutrustning. Beregnes på basis av andre UU-egenskapstyper.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10188</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_poeng, beregnet, faktisk</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Poeng, beregnet, faktisk</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Holdeplasskilt"
-                        type="nvdb:UU_HoldeplasskiltHoldeplassutrustningType">
+               <element name="holdeplasskilt"
+                        type="nvdb:HoldeplasskiltHoldeplassutrustningType">
                   <annotation>
                      <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10416</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Holdeplasskilt</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Holdeplasskilt</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_OppslagstavleForRutetabell">
+               <element name="oppslagstavleForRutetabell">
                   <annotation>
                      <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10206</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle for rutetabell</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppslagstavle for rutetabell</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_OppslagstavleRutetab_HøydeUnderkant"
+                        name="oppslagstavleRutetab_HøydeUnderkant"
                         type="double">
                   <annotation>
                      <documentation>10207: Høyde over bakken for nedre kant av oppslagstavle for rutetabell.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10207</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, høyde underkant</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, høyde underkant</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_OppslagstavleRutetab_HøydeOverkant"
+                        name="oppslagstavleRutetab_HøydeOverkant"
                         type="double">
                   <annotation>
                      <documentation>10257: Høyde over bakken for øvre kant av oppslagstavle for rutetabell.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10257</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, høyde overkant</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, høyde overkant</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_OppslagstavleRutetab_Adgang">
+               <element minOccurs="0" name="oppslagstavleRutetab_Adgang">
                   <annotation>
                      <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10208</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, adgang</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, adgang</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_OppslagstavleRutetab_Belyst">
+               <element minOccurs="0" name="oppslagstavleRutetab_Belyst">
                   <annotation>
                      <documentation>10417: Angir om oppslagstavle er belyst eller ikke.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10417</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, belyst</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, belyst</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_Sanntidsinformasjon"
-                        type="nvdb:UU_SanntidsinformasjonHoldeplassutrustningType">
+                        name="sanntidsinformasjon"
+                        type="nvdb:SanntidsinformasjonHoldeplassutrustningType">
                   <annotation>
                      <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10209</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Sanntidsinformasjon</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sanntidsinformasjon</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_Høyttaler"
-                        type="nvdb:UU_HøyttalerHoldeplassutrustningType">
+                        name="høyttaler"
+                        type="nvdb:HøyttalerHoldeplassutrustningType">
                   <annotation>
                      <documentation>10210: Angir om det er høyttaler for å formidle informasjon.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10210</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Høyttaler</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyttaler</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Belysning" type="nvdb:UU_BelysningHoldeplassutrustningType">
+               <element name="belysning" type="nvdb:BelysningHoldeplassutrustningType">
                   <annotation>
                      <documentation>3959: Angir utvendige belysningsforhold. Ev. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3959</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Belysning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Takoverbygg"
-                        type="nvdb:UU_TakoverbyggHoldeplassutrustningType">
+               <element name="takoverbygg" type="nvdb:TakoverbyggHoldeplassutrustningType">
                   <annotation>
                      <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10199</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Takoverbygg</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Leskur_FriBreddeInnvendig" type="double">
+               <element minOccurs="0" name="leskur_FriBreddeInnvendig" type="double">
                   <annotation>
                      <documentation>10262: Angir minste frie bredde innvendig i leskur. Fri bredde måles i leskurets lengderetning, dvs. parallelt med åpning. Innenfor denne bredden skal det være mulig å bevege seg med rullestol, dvs. bredde av ev. benker m.m. er ikke inkludert i fri bredde.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10262</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Leskur, fri bredde innvendig</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leskur, fri bredde innvendig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Leskur_FriDybdeInnvendig" type="double">
+               <element minOccurs="0" name="leskur_FriDybdeInnvendig" type="double">
                   <annotation>
                      <documentation>10263: Angir minste frie dybde innvendig i leskur. Fri dybde måles på tvers av leskuret, dvs. normalt på åpning. Innenfor denne dybden skal det være mulig å bevege seg med rullestol, dvs. dybde av ev. benker m.m. er ikke inkludert i fri dybde.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10263</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Leskur, fri dybde innvendig</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leskur, fri dybde innvendig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Leskur_ArealTilpassetRullestol">
+               <element minOccurs="0" name="leskur_ArealTilpassetRullestol">
                   <annotation>
                      <documentation>10200: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10200</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Leskur, areal tilpasset rullestol</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leskur, areal tilpasset rullestol</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Sittemulighet"
-                        type="nvdb:UU_SittemulighetHoldeplassutrustningType">
+               <element name="sittemulighet" type="nvdb:SittemulighetHoldeplassutrustningType">
                   <annotation>
                      <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10211</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Sittemulighet</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sittemulighet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Sykkelparkering"
-                        type="nvdb:UU_SykkelparkeringHoldeplassutrustningType">
+               <element name="sykkelparkering"
+                        type="nvdb:SykkelparkeringHoldeplassutrustningType">
                   <annotation>
                      <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10212</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Sykkelparkering</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Gangadkomst"
-                        type="nvdb:UU_GangadkomstHoldeplassutrustningType">
+               <element name="gangadkomst" type="nvdb:GangadkomstHoldeplassutrustningType">
                   <annotation>
                      <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3963</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gangadkomst</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Gangadkomst_Stigning">
+               <element name="gangadkomst_Stigning">
                   <annotation>
                      <documentation>10190: Angir største stigningsgrad på slakeste gangadkomst til Holdeplass.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10190</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, stigning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gangadkomst, stigning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Bilparkering"
-                        type="nvdb:UU_BilparkeringHoldeplassutrustningType">
+               <element name="bilparkering" type="nvdb:BilparkeringHoldeplassutrustningType">
                   <annotation>
                      <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10220</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Bilparkering</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bilparkering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Gangadkomst_Kryssingsmulighet">
+               <element minOccurs="0" name="gangadkomst_Kryssingsmulighet">
                   <annotation>
                      <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10694</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, kryssingsmulighet</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gangadkomst, kryssingsmulighet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Type">
+               <element minOccurs="0" name="plattform_Type">
                   <annotation>
                      <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10219</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, type</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, type</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Belegning">
+               <element minOccurs="0" name="plattform_Belegning">
                   <annotation>
                      <documentation>10193: Belegning på plattform.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10193</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, belegning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, belegning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Dekkekvalitet">
+               <element minOccurs="0" name="plattform_Dekkekvalitet">
                   <annotation>
                      <documentation>10189: Dekkekvalitet på Holdeplassutrustning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10189</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, dekkekvalitet</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, dekkekvalitet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Lengde" type="double">
+               <element minOccurs="0" name="plattform_Lengde" type="double">
                   <annotation>
                      <documentation>10191: Lengde av plattform eksklusiv inn-/utkjøringslengde.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10191</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, lengde</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, lengde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Bredde" type="double">
+               <element minOccurs="0" name="plattform_Bredde" type="double">
                   <annotation>
                      <documentation>10192: Fri bredde i plattformens fulle lengde. Ved varierende bredde brukes gjennomsnitt.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10192</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, bredde</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, bredde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Areal" type="integer">
+               <element minOccurs="0" name="plattform_Areal" type="integer">
                   <annotation>
                      <documentation>11862: Areal av plattform.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11862</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, areal</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, areal</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Punkthinder">
+               <element minOccurs="0" name="plattform_Punkthinder">
                   <annotation>
                      <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10202</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, punkthinder</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, punkthinder</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_Minstebredde" type="double">
+               <element minOccurs="0" name="plattform_Minstebredde" type="double">
                   <annotation>
                      <documentation>10201: Minste bredde på beste gang-/forflytningsbane langs plattformen. Det skal tas hensyn til permanente punkthinder som trapper, skiltstolper, portaler, bygninger osv. Kjøretøy, rullestoler, vogner etc. som har bredde større enn denne minstebredden vil ikke kunne passere fritt på plattform.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10201</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, minstebredde</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, minstebredde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_Plattform_KantsteinhøydePåstigning"
+                        name="plattform_KantsteinhøydePåstigning"
                         type="double">
                   <annotation>
                      <documentation>10194: Høyde på kantstein ved påstigningspunkt.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10194</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, kantsteinhøyde påstigning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, kantsteinhøyde påstigning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element minOccurs="0"
-                        name="UU_Plattform_KantsteinhøydeAvstigning"
+                        name="plattform_KantsteinhøydeAvstigning"
                         type="double">
                   <annotation>
                      <documentation>10195: Høyde på kantstein ved avstigningspunkt (ca. 5 m bak påstigning).</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10195</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, kantsteinhøyde avstigning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, kantsteinhøyde avstigning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_BussAdgangTilKant">
+               <element minOccurs="0" name="plattform_BussAdgangTilKant">
                   <annotation>
                      <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10196</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, buss adgang til kant</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, buss adgang til kant</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="UU_Plattform_TaktilIndikatorPåstigning">
+               <element name="plattform_TaktilIndikatorPåstigning">
                   <annotation>
                      <documentation>10197: Angir om det er Taktil indikator som markerer stoppunkt på holdeplass.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10197</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator påstigning</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator påstigning</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="UU_Plattform_TaktilIndikatorPerrong">
+               <element minOccurs="0" name="plattform_TaktilIndikatorPerrong">
                   <annotation>
                      <documentation>10198: Angir om det er langsgående markering ved perrong eller holdeplass ut mot veg, for å gjøre folk oppmerksom på kanten og på innkommende busser/trikker</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10198</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator perrong</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator perrong</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -522,7 +874,7 @@
                         name="stoppknapp"
                         type="nvdb:StoppknappHoldeplassutrustningType">
                   <annotation>
-                     <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+                     <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe eller lyssignal tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
@@ -631,9 +983,748 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="HøyttalerHoldeplassutrustningType">
+      <annotation>
+         <documentation>10210: Angir om det er høyttaler for å formidle informasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10210</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høyttaler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HøyttalerHoldeplassutrustningEnumerationType nvdb:HøyttalerHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="HøyttalerHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10210: Angir om det er høyttaler for å formidle informasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10210</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høyttaler</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16633: Holdeplassutrustning har høyttaler.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16633</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16634: Holdeplassutrustning har ikke høyttaler.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16634</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøyttalerHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Leskur_ArealTilpassetRullestolHoldeplassutrustningType">
+      <annotation>
+         <documentation>10200: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10200</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Leskur, areal tilpasset rullestol</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Leskur_ArealTilpassetRullestolHoldeplassutrustningEnumerationType nvdb:Leskur_ArealTilpassetRullestolHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Leskur_ArealTilpassetRullestolHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10200: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10200</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Leskur, areal tilpasset rullestol</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16621</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16622</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Leskur_ArealTilpassetRullestolHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleForRutetabellHoldeplassutrustningType">
+      <annotation>
+         <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10206</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OppslagstavleForRutetabellHoldeplassutrustningEnumerationType nvdb:OppslagstavleForRutetabellHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="OppslagstavleForRutetabellHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10206</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16627</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16628</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleForRutetabellHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_AdgangHoldeplassutrustningType">
+      <annotation>
+         <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10208</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, adgang</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OppslagstavleRutetab_AdgangHoldeplassutrustningEnumerationType nvdb:OppslagstavleRutetab_AdgangHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_AdgangHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10208</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, adgang</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16629: Det er mulig å komme helt inn til rutetidsinformasjonen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16629</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16630: Det er ikke mulig å komme helt inn til rutetidsinformasjonen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16630</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_AdgangHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_BelystHoldeplassutrustningType">
+      <annotation>
+         <documentation>10417: Angir om oppslagstavle er belyst eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10417</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, belyst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OppslagstavleRutetab_BelystHoldeplassutrustningEnumerationType nvdb:OppslagstavleRutetab_BelystHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_BelystHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10417: Angir om oppslagstavle er belyst eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10417</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oppslagstavle rutetab, belyst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <documentation>16793: For å svare ja skal det være belysning direkte på ruteinformasjonen, på samme stolpe som ruteinformasjon, eller lehus med innvendig belysning og ruteinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16793</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16794</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OppslagstavleRutetab_BelystHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_BelegningHoldeplassutrustningType">
+      <annotation>
+         <documentation>10193: Belegning på plattform.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10193</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, belegning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_BelegningHoldeplassutrustningEnumerationType nvdb:Plattform_BelegningHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_BelegningHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10193: Belegning på plattform.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10193</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, belegning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="asf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16605</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bet">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16606</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bst">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16607</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gru">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16608</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bro">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16609</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naturstein, brostein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20073</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naturstein, heller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_BelegningHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_BussAdgangTilKantHoldeplassutrustningType">
+      <annotation>
+         <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10196</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, buss adgang til kant</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_BussAdgangTilKantHoldeplassutrustningEnumerationType nvdb:Plattform_BussAdgangTilKantHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_BussAdgangTilKantHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10196</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, buss adgang til kant</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16610: Buss/trikk kan kjøre uhindret inn til kant.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16610</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16611: Buss/trikk kan ikke kjøre uhindret inn til kant.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16611</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_BussAdgangTilKantHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_DekkekvalitetHoldeplassutrustningType">
+      <annotation>
+         <documentation>10189: Dekkekvalitet på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10189</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, dekkekvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_DekkekvalitetHoldeplassutrustningEnumerationType nvdb:Plattform_DekkekvalitetHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_DekkekvalitetHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10189: Dekkekvalitet på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10189</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, dekkekvalitet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="dårl">
+            <annotation>
+               <documentation>16600: Ujevnt og/eller betydelig skadd dekke.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16600</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dårlig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="god">
+            <annotation>
+               <documentation>16598: Stabilt og jevnt dekke uten sjenerende skader.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16598</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">God</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="midl">
+            <annotation>
+               <documentation>16599: Noen ujevnheter og/eller mindre skader.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16599</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_DekkekvalitetHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_PunkthinderHoldeplassutrustningType">
+      <annotation>
+         <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10202</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, punkthinder</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_PunkthinderHoldeplassutrustningEnumerationType nvdb:Plattform_PunkthinderHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_PunkthinderHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10202</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, punkthinder</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16623</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16624</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_PunkthinderHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPerrongHoldeplassutrustningType">
+      <annotation>
+         <documentation>10198: Angir om det er langsgående markering ved perrong eller holdeplass ut mot veg, for å gjøre folk oppmerksom på kanten og på innkommende busser/trikker</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10198</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator perrong</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_TaktilIndikatorPerrongHoldeplassutrustningEnumerationType nvdb:Plattform_TaktilIndikatorPerrongHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPerrongHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10198: Angir om det er langsgående markering ved perrong eller holdeplass ut mot veg, for å gjøre folk oppmerksom på kanten og på innkommende busser/trikker</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10198</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator perrong</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16614</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16615</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPerrongHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPåstigningHoldeplassutrustningType">
+      <annotation>
+         <documentation>10197: Angir om det er Taktil indikator som markerer stoppunkt på holdeplass.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10197</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator påstigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_TaktilIndikatorPåstigningHoldeplassutrustningEnumerationType nvdb:Plattform_TaktilIndikatorPåstigningHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPåstigningHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10197: Angir om det er Taktil indikator som markerer stoppunkt på holdeplass.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10197</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, taktil indikator påstigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16612</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16613</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TaktilIndikatorPåstigningHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TypeHoldeplassutrustningType">
+      <annotation>
+         <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10219</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Plattform_TypeHoldeplassutrustningEnumerationType nvdb:Plattform_TypeHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Plattform_TypeHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10219</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="fort">
+            <annotation>
+               <documentation>16690: Plattformen er del av gjennomgående fortau.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16690</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Del av fortau</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Del av g/s-veg">
+            <annotation>
+               <documentation>19834: Plattformen er del av gjennomgående g/s-veg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19834</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Del av g/s-veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="eget">
+            <annotation>
+               <documentation>16692: Eget areal som er opphøyet fra kjørebanen, brukes som venteareal.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16692</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Eget areal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16689: Det er ikke noe eget tilrettelagt venteareal.  Venteareal utenfor kjørebanen (i avkjørsler, stikkveger, ved postkasser eller lignende).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16689</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke plattform</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="øy">
+            <annotation>
+               <documentation>16691: Trafikkøy som skiller kjørefelt eller påstigningspunkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16691</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkøy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Plattform_TypeHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PåOgAvstigningHoldeplassutrustningType">
+      <annotation>
+         <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">På- og avstigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PåOgAvstigningHoldeplassutrustningEnumerationType nvdb:PåOgAvstigningHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="PåOgAvstigningHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">På- og avstigning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16625</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Både på- og avstigning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16626</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Primært avstigning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PåOgAvstigningHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SanntidsinformasjonHoldeplassutrustningType">
+      <annotation>
+         <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10209</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sanntidsinformasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SanntidsinformasjonHoldeplassutrustningEnumerationType nvdb:SanntidsinformasjonHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="SanntidsinformasjonHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10209</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sanntidsinformasjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16631: Holdeplassutrustning har sanntidsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16631</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16632: Holdeplassutrustning har ikke sanntidsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16632</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SanntidsinformasjonHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SittemulighetHoldeplassutrustningType">
+      <annotation>
+         <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10211</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittemulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SittemulighetHoldeplassutrustningEnumerationType nvdb:SittemulighetHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="SittemulighetHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10211</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittemulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16635: Angir at det er sittemulighet, men ikke sittemulighet under tak og det er ikke armlene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16635</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="arml">
+            <annotation>
+               <documentation>16637: Angir at det er sittemulighet med armlene, men ikke under tak.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16637</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med armlene</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="alta">
+            <annotation>
+               <documentation>16638: Angir at det er sittemulighet under tak og at det er sittemulighet med armlene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16638</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med armlene og tak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tak">
+            <annotation>
+               <documentation>16636: Angir at det er sittemulighet under tak, men det er ikke armlene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16636</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med tak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16639</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SittemulighetHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="StoppknappHoldeplassutrustningType">
       <annotation>
-         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe eller lyssignal tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
@@ -643,7 +1734,7 @@
    </simpleType>
    <simpleType name="StoppknappHoldeplassutrustningEnumerationType">
       <annotation>
-         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
+         <documentation>12984: Angir om det finnes en trykknapp på holdeplassen som sender signal, slik at en lampe eller lyssignal tennes ved vegen. Dette er aktuelt der holdeplassen ligger slik til at bussjåføren må svinge av vegen for å ta med passasjerer som venter.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">12984</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Stoppknapp</sc:taggedValue>
@@ -669,6 +1760,165 @@
       </restriction>
    </simpleType>
    <simpleType name="StoppknappHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SykkelparkeringHoldeplassutrustningType">
+      <annotation>
+         <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10212</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SykkelparkeringHoldeplassutrustningEnumerationType nvdb:SykkelparkeringHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="SykkelparkeringHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10212</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="tak">
+            <annotation>
+               <documentation>16641: Holdeplassutrustning har sykkelparkering med takoverbygg over hele eller deler av sykkelparkeringen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16641</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med takoverbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16640: Holdeplassutrustning har sykkelparkering uten takoverbygg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16640</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, uten takoverbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16642: Holdeplassutrustning har ikke sykkelparkering.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16642</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SykkelparkeringHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TakoverbyggHoldeplassutrustningType">
+      <annotation>
+         <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10199</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TakoverbyggHoldeplassutrustningEnumerationType nvdb:TakoverbyggHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="TakoverbyggHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10199</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Takoverbygg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16618: Holdeplassutrustning er plassert innendørs.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16618</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Innendørs</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ja">
+            <annotation>
+               <documentation>16619: Holdeplassutrustning har leskur.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Leskur</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>16617: Det er ikke takoverbygg ved Holdeplassutrustning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16617</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16620: Holdeplassutrustning er plassert under åpent overbygg. Beskytter mot regn, men ikke nødvendigvis mot vind.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16620</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Åpent overbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TakoverbyggHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningType">
+      <annotation>
+         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType nvdb:TilrettelagtForOvergangBytteHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>22553: Holdeplassutrustning er tilrettelagt for omstigning mellom kollektivlinjer, men har ikke fasilitetene som et kollektivknutepunkt har. Det kan f.eks. være korrespondanse mellom busslinjer.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22553</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>22554: Det kan være mulig å bytte mellom ulike busslinjer, men det er ingen spesiell tilrettelegging.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22554</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -771,1275 +2021,22 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="UU_BelysningHoldeplassutrustningType">
-      <annotation>
-         <documentation>3959: Angir utvendige belysningsforhold. Ev. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3959</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Belysning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_BelysningHoldeplassutrustningEnumerationType nvdb:UU_BelysningHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_BelysningHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>3959: Angir utvendige belysningsforhold. Ev. innvendig belysning i leskur skal knyttes til "leskur".</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3959</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Belysning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="JG">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">9954</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, belyst av gatebelysning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="JE">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4978</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, egen belysning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4979</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_BelysningHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_BilparkeringHoldeplassutrustningType">
-      <annotation>
-         <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10220</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Bilparkering</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_BilparkeringHoldeplassutrustningEnumerationType nvdb:UU_BilparkeringHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_BilparkeringHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10220: Angir om det er parkering for bil i tilknytning til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10220</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Bilparkering</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16648: Angir at det er bilparkering i tilknytning til holdeplassutrustning, men parkering er uten takoverbygg og det er ikke tilrettelagt for forflytningshemmede.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16648</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tak">
-            <annotation>
-               <documentation>16649: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, men parkering er ikke tilrettelagt for forflytningshemmede.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16649</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, med takoverbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="uu">
-            <annotation>
-               <documentation>16650: Angir at det er bilparkering i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede, men det er ikke takoverbygg.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16650</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, tilrettelagt for forflytningshemmede</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="takuu">
-            <annotation>
-               <documentation>16651: Angir at det er bilparkering med takoverbygg i tilknytning til holdeplassutrustning, det er tilrettelagt for forflytningshemmede.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16651</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, tilrettelagt for forflytningshemmede og takoverbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16652: Det er ikke parkering i tilknytning til holdeplassutrustning.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16652</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_BilparkeringHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_GangadkomstHoldeplassutrustningType">
-      <annotation>
-         <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3963</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_GangadkomstHoldeplassutrustningEnumerationType nvdb:UU_GangadkomstHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_GangadkomstHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>3963: Angir om holdeplass har tilrettelagt adkomst for fotgjengere. Med tilrettelagt adkomst menes at det er fortau eller gang/sykkelveg/lokal veg fram til holdeplassen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3963</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="d">
-            <annotation>
-               <documentation>4988: Gangadkomst fra noen av de tilhørende områdene.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4988</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Delvis</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ja">
-            <annotation>
-               <documentation>4987: Gangadkomst fra tilnærmet alle tilhørende områder.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4987</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <documentation>4989: Ingen form for egen gangadkomst til holdeplassen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4989</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_GangadkomstHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_KryssingsmulighetHoldeplassutrustningType">
-      <annotation>
-         <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10694</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, kryssingsmulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Gangadkomst_KryssingsmulighetHoldeplassutrustningEnumerationType nvdb:UU_Gangadkomst_KryssingsmulighetHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_KryssingsmulighetHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10694: Angir hvilken mulighet det er for å krysse vegen ved holdeplassen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10694</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, kryssingsmulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <documentation>17273: Det finnes nærliggende gangfelt eller tilrettelagt kryssing. Tilrettelagt kryssing vil si at det f.eks. er nedsenket kantstein  eller åpning i rekkverk/gjerde, men uten at det er gangfelt.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17273</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Gangfelt/tilrettelagt kryssing</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <documentation>17274: Vegen må krysses i samme plan som øvrig trafikk. Det er ikke gangfelt eller tilrettelagt kryssing.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17274</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ingen tilrettelegging</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="IR">
-            <annotation>
-               <documentation>22570: Kryssing av vegen er ikke en relevant problemstilling for denne holdeplassen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22570</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="PK">
-            <annotation>
-               <documentation>22569: Kryssing av vegen på g/s-veg over gangbro eller gjennom undergang.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22569</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Planskilt kryssing på g/s-veg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_KryssingsmulighetHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_StigningHoldeplassutrustningType">
-      <annotation>
-         <documentation>10190: Angir største stigningsgrad på slakeste gangadkomst til Holdeplass.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10190</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, stigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Gangadkomst_StigningHoldeplassutrustningEnumerationType nvdb:UU_Gangadkomst_StigningHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_StigningHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10190: Angir største stigningsgrad på slakeste gangadkomst til Holdeplass.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10190</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Gangadkomst, stigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="&gt;1:12">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16604</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Brattere enn 1:12</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="1:12">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16603</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:12</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="1:15">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16602</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:15</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="1:20">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16601</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Slakere enn 1:20</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Gangadkomst_StigningHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_HoldeplasskiltHoldeplassutrustningType">
-      <annotation>
-         <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10416</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Holdeplasskilt</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_HoldeplasskiltHoldeplassutrustningEnumerationType nvdb:UU_HoldeplasskiltHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_HoldeplasskiltHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10416: Angir om det er holdeplasskilt knyttet til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10416</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Holdeplasskilt</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="Ja, integrert symbol">
-            <annotation>
-               <documentation>18175: Skilt er integrert ("trykket") som symbol i selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">18175</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, integrert symbol</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="Ja, klistremerke">
-            <annotation>
-               <documentation>18176: Skilt er limt på selve leskuret, oppslagstavle, eller annen del av holdeplassutrustningen i form av klistremerke.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">18176</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, klistremerke</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="Ja">
-            <annotation>
-               <documentation>16791: Det er standard skiltplate i tilknytning til holdeplass.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16791</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, standard skiltplate</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <documentation>16792: Det er ingen former for holdeplasskilt.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16792</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_HoldeplasskiltHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_HøyttalerHoldeplassutrustningType">
-      <annotation>
-         <documentation>10210: Angir om det er høyttaler for å formidle informasjon.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10210</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Høyttaler</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_HøyttalerHoldeplassutrustningEnumerationType nvdb:UU_HøyttalerHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_HøyttalerHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10210: Angir om det er høyttaler for å formidle informasjon.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10210</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Høyttaler</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16633: Holdeplassutrustning har høyttaler.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16633</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16634: Holdeplassutrustning har ikke høyttaler.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16634</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_HøyttalerHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Leskur_ArealTilpassetRullestolHoldeplassutrustningType">
-      <annotation>
-         <documentation>10200: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10200</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Leskur, areal tilpasset rullestol</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Leskur_ArealTilpassetRullestolHoldeplassutrustningEnumerationType nvdb:UU_Leskur_ArealTilpassetRullestolHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Leskur_ArealTilpassetRullestolHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10200: Angir om det finnes fritt areal innvendig på minst 1.5 x 1.5 m.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10200</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Leskur, areal tilpasset rullestol</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16621</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16622</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Leskur_ArealTilpassetRullestolHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleForRutetabellHoldeplassutrustningType">
-      <annotation>
-         <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10206</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle for rutetabell</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_OppslagstavleForRutetabellHoldeplassutrustningEnumerationType nvdb:UU_OppslagstavleForRutetabellHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleForRutetabellHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10206: Angir om det er oppslagstavle/kassett eller annen tilrettelegging for oppslag av rutetabeller.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10206</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle for rutetabell</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16627</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16628</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleForRutetabellHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_AdgangHoldeplassutrustningType">
-      <annotation>
-         <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10208</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, adgang</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_OppslagstavleRutetab_AdgangHoldeplassutrustningEnumerationType nvdb:UU_OppslagstavleRutetab_AdgangHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_AdgangHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10208: Angir om det er mulig å komme helt inntil oppslagstavle for rutetabell.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10208</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, adgang</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16629: Det er mulig å komme helt inn til rutetidsinformasjonen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16629</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16630: Det er ikke mulig å komme helt inn til rutetidsinformasjonen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16630</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_AdgangHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_BelystHoldeplassutrustningType">
-      <annotation>
-         <documentation>10417: Angir om oppslagstavle er belyst eller ikke.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10417</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, belyst</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_OppslagstavleRutetab_BelystHoldeplassutrustningEnumerationType nvdb:UU_OppslagstavleRutetab_BelystHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_BelystHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10417: Angir om oppslagstavle er belyst eller ikke.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10417</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Oppslagstavle rutetab, belyst</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16793</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16794</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_OppslagstavleRutetab_BelystHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_BelegningHoldeplassutrustningType">
-      <annotation>
-         <documentation>10193: Belegning på plattform.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10193</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, belegning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_BelegningHoldeplassutrustningEnumerationType nvdb:UU_Plattform_BelegningHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_BelegningHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10193: Belegning på plattform.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10193</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, belegning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="asf">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16605</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bet">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16606</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bst">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16607</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Betongstein</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="gru">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16608</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Grus</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bro">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16609</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Naturstein, brostein</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nh">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">20073</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Naturstein, heller</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_BelegningHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_BussAdgangTilKantHoldeplassutrustningType">
-      <annotation>
-         <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10196</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, buss adgang til kant</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_BussAdgangTilKantHoldeplassutrustningEnumerationType nvdb:UU_Plattform_BussAdgangTilKantHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_BussAdgangTilKantHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10196: Angir om buss/trikk kan kjøre uhindret inn til kant. Gjelder vanlig buss eller trikk.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10196</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, buss adgang til kant</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16610: Buss/trikk kan kjøre uhindret inn til kant.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16610</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16611: Buss/trikk kan ikke kjøre uhindret inn til kant.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16611</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_BussAdgangTilKantHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_DekkekvalitetHoldeplassutrustningType">
-      <annotation>
-         <documentation>10189: Dekkekvalitet på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10189</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, dekkekvalitet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_DekkekvalitetHoldeplassutrustningEnumerationType nvdb:UU_Plattform_DekkekvalitetHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_DekkekvalitetHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10189: Dekkekvalitet på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10189</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, dekkekvalitet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="dårl">
-            <annotation>
-               <documentation>16600: Ujevnt og/eller betydelig skadd dekke.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16600</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Dårlig</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="god">
-            <annotation>
-               <documentation>16598: Stabilt og jevnt dekke uten sjenerende skader.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16598</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">God</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="midl">
-            <annotation>
-               <documentation>16599: Noen ujevnheter og/eller mindre skader.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16599</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_DekkekvalitetHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_PunkthinderHoldeplassutrustningType">
-      <annotation>
-         <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10202</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, punkthinder</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_PunkthinderHoldeplassutrustningEnumerationType nvdb:UU_Plattform_PunkthinderHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_PunkthinderHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10202: Angir om det finnes punkthinder i forflytningsbane langs plattformen.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10202</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, punkthinder</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16623</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16624</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_PunkthinderHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPerrongHoldeplassutrustningType">
-      <annotation>
-         <documentation>10198: Angir om det er langsgående markering ved perrong eller holdeplass ut mot veg, for å gjøre folk oppmerksom på kanten og på innkommende busser/trikker</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10198</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator perrong</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_TaktilIndikatorPerrongHoldeplassutrustningEnumerationType nvdb:UU_Plattform_TaktilIndikatorPerrongHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPerrongHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10198: Angir om det er langsgående markering ved perrong eller holdeplass ut mot veg, for å gjøre folk oppmerksom på kanten og på innkommende busser/trikker</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10198</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator perrong</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16614</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16615</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPerrongHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPåstigningHoldeplassutrustningType">
-      <annotation>
-         <documentation>10197: Angir om det er Taktil indikator som markerer stoppunkt på holdeplass.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10197</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator påstigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_TaktilIndikatorPåstigningHoldeplassutrustningEnumerationType nvdb:UU_Plattform_TaktilIndikatorPåstigningHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPåstigningHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10197: Angir om det er Taktil indikator som markerer stoppunkt på holdeplass.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10197</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, taktil indikator påstigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16612</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16613</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TaktilIndikatorPåstigningHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TypeHoldeplassutrustningType">
-      <annotation>
-         <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10219</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, type</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_Plattform_TypeHoldeplassutrustningEnumerationType nvdb:UU_Plattform_TypeHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_Plattform_TypeHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10219: Angir type område hvor reisende kan oppholde seg i forbindelse med venting på kollektivtrafikk. Plattform er opphøyet fra kjørearealet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10219</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Plattform, type</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="fort">
-            <annotation>
-               <documentation>16690: Plattformen er del av gjennomgående fortau.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16690</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Del av fortau</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="Del av g/s-veg">
-            <annotation>
-               <documentation>19834: Plattformen er del av gjennomgående g/s-veg.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19834</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Del av g/s-veg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="eget">
-            <annotation>
-               <documentation>16692: Eget areal som er opphøyet fra kjørebanen, brukes som venteareal.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16692</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Eget areal</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16689: Det er ikke noe eget tilrettelagt venteareal.  Venteareal utenfor kjørebanen (i avkjørsler, stikkveger, ved postkasser eller lignende).</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16689</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ikke plattform</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="øy">
-            <annotation>
-               <documentation>16691: Trafikkøy som skiller kjørefelt eller påstigningspunkt.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16691</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Trafikkøy</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_Plattform_TypeHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_PåOgAvstigningHoldeplassutrustningType">
-      <annotation>
-         <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_På- og avstigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_PåOgAvstigningHoldeplassutrustningEnumerationType nvdb:UU_PåOgAvstigningHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_PåOgAvstigningHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10205: Angir om Holdeplassutrustning brukes for både på- og avstigning eller primært for avstigning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10205</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_På- og avstigning</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16625</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Både på- og avstigning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16626</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Primært avstigning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_PåOgAvstigningHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SanntidsinformasjonHoldeplassutrustningType">
-      <annotation>
-         <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10209</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sanntidsinformasjon</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_SanntidsinformasjonHoldeplassutrustningEnumerationType nvdb:UU_SanntidsinformasjonHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_SanntidsinformasjonHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10209</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sanntidsinformasjon</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16631: Holdeplassutrustning har sanntidsinformasjon.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16631</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16632: Holdeplassutrustning har ikke sanntidsinformasjon.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16632</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SanntidsinformasjonHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SittemulighetHoldeplassutrustningType">
-      <annotation>
-         <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10211</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sittemulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_SittemulighetHoldeplassutrustningEnumerationType nvdb:UU_SittemulighetHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_SittemulighetHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10211: Angir om det er sittemulighet på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10211</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sittemulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16635: Angir at det er sittemulighet, men ikke sittemulighet under tak og det er ikke armlene.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16635</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="arml">
-            <annotation>
-               <documentation>16637: Angir at det er sittemulighet med armlene, men ikke under tak.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16637</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, med armlene</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="alta">
-            <annotation>
-               <documentation>16638: Angir at det er sittemulighet under tak og at det er sittemulighet med armlene.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16638</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, med armlene og tak</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tak">
-            <annotation>
-               <documentation>16636: Angir at det er sittemulighet under tak, men det er ikke armlene.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16636</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, med tak</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16639</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SittemulighetHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SykkelparkeringHoldeplassutrustningType">
-      <annotation>
-         <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10212</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sykkelparkering</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_SykkelparkeringHoldeplassutrustningEnumerationType nvdb:UU_SykkelparkeringHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_SykkelparkeringHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10212: Angir om det er sykkelparkering i tilknytning til Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10212</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Sykkelparkering</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="tak">
-            <annotation>
-               <documentation>16641: Holdeplassutrustning har sykkelparkering med takoverbygg over hele eller deler av sykkelparkeringen.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16641</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, med takoverbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16640: Holdeplassutrustning har sykkelparkering uten takoverbygg.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16640</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, uten takoverbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16642: Holdeplassutrustning har ikke sykkelparkering.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16642</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_SykkelparkeringHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_TakoverbyggHoldeplassutrustningType">
-      <annotation>
-         <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10199</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Takoverbygg</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_TakoverbyggHoldeplassutrustningEnumerationType nvdb:UU_TakoverbyggHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_TakoverbyggHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>10199: Angir om det er mulighet for tak over hodet ved opphold på Holdeplassutrustning.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10199</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Takoverbygg</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16618: Holdeplassutrustning er plassert innendørs.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16618</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Innendørs</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ja">
-            <annotation>
-               <documentation>16619: Holdeplassutrustning har leskur.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16619</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Leskur</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <documentation>16617: Det er ikke takoverbygg ved Holdeplassutrustning.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16617</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="nei">
-            <annotation>
-               <documentation>16620: Holdeplassutrustning er plassert under åpent overbygg. Beskytter mot regn, men ikke nødvendigvis mot vind.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16620</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Åpent overbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_TakoverbyggHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningType">
-      <annotation>
-         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:UU_TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType nvdb:UU_TilrettelagtForOvergangBytteHoldeplassutrustningOtherType"/>
-   </simpleType>
-   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType">
-      <annotation>
-         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Tilrettelagt for overgang/bytte</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <documentation>22553: Holdeplassutrustning er tilrettelagt for omstigning mellom kollektivlinjer, men har ikke fasilitetene som et kollektivknutepunkt har. Det kan f.eks. være korrespondanse mellom busslinjer.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22553</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <documentation>22554: Det kan være mulig å bytte mellom ulike busslinjer, men det er ingen spesiell tilrettelegging.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22554</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_TilrettelagtForOvergangBytteHoldeplassutrustningOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="UU_TypeHoldeplassutrustningType">
+   <simpleType name="TypeHoldeplassutrustningType">
       <annotation>
          <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">3956</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Type</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:UU_TypeHoldeplassutrustningEnumerationType nvdb:UU_TypeHoldeplassutrustningOtherType"/>
+      <union memberTypes="nvdb:TypeHoldeplassutrustningEnumerationType nvdb:TypeHoldeplassutrustningOtherType"/>
    </simpleType>
-   <simpleType name="UU_TypeHoldeplassutrustningEnumerationType">
+   <simpleType name="TypeHoldeplassutrustningEnumerationType">
       <annotation>
          <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">3956</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Type</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -2099,27 +2096,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="UU_TypeHoldeplassutrustningOtherType">
+   <simpleType name="TypeHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="UU_TypeTransportmiddelHoldeplassutrustningType">
+   <simpleType name="TypeTransportmiddelHoldeplassutrustningType">
       <annotation>
          <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">10259</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Type transportmiddel</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type transportmiddel</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:UU_TypeTransportmiddelHoldeplassutrustningEnumerationType nvdb:UU_TypeTransportmiddelHoldeplassutrustningOtherType"/>
+      <union memberTypes="nvdb:TypeTransportmiddelHoldeplassutrustningEnumerationType nvdb:TypeTransportmiddelHoldeplassutrustningOtherType"/>
    </simpleType>
-   <simpleType name="UU_TypeTransportmiddelHoldeplassutrustningEnumerationType">
+   <simpleType name="TypeTransportmiddelHoldeplassutrustningEnumerationType">
       <annotation>
          <documentation>10259: Angir hvilken type transportmiddel det er tilrettelagt for.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">10259</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">UU_Type transportmiddel</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type transportmiddel</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -2165,7 +2162,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="UU_TypeTransportmiddelHoldeplassutrustningOtherType">
+   <simpleType name="TypeTransportmiddelHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

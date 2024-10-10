@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.38">
+   <annotation>
+      <documentation>67: Utgravd eller utstøpt passasje gjennom jord/berg eller under større lokk. Har normalt inngang og utgang i dagen. I spesielle tilfeller, f.eks. når forgreninger eller kryss, kan det være utgang mot annet tunnelløp eller inngang fra annet tunnelløp. Se også Undergang, Skredoverbygg og Høydebegrensning.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_NV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <import namespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="KategoriTunnelløpType">
+      <annotation>
+         <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KategoriTunnelløpEnumerationType nvdb:KategoriTunnelløpOtherType"/>
+   </simpleType>
+   <simpleType name="KategoriTunnelløpEnumerationType">
+      <annotation>
+         <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="LH">
+            <annotation>
+               <documentation>11801: Tunnelløp som fører hovedveg. Hovedveg har vanligvis "normale" hovedparsellnummer (ikke ramper, armer, etc.).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11801</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hovedløp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SR">
+            <annotation>
+               <documentation>11802: Tunnelløp som fører rampe.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11802</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rampe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="RK">
+            <annotation>
+               <documentation>11804: Tunnelløp med rundkjøring.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11804</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rundkjøring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SL">
+            <annotation>
+               <documentation>12091: Tunnelløp som fører sekundærveg eller vegarm. Aktuelt for tunnel med kryss.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12091</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sekundærløp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KategoriTunnelløpOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Tunnelløp"
+            substitutionGroup="nvdb:AbstraktTunnelløp"
+            type="nvdb:TunnelløpType">
+      <annotation>
+         <documentation>67: Utgravd eller utstøpt passasje gjennom jord/berg eller under større lokk. Har normalt inngang og utgang i dagen. I spesielle tilfeller, f.eks. når forgreninger eller kryss, kan det være utgang mot annet tunnelløp eller inngang fra annet tunnelløp. Se også Undergang, Skredoverbygg og Høydebegrensning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">67</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelløp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="TunnelløpType">
+      <complexContent>
+         <extension base="nvdb:AbstraktTunnelløpType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>1081: Angir navn på tunnelløp.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1081</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kategori" type="nvdb:KategoriTunnelløpType">
+                  <annotation>
+                     <documentation>8944: Angir hvilken kategori tunnelløpet tilhører.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8944</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tunnelprofil" type="nvdb:TunnelprofilTunnelløpType">
+                  <annotation>
+                     <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeTunnelløp">
+                  <annotation>
+                     <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengde" type="double">
+                  <annotation>
+                     <documentation>1317: Angir lengde av tunnelløpet. Et tunnelløp sees på som et rør. Eventuelle portaler regnes som del av tunnelløpet. Lengde av tunnelløp blir lik lengde av "røret". Eksempelvis vil lengde av et rampe-løp strekker seg til der rampen kommer inn i hovedløpet selv om rampeparsell kan fortsette et stykke parallelt med hovedvegen i hovedløpet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1317</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="åpningsår" type="integer">
+                  <annotation>
+                     <documentation>8356: Angir hvilket år tunnelløpet ble åpnet for trafikk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8356</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Åpningsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11060: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11060</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12299: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12299</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4769: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4769</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="TunnelløpPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Tunnelløp"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TunnelprofilTunnelløpType">
+      <annotation>
+         <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TunnelprofilTunnelløpEnumerationType nvdb:TunnelprofilTunnelløpOtherType"/>
+   </simpleType>
+   <simpleType name="TunnelprofilTunnelløpEnumerationType">
+      <annotation>
+         <documentation>1977: Angir hvilket standard tunnelprofil tunnelløpet er bygd etter. Merknad: Dersom tunnelløpet har varierende standard, skal det oppgis det profilet som beskriver det minste tverrsnittet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1977</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelprofil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3421</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rektangulært tverrsnitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T10">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4350</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T10</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T10,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17532</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T10,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T11">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3414</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T11</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T11,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8172</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T11,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3416</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T12,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8173</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T12,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T13">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12237</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T13</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T13,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17533</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T13,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T14">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12238</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T14</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T4">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3404</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T4</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3406</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T5,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8169</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T5,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T6">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3408</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T6</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T7">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8170</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T7</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T7,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17531</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T7,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T8">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12911</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T8</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T8,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3410</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T8,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T9">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3412</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T9</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T9,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8171</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T9,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TunnelprofilTunnelløpOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTunnelløpTunnelløpType">
+      <annotation>
+         <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeTunnelløpTunnelløpEnumerationType nvdb:TypeTunnelløpTunnelløpOtherType"/>
+   </simpleType>
+   <simpleType name="TypeTunnelløpTunnelløpEnumerationType">
+      <annotation>
+         <documentation>1130: Angir hvilken type tunnelløp det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1130</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type tunnelløp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>3386: Tunnelløp som hovedsakelig går i berg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3386</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Berg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BL">
+            <annotation>
+               <documentation>3388: Tunnelløp som delvis går i berg og delvis i løsmasser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3388</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Berg/løsmasse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Lk">
+            <annotation>
+               <documentation>4843: Tunnelløp som går under bygning/lokk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4843</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lokk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Lm">
+            <annotation>
+               <documentation>3387: Tunnelløp som går i løsmasser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3387</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Løsmasse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <documentation>13001: Tunnelløp under vann som er satt sammen av ferdigbygde seksjoner som har blitt senka på plass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13001</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Senketunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTunnelløpTunnelløpOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

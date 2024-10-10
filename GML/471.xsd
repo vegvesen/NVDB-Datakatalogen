@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>471: System for innhenting og videreformidling av mobiltelefonsignal f.eks. i tunnel.</documentation>
    </annotation>
@@ -85,6 +85,48 @@
       </restriction>
    </simpleType>
    <simpleType name="EierMobiltelefonsambandOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ICEMobiltelefonsambandType">
+      <annotation>
+         <documentation>10577: Angir om det er dekning for denne type mobiltelefonnett.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10577</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">ICE</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ICEMobiltelefonsambandEnumerationType nvdb:ICEMobiltelefonsambandOtherType"/>
+   </simpleType>
+   <simpleType name="ICEMobiltelefonsambandEnumerationType">
+      <annotation>
+         <documentation>10577: Angir om det er dekning for denne type mobiltelefonnett.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10577</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">ICE</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16964</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16965</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ICEMobiltelefonsambandOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -188,12 +230,12 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="networkNorway">
+               <element name="ICE" type="nvdb:ICEMobiltelefonsambandType">
                   <annotation>
                      <documentation>10577: Angir om det er dekning for denne type mobiltelefonnett.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10577</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Network Norway</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ICE</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -299,48 +341,6 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="NetworkNorwayMobiltelefonsambandType">
-      <annotation>
-         <documentation>10577: Angir om det er dekning for denne type mobiltelefonnett.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10577</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Network Norway</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:NetworkNorwayMobiltelefonsambandEnumerationType nvdb:NetworkNorwayMobiltelefonsambandOtherType"/>
-   </simpleType>
-   <simpleType name="NetworkNorwayMobiltelefonsambandEnumerationType">
-      <annotation>
-         <documentation>10577: Angir om det er dekning for denne type mobiltelefonnett.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10577</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Network Norway</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16964</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16965</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="NetworkNorwayMobiltelefonsambandOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
    <simpleType name="VedlikeholdsansvarligMobiltelefonsambandType">
       <annotation>
          <documentation>12007: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.38">
+   <annotation>
+      <documentation>502: Skap for oppbevaring/installasjon av utstyr.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Skap, teknisk"
+            substitutionGroup="nvdb:AbstraktSkap_Teknisk"
+            type="nvdb:Skap, tekniskType">
+      <annotation>
+         <documentation>502: Skap for oppbevaring/installasjon av utstyr.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">502</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skap, teknisk</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Skap, tekniskType">
+      <complexContent>
+         <extension base="nvdb:AbstraktSkap_TekniskType">
+            <sequence>
+               <element name="type" type="nvdb:TypeSkap, tekniskType">
+                  <annotation>
+                     <documentation>4013: Angir hvilken type skap det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4013</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10358: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10358</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10087: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10087</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>4016: Angir navn på produsent/fabrikant av selve skapet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4016</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>4018: Angir produktnavn for selve skapet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4018</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>5007: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5007</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Skap, tekniskPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Skap, teknisk"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeSkap, tekniskType">
+      <annotation>
+         <documentation>4013: Angir hvilken type skap det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeSkap, tekniskEnumerationType nvdb:TypeSkap, tekniskOtherType"/>
+   </simpleType>
+   <simpleType name="TypeSkap, tekniskEnumerationType">
+      <annotation>
+         <documentation>4013: Angir hvilken type skap det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <documentation>5056: Skap for automatisk styring eller fjernstyring av f.eks. kommunikasjon, vifter, belysning eller pumpestasjon.Merknad: Dersom det er ett felles skap med fordeling registreres det i stedet som "Fordeling" (VT819).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5056</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Automasjonsskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BS">
+            <annotation>
+               <documentation>7455: Skap for betjening og manuell styring av f.eks. kommunikasjon, vifter, belysning eller pumpestasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7455</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betjening/styring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BS">
+            <annotation>
+               <documentation>5046: Skap med brannslukker/brannslukkingsapparat. Der det finnes en nødtelefon i direkte nærhet, defineres nødtelefon og brannslokkere som Nødstasjon iht. N500. Skapet registreres da ikke.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5046</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Brannslukkerskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TP">
+            <annotation>
+               <documentation>11787: Skap for tekniske komponenter i tilknytning til en trafikkregistreringsstasjon (tellepunkt). Dersom det er ett felles skap med fordeling registreres det i stedet som "Fordeling" (VT819).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11787</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tellepunktskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ATK">
+            <annotation>
+               <documentation>22517: Skap som inneholder tekniske komponenter i tilknytning til ATK. Merknad: Dersom det er ett felles skap med fordeling registreres det som "Fordeling" (VT819).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22517</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ATK skap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KS">
+            <annotation>
+               <documentation>22519: Skap som inneholder tekniske komponenter i tilknytning til en kamerastasjon. Merknad: Dersom det er ett felles skap med fordeling registreres det i stedet som "Fordeling" (VT819).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22519</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kamerastasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>22520: Skap for oppbevaring av utstyr. Merknad.Utdypende informasjon under Tilleggsinformasjon (ET 11625)</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22520</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utstyrsskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VS">
+            <annotation>
+               <documentation>22518: Skap som inneholder tekniske komponenter i tilknytning til en værstasjon. Merknad: Dersom det er ett felles skap med fordeling registreres det i stedet som "Fordeling" (VT819).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22518</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Værstasjonsskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeSkap, tekniskOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

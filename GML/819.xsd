@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.37">
+        version="2.38">
    <annotation>
       <documentation>819: Tavle/skap/koblingsboks/punkt hvor strøm fordeles til teknisk utstyr. Benyttes bl.a. i forbindelse med tunnelutstyr.</documentation>
    </annotation>
@@ -321,6 +321,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="høydeOverBakken" type="double">
+                  <annotation>
+                     <documentation>13033: Angir høyde fra bakken til underkant skap. Det gis verdi 0,0 for fordelinger som står på egen sokkel/gulv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13033</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde over bakken</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="typeEnhet">
                   <annotation>
                      <documentation>10081: Angir hvilken type/kapsling objektet er av.</documentation>
@@ -345,6 +354,24 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10058</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Låsesystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="inngårINødsystemet">
+                  <annotation>
+                     <documentation>12996: Angir om deler av anlegget inngår i nødsystemet i en tunnel.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12996</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="jordelektrode" type="nvdb:JordelektrodeFordelingType">
+                  <annotation>
+                     <documentation>12997: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12997</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -549,6 +576,106 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="InngårINødsystemetFordelingType">
+      <annotation>
+         <documentation>12996: Angir om deler av anlegget inngår i nødsystemet i en tunnel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12996</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:InngårINødsystemetFordelingEnumerationType nvdb:InngårINødsystemetFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="InngårINødsystemetFordelingEnumerationType">
+      <annotation>
+         <documentation>12996: Angir om deler av anlegget inngår i nødsystemet i en tunnel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12996</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22577</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22578</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="InngårINødsystemetFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordelektrodeFordelingType">
+      <annotation>
+         <documentation>12997: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12997</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:JordelektrodeFordelingEnumerationType nvdb:JordelektrodeFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="JordelektrodeFordelingEnumerationType">
+      <annotation>
+         <documentation>12997: Angir hvilken type jordelektrode som er benyttet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12997</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordelektrode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22579</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="cuwi">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22580</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Cu wiret</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="samm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22582</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sammenkoplet med annet nett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="spyd">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22581</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spyd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordelektrodeFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="MaterialeFordelingType">
       <annotation>
          <documentation>12107: Angir hvilket materiale skap/innkapsling er av.</documentation>
