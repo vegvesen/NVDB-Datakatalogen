@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>929: Fjerning av uegnede løsmasser som erstattes med masser av ønsket kvalitet.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FormålMasseutskiftingType">
+      <annotation>
+         <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FormålMasseutskiftingEnumerationType nvdb:FormålMasseutskiftingOtherType"/>
+   </simpleType>
+   <simpleType name="FormålMasseutskiftingEnumerationType">
+      <annotation>
+         <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="AU">
+            <annotation>
+               <documentation>22619: Skrå masseutskifting under vegens planum pga andre forhold enn stikkrenne for å hindre at det blir ujevnheter på vegoverflata. Benyttes der vegen ligger på telefarlige grunn.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen utkiling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="FP">
+            <annotation>
+               <documentation>22617: Masser fjernes under vegens planum og erstattes med nye for å sikre god stabilitet for overbygning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22617</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Forsterke planum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TS">
+            <annotation>
+               <documentation>22620: Utskifting av ubrukbare masser i tunnelsåle.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22620</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnelsåle</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="US">
+            <annotation>
+               <documentation>22618: Skrå masseutskifting under vegens planum før og etter stikkrenne for å hindre at det blir ujevnheter på vegoverflate. Benyttes der vegen ligger på telefarlige grunn.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22618</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utkiling stikkrenne</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FormålMasseutskiftingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Masseutskifting"
+            substitutionGroup="nvdb:AbstraktMasseutskifting"
+            type="nvdb:MasseutskiftingType">
+      <annotation>
+         <documentation>929: Fjerning av uegnede løsmasser som erstattes med masser av ønsket kvalitet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">929</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Masseutskifting</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="MasseutskiftingType">
+      <complexContent>
+         <extension base="nvdb:AbstraktMasseutskiftingType">
+            <sequence>
+               <element name="formål" type="nvdb:FormålMasseutskiftingType">
+                  <annotation>
+                     <documentation>13013: Angir hva som er formål med utskifting av masser.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13013</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeNyeMasser">
+                  <annotation>
+                     <documentation>11394: Type masser det er skiftet ut til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11394</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type nye masser</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybde_Maksimal" type="double">
+                  <annotation>
+                     <documentation>11395: Maksimal utskiftingsdybde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11395</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde, maksimal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="double">
+                  <annotation>
+                     <documentation>11396: Angir areal av område med utskiftede masser.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11396</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>11397: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11397</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>11352: Gir flate/polygon som avgrenser område med masseutskifting.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11352</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="MasseutskiftingPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Masseutskifting"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeNyeMasserMasseutskiftingType">
+      <annotation>
+         <documentation>11394: Type masser det er skiftet ut til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11394</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type nye masser</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeNyeMasserMasseutskiftingEnumerationType nvdb:TypeNyeMasserMasseutskiftingOtherType"/>
+   </simpleType>
+   <simpleType name="TypeNyeMasserMasseutskiftingEnumerationType">
+      <annotation>
+         <documentation>11394: Type masser det er skiftet ut til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11394</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type nye masser</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="KM">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19234</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Knuste masser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LM">
+            <annotation>
+               <documentation>19233: Masser i kategorien "lette masser". Detaljer spesifiseres i ET 11398 "Tilleggsinformasjon".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19233</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lette masser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19232</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sand/grus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19231</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sprengt stein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeNyeMasserMasseutskiftingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

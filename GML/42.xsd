@@ -5,9 +5,14 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.38">
+        version="2.39">
    <annotation>
-      <documentation>42: Sted i kollektivnettet der kollektivlinjer krysser eller tangerer hverandre. Knutepunktets funksjon er å binde kollektivnettet sammen til et nettverk slik at den reisende ved hjelp av tilrettelagt omstigning/bytte kan nå sitt bestemmelsessted. Et knutepunkt har ofte begrepet terminal eller stasjon i navnet (HB V123).</documentation>
+      <documentation>42: Et sted i kollektivnettet der kollektivlinjer korresponderer med hverandre. Knutepunktet binder kollektivnettet sammen til et nettverk. De fleste knutepunkter har omstigningsmulighet buss til buss. Noen knutepunkter har omstigning til bane, tog, båt og ferje. Knutepunkter kan ha navn som inkluderer ord som terminal eller stasjon. Et kollektivknutepunkt kan inneholde flere holdeplasser (Håndbok 123 Kollektivtrafikk).
+Merknad: I NVDB er det fokus på viktige kollektivknutepunkt der det er tilrettelagt for omstigning mellom kollektivlinjer som benytter vegnettet. Det registreres kun kollektivknutepunkt hvor punkt 1 nedenfor er oppfylt og hvor i tillegg enten punkt 2 eller punkt 3 (eller begge) er oppfylt.  
+1.Kollektivknutepunktet er tilrettelagt for overgang mellom busslinjer. 
+2.Navn på kollektivknutepunktet inneholder stavelsen terminal, stasjon, lufthavn, kai e.l. 
+3.Kollektivknutepunktet ligger på annet vegnett enn gjennomgående veg, f.eks. på vegnett av type sideanlegg. 
+Dersom kun punkt 1 er oppfylt registreres det ikke kollektivknutepunkt, men Holdeplassutrustning der egenskap "Tilrettelagt for omstigning/bytte" gis verdi "Omstigningsholdeplass". I tilknytning til jernbanestasjoner, lufthavner, ferjekaier, rutebåtterminaler etc. kreves det også at punkt 1skal være oppfylt for at det skal registreres som kollektivknutepunkt i NVDB. Om ikke punkt 1 er oppfylt registreres det også her i stedet  "Holdeplassutrustning" som nevnt ovenfor. På ferjekaier skal det alltid registreres forekomst av Ferjekai i NVDB.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -159,305 +164,16 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="GjelderBussKollektivknutepunktType">
-      <annotation>
-         <documentation>2026: Angir om kollektivknutepunktet benyttes av buss.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2026</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder buss</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderBussKollektivknutepunktEnumerationType nvdb:GjelderBussKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderBussKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>2026: Angir om kollektivknutepunktet benyttes av buss.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2026</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder buss</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3534</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3572</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderBussKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderDrosjeKollektivknutepunktType">
-      <annotation>
-         <documentation>2029: Angir om det er skiltet drosjeholdeplass i tilknytning til kollektivknutepunktet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2029</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder drosje</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderDrosjeKollektivknutepunktEnumerationType nvdb:GjelderDrosjeKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderDrosjeKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>2029: Angir om det er skiltet drosjeholdeplass i tilknytning til kollektivknutepunktet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2029</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder drosje</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3537</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3575</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderDrosjeKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderFerjeKollektivknutepunktType">
-      <annotation>
-         <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10256</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder ferje</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderFerjeKollektivknutepunktEnumerationType nvdb:GjelderFerjeKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderFerjeKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10256</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder ferje</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16748</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16749</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderFerjeKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderFlyKollektivknutepunktType">
-      <annotation>
-         <documentation>10598: Angir om kollektivknutepunktet benyttes av fly.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10598</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder fly</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderFlyKollektivknutepunktEnumerationType nvdb:GjelderFlyKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderFlyKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>10598: Angir om kollektivknutepunktet benyttes av fly.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10598</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder fly</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16988</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16989</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderFlyKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderRutebåtKollektivknutepunktType">
-      <annotation>
-         <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2028</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder rutebåt</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderRutebåtKollektivknutepunktEnumerationType nvdb:GjelderRutebåtKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderRutebåtKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2028</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder rutebåt</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3536</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3574</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderRutebåtKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderTogKollektivknutepunktType">
-      <annotation>
-         <documentation>2027: Angir om kollektivknutepunktet benyttes av tog.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2027</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder tog</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderTogKollektivknutepunktEnumerationType nvdb:GjelderTogKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderTogKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>2027: Angir om kollektivknutepunktet benyttes av tog.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">2027</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder tog</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3535</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3573</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderTogKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderTrikkBybaneKollektivknutepunktType">
-      <annotation>
-         <documentation>10596: Angir om kollektivknutepunktet benyttes av trikk/bybane.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder trikk/bybane</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:GjelderTrikkBybaneKollektivknutepunktEnumerationType nvdb:GjelderTrikkBybaneKollektivknutepunktOtherType"/>
-   </simpleType>
-   <simpleType name="GjelderTrikkBybaneKollektivknutepunktEnumerationType">
-      <annotation>
-         <documentation>10596: Angir om kollektivknutepunktet benyttes av trikk/bybane.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Gjelder trikk/bybane</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16986</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16987</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="GjelderTrikkBybaneKollektivknutepunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
    <element name="Kollektivknutepunkt"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:KollektivknutepunktType">
       <annotation>
-         <documentation>42: Sted i kollektivnettet der kollektivlinjer krysser eller tangerer hverandre. Knutepunktets funksjon er å binde kollektivnettet sammen til et nettverk slik at den reisende ved hjelp av tilrettelagt omstigning/bytte kan nå sitt bestemmelsessted. Et knutepunkt har ofte begrepet terminal eller stasjon i navnet (HB V123).</documentation>
+         <documentation>42: Et sted i kollektivnettet der kollektivlinjer korresponderer med hverandre. Knutepunktet binder kollektivnettet sammen til et nettverk. De fleste knutepunkter har omstigningsmulighet buss til buss. Noen knutepunkter har omstigning til bane, tog, båt og ferje. Knutepunkter kan ha navn som inkluderer ord som terminal eller stasjon. Et kollektivknutepunkt kan inneholde flere holdeplasser (Håndbok 123 Kollektivtrafikk).
+Merknad: I NVDB er det fokus på viktige kollektivknutepunkt der det er tilrettelagt for omstigning mellom kollektivlinjer som benytter vegnettet. Det registreres kun kollektivknutepunkt hvor punkt 1 nedenfor er oppfylt og hvor i tillegg enten punkt 2 eller punkt 3 (eller begge) er oppfylt.  
+1.Kollektivknutepunktet er tilrettelagt for overgang mellom busslinjer. 
+2.Navn på kollektivknutepunktet inneholder stavelsen terminal, stasjon, lufthavn, kai e.l. 
+3.Kollektivknutepunktet ligger på annet vegnett enn gjennomgående veg, f.eks. på vegnett av type sideanlegg. 
+Dersom kun punkt 1 er oppfylt registreres det ikke kollektivknutepunkt, men Holdeplassutrustning der egenskap "Tilrettelagt for omstigning/bytte" gis verdi "Omstigningsholdeplass". I tilknytning til jernbanestasjoner, lufthavner, ferjekaier, rutebåtterminaler etc. kreves det også at punkt 1skal være oppfylt for at det skal registreres som kollektivknutepunkt i NVDB. Om ikke punkt 1 er oppfylt registreres det også her i stedet  "Holdeplassutrustning" som nevnt ovenfor. På ferjekaier skal det alltid registreres forekomst av Ferjekai i NVDB.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">42</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Kollektivknutepunkt</sc:taggedValue>
@@ -495,75 +211,66 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="gjelderBuss">
+               <element name="omstigningTilBuss">
                   <annotation>
-                     <documentation>2026: Angir om kollektivknutepunktet benyttes av buss.</documentation>
+                     <documentation>2026: Det er tilrettelagt for omstigning til/fra buss.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">2026</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder buss</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til buss</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderTrikkBybane">
+               <element minOccurs="0" name="omstigningTilTrikkBybane">
                   <annotation>
-                     <documentation>10596: Angir om kollektivknutepunktet benyttes av trikk/bybane.</documentation>
+                     <documentation>10596: Det er tilrettelagt for omstigning til/fra trikk/bybane.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder trikk/bybane</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til trikk/bybane</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderTog">
+               <element minOccurs="0" name="omstigningTilTog">
                   <annotation>
-                     <documentation>2027: Angir om kollektivknutepunktet benyttes av tog.</documentation>
+                     <documentation>2027: Det er tilrettelagt for omstigning til/fra tog.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">2027</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder tog</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til tog</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderRutebåt">
+               <element minOccurs="0" name="omstigningTilRutebåt">
                   <annotation>
-                     <documentation>2028: Angir om kollektivknutepunktet benyttes av rutebåt.</documentation>
+                     <documentation>2028: Det er tilrettelagt for omstigning til/fra rutebåt.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">2028</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder rutebåt</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til rutebåt</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderFerje">
+               <element minOccurs="0" name="omstigningTilFerje">
                   <annotation>
-                     <documentation>10256: Angir om kollektivknutepunktet benyttes av ferje.</documentation>
+                     <documentation>10256: Det er tilrettelagt for omstigning til/fra ferje.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10256</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder ferje</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til ferje</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderFly">
+               <element minOccurs="0" name="omstigningTilFly">
                   <annotation>
-                     <documentation>10598: Angir om kollektivknutepunktet benyttes av fly.</documentation>
+                     <documentation>10598: Det er tilrettelagt for omstigning til/fra fly.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10598</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder fly</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til fly</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="gjelderDrosje">
+               <element minOccurs="0" name="omstigningTilDrosje">
                   <annotation>
-                     <documentation>2029: Angir om det er skiltet drosjeholdeplass i tilknytning til kollektivknutepunktet.</documentation>
+                     <documentation>2029: Det er tilrettelagt for omstigning til/fra drosje.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">2029</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Gjelder drosje</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="antallStoppunkt_Test" type="double">
-                  <annotation>
-                     <documentation>10592: Angir hvor mange stoppunkt det er knyttet til kollektivknutepunktet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10592</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Antall stoppunkt (test)</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omstigning til drosje</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -576,12 +283,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="toalett_Test">
+               <element name="toalett" type="nvdb:ToalettKollektivknutepunktType">
                   <annotation>
                      <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1803</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Toalett (test)</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Toalett</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -594,30 +301,40 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="sykkelparkering_Test">
+               <element name="sykkelparkering"
+                        type="nvdb:SykkelparkeringKollektivknutepunktType">
                   <annotation>
                      <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10595</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Sykkelparkering (test)</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="parkering_Test">
+               <element name="parkering" type="nvdb:ParkeringKollektivknutepunktType">
                   <annotation>
                      <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1814</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Parkering (test)</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Parkering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="parkeringForForflytningshemmede_Test">
+               <element name="parkeringForForflytningshemmede">
                   <annotation>
                      <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10597</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede (test)</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="antallStoppunkt_Test" type="double">
+                  <annotation>
+                     <documentation>10592: Angir hvor mange stoppunkt det er knyttet til kollektivknutepunktet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10592</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall stoppunkt (test)</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -776,22 +493,316 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="ParkeringForForflytningshemmede_TestKollektivknutepunktType">
+   <simpleType name="OmstigningTilBussKollektivknutepunktType">
       <annotation>
-         <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet.</documentation>
+         <documentation>2026: Det er tilrettelagt for omstigning til/fra buss.</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10597</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">2026</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til buss</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:ParkeringForForflytningshemmede_TestKollektivknutepunktEnumerationType nvdb:ParkeringForForflytningshemmede_TestKollektivknutepunktOtherType"/>
+      <union memberTypes="nvdb:OmstigningTilBussKollektivknutepunktEnumerationType nvdb:OmstigningTilBussKollektivknutepunktOtherType"/>
    </simpleType>
-   <simpleType name="ParkeringForForflytningshemmede_TestKollektivknutepunktEnumerationType">
+   <simpleType name="OmstigningTilBussKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>2026: Det er tilrettelagt for omstigning til/fra buss.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2026</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til buss</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3534</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3572</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilBussKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilDrosjeKollektivknutepunktType">
+      <annotation>
+         <documentation>2029: Det er tilrettelagt for omstigning til/fra drosje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2029</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til drosje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilDrosjeKollektivknutepunktEnumerationType nvdb:OmstigningTilDrosjeKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilDrosjeKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>2029: Det er tilrettelagt for omstigning til/fra drosje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2029</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til drosje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3537</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3575</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilDrosjeKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilFerjeKollektivknutepunktType">
+      <annotation>
+         <documentation>10256: Det er tilrettelagt for omstigning til/fra ferje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10256</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilFerjeKollektivknutepunktEnumerationType nvdb:OmstigningTilFerjeKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilFerjeKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>10256: Det er tilrettelagt for omstigning til/fra ferje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10256</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16748</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16749</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilFerjeKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilFlyKollektivknutepunktType">
+      <annotation>
+         <documentation>10598: Det er tilrettelagt for omstigning til/fra fly.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10598</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til fly</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilFlyKollektivknutepunktEnumerationType nvdb:OmstigningTilFlyKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilFlyKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>10598: Det er tilrettelagt for omstigning til/fra fly.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10598</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til fly</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16988</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16989</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilFlyKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilRutebåtKollektivknutepunktType">
+      <annotation>
+         <documentation>2028: Det er tilrettelagt for omstigning til/fra rutebåt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2028</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til rutebåt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilRutebåtKollektivknutepunktEnumerationType nvdb:OmstigningTilRutebåtKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilRutebåtKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>2028: Det er tilrettelagt for omstigning til/fra rutebåt.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2028</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til rutebåt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3536</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3574</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilRutebåtKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilTogKollektivknutepunktType">
+      <annotation>
+         <documentation>2027: Det er tilrettelagt for omstigning til/fra tog.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2027</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til tog</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilTogKollektivknutepunktEnumerationType nvdb:OmstigningTilTogKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilTogKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>2027: Det er tilrettelagt for omstigning til/fra tog.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2027</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til tog</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3535</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3573</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilTogKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilTrikkBybaneKollektivknutepunktType">
+      <annotation>
+         <documentation>10596: Det er tilrettelagt for omstigning til/fra trikk/bybane.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til trikk/bybane</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmstigningTilTrikkBybaneKollektivknutepunktEnumerationType nvdb:OmstigningTilTrikkBybaneKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="OmstigningTilTrikkBybaneKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>10596: Det er tilrettelagt for omstigning til/fra trikk/bybane.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10596</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omstigning til trikk/bybane</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16986</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16987</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmstigningTilTrikkBybaneKollektivknutepunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ParkeringForForflytningshemmedeKollektivknutepunktType">
       <annotation>
          <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">10597</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ParkeringForForflytningshemmedeKollektivknutepunktEnumerationType nvdb:ParkeringForForflytningshemmedeKollektivknutepunktOtherType"/>
+   </simpleType>
+   <simpleType name="ParkeringForForflytningshemmedeKollektivknutepunktEnumerationType">
+      <annotation>
+         <documentation>10597: Angir om det er parkering for forflytningshemmede i tilknytning til kollektivknutepunktet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10597</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Parkering for forflytningshemmede</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -813,27 +824,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="ParkeringForForflytningshemmede_TestKollektivknutepunktOtherType">
+   <simpleType name="ParkeringForForflytningshemmedeKollektivknutepunktOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="Parkering_TestKollektivknutepunktType">
+   <simpleType name="ParkeringKollektivknutepunktType">
       <annotation>
          <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1814</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Parkering (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Parkering</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:Parkering_TestKollektivknutepunktEnumerationType nvdb:Parkering_TestKollektivknutepunktOtherType"/>
+      <union memberTypes="nvdb:ParkeringKollektivknutepunktEnumerationType nvdb:ParkeringKollektivknutepunktOtherType"/>
    </simpleType>
-   <simpleType name="Parkering_TestKollektivknutepunktEnumerationType">
+   <simpleType name="ParkeringKollektivknutepunktEnumerationType">
       <annotation>
          <documentation>1814: Angir om det er parkeringsplass i tilknytning til kollektivknutepunktet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1814</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Parkering (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Parkering</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -855,27 +866,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="Parkering_TestKollektivknutepunktOtherType">
+   <simpleType name="ParkeringKollektivknutepunktOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="Sykkelparkering_TestKollektivknutepunktType">
+   <simpleType name="SykkelparkeringKollektivknutepunktType">
       <annotation>
          <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">10595</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sykkelparkering (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:Sykkelparkering_TestKollektivknutepunktEnumerationType nvdb:Sykkelparkering_TestKollektivknutepunktOtherType"/>
+      <union memberTypes="nvdb:SykkelparkeringKollektivknutepunktEnumerationType nvdb:SykkelparkeringKollektivknutepunktOtherType"/>
    </simpleType>
-   <simpleType name="Sykkelparkering_TestKollektivknutepunktEnumerationType">
+   <simpleType name="SykkelparkeringKollektivknutepunktEnumerationType">
       <annotation>
          <documentation>10595: Angir om det er sykkelparkering i tilknytning til kollektivknutepunktet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">10595</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Sykkelparkering (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sykkelparkering</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -897,27 +908,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="Sykkelparkering_TestKollektivknutepunktOtherType">
+   <simpleType name="SykkelparkeringKollektivknutepunktOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="Toalett_TestKollektivknutepunktType">
+   <simpleType name="ToalettKollektivknutepunktType">
       <annotation>
          <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1803</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Toalett (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Toalett</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:Toalett_TestKollektivknutepunktEnumerationType nvdb:Toalett_TestKollektivknutepunktOtherType"/>
+      <union memberTypes="nvdb:ToalettKollektivknutepunktEnumerationType nvdb:ToalettKollektivknutepunktOtherType"/>
    </simpleType>
-   <simpleType name="Toalett_TestKollektivknutepunktEnumerationType">
+   <simpleType name="ToalettKollektivknutepunktEnumerationType">
       <annotation>
          <documentation>1803: Angir om det er offentlig toalett i tilknytning til kollektivknutepunktet, og om det eventuelt er tilgjengelig for forflytningshemmede.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1803</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Toalett (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Toalett</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -948,7 +959,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="Toalett_TestKollektivknutepunktOtherType">
+   <simpleType name="ToalettKollektivknutepunktOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.38">
+        version="2.39">
    <annotation>
       <documentation>487: Sted for på og avstigning av kollektivtrafikk.</documentation>
    </annotation>
@@ -487,12 +487,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="tilrettelagtForOvergangBytte">
+               <element name="tilrettelagtForOmstigningBytte">
                   <annotation>
-                     <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+                     <documentation>12985: Det er lagt opp til at reisende her skal kunne bytte mellom ulike kollektivlinjer, og det er gjerne satt opp linjer som korresponderer. Det kan gjelde omstigning til/fra vegbasert kollektivtrafikk, men også til/fra tog, fly, båt og ferje.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilrettelagt for omstigning/bytte</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -905,6 +905,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">7833</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="NSRSynkroniseringsinfo" type="string">
+                  <annotation>
+                     <documentation>13071: Informasjon relatert til synkronisering mellom NVDB og NSR - Nasjonalt stoppestedsregister. Det gjennomføres bla jevnlig oppdatering av Navn, NSR_Stopplace_ID og punktkoordinater basert på gitt NSR_Quay_ID. Rapportering fra slik oppdatering legges inn her.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13071</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">NSR synkroniseringsinfo</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -1879,46 +1888,55 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningType">
+   <simpleType name="TilrettelagtForOmstigningBytteHoldeplassutrustningType">
       <annotation>
-         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <documentation>12985: Det er lagt opp til at reisende her skal kunne bytte mellom ulike kollektivlinjer, og det er gjerne satt opp linjer som korresponderer. Det kan gjelde omstigning til/fra vegbasert kollektivtrafikk, men også til/fra tog, fly, båt og ferje.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for omstigning/bytte</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType nvdb:TilrettelagtForOvergangBytteHoldeplassutrustningOtherType"/>
+      <union memberTypes="nvdb:TilrettelagtForOmstigningBytteHoldeplassutrustningEnumerationType nvdb:TilrettelagtForOmstigningBytteHoldeplassutrustningOtherType"/>
    </simpleType>
-   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningEnumerationType">
+   <simpleType name="TilrettelagtForOmstigningBytteHoldeplassutrustningEnumerationType">
       <annotation>
-         <documentation>12985: Angir i hvilken grad holdeplassutrustning er tilrettelagt for overgang/bytte mellom andre kollektivlinjer/busslinjer.</documentation>
+         <documentation>12985: Det er lagt opp til at reisende her skal kunne bytte mellom ulike kollektivlinjer, og det er gjerne satt opp linjer som korresponderer. Det kan gjelde omstigning til/fra vegbasert kollektivtrafikk, men også til/fra tog, fly, båt og ferje.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">12985</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for overgang/bytte</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for omstigning/bytte</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <documentation>22553: Holdeplassutrustning er tilrettelagt for omstigning mellom kollektivlinjer, men har ikke fasilitetene som et kollektivknutepunkt har. Det kan f.eks. være korrespondanse mellom busslinjer.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22553</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="N">
             <annotation>
-               <documentation>22554: Det kan være mulig å bytte mellom ulike busslinjer, men det er ingen spesiell tilrettelegging.</documentation>
+               <documentation>22554: Det kan være mulig å bytte mellom ulike busslinjer, men det er ingen spesiell tilrettelegging, dvs ingen planlagt korrespondanse.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22554</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="J">
+            <annotation>
+               <documentation>22553: Holdeplassutrustning benyttes for omstigning/bytte mellom korresponderende kollektivlinjer, det kan være omstigning til/fra buss, tog, fly, rutebåt eller ferje. Holdeplassutrustningen er ikke del av et kollektivknutepunkt da NVDB sine kriterier for å registre kollektivknutepunkt på stedet ikke er oppfylt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22553</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Omstigningsholdeplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ja2">
+            <annotation>
+               <documentation>22696: Holdeplassutrustningen tilhører et kollektivknutepunkt i NVDB. Dermed regnes det ikke som en egen omstillingsholdeplass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22696</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Del av kollektivknutepunkt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TilrettelagtForOvergangBytteHoldeplassutrustningOtherType">
+   <simpleType name="TilrettelagtForOmstigningBytteHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -2122,6 +2140,7 @@
       <restriction base="string">
          <enumeration value="b">
             <annotation>
+               <documentation>16750: Holdeplass for buss. Ikke for trikk/bane.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16750</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Buss</sc:taggedValue>
@@ -2130,33 +2149,28 @@
          </enumeration>
          <enumeration value="D">
             <annotation>
+               <documentation>16759: Skiltet/merket holdeplass for drosje.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16759</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Drosje</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="F">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16837</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ferje</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tt">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16752</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Tog/T-bane</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="tb">
             <annotation>
+               <documentation>16751: Holdeplass for trikk eller bybane.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16751</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Trikk/bybane</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="btb">
+            <annotation>
+               <documentation>22689: Buss og trikk/bybane stopper på samme holdeplass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22689</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Buss og trikk/bybane</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

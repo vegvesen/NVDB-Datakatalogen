@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.38">
+        version="2.39">
    <annotation>
       <documentation>470: Ledning eller system av ledninger som en bruker til å sende ut eller ta imot elektromagnetiske bølger med (5). I tilknytning til vegtrafikk benyttes f.eks. radio- og mobiltelefonantenner i tunneler.</documentation>
    </annotation>
@@ -35,6 +35,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3779</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="DSRCAvlesing">
+                  <annotation>
+                     <documentation>13072: Angir hva som leses av DSRC-antenne.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13072</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">DSRC avlesing</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -194,6 +203,56 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="DSRCAvlesingAntenneType">
+      <annotation>
+         <documentation>13072: Angir hva som leses av DSRC-antenne.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13072</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">DSRC avlesing</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DSRCAvlesingAntenneEnumerationType nvdb:DSRCAvlesingAntenneOtherType"/>
+   </simpleType>
+   <simpleType name="DSRCAvlesingAntenneEnumerationType">
+      <annotation>
+         <documentation>13072: Angir hva som leses av DSRC-antenne.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13072</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">DSRC avlesing</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ITS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22693</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ITS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ITST">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22694</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ITS/Tachoscan</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22695</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tachoscan</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DSRCAvlesingAntenneOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="EierAntenneType">
       <annotation>
          <documentation>3518: Angir hvem som er eier av vegobjektet.</documentation>
@@ -317,6 +376,15 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">4823</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Strålekabel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DSRC">
+            <annotation>
+               <documentation>22692: DSRC - Dedicated short-range communication. For avlesing av ITS elemnt i bombrikke og/eller Tachograp kortmelding.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22692</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DSRC</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

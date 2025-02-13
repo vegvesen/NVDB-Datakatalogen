@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>812: Angir strekning med gatevarme.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Gatevarme"
+            substitutionGroup="nvdb:AbstraktGatevarme"
+            type="nvdb:GatevarmeType">
+      <annotation>
+         <documentation>812: Angir strekning med gatevarme.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">812</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gatevarme</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="GatevarmeType">
+      <complexContent>
+         <extension base="nvdb:AbstraktGatevarmeType">
+            <sequence>
+               <element name="type" type="nvdb:TypeGatevarmeType">
+                  <annotation>
+                     <documentation>9310: Angir hvilken type gatevarme.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9310</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="areal" type="integer">
+                  <annotation>
+                     <documentation>9311: Angir areal av område med gatevarme.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9311</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavnKabel" type="string">
+                  <annotation>
+                     <documentation>13074: Angir produktnavn for kabel som er benyttet i forbindelse med gatevarme. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13074</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn kabel</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>10871: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10871</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>11001: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11001</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>10426: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10426</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="GatevarmePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Gatevarme"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeGatevarmeType">
+      <annotation>
+         <documentation>9310: Angir hvilken type gatevarme.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9310</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeGatevarmeEnumerationType nvdb:TypeGatevarmeOtherType"/>
+   </simpleType>
+   <simpleType name="TypeGatevarmeEnumerationType">
+      <annotation>
+         <documentation>9310: Angir hvilken type gatevarme.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9310</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13005</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Strøm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="V">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13006</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vann</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeGatevarmeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

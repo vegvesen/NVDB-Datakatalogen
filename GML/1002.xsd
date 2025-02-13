@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>1002: Kulturmiljø og utvalgte kulturhistoriske landskap hvor kulturminner inngår som en større helhet eller sammenheng, hvor det kan være vernebestemmelser eller andre restriksjoner for tiltak.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierKulturminne, kulturmiljøType">
+      <annotation>
+         <documentation>13052: Angir hvem som er eier av kulturminne.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13052</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierKulturminne, kulturmiljøEnumerationType nvdb:EierKulturminne, kulturmiljøOtherType"/>
+   </simpleType>
+   <simpleType name="EierKulturminne, kulturmiljøEnumerationType">
+      <annotation>
+         <documentation>13052: Angir hvem som er eier av kulturminne.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13052</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22676</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22672</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22674</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22677</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22671</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22673</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, øvrig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22675</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKulturminne, kulturmiljøOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Kulturminne, kulturmiljø"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Kulturminne, kulturmiljøType">
+      <annotation>
+         <documentation>1002: Kulturmiljø og utvalgte kulturhistoriske landskap hvor kulturminner inngår som en større helhet eller sammenheng, hvor det kan være vernebestemmelser eller andre restriksjoner for tiltak.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1002</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kulturminne, kulturmiljø</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Kulturminne, kulturmiljøType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>13057: Navn på kulturminnet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13057</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vernestatus" type="nvdb:VernestatusKulturminne, kulturmiljøType">
+                  <annotation>
+                     <documentation>13064: Juridisk vern, hjemlet i lov, forskrift, plan mv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13064</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vernestatus</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="linkTilKulturminnesøk" type="string">
+                  <annotation>
+                     <documentation>13056: Gir link til Kulturminnesøk, dvs. innsynsløsning for Askeladden. Gir mer detaljert informasjon om forekomst.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13056</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Link til kulturminnesøk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="askeladden_ID" type="string">
+                  <annotation>
+                     <documentation>13051: Gir referanse til unik ID i Askeladden.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13051</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Askeladden_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="AK_ID" type="string">
+                  <annotation>
+                     <documentation>13049: ID-nr i SEFRAK-registeret. SEFRAK= Sekretariatet for registrering av faste kulturminne i Noreg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13049</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">SEFRAK-ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="restriksjonGrøftKantrensk" type="string">
+                  <annotation>
+                     <documentation>13058: Beskriver hvilke spesielle hensyn som må tas ved grøft/kantrensk. Dersom det ikke er nødvendig å foreta spesielle hensyn skal også det beskrives.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13058</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Restriksjon grøft/kantrensk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="restriksjonKantklipp" type="string">
+                  <annotation>
+                     <documentation>13059: Beskriver hvilke spesielle hensyn som må tas ved kantklipp. Dersom det ikke er nødvendig å foreta spesielle hensyn skal også det beskrives.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13059</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Restriksjon kantklipp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="andreRestriksjoner" type="string">
+                  <annotation>
+                     <documentation>13050: Beskriver andre restriksjoner knyttet til drift og vedlikehold utover grøft/kantrensk og kantklipp.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13050</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Andre restriksjoner</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>13060: Angir informasjon fortrinnsvis knyttet til forvaltning, drift og vedlikehold.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13060</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="eier"
+                        type="nvdb:EierKulturminne, kulturmiljøType">
+                  <annotation>
+                     <documentation>13052: Angir hvem som er eier av kulturminne.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13052</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>13055: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13055</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>13054: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13054</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>13053: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13053</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Kulturminne, kulturmiljøPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kulturminne, kulturmiljø"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VernestatusKulturminne, kulturmiljøType">
+      <annotation>
+         <documentation>13064: Juridisk vern, hjemlet i lov, forskrift, plan mv.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13064</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vernestatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VernestatusKulturminne, kulturmiljøEnumerationType nvdb:VernestatusKulturminne, kulturmiljøOtherType"/>
+   </simpleType>
+   <simpleType name="VernestatusKulturminne, kulturmiljøEnumerationType">
+      <annotation>
+         <documentation>13064: Juridisk vern, hjemlet i lov, forskrift, plan mv.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13064</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vernestatus</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="AF">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22665</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Automatisk fredet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="I">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22670</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22669</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommunal kulturminneplan</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TL">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22667</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tinglysning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VF">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22666</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vedtaksfredet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22668</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Verneplan</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VernestatusKulturminne, kulturmiljøOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

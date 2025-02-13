@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>994: Skap som inneholder nødstyrepanel og eventuelt annet teknisk utstyr i tilknytning til håndtering av nødsituajoner, benyttes først og fremst i tilknytning til tunneler.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Nødstyreskap"
+            substitutionGroup="nvdb:AbstraktNødstyreskap_Test"
+            type="nvdb:NødstyreskapType">
+      <annotation>
+         <documentation>994: Skap som inneholder nødstyrepanel og eventuelt annet teknisk utstyr i tilknytning til håndtering av nødsituajoner, benyttes først og fremst i tilknytning til tunneler.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">994</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nødstyreskap</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="NødstyreskapType">
+      <complexContent>
+         <extension base="nvdb:AbstraktNødstyreskap_TestType">
+            <sequence>
+               <element name="typePanel">
+                  <annotation>
+                     <documentation>12797: Angir hvordan nødstyrepanelet er utformet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12797</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type panel</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>12759: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12759</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>12792: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12792</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>12779: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12779</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12777: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12777</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>12746: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12746</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="NødstyreskapPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Nødstyreskap"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypePanelNødstyreskapType">
+      <annotation>
+         <documentation>12797: Angir hvordan nødstyrepanelet er utformet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12797</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type panel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypePanelNødstyreskapEnumerationType nvdb:TypePanelNødstyreskapOtherType"/>
+   </simpleType>
+   <simpleType name="TypePanelNødstyreskapEnumerationType">
+      <annotation>
+         <documentation>12797: Angir hvordan nødstyrepanelet er utformet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12797</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type panel</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="KS">
+            <annotation>
+               <documentation>22082: Panelet består av trykknapper og skjerm. Kommandoer gjøres ved å trykke på knappene, informasjon via skjermen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22082</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Knapper med skjerm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <documentation>22083: Panelet består av trykknapper. Panelet har ikke skjerm. Kommandoer gjøres ved å trykke på knappene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22083</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Knapper uten skjerm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T">
+            <annotation>
+               <documentation>22081: Panelet består av kun en touch-skjerm. Interaksjon skjer ved trykk på skjermen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22081</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Touch-panel uten knapper</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypePanelNødstyreskapOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

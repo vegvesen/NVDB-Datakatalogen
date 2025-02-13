@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>852: Rør eller kanal for trekking av kabel.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="EierTrekkerørkanalType">
+      <annotation>
+         <documentation>9717: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9717</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierTrekkerørkanalEnumerationType nvdb:EierTrekkerørkanalOtherType"/>
+   </simpleType>
+   <simpleType name="EierTrekkerørkanalEnumerationType">
+      <annotation>
+         <documentation>9717: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9717</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13986</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13987</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13988</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <documentation>18622: Organisasjonsnummer: 915488099.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18622</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <documentation>13985: Organisasjonsnummer: 971032081.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13985</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>17565: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17565</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierTrekkerørkanalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="LedigPlassTrekkerørkanalType">
+      <annotation>
+         <documentation>9723: Angir om rør/kanal er ledig (tomt).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9723</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ledig plass</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LedigPlassTrekkerørkanalEnumerationType nvdb:LedigPlassTrekkerørkanalOtherType"/>
+   </simpleType>
+   <simpleType name="LedigPlassTrekkerørkanalEnumerationType">
+      <annotation>
+         <documentation>9723: Angir om rør/kanal er ledig (tomt).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9723</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ledig plass</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IR">
+            <annotation>
+               <documentation>21522: Vil aldri være relevant med ledig plass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21522</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ja">
+            <annotation>
+               <documentation>15868: Det er ledig kapasitet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15868</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>15869: Det er ikke ledig kapasitet for tiden.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15869</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>21523: Det er ikke avklart om det er ledig plass.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21523</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LedigPlassTrekkerørkanalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeTrekkerørkanalType">
+      <annotation>
+         <documentation>9724: Angir type materiale i rør/kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9724</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialeTrekkerørkanalEnumerationType nvdb:MaterialeTrekkerørkanalOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialeTrekkerørkanalEnumerationType">
+      <annotation>
+         <documentation>9724: Angir type materiale i rør/kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9724</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="al">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13998</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="be">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13995</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13996</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13997</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeTrekkerørkanalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlasseringTrekkerørkanalType">
+      <annotation>
+         <documentation>9725: Angir hvor/hvordan trekkerøret er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9725</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlasseringTrekkerørkanalEnumerationType nvdb:PlasseringTrekkerørkanalOtherType"/>
+   </simpleType>
+   <simpleType name="PlasseringTrekkerørkanalEnumerationType">
+      <annotation>
+         <documentation>9725: Angir hvor/hvordan trekkerøret er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9725</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="be">
+            <annotation>
+               <documentation>13999: Plasseres bak betongrekkverk (f.eks. New Jersey). Brukes hovedsakelig i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13999</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bak betongrekkverk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lg">
+            <annotation>
+               <documentation>14000: I lukket rørgrøft eller kabelgrøft.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14000</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I grøft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="GUV">
+            <annotation>
+               <documentation>17275: Ligger i grøft på tvers under vegen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17275</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I grøft under veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ub">
+            <annotation>
+               <documentation>15881: Festes til kabelstige, f.eks. i en brukasse.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15881</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I Kabelbru/stige</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ub">
+            <annotation>
+               <documentation>15882: Legges i et større rør eller en kanal, f.eks. i en brukasse.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15882</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I Trekkerør/kanal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pb">
+            <annotation>
+               <documentation>14001: Plasseres på banket, hovedsakelig i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14001</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">På bankett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ti">
+            <annotation>
+               <documentation>14003: På innside av hvelv eller annen vann og frostsikring i tunnel, eller direkte på tunnelvegg der det ikke er noe innenfor.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14003</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">På tunnelvegg innside</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tu">
+            <annotation>
+               <documentation>14004: På utside av hvelv eller annen vann og frostsikring i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14004</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">På tunnelvegg utside</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ub">
+            <annotation>
+               <documentation>14002: Plasseres under banket, hovedsakelig i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14002</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Under bankett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BI">
+            <annotation>
+               <documentation>22622: Plassert inne i brukasse. Åpent tilgjengelig.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22622</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bru innvendig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IB">
+            <annotation>
+               <documentation>22621: Trekkerør er innstøpt i brukonstruksjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22621</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Innstøpt i bru</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlasseringTrekkerørkanalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Trekkerørkanal"
+            substitutionGroup="nvdb:AbstraktTrekkerørKanal"
+            type="nvdb:TrekkerørkanalType">
+      <annotation>
+         <documentation>852: Rør eller kanal for trekking av kabel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">852</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trekkerørkanal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="TrekkerørkanalType">
+      <complexContent>
+         <extension base="nvdb:AbstraktTrekkerørKanalType">
+            <sequence>
+               <element name="type" type="nvdb:TypeTrekkerørkanalType">
+                  <annotation>
+                     <documentation>9727: Angir type trekkerør/kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9727</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallLøp" type="integer">
+                  <annotation>
+                     <documentation>9710: Gir antall separate parallelle løp/kammer/rom som trekkerør/kanal består av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9710</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall løp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="plassering" type="nvdb:PlasseringTrekkerørkanalType">
+                  <annotation>
+                     <documentation>9725: Angir hvor/hvordan trekkerøret er plassert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9725</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="diameter_Ytre" type="double">
+                  <annotation>
+                     <documentation>9714: Angir ytre diameter for rør/kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9714</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Diameter, ytre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bredde_Ytre" type="double">
+                  <annotation>
+                     <documentation>9712: Angir ytre bredde for rør/kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9712</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde, ytre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="høyde_Ytre" type="double">
+                  <annotation>
+                     <documentation>9722: Angir ytre høyde for rør/kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9722</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde, ytre</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materiale" type="nvdb:MaterialeTrekkerørkanalType">
+                  <annotation>
+                     <documentation>9724: Angir type materiale i rør/kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9724</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="ledigPlass">
+                  <annotation>
+                     <documentation>9723: Angir om rør/kanal er ledig (tomt).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9723</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ledig plass</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>9716: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9716</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>9715: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9715</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="eier" type="nvdb:EierTrekkerørkanalType">
+                  <annotation>
+                     <documentation>9717: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9717</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier_Navn" type="string">
+                  <annotation>
+                     <documentation>9718: Navn på eier av vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9718</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier, navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>9721: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9721</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="TrekkerørkanalPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Trekkerørkanal"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeTrekkerørkanalType">
+      <annotation>
+         <documentation>9727: Angir type trekkerør/kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9727</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeTrekkerørkanalEnumerationType nvdb:TypeTrekkerørkanalOtherType"/>
+   </simpleType>
+   <simpleType name="TypeTrekkerørkanalEnumerationType">
+      <annotation>
+         <documentation>9727: Angir type trekkerør/kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9727</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ka">
+            <annotation>
+               <documentation>14006: Enkel kanal.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14006</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kanal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mk">
+            <annotation>
+               <documentation>14008: Flerløps plastkanal.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14008</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Multikanal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sub">
+            <annotation>
+               <documentation>14009: Flere fiberrør i et større rør.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14009</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Multitube/Sub</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="opi">
+            <annotation>
+               <documentation>14007: Kasselignende elementer med mange rørføringer for å trekke kabel i).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14007</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPI-kanal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ro">
+            <annotation>
+               <documentation>14005: Enkelt rør.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">14005</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rør</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeTrekkerørkanalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

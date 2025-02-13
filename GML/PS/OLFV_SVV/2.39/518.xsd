@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>518: Siktsone er et areal som krever tiltak for å tilfredsstille siktkrav som ikke tilfredsstilles av kantklipp.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Siktsone"
+            substitutionGroup="nvdb:AbstraktSiktsone"
+            type="nvdb:SiktsoneType">
+      <annotation>
+         <documentation>518: Siktsone er et areal som krever tiltak for å tilfredsstille siktkrav som ikke tilfredsstilles av kantklipp.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">518</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Siktsone</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="SiktsoneType">
+      <complexContent>
+         <extension base="nvdb:AbstraktSiktsoneType">
+            <sequence>
+               <element name="type" type="nvdb:TypeSiktsoneType">
+                  <annotation>
+                     <documentation>4165: Angir hvilken type siktsone det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4165</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengdePrimærveg" type="integer">
+                  <annotation>
+                     <documentation>4561: Angir hvor langt siktsonen strekker seg langs primærvegen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4561</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde primærveg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengdeSekundærveg" type="integer">
+                  <annotation>
+                     <documentation>4560: Angir hvor langt inn i sekundærvegen siktsonen strekker seg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4560</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde sekundærveg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>8896: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8896</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="SiktsonePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Siktsone"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeSiktsoneType">
+      <annotation>
+         <documentation>4165: Angir hvilken type siktsone det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeSiktsoneEnumerationType nvdb:TypeSiktsoneOtherType"/>
+   </simpleType>
+   <simpleType name="TypeSiktsoneEnumerationType">
+      <annotation>
+         <documentation>4165: Angir hvilken type siktsone det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ka">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5140</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kryss/avkjørsel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="k">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5141</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kurve</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5139</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Siktrydding, vilt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="si">
+            <annotation>
+               <documentation>5142: Gjelder generelt soner siktsoner knyttet til objekt som skal gi informasjon til trafikanter.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5142</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skilt/info</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeSiktsoneOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

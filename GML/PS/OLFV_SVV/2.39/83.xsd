@@ -1,0 +1,1134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>83: Konstruksjon som benyttes i forbindelse med kopling av rørledninger og/eller inntak av vann gjennom rist/sluk. Merknad: Kum for kopling av trekkerør og kabler er definert som egen vegobjekttype Trekkekum.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeKumType">
+      <annotation>
+         <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1269</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeKumEnumerationType nvdb:BruksområdeKumOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeKumEnumerationType">
+      <annotation>
+         <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1269</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="b">
+            <annotation>
+               <documentation>17534: Vannkum hvor det er dimensjonert for vannuttak til slokking av brann og er lagt til rette for påkobling av brannslanger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17534</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Brannkum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="dr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2936</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drenering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2940</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fallkum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="FV">
+            <annotation>
+               <documentation>21845: Kum benyttes i forbindelse med fjernvarme.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21845</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fjernvarme</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2939</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Inntak/utløp stikkrenne</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ik">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2937</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Inspeksjonskum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2942</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pumpekum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2938</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spillvannskum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vk">
+            <annotation>
+               <documentation>2943: Kum som inngår i et vannforsyningsanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2943</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vannkum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ub">
+            <annotation>
+               <documentation>22662: Kum som ikke lenger er i bruk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22662</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ute av bruk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="DykkerKumType">
+      <annotation>
+         <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp for tining av frosne kummer eller ledninger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4594</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dykker</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DykkerKumEnumerationType nvdb:DykkerKumOtherType"/>
+   </simpleType>
+   <simpleType name="DykkerKumEnumerationType">
+      <annotation>
+         <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp for tining av frosne kummer eller ledninger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4594</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Dykker</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5531</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5532</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DykkerKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKumType">
+      <annotation>
+         <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5816</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierKumEnumerationType nvdb:EierKumOtherType"/>
+   </simpleType>
+   <simpleType name="EierKumEnumerationType">
+      <annotation>
+         <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5816</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10703</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8237</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8263</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18593</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8211</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>17562: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17562</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HarFlyterammeKumType">
+      <annotation>
+         <documentation>2294: Angir om kummen har flyteramme eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2294</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Har flyteramme</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HarFlyterammeKumEnumerationType nvdb:HarFlyterammeKumOtherType"/>
+   </simpleType>
+   <simpleType name="HarFlyterammeKumEnumerationType">
+      <annotation>
+         <documentation>2294: Angir om kummen har flyteramme eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2294</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Har flyteramme</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4176</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4177</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HarFlyterammeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Kum" substitutionGroup="nvdb:AbstraktKum" type="nvdb:KumType">
+      <annotation>
+         <documentation>83: Konstruksjon som benyttes i forbindelse med kopling av rørledninger og/eller inntak av vann gjennom rist/sluk. Merknad: Kum for kopling av trekkerør og kabler er definert som egen vegobjekttype Trekkekum.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">83</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kum</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KumType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKumType">
+            <sequence>
+               <element name="type" type="nvdb:TypeKumType">
+                  <annotation>
+                     <documentation>1141: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1141</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bruksområde" type="nvdb:BruksområdeKumType">
+                  <annotation>
+                     <documentation>1269: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1269</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materialtype" type="nvdb:MaterialtypeKumType">
+                  <annotation>
+                     <documentation>1411: Angir primær materialtype for vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1411</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lokkRist_Type">
+                  <annotation>
+                     <documentation>2290: .</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2290</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lokk/rist, type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="spesiellBelegningRundtKum">
+                  <annotation>
+                     <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11417</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spesiell belegning rundt kum</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="diameter" type="double">
+                  <annotation>
+                     <documentation>1727: Angir indre diameter av kum.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1727</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Diameter</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybde" type="double">
+                  <annotation>
+                     <documentation>1586: Angir dybde målt fra topp kumlokk til innvendig bunn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1586</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="dybdeTilUtløp" type="double">
+                  <annotation>
+                     <documentation>2079: Angir dybde fra topp kum til underkant (innvendig rør) av utløp.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2079</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde til utløp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bredde1_Firkantkum" type="double">
+                  <annotation>
+                     <documentation>5797: Angir bredde 1 av firkantkum.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5797</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde1, firkantkum</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bredde2_Firkantkum" type="double">
+                  <annotation>
+                     <documentation>5798: Angir bredde 2 av firkantkum.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5798</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde2, firkantkum</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="avstandFraVegkant" type="double">
+                  <annotation>
+                     <documentation>2388: Angir avstand fra vegkant til senter kumlokk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2388</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Avstand fra vegkant</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stige" type="nvdb:StigeKumType">
+                  <annotation>
+                     <documentation>1946: Angir hva slags stige det er i kummen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1946</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stige</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="harFlyteramme">
+                  <annotation>
+                     <documentation>2294: Angir om kummen har flyteramme eller ikke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2294</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Har flyteramme</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="dykker" type="nvdb:DykkerKumType">
+                  <annotation>
+                     <documentation>4594: Angir om det er dykker i tilknytning til kummen. Dykker er en konstruksjon som skal hindre slitasje på kummen når det føres mye vann inn i kummen på et nivå høyere enn bunnen på kummen. Dykker kan også brukes for å føre inn en slange med vann eller damp for tining av frosne kummer eller ledninger.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4594</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dykker</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="oljeutskilling"
+                        type="nvdb:OljeutskillingKumType">
+                  <annotation>
+                     <documentation>10969: Kum har system for utskilling av olje.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10969</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Oljeutskilling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stengeventil" type="nvdb:StengeventilKumType">
+                  <annotation>
+                     <documentation>12555: Angir hvorvidt det er stengeventil eller ikke i kum.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12555</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengeventil</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kumskjerm" type="nvdb:KumskjermKumType">
+                  <annotation>
+                     <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10227</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kumskjerm</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>7065: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7065</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10470: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10470</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierKumType">
+                  <annotation>
+                     <documentation>5816: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5816</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier_Navn" type="string">
+                  <annotation>
+                     <documentation>11198: Navn på eier av vegobjektet. Merknad: Det skal angis organisasjonsnavn, firmanavn eller gårds- og bruksnummer, ikke personnavn.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11198</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier, navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4784: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4784</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KumPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kum"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="KumskjermKumType">
+      <annotation>
+         <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10227</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kumskjerm</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KumskjermKumEnumerationType nvdb:KumskjermKumOtherType"/>
+   </simpleType>
+   <simpleType name="KumskjermKumEnumerationType">
+      <annotation>
+         <documentation>10227: Angir om det er satt opp en skjerm/skjold ved kummen inn mot skråningen for å hindre at det glir masser fra skråning ned i kummen eller blokkerer kumlokket. Det kan også angis hvilket materiale denne skjermen er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10227</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kumskjerm</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Ja">
+            <annotation>
+               <documentation>16738: Angir at det er kumskjerm, men det mangler informasjon om hvilken type den er av.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16738</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16705</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ms">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16707</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, metall, stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16706</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16708</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, tre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>16739: Angir at kum ikke har kumskjerm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16739</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KumskjermKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="LokkRist_TypeKumType">
+      <annotation>
+         <documentation>2290: .</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2290</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lokk/rist, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LokkRist_TypeKumEnumerationType nvdb:LokkRist_TypeKumOtherType"/>
+   </simpleType>
+   <simpleType name="LokkRist_TypeKumEnumerationType">
+      <annotation>
+         <documentation>2290: .</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2290</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lokk/rist, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="bl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5341</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betonglokk m liten rist</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4151</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kuppelrist, flat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4153</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kuppelrist, høy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4152</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kuppelrist, lav</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SR">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12867</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skrårist</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4158</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slukrist, i gateplan</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sv">
+            <annotation>
+               <documentation>4155: Benevnes også "kjeftsluk".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4155</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slukrist, vertikal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4156</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Støpjernslokk m halv rist</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5542</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Støpjernslokk m hel rist</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4148</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tett lokk, betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tlp">
+            <annotation>
+               <documentation>17889: Tett lokk av plastmateriale.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17889</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tett lokk, plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ts">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4149</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tett lokk, støpjern</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lt">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5541</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tett lokk, tre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="aa">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4157</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Åpen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LokkRist_TypeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialtypeKumType">
+      <annotation>
+         <documentation>1411: Angir primær materialtype for vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1411</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialtypeKumEnumerationType nvdb:MaterialtypeKumOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialtypeKumEnumerationType">
+      <annotation>
+         <documentation>1411: Angir primær materialtype for vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1411</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2211</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5540</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2255</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naturstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2272</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19635</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rustfritt stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2377</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Teglstein, murstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialtypeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OljeutskillingKumType">
+      <annotation>
+         <documentation>10969: Kum har system for utskilling av olje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10969</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oljeutskilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OljeutskillingKumEnumerationType nvdb:OljeutskillingKumOtherType"/>
+   </simpleType>
+   <simpleType name="OljeutskillingKumEnumerationType">
+      <annotation>
+         <documentation>10969: Kum har system for utskilling av olje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10969</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Oljeutskilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <documentation>18320: Det er oljeutskiller i tilknytning til kummen, men det er ikke kjent om det finnes koalesensfilter.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18320</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="JMK">
+            <annotation>
+               <documentation>21847: Det er oljeutskiller i tilknytning til kummen. Det finnes koalesensfilter i tilknytning til oljeutskiller.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21847</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, med koalesensfilter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="JUK">
+            <annotation>
+               <documentation>21848: Det er oljeutskiller i tilknytning til kummen. Det finnes ikke koalesensfilter i tilknytning til oljeutskiller.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21848</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, uten koalesensfilter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>18321: Det er ikke oljeutskiller i tilknytning til kummen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18321</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OljeutskillingKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpesiellBelegningRundtKumKumType">
+      <annotation>
+         <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11417</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spesiell belegning rundt kum</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpesiellBelegningRundtKumKumEnumerationType nvdb:SpesiellBelegningRundtKumKumOtherType"/>
+   </simpleType>
+   <simpleType name="SpesiellBelegningRundtKumKumEnumerationType">
+      <annotation>
+         <documentation>11417: Angir om det er spesiell belegning i et belte/firkant rundt kum for å lette vedlikehold og gjøre kum mer synlig.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11417</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spesiell belegning rundt kum</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19268</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="B">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21217</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="I">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19270</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19269</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpesiellBelegningRundtKumKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StengeventilKumType">
+      <annotation>
+         <documentation>12555: Angir hvorvidt det er stengeventil eller ikke i kum.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12555</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengeventil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StengeventilKumEnumerationType nvdb:StengeventilKumOtherType"/>
+   </simpleType>
+   <simpleType name="StengeventilKumEnumerationType">
+      <annotation>
+         <documentation>12555: Angir hvorvidt det er stengeventil eller ikke i kum.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12555</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengeventil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21613</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21614</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StengeventilKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StigeKumType">
+      <annotation>
+         <documentation>1946: Angir hva slags stige det er i kummen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1946</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stige</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StigeKumEnumerationType nvdb:StigeKumOtherType"/>
+   </simpleType>
+   <simpleType name="StigeKumEnumerationType">
+      <annotation>
+         <documentation>1946: Angir hva slags stige det er i kummen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1946</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stige</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="I">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19080</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke stige</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="it">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3053</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Innstøpte trinn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3052</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stige</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StigeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKumType">
+      <annotation>
+         <documentation>1141: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1141</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeKumEnumerationType nvdb:TypeKumOtherType"/>
+   </simpleType>
+   <simpleType name="TypeKumEnumerationType">
+      <annotation>
+         <documentation>1141: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1141</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="fk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5742</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Firkantkum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gg">
+            <annotation>
+               <documentation>4145: Liten kum med lokk i som skjuler VA objekt (f.eks. en stoppekran) eller andre objekter (f.eks. fastpunkt) i veg/fortau.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4145</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gategutt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4144</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hjelpesluk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Kum sprengt i fjell">
+            <annotation>
+               <documentation>5474: Kum som er sprengt direkte i fjell.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5474</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kum sprengt i fjell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2945</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ss">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2947</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum plasstøpt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="si">
+            <annotation>
+               <documentation>2949: En infiltreringskum samler opp overvann og lar det infiltreres i grunnen via bunnen på kummen. Vil kunne være aktuelt å bruke der det er store asfaltflater og andre overflater som hindrer at overvann kan trenge ned i grunnen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2949</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum, infiltreringskum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2948</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum, murt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2946</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum, prefabrikkert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2944</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Standard kum</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4146</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Standard kum m sandfang</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKumOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>849: Område som blir overvåket av et skredvarslingssystem.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="OvervåkningstypeSkred, varslingovervåkningType">
+      <annotation>
+         <documentation>9648: Angir type overvåkning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9648</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Overvåkningstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OvervåkningstypeSkred, varslingovervåkningEnumerationType nvdb:OvervåkningstypeSkred, varslingovervåkningOtherType"/>
+   </simpleType>
+   <simpleType name="OvervåkningstypeSkred, varslingovervåkningEnumerationType">
+      <annotation>
+         <documentation>9648: Angir type overvåkning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9648</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Overvåkningstype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="an">
+            <annotation>
+               <documentation>13899: Annen overvåkningstype. Utdypes under Tilleggsinformasjon</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13899</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gf">
+            <annotation>
+               <documentation>13895: Instrument for registrering av rystelser i grunnen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13895</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Geofon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Il">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21024</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Infralyd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ra">
+            <annotation>
+               <documentation>13896: Radar for måling av bevegelser i terrenget.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13896</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Radar</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rm">
+            <annotation>
+               <documentation>13897: Måling av rystelser (f.eks. i grunnen, i fanggjerde etc.).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13897</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rystelsesmåling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vg">
+            <annotation>
+               <documentation>13898: Gjerde for varsling av farlig område.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13898</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Varslingsgjerde</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OvervåkningstypeSkred, varslingovervåkningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Skred, varslingovervåkning"
+            substitutionGroup="nvdb:AbstraktSkred_VarslingOvervåkning"
+            type="nvdb:Skred, varslingovervåkningType">
+      <annotation>
+         <documentation>849: Område som blir overvåket av et skredvarslingssystem.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">849</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skred, varslingovervåkning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Skred, varslingovervåkningType">
+      <complexContent>
+         <extension base="nvdb:AbstraktSkred_VarslingOvervåkningType">
+            <sequence>
+               <element name="typeNaturfare">
+                  <annotation>
+                     <documentation>9647: Angir hvilken type naturfare overvåkning/varsling gjelder for.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9647</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type naturfare</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="overvåkningstype"
+                        type="nvdb:OvervåkningstypeSkred, varslingovervåkningType">
+                  <annotation>
+                     <documentation>9648: Angir type overvåkning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9648</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Overvåkningstype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="stengningAvVeg">
+                  <annotation>
+                     <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>9651: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9651</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Skred, varslingovervåkningPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Skred, varslingovervåkning"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="StengningAvVegSkred, varslingovervåkningType">
+      <annotation>
+         <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StengningAvVegSkred, varslingovervåkningEnumerationType nvdb:StengningAvVegSkred, varslingovervåkningOtherType"/>
+   </simpleType>
+   <simpleType name="StengningAvVegSkred, varslingovervåkningEnumerationType">
+      <annotation>
+         <documentation>9650: Angir hvordan vegen stenges for trafikanter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stengning av veg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="in">
+            <annotation>
+               <documentation>15963: Ingen stengning eller varsling er satt opp.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">15963</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen stengning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bo">
+            <annotation>
+               <documentation>13982: Stengning ved hjelp av bommer.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13982</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stengning med bommer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ly">
+            <annotation>
+               <documentation>13981: Varsling om stengning vved hejelp av lys.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13981</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stengning med lys</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StengningAvVegSkred, varslingovervåkningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeNaturfareSkred, varslingovervåkningType">
+      <annotation>
+         <documentation>9647: Angir hvilken type naturfare overvåkning/varsling gjelder for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9647</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type naturfare</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeNaturfareSkred, varslingovervåkningEnumerationType nvdb:TypeNaturfareSkred, varslingovervåkningOtherType"/>
+   </simpleType>
+   <simpleType name="TypeNaturfareSkred, varslingovervåkningEnumerationType">
+      <annotation>
+         <documentation>9647: Angir hvilken type naturfare overvåkning/varsling gjelder for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9647</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type naturfare</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="bø">
+            <annotation>
+               <documentation>13894: Fare for bølger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13894</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bølger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <documentation>21023: Varsling/overvåkning av flere typer naturfare. Utdypes under Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21023</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flere naturfarer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fl">
+            <annotation>
+               <documentation>13893: Fare for flom.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13893</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="jo">
+            <annotation>
+               <documentation>13892: Fare for jordskred.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13892</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jordskred</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sn">
+            <annotation>
+               <documentation>13890: Fare for snøskred.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13890</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Snøskred</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <documentation>13891: Fare for steinsprang/steinskred.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13891</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Steinsprang/skred</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeNaturfareSkred, varslingovervåkningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

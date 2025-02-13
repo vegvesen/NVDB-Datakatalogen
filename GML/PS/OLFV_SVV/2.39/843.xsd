@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>843: Lukka grøft med kabler og trekkerør.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Kabelgrøft"
+            substitutionGroup="nvdb:AbstraktKabelgrøft"
+            type="nvdb:KabelgrøftType">
+      <annotation>
+         <documentation>843: Lukka grøft med kabler og trekkerør.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">843</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kabelgrøft</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KabelgrøftType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKabelgrøftType">
+            <sequence>
+               <element name="spenningsnivå" type="nvdb:SpenningsnivåKabelgrøftType">
+                  <annotation>
+                     <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bredde" type="double">
+                  <annotation>
+                     <documentation>13073: Bredde måles mellom yterkantene av de ytterste ledningene/trekkerørene på hver side i grøften.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13073</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="dybde" type="double">
+                  <annotation>
+                     <documentation>9577: Angir dybde av vegobjektet. Dybde måles ned til topp fundament.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9577</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dybde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10314: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10314</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>9578: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9578</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KabelgrøftPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kabelgrøft"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="SpenningsnivåKabelgrøftType">
+      <annotation>
+         <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningsnivåKabelgrøftEnumerationType nvdb:SpenningsnivåKabelgrøftOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningsnivåKabelgrøftEnumerationType">
+      <annotation>
+         <documentation>12182: Angir spenningsnivå for kabelgrøft.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12182</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenningsnivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="E">
+            <annotation>
+               <documentation>21238: Det finnes strømførende kabler i kabelgrøft.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21238</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elkraft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ES">
+            <annotation>
+               <documentation>21240: Det finnes både strømførende ledninger og signalkabler i grøft.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21240</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elkraft/signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <documentation>21239: Det finnes ikke strømførende kabler i kabelgrøft, kun signalkabler eller tilsvarende.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21239</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Signal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningsnivåKabelgrøftOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

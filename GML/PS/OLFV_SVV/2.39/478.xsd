@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.39">
+   <annotation>
+      <documentation>478: Utstyr til å registrere tilløp til brann.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Branndetektor"
+            substitutionGroup="nvdb:AbstraktBranndetektor"
+            type="nvdb:BranndetektorType">
+      <annotation>
+         <documentation>478: Utstyr til å registrere tilløp til brann.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">478</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Branndetektor</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="BranndetektorType">
+      <complexContent>
+         <extension base="nvdb:AbstraktBranndetektorType">
+            <sequence>
+               <element name="type" type="nvdb:TypeBranndetektorType">
+                  <annotation>
+                     <documentation>3774: Angir type.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3774</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10272: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10272</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>10139: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10139</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>10078: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10078</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="BranndetektorPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Branndetektor"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeBranndetektorType">
+      <annotation>
+         <documentation>3774: Angir type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3774</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeBranndetektorEnumerationType nvdb:TypeBranndetektorOtherType"/>
+   </simpleType>
+   <simpleType name="TypeBranndetektorEnumerationType">
+      <annotation>
+         <documentation>3774: Angir type.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3774</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="g">
+            <annotation>
+               <documentation>16015: Sensor som måler tilstedeværelse av en eller flere gasser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16015</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ir">
+            <annotation>
+               <documentation>16016: Infrarødt kamera for detektering av brann ut fra bildeanalyse.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16016</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">IR-kamera</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="k">
+            <annotation>
+               <documentation>16027: Brannvarsler som kombinerer flere metoder for registrering av brann.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16027</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kombinert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="m">
+            <annotation>
+               <documentation>4833: Manuell brannmelder.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4833</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Manuell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="r">
+            <annotation>
+               <documentation>4834: Sensor som registrerer røyk optisk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4834</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Optisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <documentation>4835: Sensor som registrerer endring i temperatur.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4835</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Termisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBranndetektorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

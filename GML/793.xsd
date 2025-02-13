@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.38">
+        version="2.39">
    <annotation>
       <documentation>793: Objekttype benyttet for å dokumentere noen enum-verdier i NVDB. Det kan forekomme avvik fra NVDB i og med at det ikke er automatisk synkronisering.</documentation>
    </annotation>
@@ -1246,6 +1246,77 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="HrefStyringsparameterNVDB dokumentasjonType">
+      <annotation>
+         <documentation>13041: Styringsparameter Href i Datakatalogen for å styre bruk av Href på geometriegenskapstyper. Det vil av tillatte verdier framkomme mulige verdier for Href i Datakatalogen. Styringsparameteren benevnes "Høydereferanse_tall" i NVDB API Les.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13041</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Href styringsparameter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HrefStyringsparameterNVDB dokumentasjonEnumerationType nvdb:HrefStyringsparameterNVDB dokumentasjonOtherType"/>
+   </simpleType>
+   <simpleType name="HrefStyringsparameterNVDB dokumentasjonEnumerationType">
+      <annotation>
+         <documentation>13041: Styringsparameter Href i Datakatalogen for å styre bruk av Href på geometriegenskapstyper. Det vil av tillatte verdier framkomme mulige verdier for Href i Datakatalogen. Styringsparameteren benevnes "Høydereferanse_tall" i NVDB API Les.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13041</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Href styringsparameter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="0">
+            <annotation>
+               <documentation>22651: Det er ikke relevant med href for denne geometriegenskapstypen.NVDB vil ikke lagre href.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22651</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J">
+            <annotation>
+               <documentation>22654: Egenskapstype med z-koordinater skal ha href. NVDB API Skriv vil gi advarsel om Href-verdi mangler.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22654</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>22653: Egenskapstype med z-koordinater skal ha href. Href-verdi "fot" er standardverdi og skal benyttes om ikke annet er avtalt. NVDB API Skriv vil gi advarsel om Href-verdi mangler. Det gis notabene om Href-verdi "topp" er benyttet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22653</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, fot er standard</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>22652: Egenskapstype med z-koordinater skal ha href. Href-verdi "topp" er standardverdi og skal benyttes om ikke annet er avtalt. NVDB API Skriv vil gi advarsel om Href-verdi mangler. Det gis notabene om Href-verdi "fot" er benyttet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22652</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, topp er standard</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>22655: Det er ikke krav om å gi Href-verdi, men eksisterende data med Href-verdi beholdes. NVDB API Skriv vil gi "Notabene" om det er angitt Href-verdi for nye geometriegenskapstyper.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22655</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HrefStyringsparameterNVDB dokumentasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="HøydeposisjonNVDB dokumentasjonType">
       <annotation>
          <documentation>8763: Gir lovlige verdier for høydeposisjon i NVDB sin lokasjonsattributt.</documentation>
@@ -1565,10 +1636,19 @@
                </element>
                <element minOccurs="0" name="høydereferanse">
                   <annotation>
-                     <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard).</documentation>
+                     <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard). Attributt knyttet til egengeometri i NVDB..</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9546</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="hrefStyringsparameter">
+                  <annotation>
+                     <documentation>13041: Styringsparameter Href i Datakatalogen for å styre bruk av Href på geometriegenskapstyper. Det vil av tillatte verdier framkomme mulige verdier for Href i Datakatalogen. Styringsparameteren benevnes "Høydereferanse_tall" i NVDB API Les.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13041</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Href styringsparameter</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -1589,6 +1669,17 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9547</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Referansegeometri</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="viktighet"
+                        type="nvdb:ViktighetNVDB dokumentasjonType">
+                  <annotation>
+                     <documentation>13042: Angir hvilekn viktighet en egenskapstype har i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13042</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Viktighet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -1619,23 +1710,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="string">
-                  <annotation>
-                     <documentation>10806: Angir eier</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10806</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="vedlikeholdsansvarlig" type="string">
-                  <annotation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10807</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
             </sequence>
          </extension>
       </complexContent>
@@ -1649,7 +1723,7 @@
    </complexType>
    <simpleType name="NVDB dokumentasjonHøydereferanseType">
       <annotation>
-         <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard).</documentation>
+         <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard). Attributt knyttet til egengeometri i NVDB..</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">9546</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
@@ -1659,7 +1733,7 @@
    </simpleType>
    <simpleType name="NVDB dokumentasjonHøydereferanseEnumerationType">
       <annotation>
-         <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard).</documentation>
+         <documentation>9546: Koordinatregistering utført på topp eller bunn av et objekt. (Definisjon fra SOSI standard). Attributt knyttet til egengeometri i NVDB..</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">9546</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
@@ -2145,6 +2219,86 @@
       </restriction>
    </simpleType>
    <simpleType name="VegdetaljnivåNVDB dokumentasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ViktighetNVDB dokumentasjonType">
+      <annotation>
+         <documentation>13042: Angir hvilekn viktighet en egenskapstype har i NVDB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13042</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Viktighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ViktighetNVDB dokumentasjonEnumerationType nvdb:ViktighetNVDB dokumentasjonOtherType"/>
+   </simpleType>
+   <simpleType name="ViktighetNVDB dokumentasjonEnumerationType">
+      <annotation>
+         <documentation>13042: Angir hvilekn viktighet en egenskapstype har i NVDB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13042</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Viktighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1">
+            <annotation>
+               <documentation>22656: Det skal registreres verdi til gitt egenskapstype. NVDB API Skriv avviser vegobjekter uten verdi for egenslkapstypen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22656</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Absolutt påkrevd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <documentation>22658: Det skal registreres verdi til gitt egenskapstype når en gitt betingelse er oppfylt. Betingelse finnes under "Merknad registrering". NVDB API Skriv gir "Notabene" om egenskap mangler verdi.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22658</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betinga</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>22659: Det er ikke krav om å registrere verdi til egenskap.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22659</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Opsjonell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>22657: Det skal registreres verdi til gitt egenskapstype. NVDB API Skriv gir advarsel om egenskap mangler verdi.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22657</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Påkrevd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <documentation>22660: Det er ikke krav om å registrere verdi til egenskap. Egenskapstype er etterspurt av spesielt interesserte.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22660</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialinformasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>22661: Egenskapstype er utgående. Det skal ikke registreres verdi til slike egenskapstyper. NVDB-API Skriv vil gi advarsel om det gis verdi til slik egenskap.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22661</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utgående</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ViktighetNVDB dokumentasjonOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
