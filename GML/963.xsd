@@ -5,12 +5,12 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>963: Gir statistikk om dekketilstand knyttet til en vegstrekning. Informasjon bygger på detaljerte spor- og jevnhetsmålinger utført på strekningen. De enkelte tilstandsparametre er beregnet i fagsystemet Dekkesys og overført derfra til NVDB.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
@@ -29,15 +29,6 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="eksternID" type="double">
-                  <annotation>
-                     <documentation>12156: ID benyttet i eksternt system. I dette tilfellet PMS/Rosita.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12156</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Ekstern ID</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element minOccurs="0" name="lengde" type="double">
                   <annotation>
                      <documentation>13005: Angir lengde på strekning.</documentation>
@@ -85,7 +76,7 @@
                </element>
                <element name="spor_90_Persentil" type="double">
                   <annotation>
-                     <documentation>12158: Spor90persentil. 90-persentil sporverdi (spordybde) for gitt vegstrekning basert på tilsvarende medianverdier for 20-metersstrekninger.</documentation>
+                     <documentation>12158: Spor90persentil. 90-persentil sporverdi (spordybde) for vegstrekningen basert på medianverdier for 20-metersstrekninger [mm].</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12158</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Spor, 90-persentil</sc:taggedValue>
@@ -94,7 +85,7 @@
                </element>
                <element name="spor_50_Persentil" type="double">
                   <annotation>
-                     <documentation>12998: Spor50persentil. 50-persentil - median - sporverdi basert på 20m medianverdier spordybde for strekning [mm].</documentation>
+                     <documentation>12998: Spor50persentil. 50-persentil - median - sporverdi (spordybde) for vegstrekningen basert på medianverdier for 20-metersstrekninger [mm].</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12998</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Spor, 50-persentil</sc:taggedValue>
@@ -121,7 +112,7 @@
                </element>
                <element name="tilstandsindikatorverdi_Spor" type="double">
                   <annotation>
-                     <documentation>13000: TG - Tilstandsgrad for spor.</documentation>
+                     <documentation>13000: Tilstandsindikator for spor (jevnhet på tvers). Baseres på 90-persentil for målt spordybde på PMS-parseller (opptil 1000 m) og sammenlignes med vedlikeholdsstandard differensiert for ÅDT. Tilstand angis med verdi fra 0 til 3, samt 98 og 99. 0: Ingen avvik. 1: Tilfredsstiller vedlikeholdsstandard. 2: Vesentlig avvik. 3: Stort eller alvorlig avvik. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13000</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi, Spor</sc:taggedValue>
@@ -130,7 +121,7 @@
                </element>
                <element name="jevnhet_90_Persentil" type="double">
                   <annotation>
-                     <documentation>12160: Jevnhet90persentil90-persentil sporverdi (IRI) for gitt vegstrekning basert på tilsvarende medianverdier for 20-metersstrekninger.</documentation>
+                     <documentation>12160: Jevnhet90persentil. 90-persentil IRI/jevnhetsverdi for vegstrekningen basert på medianverdier for 20-metersstrekninger [mm/m].</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12160</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Jevnhet, 90-persentil</sc:taggedValue>
@@ -139,7 +130,7 @@
                </element>
                <element name="jevnhet_50_Persentil" type="double">
                   <annotation>
-                     <documentation>13001: Jevnhet50persentil. 50-persentil IRI/jevnhetsverdi - median - basert på IRI 20m medianverdier for strekning [mm/m].</documentation>
+                     <documentation>13001: Jevnhet50persentil. 50-persentil IRI/jevnhetsverdi - median - basert på medianverdier for 20-metersstrekninger [mm/m].</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13001</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Jevnhet, 50-persentil</sc:taggedValue>
@@ -157,7 +148,7 @@
                </element>
                <element name="jevnhet_AndelAvVedlikeholdsstandard" type="double">
                   <annotation>
-                     <documentation>12161: prosentStdJevnhet. Angir hvor stor andel av vedlikeholdsstandard som er "oppbrukt":. Regnes ut som jevnhet 90-persentil dividert med maksimal IRI i henhold til vedlikeholdsstandard. Angis i prosent.</documentation>
+                     <documentation>12161: prosentStdJevnhet. Angir hvor stor andel av vedlikeholdsstandard som er "oppbrukt". Regnes ut som jevnhet 90-persentil dividert med maksimal IRI i henhold til vedlikeholdsstandard. Angis i prosent.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12161</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Jevnhet, andel av vedlikeholdsstandard</sc:taggedValue>
@@ -166,7 +157,7 @@
                </element>
                <element name="tilstandsindikatorverdi_Jevnhet" type="double">
                   <annotation>
-                     <documentation>13003: Tilstandsgrad for jevnhet.</documentation>
+                     <documentation>13003: Tilstandsindikator for jevnhet på langs (IRI). Baseres på 90-persentil for målt IRI på PMS-parseller (opptil 1000 m) og sammenlignes med vedlikeholdsstandard differensiert for ÅDT. Tilstand angis med verdi fra 0 til 3, samt 98 og 99. 0: Ingen avvik. 1: Tilfredsstiller vedlikeholdsstandard. 2: Vesentlig avvik. 3: Stort eller alvorlig avvik. 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13003</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi, Jevnhet</sc:taggedValue>
@@ -175,7 +166,7 @@
                </element>
                <element name="tilstandsindikatorverdi" type="double">
                   <annotation>
-                     <documentation>13010: Tilstandsindikatorverdi for dekketilstand</documentation>
+                     <documentation>13010: Tilstandsindikatorverdi for dekketilstand. Baseres på Tilstandsindikatorverdi, spor og Tilstandsindikatorverdi, jevnhet. Tilstand angis med verdi fra 0 til 3, samt 98 og 99. 0: Ingen avvik for verken spor eller jevnhet (IRI). 1: Tilfredsstiller vedlikeholdsstandard for både spor og jevnhet (IRI). 2: Vesentlig avvik for spor og/eller jevnhet (IRI). 3: Stort eller alvorlig avvik for spor og/eller jevnhet (IRI). 98: Mangler data. 99: Utenfor utvalg av veger.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13010</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Tilstandsindikatorverdi</sc:taggedValue>

@@ -5,15 +5,68 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>819: Tavle/skap/koblingsboks/punkt hvor strøm fordeles til teknisk utstyr. Benyttes bl.a. i forbindelse med tunnelutstyr.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AdgangskravFordelingType">
+      <annotation>
+         <documentation>13149: Angir hvilken type adgang fordelingen er tilrettelagt for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13149</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AdgangskravFordelingEnumerationType nvdb:AdgangskravFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="AdgangskravFordelingEnumerationType">
+      <annotation>
+         <documentation>13149: Angir hvilken type adgang fordelingen er tilrettelagt for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13149</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="BA1">
+            <annotation>
+               <documentation>22861: Ukyndige personer har adgang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22861</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA1 - Ukyndige personer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BA4">
+            <annotation>
+               <documentation>22862: Sakkyndige personer har adgang, f.eks elektrikere, fagfolk, mm</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22862</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA4 - Sakkyndige personer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BA5">
+            <annotation>
+               <documentation>22863: Kun instruert personell har adgang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22863</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA5 - Instruert personell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AdgangskravFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="BruksområdeFordelingType">
       <annotation>
          <documentation>12108: Angir hva som er hovedbruksområdet for fordeling.</documentation>
@@ -348,12 +401,41 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0"
+                        name="adgangskrav"
+                        type="nvdb:AdgangskravFordelingType">
+                  <annotation>
+                     <documentation>13149: Angir hvilken type adgang fordelingen er tilrettelagt for.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13149</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="låsesystem" type="string">
                   <annotation>
                      <documentation>10058: Angir hvilket låsesystem som er benyttet på skapet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10058</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Låsesystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nettsystem" type="nvdb:NettsystemFordelingType">
+                  <annotation>
+                     <documentation>13135: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13135</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tilknyttetOvervåkningssentral">
+                  <annotation>
+                     <documentation>10067: Angir hvilken overvåkningssentral tavlen er tilknyttet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10067</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilknyttet overvåkningssentral</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -375,21 +457,34 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0"
+                        name="jordfeilbryter"
+                        type="nvdb:JordfeilbryterFordelingType">
+                  <annotation>
+                     <documentation>13133: Angir hvordan jordfeilbrytere er koblet i anlegget.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13133</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jordfeilbryter</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="jordfeilvarsling"
+                        type="nvdb:JordfeilvarslingFordelingType">
+                  <annotation>
+                     <documentation>13134: Angir om anlegget har jordfeilvarsling.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13134</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Jordfeilvarsling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="antallKurser" type="double">
                   <annotation>
                      <documentation>10052: Antall faktiske kurser ut fra fordeling.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10052</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Antall kurser</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="tilknyttetOvervåkningssentral">
-                  <annotation>
-                     <documentation>10067: Angir hvilken overvåkningssentral tavlen er tilknyttet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10067</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tilknyttet overvåkningssentral</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -676,6 +771,115 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="JordfeilbryterFordelingType">
+      <annotation>
+         <documentation>13133: Angir hvordan jordfeilbrytere er koblet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13133</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordfeilbryter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:JordfeilbryterFordelingEnumerationType nvdb:JordfeilbryterFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="JordfeilbryterFordelingEnumerationType">
+      <annotation>
+         <documentation>13133: Angir hvordan jordfeilbrytere er koblet i anlegget.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13133</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordfeilbryter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="enKu">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22834</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">En for hver kurs</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fell">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22833</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Felles for alle kurser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hvMa">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22835</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hver mast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="I">
+            <annotation>
+               <documentation>22837: Fordeling har ikke jordfeilbryter.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22837</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="komb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22836</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kombinasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordfeilbryterFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordfeilvarslingFordelingType">
+      <annotation>
+         <documentation>13134: Angir om anlegget har jordfeilvarsling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13134</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordfeilvarsling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:JordfeilvarslingFordelingEnumerationType nvdb:JordfeilvarslingFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="JordfeilvarslingFordelingEnumerationType">
+      <annotation>
+         <documentation>13134: Angir om anlegget har jordfeilvarsling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13134</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Jordfeilvarsling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22864</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22865</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="JordfeilvarslingFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="MaterialeFordelingType">
       <annotation>
          <documentation>12107: Angir hvilket materiale skap/innkapsling er av.</documentation>
@@ -723,6 +927,77 @@
       </restriction>
    </simpleType>
    <simpleType name="MaterialeFordelingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="NettsystemFordelingType">
+      <annotation>
+         <documentation>13135: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13135</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:NettsystemFordelingEnumerationType nvdb:NettsystemFordelingOtherType"/>
+   </simpleType>
+   <simpleType name="NettsystemFordelingEnumerationType">
+      <annotation>
+         <documentation>13135: Angir hvordan elkraft er distribuert mellom siste transformator før konsument og konsument.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13135</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nettsystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IT">
+            <annotation>
+               <documentation>22838: IT-nett (Isolated Terra) er en nett-type der transformatorens nullpunkt ikke er jordet, men er beskyttet med et gnistgap (disneuter) mellom nullpunkt og jord.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22838</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">IT</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-C">
+            <annotation>
+               <documentation>22840: Nett der PEN-leder fremføres fra trafo til forbrukerens første fordeling (sikringsskap). Her splittes PEN-lederen opp i PE-leder (Protective Earth) eller jordleder og N-leder (Neutral). Energien kan tas ut både mellom de tre fasene (400V) og mellom hver av fasene og N-leder (230V). C angir at PEN-lederen frem til første fordeling er en kombinert leder (Combined).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22840</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-C</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-C-S">
+            <annotation>
+               <documentation>22842: TN Nett hvor C angir at PEN-lederen frem til første fordeling er en kombinert leder (Combined). S angir at PEN-leren er delt (Separated) fra første fordeling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22842</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-C-S</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TN-S">
+            <annotation>
+               <documentation>22841: Nett der PEN-leder fremføres fra trafo til forbrukerens første fordeling (sikringsskap). Her splittes PEN-lederen opp i PE-leder (Protective Earth) eller jordleder og N-leder (Neutral). Energien kan tas ut både mellom de tre fasene (400V) og mellom hver av fasene og N-leder (230V). S angir at PEN-leren er delt (Separated) fra første fordeling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22841</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TN-S</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TT">
+            <annotation>
+               <documentation>22839: Et TT-nett (Terra Terra) er lik et IT-nett med den vesentlige forskjellen at transformatorens nullpunkt er jordet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22839</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">TT</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NettsystemFordelingOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

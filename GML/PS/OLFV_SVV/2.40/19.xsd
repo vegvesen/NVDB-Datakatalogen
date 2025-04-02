@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.40">
+   <annotation>
+      <documentation>19: Kunst/utsmykking i forbindelse med et veganlegg. Kan være skulpturer, relieff m.m.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="KunstUtsmykking"
+            substitutionGroup="nvdb:AbstraktKunstUtsmykking"
+            type="nvdb:KunstUtsmykkingType">
+      <annotation>
+         <documentation>19: Kunst/utsmykking i forbindelse med et veganlegg. Kan være skulpturer, relieff m.m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">19</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">KunstUtsmykking</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KunstUtsmykkingType">
+      <complexContent>
+         <extension base="nvdb:AbstraktKunstUtsmykkingType">
+            <sequence>
+               <element name="type" type="nvdb:TypeKunstUtsmykkingType">
+                  <annotation>
+                     <documentation>1101: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1101</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tittel" type="string">
+                  <annotation>
+                     <documentation>1733: Angir tittel på kunst/utsmykking.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1733</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tittel</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="navnPåKunstner" type="string">
+                  <annotation>
+                     <documentation>1734: Angir navn på kunstner.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1734</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn på kunstner</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10320: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10320</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>10833: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10833</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4727: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4727</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KunstUtsmykkingPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:KunstUtsmykking"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeKunstUtsmykkingType">
+      <annotation>
+         <documentation>1101: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1101</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeKunstUtsmykkingEnumerationType nvdb:TypeKunstUtsmykkingOtherType"/>
+   </simpleType>
+   <simpleType name="TypeKunstUtsmykkingEnumerationType">
+      <annotation>
+         <documentation>1101: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1101</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <documentation>17856: Kunstverket passer ikke inn i noen av de øvrige typene. Gi beskrivelse i feltet "Tilleggsinformasjon".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17856</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen type</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <documentation>16795: Spesielle byggverk f.eks. utsiktstårn i tilknytning til rasteplasser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16795</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Byggverk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mo">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2491</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mosaikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2489</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skulptur</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2490</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veggbilde</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeKunstUtsmykkingOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

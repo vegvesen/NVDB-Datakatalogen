@@ -5,12 +5,12 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>859: Taktile indikatorer er standardiserte elementer som er lagt ned i gategrunn for å bidra til vegfinning for blinde og svaksynte. Kan bestå av retnings-, varsels- eller oppmerksomhetsindikator. For mer utfyllende informasjon, se HB V129 (278).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
@@ -267,6 +267,50 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="MerknadVinterdriftTaktile indikatorerType">
+      <annotation>
+         <documentation>13102: Gir tilleggsinformasjon knyttet til vinterdrift.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13102</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Merknad vinterdrift</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MerknadVinterdriftTaktile indikatorerEnumerationType nvdb:MerknadVinterdriftTaktile indikatorerOtherType"/>
+   </simpleType>
+   <simpleType name="MerknadVinterdriftTaktile indikatorerEnumerationType">
+      <annotation>
+         <documentation>13102: Gir tilleggsinformasjon knyttet til vinterdrift.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13102</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Merknad vinterdrift</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="N">
+            <annotation>
+               <documentation>22783: Det er ikke krav til at taktil indikator skal være snø- og isfri for GsC..</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22783</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke krav om snø- og isfri indikator for GsC</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IA">
+            <annotation>
+               <documentation>22784: Ingen merkand.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22784</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen merknad</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MerknadVinterdriftTaktile indikatorerOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Taktile indikatorer"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Taktile indikatorerType">
@@ -324,6 +368,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9810</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknadVinterdrift">
+                  <annotation>
+                     <documentation>13102: Gir tilleggsinformasjon knyttet til vinterdrift.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13102</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad vinterdrift</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

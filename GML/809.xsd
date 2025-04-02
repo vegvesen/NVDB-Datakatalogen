@@ -5,12 +5,12 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>809: Et område som er tilrettelagt for hensetting av vogntog i langtransport slik at sjåførene kan innta normal døgnhvile.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
@@ -257,7 +257,7 @@
                <element name="kameraovervåkning"
                         type="nvdb:KameraovervåkningDøgnhvileplassType">
                   <annotation>
-                     <documentation>9263: Angir om det er kameraovervåkning av området.</documentation>
+                     <documentation>9263: Angir om det er kameraovervåkning av området. Kamera er satt opp for å sikre tryggheten til sjåfører, hindre hærverk etc.  Dette må ikke forveksles med webkamera som er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9263</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Kameraovervåkning</sc:taggedValue>
@@ -452,6 +452,24 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9468</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Prisnivå</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="webkamera" type="nvdb:WebkameraDøgnhvileplassType">
+                  <annotation>
+                     <documentation>13096: Webkamera er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13096</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Webkamera</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="hyperlink" type="string">
+                  <annotation>
+                     <documentation>13095: Hyperlink (URL) til angitt webkamera.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13095</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Hyperlink</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -808,7 +826,7 @@
    </simpleType>
    <simpleType name="KameraovervåkningDøgnhvileplassType">
       <annotation>
-         <documentation>9263: Angir om det er kameraovervåkning av området.</documentation>
+         <documentation>9263: Angir om det er kameraovervåkning av området. Kamera er satt opp for å sikre tryggheten til sjåfører, hindre hærverk etc.  Dette må ikke forveksles med webkamera som er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">9263</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Kameraovervåkning</sc:taggedValue>
@@ -818,7 +836,7 @@
    </simpleType>
    <simpleType name="KameraovervåkningDøgnhvileplassEnumerationType">
       <annotation>
-         <documentation>9263: Angir om det er kameraovervåkning av området.</documentation>
+         <documentation>9263: Angir om det er kameraovervåkning av området. Kamera er satt opp for å sikre tryggheten til sjåfører, hindre hærverk etc.  Dette må ikke forveksles med webkamera som er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">9263</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Kameraovervåkning</sc:taggedValue>
@@ -1640,6 +1658,48 @@
       </restriction>
    </simpleType>
    <simpleType name="VedlikeholdsansvarligDøgnhvileplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="WebkameraDøgnhvileplassType">
+      <annotation>
+         <documentation>13096: Webkamera er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13096</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Webkamera</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:WebkameraDøgnhvileplassEnumerationType nvdb:WebkameraDøgnhvileplassOtherType"/>
+   </simpleType>
+   <simpleType name="WebkameraDøgnhvileplassEnumerationType">
+      <annotation>
+         <documentation>13096: Webkamera er satt opp for å få informasjon om belegget på døgnhvileplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13096</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Webkamera</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22766</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22767</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="WebkameraDøgnhvileplassOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

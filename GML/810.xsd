@@ -5,15 +5,103 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>810: Inndeling av vegnettet for å beskrive ulik standard for vinterdrift. Inndelingen baseres på trafikkmengde, viktighet av veg, klima, trafikksikkerhet m.m. (Revidert HB R610).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="StrekningMedKravTilForsterkaVinterfriksjonVinterdriftsklasseType">
+      <annotation>
+         <documentation>13110: Angir at gitt strekning skal ha ekstra vinterfriksjon under spesielle forhold slik det er beskrevet for DkB, DkC, DkD og DkE i HB 610</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13110</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strekning med krav til forsterka vinterfriksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StrekningMedKravTilForsterkaVinterfriksjonVinterdriftsklasseEnumerationType nvdb:StrekningMedKravTilForsterkaVinterfriksjonVinterdriftsklasseOtherType"/>
+   </simpleType>
+   <simpleType name="StrekningMedKravTilForsterkaVinterfriksjonVinterdriftsklasseEnumerationType">
+      <annotation>
+         <documentation>13110: Angir at gitt strekning skal ha ekstra vinterfriksjon under spesielle forhold slik det er beskrevet for DkB, DkC, DkD og DkE i HB 610</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13110</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strekning med krav til forsterka vinterfriksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <documentation>22793: Ja</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22793</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <documentation>22794: Nei</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22794</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StrekningMedKravTilForsterkaVinterfriksjonVinterdriftsklasseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StrekningMedSandstrøingDkAVinterdriftsklasseType">
+      <annotation>
+         <documentation>13109: Angir at gitt strekning skal ha sandstrøing under spesielle forhold slik det er beskrevet for DkA i HB 610.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strekning med sandstrøing DkA</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StrekningMedSandstrøingDkAVinterdriftsklasseEnumerationType nvdb:StrekningMedSandstrøingDkAVinterdriftsklasseOtherType"/>
+   </simpleType>
+   <simpleType name="StrekningMedSandstrøingDkAVinterdriftsklasseEnumerationType">
+      <annotation>
+         <documentation>13109: Angir at gitt strekning skal ha sandstrøing under spesielle forhold slik det er beskrevet for DkA i HB 610.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strekning med sandstrøing DkA</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <documentation>22791: Ja</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22791</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <documentation>22792: Nei</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22792</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StrekningMedSandstrøingDkAVinterdriftsklasseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Vinterdriftsklasse"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:VinterdriftsklasseType">
@@ -36,6 +124,33 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9260</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="strekningMedSandstrøingDkA">
+                  <annotation>
+                     <documentation>13109: Angir at gitt strekning skal ha sandstrøing under spesielle forhold slik det er beskrevet for DkA i HB 610.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13109</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Strekning med sandstrøing DkA</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="strekningMedKravTilForsterkaVinterfriksjon">
+                  <annotation>
+                     <documentation>13110: Angir at gitt strekning skal ha ekstra vinterfriksjon under spesielle forhold slik det er beskrevet for DkB, DkC, DkD og DkE i HB 610</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13110</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Strekning med krav til forsterka vinterfriksjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsareal" type="integer">
+                  <annotation>
+                     <documentation>13112: Angir areal av tilleggsområde. Arealet kommer i tillegg til selve vegarealet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13112</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsareal</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -63,6 +178,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9301</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>13111: Avgrenser tilleggsareal utenfor selve vegen som skal vinterdriftes.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13111</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

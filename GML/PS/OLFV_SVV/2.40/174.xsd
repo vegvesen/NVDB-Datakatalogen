@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.40">
+   <annotation>
+      <documentation>174: Oppmerket felt for fotgjengere (Ordbok Veg og Trafikkteknikk).</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="Belegning_TypeGangfeltType">
+      <annotation>
+         <documentation>8736: Angir type belegning for gangfeltet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8736</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belegning, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Belegning_TypeGangfeltEnumerationType nvdb:Belegning_TypeGangfeltOtherType"/>
+   </simpleType>
+   <simpleType name="Belegning_TypeGangfeltEnumerationType">
+      <annotation>
+         <documentation>8736: Angir type belegning for gangfeltet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8736</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belegning, type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11567</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11559</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongheller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bts">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11564</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11565</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiferheller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <documentation>11566: Belegningsstein f.eks. av type granitt , brostein etc.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11566</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Belegning_TypeGangfeltOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BelysningGangfeltType">
+      <annotation>
+         <documentation>1880: Angir om gangfeltet er belyst. Kan være fra egen belysning eller fra generell veg-/gatebelysning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1880</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BelysningGangfeltEnumerationType nvdb:BelysningGangfeltOtherType"/>
+   </simpleType>
+   <simpleType name="BelysningGangfeltEnumerationType">
+      <annotation>
+         <documentation>1880: Angir om gangfeltet er belyst. Kan være fra egen belysning eller fra generell veg-/gatebelysning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1880</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3526</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3564</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BelysningGangfeltOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Gangfelt"
+            substitutionGroup="nvdb:AbstraktGangfelt"
+            type="nvdb:GangfeltType">
+      <annotation>
+         <documentation>174: Oppmerket felt for fotgjengere (Ordbok Veg og Trafikkteknikk).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">174</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gangfelt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="GangfeltType">
+      <complexContent>
+         <extension base="nvdb:AbstraktGangfeltType">
+            <sequence>
+               <element minOccurs="0" name="stedsangivelse" type="string">
+                  <annotation>
+                     <documentation>7904: Stedsnavn hvor forekomst er lokalisert. Kan eventuelt gi plassering relatert til stedsnavn. I kryssområder der det er flere gangfelt kan de enkelte gis en forløpende nummerering i tillegg til stedsnavnet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7904</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stedsangivelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="markeringAvStriper">
+                  <annotation>
+                     <documentation>8738: Angir hvordan striper er markert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8738</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Markering av striper</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="hevet" type="nvdb:HevetGangfeltType">
+                  <annotation>
+                     <documentation>8739: Angir om gangfeltet er hevet i forhold til vegplanet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8739</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Hevet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lysregulert" type="nvdb:LysregulertGangfeltType">
+                  <annotation>
+                     <documentation>2034: Angir om gangfeltet er lysregulert. Lysregulerte gangfelt har egne signalhoder for å styre gangtrafikken som benytter gangfeltet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2034</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lysregulert</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="belysning" type="nvdb:BelysningGangfeltType">
+                  <annotation>
+                     <documentation>1880: Angir om gangfeltet er belyst. Kan være fra egen belysning eller fra generell veg-/gatebelysning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1880</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="belegning_Type">
+                  <annotation>
+                     <documentation>8736: Angir type belegning for gangfeltet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8736</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Belegning, type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10300: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10300</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>12089: Gir flate/polygon som geometrisk avgrenser objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12089</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="GangfeltPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Gangfelt"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="HevetGangfeltType">
+      <annotation>
+         <documentation>8739: Angir om gangfeltet er hevet i forhold til vegplanet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8739</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Hevet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HevetGangfeltEnumerationType nvdb:HevetGangfeltOtherType"/>
+   </simpleType>
+   <simpleType name="HevetGangfeltEnumerationType">
+      <annotation>
+         <documentation>8739: Angir om gangfeltet er hevet i forhold til vegplanet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8739</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Hevet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11557</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11558</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HevetGangfeltOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="LysregulertGangfeltType">
+      <annotation>
+         <documentation>2034: Angir om gangfeltet er lysregulert. Lysregulerte gangfelt har egne signalhoder for å styre gangtrafikken som benytter gangfeltet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2034</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lysregulert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LysregulertGangfeltEnumerationType nvdb:LysregulertGangfeltOtherType"/>
+   </simpleType>
+   <simpleType name="LysregulertGangfeltEnumerationType">
+      <annotation>
+         <documentation>2034: Angir om gangfeltet er lysregulert. Lysregulerte gangfelt har egne signalhoder for å styre gangtrafikken som benytter gangfeltet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2034</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lysregulert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3539</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3577</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LysregulertGangfeltOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="MarkeringAvStriperGangfeltType">
+      <annotation>
+         <documentation>8738: Angir hvordan striper er markert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8738</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Markering av striper</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MarkeringAvStriperGangfeltEnumerationType nvdb:MarkeringAvStriperGangfeltOtherType"/>
+   </simpleType>
+   <simpleType name="MarkeringAvStriperGangfeltEnumerationType">
+      <annotation>
+         <documentation>8738: Angir hvordan striper er markert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8738</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Markering av striper</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="I">
+            <annotation>
+               <documentation>11568: Gangfeltet har ikke markerte striper.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11568</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke striper</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11555</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Malte striper</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <documentation>11556: Striper framkommer av vekslende materialbruk, for eksempel forskjellig type stein med ulik farge. Ikke benyttet maling.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11556</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vekslende materialtype</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MarkeringAvStriperGangfeltOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

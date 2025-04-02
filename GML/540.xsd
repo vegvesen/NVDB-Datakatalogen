@@ -5,15 +5,68 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>540: Gir informasjon om representativ trafikkmengde for strekningen. Trafikkmengde kalkuleres på bakgrunn av registrerte passeringer av kjøretøy i kategorien motorvogn av type bil, vogntog, traktor og motorredskap.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="GjelderTrafikkIBeggeRetningerTrafikkmengdeType">
+      <annotation>
+         <documentation>12083: Angir hvorvidt trafikkmengde gjelder for trafikk i begge retninger eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gjelder trafikk i begge retninger</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GjelderTrafikkIBeggeRetningerTrafikkmengdeEnumerationType nvdb:GjelderTrafikkIBeggeRetningerTrafikkmengdeOtherType"/>
+   </simpleType>
+   <simpleType name="GjelderTrafikkIBeggeRetningerTrafikkmengdeEnumerationType">
+      <annotation>
+         <documentation>12083: Angir hvorvidt trafikkmengde gjelder for trafikk i begge retninger eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12083</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Gjelder trafikk i begge retninger</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>21001: Vegen har tovegs trafikk. Trafikkmengde er sum av trafikk i begge retninger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21001</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="E">
+            <annotation>
+               <documentation>21003: Vegen har adskilte løp. Gitt trafikkmengde representerer trafikk for kun ett av de adskilte løpene. For å få fram total trafikkmengde for vegen må det summeres trafikkmengder for med- og motgående løp på stedet. En del 4-feltsveger ligger inne i NVDB med med- og motgående løp.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21003</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei, del av veg med adskilte løp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="E">
+            <annotation>
+               <documentation>21002: Vegen er envegskjørt. Trafikkmengde gjelder dermed kun trafikk i en retning.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21002</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei, envegskjørt veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GjelderTrafikkIBeggeRetningerTrafikkmengdeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="GrunnlagForÅDTTrafikkmengdeType">
       <annotation>
          <documentation>4625: Angir hva som er grunnlag for "ÅDT, total" og "ÅDT, andel lange kjøretøy". Det er kun verdiene "Trafikkdatasystemet", "Manuell telling og skjønn" og "Skjønn" som benyttes aktivt, øvrige verdier er bare relevant i forhold til historiske data.</documentation>
@@ -35,7 +88,7 @@
       <restriction base="string">
          <enumeration value="FB">
             <annotation>
-               <documentation>5582: Ferjedatabanken.</documentation>
+               <documentation>5582: Trafikkmengde er basert på trafikkdata fra Ferjedatabanken.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5582</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Ferjedatabanken</sc:taggedValue>
@@ -44,6 +97,7 @@
          </enumeration>
          <enumeration value="NT">
             <annotation>
+               <documentation>5579: Kun aktuell for historiske data.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5579</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">NorTraf</sc:taggedValue>
@@ -52,7 +106,7 @@
          </enumeration>
          <enumeration value="NTK">
             <annotation>
-               <documentation>13102: Fra NorTraf Kommune.</documentation>
+               <documentation>13102: Fra NorTraf Kommune. (Kun aktuell fo rhistoriske data)</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">13102</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">NorTraf Kommune</sc:taggedValue>
@@ -61,7 +115,7 @@
          </enumeration>
          <enumeration value="S">
             <annotation>
-               <documentation>5580: Basert på skjønn.</documentation>
+               <documentation>5580: Basert på skjønn. (Benyttes kun for trafikkmengdedata fra  før 2024)</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5580</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Skjønn</sc:taggedValue>
@@ -70,7 +124,7 @@
          </enumeration>
          <enumeration value="TS">
             <annotation>
-               <documentation>5581: Basert på telling og skjønn.</documentation>
+               <documentation>5581: Basert på telling og skjønn. (Benyttes kun for trafikkmengdedata fra  før 2024)</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5581</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Telling og skjønn</sc:taggedValue>
@@ -79,7 +133,7 @@
          </enumeration>
          <enumeration value="TrafSys">
             <annotation>
-               <documentation>20994: Data er kalkulert direkte ut fra trafikkdata i tellepunkt.</documentation>
+               <documentation>20994: Data er kalkulert direkte ut fra trafikkdata i tellepunkt. (Benyttes kun for trafikkmengdedata fra  før 2024)</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">20994</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Trafikkdatasystemet</sc:taggedValue>
@@ -88,10 +142,55 @@
          </enumeration>
          <enumeration value="V">
             <annotation>
-               <documentation>5578: Vegorama.</documentation>
+               <documentation>5578: Kun aktuell for historiske data.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">5578</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Vegorama</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="erfa">
+            <annotation>
+               <documentation>22754: Trafikkmengde er framkommet ut fra erfaringsbasert estimat.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22754</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Erfaringsbasert estimat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kont">
+            <annotation>
+               <documentation>22750: Trafikkmengde er basert på trafikkdata fra kontinuerlig trafikkregistrering.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22750</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kontinuerlig trafikkregistrering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="peri">
+            <annotation>
+               <documentation>22751: Trafikkmengde er basert på trafikkdata fra periodisk trafikkregistrering.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22751</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Periodisk trafikkregistrering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="stat">
+            <annotation>
+               <documentation>22753: Trafikkmengde er estimert.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22753</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statistisk estimat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="utle">
+            <annotation>
+               <documentation>22752: Trafikkmengde er utledet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22752</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utledet</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -238,12 +337,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="trafikkmengdePåAdskilteLøp">
+               <element name="gjelderTrafikkIBeggeRetninger">
                   <annotation>
-                     <documentation>12083: Angir hvordan oppgitt ÅDT-verdi for trafikkmengdeforekomster stedfestet på vegstrekning med adskilte løp=Ja eller adskilte løp=Nei skal tolkes.</documentation>
+                     <documentation>12083: Angir hvorvidt trafikkmengde gjelder for trafikk i begge retninger eller ikke.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12083</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Trafikkmengde på adskilte løp</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjelder trafikk i begge retninger</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -347,57 +446,4 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="TrafikkmengdePåAdskilteLøpTrafikkmengdeType">
-      <annotation>
-         <documentation>12083: Angir hvordan oppgitt ÅDT-verdi for trafikkmengdeforekomster stedfestet på vegstrekning med adskilte løp=Ja eller adskilte løp=Nei skal tolkes.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12083</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Trafikkmengde på adskilte løp</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:TrafikkmengdePåAdskilteLøpTrafikkmengdeEnumerationType nvdb:TrafikkmengdePåAdskilteLøpTrafikkmengdeOtherType"/>
-   </simpleType>
-   <simpleType name="TrafikkmengdePåAdskilteLøpTrafikkmengdeEnumerationType">
-      <annotation>
-         <documentation>12083: Angir hvordan oppgitt ÅDT-verdi for trafikkmengdeforekomster stedfestet på vegstrekning med adskilte løp=Ja eller adskilte løp=Nei skal tolkes.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">12083</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Trafikkmengde på adskilte løp</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="E">
-            <annotation>
-               <documentation>21003: Angis for trafikkmengdeforekomster som ikke er stedfestet på enveg med/mot-strekninger.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">21003</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="B">
-            <annotation>
-               <documentation>21001: Det er oppgitt ÅDT-verdi som er summen av trafikken for med-strekning og tilhørende mot-strekning.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">21001</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Sum av trafikk</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="E">
-            <annotation>
-               <documentation>21002: Det er oppgitt ÅDT-verdi som angir summen av trafikken i en retning.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">21002</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Trafikk i en retning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="TrafikkmengdePåAdskilteLøpTrafikkmengdeOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
 </schema>

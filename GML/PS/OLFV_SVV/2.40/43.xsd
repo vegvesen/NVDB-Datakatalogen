@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.40">
+   <annotation>
+      <documentation>43: Område avsatt til parkering for kjøretøy. På et parkeringsområde vil det normalt være en eller flere parkeringsplasser (oppstillingsplasser) som ligger inntil hverandre.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="InnfartsparkeringParkeringsområdeType">
+      <annotation>
+         <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering. Trafikanter parkerer egne kjøretøy på parkeringsplasser ved stasjoner, terminaler og holdeplasser for så å reise kollektivt videre.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5779</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Innfartsparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:InnfartsparkeringParkeringsområdeEnumerationType nvdb:InnfartsparkeringParkeringsområdeOtherType"/>
+   </simpleType>
+   <simpleType name="InnfartsparkeringParkeringsområdeEnumerationType">
+      <annotation>
+         <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering. Trafikanter parkerer egne kjøretøy på parkeringsplasser ved stasjoner, terminaler og holdeplasser for så å reise kollektivt videre.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5779</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Innfartsparkering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8177</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8178</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="InnfartsparkeringParkeringsområdeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Parkeringsområde"
+            substitutionGroup="nvdb:AbstraktParkeringsområde"
+            type="nvdb:ParkeringsområdeType">
+      <annotation>
+         <documentation>43: Område avsatt til parkering for kjøretøy. På et parkeringsområde vil det normalt være en eller flere parkeringsplasser (oppstillingsplasser) som ligger inntil hverandre.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">43</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Parkeringsområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="ParkeringsområdeType">
+      <complexContent>
+         <extension base="nvdb:AbstraktParkeringsområdeType">
+            <sequence>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>1076: Angir navn på vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1076</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeParkeringsområdeType">
+                  <annotation>
+                     <documentation>1116: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1116</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="innfartsparkering"
+                        type="nvdb:InnfartsparkeringParkeringsområdeType">
+                  <annotation>
+                     <documentation>5779: Angir om parkeringsområde kan defineres som innfartsparkering. Trafikanter parkerer egne kjøretøy på parkeringsplasser ved stasjoner, terminaler og holdeplasser for så å reise kollektivt videre.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5779</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Innfartsparkering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallParkeringsplasserSmåKjt" type="integer">
+                  <annotation>
+                     <documentation>1807: Angir antall oppmerka parkeringsplasser for små personbiler. For parkeringsområder som ikke har oppmerka plasser gis det anslag på hvor mange personbiler det er plass til. Områder som er skiltet o.l. for buss/lastebil regnes ikke med. Rasteplasser kan ha oppstillingsplasser utenom parkeringsområde (se "Rasteplass").</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1807</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall parkeringsplasser små kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="plasserReservertHandikappede" type="integer">
+                  <annotation>
+                     <documentation>1818: Angir antall parkerings/oppstillingsplasser reservert handikappede.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1818</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plasser reservert handikappede</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallParkeringsplasserStoreKjt" type="integer">
+                  <annotation>
+                     <documentation>1817: Angir antall oppmerka parkeringsplasser for store kjøretøy. For parkeringsområder som ikke har oppmerka plasser telles det kun med antall slike plasser innenfor delområder som er tydelig merka buss/lastebil.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1817</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall parkeringsplasser store kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="integer">
+                  <annotation>
+                     <documentation>1359: Angir totalt areal. Dette inkluderer kjørbart, ikke kjørbart og bebygd areal innenfor parkeringsområdets avgrensning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1359</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10335: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10335</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>10891: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10891</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ParkeringsområdePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Parkeringsområde"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeParkeringsområdeType">
+      <annotation>
+         <documentation>1116: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1116</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeParkeringsområdeEnumerationType nvdb:TypeParkeringsområdeOtherType"/>
+   </simpleType>
+   <simpleType name="TypeParkeringsområdeEnumerationType">
+      <annotation>
+         <documentation>1116: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1116</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ap">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3162</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Avskjermet plass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3161</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Parkering langs kjørebane</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ph">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3163</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Parkeringshus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeParkeringsområdeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -5,16 +5,16 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
-      <documentation>583: Strekning som har enhelig bredde på vegen. Inneholder bredde på dekke, kjørebane og total vegbredde. Merknad: Vi er i ferd med å gå over til å benytte vegbredde beregnet på grunnlag av FKB-kartdata. Beregnet vegbredde finnes under vegobjekttype "Vegbredde, beregnet" (VT 838). Vegbredde (VT 583) inneholder mye data som er foreldet. I en overgangsperiode bør VT 838 benyttes der den finnes og VT 583 ellers. Det er også mulig å legge inn målte bredder under VT838.</documentation>
+      <documentation>583: Strekning som har enhelig bredde på vegen. Inneholder bredde på dekke, kjørebane og total vegbredde. Merknad: Vegbredde, historisk (VT 583) benevnes "historisk" da den inneholder mye data som er foreldet. Data tilhørende "Vegbredde, beregnet" (VT 838) benyttes i stedet. Data tilhørende VT 583 anbfales bare benyttet på strekninger det ikke finnes data for VT 838.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="DataopprinnelseVegbreddeType">
+   <simpleType name="DataopprinnelseVegbredde, historiskType">
       <annotation>
          <documentation>5261: Angir hvilke kilde dataene kommer fra.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Dataopprinnelse</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:DataopprinnelseVegbreddeEnumerationType nvdb:DataopprinnelseVegbreddeOtherType"/>
+      <union memberTypes="nvdb:DataopprinnelseVegbredde, historiskEnumerationType nvdb:DataopprinnelseVegbredde, historiskOtherType"/>
    </simpleType>
-   <simpleType name="DataopprinnelseVegbreddeEnumerationType">
+   <simpleType name="DataopprinnelseVegbredde, historiskEnumerationType">
       <annotation>
          <documentation>5261: Angir hvilke kilde dataene kommer fra.</documentation>
          <appinfo>
@@ -60,23 +60,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="DataopprinnelseVegbreddeOtherType">
+   <simpleType name="DataopprinnelseVegbredde, historiskOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Vegbredde"
+   <element name="Vegbredde, historisk"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:VegbreddeType">
+            type="nvdb:Vegbredde, historiskType">
       <annotation>
-         <documentation>583: Strekning som har enhelig bredde på vegen. Inneholder bredde på dekke, kjørebane og total vegbredde. Merknad: Vi er i ferd med å gå over til å benytte vegbredde beregnet på grunnlag av FKB-kartdata. Beregnet vegbredde finnes under vegobjekttype "Vegbredde, beregnet" (VT 838). Vegbredde (VT 583) inneholder mye data som er foreldet. I en overgangsperiode bør VT 838 benyttes der den finnes og VT 583 ellers. Det er også mulig å legge inn målte bredder under VT838.</documentation>
+         <documentation>583: Strekning som har enhelig bredde på vegen. Inneholder bredde på dekke, kjørebane og total vegbredde. Merknad: Vegbredde, historisk (VT 583) benevnes "historisk" da den inneholder mye data som er foreldet. Data tilhørende "Vegbredde, beregnet" (VT 838) benyttes i stedet. Data tilhørende VT 583 anbfales bare benyttet på strekninger det ikke finnes data for VT 838.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">583</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Vegbredde</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegbredde, historisk</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="VegbreddeType">
+   <complexType name="Vegbredde, historiskType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -118,7 +118,7 @@
                </element>
                <element minOccurs="0"
                         name="dataopprinnelse"
-                        type="nvdb:DataopprinnelseVegbreddeType">
+                        type="nvdb:DataopprinnelseVegbredde, historiskType">
                   <annotation>
                      <documentation>5261: Angir hvilke kilde dataene kommer fra.</documentation>
                      <appinfo>
@@ -157,14 +157,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="VegbreddePropertyType">
+   <complexType name="Vegbredde, historiskPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Vegbredde"/>
+         <element ref="nvdb:Vegbredde, historisk"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VegbreddeMålemetodeType">
+   <simpleType name="Vegbredde, historiskMålemetodeType">
       <annotation>
          <documentation>5262: Angir hvilken målemetode som er benyttet for å framskaffe bredde.</documentation>
          <appinfo>
@@ -172,9 +172,9 @@
             <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VegbreddeMålemetodeEnumerationType nvdb:VegbreddeMålemetodeOtherType"/>
+      <union memberTypes="nvdb:Vegbredde, historiskMålemetodeEnumerationType nvdb:Vegbredde, historiskMålemetodeOtherType"/>
    </simpleType>
-   <simpleType name="VegbreddeMålemetodeEnumerationType">
+   <simpleType name="Vegbredde, historiskMålemetodeEnumerationType">
       <annotation>
          <documentation>5262: Angir hvilken målemetode som er benyttet for å framskaffe bredde.</documentation>
          <appinfo>
@@ -225,7 +225,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VegbreddeMålemetodeOtherType">
+   <simpleType name="Vegbredde, historiskMålemetodeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

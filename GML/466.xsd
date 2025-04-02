@@ -5,16 +5,77 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.39">
+        version="2.40">
    <annotation>
       <documentation>466: Transformerer vekselstrøm fra et spenningsnivå til et annet.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
-           schemaLocation="http://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="EierTrafoType">
+   <simpleType name="BruksområdeTransformatorType">
+      <annotation>
+         <documentation>13146: Gir bruksområde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13146</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeTransformatorEnumerationType nvdb:BruksområdeTransformatorOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeTransformatorEnumerationType">
+      <annotation>
+         <documentation>13146: Gir bruksområde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13146</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="SG">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22852</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skilletrafo, galvanisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T">
+            <annotation>
+               <documentation>22849: Transformator benyttes til strømforsyning i tunnel. Merknad: Transformatorer som eies av nettselskap og er plassert i teknisk bygg skal ikke registreres i NVDB.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22849</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="UPS">
+            <annotation>
+               <documentation>22851: Transformatorer for å transformere fra 400V til 230V for å opprette IT-nett.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22851</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="VL">
+            <annotation>
+               <documentation>22850: Transformator benytts til strømforsyning til veglys. Merknad: Transformatorer som eies av nettselskapene skal ikke registreres i NVDB.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22850</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veglys</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeTransformatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierTransformatorType">
       <annotation>
          <documentation>8028: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -22,9 +83,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierTrafoEnumerationType nvdb:EierTrafoOtherType"/>
+      <union memberTypes="nvdb:EierTransformatorEnumerationType nvdb:EierTransformatorOtherType"/>
    </simpleType>
-   <simpleType name="EierTrafoEnumerationType">
+   <simpleType name="EierTransformatorEnumerationType">
       <annotation>
          <documentation>8028: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,26 +145,169 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierTrafoOtherType">
+   <simpleType name="EierTransformatorOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Trafo"
+   <simpleType name="SpenningInnTransformatorType">
+      <annotation>
+         <documentation>13147: Angir hvilken spenning det leveres inn i transformator.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13147</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning inn</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningInnTransformatorEnumerationType nvdb:SpenningInnTransformatorOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningInnTransformatorEnumerationType">
+      <annotation>
+         <documentation>13147: Angir hvilken spenning det leveres inn i transformator.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13147</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning inn</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1000">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22854</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1000</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="22000">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22853</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">22000</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="230">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22856</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22855</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningInnTransformatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningUtTransformatorType">
+      <annotation>
+         <documentation>13148: Angir hvilken spenning det er ut fra transformator.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13148</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning ut</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningUtTransformatorEnumerationType nvdb:SpenningUtTransformatorOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningUtTransformatorEnumerationType">
+      <annotation>
+         <documentation>13148: Angir hvilken spenning det er ut fra transformator.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13148</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning ut</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1000">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22857</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1000</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="230">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22860</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22859</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="690">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22858</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">690</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningUtTransformatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Transformator"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:TrafoType">
+            type="nvdb:TransformatorType">
       <annotation>
          <documentation>466: Transformerer vekselstrøm fra et spenningsnivå til et annet.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">466</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Trafo</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Transformator</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="TrafoType">
+   <complexType name="TransformatorType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeTransformatorType">
+                  <annotation>
+                     <documentation>13146: Gir bruksområde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13146</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="spenningInn">
+                  <annotation>
+                     <documentation>13147: Angir hvilken spenning det leveres inn i transformator.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13147</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenning inn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="spenningUt">
+                  <annotation>
+                     <documentation>13148: Angir hvilken spenning det er ut fra transformator.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13148</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenning ut</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="merkeytelse" type="double">
                   <annotation>
                      <documentation>9999: Angir maksimal effekt trafoen kan yte.</documentation>
@@ -194,7 +398,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierTrafoType">
+               <element minOccurs="0" name="eier" type="nvdb:EierTransformatorType">
                   <annotation>
                      <documentation>8028: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -214,7 +418,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligTrafoType">
+                        type="nvdb:VedlikeholdsansvarligTransformatorType">
                   <annotation>
                      <documentation>8103: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
                      <appinfo>
@@ -244,14 +448,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="TrafoPropertyType">
+   <complexType name="TransformatorPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Trafo"/>
+         <element ref="nvdb:Transformator"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligTrafoType">
+   <simpleType name="VedlikeholdsansvarligTransformatorType">
       <annotation>
          <documentation>8103: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -259,9 +463,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligTrafoEnumerationType nvdb:VedlikeholdsansvarligTrafoOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligTransformatorEnumerationType nvdb:VedlikeholdsansvarligTransformatorOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTrafoEnumerationType">
+   <simpleType name="VedlikeholdsansvarligTransformatorEnumerationType">
       <annotation>
          <documentation>8103: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -328,7 +532,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTrafoOtherType">
+   <simpleType name="VedlikeholdsansvarligTransformatorOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

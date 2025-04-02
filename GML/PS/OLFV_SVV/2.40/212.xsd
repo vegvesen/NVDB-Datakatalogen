@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.40">
+   <annotation>
+      <documentation>212: Innretning for å ventilere tunneler.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="KorrosjonsbeskyttelseVentilatorType">
+      <annotation>
+         <documentation>4022: Angir hvilken type korrosjonsbeskyttelse som er benyttet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4022</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KorrosjonsbeskyttelseVentilatorEnumerationType nvdb:KorrosjonsbeskyttelseVentilatorOtherType"/>
+   </simpleType>
+   <simpleType name="KorrosjonsbeskyttelseVentilatorEnumerationType">
+      <annotation>
+         <documentation>4022: Angir hvilken type korrosjonsbeskyttelse som er benyttet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4022</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="IB">
+            <annotation>
+               <documentation>13785: Angis dersom vifte/ventilator er av materiale som ikke trenger korrosjonsbeskyttelse, f.eks. syrefast stål.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13785</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke behov, rustfritt stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5054</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pulverlakkert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5053</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Varmforsinket</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KorrosjonsbeskyttelseVentilatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVentilatorType">
+      <annotation>
+         <documentation>1205: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1205</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeVentilatorEnumerationType nvdb:TypeVentilatorOtherType"/>
+   </simpleType>
+   <simpleType name="TypeVentilatorEnumerationType">
+      <annotation>
+         <documentation>1205: Angir hvilken type vegobjektet er av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1205</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4867</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asymmetrisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sv">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7453</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sjaktventilator</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4866</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Symmetrisk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVentilatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Ventilator"
+            substitutionGroup="nvdb:AbstraktVentilator"
+            type="nvdb:VentilatorType">
+      <annotation>
+         <documentation>212: Innretning for å ventilere tunneler.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">212</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ventilator</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VentilatorType">
+      <complexContent>
+         <extension base="nvdb:AbstraktVentilatorType">
+            <sequence>
+               <element name="type" type="nvdb:TypeVentilatorType">
+                  <annotation>
+                     <documentation>1205: Angir hvilken type vegobjektet er av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1205</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="effekt" type="integer">
+                  <annotation>
+                     <documentation>2150: Angir hvilken effekt tunnelvifta har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2150</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Effekt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="korrosjonsbeskyttelse"
+                        type="nvdb:KorrosjonsbeskyttelseVentilatorType">
+                  <annotation>
+                     <documentation>4022: Angir hvilken type korrosjonsbeskyttelse som er benyttet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4022</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vibrasjonsvakt" type="nvdb:VibrasjonsvaktVentilatorType">
+                  <annotation>
+                     <documentation>11813: En type sensor som måler hvor mye viften vibrer. Det kan på den måten varsles om det er unormalt kraftige vibrasjoner.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11813</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vibrasjonsvakt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>4062: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4062</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="driftsmerking" type="string">
+                  <annotation>
+                     <documentation>3608: Identitet/navn på forekomst, normalt synlig på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3608</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produsent" type="string">
+                  <annotation>
+                     <documentation>12762: Angir navn på produsent/fabrikant av ventilator som helhet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12762</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12763: Angir produktnavn for ventilator som helhet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12763</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4852: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4852</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VentilatorPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Ventilator"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VibrasjonsvaktVentilatorType">
+      <annotation>
+         <documentation>11813: En type sensor som måler hvor mye viften vibrer. Det kan på den måten varsles om det er unormalt kraftige vibrasjoner.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11813</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vibrasjonsvakt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VibrasjonsvaktVentilatorEnumerationType nvdb:VibrasjonsvaktVentilatorOtherType"/>
+   </simpleType>
+   <simpleType name="VibrasjonsvaktVentilatorEnumerationType">
+      <annotation>
+         <documentation>11813: En type sensor som måler hvor mye viften vibrer. Det kan på den måten varsles om det er unormalt kraftige vibrasjoner.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11813</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vibrasjonsvakt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19799</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19800</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VibrasjonsvaktVentilatorOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

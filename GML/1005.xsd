@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.40">
+   <annotation>
+      <documentation>1005: Angir hvilken vinterberedskap vegstrekning skal ha i hvilke perioder.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Vinterberedskap"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:VinterberedskapType">
+      <annotation>
+         <documentation>1005: Angir hvilken vinterberedskap vegstrekning skal ha i hvilke perioder.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1005</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterberedskap</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VinterberedskapType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="vinterberedskap" type="nvdb:VinterberedskapVinterberedskapType">
+                  <annotation>
+                     <documentation>13104: Angir hvilken vinterberedskap det er på strekningen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13104</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterberedskap</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="redusertVinterberedskap_FraDato" type="string">
+                  <annotation>
+                     <documentation>13105: Angir dato for når periode med redusert vinterberedskap skal starte. Perioden varer til startdado for vinterberedskap eller til sluttdato for redusert vinterberedskap.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13105</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Redusert vinterberedskap, fra dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vinterberedskap_FraDato" type="string">
+                  <annotation>
+                     <documentation>13106: Angir dato for når periode med vinterberedskap starter. Perioden varer til sluttdato for vinterberedskap.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13106</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterberedskap, fra dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="vinterberedskap_TilDato" type="string">
+                  <annotation>
+                     <documentation>13107: Angir dato for når periode med vinterberedskap slutter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13107</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterberedskap, til dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="redusertVinterberedskap_TilDato" type="string">
+                  <annotation>
+                     <documentation>13108: Angir dato for når periode med redusert vinterberedskap slutter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13108</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Redusert vinterberedskap, til dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VinterberedskapPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vinterberedskap"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="VinterberedskapVinterberedskapType">
+      <annotation>
+         <documentation>13104: Angir hvilken vinterberedskap det er på strekningen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterberedskap</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterberedskapVinterberedskapEnumerationType nvdb:VinterberedskapVinterberedskapOtherType"/>
+   </simpleType>
+   <simpleType name="VinterberedskapVinterberedskapEnumerationType">
+      <annotation>
+         <documentation>13104: Angir hvilken vinterberedskap det er på strekningen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13104</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterberedskap</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <documentation>22786: Det er vinterberedskap på strekningen. Det kan være periode med redusert vinterberedskap i forkant/etterkant av perioden med vinterberedskap.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22786</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="red">
+            <annotation>
+               <documentation>22787: Det er kun redusert vinterberedskap på strekningen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22787</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kun redusert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <documentation>22788: Det er ingen form for vinterberedskap på strekningen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22788</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterberedskapVinterberedskapOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>
