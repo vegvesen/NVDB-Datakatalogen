@@ -8,24 +8,62 @@
    <ApplicableTypeValue/>
    <PropertyDefs>
       <PropertyDef>
-         <Name>bolttype</Name>
+         <Name>type</Name>
          <Definition>Angir boltetype.</Definition>
          <PropertyType>
             <TypePropertyEnumeratedValue>
-               <EnumList name="PEnum_Fastmerke_Bolttype">
-                  <EnumItem>Bolt, firkant-type</EnumItem>
-                  <EnumItem>Bolt, NGO-type</EnumItem>
-                  <EnumItem>Bolt, SK-type</EnumItem>
-                  <EnumItem>Bolt, uspesifisert</EnumItem>
-                  <EnumItem>Kamjern</EnumItem>
-                  <EnumItem>Rør</EnumItem>
+               <EnumList name="PEnum_Fastmerke_Type">
+                  <EnumItem>Bolt</EnumItem>
+                  <EnumItem>Annet</EnumItem>
+                  <EnumItem>Instrumentplate</EnumItem>
+                  <EnumItem>Prismebolt, avtagbar</EnumItem>
+                  <EnumItem>Prismebolt, fastmontert</EnumItem>
+                  <EnumItem>Søyle, betong</EnumItem>
+                  <EnumItem>Søyle, metall</EnumItem>
+                  <EnumItem>Tunnelspade</EnumItem>
                </EnumList>
             </TypePropertyEnumeratedValue>
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
-         <Name>fastmerkedato</Name>
-         <Definition>Informasjon om når punktet er etablert og koordinatberegningen er fullført.</Definition>
+         <Name>leverandør</Name>
+         <Definition>Angir navn på firma som har levert vegobjektet.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcText"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>produktnavn</Name>
+         <Definition>Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcText"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>gjengedimensjonPrismebolt_Avtagbar</Name>
+         <Definition>Angir gjengedimensjonen på den avtagbare prismebolten. Hvis M8 gjenger velg 8 mm. Hvis M10 gjenger velg 10 mm. Osv.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcInteger"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>lengdePrismebolt_Avtagbar</Name>
+         <Definition>Angir total lengde uten gjenger på den avtagbare prismebolten. Måles som angitt i produktspesifikasjonen.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>etableringsdato</Name>
+         <Definition>Angir dato for når punktet er etablert og koordinatberegningen er fullført.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcDateTime"/>
@@ -38,6 +76,214 @@
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcText"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>underlag</Name>
+         <Definition>Angir hvilket underlag det er i tilknytning til fastmerket.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Underlag">
+                  <EnumItem>Annet underlag</EnumItem>
+                  <EnumItem>Asfalt</EnumItem>
+                  <EnumItem>Betong</EnumItem>
+                  <EnumItem>Bygning</EnumItem>
+                  <EnumItem>Fjell</EnumItem>
+                  <EnumItem>Jordfast stein</EnumItem>
+                  <EnumItem>Jordspyd</EnumItem>
+                  <EnumItem>Konstruksjon</EnumItem>
+                  <EnumItem>Mur</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>materiale</Name>
+         <Definition>Angir type materiale fastmerket er laget av.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Materiale">
+                  <EnumItem>Aluminium</EnumItem>
+                  <EnumItem>Annet/Ukjent</EnumItem>
+                  <EnumItem>Betong</EnumItem>
+                  <EnumItem>Messing</EnumItem>
+                  <EnumItem>Plast</EnumItem>
+                  <EnumItem>Rustfritt stål</EnumItem>
+                  <EnumItem>Stål</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>grunnrissreferanse</Name>
+         <Definition>Angir hva grunnrisset til fastmerket refererer til.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Grunnrissreferanse">
+                  <EnumItem>Annet</EnumItem>
+                  <EnumItem>Senter bolt/skrue</EnumItem>
+                  <EnumItem>Senter prisme</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>høydereferanse</Name>
+         <Definition>Angir hva høyden til fastmerket refererer til.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Høydereferanse">
+                  <EnumItem>Annet</EnumItem>
+                  <EnumItem>Fot bolt</EnumItem>
+                  <EnumItem>Fot skrue</EnumItem>
+                  <EnumItem>Senter prisme</EnumItem>
+                  <EnumItem>Topp bolt</EnumItem>
+                  <EnumItem>Topp instrumentplate</EnumItem>
+                  <EnumItem>Topp skrue</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>nord_Koordinat</Name>
+         <Definition>Angir opprinnelig nord-koordinat.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>øst_Koordinat</Name>
+         <Definition>Angir opprinnelig øst-koordinat.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>høyde_Koordinat</Name>
+         <Definition>Angir opprinnelig høyde-koordinat.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>kartprojeksjon</Name>
+         <Definition>Angir kartprojeksjon til oppfinnelseskoordinat.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Kartprojeksjon">
+                  <EnumItem>NTM Sone 10</EnumItem>
+                  <EnumItem>NTM Sone 11</EnumItem>
+                  <EnumItem>NTM Sone 12</EnumItem>
+                  <EnumItem>NTM Sone 13</EnumItem>
+                  <EnumItem>NTM Sone 14</EnumItem>
+                  <EnumItem>NTM Sone 15</EnumItem>
+                  <EnumItem>NTM Sone 16</EnumItem>
+                  <EnumItem>NTM Sone 17</EnumItem>
+                  <EnumItem>NTM Sone 18</EnumItem>
+                  <EnumItem>NTM Sone 19</EnumItem>
+                  <EnumItem>NTM Sone 20</EnumItem>
+                  <EnumItem>NTM Sone 21</EnumItem>
+                  <EnumItem>NTM Sone 22</EnumItem>
+                  <EnumItem>NTM Sone 23</EnumItem>
+                  <EnumItem>NTM Sone 24</EnumItem>
+                  <EnumItem>NTM Sone 25</EnumItem>
+                  <EnumItem>NTM Sone 26</EnumItem>
+                  <EnumItem>NTM Sone 27</EnumItem>
+                  <EnumItem>NTM Sone 28</EnumItem>
+                  <EnumItem>NTM Sone 29</EnumItem>
+                  <EnumItem>NTM Sone 30</EnumItem>
+                  <EnumItem>NTM Sone 5</EnumItem>
+                  <EnumItem>NTM Sone 6</EnumItem>
+                  <EnumItem>NTM Sone 7</EnumItem>
+                  <EnumItem>NTM Sone 8</EnumItem>
+                  <EnumItem>NTM Sone 9</EnumItem>
+                  <EnumItem>UTM Sone 32</EnumItem>
+                  <EnumItem>UTM Sone 33</EnumItem>
+                  <EnumItem>UTM Sone 35</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>høydereferansesystem</Name>
+         <Definition>Angir høydereferansesystem til opprinnelseskoordinat.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Høydereferansesystem">
+                  <EnumItem>Annet/Ukjent</EnumItem>
+                  <EnumItem>NN1954</EnumItem>
+                  <EnumItem>NN2000</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>kvalitetsklasse_Grunnriss</Name>
+         <Definition>Angir kvalitetsklasse for fastmerkets grunnriss.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Kvalitetsklasse_Grunnriss">
+                  <EnumItem>1a</EnumItem>
+                  <EnumItem>1b</EnumItem>
+                  <EnumItem>2a</EnumItem>
+                  <EnumItem>2b</EnumItem>
+                  <EnumItem>3a (BA-Nett)</EnumItem>
+                  <EnumItem>3b</EnumItem>
+                  <EnumItem>4a</EnumItem>
+                  <EnumItem>4b</EnumItem>
+                  <EnumItem>5a</EnumItem>
+                  <EnumItem>5b</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>kvalitetsklasse_Høyde</Name>
+         <Definition>Angir kvalitetsklasse for fastmerkets høyde.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Kvalitetsklasse_Høyde">
+                  <EnumItem>1a</EnumItem>
+                  <EnumItem>1b</EnumItem>
+                  <EnumItem>2a</EnumItem>
+                  <EnumItem>2b</EnumItem>
+                  <EnumItem>3a (BA-Nett)</EnumItem>
+                  <EnumItem>3b</EnumItem>
+                  <EnumItem>4a</EnumItem>
+                  <EnumItem>4b</EnumItem>
+                  <EnumItem>5a</EnumItem>
+                  <EnumItem>5b</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>status</Name>
+         <Definition>Angir fastmerkets status.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Fastmerke_Status">
+                  <EnumItem>Funnet i orden</EnumItem>
+                  <EnumItem>Rapportert skadet</EnumItem>
+                  <EnumItem>Ustabilt</EnumItem>
+                  <EnumItem>Verifisert borte/utilgjengelig</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>datoStatusendring</Name>
+         <Definition>Angir dato når status ble endret.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcDateTime"/>
             </TypePropertySingleValue>
          </PropertyType>
       </PropertyDef>

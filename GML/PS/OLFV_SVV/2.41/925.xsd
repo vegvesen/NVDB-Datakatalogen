@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.41">
+   <annotation>
+      <documentation>925: Stag e.l. som benyttes for å forankre støttevegger, etc. Stagene ligger skrått eller tilnærmet horisontalt ut fra konstruksjonen. En registrert forekomst vil normalt dekke et område med flere enkeltstag.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AktivStagforankringType">
+      <annotation>
+         <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i anleggsfase.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11368</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aktiv</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AktivStagforankringEnumerationType nvdb:AktivStagforankringOtherType"/>
+   </simpleType>
+   <simpleType name="AktivStagforankringEnumerationType">
+      <annotation>
+         <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i anleggsfase.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11368</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Aktiv</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19220</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19221</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AktivStagforankringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeStagforankringType">
+      <annotation>
+         <documentation>11360: Angir hva stagforankring forankrer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11360</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeStagforankringEnumerationType nvdb:BruksområdeStagforankringOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeStagforankringEnumerationType">
+      <annotation>
+         <documentation>11360: Angir hva stagforankring forankrer.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11360</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="jn">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19216</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jordnagling</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19215</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Støttekonstruksjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeStagforankringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Stagforankring"
+            substitutionGroup="nvdb:AbstraktStagforankring"
+            type="nvdb:StagforankringType">
+      <annotation>
+         <documentation>925: Stag e.l. som benyttes for å forankre støttevegger, etc. Stagene ligger skrått eller tilnærmet horisontalt ut fra konstruksjonen. En registrert forekomst vil normalt dekke et område med flere enkeltstag.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">925</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stagforankring</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="StagforankringType">
+      <complexContent>
+         <extension base="nvdb:AbstraktStagforankringType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeStagforankringType">
+                  <annotation>
+                     <documentation>11360: Angir hva stagforankring forankrer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11360</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="typeStag">
+                  <annotation>
+                     <documentation>11361: Angir type stag for stagforankring.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11361</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type stag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="antallEnkeltstag" type="double">
+                  <annotation>
+                     <documentation>11362: Angir hvor mange enkeltstag det er innenfor avgrenset område.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11362</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall enkeltstag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høyesteKotenivåForInnfesting" type="double">
+                  <annotation>
+                     <documentation>11363: Kotenivå (moh) ved innfesting i konstruksjonen (høyeste kotenivå ved staghode).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11363</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyeste kotenivå for innfesting</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="staglengde_Maks" type="double">
+                  <annotation>
+                     <documentation>11364: Maks staglengde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11364</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Staglengde, maks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senteravstand_Maks" type="double">
+                  <annotation>
+                     <documentation>11365: Angir maks senteravstand i horisontalretning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11365</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Senteravstand, maks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vinkel_MaksNedover" type="double">
+                  <annotation>
+                     <documentation>11366: Angir maksimal vinkel under vannrett planum for en enkeltstag 0 =vannrett stag, 90 = loddrett stag.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11366</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinkel, maks nedover</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="vinkel_MinNedover" type="double">
+                  <annotation>
+                     <documentation>11367: Angir minimum vinkel under vannrett planum for en enkeltstag 0 =vannrett stag, 90 = loddrett stag.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11367</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinkel, min nedover</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="aktiv" type="nvdb:AktivStagforankringType">
+                  <annotation>
+                     <documentation>11368: Angir om forankring fortsatt har en funksjon eller om den kun var aktiv i anleggsfase.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11368</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Aktiv</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="double">
+                  <annotation>
+                     <documentation>11369: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11369</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>11348: Gir flate/polygon som geometrisk avgrenser område med stagforankring.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11348</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="StagforankringPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Stagforankring"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeStagStagforankringType">
+      <annotation>
+         <documentation>11361: Angir type stag for stagforankring.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11361</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type stag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeStagStagforankringEnumerationType nvdb:TypeStagStagforankringOtherType"/>
+   </simpleType>
+   <simpleType name="TypeStagStagforankringEnumerationType">
+      <annotation>
+         <documentation>11361: Angir type stag for stagforankring.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11361</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type stag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ls">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19217</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lissestag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19218</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Selvborende stag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ss">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19219</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stangstag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeStagStagforankringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.41">
+   <annotation>
+      <documentation>291: Strekninger som er skiltet med viltfare.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_NV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="ArtViltfareType">
+      <annotation>
+         <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på ev. skilting).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2221</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Art</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ArtViltfareEnumerationType nvdb:ArtViltfareOtherType"/>
+   </simpleType>
+   <simpleType name="ArtViltfareEnumerationType">
+      <annotation>
+         <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på ev. skilting).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2221</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Art</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="e">
+            <annotation>
+               <documentation>4073: Elg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4073</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Elg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="h">
+            <annotation>
+               <documentation>4072: Hjort.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4072</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hjort</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="r">
+            <annotation>
+               <documentation>4074: Rein.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4074</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rd">
+            <annotation>
+               <documentation>16783: Rådyr.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16783</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rådyr</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ArtViltfareOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierViltfareType">
+      <annotation>
+         <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8016</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierViltfareEnumerationType nvdb:EierViltfareOtherType"/>
+   </simpleType>
+   <simpleType name="EierViltfareEnumerationType">
+      <annotation>
+         <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8016</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10744</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10346</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10410</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18579</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10282</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>17605: Verdi benyttes inntil det er avklart hvem som er eier (ingen verdi tolkes som at vegeier er eier).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17605</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierViltfareOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligViltfareType">
+      <annotation>
+         <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8087</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligViltfareEnumerationType nvdb:VedlikeholdsansvarligViltfareOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligViltfareEnumerationType">
+      <annotation>
+         <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8087</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19950</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10559</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18769</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18898</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10637</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10481</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17733</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligViltfareOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Viltfare"
+            substitutionGroup="nvdb:AbstraktViltfare"
+            type="nvdb:ViltfareType">
+      <annotation>
+         <documentation>291: Strekninger som er skiltet med viltfare.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">291</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Viltfare</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="ViltfareType">
+      <complexContent>
+         <extension base="nvdb:AbstraktViltfareType">
+            <sequence>
+               <element name="art" type="nvdb:ArtViltfareType">
+                  <annotation>
+                     <documentation>2221: Angir hvilken dyreart som er antatt mest forekommende på strekningen(vises på ev. skilting).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2221</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Art</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11480: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11480</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierViltfareType">
+                  <annotation>
+                     <documentation>8016: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8016</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligViltfareType">
+                  <annotation>
+                     <documentation>8087: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8087</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="ViltfarePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Viltfare"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

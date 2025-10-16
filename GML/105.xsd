@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>105: Høyeste tillatte hastighet på en vegstrekning.</documentation>
    </annotation>
@@ -71,6 +71,14 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9155</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Arkivnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknad" type="nvdb:MerknadFartsgrenseType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13170</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -212,6 +220,54 @@
       </restriction>
    </simpleType>
    <simpleType name="FartsgrenseVerdiFartsgrenseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="MerknadFartsgrenseType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13170</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MerknadFartsgrenseEnumerationType nvdb:MerknadFartsgrenseOtherType"/>
+   </simpleType>
+   <simpleType name="MerknadFartsgrenseEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13170</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="pa">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23052</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat adkomst</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ps">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23050</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat skiltet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23051</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat veg innenfor fartsgrensesone</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MerknadFartsgrenseOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

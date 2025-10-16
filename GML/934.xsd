@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>934: Fastmerke knyttet til bruk i vegens driftsfase, f.eks. i tilknytning til tunneler.</documentation>
    </annotation>
@@ -14,81 +14,6 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BolttypeFastmerkeType">
-      <annotation>
-         <documentation>11449: Angir boltetype.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">11449</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bolttype</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:BolttypeFastmerkeEnumerationType nvdb:BolttypeFastmerkeOtherType"/>
-   </simpleType>
-   <simpleType name="BolttypeFastmerkeEnumerationType">
-      <annotation>
-         <documentation>11449: Angir boltetype.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">11449</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bolttype</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="B4">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19476</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Bolt, firkant-type</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="B2">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19474</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Bolt, NGO-type</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="B3">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19475</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Bolt, SK-type</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="B1">
-            <annotation>
-               <documentation>19471: Bolt - uspesifisert type.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19471</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Bolt, uspesifisert</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="K">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19473</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kamjern</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="R">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19472</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Rør</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="BolttypeFastmerkeOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
    <simpleType name="EierFastmerkeType">
       <annotation>
          <documentation>11993: Angir hvem som er eier av vegobjektet.</documentation>
@@ -179,21 +104,59 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="bolttype" type="nvdb:BolttypeFastmerkeType">
+               <element name="type" type="nvdb:TypeFastmerkeType">
                   <annotation>
                      <documentation>11449: Angir boltetype.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11449</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Bolttype</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="fastmerkedato" type="date">
+               <element minOccurs="0" name="leverandør" type="string">
                   <annotation>
-                     <documentation>11450: Informasjon om når punktet er etablert og koordinatberegningen er fullført.</documentation>
+                     <documentation>13168: Angir navn på firma som har levert vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13168</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>13167: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13167</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="gjengedimensjonPrismebolt_Avtagbar"
+                        type="integer">
+                  <annotation>
+                     <documentation>13152: Angir gjengedimensjonen på den avtagbare prismebolten. Hvis M8 gjenger velg 8 mm. Hvis M10 gjenger velg 10 mm. Osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13152</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjengedimensjon prismebolt, avtagbar</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengdePrismebolt_Avtagbar" type="double">
+                  <annotation>
+                     <documentation>13153: Angir total lengde uten gjenger på den avtagbare prismebolten. Måles som angitt i produktspesifikasjonen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13153</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde prismebolt, avtagbar</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsdato" type="date">
+                  <annotation>
+                     <documentation>11450: Angir dato for når punktet er etablert og koordinatberegningen er fullført.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11450</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Fastmerkedato</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsdato</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -203,6 +166,127 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11451</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Fastmerkenavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="underlag" type="nvdb:UnderlagFastmerkeType">
+                  <annotation>
+                     <documentation>13154: Angir hvilket underlag det er i tilknytning til fastmerket.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13154</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materiale" type="nvdb:MaterialeFastmerkeType">
+                  <annotation>
+                     <documentation>13155: Angir type materiale fastmerket er laget av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13155</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="grunnrissreferanse" type="nvdb:GrunnrissreferanseFastmerkeType">
+                  <annotation>
+                     <documentation>13156: Angir hva grunnrisset til fastmerket refererer til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13156</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Grunnrissreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høydereferanse">
+                  <annotation>
+                     <documentation>13157: Angir hva høyden til fastmerket refererer til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13157</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nord_Koordinat" type="double">
+                  <annotation>
+                     <documentation>13158: Angir opprinnelig nord-koordinat.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13158</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nord-koordinat</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="øst_Koordinat" type="double">
+                  <annotation>
+                     <documentation>13159: Angir opprinnelig øst-koordinat.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13159</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Øst-koordinat</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="høyde_Koordinat" type="double">
+                  <annotation>
+                     <documentation>13160: Angir opprinnelig høyde-koordinat.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13160</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde-koordinat</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="kartprojeksjon"
+                        type="nvdb:KartprojeksjonFastmerkeType">
+                  <annotation>
+                     <documentation>13161: Angir kartprojeksjon til oppfinnelseskoordinat.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13161</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kartprojeksjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="høydereferansesystem"
+                        type="nvdb:HøydereferansesystemFastmerkeType">
+                  <annotation>
+                     <documentation>13162: Angir høydereferansesystem til opprinnelseskoordinat.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13162</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høydereferansesystem</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kvalitetsklasse_Grunnriss">
+                  <annotation>
+                     <documentation>13163: Angir kvalitetsklasse for fastmerkets grunnriss.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13163</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, grunnriss</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kvalitetsklasse_Høyde">
+                  <annotation>
+                     <documentation>13164: Angir kvalitetsklasse for fastmerkets høyde.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13164</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, høyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="status" type="nvdb:StatusFastmerkeType">
+                  <annotation>
+                     <documentation>13165: Angir fastmerkets status.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13165</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="datoStatusendring" type="date">
+                  <annotation>
+                     <documentation>13166: Angir dato når status ble endret.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13166</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dato statusendring</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -246,7 +330,7 @@
                </element>
                <element name="posisjon" type="gml:PointPropertyType">
                   <annotation>
-                     <documentation>11454: Gir fastmerkets koordinater.</documentation>
+                     <documentation>11454: Gir punkt som geometrisk representerer objektet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11454</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
@@ -272,6 +356,1034 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="FastmerkeHøydereferanseType">
+      <annotation>
+         <documentation>13157: Angir hva høyden til fastmerket refererer til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13157</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FastmerkeHøydereferanseEnumerationType nvdb:FastmerkeHøydereferanseOtherType"/>
+   </simpleType>
+   <simpleType name="FastmerkeHøydereferanseEnumerationType">
+      <annotation>
+         <documentation>13157: Angir hva høyden til fastmerket refererer til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13157</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høydereferanse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="an">
+            <annotation>
+               <documentation>22925: Annen høydereferanse. Må beskrives i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22925</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fb">
+            <annotation>
+               <documentation>22920: Boltens laveste punkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22920</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fot bolt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fs">
+            <annotation>
+               <documentation>22922: Skruens laveste punkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22922</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fot skrue</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sp">
+            <annotation>
+               <documentation>22923: Prismens senter.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22923</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Senter prisme</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tb">
+            <annotation>
+               <documentation>22919: Boltens høyeste punkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22919</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Topp bolt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ti">
+            <annotation>
+               <documentation>22924: Instrumentplatens høyeste punkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22924</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Topp instrumentplate</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ts">
+            <annotation>
+               <documentation>22921: Skruens høyeste punkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22921</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Topp skrue</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FastmerkeHøydereferanseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="GrunnrissreferanseFastmerkeType">
+      <annotation>
+         <documentation>13156: Angir hva grunnrisset til fastmerket refererer til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13156</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Grunnrissreferanse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GrunnrissreferanseFastmerkeEnumerationType nvdb:GrunnrissreferanseFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="GrunnrissreferanseFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13156: Angir hva grunnrisset til fastmerket refererer til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13156</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Grunnrissreferanse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <documentation>22918: Annen grunnrissreferanse. Må beskrives i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22918</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sbs">
+            <annotation>
+               <documentation>22916: Senter til bolt eller skrue.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22916</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Senter bolt/skrue</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="spr">
+            <annotation>
+               <documentation>22917: Senter til prisme.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22917</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Senter prisme</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GrunnrissreferanseFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøydereferansesystemFastmerkeType">
+      <annotation>
+         <documentation>13162: Angir høydereferansesystem til opprinnelseskoordinat.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13162</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høydereferansesystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HøydereferansesystemFastmerkeEnumerationType nvdb:HøydereferansesystemFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="HøydereferansesystemFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13162: Angir høydereferansesystem til opprinnelseskoordinat.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13162</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høydereferansesystem</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <documentation>22957: Spesifieres i Tilleggsinformasjon</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22957</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet/Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1950">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22955</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NN1954</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2000">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22956</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NN2000</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøydereferansesystemFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="KartprojeksjonFastmerkeType">
+      <annotation>
+         <documentation>13161: Angir kartprojeksjon til oppfinnelseskoordinat.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13161</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kartprojeksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KartprojeksjonFastmerkeEnumerationType nvdb:KartprojeksjonFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="KartprojeksjonFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13161: Angir kartprojeksjon til oppfinnelseskoordinat.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13161</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kartprojeksjon</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="10">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22934</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 10</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="11">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22935</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 11</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22936</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="13">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22937</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 13</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="14">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22938</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 14</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="15">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22939</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 15</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="16">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22940</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 16</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="17">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22941</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 17</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="18">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22942</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 18</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="19">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22943</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 19</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="20">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22944</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 20</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="21">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22945</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 21</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="22">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22946</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 22</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="23">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22947</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 23</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="24">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22948</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 24</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="25">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22949</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 25</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="26">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22950</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 26</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="27">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22951</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 27</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="28">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22952</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 28</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="29">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22953</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 29</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="30">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22954</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 30</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22929</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22930</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 6</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22931</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 7</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="8">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22932</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 8</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22933</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">NTM Sone 9</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="32">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22926</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM Sone 32</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="33">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22927</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM Sone 33</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="35">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22928</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">UTM Sone 35</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KartprojeksjonFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_GrunnrissFastmerkeType">
+      <annotation>
+         <documentation>13163: Angir kvalitetsklasse for fastmerkets grunnriss.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13163</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, grunnriss</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kvalitetsklasse_GrunnrissFastmerkeEnumerationType nvdb:Kvalitetsklasse_GrunnrissFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_GrunnrissFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13163: Angir kvalitetsklasse for fastmerkets grunnriss.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13163</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, grunnriss</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1a">
+            <annotation>
+               <documentation>22958: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22958</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1b">
+            <annotation>
+               <documentation>22963: Absolutt pålitelighetskrav, 5 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22963</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2a">
+            <annotation>
+               <documentation>22959: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22959</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2b">
+            <annotation>
+               <documentation>22964: Absolutt pålitelighetskrav, 10 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22964</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3a">
+            <annotation>
+               <documentation>22960: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22960</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3a (BA-Nett)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3b">
+            <annotation>
+               <documentation>22965: Absolutt pålitelighetskrav, 15 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22965</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4a">
+            <annotation>
+               <documentation>22961: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22961</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4b">
+            <annotation>
+               <documentation>22966: Absolutt pålitelighetskrav, 20 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22966</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5a">
+            <annotation>
+               <documentation>22962: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22962</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5b">
+            <annotation>
+               <documentation>22967: Absolutt pålitelighetskrav, 30 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22967</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_GrunnrissFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_HøydeFastmerkeType">
+      <annotation>
+         <documentation>13164: Angir kvalitetsklasse for fastmerkets høyde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13164</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, høyde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kvalitetsklasse_HøydeFastmerkeEnumerationType nvdb:Kvalitetsklasse_HøydeFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_HøydeFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13164: Angir kvalitetsklasse for fastmerkets høyde.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13164</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kvalitetsklasse, høyde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1a">
+            <annotation>
+               <documentation>22968: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22968</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1b">
+            <annotation>
+               <documentation>22973: Absolutt pålitelighetskrav, 8 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22973</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2a">
+            <annotation>
+               <documentation>22969: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22969</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2b">
+            <annotation>
+               <documentation>22974: Absolutt pålitelighetskrav, 15 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22974</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3a">
+            <annotation>
+               <documentation>22970: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22970</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3a (BA-Nett)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3b">
+            <annotation>
+               <documentation>22975: Absolutt pålitelighetskrav, 23 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22975</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">3b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4a">
+            <annotation>
+               <documentation>22971: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22971</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4b">
+            <annotation>
+               <documentation>22976: Absolutt pålitelighetskrav, 30 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22976</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5a">
+            <annotation>
+               <documentation>22972: Relativt pålitelighetskrav.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22972</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5a</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5b">
+            <annotation>
+               <documentation>22977: Absolutt pålitelighetskrav, 45 mm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22977</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5b</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kvalitetsklasse_HøydeFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeFastmerkeType">
+      <annotation>
+         <documentation>13155: Angir type materiale fastmerket er laget av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13155</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialeFastmerkeEnumerationType nvdb:MaterialeFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialeFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13155: Angir type materiale fastmerket er laget av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13155</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="al">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22912</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ann">
+            <annotation>
+               <documentation>22915: Annet eller ukjent materiale. Annet materiale spesifiseres i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22915</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet/Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="be">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22911</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="me">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22913</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Messing</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22914</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22909</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rustfritt stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="st">
+            <annotation>
+               <documentation>22910: Stål som ikke er rustfritt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22910</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusFastmerkeType">
+      <annotation>
+         <documentation>13165: Angir fastmerkets status.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StatusFastmerkeEnumerationType nvdb:StatusFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="StatusFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13165: Angir fastmerkets status.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13165</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ord">
+            <annotation>
+               <documentation>22978: Fastmerke som er uskadet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22978</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Funnet i orden</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ska">
+            <annotation>
+               <documentation>22980: Fastmerke som er funnet, men skadet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22980</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rapportert skadet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ust">
+            <annotation>
+               <documentation>22981: Fastmerke som påviselig rører på seg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22981</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ustabilt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bu">
+            <annotation>
+               <documentation>22979: Fastmerke som ikk er funnet og derfor sannsynligvis er borte.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22979</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Verifisert borte/utilgjengelig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFastmerkeType">
+      <annotation>
+         <documentation>11449: Angir boltetype.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11449</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeFastmerkeEnumerationType nvdb:TypeFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="TypeFastmerkeEnumerationType">
+      <annotation>
+         <documentation>11449: Angir boltetype.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11449</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>19471: Annen bolttype. Type bolt spesifiseres i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19471</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bolt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="an">
+            <annotation>
+               <documentation>23169: Type spesifiseres i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23169</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ip">
+            <annotation>
+               <documentation>23165: Instrumentplate med 5/8" UNC gjenger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23165</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Instrumentplate</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pa">
+            <annotation>
+               <documentation>23166: Prismebolt for Leica-prisme. Annet brukt navn er Tyskerbolt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23166</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Prismebolt, avtagbar</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pf">
+            <annotation>
+               <documentation>23167: Prismebolt for Leica-prisme.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23167</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Prismebolt, fastmontert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sb">
+            <annotation>
+               <documentation>23163: Søyle av betong</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23163</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søyle, betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sm">
+            <annotation>
+               <documentation>23164: Søyle av metall</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23164</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søyle, metall</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ts">
+            <annotation>
+               <documentation>23168: Tunnelspade med 5/8" UNC gjenger og dimensjoner som angitt i produktspesifikasjonen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23168</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnelspade</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UnderlagFastmerkeType">
+      <annotation>
+         <documentation>13154: Angir hvilket underlag det er i tilknytning til fastmerket.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13154</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UnderlagFastmerkeEnumerationType nvdb:UnderlagFastmerkeOtherType"/>
+   </simpleType>
+   <simpleType name="UnderlagFastmerkeEnumerationType">
+      <annotation>
+         <documentation>13154: Angir hvilket underlag det er i tilknytning til fastmerket.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13154</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Underlag</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ann">
+            <annotation>
+               <documentation>22908: Annet underlag. Spesifiseres i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22908</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet underlag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="asf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22905</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bet">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22904</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="byg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22907</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bygning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fj">
+            <annotation>
+               <documentation>22900: Fast fjell</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22900</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fjell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="jst">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22901</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jordfast stein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="jsp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22902</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jordspyd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kon">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22906</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Konstruksjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mur">
+            <annotation>
+               <documentation>22903: Mur som ikke er del av hus</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22903</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mur</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UnderlagFastmerkeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="VedlikeholdsansvarligFastmerkeType">
       <annotation>
          <documentation>12020: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>

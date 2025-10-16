@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>502: Skap som inneholder tekniske installasjoner/utstyr. Merknad: Fordelingsskap registreres som egen vegobjekttype Fordeling, Nødstyreskap registreres som egen vegobjekttype «Nødstyreskap».</documentation>
    </annotation>
@@ -14,6 +14,59 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AdgangskravSkap, tekniskType">
+      <annotation>
+         <documentation>13228: Angir hvilken type adgang skapet er tilrettelagt for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13228</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AdgangskravSkap, tekniskEnumerationType nvdb:AdgangskravSkap, tekniskOtherType"/>
+   </simpleType>
+   <simpleType name="AdgangskravSkap, tekniskEnumerationType">
+      <annotation>
+         <documentation>13228: Angir hvilken type adgang skapet er tilrettelagt for.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13228</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="BA1">
+            <annotation>
+               <documentation>23124: Ukyndige personer har adgang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23124</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA1 - Ukyndige personer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BA4">
+            <annotation>
+               <documentation>23125: Sakkyndige personer har adgang, f.eks elektrikere, fagfolk, mm</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23125</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA4 - Sakkyndige personer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BA5">
+            <annotation>
+               <documentation>23126: Kun instruert personell har adgang.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23126</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">BA5 - Instruert personell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AdgangskravSkap, tekniskOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="BrøytingAvAdkomstSkap, tekniskType">
       <annotation>
          <documentation>12937: Angir om det utføres brøyting av adkamst til Skap, teknisk.</documentation>
@@ -172,6 +225,17 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11313</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høyde over bakken</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="adgangskrav"
+                        type="nvdb:AdgangskravSkap, tekniskType">
+                  <annotation>
+                     <documentation>13228: Angir hvilken type adgang skapet er tilrettelagt for.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13228</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Adgangskrav</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>534: Region ihht Statens vegvesens nye regioninndeling.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="KoordinatsystemRegionType">
+   <simpleType name="KoordinatsystemRegion, historiskType">
       <annotation>
          <documentation>8147: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:KoordinatsystemRegionEnumerationType nvdb:KoordinatsystemRegionOtherType"/>
+      <union memberTypes="nvdb:KoordinatsystemRegion, historiskEnumerationType nvdb:KoordinatsystemRegion, historiskOtherType"/>
    </simpleType>
-   <simpleType name="KoordinatsystemRegionEnumerationType">
+   <simpleType name="KoordinatsystemRegion, historiskEnumerationType">
       <annotation>
          <documentation>8147: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
          <appinfo>
@@ -233,23 +233,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="KoordinatsystemRegionOtherType">
+   <simpleType name="KoordinatsystemRegion, historiskOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Region"
+   <element name="Region, historisk"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:RegionType">
+            type="nvdb:Region, historiskType">
       <annotation>
          <documentation>534: Region ihht Statens vegvesens nye regioninndeling.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">534</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Region</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Region, historisk</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="RegionType">
+   <complexType name="Region, historiskType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -271,7 +271,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="koordinatsystem" type="nvdb:KoordinatsystemRegionType">
+               <element name="koordinatsystem" type="nvdb:KoordinatsystemRegion, historiskType">
                   <annotation>
                      <documentation>8147: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
                      <appinfo>
@@ -302,9 +302,9 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="RegionPropertyType">
+   <complexType name="Region, historiskPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Region"/>
+         <element ref="nvdb:Region, historisk"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>

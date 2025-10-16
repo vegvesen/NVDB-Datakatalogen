@@ -152,11 +152,29 @@
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
-         <Name>omkjøring</Name>
+         <Name>sumSannsynlighet</Name>
+         <Definition>Sum av sannsynligheter oppgitt ovenfor.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>gjennomsnittligBredde</Name>
+         <Definition>Bredder oppgitt ovenfor, vektet mot sannsynlighet.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>omkjøring_UtgårPåSikt</Name>
          <Definition>Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</Definition>
          <PropertyType>
             <TypePropertyEnumeratedValue>
-               <EnumList name="PEnum_Skredpunkt_Omkjøring">
+               <EnumList name="PEnum_Skredpunkt_Omkjøring_UtgårPåSikt">
                   <EnumItem>15 min</EnumItem>
                   <EnumItem>2 t</EnumItem>
                   <EnumItem>3 t</EnumItem>
@@ -175,6 +193,27 @@
                   <EnumItem>Under 1 min.</EnumItem>
                </EnumList>
             </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>omkjøringsmulighet_Ny</Name>
+         <Definition>Angi om det finnes omkjøringsmuligheter eller ikke. Brukes i beregning av F3 Omkjøringstid og delfaktor omkjøring. </Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Skredpunkt_Omkjøringsmulighet_Ny">
+                  <EnumItem>Ja</EnumItem>
+                  <EnumItem>Nei</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>omkjøringstid_Ny</Name>
+         <Definition>Omkjøringstid. Oppgitt i antall minutt. Brukes i beregning av F3 Omkjøringstid og Delfaktor omkjøring.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcInteger"/>
+            </TypePropertySingleValue>
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
@@ -278,6 +317,65 @@
          <PropertyType>
             <TypePropertyEnumeratedValue>
                <EnumList name="PEnum_Skredpunkt_Skredfaktorkategori">
+                  <EnumItem>Høy</EnumItem>
+                  <EnumItem>Lav</EnumItem>
+                  <EnumItem>Middels</EnumItem>
+                  <EnumItem>Sikring utført</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>delfaktorSannsynlighet_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra Summert sannsynlighet</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>delfaktorSkredbredde_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra Gjennomsnittlig bredde</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>delfaktorOmkjøring_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra Omkjøringsmulighet og Omkjøringstid. </Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>delfaktorTrafikkmengde_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra ÅDT</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>nySkredfaktor_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra de fire delfaktorene, de fire ganges sammen</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcReal"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>nySkredfaktorkategori_NyRegnemodell</Name>
+         <Definition>Beregnes automatisk ut fra Ny skredfaktor </Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Skredpunkt_NySkredfaktorkategori_NyRegnemodell">
                   <EnumItem>Høy</EnumItem>
                   <EnumItem>Lav</EnumItem>
                   <EnumItem>Middels</EnumItem>

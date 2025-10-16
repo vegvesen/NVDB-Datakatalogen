@@ -5,108 +5,16 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
-      <documentation>854: Port som kan avstenge et tunnelløp.</documentation>
+      <documentation>854: Automatisk port plassert i en eller begge ender av en tunnel, med hensikt om å holde kulden ute om vinteren for å unngå isdannelse i tunnelen.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BrannsikkerTunnelportType">
-      <annotation>
-         <documentation>9761: Angir om porten er godkjent brannport.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9761</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Brannsikker</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:BrannsikkerTunnelportEnumerationType nvdb:BrannsikkerTunnelportOtherType"/>
-   </simpleType>
-   <simpleType name="BrannsikkerTunnelportEnumerationType">
-      <annotation>
-         <documentation>9761: Angir om porten er godkjent brannport.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9761</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Brannsikker</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15888</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15889</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="BrannsikkerTunnelportOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="BruksområdeTunnelportType">
-      <annotation>
-         <documentation>9763: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9763</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:BruksområdeTunnelportEnumerationType nvdb:BruksområdeTunnelportOtherType"/>
-   </simpleType>
-   <simpleType name="BruksområdeTunnelportEnumerationType">
-      <annotation>
-         <documentation>9763: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9763</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="kulPort">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15892</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kuldeport</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tilFjell">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15890</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Tilgang fjellrom</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tilSide">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15891</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Tilgang sideløp</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="BruksområdeTunnelportOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="EierTunnelportType">
+   <simpleType name="EierKuldeportType">
       <annotation>
          <documentation>9764: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -114,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierTunnelportEnumerationType nvdb:EierTunnelportOtherType"/>
+      <union memberTypes="nvdb:EierKuldeportEnumerationType nvdb:EierKuldeportOtherType"/>
    </simpleType>
-   <simpleType name="EierTunnelportEnumerationType">
+   <simpleType name="EierKuldeportEnumerationType">
       <annotation>
          <documentation>9764: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -176,151 +84,74 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierTunnelportOtherType">
+   <simpleType name="EierKuldeportOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="MaterialeTunnelportType">
+   <simpleType name="FjernstyrtKuldeportType">
       <annotation>
-         <documentation>9769: Angir materiale.</documentation>
+         <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9769</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:MaterialeTunnelportEnumerationType nvdb:MaterialeTunnelportOtherType"/>
+      <union memberTypes="nvdb:FjernstyrtKuldeportEnumerationType nvdb:FjernstyrtKuldeportOtherType"/>
    </simpleType>
-   <simpleType name="MaterialeTunnelportEnumerationType">
+   <simpleType name="FjernstyrtKuldeportEnumerationType">
       <annotation>
-         <documentation>9769: Angir materiale.</documentation>
+         <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9769</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="Al">
+         <enumeration value="j">
             <annotation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15900</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">23086</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="S">
+         <enumeration value="n">
             <annotation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15901</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">23087</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="MaterialeTunnelportOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="NormalStillingTunnelportType">
-      <annotation>
-         <documentation>9770: Angir hva som er normal stilling for dør.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9770</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:NormalStillingTunnelportEnumerationType nvdb:NormalStillingTunnelportOtherType"/>
-   </simpleType>
-   <simpleType name="NormalStillingTunnelportEnumerationType">
-      <annotation>
-         <documentation>9770: Angir hva som er normal stilling for dør.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9770</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="LL">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15902</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Lukka, låst</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="LU">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15903</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Lukka, ulåst</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="Å">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15904</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Åpen</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="NormalStillingTunnelportOtherType">
+   <simpleType name="FjernstyrtKuldeportOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Tunnelport"
+   <element name="Kuldeport"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:TunnelportType">
+            type="nvdb:KuldeportType">
       <annotation>
-         <documentation>854: Port som kan avstenge et tunnelløp.</documentation>
+         <documentation>854: Automatisk port plassert i en eller begge ender av en tunnel, med hensikt om å holde kulden ute om vinteren for å unngå isdannelse i tunnelen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">854</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tunnelport</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kuldeport</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="TunnelportType">
+   <complexType name="KuldeportType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="bruksområde" type="nvdb:BruksområdeTunnelportType">
-                  <annotation>
-                     <documentation>9763: Angir hva vegobjektet brukes til, hvilken funksjon det har.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9763</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="type" type="nvdb:TypeTunnelportType">
-                  <annotation>
-                     <documentation>9771: Angir hvilken type vegobjektet er av.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9771</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="materiale" type="nvdb:MaterialeTunnelportType">
+               <element minOccurs="0" name="materiale" type="nvdb:MaterialeKuldeportType">
                   <annotation>
                      <documentation>9769: Angir materiale.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9769</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="brannsikker" type="nvdb:BrannsikkerTunnelportType">
-                  <annotation>
-                     <documentation>9761: Angir om porten er godkjent brannport.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9761</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Brannsikker</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -342,12 +173,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="normalStilling">
+               <element minOccurs="0" name="fjernstyrt" type="nvdb:FjernstyrtKuldeportType">
                   <annotation>
-                     <documentation>9770: Angir hva som er normal stilling for dør.</documentation>
+                     <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9770</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -414,7 +245,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierTunnelportType">
+               <element minOccurs="0" name="eier" type="nvdb:EierKuldeportType">
                   <annotation>
                      <documentation>9764: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -425,7 +256,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligTunnelportType">
+                        type="nvdb:VedlikeholdsansvarligKuldeportType">
                   <annotation>
                      <documentation>9765: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
                      <appinfo>
@@ -455,56 +286,56 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="TunnelportPropertyType">
+   <complexType name="KuldeportPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Tunnelport"/>
+         <element ref="nvdb:Kuldeport"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="TypeTunnelportType">
+   <simpleType name="MaterialeKuldeportType">
       <annotation>
-         <documentation>9771: Angir hvilken type vegobjektet er av.</documentation>
+         <documentation>9769: Angir materiale.</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9771</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9769</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TypeTunnelportEnumerationType nvdb:TypeTunnelportOtherType"/>
+      <union memberTypes="nvdb:MaterialeKuldeportEnumerationType nvdb:MaterialeKuldeportOtherType"/>
    </simpleType>
-   <simpleType name="TypeTunnelportEnumerationType">
+   <simpleType name="MaterialeKuldeportEnumerationType">
       <annotation>
-         <documentation>9771: Angir hvilken type vegobjektet er av.</documentation>
+         <documentation>9769: Angir materiale.</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9771</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">9769</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="Lp">
+         <enumeration value="Al">
             <annotation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15905</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Leddport</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">15900</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="Sp">
+         <enumeration value="S">
             <annotation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">15906</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Skyveport</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">15901</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TypeTunnelportOtherType">
+   <simpleType name="MaterialeKuldeportOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTunnelportType">
+   <simpleType name="VedlikeholdsansvarligKuldeportType">
       <annotation>
          <documentation>9765: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -512,9 +343,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelportEnumerationType nvdb:VedlikeholdsansvarligTunnelportOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligKuldeportEnumerationType nvdb:VedlikeholdsansvarligKuldeportOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTunnelportEnumerationType">
+   <simpleType name="VedlikeholdsansvarligKuldeportEnumerationType">
       <annotation>
          <documentation>9765: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -581,7 +412,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTunnelportOtherType">
+   <simpleType name="VedlikeholdsansvarligKuldeportOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

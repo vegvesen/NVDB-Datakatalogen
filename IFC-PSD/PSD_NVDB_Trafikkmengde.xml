@@ -18,7 +18,7 @@
       </PropertyDef>
       <PropertyDef>
          <Name>ådtAndelLangeKjøretøy</Name>
-         <Definition>Angir total årsdøgntrafikk, dvs. gjennomsnittlig antall kjøretøypasseringer i løpet av et døgn summert for begge trafikkretninger og representativt for gitt strekning. Se også ET 12083 "Trafikkmengde på adskilte løp".</Definition>
+         <Definition>Angir hvor stor andel (i prosent) av kjøretøyene som er definert som lange.  Kjøretøy med lengde større eller lik 5,6 meter defineres som lange kjøretøy.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcInteger"/>
@@ -41,51 +41,33 @@
             <TypePropertyEnumeratedValue>
                <EnumList name="PEnum_Trafikkmengde_GrunnlagForÅDT">
                   <EnumItem>Ferjedatabanken</EnumItem>
-                  <EnumItem>NorTraf</EnumItem>
-                  <EnumItem>NorTraf Kommune</EnumItem>
-                  <EnumItem>Skjønn</EnumItem>
-                  <EnumItem>Telling og skjønn</EnumItem>
-                  <EnumItem>Trafikkdatasystemet</EnumItem>
-                  <EnumItem>Vegorama</EnumItem>
+                  <EnumItem>NorTraf (Historisk)</EnumItem>
+                  <EnumItem>NorTraf Kommune (Historisk)</EnumItem>
+                  <EnumItem>Skjønn (Historisk)</EnumItem>
+                  <EnumItem>Telling og skjønn (Historisk)</EnumItem>
+                  <EnumItem>Trafikkdatasystemet (Historisk)</EnumItem>
+                  <EnumItem>Vegorama (Historisk)</EnumItem>
                   <EnumItem>Erfaringsbasert estimat</EnumItem>
                   <EnumItem>Kontinuerlig trafikkregistrering</EnumItem>
                   <EnumItem>Periodisk trafikkregistrering</EnumItem>
                   <EnumItem>Statistisk estimat</EnumItem>
                   <EnumItem>Utledet</EnumItem>
+                  <EnumItem>Bomstasjon</EnumItem>
+                  <EnumItem>Trafikkregistrering med ukjent kvalitet</EnumItem>
                </EnumList>
             </TypePropertyEnumeratedValue>
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
-         <Name>oppdatertFra</Name>
-         <Definition>Angir hvorfra ÅDT-verdien er kommet.</Definition>
+         <Name>overførtFraTrafikkdatasystemet</Name>
+         <Definition>Angir om trafikkmengde er overført fra det nasjonale Trafikkdatasystemet eller ikke.</Definition>
          <PropertyType>
             <TypePropertyEnumeratedValue>
-               <EnumList name="PEnum_Trafikkmengde_OppdatertFra">
-                  <EnumItem>Brukersatt</EnumItem>
-                  <EnumItem>Oppskrevet fra fylkesindeksen</EnumItem>
-                  <EnumItem>Oppskrevet fra nivå-1 tellepunktet</EnumItem>
-                  <EnumItem>Oppskrevet fra primærtellepunktet</EnumItem>
+               <EnumList name="PEnum_Trafikkmengde_OverførtFraTrafikkdatasystemet">
+                  <EnumItem>Ja</EnumItem>
+                  <EnumItem>Nei</EnumItem>
                </EnumList>
             </TypePropertyEnumeratedValue>
-         </PropertyType>
-      </PropertyDef>
-      <PropertyDef>
-         <Name>ådtStart</Name>
-         <Definition>Angir årsdøgntrafikk i start av gitt strekning. Inkl. tunge kjøretøy.</Definition>
-         <PropertyType>
-            <TypePropertySingleValue>
-               <DataType type="IfcInteger"/>
-            </TypePropertySingleValue>
-         </PropertyType>
-      </PropertyDef>
-      <PropertyDef>
-         <Name>ådtSlutt</Name>
-         <Definition>Angir årsdøgntrafikk i slutt av gitt strekning. Inkl. tunge kjøretøy.</Definition>
-         <PropertyType>
-            <TypePropertySingleValue>
-               <DataType type="IfcInteger"/>
-            </TypePropertySingleValue>
          </PropertyType>
       </PropertyDef>
       <PropertyDef>
@@ -104,6 +86,38 @@
       <PropertyDef>
          <Name>trafikkarbeidstall</Name>
          <Definition>Antall vognkilometer pr år. Veglengde x ÅDT x 365.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcInteger"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>oppdatertFra</Name>
+         <Definition>Angir hvorfra ÅDT-verdien er kommet. Kun aktuell for historiske data.</Definition>
+         <PropertyType>
+            <TypePropertyEnumeratedValue>
+               <EnumList name="PEnum_Trafikkmengde_OppdatertFra">
+                  <EnumItem>Brukersatt</EnumItem>
+                  <EnumItem>Oppskrevet fra fylkesindeksen</EnumItem>
+                  <EnumItem>Oppskrevet fra nivå-1 tellepunktet</EnumItem>
+                  <EnumItem>Oppskrevet fra primærtellepunktet</EnumItem>
+               </EnumList>
+            </TypePropertyEnumeratedValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>ådtStart</Name>
+         <Definition>Angir årsdøgntrafikk i start av gitt strekning. Inkluderer tunge kjøretøy. Relevant for trafikkmengdestrekninger der det er vesentlig forskjell på ÅDT i start og slutt. Typisk for lavtrafikkerte veger som ender opp i snuplass.</Definition>
+         <PropertyType>
+            <TypePropertySingleValue>
+               <DataType type="IfcInteger"/>
+            </TypePropertySingleValue>
+         </PropertyType>
+      </PropertyDef>
+      <PropertyDef>
+         <Name>ådtSlutt</Name>
+         <Definition>Angir årsdøgntrafikk i slutt av gitt strekning. Inkluderer tunge kjøretøy. Relevant for trafikkmengdestrekninger der det er vesentlig forskjell på ÅDT i start og slutt. Typisk for lavtrafikkerte veger som ender opp i snuplass.</Definition>
          <PropertyType>
             <TypePropertySingleValue>
                <DataType type="IfcInteger"/>

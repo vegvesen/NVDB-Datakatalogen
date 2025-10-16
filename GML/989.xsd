@@ -5,9 +5,9 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
-      <documentation>989: Brannbeskyttelsesplater plassert inne i tunnelrommet for passiv  brannbeskyttelse fortrinnsvis i betongtunneler. Brukes bla i portalområder og under lokk for å unngå kollaps/ødeleggelser ved brann.</documentation>
+      <documentation>989: Materiale plassert inne i tunnelrommet for passiv brannbeskyttelse fortrinnsvis i betongtunneler. Brukes bl.a. i portalområder og under lokk for å unngå kollaps/ødeleggelser ved brann. Sprøytebetong for brannsikring av PE-skum skal registreres som Vann- og frostsikring (70).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -18,7 +18,7 @@
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:BrannbeskyttelseType">
       <annotation>
-         <documentation>989: Brannbeskyttelsesplater plassert inne i tunnelrommet for passiv  brannbeskyttelse fortrinnsvis i betongtunneler. Brukes bla i portalområder og under lokk for å unngå kollaps/ødeleggelser ved brann.</documentation>
+         <documentation>989: Materiale plassert inne i tunnelrommet for passiv brannbeskyttelse fortrinnsvis i betongtunneler. Brukes bl.a. i portalområder og under lokk for å unngå kollaps/ødeleggelser ved brann. Sprøytebetong for brannsikring av PE-skum skal registreres som Vann- og frostsikring (70).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">989</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Brannbeskyttelse</sc:taggedValue>
@@ -29,12 +29,21 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="type" type="string">
+               <element name="type" type="nvdb:TypeBrannbeskyttelseType">
                   <annotation>
-                     <documentation>12751: Beskrivelse av brannbeskyttelse, typebetegnelse, mm.</documentation>
+                     <documentation>13174: Angir type. Annen beskrivelse legges i Tilleggsinformasjon.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12751</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">13174</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="plassering" type="nvdb:PlasseringBrannbeskyttelseType">
+                  <annotation>
+                     <documentation>13175: Angir hvor vegobjektet er plassert.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13175</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -49,7 +58,7 @@
                </element>
                <element minOccurs="0" name="areal" type="double">
                   <annotation>
-                     <documentation>12749: Samlet vegg/tak-areal som er dekket med brannbeskyttende plater.</documentation>
+                     <documentation>12749: Samlet vegg/tak-areal som er dekket med passiv  brannbeskyttelse.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12749</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
@@ -65,7 +74,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produsent" type="string">
+               <element minOccurs="0" name="produsent" type="string">
                   <annotation>
                      <documentation>12770: Angir navn på produsent/fabrikant av vegobjektet.</documentation>
                      <appinfo>
@@ -74,7 +83,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produktnavn" type="string">
+               <element minOccurs="0" name="produktnavn" type="string">
                   <annotation>
                      <documentation>12768: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
                      <appinfo>
@@ -121,12 +130,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+               <element name="senterlinje" type="gml:CurvePropertyType">
                   <annotation>
-                     <documentation>12741: Linje/kurve er manus for å etablere vegobjektets stedfesting på vegnettet.</documentation>
+                     <documentation>12741: Gir linje/kurve som geometrisk representerer objektet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12741</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -220,6 +229,112 @@
       </restriction>
    </simpleType>
    <simpleType name="EierBrannbeskyttelseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlasseringBrannbeskyttelseType">
+      <annotation>
+         <documentation>13175: Angir hvor vegobjektet er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13175</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlasseringBrannbeskyttelseEnumerationType nvdb:PlasseringBrannbeskyttelseOtherType"/>
+   </simpleType>
+   <simpleType name="PlasseringBrannbeskyttelseEnumerationType">
+      <annotation>
+         <documentation>13175: Angir hvor vegobjektet er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13175</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="t">
+            <annotation>
+               <documentation>23066: Angir om brannbeskyttelse dekker tak/øvre del av tunnelrommet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23066</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tv">
+            <annotation>
+               <documentation>23068: Angir om det er samme type brannbeskyttelse i tak og vegger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23068</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tak og vegger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <documentation>23067: Angir om brannbeskyttelse dekker vegger.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23067</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlasseringBrannbeskyttelseOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBrannbeskyttelseType">
+      <annotation>
+         <documentation>13174: Angir type. Annen beskrivelse legges i Tilleggsinformasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13174</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeBrannbeskyttelseEnumerationType nvdb:TypeBrannbeskyttelseOtherType"/>
+   </simpleType>
+   <simpleType name="TypeBrannbeskyttelseEnumerationType">
+      <annotation>
+         <documentation>13174: Angir type. Annen beskrivelse legges i Tilleggsinformasjon.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13174</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <documentation>23065: Beskrives under Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23065</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <documentation>23064: Brannbeskyttelse bestående av påmonterte elementer av betong. Skal ikke brukes når selve konstruksjonen er støpt i brannbestandig betong.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23064</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongelementer</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <documentation>23063: Brannbeskyttelse bestående av påmonterte elementer av annet materiale enn betong.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23063</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plater</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBrannbeskyttelseOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.41">
+   <annotation>
+      <documentation>837: Område utenfor selve kjørebanen som har egen belegning. Kan også være kjørebane på områder/veger som ikke har eget vegnett i NVDB.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <element name="Belegning"
+            substitutionGroup="nvdb:AbstraktBelegning_Test"
+            type="nvdb:BelegningType">
+      <annotation>
+         <documentation>837: Område utenfor selve kjørebanen som har egen belegning. Kan også være kjørebane på områder/veger som ikke har eget vegnett i NVDB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">837</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belegning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="BelegningType">
+      <complexContent>
+         <extension base="nvdb:AbstraktBelegning_TestType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeBelegningType">
+                  <annotation>
+                     <documentation>12965: Angir hva belegning brukes til.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeBelegningType">
+                  <annotation>
+                     <documentation>9510: Angir type belegning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9510</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="areal" type="double">
+                  <annotation>
+                     <documentation>9509: Angir areal av belegning</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9509</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>9514: Gir flate som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9514</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="BelegningPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Belegning"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="BruksområdeBelegningType">
+      <annotation>
+         <documentation>12965: Angir hva belegning brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeBelegningEnumerationType nvdb:BruksområdeBelegningOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeBelegningEnumerationType">
+      <annotation>
+         <documentation>12965: Angir hva belegning brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12965</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="GF">
+            <annotation>
+               <documentation>22525: Belegning benyttes på gangveg, fortau eller sti.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22525</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dekke gangveg/fortau</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BT">
+            <annotation>
+               <documentation>22528: Dekke av plasser, byrom torg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22528</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dekke plass/torg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KA">
+            <annotation>
+               <documentation>22526: Benyttes for markering av kant på veg, varsling av fartsdemper, avgrensing av parkering, mm</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22526</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Markering i vegbane/fortau</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TD">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22527</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trafikkdeler/trafikkøy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="GP">
+            <annotation>
+               <documentation>22529: Mindre areal med belegning i tilknytning til gater, plasser og parkerr og som ikke passer inn under øvrige bruksområder.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22529</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Øvrig areal by/park</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeBelegningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBelegningType">
+      <annotation>
+         <documentation>9510: Angir type belegning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9510</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeBelegningEnumerationType nvdb:TypeBelegningOtherType"/>
+   </simpleType>
+   <simpleType name="TypeBelegningEnumerationType">
+      <annotation>
+         <documentation>9510: Angir type belegning.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9510</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13411</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfalt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ba">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13424</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bark</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13412</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13413</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong, farget</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bm">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13414</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong, mønstret</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b2">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13415</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betong, mønstret og farget</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13416</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongheller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13421</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Betongstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="gn">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13423</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Granitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="g">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13410</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grus</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13420</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pukk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13422</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skiferheller</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13419</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stein, brostein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13417</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stein, faststøpt i betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13418</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stein, rundstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBelegningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

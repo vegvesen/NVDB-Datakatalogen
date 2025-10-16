@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>824: Strekning som er utsatt for skred fra naturlig sideterreng og hvor det er aktuelt å gjennomføre sikringstiltak. Det skal normalt opprettes et skredpunkt per skredløp, men der skredløpene vanskelig kan sikres uten å berøre neste skredløp kan man vurdere å slå sammen flere skredløp i samme skredpunkt.</documentation>
    </annotation>
@@ -130,22 +130,84 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="OmkjøringSkredpunktType">
+   <simpleType name="NySkredfaktorkategori_NyRegnemodellSkredpunktType">
       <annotation>
-         <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
+         <documentation>13234: Beregnes automatisk ut fra Ny skredfaktor</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">13234</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ny skredfaktorkategori (ny regnemodell)</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:OmkjøringSkredpunktEnumerationType nvdb:OmkjøringSkredpunktOtherType"/>
+      <union memberTypes="nvdb:NySkredfaktorkategori_NyRegnemodellSkredpunktEnumerationType nvdb:NySkredfaktorkategori_NyRegnemodellSkredpunktOtherType"/>
    </simpleType>
-   <simpleType name="OmkjøringSkredpunktEnumerationType">
+   <simpleType name="NySkredfaktorkategori_NyRegnemodellSkredpunktEnumerationType">
+      <annotation>
+         <documentation>13234: Beregnes automatisk ut fra Ny skredfaktor</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13234</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ny skredfaktorkategori (ny regnemodell)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="H">
+            <annotation>
+               <documentation>23129: Angir at skredfaktor ≥ 3,5.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23129</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Høy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="L">
+            <annotation>
+               <documentation>23131: Angir at skredfaktor &lt; 2,5</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23131</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lav</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="M">
+            <annotation>
+               <documentation>23130: Angir at skredfaktor &lt; 3,5 og ≥ 2,5.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23130</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SU">
+            <annotation>
+               <documentation>23132: Angir at dette skredpunktet er sikret. Kategorien blir «sikring utført» hvis en verdi er fylt ut i egenskapstypen «utbedret år». Det er med for å ha historikk.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23132</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sikring utført</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NySkredfaktorkategori_NyRegnemodellSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Omkjøring_UtgårPåSiktSkredpunktType">
       <annotation>
          <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøring (Utgår på sikt)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Omkjøring_UtgårPåSiktSkredpunktEnumerationType nvdb:Omkjøring_UtgårPåSiktSkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="Omkjøring_UtgårPåSiktSkredpunktEnumerationType">
+      <annotation>
+         <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøring (Utgår på sikt)</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -295,7 +357,51 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="OmkjøringSkredpunktOtherType">
+   <simpleType name="Omkjøring_UtgårPåSiktSkredpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Omkjøringsmulighet_NySkredpunktType">
+      <annotation>
+         <documentation>13227: Angi om det finnes omkjøringsmuligheter eller ikke. Brukes i beregning av F3 Omkjøringstid og delfaktor omkjøring.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13227</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet (Ny)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Omkjøringsmulighet_NySkredpunktEnumerationType nvdb:Omkjøringsmulighet_NySkredpunktOtherType"/>
+   </simpleType>
+   <simpleType name="Omkjøringsmulighet_NySkredpunktEnumerationType">
+      <annotation>
+         <documentation>13227: Angi om det finnes omkjøringsmuligheter eller ikke. Brukes i beregning av F3 Omkjøringstid og delfaktor omkjøring.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13227</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet (Ny)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>23127: Det er mulighet for omkjøring</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23127</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>23128: Det er ikke mulighet for omkjøring.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23128</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Omkjøringsmulighet_NySkredpunktOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -603,12 +709,48 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="omkjøring" type="nvdb:OmkjøringSkredpunktType">
+               <element minOccurs="0" name="sumSannsynlighet" type="double">
+                  <annotation>
+                     <documentation>13205: Sum av sannsynligheter oppgitt ovenfor.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13205</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sum sannsynlighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="gjennomsnittligBredde" type="double">
+                  <annotation>
+                     <documentation>13206: Bredder oppgitt ovenfor, vektet mot sannsynlighet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13206</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Gjennomsnittlig bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="omkjøring_UtgårPåSikt">
                   <annotation>
                      <documentation>9392: Beregnet omkjøringstid (inkl. fergetid) hvis vegen er stengt ved skredpunktet. Brukes ved beregning av F3 Omkjøringsfaktor.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9392</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Omkjøring</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omkjøring (Utgår på sikt)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="omkjøringsmulighet_Ny">
+                  <annotation>
+                     <documentation>13227: Angi om det finnes omkjøringsmuligheter eller ikke. Brukes i beregning av F3 Omkjøringstid og delfaktor omkjøring.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13227</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet (Ny)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="omkjøringstid_Ny" type="integer">
+                  <annotation>
+                     <documentation>13226: Omkjøringstid. Oppgitt i antall minutt. Brukes i beregning av F3 Omkjøringstid og Delfaktor omkjøring.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13226</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omkjøringstid (Ny)</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -709,6 +851,66 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9380</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Skredfaktorkategori</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="delfaktorSannsynlighet_NyRegnemodell"
+                        type="double">
+                  <annotation>
+                     <documentation>13229: Beregnes automatisk ut fra Summert sannsynlighet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13229</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Delfaktor sannsynlighet  (ny regnemodell)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="delfaktorSkredbredde_NyRegnemodell"
+                        type="double">
+                  <annotation>
+                     <documentation>13230: Beregnes automatisk ut fra Gjennomsnittlig bredde</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13230</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Delfaktor skredbredde (ny regnemodell)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="delfaktorOmkjøring_NyRegnemodell" type="double">
+                  <annotation>
+                     <documentation>13231: Beregnes automatisk ut fra Omkjøringsmulighet og Omkjøringstid.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13231</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Delfaktor omkjøring (ny regnemodell)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="delfaktorTrafikkmengde_NyRegnemodell"
+                        type="double">
+                  <annotation>
+                     <documentation>13232: Beregnes automatisk ut fra ÅDT</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13232</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Delfaktor trafikkmengde (ny regnemodell)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nySkredfaktor_NyRegnemodell" type="double">
+                  <annotation>
+                     <documentation>13233: Beregnes automatisk ut fra de fire delfaktorene, de fire ganges sammen</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13233</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ny skredfaktor (ny regnemodell)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nySkredfaktorkategori_NyRegnemodell">
+                  <annotation>
+                     <documentation>13234: Beregnes automatisk ut fra Ny skredfaktor</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13234</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ny skredfaktorkategori (ny regnemodell)</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

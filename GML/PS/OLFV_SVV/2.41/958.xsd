@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.41">
+   <annotation>
+      <documentation>958: Bevegelig konstruksjon som har som oppgave å koble ladekabler til og fra ferger eller busser. Konstruksjonen blir bygget for å kunne tilføre elektrisk energi til ferger/busser og er således en del av et elektrisk anlegg.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeLadetårnType">
+      <annotation>
+         <documentation>12075: Angir om det er ladetårn benyttet i forbindelse med lading av ferje eller buss.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12075</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeLadetårnEnumerationType nvdb:BruksområdeLadetårnOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeLadetårnEnumerationType">
+      <annotation>
+         <documentation>12075: Angir om det er ladetårn benyttet i forbindelse med lading av ferje eller buss.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12075</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20972</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Buss</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20971</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferje</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeLadetårnOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Ladetårn"
+            substitutionGroup="nvdb:AbstraktLadetårn"
+            type="nvdb:LadetårnType">
+      <annotation>
+         <documentation>958: Bevegelig konstruksjon som har som oppgave å koble ladekabler til og fra ferger eller busser. Konstruksjonen blir bygget for å kunne tilføre elektrisk energi til ferger/busser og er således en del av et elektrisk anlegg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">958</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ladetårn</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="LadetårnType">
+      <complexContent>
+         <extension base="nvdb:AbstraktLadetårnType">
+            <sequence>
+               <element name="bruksområde" type="nvdb:BruksområdeLadetårnType">
+                  <annotation>
+                     <documentation>12075: Angir om det er ladetårn benyttet i forbindelse med lading av ferje eller buss.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12075</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="type" type="nvdb:TypeLadetårnType">
+                  <annotation>
+                     <documentation>12073: Angir hvilken type ladetårn det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12073</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12085: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12085</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>12078: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12078</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="LadetårnPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Ladetårn"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeLadetårnType">
+      <annotation>
+         <documentation>12073: Angir hvilken type ladetårn det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12073</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeLadetårnEnumerationType nvdb:TypeLadetårnOtherType"/>
+   </simpleType>
+   <simpleType name="TypeLadetårnEnumerationType">
+      <annotation>
+         <documentation>12073: Angir hvilken type ladetårn det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">12073</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20969</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pantograf</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SM">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20970</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sentermontert ladeplugg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeLadetårnOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

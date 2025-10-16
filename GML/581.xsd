@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>581: Sted hvor veg passerer gjennom jord/fjell eller under større lokk. Består av ett eller flere tunnelløp.</documentation>
    </annotation>
@@ -854,6 +854,14 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="tunnelovervåkning" type="nvdb:TunnelovervåkningTunnelType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13223</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tunnelovervåkning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="kopletTilVTS">
                   <annotation>
                      <documentation>12609: Angir hvilken vegtrafikksentral tunnel er koplet til.</documentation>
@@ -1269,6 +1277,62 @@
       </restriction>
    </simpleType>
    <simpleType name="Tunnelklasse_ProsjektertTunnelOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TunnelovervåkningTunnelType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13223</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelovervåkning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TunnelovervåkningTunnelEnumerationType nvdb:TunnelovervåkningTunnelOtherType"/>
+   </simpleType>
+   <simpleType name="TunnelovervåkningTunnelEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13223</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelovervåkning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ah">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23120</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Automatisk hendelsesdetektering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="di">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23118</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Delvis ITV</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fi">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23119</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Full dekning ITV</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="in">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23117</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TunnelovervåkningTunnelOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

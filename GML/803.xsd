@@ -5,20 +5,78 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
-      <documentation>803: Åpning i tunnelhvelv hvor en kan komme bak tunnelhvelvet. Benyttes i forbindelse med inspeksjon av geologiske forhold.</documentation>
+      <documentation>803: Liten dør til å stenge en åpning med. Brukes hovedsakelig for åpninger i tunnelhvelv.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BruksområdeInspeksjonslukeType">
+      <annotation>
+         <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13177</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeInspeksjonslukeEnumerationType nvdb:BruksområdeInspeksjonslukeOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeInspeksjonslukeEnumerationType">
+      <annotation>
+         <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13177</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23078</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="i">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23075</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Inspeksjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23076</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Slokkevann</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23077</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ventilasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeInspeksjonslukeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Inspeksjonsluke"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:InspeksjonslukeType">
       <annotation>
-         <documentation>803: Åpning i tunnelhvelv hvor en kan komme bak tunnelhvelvet. Benyttes i forbindelse med inspeksjon av geologiske forhold.</documentation>
+         <documentation>803: Liten dør til å stenge en åpning med. Brukes hovedsakelig for åpninger i tunnelhvelv.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">803</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Inspeksjonsluke</sc:taggedValue>
@@ -29,18 +87,18 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element minOccurs="0" name="beskrivelse" type="string">
+               <element name="bruksområde" type="nvdb:BruksområdeInspeksjonslukeType">
                   <annotation>
-                     <documentation>9133: Kan beskrive f.eks. type åpning, størrelse, tilgjengelighet osv.</documentation>
+                     <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9133</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Beskrivelse</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">13177</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
                <element name="høyde" type="double">
                   <annotation>
-                     <documentation>9150: Angir høyde av luke.</documentation>
+                     <documentation>9150: Angir høyde på lysåpning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9150</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
@@ -49,10 +107,37 @@
                </element>
                <element name="bredde" type="double">
                   <annotation>
-                     <documentation>9151: Angir bredde av luke.</documentation>
+                     <documentation>9151: Angir bredde på lysåpning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9151</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="materiale" type="nvdb:MaterialeInspeksjonslukeType">
+                  <annotation>
+                     <documentation>13178: Angir materiale.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13178</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="normalStilling">
+                  <annotation>
+                     <documentation>13179: Angir normal stilling.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13179</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>9133: Kan beskrive f.eks. type åpning, størrelse, tilgjengelighet osv.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9133</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -149,6 +234,90 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="MaterialeInspeksjonslukeType">
+      <annotation>
+         <documentation>13178: Angir materiale.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13178</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:MaterialeInspeksjonslukeEnumerationType nvdb:MaterialeInspeksjonslukeOtherType"/>
+   </simpleType>
+   <simpleType name="MaterialeInspeksjonslukeEnumerationType">
+      <annotation>
+         <documentation>13178: Angir materiale.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13178</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23080</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Aluminium</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23079</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="MaterialeInspeksjonslukeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="NormalStillingInspeksjonslukeType">
+      <annotation>
+         <documentation>13179: Angir normal stilling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:NormalStillingInspeksjonslukeEnumerationType nvdb:NormalStillingInspeksjonslukeOtherType"/>
+   </simpleType>
+   <simpleType name="NormalStillingInspeksjonslukeEnumerationType">
+      <annotation>
+         <documentation>13179: Angir normal stilling.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13179</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="l">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23081</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Låst</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="u">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23082</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ulåst</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="NormalStillingInspeksjonslukeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="VedlikeholdsansvarligInspeksjonslukeType">
       <annotation>
          <documentation>10976: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>

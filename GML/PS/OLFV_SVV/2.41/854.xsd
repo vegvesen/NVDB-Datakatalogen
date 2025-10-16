@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.41">
+   <annotation>
+      <documentation>854: Automatisk port plassert i en eller begge ender av en tunnel, med hensikt om å holde kulden ute om vinteren for å unngå isdannelse i tunnelen.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FjernstyrtKuldeportType">
+      <annotation>
+         <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FjernstyrtKuldeportEnumerationType nvdb:FjernstyrtKuldeportOtherType"/>
+   </simpleType>
+   <simpleType name="FjernstyrtKuldeportEnumerationType">
+      <annotation>
+         <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23086</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23087</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FjernstyrtKuldeportOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Kuldeport"
+            substitutionGroup="nvdb:AbstraktTunnelport"
+            type="nvdb:KuldeportType">
+      <annotation>
+         <documentation>854: Automatisk port plassert i en eller begge ender av en tunnel, med hensikt om å holde kulden ute om vinteren for å unngå isdannelse i tunnelen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">854</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kuldeport</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="KuldeportType">
+      <complexContent>
+         <extension base="nvdb:AbstraktTunnelportType">
+            <sequence>
+               <element name="bredde" type="double">
+                  <annotation>
+                     <documentation>9762: .</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9762</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høyde" type="double">
+                  <annotation>
+                     <documentation>9768: Angir egenhøyde av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9768</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fjernstyrt" type="nvdb:FjernstyrtKuldeportType">
+                  <annotation>
+                     <documentation>13181: Angir om objektet kan fjernstyres eller ikke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13181</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fjernstyrt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10386: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10386</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>9767: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9767</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="KuldeportPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Kuldeport"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

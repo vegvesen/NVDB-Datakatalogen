@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
       <documentation>537: Område i henhold til Statens vegvesens inndeling i fylkes/lokalavdelinger.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="KoordinatsystemVegavdelingType">
+   <simpleType name="KoordinatsystemVegavdeling, historiskType">
       <annotation>
          <documentation>8149: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Koordinatsystem</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:KoordinatsystemVegavdelingEnumerationType nvdb:KoordinatsystemVegavdelingOtherType"/>
+      <union memberTypes="nvdb:KoordinatsystemVegavdeling, historiskEnumerationType nvdb:KoordinatsystemVegavdeling, historiskOtherType"/>
    </simpleType>
-   <simpleType name="KoordinatsystemVegavdelingEnumerationType">
+   <simpleType name="KoordinatsystemVegavdeling, historiskEnumerationType">
       <annotation>
          <documentation>8149: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
          <appinfo>
@@ -233,23 +233,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="KoordinatsystemVegavdelingOtherType">
+   <simpleType name="KoordinatsystemVegavdeling, historiskOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Vegavdeling"
+   <element name="Vegavdeling, historisk"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:VegavdelingType">
+            type="nvdb:Vegavdeling, historiskType">
       <annotation>
          <documentation>537: Område i henhold til Statens vegvesens inndeling i fylkes/lokalavdelinger.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">537</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Vegavdeling</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegavdeling, historisk</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="VegavdelingType">
+   <complexType name="Vegavdeling, historiskType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -271,7 +271,8 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="koordinatsystem" type="nvdb:KoordinatsystemVegavdelingType">
+               <element name="koordinatsystem"
+                        type="nvdb:KoordinatsystemVegavdeling, historiskType">
                   <annotation>
                      <documentation>8149: Angir hvilket koordinatsystem som primært benyttes for gitt område.</documentation>
                      <appinfo>
@@ -302,9 +303,9 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="VegavdelingPropertyType">
+   <complexType name="Vegavdeling, historiskPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Vegavdeling"/>
+         <element ref="nvdb:Vegavdeling, historisk"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>

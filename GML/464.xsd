@@ -5,16 +5,16 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.40">
+        version="2.41">
    <annotation>
-      <documentation>464: Utstyr for å måle vannstand f.eks. i pumpesump.</documentation>
+      <documentation>464: Utstyr for å måle nivå f.eks. i pumpesump.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BruksområdeVannstandsmålerType">
+   <simpleType name="BruksområdeNivåmålerType">
       <annotation>
          <documentation>10581: Angir primært bruksområde for vegobjekttype.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:BruksområdeVannstandsmålerEnumerationType nvdb:BruksområdeVannstandsmålerOtherType"/>
+      <union memberTypes="nvdb:BruksområdeNivåmålerEnumerationType nvdb:BruksområdeNivåmålerOtherType"/>
    </simpleType>
-   <simpleType name="BruksområdeVannstandsmålerEnumerationType">
+   <simpleType name="BruksområdeNivåmålerEnumerationType">
       <annotation>
          <documentation>10581: Angir primært bruksområde for vegobjekttype.</documentation>
          <appinfo>
@@ -51,12 +51,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="BruksområdeVannstandsmålerOtherType">
+   <simpleType name="BruksområdeNivåmålerOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierVannstandsmålerType">
+   <simpleType name="EierNivåmålerType">
       <annotation>
          <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -64,9 +64,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierVannstandsmålerEnumerationType nvdb:EierVannstandsmålerOtherType"/>
+      <union memberTypes="nvdb:EierNivåmålerEnumerationType nvdb:EierNivåmålerOtherType"/>
    </simpleType>
-   <simpleType name="EierVannstandsmålerEnumerationType">
+   <simpleType name="EierNivåmålerEnumerationType">
       <annotation>
          <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -126,106 +126,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierVannstandsmålerOtherType">
+   <simpleType name="EierNivåmålerOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TypeVannstandsmålerType">
-      <annotation>
-         <documentation>10090: Angir hvilken type sensor som brukes.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10090</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:TypeVannstandsmålerEnumerationType nvdb:TypeVannstandsmålerOtherType"/>
-   </simpleType>
-   <simpleType name="TypeVannstandsmålerEnumerationType">
-      <annotation>
-         <documentation>10090: Angir hvilken type sensor som brukes.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10090</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="flott">
-            <annotation>
-               <documentation>16592: Vanndybde måles ved hjelp av flottør.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16592</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Flottørmåler</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="laser">
-            <annotation>
-               <documentation>16594: Vanndybde måles ved hjelp av laser.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16594</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Laser</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="radr">
-            <annotation>
-               <documentation>16458: Vanndybde måles fra overflaten ved å sende mikrobølger med "radar" frekvens som reflekteres fra bunnen og derved gir dybden.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16458</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Radarsensor</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tryk">
-            <annotation>
-               <documentation>16457: Sensor som ligger på bunnen og måler vanndybde ut fra vanntrykk der.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16457</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Trykksensor</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ultra">
-            <annotation>
-               <documentation>16593: Vanndybde måles ved hjelp av ultralyd.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16593</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ultralyd</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="k">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">22541</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kapasitiv</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="TypeVannstandsmålerOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <element name="Vannstandsmåler"
+   <element name="Nivåmåler"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:VannstandsmålerType">
+            type="nvdb:NivåmålerType">
       <annotation>
-         <documentation>464: Utstyr for å måle vannstand f.eks. i pumpesump.</documentation>
+         <documentation>464: Utstyr for å måle nivå f.eks. i pumpesump.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">464</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Vannstandsmåler</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Nivåmåler</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="VannstandsmålerType">
+   <complexType name="NivåmålerType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="type" type="nvdb:TypeVannstandsmålerType">
+               <element name="type" type="nvdb:TypeNivåmålerType">
                   <annotation>
                      <documentation>10090: Angir hvilken type sensor som brukes.</documentation>
                      <appinfo>
@@ -236,7 +157,7 @@
                </element>
                <element minOccurs="0"
                         name="bruksområde"
-                        type="nvdb:BruksområdeVannstandsmålerType">
+                        type="nvdb:BruksområdeNivåmålerType">
                   <annotation>
                      <documentation>10581: Angir primært bruksområde for vegobjekttype.</documentation>
                      <appinfo>
@@ -326,7 +247,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierVannstandsmålerType">
+               <element minOccurs="0" name="eier" type="nvdb:EierNivåmålerType">
                   <annotation>
                      <documentation>8027: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -337,7 +258,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligVannstandsmålerType">
+                        type="nvdb:VedlikeholdsansvarligNivåmålerType">
                   <annotation>
                      <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
                      <appinfo>
@@ -367,14 +288,93 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="VannstandsmålerPropertyType">
+   <complexType name="NivåmålerPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Vannstandsmåler"/>
+         <element ref="nvdb:Nivåmåler"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligVannstandsmålerType">
+   <simpleType name="TypeNivåmålerType">
+      <annotation>
+         <documentation>10090: Angir hvilken type sensor som brukes.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10090</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeNivåmålerEnumerationType nvdb:TypeNivåmålerOtherType"/>
+   </simpleType>
+   <simpleType name="TypeNivåmålerEnumerationType">
+      <annotation>
+         <documentation>10090: Angir hvilken type sensor som brukes.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10090</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="flott">
+            <annotation>
+               <documentation>16592: Vanndybde måles ved hjelp av flottør.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16592</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flottørmåler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="laser">
+            <annotation>
+               <documentation>16594: Vanndybde måles ved hjelp av laser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16594</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Laser</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="radr">
+            <annotation>
+               <documentation>16458: Vanndybde måles fra overflaten ved å sende mikrobølger med "radar" frekvens som reflekteres fra bunnen og derved gir dybden.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16458</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Radarsensor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tryk">
+            <annotation>
+               <documentation>16457: Sensor som ligger på bunnen og måler vanndybde ut fra vanntrykk der.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16457</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trykksensor</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ultra">
+            <annotation>
+               <documentation>16593: Vanndybde måles ved hjelp av ultralyd.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16593</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ultralyd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="k">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22541</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kapasitiv</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeNivåmålerOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligNivåmålerType">
       <annotation>
          <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -382,9 +382,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligVannstandsmålerEnumerationType nvdb:VedlikeholdsansvarligVannstandsmålerOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligNivåmålerEnumerationType nvdb:VedlikeholdsansvarligNivåmålerOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligVannstandsmålerEnumerationType">
+   <simpleType name="VedlikeholdsansvarligNivåmålerEnumerationType">
       <annotation>
          <documentation>8102: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -451,7 +451,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligVannstandsmålerOtherType">
+   <simpleType name="VedlikeholdsansvarligNivåmålerOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
