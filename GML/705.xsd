@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>705: Fastlagt rute for sykling. Status som nasjonal sykkelrute for tur/fritidssykling.</documentation>
    </annotation>
@@ -84,6 +84,59 @@
       </restriction>
    </simpleType>
    <simpleType name="EuroVeloSykkelruteSykkelrute, nasjonalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="KategoriSykkelrute, nasjonalType">
+      <annotation>
+         <documentation>10251: Angir hvilken hovedkategori sykkelruta tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10251</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KategoriSykkelrute, nasjonalEnumerationType nvdb:KategoriSykkelrute, nasjonalOtherType"/>
+   </simpleType>
+   <simpleType name="KategoriSykkelrute, nasjonalEnumerationType">
+      <annotation>
+         <documentation>10251: Angir hvilken hovedkategori sykkelruta tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10251</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="L">
+            <annotation>
+               <documentation>16743: Sykkelrute innenfor avgrenset geografisk område, ofte innenfor en eller et fåtall kommuner. Kan være både transportsykkelruter og tur-/turistsykkelruter både i byer, tettsteder og landlige omgivelser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16743</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lokal sykkelrute</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NE">
+            <annotation>
+               <documentation>16741: Sykkelrute som betegnes som offisiell nasjonal og eller europeisk sykkelrute.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16741</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nasjonal/europeisk sykkelrute</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="R">
+            <annotation>
+               <documentation>16742: Sykkelruter innenfor fylke/region.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16742</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Regional sykkelrute</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KategoriSykkelrute, nasjonalOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -365,20 +418,71 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="SkiltetSykkelrute, nasjonalType">
+   <simpleType name="SkiltetEuroVeloSykkelruteSykkelrute, nasjonalType">
       <annotation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skiltet</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">13270</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skiltet EuroVelo sykkelrute</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:SkiltetSykkelrute, nasjonalEnumerationType nvdb:SkiltetSykkelrute, nasjonalOtherType"/>
+      <union memberTypes="nvdb:SkiltetEuroVeloSykkelruteSykkelrute, nasjonalEnumerationType nvdb:SkiltetEuroVeloSykkelruteSykkelrute, nasjonalOtherType"/>
    </simpleType>
-   <simpleType name="SkiltetSykkelrute, nasjonalEnumerationType">
+   <simpleType name="SkiltetEuroVeloSykkelruteSykkelrute, nasjonalEnumerationType">
       <annotation>
          <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13270</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skiltet EuroVelo sykkelrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="D">
+            <annotation>
+               <documentation>23185: Rute er noe sporadisk skiltet.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23185</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Delvis</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23183</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23184</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkiltetEuroVeloSykkelruteSykkelrute, nasjonalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkiltetNasjonalSykkelruteSykkelrute, nasjonalType">
+      <annotation>
+         <documentation>10423: Angir om sykkelruten er skiltet med rutenummer for nasjonal sykkelrute</documentation>
+         <appinfo>
             <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Skiltet</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skiltet nasjonal sykkelrute</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SkiltetNasjonalSykkelruteSykkelrute, nasjonalEnumerationType nvdb:SkiltetNasjonalSykkelruteSykkelrute, nasjonalOtherType"/>
+   </simpleType>
+   <simpleType name="SkiltetNasjonalSykkelruteSykkelrute, nasjonalEnumerationType">
+      <annotation>
+         <documentation>10423: Angir om sykkelruten er skiltet med rutenummer for nasjonal sykkelrute</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skiltet nasjonal sykkelrute</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
@@ -409,7 +513,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="SkiltetSykkelrute, nasjonalOtherType">
+   <simpleType name="SkiltetNasjonalSykkelruteSykkelrute, nasjonalOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -466,11 +570,29 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="skiltet" type="nvdb:SkiltetSykkelrute, nasjonalType">
+               <element name="skiltetNasjonalSykkelrute">
                   <annotation>
+                     <documentation>10423: Angir om sykkelruten er skiltet med rutenummer for nasjonal sykkelrute</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10423</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Skiltet</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skiltet nasjonal sykkelrute</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="skiltetEuroVeloSykkelrute">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13270</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skiltet EuroVelo sykkelrute</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="daily_section_id" type="string">
+                  <annotation>
+                     <documentation>13355: Angir daily section id.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13355</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Daily_section_id</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -498,6 +620,33 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">6897</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>6824: Gir navn til Sykkelvegrute.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6824</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="nummer" type="string">
+                  <annotation>
+                     <documentation>6825: Angir nummer på sykkelrute.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6825</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kategori" type="nvdb:KategoriSykkelrute, nasjonalType">
+                  <annotation>
+                     <documentation>10251: Angir hvilken hovedkategori sykkelruta tilhører.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10251</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

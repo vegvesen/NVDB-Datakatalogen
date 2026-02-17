@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>591: Strekning i vegnettet hvor kjøretøy kan komme i konflikt med overliggende hinder.</documentation>
    </annotation>
@@ -182,6 +182,26 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="bredde_Min_Retning2" type="double">
+                  <annotation>
+                     <documentation>3896: Angir minste bredde i retning 2, dvs venstre side sett i metreringsretning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3896</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde, min, retning2</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="omkjøringsmulighet"
+                        type="nvdb:OmkjøringsmulighetHøydebegrensningType">
+                  <annotation>
+                     <documentation>5281: Angir om det er omkjøringsmuligheter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5281</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -256,6 +276,48 @@
       </restriction>
    </simpleType>
    <simpleType name="HøydebegrensningMålemetodeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmkjøringsmulighetHøydebegrensningType">
+      <annotation>
+         <documentation>5281: Angir om det er omkjøringsmuligheter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5281</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:OmkjøringsmulighetHøydebegrensningEnumerationType nvdb:OmkjøringsmulighetHøydebegrensningOtherType"/>
+   </simpleType>
+   <simpleType name="OmkjøringsmulighetHøydebegrensningEnumerationType">
+      <annotation>
+         <documentation>5281: Angir om det er omkjøringsmuligheter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5281</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7294</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7295</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="OmkjøringsmulighetHøydebegrensningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

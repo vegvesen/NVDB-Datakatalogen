@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>987: Mast for plassering av teknisk utstyr som f.eks antenner, måleutstyr, kamera, etc. Merknad:Vegobjekttypen skal ikke benyttes i forbindelse med belysning, skilt eller signalanlegg da det er egne vegobjekttyper for dette.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BruksområdeUtstyrsmast (test)Type">
+   <simpleType name="BruksområdeUtstyrsmastType">
       <annotation>
          <documentation>12814: Angir hva masten brukes til. Dersom det er flere bruksområder oppgis det som er hovedbruksområde.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:BruksområdeUtstyrsmast (test)EnumerationType nvdb:BruksområdeUtstyrsmast (test)OtherType"/>
+      <union memberTypes="nvdb:BruksområdeUtstyrsmastEnumerationType nvdb:BruksområdeUtstyrsmastOtherType"/>
    </simpleType>
-   <simpleType name="BruksområdeUtstyrsmast (test)EnumerationType">
+   <simpleType name="BruksområdeUtstyrsmastEnumerationType">
       <annotation>
          <documentation>12814: Angir hva masten brukes til. Dersom det er flere bruksområder oppgis det som er hovedbruksområde.</documentation>
          <appinfo>
@@ -71,12 +71,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="BruksområdeUtstyrsmast (test)OtherType">
+   <simpleType name="BruksområdeUtstyrsmastOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierUtstyrsmast (test)Type">
+   <simpleType name="EierUtstyrsmastType">
       <annotation>
          <documentation>12719: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,9 +84,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierUtstyrsmast (test)EnumerationType nvdb:EierUtstyrsmast (test)OtherType"/>
+      <union memberTypes="nvdb:EierUtstyrsmastEnumerationType nvdb:EierUtstyrsmastOtherType"/>
    </simpleType>
-   <simpleType name="EierUtstyrsmast (test)EnumerationType">
+   <simpleType name="EierUtstyrsmastEnumerationType">
       <annotation>
          <documentation>12719: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -146,12 +146,65 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierUtstyrsmast (test)OtherType">
+   <simpleType name="EierUtstyrsmastOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TypeUtstyrsmast (test)Type">
+   <simpleType name="LuftfartshinderNRLUtstyrsmastType">
+      <annotation>
+         <documentation>13271: Angir om Utstyrsmast er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-10-22: Overføres pt. ikke til NRL automatisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13271</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LuftfartshinderNRLUtstyrsmastEnumerationType nvdb:LuftfartshinderNRLUtstyrsmastOtherType"/>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLUtstyrsmastEnumerationType">
+      <annotation>
+         <documentation>13271: Angir om Utstyrsmast er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-10-22: Overføres pt. ikke til NRL automatisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13271</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J1">
+            <annotation>
+               <documentation>23187: Utstyrsmast er definert som luftfartshinder. Datagrunnlag i NVDB er i henhold til krav fra NRL, bla. krav knyttet til nøyaktighet. Data er dermed klar for overføring til NRL. Overføringsklient REX hart ikke funksjonalitet for overføring av disse datene til NRL, de må derfor overføres manuelt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23187</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J2">
+            <annotation>
+               <documentation>23188: Utstyrsmast  regnes for å være et luftfartshinder, men data er ikke klarert for overføring til NRL. Dette kan være pga mangelfulle data eller at data ikke er godt nok kvalitetssikret. Overføring til NRL avventes.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23188</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, men ikke klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>23189: Uststyrsmast er ikke et luftfartshinder og skal ikke rapporteres til NRL.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23189</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei, ikke relevant for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLUtstyrsmastOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeUtstyrsmastType">
       <annotation>
          <documentation>12812: Angir hvilken type mast.</documentation>
          <appinfo>
@@ -159,9 +212,9 @@
             <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TypeUtstyrsmast (test)EnumerationType nvdb:TypeUtstyrsmast (test)OtherType"/>
+      <union memberTypes="nvdb:TypeUtstyrsmastEnumerationType nvdb:TypeUtstyrsmastOtherType"/>
    </simpleType>
-   <simpleType name="TypeUtstyrsmast (test)EnumerationType">
+   <simpleType name="TypeUtstyrsmastEnumerationType">
       <annotation>
          <documentation>12812: Angir hvilken type mast.</documentation>
          <appinfo>
@@ -187,29 +240,38 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <documentation>22086: Stolpe med</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22086</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Profilert stolpe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TypeUtstyrsmast (test)OtherType">
+   <simpleType name="TypeUtstyrsmastOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Utstyrsmast (test)"
+   <element name="Utstyrsmast"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Utstyrsmast (test)Type">
+            type="nvdb:UtstyrsmastType">
       <annotation>
          <documentation>987: Mast for plassering av teknisk utstyr som f.eks antenner, måleutstyr, kamera, etc. Merknad:Vegobjekttypen skal ikke benyttes i forbindelse med belysning, skilt eller signalanlegg da det er egne vegobjekttyper for dette.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">987</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utstyrsmast (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utstyrsmast</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Utstyrsmast (test)Type">
+   <complexType name="UtstyrsmastType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="type" type="nvdb:TypeUtstyrsmast (test)Type">
+               <element name="type" type="nvdb:TypeUtstyrsmastType">
                   <annotation>
                      <documentation>12812: Angir hvilken type mast.</documentation>
                      <appinfo>
@@ -218,7 +280,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="bruksområde" type="nvdb:BruksområdeUtstyrsmast (test)Type">
+               <element name="bruksområde" type="nvdb:BruksområdeUtstyrsmastType">
                   <annotation>
                      <documentation>12814: Angir hva masten brukes til. Dersom det er flere bruksområder oppgis det som er hovedbruksområde.</documentation>
                      <appinfo>
@@ -229,9 +291,19 @@
                </element>
                <element name="egenhøyde" type="double">
                   <annotation>
+                     <documentation>12813: Høyde fra topp fundament/bakkenivå til topp mast.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12813</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Egenhøyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="luftfartshinderNRL">
+                  <annotation>
+                     <documentation>13271: Angir om Utstyrsmast er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-10-22: Overføres pt. ikke til NRL automatisk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13271</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -280,7 +352,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierUtstyrsmast (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierUtstyrsmastType">
                   <annotation>
                      <documentation>12719: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -291,7 +363,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligUtstyrsmast (test)Type">
+                        type="nvdb:VedlikeholdsansvarligUtstyrsmastType">
                   <annotation>
                      <documentation>12729: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -302,7 +374,7 @@
                </element>
                <element name="posisjon" type="gml:PointPropertyType">
                   <annotation>
-                     <documentation>12739: Gir punkt s9om geometrisk representerer objektet.</documentation>
+                     <documentation>12739: Gir punkt som geometrisk representerer objektet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12739</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
@@ -321,14 +393,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Utstyrsmast (test)PropertyType">
+   <complexType name="UtstyrsmastPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Utstyrsmast (test)"/>
+         <element ref="nvdb:Utstyrsmast"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligUtstyrsmast (test)Type">
+   <simpleType name="VedlikeholdsansvarligUtstyrsmastType">
       <annotation>
          <documentation>12729: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -336,9 +408,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligUtstyrsmast (test)EnumerationType nvdb:VedlikeholdsansvarligUtstyrsmast (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligUtstyrsmastEnumerationType nvdb:VedlikeholdsansvarligUtstyrsmastOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligUtstyrsmast (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligUtstyrsmastEnumerationType">
       <annotation>
          <documentation>12729: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -403,9 +475,41 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22204</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22203</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22205</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22202</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligUtstyrsmast (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligUtstyrsmastOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

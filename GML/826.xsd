@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>826: Veg som inngår i det trans-europeiske vegnettet (Trans European Network - Transport). I regi av EU. Definert og vedtatt i EU-forordning 1315/2013. Brukes også til CEDR rapportering.</documentation>
    </annotation>
@@ -129,6 +129,48 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="PlanlagteKapasitetsutvidelserTEN-T vegType">
+      <annotation>
+         <documentation>10950: Angir om det er planlagt kapasitetsutvidelse på strekningen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10950</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Planlagte kapasitetsutvidelser</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlanlagteKapasitetsutvidelserTEN-T vegEnumerationType nvdb:PlanlagteKapasitetsutvidelserTEN-T vegOtherType"/>
+   </simpleType>
+   <simpleType name="PlanlagteKapasitetsutvidelserTEN-T vegEnumerationType">
+      <annotation>
+         <documentation>10950: Angir om det er planlagt kapasitetsutvidelse på strekningen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10950</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Planlagte kapasitetsutvidelser</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18297</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18298</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlanlagteKapasitetsutvidelserTEN-T vegOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="TEN-T veg"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:TEN-T vegType">
@@ -195,6 +237,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10949</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="planlagteKapasitetsutvidelser">
+                  <annotation>
+                     <documentation>10950: Angir om det er planlagt kapasitetsutvidelse på strekningen</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10950</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Planlagte kapasitetsutvidelser</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

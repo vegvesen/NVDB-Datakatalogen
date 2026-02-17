@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>57: Skråflate som er del av begrensningen av at skjæringsvolum. I tillegg til ei eller to skjæringer (ev. en på hver side av vegen) begrenses skjæringsvolumet av planum. Merknad: Det skal angis sideposisjon for skjæring.</documentation>
    </annotation>
@@ -52,6 +52,72 @@
       </restriction>
    </simpleType>
    <simpleType name="BrattOverBergskjæringSkjæringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeSkjæringType">
+      <annotation>
+         <documentation>1260: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1260</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeSkjæringEnumerationType nvdb:BruksområdeSkjæringOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeSkjæringEnumerationType">
+      <annotation>
+         <documentation>1260: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1260</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="k">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3703</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen konstruksjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3705</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bakkeplanering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3803</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lukka grøft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3706</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Plass/område</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3701</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegskjæring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeSkjæringOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -466,6 +532,53 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0"
+                        name="bruksområde"
+                        type="nvdb:BruksområdeSkjæringType">
+                  <annotation>
+                     <documentation>1260: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1260</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="volum" type="integer">
+                  <annotation>
+                     <documentation>1386: Angir volum av faste skjæringsmasser.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1386</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Volum</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7635: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7635</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="helningBunn" type="double">
+                  <annotation>
+                     <documentation>1844: Angir hvilken helning bunn av vegobjektet har</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1844</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Helning bunn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="utformingBunn">
+                  <annotation>
+                     <documentation>1842: Angir hvordan bunn av vegobjektet er utformet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1842</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utforming bunn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -531,6 +644,56 @@
       </restriction>
    </simpleType>
    <simpleType name="TypeSkjæringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtformingBunnSkjæringType">
+      <annotation>
+         <documentation>1842: Angir hvordan bunn av vegobjektet er utformet</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1842</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utforming bunn</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UtformingBunnSkjæringEnumerationType nvdb:UtformingBunnSkjæringOtherType"/>
+   </simpleType>
+   <simpleType name="UtformingBunnSkjæringEnumerationType">
+      <annotation>
+         <documentation>1842: Angir hvordan bunn av vegobjektet er utformet</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1842</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utforming bunn</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="eh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3058</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ensidig fall høyre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ev">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3055</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ensidig fall venstre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3061</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Takfall</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtformingBunnSkjæringOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -5,27 +5,31 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
+   <annotation>
+      <documentation>1003: Enkeltstående batteri eller en installasjon der to eller flere batterier er koplet sammen til en batteribank. Batteriene i en batteribank kan være oppdelt i pakker av seriekoplede enkeltbatteri.</documentation>
+   </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <element name="BatteriBatteribank (test)"
+   <element name="BatteriBatteribank"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:BatteriBatteribank (test)Type">
+            type="nvdb:BatteriBatteribankType">
       <annotation>
+         <documentation>1003: Enkeltstående batteri eller en installasjon der to eller flere batterier er koplet sammen til en batteribank. Batteriene i en batteribank kan være oppdelt i pakker av seriekoplede enkeltbatteri.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1003</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">BatteriBatteribank (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">BatteriBatteribank</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="BatteriBatteribank (test)Type">
+   <complexType name="BatteriBatteribankType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="bruksområde" type="nvdb:BruksområdeBatteriBatteribank (test)Type">
+               <element name="bruksområde" type="nvdb:BruksområdeBatteriBatteribankType">
                   <annotation>
                      <documentation>13075: Angir hva anlegget primært benyttes til.</documentation>
                      <appinfo>
@@ -39,11 +43,11 @@
                      <documentation>13077: Beregnet verdi i watt fra Febdok</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13077</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Dimensjonerende Last</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Dimensjonerende last</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="plassering" type="nvdb:PlasseringBatteriBatteribank (test)Type">
+               <element name="plassering" type="nvdb:PlasseringBatteriBatteribankType">
                   <annotation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13079</sc:taggedValue>
@@ -53,16 +57,25 @@
                </element>
                <element name="antallBatterier" type="double">
                   <annotation>
-                     <documentation>13080: Antall batterier</documentation>
+                     <documentation>13080: Totalt antall enkeltbatterier. For batteribanker angis totalt antall enkeltbatterier for alle batteripakker i batteribanken.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13080</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Antall batterier</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
+               <element name="antallBatteripakker" type="integer">
+                  <annotation>
+                     <documentation>13330: Angir hvor mange batteripakker det er i batteribanken. I en batteripakke er alle batteriene koplet i samme serie. Batteripakke benevnes også «streng».</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13330</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall batteripakker</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="nominellSpenning" type="double">
                   <annotation>
-                     <documentation>13081: Angir nominell spenning per batteri for anlegget. Infor hentet fra datablad.</documentation>
+                     <documentation>13081: Angir nominell spenning per batteri for anlegget. Info hentet fra datablad.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13081</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Nominell spenning</sc:taggedValue>
@@ -92,6 +105,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13084</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Batterikapasitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="batteribank_SkiftetÅr" type="double">
+                  <annotation>
+                     <documentation>13331: Angir hvilket år batteribank var ny/skiftet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13331</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Batteribank, skiftet år</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -140,9 +162,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0"
-                        name="eier"
-                        type="nvdb:EierBatteriBatteribank (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierBatteriBatteribankType">
                   <annotation>
                      <documentation>13089: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -162,7 +182,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligBatteriBatteribank (test)Type">
+                        type="nvdb:VedlikeholdsansvarligBatteriBatteribankType">
                   <annotation>
                      <documentation>13091: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -192,14 +212,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="BatteriBatteribank (test)PropertyType">
+   <complexType name="BatteriBatteribankPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:BatteriBatteribank (test)"/>
+         <element ref="nvdb:BatteriBatteribank"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="BruksområdeBatteriBatteribank (test)Type">
+   <simpleType name="BruksområdeBatteriBatteribankType">
       <annotation>
          <documentation>13075: Angir hva anlegget primært benyttes til.</documentation>
          <appinfo>
@@ -207,9 +227,9 @@
             <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:BruksområdeBatteriBatteribank (test)EnumerationType nvdb:BruksområdeBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:BruksområdeBatteriBatteribankEnumerationType nvdb:BruksområdeBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="BruksområdeBatteriBatteribank (test)EnumerationType">
+   <simpleType name="BruksområdeBatteriBatteribankEnumerationType">
       <annotation>
          <documentation>13075: Angir hva anlegget primært benyttes til.</documentation>
          <appinfo>
@@ -254,7 +274,7 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22712</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nødnett tunnel</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -262,7 +282,7 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22711</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nødstrøm tunnel</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nødstrøm</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -306,14 +326,23 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="RS">
+            <annotation>
+               <documentation>23293: Batteri/batteribank benyttes primært til reservestrøm.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23293</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Reservestrøm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="BruksområdeBatteriBatteribank (test)OtherType">
+   <simpleType name="BruksområdeBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierBatteriBatteribank (test)Type">
+   <simpleType name="EierBatteriBatteribankType">
       <annotation>
          <documentation>13089: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -321,9 +350,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierBatteriBatteribank (test)EnumerationType nvdb:EierBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:EierBatteriBatteribankEnumerationType nvdb:EierBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="EierBatteriBatteribank (test)EnumerationType">
+   <simpleType name="EierBatteriBatteribankEnumerationType">
       <annotation>
          <documentation>13089: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -383,12 +412,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierBatteriBatteribank (test)OtherType">
+   <simpleType name="EierBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="MetodeForLadingBatteriBatteribank (test)Type">
+   <simpleType name="MetodeForLadingBatteriBatteribankType">
       <annotation>
          <documentation>13082: Angir hvordan Batteri/batteribank lades.</documentation>
          <appinfo>
@@ -396,9 +425,9 @@
             <sc:taggedValue tag="NVDB_navn">Metode for lading</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:MetodeForLadingBatteriBatteribank (test)EnumerationType nvdb:MetodeForLadingBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:MetodeForLadingBatteriBatteribankEnumerationType nvdb:MetodeForLadingBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="MetodeForLadingBatteriBatteribank (test)EnumerationType">
+   <simpleType name="MetodeForLadingBatteriBatteribankEnumerationType">
       <annotation>
          <documentation>13082: Angir hvordan Batteri/batteribank lades.</documentation>
          <appinfo>
@@ -457,21 +486,21 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="MetodeForLadingBatteriBatteribank (test)OtherType">
+   <simpleType name="MetodeForLadingBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="PermanenteBatterierBatteriBatteribank (test)Type">
+   <simpleType name="PermanenteBatterierBatteriBatteribankType">
       <annotation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">13083</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Permanente batterier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:PermanenteBatterierBatteriBatteribank (test)EnumerationType nvdb:PermanenteBatterierBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:PermanenteBatterierBatteriBatteribankEnumerationType nvdb:PermanenteBatterierBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="PermanenteBatterierBatteriBatteribank (test)EnumerationType">
+   <simpleType name="PermanenteBatterierBatteriBatteribankEnumerationType">
       <annotation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">13083</sc:taggedValue>
@@ -497,21 +526,21 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="PermanenteBatterierBatteriBatteribank (test)OtherType">
+   <simpleType name="PermanenteBatterierBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="PlasseringBatteriBatteribank (test)Type">
+   <simpleType name="PlasseringBatteriBatteribankType">
       <annotation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">13079</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:PlasseringBatteriBatteribank (test)EnumerationType nvdb:PlasseringBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:PlasseringBatteriBatteribankEnumerationType nvdb:PlasseringBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="PlasseringBatteriBatteribank (test)EnumerationType">
+   <simpleType name="PlasseringBatteriBatteribankEnumerationType">
       <annotation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">13079</sc:taggedValue>
@@ -547,18 +576,18 @@
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22723</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Skap, tekning</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skap, teknisk</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="PlasseringBatteriBatteribank (test)OtherType">
+   <simpleType name="PlasseringBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBatteriBatteribank (test)Type">
+   <simpleType name="VedlikeholdsansvarligBatteriBatteribankType">
       <annotation>
          <documentation>13091: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -566,9 +595,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligBatteriBatteribank (test)EnumerationType nvdb:VedlikeholdsansvarligBatteriBatteribank (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligBatteriBatteribankEnumerationType nvdb:VedlikeholdsansvarligBatteriBatteribankOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBatteriBatteribank (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligBatteriBatteribankEnumerationType">
       <annotation>
          <documentation>13091: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -635,7 +664,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligBatteriBatteribank (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligBatteriBatteribankOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

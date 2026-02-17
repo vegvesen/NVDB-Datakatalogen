@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>447: Et tunnelløp hvor det ikke er åpent for ordinær trafikk.</documentation>
    </annotation>
@@ -85,6 +85,48 @@
       </restriction>
    </simpleType>
    <simpleType name="EierTunnelløp uten trafikkOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="InnvendigKulvertTunnelløp uten trafikkType">
+      <annotation>
+         <documentation>13273: Angir om det er bygget en kulvert inne i tunnelløpet. Gjelder hovedsakelig for tverrforbindelser mellom tunnelløp.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13273</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Innvendig kulvert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:InnvendigKulvertTunnelløp uten trafikkEnumerationType nvdb:InnvendigKulvertTunnelløp uten trafikkOtherType"/>
+   </simpleType>
+   <simpleType name="InnvendigKulvertTunnelløp uten trafikkEnumerationType">
+      <annotation>
+         <documentation>13273: Angir om det er bygget en kulvert inne i tunnelløpet. Gjelder hovedsakelig for tverrforbindelser mellom tunnelløp.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13273</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Innvendig kulvert</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23195</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23196</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="InnvendigKulvertTunnelløp uten trafikkOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -197,9 +239,9 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="navn" type="string">
+               <element minOccurs="0" name="navn" type="string">
                   <annotation>
-                     <documentation>9257: Angir navn, kan gjerne være samme som navn på tunnel pluss tillegg.</documentation>
+                     <documentation>9257: Navn skal inneholde navnet på tilhørende tunnel og nødutgangsmerking (bokstav, tall).</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9257</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
@@ -235,7 +277,7 @@
                </element>
                <element minOccurs="0" name="høyde" type="double">
                   <annotation>
-                     <documentation>3873: Angir høyde.</documentation>
+                     <documentation>3873: Angi høyde for rektangulært tverrsnitt.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3873</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
@@ -257,6 +299,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9179</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Kjørbar</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="innvendigKulvert">
+                  <annotation>
+                     <documentation>13273: Angir om det er bygget en kulvert inne i tunnelløpet. Gjelder hovedsakelig for tverrforbindelser mellom tunnelløp.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13273</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Innvendig kulvert</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -318,6 +369,14 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3101</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
             </sequence>
          </extension>
       </complexContent>
@@ -350,6 +409,7 @@
       <restriction base="string">
          <enumeration value="R">
             <annotation>
+               <documentation>12316: Skal kun gjelde betongtunneler, ikke bergtunneler. Se ET Innvendig kulvert (13273).</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">12316</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Rektangulært tverrsnitt</sc:taggedValue>
@@ -436,6 +496,46 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="T11,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12311</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T11,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12312</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T12,5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12313</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T12,5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T13">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12314</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T13</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T14">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12315</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">T14</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TunnelprofilTunnelløp uten trafikkOtherType">
@@ -462,20 +562,20 @@
          </appinfo>
       </annotation>
       <restriction base="string">
+         <enumeration value="an">
+            <annotation>
+               <documentation>13395: Beskrivelse registreres i Tilleggsinformasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13395</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
          <enumeration value="p">
             <annotation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">12323</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Parallelløp til hovedløp</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="Sløyfe">
-            <annotation>
-               <documentation>13395: Tunnelløp som går i sløyfe, dvs. det starter og slutter i samme løp. Benyttes f.eks. som rensesløyfe.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">13395</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Sløyfe</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>46: Kjørbar tilknytning til vegnettet for en eiendom eller et begrenset antall eiendommer (1). Merknad: Det regnes som vegkryss om tilknytningsveg er offentlig veg.</documentation>
    </annotation>
@@ -203,6 +203,44 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4753</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7631: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7631</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="integer">
+                  <annotation>
+                     <documentation>1361: Angir arealet av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1361</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="navn" type="string">
+                  <annotation>
+                     <documentation>1079: Angir navn på avkjørselsveg</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1079</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="siktforhold"
+                        type="nvdb:SiktforholdAvkjørselType">
+                  <annotation>
+                     <documentation>1827: Angir om siktforholdene i forbindelse med avkjørsel er ok eller ikke ok</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1827</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Siktforhold</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -718,9 +756,59 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="IA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21718</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Idrettsanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="PrimæraktivitetAvkjørselOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SiktforholdAvkjørselType">
+      <annotation>
+         <documentation>1827: Angir om siktforholdene i forbindelse med avkjørsel er ok eller ikke ok</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1827</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Siktforhold</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SiktforholdAvkjørselEnumerationType nvdb:SiktforholdAvkjørselOtherType"/>
+   </simpleType>
+   <simpleType name="SiktforholdAvkjørselEnumerationType">
+      <annotation>
+         <documentation>1827: Angir om siktforholdene i forbindelse med avkjørsel er ok eller ikke ok</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1827</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Siktforhold</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ok">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3597</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ok</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3606</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tiltaksbehov</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SiktforholdAvkjørselOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

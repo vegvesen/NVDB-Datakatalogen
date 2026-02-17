@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>572: Personer involvert i trafikkulykke.</documentation>
    </annotation>
@@ -14,6 +14,825 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AlderskategoriUlykkesinvolvert personType">
+      <annotation>
+         <documentation>11534: Angir hvilken aldersgruppe ulykkesinvolvert person tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11534</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Alderskategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AlderskategoriUlykkesinvolvert personEnumerationType nvdb:AlderskategoriUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="AlderskategoriUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>11534: Angir hvilken aldersgruppe ulykkesinvolvert person tilhører.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11534</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Alderskategori</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19610</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">0-5 år</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="17">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19613</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">16-17</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="19">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19614</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">18-19</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="24">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19615</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">20-24</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="34">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19616</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">25-34</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="44">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19617</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">35-44</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="54">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19618</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">45-54</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="64">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">55-64</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="15">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19612</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">6-15</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="74">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19620</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">65-74</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="84">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19621</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">75-84</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="85+">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19622</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">85 år eller eldre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <documentation>19623: Alder er ikke kjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19623</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uoppgitt alder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AlderskategoriUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BeskyttelsesutstyrUlykkesinvolvert personType">
+      <annotation>
+         <documentation>5113: Den beskyttelse personen har benyttet seg av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5113</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Beskyttelsesutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BeskyttelsesutstyrUlykkesinvolvert personEnumerationType nvdb:BeskyttelsesutstyrUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="BeskyttelsesutstyrUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>5113: Den beskyttelse personen har benyttet seg av.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5113</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Beskyttelsesutstyr</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="8">
+            <annotation>
+               <documentation>6676: Annen beskyttelse</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6676</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen beskyttelse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <documentation>6673: Barnesete</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6673</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Barnesete</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>6670: Bilbelte</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6670</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bilbelte</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>6672: Bilbelte og kollisjonspute</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6672</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bilbelte og kollisjonspute</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6">
+            <annotation>
+               <documentation>6674: Hjelm</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6674</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hjelm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17391</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hjelm og refleks/lykt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>6669: Ingen beskyttelse</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6669</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ingen beskyttelse</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <documentation>6671: Kollisjonspute</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6671</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kollisjonspute</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <documentation>6675: Refleks/lykt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6675</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Refleks/lykt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>6677: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6677</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BeskyttelsesutstyrUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Ferdselsformål_NyUlykkesinvolvert personType">
+      <annotation>
+         <documentation>11939: 5 sifret kode hentet fra ISO TS 14823, GDD-code. Eksempel Skolebarn er 11239).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11939</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ferdselsformål (Ny)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Ferdselsformål_NyUlykkesinvolvert personEnumerationType nvdb:Ferdselsformål_NyUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="Ferdselsformål_NyUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>11939: 5 sifret kode hentet fra ISO TS 14823, GDD-code. Eksempel Skolebarn er 11239).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11939</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Ferdselsformål (Ny)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Annet formål">
+            <annotation>
+               <documentation>20204: Annet formål</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20204</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet formål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fritidsreise">
+            <annotation>
+               <documentation>20202: Fritidsreise</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20202</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fritidsreise</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="I arbeid">
+            <annotation>
+               <documentation>20200: I arbeid</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20200</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I arbeid</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Til/fra arbeid">
+            <annotation>
+               <documentation>20199: Til/fra arbeid</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20199</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Til/fra arbeid</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Til/fra skole">
+            <annotation>
+               <documentation>20201: Til/fra skole</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20201</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Til/fra skole</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ukjent">
+            <annotation>
+               <documentation>20205: Ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20205</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Øvelseskjøring">
+            <annotation>
+               <documentation>20203: Øvelseskjøring</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">20203</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Øvelseskjøring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Ferdselsformål_NyUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="KjønnIUlykkeUlykkesinvolvert personType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5108</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kjønn i ulykke</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KjønnIUlykkeUlykkesinvolvert personEnumerationType nvdb:KjønnIUlykkeUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="KjønnIUlykkeUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5108</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kjønn i ulykke</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="2">
+            <annotation>
+               <documentation>6654: Kvinne</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6654</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kvinne</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>6653: Mann</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6653</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mann</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>6655: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6655</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KjønnIUlykkeUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="PersonsPlasseringIKjøretøyUlykkesinvolvert personType">
+      <annotation>
+         <documentation>5111: Persons plassering i kjøretøy.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5111</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Persons plassering i kjøretøy</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PersonsPlasseringIKjøretøyUlykkesinvolvert personEnumerationType nvdb:PersonsPlasseringIKjøretøyUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="PersonsPlasseringIKjøretøyUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>5111: Persons plassering i kjøretøy.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5111</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Persons plassering i kjøretøy</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="1">
+            <annotation>
+               <documentation>6656: Fører</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6656</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fører</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>6659: Passasjer annen plass</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6659</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Passasjer annen plass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <documentation>6658: Passasjer bak</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6658</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Passasjer bak</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>6657: Passasjer foran</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6657</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Passasjer foran</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>6660: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6660</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PersonsPlasseringIKjøretøyUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadeforløpUlykkesinvolvert personType">
+      <annotation>
+         <documentation>5114: Skadeforløp for person.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5114</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadeforløp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SkadeforløpUlykkesinvolvert personEnumerationType nvdb:SkadeforløpUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="SkadeforløpUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>5114: Skadeforløp for person.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5114</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadeforløp</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="8">
+            <annotation>
+               <documentation>6686: Annet forløp</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6686</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet forløp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>6682: Brann</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6682</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Brann</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <documentation>6683: Drukning</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6683</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drukning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <documentation>6681: Fotgjenger, akende påkjørt,</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6681</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fotgjenger, akende påkjørt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="0">
+            <annotation>
+               <documentation>6678: Ikke personskade</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6678</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke personskade</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>6680: Kastet ut av kjøretøyet</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6680</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kastet ut av kjøretøyet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <documentation>6685: Nakkeskade</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6685</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nakkeskade</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6">
+            <annotation>
+               <documentation>6684: Skadd mot eksteriør</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6684</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skadd mot eksteriør</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>6679: Skade mot interiør</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6679</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skade mot interiør</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>6687: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6687</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadeforløpUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadegradFraSSBUlykkesinvolvert personType">
+      <annotation>
+         <documentation>8808: Skadegrad for person innblandet i trafikkulykke. Rapportert fra SSB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8808</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadegrad fra SSB</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SkadegradFraSSBUlykkesinvolvert personEnumerationType nvdb:SkadegradFraSSBUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="SkadegradFraSSBUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>8808: Skadegrad for person innblandet i trafikkulykke. Rapportert fra SSB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8808</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadegrad fra SSB</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="3">
+            <annotation>
+               <documentation>11661: Alvorlig skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11661</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Alvorlig skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>11663: Drept</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11663</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drept</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6">
+            <annotation>
+               <documentation>11658: Illebefinnende</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11658</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Illebefinnende</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>11660: Lettere skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11660</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lettere skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>11662: Meget alvorlig skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11662</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Meget alvorlig skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <documentation>11657: Selvdrap</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11657</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Selvdrap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>11656: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11656</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <documentation>11659: Uskadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11659</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uskadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadegradFraSSBUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadegradUlykkesinvolvert personType">
+      <annotation>
+         <documentation>5112: Skadegrad for person innblandet i trafikkulykke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5112</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadegrad</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SkadegradUlykkesinvolvert personEnumerationType nvdb:SkadegradUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="SkadegradUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>5112: Skadegrad for person innblandet i trafikkulykke.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5112</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skadegrad</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="3">
+            <annotation>
+               <documentation>6663: Alvorlig skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6663</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Alvorlig skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="1">
+            <annotation>
+               <documentation>6661: Drept</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6661</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drept</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="6">
+            <annotation>
+               <documentation>6666: Illebefinnende</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6666</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Illebefinnende</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="4">
+            <annotation>
+               <documentation>6664: Lettere skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6664</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lettere skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2">
+            <annotation>
+               <documentation>6662: Meget alvorlig skadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6662</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Meget alvorlig skadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="7">
+            <annotation>
+               <documentation>6667: Selvdrap</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6667</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Selvdrap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="9">
+            <annotation>
+               <documentation>6668: ukjent</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6668</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="5">
+            <annotation>
+               <documentation>6665: Uskadd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6665</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uskadd</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SkadegradUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Skjema2_SSBUlykkesinvolvert personType">
+      <annotation>
+         <documentation>9574: Angir om personopplysninger fra ulykkesregistreringsskjema 2 er mottatt fra SSB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9574</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skjema 2 SSB</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Skjema2_SSBUlykkesinvolvert personEnumerationType nvdb:Skjema2_SSBUlykkesinvolvert personOtherType"/>
+   </simpleType>
+   <simpleType name="Skjema2_SSBUlykkesinvolvert personEnumerationType">
+      <annotation>
+         <documentation>9574: Angir om personopplysninger fra ulykkesregistreringsskjema 2 er mottatt fra SSB.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9574</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Skjema 2 SSB</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13786</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13787</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="u">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13788</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uaktuell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Skjema2_SSBUlykkesinvolvert personOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="Trafikanttyper_NyUlykkesinvolvert personType">
       <annotation>
          <documentation>11897: Trafikanttyper.</documentation>
@@ -204,6 +1023,119 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11897</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Trafikanttyper (Ny)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="passasjerNummer" type="string">
+                  <annotation>
+                     <documentation>5107: Passasjernummer, f.eks. A0. Satt sammen av ENHETS-bokstav og et fortløpende nummer. Fører=0, resten er fortløpende.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5107</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Passasjer nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kjønnIUlykke">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5108</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kjønn i ulykke</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fødselsdato" type="date">
+                  <annotation>
+                     <documentation>5109: Fødselsdato.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5109</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fødselsdato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="alder" type="integer">
+                  <annotation>
+                     <documentation>5110: Alder.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5110</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Alder</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="alderskategori"
+                        type="nvdb:AlderskategoriUlykkesinvolvert personType">
+                  <annotation>
+                     <documentation>11534: Angir hvilken aldersgruppe ulykkesinvolvert person tilhører.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11534</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Alderskategori</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="personsPlasseringIKjøretøy">
+                  <annotation>
+                     <documentation>5111: Persons plassering i kjøretøy.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5111</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Persons plassering i kjøretøy</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="skadegrad" type="nvdb:SkadegradUlykkesinvolvert personType">
+                  <annotation>
+                     <documentation>5112: Skadegrad for person innblandet i trafikkulykke.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5112</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skadegrad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skadegradFraSSB">
+                  <annotation>
+                     <documentation>8808: Skadegrad for person innblandet i trafikkulykke. Rapportert fra SSB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8808</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skadegrad fra SSB</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="skjema2_SSB">
+                  <annotation>
+                     <documentation>9574: Angir om personopplysninger fra ulykkesregistreringsskjema 2 er mottatt fra SSB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9574</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skjema 2 SSB</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="beskyttelsesutstyr"
+                        type="nvdb:BeskyttelsesutstyrUlykkesinvolvert personType">
+                  <annotation>
+                     <documentation>5113: Den beskyttelse personen har benyttet seg av.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5113</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Beskyttelsesutstyr</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="skadeforløp"
+                        type="nvdb:SkadeforløpUlykkesinvolvert personType">
+                  <annotation>
+                     <documentation>5114: Skadeforløp for person.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5114</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Skadeforløp</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="ferdselsformål_Ny">
+                  <annotation>
+                     <documentation>11939: 5 sifret kode hentet fra ISO TS 14823, GDD-code. Eksempel Skolebarn er 11239).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11939</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Ferdselsformål (Ny)</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

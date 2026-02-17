@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>106: Angir hvilken strategi det skal være i forhold til vinterdrift på strekningen.</documentation>
    </annotation>
@@ -14,6 +14,64 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BakgrunnForVinterdriftsstrategiType">
+      <annotation>
+         <documentation>2125: Angir bakgrunn for vegobjektet. Angir bakgrunn for strøing</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2125</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bakgrunn for</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BakgrunnForVinterdriftsstrategiEnumerationType nvdb:BakgrunnForVinterdriftsstrategiOtherType"/>
+   </simpleType>
+   <simpleType name="BakgrunnForVinterdriftsstrategiEnumerationType">
+      <annotation>
+         <documentation>2125: Angir bakgrunn for vegobjektet. Angir bakgrunn for strøing</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">2125</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bakgrunn for</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3900</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Punktstrøing</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pf">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3901</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Punktstrøing, fotgjengerfelt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3899</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Punktstrøing, kryss</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3902</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Strekning med behov</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BakgrunnForVinterdriftsstrategiOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeStrategiVinterdriftsstrategiType">
       <annotation>
          <documentation>1158: Angir hvilken type vinterstrategi det er tale om.</documentation>
@@ -105,6 +163,33 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4804</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bakgrunnFor">
+                  <annotation>
+                     <documentation>2125: Angir bakgrunn for vegobjektet. Angir bakgrunn for strøing</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2125</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bakgrunn for</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="masseforbruk" type="integer">
+                  <annotation>
+                     <documentation>5756: Angir gjennomsnittlig masseforbruk på denne strøstrekningen i tonn pr år</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5756</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Masseforbruk</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7672: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7672</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

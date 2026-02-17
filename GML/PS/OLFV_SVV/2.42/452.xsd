@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.42">
+   <annotation>
+      <documentation>452: Passasje for trafikk av ulik art (kjørende, gående, dyr) under bru eller mindre bygning. Se også Tunnelløp og Høydebegrensning. NB: Faunapassasjer skal ikke registreres som Undergang, men som egen vegobjekttype Faunapassasje (VT 872).</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BelysningUndergangType">
+      <annotation>
+         <documentation>5276: Angir om det er belysning i undergangen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5276</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BelysningUndergangEnumerationType nvdb:BelysningUndergangOtherType"/>
+   </simpleType>
+   <simpleType name="BelysningUndergangEnumerationType">
+      <annotation>
+         <documentation>5276: Angir om det er belysning i undergangen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5276</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7292</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7293</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BelysningUndergangOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="GårUnderUndergangType">
+      <annotation>
+         <documentation>5271: Angir hva som er begrensning i høyde, hva vegen går under.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5271</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Går under</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:GårUnderUndergangEnumerationType nvdb:GårUnderUndergangOtherType"/>
+   </simpleType>
+   <simpleType name="GårUnderUndergangEnumerationType">
+      <annotation>
+         <documentation>5271: Angir hva som er begrensning i høyde, hva vegen går under.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5271</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Går under</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>7909: Undergang under bygning, dvs. bygning med veg under.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7909</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bygning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="g">
+            <annotation>
+               <documentation>7285: Undergang går under kryssende gang-/sykkelveg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7285</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gang-/sykkelveg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="j">
+            <annotation>
+               <documentation>7286: Undergang går under kryssende jernbane.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7286</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jernbane</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <documentation>7287: Undergang går under kryssende veg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7287</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vo">
+            <annotation>
+               <documentation>8176: Undergang går under kryssende viltovergang/faunapassasje.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8176</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Viltovergang</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="GårUnderUndergangOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TverrprofilUndergangType">
+      <annotation>
+         <documentation>13329: Angir hvordan undergangens tverrprofil er utformet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13329</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tverrprofil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TverrprofilUndergangEnumerationType nvdb:TverrprofilUndergangOtherType"/>
+   </simpleType>
+   <simpleType name="TverrprofilUndergangEnumerationType">
+      <annotation>
+         <documentation>13329: Angir hvordan undergangens tverrprofil er utformet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13329</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tverrprofil</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="F">
+            <annotation>
+               <documentation>23287: Undergangen har rette vegger nært vegen på begge sider.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23287</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rette vegger</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SV">
+            <annotation>
+               <documentation>23286: Undergangens tverrprofil har en avrundet form og er sammensatt  av en eller flere avruda profilelementer. Eksempelvis kulvert/rør .</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23286</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sirkulært/avrundet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <documentation>23288: Undergangen har søyler nært vegen på begge sider. Dette er typisk søyler som bærer bro/lokk som undergangen går under.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23288</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søyler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sa">
+            <annotation>
+               <documentation>23292: Undergangen har søyler nært vegen på den ene sida, mens den er åpen på den andre sida.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23292</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søyler/Åpen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vs">
+            <annotation>
+               <documentation>23290: Undergang har vegg nært vegen på den ene sida, mens den har søyler nært vegen på den andre sida</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23290</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegg/søyler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="va">
+            <annotation>
+               <documentation>23291: Undergangen har vegg nært vegen på den ene sida, mens den er åpen på den andre sida.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23291</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegg/åpen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ap">
+            <annotation>
+               <documentation>23289: Undergangen går under lengre bru/lokk og har ikke vegger eller søyler nært vegen på noen av sidene.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23289</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Åpen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TverrprofilUndergangOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Undergang"
+            substitutionGroup="nvdb:AbstraktUndergang"
+            type="nvdb:UndergangType">
+      <annotation>
+         <documentation>452: Passasje for trafikk av ulik art (kjørende, gående, dyr) under bru eller mindre bygning. Se også Tunnelløp og Høydebegrensning. NB: Faunapassasjer skal ikke registreres som Undergang, men som egen vegobjekttype Faunapassasje (VT 872).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">452</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Undergang</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="UndergangType">
+      <complexContent>
+         <extension base="nvdb:AbstraktUndergangType">
+            <sequence>
+               <element name="gårUnder">
+                  <annotation>
+                     <documentation>5271: Angir hva som er begrensning i høyde, hva vegen går under.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5271</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Går under</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tverrprofil" type="nvdb:TverrprofilUndergangType">
+                  <annotation>
+                     <documentation>13329: Angir hvordan undergangens tverrprofil er utformet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13329</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tverrprofil</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="friBredde" type="double">
+                  <annotation>
+                     <documentation>13321: Angir maksimal bredde et kjøretøy kan ha for å kunne kjøre gjennom undergangen på normalt vis. Merknad: Fri bredde kan ha avgjørende betydning for valg av kjøretøy/utstyr knyttet til vegdrift.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13321</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fri bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="lengde" type="double">
+                  <annotation>
+                     <documentation>13269: Angir lengde av undergang. Måles i senter undergang. Hele lengden har "tak" over seg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13269</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="belysning" type="nvdb:BelysningUndergangType">
+                  <annotation>
+                     <documentation>5276: Angir om det er belysning i undergangen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5276</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Belysning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10389: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10389</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4970: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4970</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="UndergangPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Undergang"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

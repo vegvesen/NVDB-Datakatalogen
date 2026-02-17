@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>69: Byggverk som benyttes i endene av fjelltunnelene for å beskytte tunnelåpning mot rennende vann og fallende snø, is stein og jord. (HB V440).</documentation>
    </annotation>
@@ -54,6 +54,48 @@
       </restriction>
    </simpleType>
    <simpleType name="BærerTrafikklastTunnelportalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilkomstOvenfraTunnelportalType">
+      <annotation>
+         <documentation>3099: Angir om det er tilkomst ovenfra til tunnelportal. (opprinnelig fradato: 20040421)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3099</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilkomst ovenfra</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilkomstOvenfraTunnelportalEnumerationType nvdb:TilkomstOvenfraTunnelportalOtherType"/>
+   </simpleType>
+   <simpleType name="TilkomstOvenfraTunnelportalEnumerationType">
+      <annotation>
+         <documentation>3099: Angir om det er tilkomst ovenfra til tunnelportal. (opprinnelig fradato: 20040421)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3099</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilkomst ovenfra</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4608</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4609</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilkomstOvenfraTunnelportalOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -154,12 +196,77 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+               <element name="senterlinje" type="gml:CurvePropertyType">
                   <annotation>
                      <documentation>9505: Gir linje/kurve som geometrisk representerer objektet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9505</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="byggeår" type="integer">
+                  <annotation>
+                     <documentation>10387: Angir byggeår for vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10387</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Byggeår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="typeLengdesnitt">
+                  <annotation>
+                     <documentation>11204: Angir hvilken type utforming enden av portalen har. Oppbygd kant langs ende kommer i tillegg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11204</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type lengdesnitt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7643: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7643</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="høyde" type="double">
+                  <annotation>
+                     <documentation>3098: Angir høyde av tunnelportal</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3098</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilkomstOvenfra">
+                  <annotation>
+                     <documentation>3099: Angir om det er tilkomst ovenfra til tunnelportal. (opprinnelig fradato: 20040421)</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3099</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilkomst ovenfra</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3568: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3568</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligTunnelportalType">
+                  <annotation>
+                     <documentation>8059: Angir hvem som er ansvarlig for vedlikehold</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8059</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -182,6 +289,59 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="TypeLengdesnittTunnelportalType">
+      <annotation>
+         <documentation>11204: Angir hvilken type utforming enden av portalen har. Oppbygd kant langs ende kommer i tillegg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11204</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type lengdesnitt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeLengdesnittTunnelportalEnumerationType nvdb:TypeLengdesnittTunnelportalOtherType"/>
+   </simpleType>
+   <simpleType name="TypeLengdesnittTunnelportalEnumerationType">
+      <annotation>
+         <documentation>11204: Angir hvilken type utforming enden av portalen har. Oppbygd kant langs ende kommer i tillegg.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11204</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type lengdesnitt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="B">
+            <annotation>
+               <documentation>18500: Topp av portal skrår økende oppover i enden, som ende på en trompet..</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18500</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bue - trompet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="R">
+            <annotation>
+               <documentation>18498: Topp portal er tilnærmet vannrett i enden.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18498</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <documentation>18499: Topp av portal skrår jevnt opp i enden, som en trakt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18499</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skrå - trakt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeLengdesnittTunnelportalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeTverrsnittTunnelportalType">
       <annotation>
          <documentation>1131: Angir hvilken type tverrsnitt tunnelportalen har.</documentation>
@@ -219,9 +379,83 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="h">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3424</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hvelv</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="TR">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13396</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Traktformet med rektangulært tverrsnitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ST">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13397</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Traktformet med sirkulært tverrsnitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TypeTverrsnittTunnelportalOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelportalType">
+      <annotation>
+         <documentation>8059: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8059</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelportalEnumerationType nvdb:VedlikeholdsansvarligTunnelportalOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelportalEnumerationType">
+      <annotation>
+         <documentation>8059: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8059</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10531</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10609</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SvV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10453</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelportalOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

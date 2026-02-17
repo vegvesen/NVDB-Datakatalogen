@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>623: Konstruksjon beregnet for oppsetting av informasjon til trafikanter, eksempelvis informasjon rettet mot turister. Disse er normalt lokalisert til vegens sideanlegg som f.eks. rasteplasser eller lommer, og det er forutsatt at trafikant står i ro ved lesing av informasjon. Informasjonstavler som oppfyller krav til skiltnummer 560 (Håndbok N300, del 3) skal registreres som skiltpunkt/skiltplate.</documentation>
    </annotation>
@@ -396,48 +396,6 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="PleksiglassUtenpåInfoplaterStativ for turistinfoType">
-      <annotation>
-         <documentation>5650: Angir om det er pleksiglass utenpå infoplatene.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5650</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Pleksiglass utenpå infoplater</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:PleksiglassUtenpåInfoplaterStativ for turistinfoEnumerationType nvdb:PleksiglassUtenpåInfoplaterStativ for turistinfoOtherType"/>
-   </simpleType>
-   <simpleType name="PleksiglassUtenpåInfoplaterStativ for turistinfoEnumerationType">
-      <annotation>
-         <documentation>5650: Angir om det er pleksiglass utenpå infoplatene.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">5650</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Pleksiglass utenpå infoplater</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">7948</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">7949</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="PleksiglassUtenpåInfoplaterStativ for turistinfoOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
    <element name="Stativ for turistinfo"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Stativ for turistinfoType">
@@ -482,12 +440,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="pleksiglassUtenpåInfoplater">
+               <element name="typeGlassUtenpåInfoplater">
                   <annotation>
-                     <documentation>5650: Angir om det er pleksiglass utenpå infoplatene.</documentation>
+                     <documentation>5650: Angir glasstype utenpå infoplatene.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">5650</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Pleksiglass utenpå infoplater</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type glass utenpå infoplater</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -614,6 +572,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7808: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7808</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -671,6 +638,56 @@
       </restriction>
    </simpleType>
    <simpleType name="TakStativ for turistinfoOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeGlassUtenpåInfoplaterStativ for turistinfoType">
+      <annotation>
+         <documentation>5650: Angir glasstype utenpå infoplatene.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type glass utenpå infoplater</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeGlassUtenpåInfoplaterStativ for turistinfoEnumerationType nvdb:TypeGlassUtenpåInfoplaterStativ for turistinfoOtherType"/>
+   </simpleType>
+   <simpleType name="TypeGlassUtenpåInfoplaterStativ for turistinfoEnumerationType">
+      <annotation>
+         <documentation>5650: Angir glasstype utenpå infoplatene.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5650</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type glass utenpå infoplater</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ir">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7949</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke relevant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="pg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7948</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Pleksiglass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="hg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23197</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Herdet glass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeGlassUtenpåInfoplaterStativ for turistinfoOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

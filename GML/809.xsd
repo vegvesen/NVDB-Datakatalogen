@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>809: Et område som er tilrettelagt for hensetting av vogntog i langtransport slik at sjåførene kan innta normal døgnhvile.</documentation>
    </annotation>
@@ -155,21 +155,21 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="navn" type="string">
-                  <annotation>
-                     <documentation>9245: Navn på døgnhvileplass.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9245</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element name="lokalisertVed">
                   <annotation>
                      <documentation>9246: Angir hvor døgnhvileplass er lokalisert.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9246</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Lokalisert ved</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>9245: Navn på døgnhvileplass.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9245</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -193,10 +193,19 @@
                </element>
                <element name="antallOppstillingsplMedLading_StoreKjt" type="integer">
                   <annotation>
-                     <documentation>13043: Angir hvor mange av oppstillingsplassene som er beregnet for store kjøretøy som er tilrettelagt for lading av slike kjøretøy.</documentation>
+                     <documentation>13043: Angir hvor mange av oppstillingsplassene angitt under egenskap 9467 "Antall oppstillingsplasser vogntog" som er tilrettelagt for lading av store kjøretøy.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">13043</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Antall oppstillingspl. med lading, store kjt.</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="øvrigTungbil_Lading">
+                  <annotation>
+                     <documentation>13351: Angir om det er anlegg for lading av tungbil på eller i tilknytning til døgnhvileplassen utover eventuelt tilbud om lading på de faste oppstillingsplassene. Se også  egenskap 13043 "Antall oppstillingsplasser med lading, store kjt.".</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13351</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Øvrig tungbil-lading</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -538,13 +547,30 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+               <element name="område" type="gml:SurfacePropertyType">
                   <annotation>
                      <documentation>9284: Gir flate/polygon som geometrisk avgrenser døgnhvileplassen.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9284</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
                      </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>9298: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9298</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
                   </annotation>
                </element>
                <element maxOccurs="unbounded"
@@ -1700,6 +1726,48 @@
       </restriction>
    </simpleType>
    <simpleType name="WebkameraDøgnhvileplassOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ØvrigTungbil_LadingDøgnhvileplassType">
+      <annotation>
+         <documentation>13351: Angir om det er anlegg for lading av tungbil på eller i tilknytning til døgnhvileplassen utover eventuelt tilbud om lading på de faste oppstillingsplassene. Se også  egenskap 13043 "Antall oppstillingsplasser med lading, store kjt.".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13351</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Øvrig tungbil-lading</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ØvrigTungbil_LadingDøgnhvileplassEnumerationType nvdb:ØvrigTungbil_LadingDøgnhvileplassOtherType"/>
+   </simpleType>
+   <simpleType name="ØvrigTungbil_LadingDøgnhvileplassEnumerationType">
+      <annotation>
+         <documentation>13351: Angir om det er anlegg for lading av tungbil på eller i tilknytning til døgnhvileplassen utover eventuelt tilbud om lading på de faste oppstillingsplassene. Se også  egenskap 13043 "Antall oppstillingsplasser med lading, store kjt.".</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13351</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Øvrig tungbil-lading</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23331</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23332</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ØvrigTungbil_LadingDøgnhvileplassOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

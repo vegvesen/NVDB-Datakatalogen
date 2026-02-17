@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>886: Strekning/rute som anbefales for omkjøring for en eller flere stengningslenker.</documentation>
    </annotation>
@@ -48,6 +48,15 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17434</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Lette kjøretøy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="t">
+            <annotation>
+               <documentation>17436: Omkjøringsrute egner seg maksimalt for kjøretøy i kategorien tømmertransport. (60 tonn, 24 meter). Kjøring med modulvogntog og spesialberedskap må avklares spesielt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17436</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tømmertransport</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -198,6 +207,24 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="nummer" type="string">
+                  <annotation>
+                     <documentation>10708: Angir nummer</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10708</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="status" type="nvdb:StatusOmkjøringsruteType">
+                  <annotation>
+                     <documentation>10701: Beskrivelse av omkjøringsrute. Informasjon som kan være relevant for trafikk på strekningen. Ta gjerne med viapunkt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10701</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
             </sequence>
          </extension>
       </complexContent>
@@ -249,6 +276,50 @@
       </restriction>
    </simpleType>
    <simpleType name="RetningOmkjøringsruteOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusOmkjøringsruteType">
+      <annotation>
+         <documentation>10701: Beskrivelse av omkjøringsrute. Informasjon som kan være relevant for trafikk på strekningen. Ta gjerne med viapunkt</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10701</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StatusOmkjøringsruteEnumerationType nvdb:StatusOmkjøringsruteOtherType"/>
+   </simpleType>
+   <simpleType name="StatusOmkjøringsruteEnumerationType">
+      <annotation>
+         <documentation>10701: Beskrivelse av omkjøringsrute. Informasjon som kan være relevant for trafikk på strekningen. Ta gjerne med viapunkt</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10701</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="TV">
+            <annotation>
+               <documentation>22523: Omkjøringsrute er ikke ofisiell omkjøringsrute.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22523</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ikke offisiell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="O">
+            <annotation>
+               <documentation>22524: Omkjøringsrute er offisiell og godkjent både av vegeier den er omkjøring for og eier av vegen den ligger på.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22524</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Offisiell</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusOmkjøringsruteOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

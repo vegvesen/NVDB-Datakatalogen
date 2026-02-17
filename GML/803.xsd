@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>803: Liten dør til å stenge en åpning med. Brukes hovedsakelig for åpninger i tunnelhvelv.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BruksområdeInspeksjonslukeType">
+   <simpleType name="BruksområdeLukeType">
       <annotation>
          <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:BruksområdeInspeksjonslukeEnumerationType nvdb:BruksområdeInspeksjonslukeOtherType"/>
+      <union memberTypes="nvdb:BruksområdeLukeEnumerationType nvdb:BruksområdeLukeOtherType"/>
    </simpleType>
-   <simpleType name="BruksområdeInspeksjonslukeEnumerationType">
+   <simpleType name="BruksområdeLukeEnumerationType">
       <annotation>
          <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
          <appinfo>
@@ -35,6 +35,7 @@
       <restriction base="string">
          <enumeration value="a">
             <annotation>
+               <documentation>23078: Bruksområde presiseres under Tilleggsinformasjon.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23078</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
@@ -43,6 +44,7 @@
          </enumeration>
          <enumeration value="i">
             <annotation>
+               <documentation>23075: Gjelder inspeksjon av berg og bergsikring bak hvelv i tunnel.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23075</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Inspeksjon</sc:taggedValue>
@@ -67,27 +69,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="BruksområdeInspeksjonslukeOtherType">
+   <simpleType name="BruksområdeLukeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Inspeksjonsluke"
+   <element name="Luke"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:InspeksjonslukeType">
+            type="nvdb:LukeType">
       <annotation>
          <documentation>803: Liten dør til å stenge en åpning med. Brukes hovedsakelig for åpninger i tunnelhvelv.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">803</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Inspeksjonsluke</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luke</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="InspeksjonslukeType">
+   <complexType name="LukeType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="bruksområde" type="nvdb:BruksområdeInspeksjonslukeType">
+               <element name="bruksområde" type="nvdb:BruksområdeLukeType">
                   <annotation>
                      <documentation>13177: Angir hva vegobjektet brukes til.</documentation>
                      <appinfo>
@@ -114,7 +116,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="materiale" type="nvdb:MaterialeInspeksjonslukeType">
+               <element name="materiale" type="nvdb:MaterialeLukeType">
                   <annotation>
                      <documentation>13178: Angir materiale.</documentation>
                      <appinfo>
@@ -197,7 +199,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligInspeksjonslukeType">
+                        type="nvdb:VedlikeholdsansvarligLukeType">
                   <annotation>
                      <documentation>10976: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
                      <appinfo>
@@ -227,14 +229,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="InspeksjonslukePropertyType">
+   <complexType name="LukePropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Inspeksjonsluke"/>
+         <element ref="nvdb:Luke"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="MaterialeInspeksjonslukeType">
+   <simpleType name="MaterialeLukeType">
       <annotation>
          <documentation>13178: Angir materiale.</documentation>
          <appinfo>
@@ -242,9 +244,9 @@
             <sc:taggedValue tag="NVDB_navn">Materiale</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:MaterialeInspeksjonslukeEnumerationType nvdb:MaterialeInspeksjonslukeOtherType"/>
+      <union memberTypes="nvdb:MaterialeLukeEnumerationType nvdb:MaterialeLukeOtherType"/>
    </simpleType>
-   <simpleType name="MaterialeInspeksjonslukeEnumerationType">
+   <simpleType name="MaterialeLukeEnumerationType">
       <annotation>
          <documentation>13178: Angir materiale.</documentation>
          <appinfo>
@@ -271,12 +273,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="MaterialeInspeksjonslukeOtherType">
+   <simpleType name="MaterialeLukeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="NormalStillingInspeksjonslukeType">
+   <simpleType name="NormalStillingLukeType">
       <annotation>
          <documentation>13179: Angir normal stilling.</documentation>
          <appinfo>
@@ -284,9 +286,9 @@
             <sc:taggedValue tag="NVDB_navn">Normal stilling</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:NormalStillingInspeksjonslukeEnumerationType nvdb:NormalStillingInspeksjonslukeOtherType"/>
+      <union memberTypes="nvdb:NormalStillingLukeEnumerationType nvdb:NormalStillingLukeOtherType"/>
    </simpleType>
-   <simpleType name="NormalStillingInspeksjonslukeEnumerationType">
+   <simpleType name="NormalStillingLukeEnumerationType">
       <annotation>
          <documentation>13179: Angir normal stilling.</documentation>
          <appinfo>
@@ -313,12 +315,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="NormalStillingInspeksjonslukeOtherType">
+   <simpleType name="NormalStillingLukeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligInspeksjonslukeType">
+   <simpleType name="VedlikeholdsansvarligLukeType">
       <annotation>
          <documentation>10976: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -326,9 +328,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligInspeksjonslukeEnumerationType nvdb:VedlikeholdsansvarligInspeksjonslukeOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligLukeEnumerationType nvdb:VedlikeholdsansvarligLukeOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligInspeksjonslukeEnumerationType">
+   <simpleType name="VedlikeholdsansvarligLukeEnumerationType">
       <annotation>
          <documentation>10976: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -395,7 +397,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligInspeksjonslukeOtherType">
+   <simpleType name="VedlikeholdsansvarligLukeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

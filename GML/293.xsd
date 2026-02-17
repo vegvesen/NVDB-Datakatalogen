@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>293: Målt bredde gjeldende over en strekning. Breddemåling må være "datter" til annet vegojekt.</documentation>
    </annotation>
@@ -74,6 +74,24 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="målemetode">
+                  <annotation>
+                     <documentation>3108: Angir om en breddemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3108</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7717: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7717</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -131,6 +149,48 @@
       </restriction>
    </simpleType>
    <simpleType name="BreddemålingKvalitetOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="BreddemålingMålemetodeType">
+      <annotation>
+         <documentation>3108: Angir om en breddemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3108</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BreddemålingMålemetodeEnumerationType nvdb:BreddemålingMålemetodeOtherType"/>
+   </simpleType>
+   <simpleType name="BreddemålingMålemetodeEnumerationType">
+      <annotation>
+         <documentation>3108: Angir om en breddemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3108</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4616</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skrå</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4617</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trapp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BreddemålingMålemetodeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

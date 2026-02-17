@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>468: Reservestrømskilde bl.a. i forbindelse med tunneler.</documentation>
    </annotation>
@@ -35,6 +35,7 @@
       <restriction base="string">
          <enumeration value="NN">
             <annotation>
+               <documentation>19681: UPS brukes til nødnett.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">19681</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
@@ -314,48 +315,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="batteripakke_Spenning" type="double">
-                  <annotation>
-                     <documentation>10044: Angir spenningen på hver batteripakke.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10044</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Batteripakke, spenning</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="batteripakke_Antall" type="integer">
-                  <annotation>
-                     <documentation>3844: Angir hvor mange batteripakker UPS har tilkoblet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3844</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Batteripakke, antall</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="antallEnkeltbatterier" type="double">
-                  <annotation>
-                     <documentation>10893: Angir hvor mange enkeltbatterier UPS har tilkoplet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10893</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Antall enkeltbatterier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element name="integrerteBatterier">
                   <annotation>
                      <documentation>12106: Angir om det er integrerte batterier eller ikke. Integrerte batterier vil si en enhet hvor både UPS og batteriene er innenfor en og samme kapsling eller som et rack.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">12106</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Integrerte batterier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="batteripakke_SkiftetÅr" type="double">
-                  <annotation>
-                     <documentation>11220: Angir hvilket år batteripakke var ny/skiftet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">11220</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Batteripakke, skiftet år</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -395,21 +360,21 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produsent_UPS" type="string">
+               <element name="produsent" type="string">
                   <annotation>
                      <documentation>10042: Angir navn på produsent/fabrikant av UPS-enheten.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10042</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Produsent, UPS</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produktnavn_UPS" type="string">
+               <element name="produktnavn" type="string">
                   <annotation>
                      <documentation>10041: Angir produktnavn for UPS-enheten. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10041</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Produktnavn, UPS</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -484,6 +449,51 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4985</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fabrikant" type="string">
+                  <annotation>
+                     <documentation>3541: Angir hvem som har fabrikkert vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3541</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fabrikant</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3631: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3631</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="leverandør" type="string">
+                  <annotation>
+                     <documentation>3674: Angir hvem som har levert vegobjekt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3674</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>3804: Angir produktnavn/typebetegnelse, kan også ta med typenummer</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3804</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sistSkiftetBatteri" type="date">
+                  <annotation>
+                     <documentation>3883: Angir dato for forrige batteriskifte</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3883</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sist skiftet batteri</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

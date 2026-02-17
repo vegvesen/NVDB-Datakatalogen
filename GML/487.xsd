@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>487: Sted for på og avstigning av kollektivtrafikk.</documentation>
    </annotation>
@@ -973,6 +973,51 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7782: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7782</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="reposVenteareal">
+                  <annotation>
+                     <documentation>3961: Angir om det er repos/venteareal i tilknytning til holdeplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3961</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sittemulighetUtenforLeskur">
+                  <annotation>
+                     <documentation>3964: Angir om det er sittemulighet utenfor leskur</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3964</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sittemulighet utenfor leskur</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stativForRutetabell">
+                  <annotation>
+                     <documentation>3960: Angir om det på holdeplass er eget stativ for rutetabell</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3960</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="trafikkretning_Nett">
+                  <annotation>
+                     <documentation>10214: Angir hvilken trafikkretning som betjenes sett i forhold til transportårens retning. I vegsammenheng vil det si i forhold til metreringsretning. Mest aktuelt for veg og bane.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10214</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Trafikkretning, nett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -1617,6 +1662,48 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="ReposVentearealHoldeplassutrustningType">
+      <annotation>
+         <documentation>3961: Angir om det er repos/venteareal i tilknytning til holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3961</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ReposVentearealHoldeplassutrustningEnumerationType nvdb:ReposVentearealHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="ReposVentearealHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>3961: Angir om det er repos/venteareal i tilknytning til holdeplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3961</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4982</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4983</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ReposVentearealHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="SanntidsinformasjonHoldeplassutrustningType">
       <annotation>
          <documentation>10209: Angir om det er skjerm med sanntidsinformasjon på Holdeplassutrustning.</documentation>
@@ -1727,6 +1814,90 @@
       </restriction>
    </simpleType>
    <simpleType name="SittemulighetHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SittemulighetUtenforLeskurHoldeplassutrustningType">
+      <annotation>
+         <documentation>3964: Angir om det er sittemulighet utenfor leskur</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3964</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittemulighet utenfor leskur</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SittemulighetUtenforLeskurHoldeplassutrustningEnumerationType nvdb:SittemulighetUtenforLeskurHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="SittemulighetUtenforLeskurHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>3964: Angir om det er sittemulighet utenfor leskur</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3964</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Sittemulighet utenfor leskur</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4990</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4991</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SittemulighetUtenforLeskurHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StativForRutetabellHoldeplassutrustningType">
+      <annotation>
+         <documentation>3960: Angir om det på holdeplass er eget stativ for rutetabell</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3960</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StativForRutetabellHoldeplassutrustningEnumerationType nvdb:StativForRutetabellHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="StativForRutetabellHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>3960: Angir om det på holdeplass er eget stativ for rutetabell</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3960</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4980</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4981</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StativForRutetabellHoldeplassutrustningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -1878,6 +2049,15 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16620</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Åpent overbygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="nei">
+            <annotation>
+               <documentation>16616: Holdeplassutrustning er plassert i undergrunn. F.eks T-banestasjon.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16616</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I undergrunn</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -2039,6 +2219,59 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="Trafikkretning_NettHoldeplassutrustningType">
+      <annotation>
+         <documentation>10214: Angir hvilken trafikkretning som betjenes sett i forhold til transportårens retning. I vegsammenheng vil det si i forhold til metreringsretning. Mest aktuelt for veg og bane.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10214</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikkretning, nett</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Trafikkretning_NettHoldeplassutrustningEnumerationType nvdb:Trafikkretning_NettHoldeplassutrustningOtherType"/>
+   </simpleType>
+   <simpleType name="Trafikkretning_NettHoldeplassutrustningEnumerationType">
+      <annotation>
+         <documentation>10214: Angir hvilken trafikkretning som betjenes sett i forhold til transportårens retning. I vegsammenheng vil det si i forhold til metreringsretning. Mest aktuelt for veg og bane.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10214</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Trafikkretning, nett</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="begge">
+            <annotation>
+               <documentation>16661: Betjener begge retninger. Typisk for endeholdeplassr, holdeplass på jernbane osv.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16661</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Begge</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="med">
+            <annotation>
+               <documentation>16662: Betjener trafikk med nettretningen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16662</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Med nettretning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="mot">
+            <annotation>
+               <documentation>16663: Betjener trafikk mot nettretningen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16663</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Mot nettretning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Trafikkretning_NettHoldeplassutrustningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeHoldeplassutrustningType">
       <annotation>
          <documentation>3956: Angir hvilken type holdeplassutrustning det er tale om.</documentation>
@@ -2109,6 +2342,30 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16688</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Signalstopp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4975</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bussholdeplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="d">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4971</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Drosjeholdeplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4974</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trikk</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

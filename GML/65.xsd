@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>65: Bygning i tilknytning til vegen.</documentation>
    </annotation>
@@ -90,6 +90,15 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="to">
+            <annotation>
+               <documentation>3441: Bygning benyttet i forbindelse med strømforsyning. Gjerne også benevnt "Trafostasjon".</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3441</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nettstasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
          <enumeration value="ps">
             <annotation>
                <appinfo>
@@ -150,14 +159,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="to">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3441</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Trafostasjon</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="tø">
             <annotation>
                <appinfo>
@@ -171,6 +172,15 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22985</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Gapahuk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="stu">
+            <annotation>
+               <documentation>21924: Bygning som benyttes for skredteknisk utstyr</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">21924</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skredteknisk utstyr</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -396,12 +406,39 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="område" type="gml:SurfacePropertyType">
+               <element name="område" type="gml:SurfacePropertyType">
                   <annotation>
                      <documentation>9340: Gir flate/polygon som geometrisk representerer ytre omriss av bygning.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9340</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="type" type="nvdb:TypeBygningType">
+                  <annotation>
+                     <documentation>1128: Angir hvilken type vegobjektet er av</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1128</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="høyde_Møne" type="double">
+                  <annotation>
+                     <documentation>1583: Angir høyde for vegobjektet. Møne/takhøyde over bakkenivå.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1583</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde, møne</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7640: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7640</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -659,6 +696,14 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="3">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">22650</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">I undergang/kulvert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="PlasseringBygningOtherType">
@@ -746,6 +791,48 @@
       </restriction>
    </simpleType>
    <simpleType name="TaktypeBygningOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBygningType">
+      <annotation>
+         <documentation>1128: Angir hvilken type vegobjektet er av</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1128</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeBygningEnumerationType nvdb:TypeBygningOtherType"/>
+   </simpleType>
+   <simpleType name="TypeBygningEnumerationType">
+      <annotation>
+         <documentation>1128: Angir hvilken type vegobjektet er av</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1128</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="b">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3432</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bod/brakke</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3435</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Større bygg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeBygningOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

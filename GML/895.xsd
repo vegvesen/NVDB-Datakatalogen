@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>895: Punkt/strekning i vegnettet hvor det er økt risiko og sårbarhet for langvarige fremkommelighetsbrudd. Merknad: Skal ha minst 10 meters utstrekning.</documentation>
    </annotation>
@@ -259,6 +259,14 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17432</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Vind</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Tilsiktede hendelser">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17428</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tilsiktede hendelser</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -708,6 +716,107 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="AnalysenivåVegROSType">
+      <annotation>
+         <documentation>10770: Angir hvilket analysenivå som er gjennomført</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10770</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Analysenivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AnalysenivåVegROSEnumerationType nvdb:AnalysenivåVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="AnalysenivåVegROSEnumerationType">
+      <annotation>
+         <documentation>10770: Angir hvilket analysenivå som er gjennomført</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10770</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Analysenivå</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="D">
+            <annotation>
+               <documentation>17450: Fagmiljøer eller andre miljøers mer omfattende og detaljerte analyse, tilsvarende detaljerte analyse i VegCIM ROS</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17450</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Detaljert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="F">
+            <annotation>
+               <documentation>17449: Fagmiljøer eller andre miljøers mer omfattende analyse, tilsvarende forenklet analyse i VegCIM ROS</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17449</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Forenklet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="G">
+            <annotation>
+               <documentation>17448: Analysegruppens vurdering etter retningslinjer for VegROS. Tilsvarende grovanalyse i VegCIM ROS</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17448</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Grov</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AnalysenivåVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HyppighetVegROSType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11018</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Hyppighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HyppighetVegROSEnumerationType nvdb:HyppighetVegROSOtherType"/>
+   </simpleType>
+   <simpleType name="HyppighetVegROSEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11018</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Hyppighet</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18443</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Jevnlig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="o">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18444</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ofte</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18442</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sjelden</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HyppighetVegROSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="VegROS"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:VegROSType">
@@ -904,6 +1013,23 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11011</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, hjelpelinje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="analysenivå" type="nvdb:AnalysenivåVegROSType">
+                  <annotation>
+                     <documentation>10770: Angir hvilket analysenivå som er gjennomført</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10770</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Analysenivå</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="hyppighet" type="nvdb:HyppighetVegROSType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11018</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Hyppighet</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

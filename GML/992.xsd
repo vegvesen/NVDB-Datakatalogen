@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>992: Kabel for distribusjon av DAB/nødnett-signaler.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="EierStrålekabel (test)Type">
+   <simpleType name="EierStrålekabelType">
       <annotation>
          <documentation>12724: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierStrålekabel (test)EnumerationType nvdb:EierStrålekabel (test)OtherType"/>
+      <union memberTypes="nvdb:EierStrålekabelEnumerationType nvdb:EierStrålekabelOtherType"/>
    </simpleType>
-   <simpleType name="EierStrålekabel (test)EnumerationType">
+   <simpleType name="EierStrålekabelEnumerationType">
       <annotation>
          <documentation>12724: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,23 +84,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierStrålekabel (test)OtherType">
+   <simpleType name="EierStrålekabelOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Strålekabel (test)"
+   <element name="Strålekabel"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Strålekabel (test)Type">
+            type="nvdb:StrålekabelType">
       <annotation>
          <documentation>992: Kabel for distribusjon av DAB/nødnett-signaler.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">992</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Strålekabel (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strålekabel</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Strålekabel (test)Type">
+   <complexType name="StrålekabelType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -140,6 +140,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="leverandør" type="string">
+                  <annotation>
+                     <documentation>13356: Angir navn på firma som har levert vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13356</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="tilleggsinformasjon" type="string">
                   <annotation>
                      <documentation>12714: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
@@ -167,7 +176,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierStrålekabel (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierStrålekabelType">
                   <annotation>
                      <documentation>12724: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -178,7 +187,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligStrålekabel (test)Type">
+                        type="nvdb:VedlikeholdsansvarligStrålekabelType">
                   <annotation>
                      <documentation>12734: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -208,14 +217,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Strålekabel (test)PropertyType">
+   <complexType name="StrålekabelPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Strålekabel (test)"/>
+         <element ref="nvdb:Strålekabel"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligStrålekabel (test)Type">
+   <simpleType name="VedlikeholdsansvarligStrålekabelType">
       <annotation>
          <documentation>12734: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -223,9 +232,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligStrålekabel (test)EnumerationType nvdb:VedlikeholdsansvarligStrålekabel (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligStrålekabelEnumerationType nvdb:VedlikeholdsansvarligStrålekabelOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligStrålekabel (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligStrålekabelEnumerationType">
       <annotation>
          <documentation>12734: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -292,7 +301,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligStrålekabel (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligStrålekabelOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

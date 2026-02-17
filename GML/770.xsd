@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>770: Overfart som trafikkeres av bilferje. Kan ha to eller flere anløpssteder.</documentation>
    </annotation>
@@ -14,6 +14,48 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AutoPASSForFerjeFerjesambandType">
+      <annotation>
+         <documentation>13275: Angir om ferjesambander er med i AutoPASS for ferje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13275</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">AutoPASS for ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AutoPASSForFerjeFerjesambandEnumerationType nvdb:AutoPASSForFerjeFerjesambandOtherType"/>
+   </simpleType>
+   <simpleType name="AutoPASSForFerjeFerjesambandEnumerationType">
+      <annotation>
+         <documentation>13275: Angir om ferjesambander er med i AutoPASS for ferje.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13275</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">AutoPASS for ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23198</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23199</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AutoPASSForFerjeFerjesambandOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="DriftsstatusFerjesambandType">
       <annotation>
          <appinfo>
@@ -125,6 +167,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="autoPASSForFerje">
+                  <annotation>
+                     <documentation>13275: Angir om ferjesambander er med i AutoPASS for ferje.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13275</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">AutoPASS for ferje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element name="driftsstatus" type="nvdb:DriftsstatusFerjesambandType">
                   <annotation>
                      <appinfo>
@@ -158,6 +209,51 @@
                         <sc:taggedValue tag="NVDB_ID">12598</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Drift til dato</sc:taggedValue>
                      </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="utaskjærs"
+                        type="nvdb:UtaskjærsFerjesambandType">
+                  <annotation>
+                     <documentation>7860: Angir om deler av overfarten går utaskjærs.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7860</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Utaskjærs</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>9190: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9190</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="GFDB_Id" type="integer">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9188</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">gFDB_Id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>8869: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8869</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
                   </annotation>
                </element>
             </sequence>
@@ -229,6 +325,48 @@
       </restriction>
    </simpleType>
    <simpleType name="SambandstypeFerjesambandOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtaskjærsFerjesambandType">
+      <annotation>
+         <documentation>7860: Angir om deler av overfarten går utaskjærs.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7860</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utaskjærs</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:UtaskjærsFerjesambandEnumerationType nvdb:UtaskjærsFerjesambandOtherType"/>
+   </simpleType>
+   <simpleType name="UtaskjærsFerjesambandEnumerationType">
+      <annotation>
+         <documentation>7860: Angir om deler av overfarten går utaskjærs.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7860</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Utaskjærs</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9968</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9969</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="UtaskjærsFerjesambandOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

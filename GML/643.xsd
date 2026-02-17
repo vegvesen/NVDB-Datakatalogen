@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>643: Aggregert informasjon ifbm PMS-rapport 2603. 20220228:Benyttes kun for historiske data.</documentation>
    </annotation>
@@ -152,6 +152,54 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="KjøretøytypeStatistikk, trafikkmengde (Historisk)Type">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6068</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kjøretøytype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KjøretøytypeStatistikk, trafikkmengde (Historisk)EnumerationType nvdb:KjøretøytypeStatistikk, trafikkmengde (Historisk)OtherType"/>
+   </simpleType>
+   <simpleType name="KjøretøytypeStatistikk, trafikkmengde (Historisk)EnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6068</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kjøretøytype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="A">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8405</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Alle</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8403</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Korte</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="L">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8404</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lange</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KjøretøytypeStatistikk, trafikkmengde (Historisk)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Statistikk, trafikkmengde (Historisk)"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:Statistikk, trafikkmengde (Historisk)Type">
@@ -293,6 +341,32 @@
                         <sc:taggedValue tag="NVDB_ID">7929</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Største andel lange</sc:taggedValue>
                      </appinfo>
+                  </annotation>
+               </element>
+               <element name="kjøretøytype"
+                        type="nvdb:KjøretøytypeStatistikk, trafikkmengde (Historisk)Type">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6068</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kjøretøytype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>8853: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8853</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
                   </annotation>
                </element>
             </sequence>

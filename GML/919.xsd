@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>919: Sideanlegg som trenger egne referanselenker forvaltningsmessig sett fordi disse ikke er en del av vegen for øvrig.</documentation>
    </annotation>
@@ -38,6 +38,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="type" type="nvdb:TypeSideanleggType">
+                  <annotation>
+                     <documentation>11293: Type</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11293</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
             </sequence>
          </extension>
       </complexContent>
@@ -49,4 +58,38 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="TypeSideanleggType">
+      <annotation>
+         <documentation>11293: Type</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11293</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeSideanleggEnumerationType nvdb:TypeSideanleggOtherType"/>
+   </simpleType>
+   <simpleType name="TypeSideanleggEnumerationType">
+      <annotation>
+         <documentation>11293: Type</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11293</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19048</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rasteplass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeSideanleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

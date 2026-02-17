@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.43">
+   <annotation>
+      <documentation>1009: Plass/område som kan benyttes i forbindelse med redningsoppdrag i tunnel.</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="AdkomstBeredskapsplass (test)Type">
+      <annotation>
+         <documentation>13320: Angir adkomst til beredskapsplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13320</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:AdkomstBeredskapsplass (test)EnumerationType nvdb:AdkomstBeredskapsplass (test)OtherType"/>
+   </simpleType>
+   <simpleType name="AdkomstBeredskapsplass (test)EnumerationType">
+      <annotation>
+         <documentation>13320: Angir adkomst til beredskapsplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13320</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Adkomst</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ft">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23274</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fritt tilgjengelig</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23275</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Låst bom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="AdkomstBeredskapsplass (test)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Beredskapsplass (test)"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:Beredskapsplass (test)Type">
+      <annotation>
+         <documentation>1009: Plass/område som kan benyttes i forbindelse med redningsoppdrag i tunnel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1009</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Beredskapsplass (test)</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="Beredskapsplass (test)Type">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="navn" type="string">
+                  <annotation>
+                     <documentation>13277: Angir navn på beredskapsplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13277</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Navn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="areal" type="double">
+                  <annotation>
+                     <documentation>13278: Angir areal av vegobjekttype.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13278</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="adkomst" type="nvdb:AdkomstBeredskapsplass (test)Type">
+                  <annotation>
+                     <documentation>13320: Angir adkomst til beredskapsplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13320</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Adkomst</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="tilrettelagtForHelikopter">
+                  <annotation>
+                     <documentation>13286: Angir om beredskapsplassen er tilrettelagt for helikopter.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13286</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilrettelagt for helikopter</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vinterdriftsklasse"
+                        type="nvdb:VinterdriftsklasseBeredskapsplass (test)Type">
+                  <annotation>
+                     <documentation>13280: Beskriver hvilken standard for vinterdrift som skal gjelde for beredskapsplassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13280</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>13279: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13279</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>13281: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13281</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>13282: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13282</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="eier"
+                        type="nvdb:EierBeredskapsplass (test)Type">
+                  <annotation>
+                     <documentation>13283: Angir hvem som er eier av beredskapsplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13283</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligBeredskapsplass (test)Type">
+                  <annotation>
+                     <documentation>13284: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13284</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>13285: Gir flate/polygon som geometrisk avgrenser beredskapsplassen.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13285</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="Beredskapsplass (test)PropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Beredskapsplass (test)"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="EierBeredskapsplass (test)Type">
+      <annotation>
+         <documentation>13283: Angir hvem som er eier av beredskapsplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13283</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EierBeredskapsplass (test)EnumerationType nvdb:EierBeredskapsplass (test)OtherType"/>
+   </simpleType>
+   <simpleType name="EierBeredskapsplass (test)EnumerationType">
+      <annotation>
+         <documentation>13283: Angir hvem som er eier av beredskapsplassen.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13283</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23207</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23203</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23205</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23208</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23202</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stat, Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23206</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EierBeredskapsplass (test)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilrettelagtForHelikopterBeredskapsplass (test)Type">
+      <annotation>
+         <documentation>13286: Angir om beredskapsplassen er tilrettelagt for helikopter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13286</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for helikopter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilrettelagtForHelikopterBeredskapsplass (test)EnumerationType nvdb:TilrettelagtForHelikopterBeredskapsplass (test)OtherType"/>
+   </simpleType>
+   <simpleType name="TilrettelagtForHelikopterBeredskapsplass (test)EnumerationType">
+      <annotation>
+         <documentation>13286: Angir om beredskapsplassen er tilrettelagt for helikopter.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13286</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilrettelagt for helikopter</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23224</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23225</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilrettelagtForHelikopterBeredskapsplass (test)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligBeredskapsplass (test)Type">
+      <annotation>
+         <documentation>13284: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13284</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligBeredskapsplass (test)EnumerationType nvdb:VedlikeholdsansvarligBeredskapsplass (test)OtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligBeredskapsplass (test)EnumerationType">
+      <annotation>
+         <documentation>13284: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13284</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="FK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23211</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23213</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23210</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nye Veier</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="OPS">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23212</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">OPS</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23214</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SVV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23209</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="U">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23215</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligBeredskapsplass (test)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseBeredskapsplass (test)Type">
+      <annotation>
+         <documentation>13280: Beskriver hvilken standard for vinterdrift som skal gjelde for beredskapsplassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13280</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VinterdriftsklasseBeredskapsplass (test)EnumerationType nvdb:VinterdriftsklasseBeredskapsplass (test)OtherType"/>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseBeredskapsplass (test)EnumerationType">
+      <annotation>
+         <documentation>13280: Beskriver hvilken standard for vinterdrift som skal gjelde for beredskapsplassen. (Se også vegobjekttype 810-Vinterdriftsklasse).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13280</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vinterdriftsklasse</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="DkA">
+            <annotation>
+               <documentation>23222: Godkjent føreforhold er bar veg (tørr eller våt). Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23222</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkA</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBh">
+            <annotation>
+               <documentation>23219: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Høyt tidskrav. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23219</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, høy</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBl">
+            <annotation>
+               <documentation>23221: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Lavt tidskrav. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23221</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, lav</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkBm">
+            <annotation>
+               <documentation>23220: Godkjent føreforhold er bar veg (tørr eller våt), hard snø/is tillates utenom hjulspor i begrenset tidsrom. Middels tidskrav. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23220</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkB, middels</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkC">
+            <annotation>
+               <documentation>23218: Godkjent føreforhold er bar veg (tørr eller våt) i milde perioder og hard snø/is i kalde perioder. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23218</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkC</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkD">
+            <annotation>
+               <documentation>23217: Godkjent føreforhold er hard snø/is. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23217</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkD</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="DkE">
+            <annotation>
+               <documentation>23216: Godkjent føreforhold er hard snø/is. Friksjon ned til 0,20 aksepteres. DkE skal ikke nyttes på riksveg. Håndbok R610 (111).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23216</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">DkE</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="si">
+            <annotation>
+               <documentation>23223: Spesiell standard for sideanlegg.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23223</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sideanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VinterdriftsklasseBeredskapsplass (test)OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

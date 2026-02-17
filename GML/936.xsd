@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>936: Anlegg for varsling til trafikantene i tunnel.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="DynamikkHøyttalersystemType">
+   <simpleType name="DynamikkHøyttaleranleggType">
       <annotation>
          <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Dynamikk</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:DynamikkHøyttalersystemEnumerationType nvdb:DynamikkHøyttalersystemOtherType"/>
+      <union memberTypes="nvdb:DynamikkHøyttaleranleggEnumerationType nvdb:DynamikkHøyttaleranleggOtherType"/>
    </simpleType>
-   <simpleType name="DynamikkHøyttalersystemEnumerationType">
+   <simpleType name="DynamikkHøyttaleranleggEnumerationType">
       <annotation>
          <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
          <appinfo>
@@ -53,12 +53,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="DynamikkHøyttalersystemOtherType">
+   <simpleType name="DynamikkHøyttaleranleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierHøyttalersystemType">
+   <simpleType name="EierHøyttaleranleggType">
       <annotation>
          <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -66,9 +66,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierHøyttalersystemEnumerationType nvdb:EierHøyttalersystemOtherType"/>
+      <union memberTypes="nvdb:EierHøyttaleranleggEnumerationType nvdb:EierHøyttaleranleggOtherType"/>
    </simpleType>
-   <simpleType name="EierHøyttalersystemEnumerationType">
+   <simpleType name="EierHøyttaleranleggEnumerationType">
       <annotation>
          <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -128,27 +128,27 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierHøyttalersystemOtherType">
+   <simpleType name="EierHøyttaleranleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Høyttalersystem"
+   <element name="Høyttaleranlegg"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:HøyttalersystemType">
+            type="nvdb:HøyttaleranleggType">
       <annotation>
          <documentation>936: Anlegg for varsling til trafikantene i tunnel.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">936</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Høyttalersystem</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Høyttaleranlegg</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="HøyttalersystemType">
+   <complexType name="HøyttaleranleggType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element name="dynamikk" type="nvdb:DynamikkHøyttalersystemType">
+               <element name="dynamikk" type="nvdb:DynamikkHøyttaleranleggType">
                   <annotation>
                      <documentation>11492: Angir om det er mulig å gi forskjellig informasjon til trafikanter basert på hvor de er plassert i forhold til ev. Hendelsessted.</documentation>
                      <appinfo>
@@ -220,7 +220,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierHøyttalersystemType">
+               <element minOccurs="0" name="eier" type="nvdb:EierHøyttaleranleggType">
                   <annotation>
                      <documentation>11495: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -231,7 +231,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligHøyttalersystemType">
+                        type="nvdb:VedlikeholdsansvarligHøyttaleranleggType">
                   <annotation>
                      <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -261,14 +261,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="HøyttalersystemPropertyType">
+   <complexType name="HøyttaleranleggPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Høyttalersystem"/>
+         <element ref="nvdb:Høyttaleranlegg"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligHøyttalersystemType">
+   <simpleType name="VedlikeholdsansvarligHøyttaleranleggType">
       <annotation>
          <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -276,9 +276,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligHøyttalersystemEnumerationType nvdb:VedlikeholdsansvarligHøyttalersystemOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligHøyttaleranleggEnumerationType nvdb:VedlikeholdsansvarligHøyttaleranleggOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligHøyttalersystemEnumerationType">
+   <simpleType name="VedlikeholdsansvarligHøyttaleranleggEnumerationType">
       <annotation>
          <documentation>12817: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -345,7 +345,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligHøyttalersystemOtherType">
+   <simpleType name="VedlikeholdsansvarligHøyttaleranleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

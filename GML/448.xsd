@@ -5,16 +5,16 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
-      <documentation>448: Synk eller stigort, vertikalt eller sterkt skrånende rom i berg med stor utstrekning i lengdeaksen (Prosesskode-1).</documentation>
+      <documentation>448: Synk eller stigort, vertikalt eller sterkt skrånende rom i berg med stor utstrekning i lengdeaksen (Prosesskode-1). Sjakter som benyttes for utslipp av tunnelluft skal registreres. Det inkluderes også informasjon om eventuelle tårn/konstruksjoner på stedet der sjakt kommer ut i dagen.</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="EierTunnelsjaktType">
+   <simpleType name="EierTunnelsjakttårnType">
       <annotation>
          <documentation>8018: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierTunnelsjaktEnumerationType nvdb:EierTunnelsjaktOtherType"/>
+      <union memberTypes="nvdb:EierTunnelsjakttårnEnumerationType nvdb:EierTunnelsjakttårnOtherType"/>
    </simpleType>
-   <simpleType name="EierTunnelsjaktEnumerationType">
+   <simpleType name="EierTunnelsjakttårnEnumerationType">
       <annotation>
          <documentation>8018: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,29 +84,82 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierTunnelsjaktOtherType">
+   <simpleType name="EierTunnelsjakttårnOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Tunnelsjakt"
-            substitutionGroup="gml:AbstractFeature"
-            type="nvdb:TunnelsjaktType">
+   <simpleType name="LuftfartshinderNRLTunnelsjakttårnType">
       <annotation>
-         <documentation>448: Synk eller stigort, vertikalt eller sterkt skrånende rom i berg med stor utstrekning i lengdeaksen (Prosesskode-1).</documentation>
+         <documentation>13358: Angir om tårn/konstruksjon der tunnelsjakt kommer ut i dagen er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-11-27: Overføres pt. ikke til NRL automatisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13358</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LuftfartshinderNRLTunnelsjakttårnEnumerationType nvdb:LuftfartshinderNRLTunnelsjakttårnOtherType"/>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLTunnelsjakttårnEnumerationType">
+      <annotation>
+         <documentation>13358: Angir om tårn/konstruksjon der tunnelsjakt kommer ut i dagen er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-11-27: Overføres pt. ikke til NRL automatisk.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13358</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J1">
+            <annotation>
+               <documentation>23340: Tårn er definert som luftfartshinder. Datagrunnlag i NVDB er i henhold til krav fra NRL, bla. krav knyttet til nøyaktighet. Overføringsklient REX hart ikke funksjonalitet for overføring av disse datene til NRL, de må derfor overføres manuelt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23340</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="J2">
+            <annotation>
+               <documentation>23341: Tårn regnes for å være et luftfartshinder, men data er ikke klarert for overføring til NRL. Dette kan være pga mangelfulle data eller at data ikke er godt nok kvalitetssikret. Overføring til NRL avventes.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23341</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja, men ikke klarert for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>23342: Uststyrsmast  er ikke et luftfartshinder og skal ikke rapporteres til NRL.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23342</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei, ikke relevant for NRL</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LuftfartshinderNRLTunnelsjakttårnOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Tunnelsjakttårn"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:TunnelsjakttårnType">
+      <annotation>
+         <documentation>448: Synk eller stigort, vertikalt eller sterkt skrånende rom i berg med stor utstrekning i lengdeaksen (Prosesskode-1). Sjakter som benyttes for utslipp av tunnelluft skal registreres. Det inkluderes også informasjon om eventuelle tårn/konstruksjoner på stedet der sjakt kommer ut i dagen.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">448</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tunnelsjakt</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tunnelsjakttårn</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="TunnelsjaktType">
+   <complexType name="TunnelsjakttårnType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
                <element name="lengde" type="integer">
                   <annotation>
-                     <documentation>3106: Angir lengde av sjakt.</documentation>
+                     <documentation>3106: Angir lengde av sjakt. Regnes i sjaktens lengderetning fra innløp til utløp.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3106</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
@@ -115,7 +168,7 @@
                </element>
                <element minOccurs="0" name="høyde" type="double">
                   <annotation>
-                     <documentation>3872: Angir vegobjektets høyde.</documentation>
+                     <documentation>3872: Angir høyde av tunnelsjakten. Det vil si høyde av tunnelsjaktens tverrprofil.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3872</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Høyde</sc:taggedValue>
@@ -124,10 +177,28 @@
                </element>
                <element minOccurs="0" name="bredde" type="double">
                   <annotation>
-                     <documentation>3847: Angir bredde.</documentation>
+                     <documentation>3847: Angir bredde av tunnelsjakten. Det vil si bredde av tunnelsjaktens tverrprofil.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">3847</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="høydeTårn" type="double">
+                  <annotation>
+                     <documentation>13357: Angir høyde av tårn eller annen konstruksjon knyttet til sted hvor tunnelsjakten kommer ut i dagen. Høyde regnes fra bakkenivå til topp konstruksjon. Det angis verdi 0 om det ikke er noe tårn/konstruksjon i tilknytning til utløpsstedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13357</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde tårn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="luftfartshinderNRL">
+                  <annotation>
+                     <documentation>13358: Angir om tårn/konstruksjon der tunnelsjakt kommer ut i dagen er rapporteringspliktig til Nasjonalt register over luftfartshindre (NRL). Merknad 2025-11-27: Overføres pt. ikke til NRL automatisk.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13358</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Luftfartshinder NRL</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -149,7 +220,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierTunnelsjaktType">
+               <element minOccurs="0" name="eier" type="nvdb:EierTunnelsjakttårnType">
                   <annotation>
                      <documentation>8018: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -160,7 +231,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligTunnelsjaktType">
+                        type="nvdb:VedlikeholdsansvarligTunnelsjakttårnType">
                   <annotation>
                      <documentation>12820: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -178,12 +249,40 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+               <element name="senterlinje" type="gml:CurvePropertyType">
                   <annotation>
                      <documentation>8921: Gir linje/kurve som geometrisk representerer objektet.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">8921</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3104</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="basistverrsnitt" type="string">
+                  <annotation>
+                     <documentation>3103: Angir hvilken type basistverrsnitt tunnelsjakten har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3103</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Basistverrsnitt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligTunnelsjakttårnType">
+                  <annotation>
+                     <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -199,14 +298,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="TunnelsjaktPropertyType">
+   <complexType name="TunnelsjakttårnPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Tunnelsjakt"/>
+         <element ref="nvdb:Tunnelsjakttårn"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligTunnelsjaktType">
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnType">
       <annotation>
          <documentation>12820: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -214,9 +313,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelsjaktEnumerationType nvdb:VedlikeholdsansvarligTunnelsjaktOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelsjakttårnEnumerationType nvdb:VedlikeholdsansvarligTunnelsjakttårnOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTunnelsjaktEnumerationType">
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnEnumerationType">
       <annotation>
          <documentation>12820: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -283,7 +382,57 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligTunnelsjaktOtherType">
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnType">
+      <annotation>
+         <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelsjakttårnEnumerationType nvdb:VedlikeholdsansvarligTunnelsjakttårnOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnEnumerationType">
+      <annotation>
+         <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10641</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SvV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10485</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

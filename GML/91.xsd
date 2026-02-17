@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.41">
+        version="2.43">
    <annotation>
       <documentation>91: Innfatning med ett eller flere lys/lamper som til sammen danner et trafikklyssignal.</documentation>
    </annotation>
@@ -147,6 +147,56 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="LampetypeSignalhodeType">
+      <annotation>
+         <documentation>3647: Angir hvilken lampetype som benyttes</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3647</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lampetype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:LampetypeSignalhodeEnumerationType nvdb:LampetypeSignalhodeOtherType"/>
+   </simpleType>
+   <simpleType name="LampetypeSignalhodeEnumerationType">
+      <annotation>
+         <documentation>3647: Angir hvilken lampetype som benyttes</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3647</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Lampetype</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="22">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4731</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">220v</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lv">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4732</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lavvolt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ld">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4733</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lysdiode</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="LampetypeSignalhodeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="RetningSignalhodeType">
       <annotation>
          <documentation>5659: Angir hvilken retning signalhodet peker relatert til metreringsretning.</documentation>
@@ -199,6 +249,70 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">7984</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">9</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="01">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7976</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="10">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7985</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">10</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="11">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7986</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">11</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="02">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7977</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="04">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7979</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">4</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="05">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7980</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="07">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7982</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">7</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="08">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7983</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">8</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -385,6 +499,60 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4791</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="antall" type="integer">
+                  <annotation>
+                     <documentation>2201: Vegobjektet kan representere flere objekt av samme type. Vi angir her hvor mange objekt dette objektet representerer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2201</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3584: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3584</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="korrosjonsbeskyttelse" type="string">
+                  <annotation>
+                     <documentation>4046: Angir hvilken type korrosjonsbeskyttelse som er benyttet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4046</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="IP_Klasse" type="string">
+                  <annotation>
+                     <documentation>4033: Angir IP-klasse for et objekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4033</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">IP-klasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7661: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7661</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lampetype" type="nvdb:LampetypeSignalhodeType">
+                  <annotation>
+                     <documentation>3647: Angir hvilken lampetype som benyttes</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3647</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lampetype</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -687,6 +855,24 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23135</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Varsellys etter ATK-strekning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="b">
+            <annotation>
+               <documentation>17452: Signalhode som benyttes i tilknytning til bomstassjoner</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17452</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bomstasjonsignal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="p1">
+            <annotation>
+               <documentation>2994: Flyttet til 2995</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2994</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utgått_Kjtsig, pilsignal, 1 lys</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
