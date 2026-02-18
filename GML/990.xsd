@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>990: Radioforsterker (RFOR).</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="EierRadioforsterker (test)Type">
+   <simpleType name="EierRadioforsterkerType">
       <annotation>
          <documentation>12722: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierRadioforsterker (test)EnumerationType nvdb:EierRadioforsterker (test)OtherType"/>
+      <union memberTypes="nvdb:EierRadioforsterkerEnumerationType nvdb:EierRadioforsterkerOtherType"/>
    </simpleType>
-   <simpleType name="EierRadioforsterker (test)EnumerationType">
+   <simpleType name="EierRadioforsterkerEnumerationType">
       <annotation>
          <documentation>12722: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,23 +84,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierRadioforsterker (test)OtherType">
+   <simpleType name="EierRadioforsterkerOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Radioforsterker (test)"
+   <element name="Radioforsterker"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Radioforsterker (test)Type">
+            type="nvdb:RadioforsterkerType">
       <annotation>
          <documentation>990: Radioforsterker (RFOR).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">990</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Radioforsterker (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Radioforsterker</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Radioforsterker (test)Type">
+   <complexType name="RadioforsterkerType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -140,15 +140,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produktnavn" type="string">
-                  <annotation>
-                     <documentation>12780: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12780</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element minOccurs="0" name="tilleggsinformasjon" type="string">
                   <annotation>
                      <documentation>12712: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
@@ -185,9 +176,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0"
-                        name="eier"
-                        type="nvdb:EierRadioforsterker (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierRadioforsterkerType">
                   <annotation>
                      <documentation>12722: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -198,7 +187,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligRadioforsterker (test)Type">
+                        type="nvdb:VedlikeholdsansvarligRadioforsterkerType">
                   <annotation>
                      <documentation>12732: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -216,6 +205,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12780: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12780</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -228,14 +226,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Radioforsterker (test)PropertyType">
+   <complexType name="RadioforsterkerPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Radioforsterker (test)"/>
+         <element ref="nvdb:Radioforsterker"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligRadioforsterker (test)Type">
+   <simpleType name="VedlikeholdsansvarligRadioforsterkerType">
       <annotation>
          <documentation>12732: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -243,9 +241,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligRadioforsterker (test)EnumerationType nvdb:VedlikeholdsansvarligRadioforsterker (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligRadioforsterkerEnumerationType nvdb:VedlikeholdsansvarligRadioforsterkerOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadioforsterker (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligRadioforsterkerEnumerationType">
       <annotation>
          <documentation>12732: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -312,7 +310,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadioforsterker (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligRadioforsterkerOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

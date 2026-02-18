@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>1013: Alle stikkrenner, kulverter og bruer hvor fisken burde kunne passere, uavhengig av om det faktisk skjer. Stikkrenner, kulvert og bruer er typiske tiltak som har primærfunksjon knyttet til vannhåndtering, men som samtidig har sekundærfunksjon som fiskepassasje. Fiskepassasjer kan ha egne tiltak i form av feks vannspeil, kulper, terskler og fisketrapper og som krever særskilt drift og vedlikehold. Driften og vedlikeholdet av fiskepassasjer skal ivareta frie vandringsveger for både fisk og andre ferkvannssorganismer med egen evne til vandring.</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="BunnsubstratFiskepassasje (test)Type">
+   <simpleType name="BunnsubstratFiskepassasjeType">
       <annotation>
          <documentation>13342: Beskrivelse av bunnsubstrat i fiskepassasjen.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Bunnsubstrat</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:BunnsubstratFiskepassasje (test)EnumerationType nvdb:BunnsubstratFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:BunnsubstratFiskepassasjeEnumerationType nvdb:BunnsubstratFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="BunnsubstratFiskepassasje (test)EnumerationType">
+   <simpleType name="BunnsubstratFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13342: Beskrivelse av bunnsubstrat i fiskepassasjen.</documentation>
          <appinfo>
@@ -62,12 +62,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="BunnsubstratFiskepassasje (test)OtherType">
+   <simpleType name="BunnsubstratFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierFiskepassasje (test)Type">
+   <simpleType name="EierFiskepassasjeType">
       <annotation>
          <documentation>13337: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -75,9 +75,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierFiskepassasje (test)EnumerationType nvdb:EierFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:EierFiskepassasjeEnumerationType nvdb:EierFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="EierFiskepassasje (test)EnumerationType">
+   <simpleType name="EierFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13337: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -137,23 +137,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierFiskepassasje (test)OtherType">
+   <simpleType name="EierFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Fiskepassasje (test)"
+   <element name="Fiskepassasje"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Fiskepassasje (test)Type">
+            type="nvdb:FiskepassasjeType">
       <annotation>
          <documentation>1013: Alle stikkrenner, kulverter og bruer hvor fisken burde kunne passere, uavhengig av om det faktisk skjer. Stikkrenner, kulvert og bruer er typiske tiltak som har primærfunksjon knyttet til vannhåndtering, men som samtidig har sekundærfunksjon som fiskepassasje. Fiskepassasjer kan ha egne tiltak i form av feks vannspeil, kulper, terskler og fisketrapper og som krever særskilt drift og vedlikehold. Driften og vedlikeholdet av fiskepassasjer skal ivareta frie vandringsveger for både fisk og andre ferkvannssorganismer med egen evne til vandring.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">1013</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Fiskepassasje (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Fiskepassasje</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Fiskepassasje (test)Type">
+   <complexType name="FiskepassasjeType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -166,7 +166,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="type" type="nvdb:TypeFiskepassasje (test)Type">
+               <element name="type" type="nvdb:TypeFiskepassasjeType">
                   <annotation>
                      <documentation>13333: Angir hvilken type utforming passasjen har.</documentation>
                      <appinfo>
@@ -184,8 +184,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="vandringshinder"
-                        type="nvdb:VandringshinderFiskepassasje (test)Type">
+               <element name="vandringshinder" type="nvdb:VandringshinderFiskepassasjeType">
                   <annotation>
                      <documentation>13339: Angir om passasje er vandringshindrende for fisk og ferskvannsorganismer.</documentation>
                      <appinfo>
@@ -214,7 +213,7 @@
                </element>
                <element minOccurs="0"
                         name="bunnsubstrat"
-                        type="nvdb:BunnsubstratFiskepassasje (test)Type">
+                        type="nvdb:BunnsubstratFiskepassasjeType">
                   <annotation>
                      <documentation>13342: Beskrivelse av bunnsubstrat i fiskepassasjen.</documentation>
                      <appinfo>
@@ -225,7 +224,7 @@
                </element>
                <element minOccurs="0"
                         name="tiltakstype"
-                        type="nvdb:TiltakstypeFiskepassasje (test)Type">
+                        type="nvdb:TiltakstypeFiskepassasjeType">
                   <annotation>
                      <documentation>13343: Hovedtiltak for å sikre fiskens frie vandring. Øvrige tiltak beskrives i egenskapstype "Beskrivelse tiltak" (13345).</documentation>
                      <appinfo>
@@ -279,7 +278,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierFiskepassasje (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierFiskepassasjeType">
                   <annotation>
                      <documentation>13337: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -290,7 +289,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligFiskepassasje (test)Type">
+                        type="nvdb:VedlikeholdsansvarligFiskepassasjeType">
                   <annotation>
                      <documentation>13338: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
                      <appinfo>
@@ -326,15 +325,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="etableringsår" type="integer">
-                  <annotation>
-                     <documentation>13336: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">13336</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -347,14 +337,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Fiskepassasje (test)PropertyType">
+   <complexType name="FiskepassasjePropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Fiskepassasje (test)"/>
+         <element ref="nvdb:Fiskepassasje"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="StatusTiltakFiskepassasje (test)Type">
+   <simpleType name="StatusTiltakFiskepassasjeType">
       <annotation>
          <documentation>13344: Angir status for tiltak.</documentation>
          <appinfo>
@@ -362,9 +352,9 @@
             <sc:taggedValue tag="NVDB_navn">Status tiltak</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:StatusTiltakFiskepassasje (test)EnumerationType nvdb:StatusTiltakFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:StatusTiltakFiskepassasjeEnumerationType nvdb:StatusTiltakFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="StatusTiltakFiskepassasje (test)EnumerationType">
+   <simpleType name="StatusTiltakFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13344: Angir status for tiltak.</documentation>
          <appinfo>
@@ -382,15 +372,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="u">
-            <annotation>
-               <documentation>23330: Status er ukjent.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23330</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ukjent</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="ut">
             <annotation>
                <documentation>23328: Tiltak som er gjennomført.</documentation>
@@ -402,12 +383,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="StatusTiltakFiskepassasje (test)OtherType">
+   <simpleType name="StatusTiltakFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TiltaksbehovPrioriteringFiskepassasje (test)Type">
+   <simpleType name="TiltaksbehovPrioriteringFiskepassasjeType">
       <annotation>
          <documentation>13341: Vegeiers egen prioritering av tiltak for denne fiskepassasjen.</documentation>
          <appinfo>
@@ -415,9 +396,9 @@
             <sc:taggedValue tag="NVDB_navn">Tiltaksbehov prioritering</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TiltaksbehovPrioriteringFiskepassasje (test)EnumerationType nvdb:TiltaksbehovPrioriteringFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:TiltaksbehovPrioriteringFiskepassasjeEnumerationType nvdb:TiltaksbehovPrioriteringFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="TiltaksbehovPrioriteringFiskepassasje (test)EnumerationType">
+   <simpleType name="TiltaksbehovPrioriteringFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13341: Vegeiers egen prioritering av tiltak for denne fiskepassasjen.</documentation>
          <appinfo>
@@ -455,12 +436,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TiltaksbehovPrioriteringFiskepassasje (test)OtherType">
+   <simpleType name="TiltaksbehovPrioriteringFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TiltakstypeFiskepassasje (test)Type">
+   <simpleType name="TiltakstypeFiskepassasjeType">
       <annotation>
          <documentation>13343: Hovedtiltak for å sikre fiskens frie vandring. Øvrige tiltak beskrives i egenskapstype "Beskrivelse tiltak" (13345).</documentation>
          <appinfo>
@@ -468,9 +449,9 @@
             <sc:taggedValue tag="NVDB_navn">Tiltakstype</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TiltakstypeFiskepassasje (test)EnumerationType nvdb:TiltakstypeFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:TiltakstypeFiskepassasjeEnumerationType nvdb:TiltakstypeFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="TiltakstypeFiskepassasje (test)EnumerationType">
+   <simpleType name="TiltakstypeFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13343: Hovedtiltak for å sikre fiskens frie vandring. Øvrige tiltak beskrives i egenskapstype "Beskrivelse tiltak" (13345).</documentation>
          <appinfo>
@@ -524,15 +505,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="ia">
-            <annotation>
-               <documentation>23327: Ikke behov for tiltak for å sikre fiskens frie vandring.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23327</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ikke aktuell</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="os">
             <annotation>
                <documentation>23323: Ospestokker montert mot kulvertbunn.</documentation>
@@ -562,12 +534,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TiltakstypeFiskepassasje (test)OtherType">
+   <simpleType name="TiltakstypeFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="TypeFiskepassasje (test)Type">
+   <simpleType name="TypeFiskepassasjeType">
       <annotation>
          <documentation>13333: Angir hvilken type utforming passasjen har.</documentation>
          <appinfo>
@@ -575,9 +547,9 @@
             <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:TypeFiskepassasje (test)EnumerationType nvdb:TypeFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:TypeFiskepassasjeEnumerationType nvdb:TypeFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="TypeFiskepassasje (test)EnumerationType">
+   <simpleType name="TypeFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13333: Angir hvilken type utforming passasjen har.</documentation>
          <appinfo>
@@ -586,30 +558,12 @@
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="a">
-            <annotation>
-               <documentation>23338: Alle andre typer. Beskrives under Beskrivelse.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23338</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Annet</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="b">
             <annotation>
                <documentation>23336: Passasje der fisk vandrer under åpen brukonstruksjon.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23336</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Bru</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ft">
-            <annotation>
-               <documentation>23337: Passasje via fisketrapp i vannforekomsten som er tilknyttet veganlegget like opp- eller nedstrøms stikkrenne/kulvert/bru.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23337</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Fisketrapp</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -633,12 +587,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="TypeFiskepassasje (test)OtherType">
+   <simpleType name="TypeFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VandringshinderFiskepassasje (test)Type">
+   <simpleType name="VandringshinderFiskepassasjeType">
       <annotation>
          <documentation>13339: Angir om passasje er vandringshindrende for fisk og ferskvannsorganismer.</documentation>
          <appinfo>
@@ -646,9 +600,9 @@
             <sc:taggedValue tag="NVDB_navn">Vandringshinder</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VandringshinderFiskepassasje (test)EnumerationType nvdb:VandringshinderFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:VandringshinderFiskepassasjeEnumerationType nvdb:VandringshinderFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="VandringshinderFiskepassasje (test)EnumerationType">
+   <simpleType name="VandringshinderFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13339: Angir om passasje er vandringshindrende for fisk og ferskvannsorganismer.</documentation>
          <appinfo>
@@ -657,30 +611,12 @@
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="jd">
-            <annotation>
-               <documentation>23311: Dersom det er dokumentert at passasjen har menneskeskapt vandringshinder for enkelte arter, års- eller størrelsesklasser av fisk eller andre ferskvannsorganismer. Ikke akutt tiltaksbehov, men det må tas hensyn ved neste skifte av rør, kulvert eller bru.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23311</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, delvis</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
          <enumeration value="jf">
             <annotation>
                <documentation>23310: Dokumentert menneskapt vandringshinder med tiltaksbehov for å sikre fiskens frie vandring.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23310</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja, fiskesperre</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <documentation>23312: Dersom det finnes kunnskap som bekrefter at passasjen ikke har noen form for menneskeskapte vandringshindre og/eller der det er dokumentert at det gjennomført varig tiltak som sikrer fiskens frie vandring. Omfatter også naturlige vandringshindre.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23312</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sperre, nær absolutt hinder</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -693,14 +629,32 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <documentation>23312: Dersom det finnes kunnskap som bekrefter at passasjen ikke har noen form for menneskeskapte vandringshindre og/eller der det er dokumentert at det gjennomført varig tiltak som sikrer fiskens frie vandring. Omfatter også naturlige vandringshindre.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23312</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vandring påvirkes ikke eller kun i beskjeden grad</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="jd">
+            <annotation>
+               <documentation>23311: Dersom det er dokumentert at passasjen har menneskeskapt vandringshinder for enkelte arter, års- eller størrelsesklasser av fisk eller andre ferskvannsorganismer. Ikke akutt tiltaksbehov, men det må tas hensyn ved neste skifte av rør, kulvert eller bru.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23311</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vandring påvirkes, delvis hinder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VandringshinderFiskepassasje (test)OtherType">
+   <simpleType name="VandringshinderFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligFiskepassasje (test)Type">
+   <simpleType name="VedlikeholdsansvarligFiskepassasjeType">
       <annotation>
          <documentation>13338: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -708,9 +662,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligFiskepassasje (test)EnumerationType nvdb:VedlikeholdsansvarligFiskepassasje (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligFiskepassasjeEnumerationType nvdb:VedlikeholdsansvarligFiskepassasjeOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligFiskepassasje (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligFiskepassasjeEnumerationType">
       <annotation>
          <documentation>13338: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -777,7 +731,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligFiskepassasje (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligFiskepassasjeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

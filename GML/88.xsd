@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>88: Lyskilde med innfatning.</documentation>
    </annotation>
@@ -476,48 +476,6 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="InngårINødsystemetLysarmaturType">
-      <annotation>
-         <documentation>10012: Angir om lysarmatur er en del av nødsystemet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10012</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:InngårINødsystemetLysarmaturEnumerationType nvdb:InngårINødsystemetLysarmaturOtherType"/>
-   </simpleType>
-   <simpleType name="InngårINødsystemetLysarmaturEnumerationType">
-      <annotation>
-         <documentation>10012: Angir om lysarmatur er en del av nødsystemet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10012</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="J">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16446</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="N">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16447</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="InngårINødsystemetLysarmaturOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
    <simpleType name="KonstantLysutbytteLysarmaturType">
       <annotation>
          <documentation>9567: Angir at armaturen har korreksjon slik at lysutbytte er konstant gjennom hele levetiden (CLO - Constant Light Output).</documentation>
@@ -622,12 +580,12 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="inngårINødsystemet">
+               <element minOccurs="0" name="strømforsyningFraUPS">
                   <annotation>
-                     <documentation>10012: Angir om lysarmatur er en del av nødsystemet.</documentation>
+                     <documentation>10012: Angir om lysarmatur har strømforsyning fra UPS. Merknad: Egenskapstype har endra navn fra "Inngår i nødsystemet" (v2,44)</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10012</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Inngår i nødsystemet</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Strømforsyning fra UPS</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -707,7 +665,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="lysflux_Lumen" type="double">
+               <element minOccurs="0" name="lysflux_Lumen" type="integer">
                   <annotation>
                      <documentation>10011: Total lysmengde fra lysarmaturen, definert som lysmengde målt mot øyets følsomhetskurve.</documentation>
                      <appinfo>
@@ -808,7 +766,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="ombyggingsår" type="double">
+               <element minOccurs="0" name="ombyggingsår" type="integer">
                   <annotation>
                      <documentation>12922: Angir hvilket år lysarmatur ble bygd om.</documentation>
                      <appinfo>
@@ -1063,78 +1021,6 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4788</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="armaturnummer_Test" type="string">
-                  <annotation>
-                     <documentation>10494: Identifiseringsnummer som kan benyttes i tillegg til driftsmerking.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10494</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Armaturnummer (test)</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="eier" type="string">
-                  <annotation>
-                     <documentation>10009: Angir hvem som er eier av vegobjektet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10009</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="installeringsår" type="string">
-                  <annotation>
-                     <documentation>4065: Angir hvilket år utstyret ble installert</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4065</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Installeringsår</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="interntNummer" type="string">
-                  <annotation>
-                     <documentation>3581: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3581</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="IP_Klasse" type="string">
-                  <annotation>
-                     <documentation>4025: Angir IP-klasse for et objekt.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4025</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">IP-klasse</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="korrosjonsbeskyttelse" type="string">
-                  <annotation>
-                     <documentation>4039: Angir hvilken type korrosjonsbeskyttelse som er benyttet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4039</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="spenning" type="nvdb:SpenningLysarmaturType">
-                  <annotation>
-                     <documentation>10013: Driftspenning for armaturen</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="VDB_id" type="integer">
-                  <annotation>
-                     <documentation>7658: Gir objektets id i VDB</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">7658</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -1851,6 +1737,30 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="cbc">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23445</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Cabicon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="norl">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23428</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Norlux</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ragn">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23429</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ragni</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="Produsent_ArmaturLysarmaturOtherType">
@@ -1858,64 +1768,44 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="SpenningLysarmaturType">
+   <simpleType name="StrømforsyningFraUPSLysarmaturType">
       <annotation>
-         <documentation>10013: Driftspenning for armaturen</documentation>
+         <documentation>10012: Angir om lysarmatur har strømforsyning fra UPS. Merknad: Egenskapstype har endra navn fra "Inngår i nødsystemet" (v2,44)</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">10012</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strømforsyning fra UPS</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:SpenningLysarmaturEnumerationType nvdb:SpenningLysarmaturOtherType"/>
+      <union memberTypes="nvdb:StrømforsyningFraUPSLysarmaturEnumerationType nvdb:StrømforsyningFraUPSLysarmaturOtherType"/>
    </simpleType>
-   <simpleType name="SpenningLysarmaturEnumerationType">
+   <simpleType name="StrømforsyningFraUPSLysarmaturEnumerationType">
       <annotation>
-         <documentation>10013: Driftspenning for armaturen</documentation>
+         <documentation>10012: Angir om lysarmatur har strømforsyning fra UPS. Merknad: Egenskapstype har endra navn fra "Inngår i nødsystemet" (v2,44)</documentation>
          <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">10012</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Strømforsyning fra UPS</sc:taggedValue>
          </appinfo>
       </annotation>
       <restriction base="string">
-         <enumeration value="12">
+         <enumeration value="J">
             <annotation>
-               <documentation>16299: 12 volt</documentation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16299</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">12</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">16446</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="230">
+         <enumeration value="N">
             <annotation>
-               <documentation>16297: 230 volt</documentation>
                <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16297</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="24">
-            <annotation>
-               <documentation>16298: 24 volt</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16298</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">24</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="400">
-            <annotation>
-               <documentation>16296: 400 volt</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16296</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_ID">16447</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="SpenningLysarmaturOtherType">
+   <simpleType name="StrømforsyningFraUPSLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>508: Grøntanlegg er arealer som er opparbeidet eller forkommer naturlig overveiende med vegetasjonsobjekter, som busker, blomsterbeplanting, trær og grasdekker, i tilknytning til eller langs veger. Grøntanlegg kan ligge i naturlig terreng eller på helt kunstig opparbeidede flater, for eksempel sentraløyer i rundkjøringer. Grøntanlegget kan inneholde en gruppering grøntobjekter som sammen utgjør en helhet eller kun enkelte grøntobjekter. I tillegg kan det være skjøtselsmessige årsaker til grupperingen. Grøntanlegg kan ha naturskjøtsel eller parkskjøtsel (jfr R610).</documentation>
    </annotation>
@@ -214,6 +214,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="tilhørerNasjonaleTuristveger">
+                  <annotation>
+                     <documentation>13395: Angir om vegobjektet tilhører Nasjonale turistveger. Vegobjekter som tilhører Nasjonale turistveger skal håndteres i henhold til avtale med Nasjonale turistveger.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13395</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilhører Nasjonale turistveger</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0" name="posisjon" type="gml:PointPropertyType">
                   <annotation>
                      <documentation>7588: Gir punkt som geometrisk representerer objektet.</documentation>
@@ -229,42 +238,6 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">7587</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="tilhørerHovedområde" type="string">
-                  <annotation>
-                     <documentation>4152: Angir hvilket hovedområde grøntanlegget tilhører (fylkesvis inndeling)</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4152</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tilhører hovedområde</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="tilhørerDelområde" type="string">
-                  <annotation>
-                     <documentation>4153: Angir hvilket delområde grøntanlegget tilhører (fylkesvis inndeling)</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4153</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tilhører delområde</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="VDB_id" type="integer">
-                  <annotation>
-                     <documentation>7788: Gir objektets id i VDB</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">7788</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="areal" type="integer">
-                  <annotation>
-                     <documentation>4143: Angir samlet areal</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4143</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Areal</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -370,6 +343,48 @@
       </restriction>
    </simpleType>
    <simpleType name="SpesielleHensynGrøntanleggOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilhørerNasjonaleTuristvegerGrøntanleggType">
+      <annotation>
+         <documentation>13395: Angir om vegobjektet tilhører Nasjonale turistveger. Vegobjekter som tilhører Nasjonale turistveger skal håndteres i henhold til avtale med Nasjonale turistveger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13395</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilhører Nasjonale turistveger</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilhørerNasjonaleTuristvegerGrøntanleggEnumerationType nvdb:TilhørerNasjonaleTuristvegerGrøntanleggOtherType"/>
+   </simpleType>
+   <simpleType name="TilhørerNasjonaleTuristvegerGrøntanleggEnumerationType">
+      <annotation>
+         <documentation>13395: Angir om vegobjektet tilhører Nasjonale turistveger. Vegobjekter som tilhører Nasjonale turistveger skal håndteres i henhold til avtale med Nasjonale turistveger.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13395</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilhører Nasjonale turistveger</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23414</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23415</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilhørerNasjonaleTuristvegerGrøntanleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

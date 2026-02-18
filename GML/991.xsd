@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>991: Radiosentral (RES).</documentation>
    </annotation>
@@ -14,7 +14,7 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="EierRadiosentral (test)Type">
+   <simpleType name="EierRadiosentralType">
       <annotation>
          <documentation>12723: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -22,9 +22,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierRadiosentral (test)EnumerationType nvdb:EierRadiosentral (test)OtherType"/>
+      <union memberTypes="nvdb:EierRadiosentralEnumerationType nvdb:EierRadiosentralOtherType"/>
    </simpleType>
-   <simpleType name="EierRadiosentral (test)EnumerationType">
+   <simpleType name="EierRadiosentralEnumerationType">
       <annotation>
          <documentation>12723: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -84,23 +84,23 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierRadiosentral (test)OtherType">
+   <simpleType name="EierRadiosentralOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <element name="Radiosentral (test)"
+   <element name="Radiosentral"
             substitutionGroup="gml:AbstractFeature"
-            type="nvdb:Radiosentral (test)Type">
+            type="nvdb:RadiosentralType">
       <annotation>
          <documentation>991: Radiosentral (RES).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">991</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Radiosentral (test)</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Radiosentral</sc:taggedValue>
          </appinfo>
       </annotation>
    </element>
-   <complexType name="Radiosentral (test)Type">
+   <complexType name="RadiosentralType">
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
@@ -140,15 +140,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produktnavn" type="string">
-                  <annotation>
-                     <documentation>12783: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12783</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element minOccurs="0" name="tilleggsinformasjon" type="string">
                   <annotation>
                      <documentation>12713: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper.</documentation>
@@ -185,7 +176,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierRadiosentral (test)Type">
+               <element minOccurs="0" name="eier" type="nvdb:EierRadiosentralType">
                   <annotation>
                      <documentation>12723: Angir hvem som er eier av vegobjektet.</documentation>
                      <appinfo>
@@ -196,7 +187,7 @@
                </element>
                <element minOccurs="0"
                         name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligRadiosentral (test)Type">
+                        type="nvdb:VedlikeholdsansvarligRadiosentralType">
                   <annotation>
                      <documentation>12733: Angir hvem som er ansvarlig for vedlikehold.</documentation>
                      <appinfo>
@@ -214,6 +205,15 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>12783: Angir produktnavn for vegobjektet. Produktnavn kan inneholde modellnavn, typebetegnelse, typenummer og ev. serienummer.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12783</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -226,14 +226,14 @@
          </extension>
       </complexContent>
    </complexType>
-   <complexType name="Radiosentral (test)PropertyType">
+   <complexType name="RadiosentralPropertyType">
       <sequence minOccurs="0">
-         <element ref="nvdb:Radiosentral (test)"/>
+         <element ref="nvdb:Radiosentral"/>
       </sequence>
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
-   <simpleType name="VedlikeholdsansvarligRadiosentral (test)Type">
+   <simpleType name="VedlikeholdsansvarligRadiosentralType">
       <annotation>
          <documentation>12733: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -241,9 +241,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligRadiosentral (test)EnumerationType nvdb:VedlikeholdsansvarligRadiosentral (test)OtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligRadiosentralEnumerationType nvdb:VedlikeholdsansvarligRadiosentralOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadiosentral (test)EnumerationType">
+   <simpleType name="VedlikeholdsansvarligRadiosentralEnumerationType">
       <annotation>
          <documentation>12733: Angir hvem som er ansvarlig for vedlikehold.</documentation>
          <appinfo>
@@ -310,7 +310,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadiosentral (test)OtherType">
+   <simpleType name="VedlikeholdsansvarligRadiosentralOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

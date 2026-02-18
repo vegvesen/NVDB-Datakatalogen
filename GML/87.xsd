@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>87: Lokasjon/konteiner med samling av en eller flere lysarmaturer og lysmast i ett punkt. Det kan forekomme varianter uten lysmast, for eksempel lysarmatur opphengt i tunneltak, og det kan forekomme varianter uten lysarmatur, f.eks. lysmast kun for kabelframføring.</documentation>
    </annotation>
@@ -195,60 +195,6 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="antallLamper" type="integer">
-                  <annotation>
-                     <documentation>1954: Angir hvor mange lyspærer det er knyttet til vegobjektet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">1954</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Antall lamper</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="driftsmerking" type="string">
-                  <annotation>
-                     <documentation>10002: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10002</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierBelysningspunktType">
-                  <annotation>
-                     <documentation>9952: Angir hvem som er eier av vegobjektet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9952</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="forsyningspunktTilAndreAnlegg" type="string">
-                  <annotation>
-                     <documentation>8746: Angir om dette belysningspunktet fungerer som matepunkt til andre belysningsstrekninger for andre veger etc. "Ja" eller "Nei" med mulighet for å gi kommentar.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">8746</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Forsyningspunkt til andre anlegg</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="interntNummer" type="string">
-                  <annotation>
-                     <documentation>3580: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3580</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="VDB_id" type="integer">
-                  <annotation>
-                     <documentation>7657: Gir objektets id i VDB</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">7657</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -287,12 +233,21 @@
          </appinfo>
       </annotation>
       <restriction base="string">
+         <enumeration value="rl">
+            <annotation>
+               <documentation>4909: Evakueringsbelysning i tunnel.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4909</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Evakueringslys tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
          <enumeration value="fl">
             <annotation>
                <documentation>16261: Belysning av ferjeleie.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16261</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning ferjeleie</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferjeleie</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -301,7 +256,7 @@
                <documentation>2953: Belysning på gang- og sykkelveg.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2953</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning gang/sykkelveg</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gang/sykkelveg</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -310,7 +265,7 @@
                <documentation>2961: Belysning for gangfelt.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">2961</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning gangfelt</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gangfelt</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -319,97 +274,7 @@
                <documentation>3319: Belysning av bygning/byggverk, innvendig eller utvendig. Eksempel kan være innvendig brukar, tverrslag, bergrom, tekniske rom. NB: Belysning av selve vegen på ei bru skal angis med bruksområde "Belysning veg/gate"</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">3319</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning innvendig/utvendig i bygg/konstruksjon</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ls">
-            <annotation>
-               <documentation>19801: Belysningspunkt for opplysing av leskur, sykkelparkering, etc.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19801</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning leskur/sykkelparkering</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="op">
-            <annotation>
-               <documentation>2957: Belysning av område/plass.Kan være rasteplass, parkering, kontroll/veieplass, etc. Belysning på ferjeoppstillingsplasser gis bruksområde "Belysning ferjeleie" eller "Belysning veg/gate"</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">2957</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning område/plass</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="po">
-            <annotation>
-               <documentation>3856: Belysning av privat område.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3856</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning privat område</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="sk">
-            <annotation>
-               <documentation>19802: Belysningspunkt for opplysing av skilt.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">19802</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning skilt</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tb">
-            <annotation>
-               <documentation>2963: Belysning av veg i tunnel. Benyttes også om belysning i havarinisjer og snunisjer.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">2963</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning tunnel</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ug">
-            <annotation>
-               <documentation>17318: Belysningspunkt i undergang/under bru etc.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17318</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning undergang</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bu">
-            <annotation>
-               <documentation>4908: Belysning av annet vegutstyr. Skal ikke benyttes for skilt og leskur da det er spesifikke verdier for disse.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4908</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning utstyr</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="vg">
-            <annotation>
-               <documentation>2955: Belysning av veg og gate.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">2955</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning veg/gate</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="vk">
-            <annotation>
-               <documentation>2959: Belysning i vegkryss.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">2959</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning vegkryss</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="rl">
-            <annotation>
-               <documentation>4909: Evakueringsbelysning i tunnel.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4909</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Evakueringslys tunnel</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Innvendig/utvendig i bygg/konstruksjon</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -422,12 +287,93 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="ls">
+            <annotation>
+               <documentation>19801: Belysningspunkt for opplysing av leskur, sykkelparkering, etc.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19801</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Leskur/sykkelparkering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="op">
+            <annotation>
+               <documentation>2957: Belysning av område/plass.Kan være rasteplass, parkering, kontroll/veieplass, etc. Belysning på ferjeoppstillingsplasser gis bruksområde "Belysning ferjeleie" eller "Belysning veg/gate"</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2957</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Område/plass</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="po">
+            <annotation>
+               <documentation>3856: Belysning av privat område.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3856</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat område</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
          <enumeration value="nb">
             <annotation>
                <documentation>4910: Sikkerhetsbelysning i tunnel.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">4910</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Sikkerhetsbelysning tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <documentation>19802: Belysningspunkt for opplysing av skilt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19802</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skilt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tb">
+            <annotation>
+               <documentation>2963: Belysning av veg i tunnel. Benyttes også om belysning i havarinisjer og snunisjer.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2963</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ug">
+            <annotation>
+               <documentation>17318: Belysningspunkt i undergang/under bru etc.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17318</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Undergang</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="bu">
+            <annotation>
+               <documentation>4908: Belysning av annet vegutstyr. Skal ikke benyttes for skilt og leskur da det er spesifikke verdier for disse.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4908</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Utstyr</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vg">
+            <annotation>
+               <documentation>2955: Belysning av veg og gate.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2955</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Veg/gate</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vk">
+            <annotation>
+               <documentation>2959: Belysning i vegkryss.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2959</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegkryss</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -463,7 +409,7 @@
                <documentation>22789: Belysning av værutsatt veg, fungerer som ledelys i dårlig vær.</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22789</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning værutsatt veg</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Værutsatt veg</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -472,24 +418,7 @@
                <documentation>23136: Belysning for å gi konstruksjoner/byggverk/områder et visuelt særpreg. Kan f.eks være tilleggsbelysning på ei bru for å lyse opp selve brukonstruksjoner eller .</documentation>
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23136</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Dekorbelysning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bb">
-            <annotation>
-               <documentation>23137: Belysning bygning, innvendig eller utvendig.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">23137</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning bygning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="bi">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">5008</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Belysning tunnel inngangssone</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dekor</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -565,64 +494,6 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">17632</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="EierBelysningspunktOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="EierBelysningspunktType">
-      <annotation>
-         <documentation>9952: Angir hvem som er eier av vegobjektet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9952</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:EierBelysningspunktEnumerationType nvdb:EierBelysningspunktOtherType"/>
-   </simpleType>
-   <simpleType name="EierBelysningspunktEnumerationType">
-      <annotation>
-         <documentation>9952: Angir hvem som er eier av vegobjektet.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9952</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="FK">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16147</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Fylkeskommune</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="K">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16148</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="P">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16149</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="S">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16146</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Stat</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -765,14 +636,6 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22899</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">På rekkverk</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="lm">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16266</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Mast med fellesføring</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

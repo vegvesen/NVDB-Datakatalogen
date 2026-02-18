@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>472: System for innhenting og videreformidling av radiosignal f.eks. i tunnel.</documentation>
    </annotation>
@@ -14,7 +14,151 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
-   <simpleType name="DABLokalRadioanleggType">
+   <element name="DAB-Anlegg"
+            substitutionGroup="gml:AbstractFeature"
+            type="nvdb:DAB-AnleggType">
+      <annotation>
+         <documentation>472: System for innhenting og videreformidling av radiosignal f.eks. i tunnel.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">472</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">DAB-Anlegg</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="DAB-AnleggType">
+      <complexContent>
+         <extension base="gml:AbstractFeatureType">
+            <sequence>
+               <element name="DABRiks">
+                  <annotation>
+                     <documentation>10792: Angir om det er DAB Riks.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10792</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">DAB Riks</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="DABRegional">
+                  <annotation>
+                     <documentation>10793: Angir om det er DAB Regional.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10793</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">DAB Regional</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="DABLokal">
+                  <annotation>
+                     <documentation>10794: Angir om det er DAB lokal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10794</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">DAB Lokal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="innsnakkLokalt">
+                  <annotation>
+                     <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="innsnakkFraVTS">
+                  <annotation>
+                     <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10791: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10791</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>10580: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks. om radioanlegg forsyner andre tunneler.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10580</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>11133: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11133</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12380: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12380</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="nvdb:EierDAB-AnleggType">
+                  <annotation>
+                     <documentation>11979: Angir hvem som er eier av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11979</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligDAB-AnleggType">
+                  <annotation>
+                     <documentation>12008: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12008</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="posisjon" type="gml:PointPropertyType">
+                  <annotation>
+                     <documentation>4989: Gir punkt som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4989</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonPunktPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="DAB-AnleggPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:DAB-Anlegg"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="DABLokalDAB-AnleggType">
       <annotation>
          <documentation>10794: Angir om det er DAB lokal.</documentation>
          <appinfo>
@@ -22,9 +166,9 @@
             <sc:taggedValue tag="NVDB_navn">DAB Lokal</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:DABLokalRadioanleggEnumerationType nvdb:DABLokalRadioanleggOtherType"/>
+      <union memberTypes="nvdb:DABLokalDAB-AnleggEnumerationType nvdb:DABLokalDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="DABLokalRadioanleggEnumerationType">
+   <simpleType name="DABLokalDAB-AnleggEnumerationType">
       <annotation>
          <documentation>10794: Angir om det er DAB lokal.</documentation>
          <appinfo>
@@ -51,12 +195,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="DABLokalRadioanleggOtherType">
+   <simpleType name="DABLokalDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="DABRegionalRadioanleggType">
+   <simpleType name="DABRegionalDAB-AnleggType">
       <annotation>
          <documentation>10793: Angir om det er DAB Regional.</documentation>
          <appinfo>
@@ -64,9 +208,9 @@
             <sc:taggedValue tag="NVDB_navn">DAB Regional</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:DABRegionalRadioanleggEnumerationType nvdb:DABRegionalRadioanleggOtherType"/>
+      <union memberTypes="nvdb:DABRegionalDAB-AnleggEnumerationType nvdb:DABRegionalDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="DABRegionalRadioanleggEnumerationType">
+   <simpleType name="DABRegionalDAB-AnleggEnumerationType">
       <annotation>
          <documentation>10793: Angir om det er DAB Regional.</documentation>
          <appinfo>
@@ -93,12 +237,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="DABRegionalRadioanleggOtherType">
+   <simpleType name="DABRegionalDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="DABRiksRadioanleggType">
+   <simpleType name="DABRiksDAB-AnleggType">
       <annotation>
          <documentation>10792: Angir om det er DAB Riks.</documentation>
          <appinfo>
@@ -106,9 +250,9 @@
             <sc:taggedValue tag="NVDB_navn">DAB Riks</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:DABRiksRadioanleggEnumerationType nvdb:DABRiksRadioanleggOtherType"/>
+      <union memberTypes="nvdb:DABRiksDAB-AnleggEnumerationType nvdb:DABRiksDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="DABRiksRadioanleggEnumerationType">
+   <simpleType name="DABRiksDAB-AnleggEnumerationType">
       <annotation>
          <documentation>10792: Angir om det er DAB Riks.</documentation>
          <appinfo>
@@ -135,12 +279,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="DABRiksRadioanleggOtherType">
+   <simpleType name="DABRiksDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="EierRadioanleggType">
+   <simpleType name="EierDAB-AnleggType">
       <annotation>
          <documentation>11979: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -148,9 +292,9 @@
             <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:EierRadioanleggEnumerationType nvdb:EierRadioanleggOtherType"/>
+      <union memberTypes="nvdb:EierDAB-AnleggEnumerationType nvdb:EierDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="EierRadioanleggEnumerationType">
+   <simpleType name="EierDAB-AnleggEnumerationType">
       <annotation>
          <documentation>11979: Angir hvem som er eier av vegobjektet.</documentation>
          <appinfo>
@@ -210,12 +354,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="EierRadioanleggOtherType">
+   <simpleType name="EierDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="InnsnakkFraVTSRadioanleggType">
+   <simpleType name="InnsnakkFraVTSDAB-AnleggType">
       <annotation>
          <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
          <appinfo>
@@ -223,9 +367,9 @@
             <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:InnsnakkFraVTSRadioanleggEnumerationType nvdb:InnsnakkFraVTSRadioanleggOtherType"/>
+      <union memberTypes="nvdb:InnsnakkFraVTSDAB-AnleggEnumerationType nvdb:InnsnakkFraVTSDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="InnsnakkFraVTSRadioanleggEnumerationType">
+   <simpleType name="InnsnakkFraVTSDAB-AnleggEnumerationType">
       <annotation>
          <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
          <appinfo>
@@ -252,12 +396,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="InnsnakkFraVTSRadioanleggOtherType">
+   <simpleType name="InnsnakkFraVTSDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="InnsnakkLokaltRadioanleggType">
+   <simpleType name="InnsnakkLokaltDAB-AnleggType">
       <annotation>
          <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
          <appinfo>
@@ -265,9 +409,9 @@
             <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:InnsnakkLokaltRadioanleggEnumerationType nvdb:InnsnakkLokaltRadioanleggOtherType"/>
+      <union memberTypes="nvdb:InnsnakkLokaltDAB-AnleggEnumerationType nvdb:InnsnakkLokaltDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="InnsnakkLokaltRadioanleggEnumerationType">
+   <simpleType name="InnsnakkLokaltDAB-AnleggEnumerationType">
       <annotation>
          <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
          <appinfo>
@@ -294,303 +438,12 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="InnsnakkLokaltRadioanleggOtherType">
+   <simpleType name="InnsnakkLokaltDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
-   <simpleType name="KringkastingRadioanleggType">
-      <annotation>
-         <documentation>10795: Angir om det er kringkasting.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10795</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kringkasting</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:KringkastingRadioanleggEnumerationType nvdb:KringkastingRadioanleggOtherType"/>
-   </simpleType>
-   <simpleType name="KringkastingRadioanleggEnumerationType">
-      <annotation>
-         <documentation>10795: Angir om det er kringkasting.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10795</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Kringkasting</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17541</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17542</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="KringkastingRadioanleggOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="NødnettRadioanleggType">
-      <annotation>
-         <documentation>10796: Angir om det er nødnett.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10796</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:NødnettRadioanleggEnumerationType nvdb:NødnettRadioanleggOtherType"/>
-   </simpleType>
-   <simpleType name="NødnettRadioanleggEnumerationType">
-      <annotation>
-         <documentation>10796: Angir om det er nødnett.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">10796</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17539</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">17540</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="NødnettRadioanleggOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <element name="Radioanlegg"
-            substitutionGroup="gml:AbstractFeature"
-            type="nvdb:RadioanleggType">
-      <annotation>
-         <documentation>472: System for innhenting og videreformidling av radiosignal f.eks. i tunnel.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">472</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Radioanlegg</sc:taggedValue>
-         </appinfo>
-      </annotation>
-   </element>
-   <complexType name="RadioanleggType">
-      <complexContent>
-         <extension base="gml:AbstractFeatureType">
-            <sequence>
-               <element name="nødnett" type="nvdb:NødnettRadioanleggType">
-                  <annotation>
-                     <documentation>10796: Angir om det er nødnett.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10796</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Nødnett</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="kringkasting" type="nvdb:KringkastingRadioanleggType">
-                  <annotation>
-                     <documentation>10795: Angir om det er kringkasting.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10795</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Kringkasting</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="DABRiks">
-                  <annotation>
-                     <documentation>10792: Angir om det er DAB Riks.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10792</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">DAB Riks</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="DABRegional">
-                  <annotation>
-                     <documentation>10793: Angir om det er DAB Regional.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10793</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">DAB Regional</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="DABLokal">
-                  <annotation>
-                     <documentation>10794: Angir om det er DAB lokal.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10794</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">DAB Lokal</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="innsnakkLokalt">
-                  <annotation>
-                     <documentation>12651: Angir om det er mulighet for lokalt innsnakk I tilknytning til radioanlegg.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12651</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Innsnakk lokalt</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="innsnakkFraVTS">
-                  <annotation>
-                     <documentation>12652: Angir om det er lokalt mulighet for innsnakk fra VTS til radioanlegg.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12652</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Innsnakk fra VTS</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="etableringsår" type="double">
-                  <annotation>
-                     <documentation>10791: Angir hvilket år vegobjektet ble etablert på stedet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10791</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="tilleggsinformasjon" type="string">
-                  <annotation>
-                     <documentation>10580: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks. om radioanlegg forsyner andre tunneler.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10580</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="prosjektreferanse" type="string">
-                  <annotation>
-                     <documentation>11133: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">11133</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
-                  <annotation>
-                     <documentation>12380: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12380</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="eier" type="nvdb:EierRadioanleggType">
-                  <annotation>
-                     <documentation>11979: Angir hvem som er eier av vegobjektet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">11979</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0"
-                        name="vedlikeholdsansvarlig"
-                        type="nvdb:VedlikeholdsansvarligRadioanleggType">
-                  <annotation>
-                     <documentation>12008: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">12008</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element name="posisjon" type="gml:PointPropertyType">
-                  <annotation>
-                     <documentation>4989: Gir punkt som geometrisk representerer objektet.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">4989</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="fabrikant" type="string">
-                  <annotation>
-                     <documentation>3545: Angir hvem som har fabrikkert vegobjektet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3545</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Fabrikant</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="interntNummer" type="string">
-                  <annotation>
-                     <documentation>3635: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3635</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="leverandør" type="string">
-                  <annotation>
-                     <documentation>3678: Angir hvem som har levert vegobjekt</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3678</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="plassering" type="string">
-                  <annotation>
-                     <documentation>3740: Angir plassering</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3740</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="vedlikeholdsavtale" type="string">
-                  <annotation>
-                     <documentation>3836: Gir referanse til evt. Vedlikeholdsavtale</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3836</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsavtale</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element maxOccurs="unbounded"
-                        minOccurs="0"
-                        name="lineærPosisjon"
-                        type="nvdb:LineærPosisjonPunktPropertyType">
-                  <annotation>
-                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
-                  </annotation>
-               </element>
-            </sequence>
-         </extension>
-      </complexContent>
-   </complexType>
-   <complexType name="RadioanleggPropertyType">
-      <sequence minOccurs="0">
-         <element ref="nvdb:Radioanlegg"/>
-      </sequence>
-      <attributeGroup ref="gml:AssociationAttributeGroup"/>
-      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
-   </complexType>
-   <simpleType name="VedlikeholdsansvarligRadioanleggType">
+   <simpleType name="VedlikeholdsansvarligDAB-AnleggType">
       <annotation>
          <documentation>12008: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -598,9 +451,9 @@
             <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
          </appinfo>
       </annotation>
-      <union memberTypes="nvdb:VedlikeholdsansvarligRadioanleggEnumerationType nvdb:VedlikeholdsansvarligRadioanleggOtherType"/>
+      <union memberTypes="nvdb:VedlikeholdsansvarligDAB-AnleggEnumerationType nvdb:VedlikeholdsansvarligDAB-AnleggOtherType"/>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadioanleggEnumerationType">
+   <simpleType name="VedlikeholdsansvarligDAB-AnleggEnumerationType">
       <annotation>
          <documentation>12008: Angir hvem som er ansvarlig for vedlikehold av vegobjektet.</documentation>
          <appinfo>
@@ -667,7 +520,7 @@
          </enumeration>
       </restriction>
    </simpleType>
-   <simpleType name="VedlikeholdsansvarligRadioanleggOtherType">
+   <simpleType name="VedlikeholdsansvarligDAB-AnleggOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

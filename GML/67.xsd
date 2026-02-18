@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>67: Utgravd eller utstøpt passasje gjennom jord/berg eller under større lokk. Har normalt inngang og utgang i dagen. I spesielle tilfeller, f.eks. når forgreninger eller kryss, kan det være utgang mot annet tunnelløp eller inngang fra annet tunnelløp. Se også Undergang, Skredoverbygg og Høydebegrensning.</documentation>
    </annotation>
@@ -111,15 +111,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="RL">
-            <annotation>
-               <documentation>11803: Tunnelløp uten trafikk, benyttes til rømning</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">11803</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Rømningsløp</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="KategoriTunnelløpOtherType">
@@ -165,48 +156,6 @@
       </restriction>
    </simpleType>
    <simpleType name="MalteTunnelveggerTunnelløpOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="OmkjøringsmulighetTunnelløpType">
-      <annotation>
-         <documentation>3898: Angir om trafikken kan omdirigeres når tunnel/undergang er stengt.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3898</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:OmkjøringsmulighetTunnelløpEnumerationType nvdb:OmkjøringsmulighetTunnelløpOtherType"/>
-   </simpleType>
-   <simpleType name="OmkjøringsmulighetTunnelløpEnumerationType">
-      <annotation>
-         <documentation>3898: Angir om trafikken kan omdirigeres når tunnel/undergang er stengt.</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">3898</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="j">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4836</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="n">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4837</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="OmkjøringsmulighetTunnelløpOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -385,73 +334,6 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4769</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="VDB_id" type="integer">
-                  <annotation>
-                     <documentation>7642: Gir objektets id i VDB</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">7642</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0"
-                        name="utgått_Tunnelklasse"
-                        type="nvdb:Utgått_TunnelklasseTunnelløpType">
-                  <annotation>
-                     <documentation>1975: Angir hvilken tunnelklasse tunnelen er av. Merknad: ET er flyttet til "Tunnel"</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">1975</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Utgått_Tunnelklasse</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="vedlikeholdsansvarlig" type="string">
-                  <annotation>
-                     <documentation>3818: Utgår: Gir info om vedlikeholdsansvarlig, f.eks navn, adresse, telefon, etc</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3818</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="vedlikeholdsavtale" type="string">
-                  <annotation>
-                     <documentation>3827: Gir referanse til evt. Vedlikeholdsavtale</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3827</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsavtale</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="interntNummer" type="string">
-                  <annotation>
-                     <documentation>2178: Angir nummer/kortnavn på tunnelløp.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">2178</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0"
-                        name="omkjøringsmulighet"
-                        type="nvdb:OmkjøringsmulighetTunnelløpType">
-                  <annotation>
-                     <documentation>3898: Angir om trafikken kan omdirigeres når tunnel/undergang er stengt.</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">3898</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Omkjøringsmulighet</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="volum" type="integer">
-                  <annotation>
-                     <documentation>1387: Angir volum av vegobjektet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">1387</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Volum</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -724,215 +606,9 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="d">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4846</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Dummy</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="du">
-            <annotation>
-               <documentation>5584: Dyreundergang (går under vegen).</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">5584</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Dyreundergang</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ro">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4845</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Rasoverbygg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="t">
-            <annotation>
-               <documentation>3385: Benyttes når detaljer om tunnelen ikke er spesifisert</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3385</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="tu">
-            <annotation>
-               <documentation>5583: Tunnel som krysser under fjord/sjø</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">5583</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Tunnel, undersjøisk</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="u">
-            <annotation>
-               <documentation>3389: Benyttes når detaljer om undergangen ikke er spesifisert</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3389</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ub">
-            <annotation>
-               <documentation>3390: Veg går under bru</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3390</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, bru</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="do">
-            <annotation>
-               <documentation>5585: Veg går under en dyreovergang (kan være vilt, husdyr, m.m.)</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">5585</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, dyreovergang</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="uf">
-            <annotation>
-               <documentation>3391: Veg går under ferjekaistag</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3391</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, ferjekaistag</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ug">
-            <annotation>
-               <documentation>3392: Veg går under gangbru</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3392</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, gangbru</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="uj">
-            <annotation>
-               <documentation>3393: Veg går under jernbane</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3393</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, jernbane</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="uk">
-            <annotation>
-               <documentation>4841: Veg går under kjøreledning</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4841</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, kjøreledning</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="ul">
-            <annotation>
-               <documentation>4842: Veg går under låvebru</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4842</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, låvebru</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="uv">
-            <annotation>
-               <documentation>4844: Veg går under en annen veg</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4844</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Undergang, veg</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TypeTunnelløpTunnelløpOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="Utgått_TunnelklasseTunnelløpType">
-      <annotation>
-         <documentation>1975: Angir hvilken tunnelklasse tunnelen er av. Merknad: ET er flyttet til "Tunnel"</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">1975</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utgått_Tunnelklasse</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:Utgått_TunnelklasseTunnelløpEnumerationType nvdb:Utgått_TunnelklasseTunnelløpOtherType"/>
-   </simpleType>
-   <simpleType name="Utgått_TunnelklasseTunnelløpEnumerationType">
-      <annotation>
-         <documentation>1975: Angir hvilken tunnelklasse tunnelen er av. Merknad: ET er flyttet til "Tunnel"</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">1975</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Utgått_Tunnelklasse</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="a">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3394</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl A</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="b">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3396</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl B</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="c">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3398</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl C</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="d">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3400</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl D</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="e">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">3402</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl E</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="e1">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4918</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl E1</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="E2">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">4919</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kl E2</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="Utgått_TunnelklasseTunnelløpOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

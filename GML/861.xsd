@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.43">
+        version="2.44">
    <annotation>
       <documentation>861: En rekke med lys satt opp i den hensikt å gi optisk ledning for de kjørende. Slike lys kan være satt opp både langs veg i dagen og langs veg i tunnel. Evakueringsbelysning i tunnel registreres som Evakueringsbelysning (861) og ikke som Ledelysstrekning, optisk.</documentation>
    </annotation>
@@ -124,22 +124,6 @@
                </appinfo>
             </annotation>
          </enumeration>
-         <enumeration value="M">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16110</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Man</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="VTS">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16111</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">VTS</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="FjernstyringLedelysstrekning, optiskOtherType">
@@ -231,7 +215,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="antallLedelyspunkt" type="double">
+               <element name="antallLedelyspunkt" type="integer">
                   <annotation>
                      <documentation>9907: Angir hvor mange ledelyspunkt det er totalt i ledelysstrekning.</documentation>
                      <appinfo>
@@ -240,7 +224,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="avstandInnbyrdes" type="double">
+               <element minOccurs="0" name="avstandInnbyrdes" type="integer">
                   <annotation>
                      <documentation>9908: Angir normal innbyrdes avstand mellom ledelyspunktene i ledelysstrekningen.</documentation>
                      <appinfo>
@@ -259,7 +243,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="effekt" type="double">
+               <element name="effekt" type="integer">
                   <annotation>
                      <documentation>9912: Angir effekt for ett ledelys.</documentation>
                      <appinfo>
@@ -279,7 +263,7 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element minOccurs="0" name="driftsstrøm" type="double">
+               <element minOccurs="0" name="driftsstrøm" type="integer">
                   <annotation>
                      <documentation>9911: Angir driftsstrøm for en lyskilde ved full lysstyrke.</documentation>
                      <appinfo>
@@ -379,26 +363,6 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">9915</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0" name="driftsmerking" type="string">
-                  <annotation>
-                     <documentation>9910: Identitet/navn på forekomst, normalt synlig på stedet</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9910</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Driftsmerking</sc:taggedValue>
-                     </appinfo>
-                  </annotation>
-               </element>
-               <element minOccurs="0"
-                        name="tenningssystem"
-                        type="nvdb:TenningssystemLedelysstrekning, optiskType">
-                  <annotation>
-                     <documentation>9922: Angir hvordan er tenning/slukking skjer</documentation>
-                     <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">9922</sc:taggedValue>
-                        <sc:taggedValue tag="NVDB_navn">Tenningssystem</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -608,80 +572,6 @@
       </restriction>
    </simpleType>
    <simpleType name="SpenningLedelysstrekning, optiskOtherType">
-      <restriction base="string">
-         <pattern value="other: \w{2,}"/>
-      </restriction>
-   </simpleType>
-   <simpleType name="TenningssystemLedelysstrekning, optiskType">
-      <annotation>
-         <documentation>9922: Angir hvordan er tenning/slukking skjer</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9922</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tenningssystem</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <union memberTypes="nvdb:TenningssystemLedelysstrekning, optiskEnumerationType nvdb:TenningssystemLedelysstrekning, optiskOtherType"/>
-   </simpleType>
-   <simpleType name="TenningssystemLedelysstrekning, optiskEnumerationType">
-      <annotation>
-         <documentation>9922: Angir hvordan er tenning/slukking skjer</documentation>
-         <appinfo>
-            <sc:taggedValue tag="NVDB_ID">9922</sc:taggedValue>
-            <sc:taggedValue tag="NVDB_navn">Tenningssystem</sc:taggedValue>
-         </appinfo>
-      </annotation>
-      <restriction base="string">
-         <enumeration value="F">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16103</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Fotocelle</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="K">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16106</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Kontaktor</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="M">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16102</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Manuell</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="R">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16107</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Radiotenner</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="S">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16105</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Signal</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="U">
-            <annotation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16104</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Ur</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-      </restriction>
-   </simpleType>
-   <simpleType name="TenningssystemLedelysstrekning, optiskOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
