@@ -5,15 +5,105 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
-      <documentation>269: Den delen av vegen som ligger utenfor kantlinjen (Def. fra Håndbøker Statens vegvesen).</documentation>
+      <documentation>269: Den delen av vegen som ligger utenfor kantlinjen. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FlatenummerVegskulderType">
+      <annotation>
+         <documentation>1747: Angir VIPS-flatenummer på vegflate</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1747</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Flatenummer</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FlatenummerVegskulderEnumerationType nvdb:FlatenummerVegskulderOtherType"/>
+   </simpleType>
+   <simpleType name="FlatenummerVegskulderEnumerationType">
+      <annotation>
+         <documentation>1747: Angir VIPS-flatenummer på vegflate</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1747</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Flatenummer</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="10">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4009</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">-2.1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="11">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4010</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">-2.2</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="12">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4011</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">-2.3</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="13">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4012</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">-2.4</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="01">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4005</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2.1</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="02">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4006</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2.2</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="03">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4007</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2.3</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="04">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4008</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">2.4</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FlatenummerVegskulderOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeVegskulderType">
       <annotation>
          <documentation>1224: Angir hvilken type vegskulder det er tale om.</documentation>
@@ -60,6 +150,46 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2561</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skulder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2570</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegkantrom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2574</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegkantrom, rekkverk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2572</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegkantrom, snøopplagring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vj">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2576</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vegkantrom, støyskjerm</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TypeVegskulderOtherType">
@@ -71,7 +201,7 @@
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:VegskulderType">
       <annotation>
-         <documentation>269: Den delen av vegen som ligger utenfor kantlinjen (Def. fra Håndbøker Statens vegvesen).</documentation>
+         <documentation>269: Den delen av vegen som ligger utenfor kantlinjen. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">269</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Vegskulder</sc:taggedValue>
@@ -88,6 +218,15 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">1224</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="breddeGrusskulder" type="double">
+                  <annotation>
+                     <documentation>13402: Gir normal bredde av grusskulder forr gitt strekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13402</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde grusskulder</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
@@ -133,6 +272,53 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4876</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7708: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7708</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="bredde" type="double">
+                  <annotation>
+                     <documentation>2246: Angir bredde av vegskulder</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2246</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bredde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="flatenummer"
+                        type="nvdb:FlatenummerVegskulderType">
+                  <annotation>
+                     <documentation>1747: Angir VIPS-flatenummer på vegflate</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1747</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Flatenummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="helning" type="double">
+                  <annotation>
+                     <documentation>1761: Angir normal helning på vegobjektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1761</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Helning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="lengde" type="double">
+                  <annotation>
+                     <documentation>1347: Angir lengde av vegobjektet, er normalt avledet fra geometri/stedfesting</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1347</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Lengde</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

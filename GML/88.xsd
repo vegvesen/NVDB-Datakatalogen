@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>88: Lyskilde med innfatning.</documentation>
    </annotation>
@@ -156,6 +156,15 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">23060</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Rombelysning</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="int">
+            <annotation>
+               <documentation>23581: Benyttes blant annet i forbindelse med gangfelt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23581</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Intensivbelysning</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -1024,6 +1033,78 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="armaturnummer_Test" type="string">
+                  <annotation>
+                     <documentation>10494: Identifiseringsnummer som kan benyttes i tillegg til driftsmerking.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10494</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Armaturnummer (test)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="eier" type="string">
+                  <annotation>
+                     <documentation>10009: Angir hvem som er eier av vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10009</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Eier</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="installeringsår" type="string">
+                  <annotation>
+                     <documentation>4065: Angir hvilket år utstyret ble installert</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4065</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Installeringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3581: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3581</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="IP_Klasse" type="string">
+                  <annotation>
+                     <documentation>4025: Angir IP-klasse for et objekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4025</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">IP-klasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="korrosjonsbeskyttelse" type="string">
+                  <annotation>
+                     <documentation>4039: Angir hvilken type korrosjonsbeskyttelse som er benyttet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4039</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="spenning" type="nvdb:SpenningLysarmaturType">
+                  <annotation>
+                     <documentation>10013: Driftspenning for armaturen</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7658: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7658</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -1761,9 +1842,95 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="Func">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23478</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Function</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="NLX">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23458</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Norlux</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="vyrt">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23562</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vyrtych</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="Produsent_ArmaturLysarmaturOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningLysarmaturType">
+      <annotation>
+         <documentation>10013: Driftspenning for armaturen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SpenningLysarmaturEnumerationType nvdb:SpenningLysarmaturOtherType"/>
+   </simpleType>
+   <simpleType name="SpenningLysarmaturEnumerationType">
+      <annotation>
+         <documentation>10013: Driftspenning for armaturen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10013</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Spenning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="12">
+            <annotation>
+               <documentation>16299: 12 volt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16299</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">12</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="230">
+            <annotation>
+               <documentation>16297: 230 volt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16297</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">230</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="24">
+            <annotation>
+               <documentation>16298: 24 volt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16298</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">24</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="400">
+            <annotation>
+               <documentation>16296: 400 volt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16296</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">400</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SpenningLysarmaturOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>79: Rør for vanngjennomløp på tvers av vegen (ev. på tvers av tilgrensende avkjørsel) med maks lysåpning 2,5 meter. Stikkrenne/kulvert har åpent innløp og/eller utløp. Stikkrenne/kulvert kan ha inn- og utløpskonstruksjoner som kummer og støtteskjold. Merknad: Inntil videre registrere stikkrenner med bruksområde biologisk mangfold eller landbruk som vanlig stikkrenne. Dette blir endret på i senere versjon av Datakatalogen.</documentation>
    </annotation>
@@ -216,6 +216,56 @@
       </restriction>
    </simpleType>
    <simpleType name="BruksområdeStikkrenneKulvertOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="DiametergruppeStikkrenneKulvertType">
+      <annotation>
+         <documentation>1725: Angir hvilken diametrergruppe indre diameter for rør i stikkrenne tilhører. Verdiområdene er oppgitt i cm.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1725</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Diametergruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DiametergruppeStikkrenneKulvertEnumerationType nvdb:DiametergruppeStikkrenneKulvertOtherType"/>
+   </simpleType>
+   <simpleType name="DiametergruppeStikkrenneKulvertEnumerationType">
+      <annotation>
+         <documentation>1725: Angir hvilken diametrergruppe indre diameter for rør i stikkrenne tilhører. Verdiområdene er oppgitt i cm.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1725</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Diametergruppe</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="25">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2933</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">101-250</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="10">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2932</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">51-100</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="05">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2931</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">&lt; 50</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DiametergruppeStikkrenneKulvertOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -525,6 +575,14 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">9124</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Tre</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sj">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9136</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Støpejern</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -1337,6 +1395,53 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="antallRør" type="integer">
+                  <annotation>
+                     <documentation>1943: Angir hvor mange rør det er i en grøft/stikkrenne</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1943</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Antall rør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilknytningVoll">
+                  <annotation>
+                     <documentation>10222: Angir om stikkrenna går gjennom voll</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10222</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilknytning voll</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7650: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7650</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="diametergruppe"
+                        type="nvdb:DiametergruppeStikkrenneKulvertType">
+                  <annotation>
+                     <documentation>1725: Angir hvilken diametrergruppe indre diameter for rør i stikkrenne tilhører. Verdiområdene er oppgitt i cm.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1725</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Diametergruppe</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="typeMateriale">
+                  <annotation>
+                     <documentation>3114: Angir om vannet renner gjennom rør eller kanal, og hvilken type rør /kanal.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3114</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type/materiale</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -1356,6 +1461,48 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="TilknytningVollStikkrenneKulvertType">
+      <annotation>
+         <documentation>10222: Angir om stikkrenna går gjennom voll</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10222</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilknytning voll</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TilknytningVollStikkrenneKulvertEnumerationType nvdb:TilknytningVollStikkrenneKulvertOtherType"/>
+   </simpleType>
+   <simpleType name="TilknytningVollStikkrenneKulvertEnumerationType">
+      <annotation>
+         <documentation>10222: Angir om stikkrenna går gjennom voll</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10222</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Tilknytning voll</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16697</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16698</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TilknytningVollStikkrenneKulvertOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TilknyttetLukkaDrenStikkrenneKulvertType">
       <annotation>
          <documentation>1941: Angir om stikkrenne er tilknytta lukka drenering. Vannet ledes inn i et lukket dreneringssystem.</documentation>
@@ -1449,6 +1596,14 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="f">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9134</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Flatbunnet</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TverrsnittsformStikkrenneKulvertOtherType">
@@ -1508,9 +1663,99 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2926</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Spesialkum over stikkrenne</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="TypeInnløpStikkrenneKulvertOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeMaterialeStikkrenneKulvertType">
+      <annotation>
+         <documentation>3114: Angir om vannet renner gjennom rør eller kanal, og hvilken type rør /kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3114</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type/materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeMaterialeStikkrenneKulvertEnumerationType nvdb:TypeMaterialeStikkrenneKulvertOtherType"/>
+   </simpleType>
+   <simpleType name="TypeMaterialeStikkrenneKulvertEnumerationType">
+      <annotation>
+         <documentation>3114: Angir om vannet renner gjennom rør eller kanal, og hvilken type rør /kanal.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3114</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type/materiale</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="fb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4641</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Firkant, betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fe">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4960</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Firkant, eternitt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fn">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4642</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Firkant, naturstein</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4959</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Firkant, stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4638</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rør, betong</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4640</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rør, plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="rs">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4639</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Rør, stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeMaterialeStikkrenneKulvertOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -1567,6 +1812,24 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">11655</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Åpen grøft</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KD">
+            <annotation>
+               <documentation>2930: Vann ledes til dreneringskum i parallell lukka grøft</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2930</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kum, drenering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="KA">
+            <annotation>
+               <documentation>11743: Vann ledes til avløpskum hvor det ledes videre i lukka grøft bort fra vegen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11743</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kum, lukka avløp</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

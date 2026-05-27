@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>482: Sted der det er installert et trafikkregistreringsapparat for registrering av trafikk. Apparatet kan ha tilkopla trafikkregistreringspunkt på en eller flere tilgrensende veger.</documentation>
    </annotation>
@@ -14,6 +14,140 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="BasiskurveTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5203: Angir hvilken type basiskurve som legges til grunn</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5203</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Basiskurve</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BasiskurveTrafikkregistreringsstasjonEnumerationType nvdb:BasiskurveTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="BasiskurveTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5203: Angir hvilken type basiskurve som legges til grunn</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5203</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Basiskurve</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="HJ">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7085</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Høy julidøgnstrafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LJ">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7084</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Lav julidøgnstrafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="MJ">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">11737</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Middels julidøgnstrafikk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BasiskurveTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EgnetForFartsregistreringTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5197: Angir om tellepunktet er egnet for å registrere fart.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5197</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Egnet for fartsregistrering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EgnetForFartsregistreringTrafikkregistreringsstasjonEnumerationType nvdb:EgnetForFartsregistreringTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="EgnetForFartsregistreringTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5197: Angir om tellepunktet er egnet for å registrere fart.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5197</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Egnet for fartsregistrering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7079</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7080</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EgnetForFartsregistreringTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="EgnetForIndeksberegningTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>7826: Angir om tellepunktets data kan brukes for å beregne indeks.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7826</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Egnet for indeksberegning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:EgnetForIndeksberegningTrafikkregistreringsstasjonEnumerationType nvdb:EgnetForIndeksberegningTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="EgnetForIndeksberegningTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>7826: Angir om tellepunktets data kan brukes for å beregne indeks.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">7826</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Egnet for indeksberegning</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9965</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9966</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="EgnetForIndeksberegningTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="EierTrafikkregistreringsstasjonType">
       <annotation>
          <documentation>11981: Angir hvem som er eier av vegobjektet.</documentation>
@@ -89,6 +223,608 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="Kategori_ATKTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5206: Angir om tellepunktet inngår i kategorien "ATK"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5206</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, ATK</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_ATKTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_ATKTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_ATKTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5206: Angir om tellepunktet inngår i kategorien "ATK"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5206</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, ATK</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7253</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7254</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_ATKTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_BomstasjonspunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5210: Angir om tellepunktet inngår i kategorien "bomstasjonspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5210</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, bomstasjonspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_BomstasjonspunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_BomstasjonspunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_BomstasjonspunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5210: Angir om tellepunktet inngår i kategorien "bomstasjonspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5210</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, bomstasjonspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7255</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7267</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_BomstasjonspunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_FartspunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5211: Angir om tellepunktet inngår i kategorien "fartspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5211</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, fartspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_FartspunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_FartspunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_FartspunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5211: Angir om tellepunktet inngår i kategorien "fartspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5211</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, fartspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7256</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7268</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_FartspunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_FerjeTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5217: Angir om tellepunktet inngår i kategorien "ferje"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_FerjeTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_FerjeTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_FerjeTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5217: Angir om tellepunktet inngår i kategorien "ferje"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5217</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, ferje</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7257</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7269</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_FerjeTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_KamerapunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5215: Angir om tellepunktet inngår i kategorien "kamerapunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5215</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, kamerapunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_KamerapunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_KamerapunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_KamerapunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5215: Angir om tellepunktet inngår i kategorien "kamerapunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5215</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, kamerapunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7258</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7270</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_KamerapunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_KlimapunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5208: Angir om tellepunktet inngår i kategorien "klimapunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5208</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, klimapunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_KlimapunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_KlimapunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_KlimapunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5208: Angir om tellepunktet inngår i kategorien "klimapunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5208</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, klimapunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7259</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7271</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_KlimapunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_LyskrysspunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5209: Angir om tellepunktet inngår i kategorien "lyskrysspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5209</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, lyskrysspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_LyskrysspunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_LyskrysspunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_LyskrysspunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5209: Angir om tellepunktet inngår i kategorien "lyskrysspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5209</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, lyskrysspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7260</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7272</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_LyskrysspunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_MiljøpunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5214: Angir om tellepunktet inngår i kategorien "miljøpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5214</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, miljøpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_MiljøpunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_MiljøpunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_MiljøpunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5214: Angir om tellepunktet inngår i kategorien "miljøpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5214</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, miljøpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7261</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7273</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_MiljøpunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_SykkelpunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5212: Angir om tellepunktet inngår i kategorien "sykkelpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5212</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, sykkelpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_SykkelpunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_SykkelpunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_SykkelpunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5212: Angir om tellepunktet inngår i kategorien "sykkelpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5212</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, sykkelpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7262</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7274</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_SykkelpunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TrafikkstyringspunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5207: Angir om tellepunktet inngår i kategorien "trafikkstyringspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5207</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, trafikkstyringspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_TrafikkstyringspunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_TrafikkstyringspunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_TrafikkstyringspunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5207: Angir om tellepunktet inngår i kategorien "trafikkstyringspunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5207</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, trafikkstyringspunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7263</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7275</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TrafikkstyringspunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TrafikktellepunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5204: Angir om tellepunktet inngår i kategorien "trafikktellepunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5204</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, trafikktellepunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_TrafikktellepunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_TrafikktellepunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_TrafikktellepunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5204: Angir om tellepunktet inngår i kategorien "trafikktellepunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5204</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, trafikktellepunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7264</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7276</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TrafikktellepunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TunnelpunktTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5216: Angir om tellepunktet inngår i kategorien "tunnelpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5216</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, tunnelpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_TunnelpunktTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_TunnelpunktTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_TunnelpunktTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5216: Angir om tellepunktet inngår i kategorien "tunnelpunkt"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5216</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, tunnelpunkt</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7265</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7277</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_TunnelpunktTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_WIMTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>5213: Angir om tellepunktet inngår i kategorien "WIM"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5213</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, WIM</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:Kategori_WIMTrafikkregistreringsstasjonEnumerationType nvdb:Kategori_WIMTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="Kategori_WIMTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>5213: Angir om tellepunktet inngår i kategorien "WIM"</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5213</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kategori, WIM</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7266</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7278</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="Kategori_WIMTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="KildeTrafikkregistreringsstasjonType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9292</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kilde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KildeTrafikkregistreringsstasjonEnumerationType nvdb:KildeTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="KildeTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9292</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Kilde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ATK">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13106</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ATK</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="B">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12990</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bomstasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="R">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12989</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Registreringspunkt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="S">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12991</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Signalanlegg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KildeTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="RegistreringshyppighetTrafikkregistreringsstasjonType">
       <annotation>
          <documentation>3910: Angir registreringshyppighet for trafikkregistreringsstasjonen.</documentation>
@@ -135,6 +871,48 @@
       </restriction>
    </simpleType>
    <simpleType name="RegistreringshyppighetTrafikkregistreringsstasjonOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="SnuddKmTrafikkregistreringsstasjonType">
+      <annotation>
+         <documentation>6927: Endrer verdi ved snuing av metreringsretning. Benyttes i forbindelse med NorTraf</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6927</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Snudd km</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:SnuddKmTrafikkregistreringsstasjonEnumerationType nvdb:SnuddKmTrafikkregistreringsstasjonOtherType"/>
+   </simpleType>
+   <simpleType name="SnuddKmTrafikkregistreringsstasjonEnumerationType">
+      <annotation>
+         <documentation>6927: Endrer verdi ved snuing av metreringsretning. Benyttes i forbindelse med NorTraf</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">6927</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Snudd km</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9106</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">9107</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="SnuddKmTrafikkregistreringsstasjonOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -194,6 +972,23 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="NG">
+            <annotation>
+               <documentation>18468: Stasjonen er nedlagt, men det er ikke utelukket at den kan bli tatt i bruk igjen for datainnsamling i framtiden.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">18468</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nedlagt, kan gjenopprettes</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="T">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">7083</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Test</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="StatusTrafikkregistreringsstasjonOtherType">
@@ -231,6 +1026,14 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">12993</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Sykkel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="G">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">12994</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Gående</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -384,6 +1187,313 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4997</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="kilde" type="nvdb:KildeTrafikkregistreringsstasjonType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9292</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kilde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="etableringsår" type="integer">
+                  <annotation>
+                     <documentation>10378: Angir byggeår for vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10378</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Etableringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7780: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7780</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="telefonnummer" type="string">
+                  <annotation>
+                     <documentation>5200: Angir telefonnummer for å ringe opp tellepunktet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5200</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Telefonnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="årsfaktorkurve" type="integer">
+                  <annotation>
+                     <documentation>5190: Henvisning til årsfaktorkurve</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5190</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Årsfaktorkurve</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sekundærtellepunkt" type="integer">
+                  <annotation>
+                     <documentation>5191: Gir referanse til sekundærtellepunkt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5191</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sekundærtellepunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="primærtellepunkt" type="integer">
+                  <annotation>
+                     <documentation>5198: Gir referanse til primærtellepunkt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5198</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Primærtellepunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="basiskurve"
+                        type="nvdb:BasiskurveTrafikkregistreringsstasjonType">
+                  <annotation>
+                     <documentation>5203: Angir hvilken type basiskurve som legges til grunn</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5203</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Basiskurve</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="opprettetIRegister" type="date">
+                  <annotation>
+                     <documentation>5199: Angir dato for opprettelse av tellepunktet i tellepunktsregisteret</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5199</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Opprettet i register</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="opprettetAv" type="string">
+                  <annotation>
+                     <documentation>5193: Kortnavn til den som har opprettet tellepunktet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5193</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Opprettet av</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="endretDato" type="date">
+                  <annotation>
+                     <documentation>5194: Angir dato for endring forrige endring</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5194</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Endret dato</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="endretKlokkeslett" type="time">
+                  <annotation>
+                     <documentation>5195: Angir klokkeslett for sist endring</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5195</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Endret klokkeslett</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="endretAv" type="string">
+                  <annotation>
+                     <documentation>5196: Kortnavn til de som har oppdatert tellepunktet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5196</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Endret av</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="egnetForFartsregistrering">
+                  <annotation>
+                     <documentation>5197: Angir om tellepunktet er egnet for å registrere fart.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5197</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Egnet for fartsregistrering</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="egnetForIndeksberegning">
+                  <annotation>
+                     <documentation>7826: Angir om tellepunktets data kan brukes for å beregne indeks.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7826</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Egnet for indeksberegning</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="merknad" type="string">
+                  <annotation>
+                     <documentation>5202: Permanent merknad til aktuell forekomst</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5202</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Merknad</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Trafikktellepunkt">
+                  <annotation>
+                     <documentation>5204: Angir om tellepunktet inngår i kategorien "trafikktellepunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5204</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, trafikktellepunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_ATK">
+                  <annotation>
+                     <documentation>5206: Angir om tellepunktet inngår i kategorien "ATK"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5206</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, ATK</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Trafikkstyringspunkt">
+                  <annotation>
+                     <documentation>5207: Angir om tellepunktet inngår i kategorien "trafikkstyringspunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5207</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, trafikkstyringspunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Klimapunkt">
+                  <annotation>
+                     <documentation>5208: Angir om tellepunktet inngår i kategorien "klimapunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5208</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, klimapunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Lyskrysspunkt">
+                  <annotation>
+                     <documentation>5209: Angir om tellepunktet inngår i kategorien "lyskrysspunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5209</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, lyskrysspunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Bomstasjonspunkt">
+                  <annotation>
+                     <documentation>5210: Angir om tellepunktet inngår i kategorien "bomstasjonspunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5210</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, bomstasjonspunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Fartspunkt">
+                  <annotation>
+                     <documentation>5211: Angir om tellepunktet inngår i kategorien "fartspunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5211</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, fartspunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Sykkelpunkt">
+                  <annotation>
+                     <documentation>5212: Angir om tellepunktet inngår i kategorien "sykkelpunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5212</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, sykkelpunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_WIM">
+                  <annotation>
+                     <documentation>5213: Angir om tellepunktet inngår i kategorien "WIM"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5213</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, WIM</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Miljøpunkt">
+                  <annotation>
+                     <documentation>5214: Angir om tellepunktet inngår i kategorien "miljøpunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5214</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, miljøpunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Kamerapunkt">
+                  <annotation>
+                     <documentation>5215: Angir om tellepunktet inngår i kategorien "kamerapunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5215</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, kamerapunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Tunnelpunkt">
+                  <annotation>
+                     <documentation>5216: Angir om tellepunktet inngår i kategorien "tunnelpunkt"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5216</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, tunnelpunkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="kategori_Ferje">
+                  <annotation>
+                     <documentation>5217: Angir om tellepunktet inngår i kategorien "ferje"</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5217</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Kategori, ferje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="snuddKm">
+                  <annotation>
+                     <documentation>6927: Endrer verdi ved snuing av metreringsretning. Benyttes i forbindelse med NorTraf</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">6927</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Snudd km</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tellepunktidentitet" type="string">
+                  <annotation>
+                     <documentation>3907: Angir entydig identitet til tellepunkt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3907</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tellepunktidentitet</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tidspunktFra" type="date">
+                  <annotation>
+                     <documentation>3908: Angir dato for når tellepunkt ble satt i drift</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3908</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tidspunkt fra</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tidspunktTil" type="date">
+                  <annotation>
+                     <documentation>3909: Angir tidspunkt for når tellepunkt ble tatt ut av drift</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3909</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tidspunkt til</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektInternObjekt_ID" type="string">
+                  <annotation>
+                     <documentation>12387: Objektmerking. Unik innenfor tilhørende vegprosjekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12387</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">ProsjektInternObjekt_ID</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>47: Kjøreareal som ligger inntil ytterste kjørefelt. Det kan være trafikkdeler mellom kjørefelt og trafikklomme.</documentation>
    </annotation>
@@ -185,6 +185,23 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="kh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4992</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kjøre/hvilelomme</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tr">
+            <annotation>
+               <documentation>16014: Trafikklomme laget for å ha tilgang til teknisk rom</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16014</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Parkering teknisk rom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="BruksområdeTrafikklommeOtherType">
@@ -246,6 +263,48 @@
       </restriction>
    </simpleType>
    <simpleType name="DekketypeTrafikklommeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="DeleøyTrafikklommeType">
+      <annotation>
+         <documentation>3986: Angir om det finnes trafikkdeler mellom trafikklomma og vegen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3986</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Deleøy</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:DeleøyTrafikklommeEnumerationType nvdb:DeleøyTrafikklommeOtherType"/>
+   </simpleType>
+   <simpleType name="DeleøyTrafikklommeEnumerationType">
+      <annotation>
+         <documentation>3986: Angir om det finnes trafikkdeler mellom trafikklomma og vegen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3986</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Deleøy</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4993</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4994</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="DeleøyTrafikklommeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -325,6 +384,48 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="ReposVentearealTrafikklommeType">
+      <annotation>
+         <documentation>3124: Angir om det er repos/venteareal i tilknytning til trafikklomme (bussholdeplass).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3124</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ReposVentearealTrafikklommeEnumerationType nvdb:ReposVentearealTrafikklommeOtherType"/>
+   </simpleType>
+   <simpleType name="ReposVentearealTrafikklommeEnumerationType">
+      <annotation>
+         <documentation>3124: Angir om det er repos/venteareal i tilknytning til trafikklomme (bussholdeplass).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3124</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4653</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4654</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ReposVentearealTrafikklommeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="SpesieltParkeringsformålTrafikklommeType">
       <annotation>
          <documentation>9883: Angir at trafikklomme benyttes til spesielt parkeringsformål.</documentation>
@@ -364,6 +465,48 @@
       </restriction>
    </simpleType>
    <simpleType name="SpesieltParkeringsformålTrafikklommeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="StativForRutetabellTrafikklommeType">
+      <annotation>
+         <documentation>3123: Angir om det på bussholdeplass er eget stativ for rutetabell</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3123</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StativForRutetabellTrafikklommeEnumerationType nvdb:StativForRutetabellTrafikklommeOtherType"/>
+   </simpleType>
+   <simpleType name="StativForRutetabellTrafikklommeEnumerationType">
+      <annotation>
+         <documentation>3123: Angir om det på bussholdeplass er eget stativ for rutetabell</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3123</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="j">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4651</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4652</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StativForRutetabellTrafikklommeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -555,6 +698,51 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">5900</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3566: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3566</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7632: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7632</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="deleøy" type="nvdb:DeleøyTrafikklommeType">
+                  <annotation>
+                     <documentation>3986: Angir om det finnes trafikkdeler mellom trafikklomma og vegen</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3986</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Deleøy</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="reposVenteareal">
+                  <annotation>
+                     <documentation>3124: Angir om det er repos/venteareal i tilknytning til trafikklomme (bussholdeplass).</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3124</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Repos/venteareal</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="stativForRutetabell">
+                  <annotation>
+                     <documentation>3123: Angir om det på bussholdeplass er eget stativ for rutetabell</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3123</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Stativ for rutetabell</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

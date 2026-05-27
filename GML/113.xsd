@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>113: Strekning med gitt høyde relatert til bestemt vegobjektforekomst. Inneholder egenhøyde start/slutt, samt høyde over vegkant.</documentation>
    </annotation>
@@ -92,6 +92,51 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="høydeAbsolutt_Start" type="double">
+                  <annotation>
+                     <documentation>2251: Angir absolutthøyde (høyde over havet) i start av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">2251</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde absolutt, start</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="høydeAbsolutt_Slutt" type="double">
+                  <annotation>
+                     <documentation>7564: Angir absolutthøyde (høyde over havet) i slutt av målestrekning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7564</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Høyde absolutt, slutt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="målemetode">
+                  <annotation>
+                     <documentation>3109: Angir om en høgdemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3109</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="minstehøyde" type="double">
+                  <annotation>
+                     <documentation>5226: Angir minstehøgde. (ikke absolutt)</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5226</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Minstehøyde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7675: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7675</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -149,6 +194,48 @@
       </restriction>
    </simpleType>
    <simpleType name="HøydemålingKvalitetOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøydemålingMålemetodeType">
+      <annotation>
+         <documentation>3109: Angir om en høgdemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:HøydemålingMålemetodeEnumerationType nvdb:HøydemålingMålemetodeOtherType"/>
+   </simpleType>
+   <simpleType name="HøydemålingMålemetodeEnumerationType">
+      <annotation>
+         <documentation>3109: Angir om en høgdemåling skal gjelde til neste måling (trapp), eller om bredden skal interpoleres mellom gitt måling og neste måling (skrå)</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3109</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Målemetode</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="sk">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4618</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skrå</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4619</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Trapp</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="HøydemålingMålemetodeOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>

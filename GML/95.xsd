@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>95: Skiltpunkt er en sammensetning av skiltplater, stolper og stolpefundament m.m.</documentation>
    </annotation>
@@ -411,6 +411,33 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">13358</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Stopp og sov (historisk)</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="2030">
+            <annotation>
+               <documentation>13359: Punkt forberedt både for bilbeltekampanje og stopp og sov kampanje</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13359</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bilbelte/stopp og sov</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="BSF">
+            <annotation>
+               <documentation>13363: Punkt forberedt både for bilbeltekampanje, stopp og sov kampanje og fartskampanje</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13363</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bilbelte/Stopp og sov/Fart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SF">
+            <annotation>
+               <documentation>13362: Punkt forberedt både for Stopp og sov kampanje og fartskampanje</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13362</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Stopp og sov/Fart</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -911,6 +938,46 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="PlattformSkiltpunktType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13412</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlattformSkiltpunktEnumerationType nvdb:PlattformSkiltpunktOtherType"/>
+   </simpleType>
+   <simpleType name="PlattformSkiltpunktEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13412</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plattform</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23475</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23476</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlattformSkiltpunktOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="Produktnavn_SkiltmastSkiltpunktType">
       <annotation>
          <documentation>10427: Angir produktnavn for ettergivende skiltmast. Verdier er hentet fra oversikt over godkjente produkttyper på vegvesen.no.</documentation>
@@ -1139,6 +1206,30 @@
                </appinfo>
             </annotation>
          </enumeration>
+         <enumeration value="EST">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ES Trafikkportal</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SH5">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23472</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SafeHit5</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SH6">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23473</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">SafeHit6</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
       </restriction>
    </simpleType>
    <simpleType name="Produktnavn_SkiltmastSkiltpunktOtherType">
@@ -1323,6 +1414,14 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="plattform" type="nvdb:PlattformSkiltpunktType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13412</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Plattform</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element minOccurs="0"
                         name="fundamentering"
                         type="nvdb:FundamenteringSkiltpunktType">
@@ -1461,6 +1560,24 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4794</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7663: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7663</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3587: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3587</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

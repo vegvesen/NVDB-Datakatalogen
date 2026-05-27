@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
+        version="2.45">
+   <annotation>
+      <documentation>269: Den delen av vegen som ligger utenfor kantlinjen. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
+   </annotation>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="TypeVegskulderType">
+      <annotation>
+         <documentation>1224: Angir hvilken type vegskulder det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1224</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeVegskulderEnumerationType nvdb:TypeVegskulderOtherType"/>
+   </simpleType>
+   <simpleType name="TypeVegskulderEnumerationType">
+      <annotation>
+         <documentation>1224: Angir hvilken type vegskulder det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1224</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="sg">
+            <annotation>
+               <documentation>2565: Vegskulder består av en asfaltdel innerst mot kjørebanen og en grusdel ytterst mot vegkanten. For at grusfeltet skal regnes som del av vegskulder må det være minst 20 cm bredt, det må være dimensjonert for kjøring, ha samme tverrfall som asfaltdelen av vegskuldra og høydeforskjell mellom asfalt og grus må ikke overstige 30 mm. I tillegg er det krav om at grusarealet driftes.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2565</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfaltskulder med grusskulder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sa">
+            <annotation>
+               <documentation>2563: Vegskulder er asfaltert i sin helhet og avsluttes mot sideterreng/grøft uten grusskulder.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Asfaltskulder uten grusskulder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sr">
+            <annotation>
+               <documentation>2567: Vegskulder avsluttes mot kantstein, rekkverk, mur eller lignende. Skulder er normalt asfaltert, men kan unntaksvis være av annet fast materiale som f.eks betong eller brostein..</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">2567</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skulder mot kantstein etc.</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeVegskulderOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Vegskulder"
+            substitutionGroup="nvdb:AbstraktVegskulderVegkant"
+            type="nvdb:VegskulderType">
+      <annotation>
+         <documentation>269: Den delen av vegen som ligger utenfor kantlinjen. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">269</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vegskulder</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="VegskulderType">
+      <complexContent>
+         <extension base="nvdb:AbstraktVegskulderVegkantType">
+            <sequence>
+               <element name="type" type="nvdb:TypeVegskulderType">
+                  <annotation>
+                     <documentation>1224: Angir hvilken type vegskulder det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1224</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="prosjektreferanse" type="string">
+                  <annotation>
+                     <documentation>12186: Referanse til prosjekt. Det benyttes samme prosjektreferanse som på tilhørende Veganlegg (VT30). Benyttes for lettere å kunne skille nye data fra eksisterende data i NVDB.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12186</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Prosjektreferanse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="senterlinje" type="gml:CurvePropertyType">
+                  <annotation>
+                     <documentation>4876: Gir linje/kurve som geometrisk representerer objektet.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4876</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded" minOccurs="0" name="lineærPosisjon">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det linære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="VegskulderPropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Vegskulder"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+</schema>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:nvdb="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+        elementFormDefault="qualified"
+        targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML/PS/OLFV_SVV/2.28"
+        version="2.28">
+   <annotation>
+      <documentation>300: Naturlike områder som det skal tas hensyn til og/eller krever en definert form for skjøtsel (se aktuell arbeidsoperasjon + hyppighet). Slike steder kan være spesielle siktsoner, naturtyper, opprettholdelse av skogryddingstiltak, landskapspleieområde m.m.</documentation>
+   </annotation>
+   <include schemaLocation="OLFV_SVV.xsd"/>
+   <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
+           schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
+   <import namespace="http://www.opengis.net/gml/3.2"
+           schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="FormålNaturområdeType">
+      <annotation>
+         <documentation>4667: Angir formål med å skjøtte området.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4667</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">4667</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:FormålNaturområdeEnumerationType nvdb:FormålNaturområdeOtherType"/>
+   </simpleType>
+   <simpleType name="FormålNaturområdeEnumerationType">
+      <annotation>
+         <documentation>4667: Angir formål med å skjøtte området.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4667</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">4667</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Bevare naturområde/kulturlandskap">
+            <annotation>
+               <documentation>16255: Areal skal skjøttes for å sikre område sin egenart.  
+Merknad: Områdets egenart kommer fram av egen egenskapstyp (Type)</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16255</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Bevare naturområde/kulturlandskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Sikre utsikt fra vegen, sikkerhet, estetikk.">
+            <annotation>
+               <documentation>16240: Holde vegetasjonen nede/ jevnlig rydding av estetiske eller sikkerhetsmessige grunner. Felt med masseplanter går ofte inn her.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16240</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sikre utsikt fra vegen, sikkerhet, estetikk.</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Hensyn til naboeiendom">
+            <annotation>
+               <documentation>5739: Holde nede vegetasjonen av hensyn til naboeiendom</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5739</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hensyn til naboeiendom</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Hindre lokalt glatt veg">
+            <annotation>
+               <documentation>5738: Holde nede vegetasjonen for å hindre skygge på veg som kan gi is/glatt vegbane</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5738</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Hindre lokalt glatt veg</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Matområde, vilt">
+            <annotation>
+               <documentation>5740: Holde nede vegetasjonen for å hindre at vilt beiter for nær inntil vegen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5740</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Matområde, vilt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="FormålNaturområdeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <element name="Naturområde"
+            substitutionGroup="nvdb:Fellesegenskaper"
+            type="nvdb:NaturområdeType">
+      <annotation>
+         <documentation>300: Naturlike områder som det skal tas hensyn til og/eller krever en definert form for skjøtsel (se aktuell arbeidsoperasjon + hyppighet). Slike steder kan være spesielle siktsoner, naturtyper, opprettholdelse av skogryddingstiltak, landskapspleieområde m.m.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">300</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">300</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Naturområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+   </element>
+   <complexType name="NaturområdeType">
+      <complexContent>
+         <extension base="nvdb:FellesegenskaperType">
+            <sequence>
+               <element name="type" type="nvdb:TypeNaturområdeType">
+                  <annotation>
+                     <documentation>10565: Angir hvilken type område det er tale om.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10565</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="formål" type="nvdb:FormålNaturområdeType">
+                  <annotation>
+                     <documentation>4667: Angir formål med å skjøtte området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4667</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Formål</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="tilleggsinformasjon" type="string">
+                  <annotation>
+                     <documentation>9995: Supplerende informasjon om vegobjektet som ikke framkommer direkte av andre egenskapstyper, f.eks hvilken type område dette er.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9995</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Tilleggsinformasjon</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="område" type="gml:SurfacePropertyType">
+                  <annotation>
+                     <documentation>10566: Gir flate/polygon som geometrisk avgrenser området.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10566</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element maxOccurs="unbounded"
+                        minOccurs="0"
+                        name="lineærPosisjon"
+                        type="nvdb:LineærPosisjonStrekningPropertyType">
+                  <annotation>
+                     <documentation>Angivelse av posisjon på det lineære objektet.</documentation>
+                  </annotation>
+               </element>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+   <complexType name="NaturområdePropertyType">
+      <sequence minOccurs="0">
+         <element ref="nvdb:Naturområde"/>
+      </sequence>
+      <attributeGroup ref="gml:AssociationAttributeGroup"/>
+      <attributeGroup ref="gml:OwnershipAttributeGroup"/>
+   </complexType>
+   <simpleType name="TypeNaturområdeType">
+      <annotation>
+         <documentation>10565: Angir hvilken type område det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10565</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">10565</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeNaturområdeEnumerationType nvdb:TypeNaturområdeOtherType"/>
+   </simpleType>
+   <simpleType name="TypeNaturområdeEnumerationType">
+      <annotation>
+         <documentation>10565: Angir hvilken type område det er tale om.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10565</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_ID">10565</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="Eng">
+            <annotation>
+               <documentation>16938: Eng består av blomstrende urter og gras. Slike områder er ikke beregnet for tråkk men skal fremstå som prydelement langs vegskråninger, vegkanter eller i kryssområde. Klippefrekvens er lav, men tilpasset frøsetting og ikke såpass lav at oppslag av kratt får dominere arealet. klippetidspunkt er med på å bestemme hvilke arter som skal vokse der.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16938</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Eng</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Masseplanter">
+            <annotation>
+               <documentation>16939: Ungplanter, tidlig stadie av skog. Hvis denne skal tilhøre skog, bør masseplanter stå i definisjonen av skog/tregruppe.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16939</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Masseplanter</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Skog/tregruppe">
+            <annotation>
+               <documentation>16940: En gruppe eller samling trær med undervegetasjon som skal tynnes/ ryddes jevnlig for å åpne for inn- og utsyn. Består av store eller små trær, med bunnvegetasjon av gress, urter eller lavtvoksende busk-kratt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16940</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skog/tregruppe</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Naturmark, impediment">
+            <annotation>
+               <documentation>16941: Skrinne områder med lav bonitet og mye fjell i dagen.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16941</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naturmark, impediment</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ferksvanns-/våtmarksområder">
+            <annotation>
+               <documentation>16942: Viktige bekkedrag, dammer, rik kultur­landskapssjø, evjer/bukter/viker, kroksjøer/ flomdammer, kalksjøer (inkl. utvalgt naturtype), deltaområde. Se DN håndbok 13</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16942</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ferksvanns-/våtmarksområder</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Kulturlandsskap">
+            <annotation>
+               <documentation>16943: Naturbeitemark, hagemark, slåttemark (inkl. utvalgt naturtype), slåtte- og beitemyr, kantkratt. Se DN håndbok 13</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16943</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kulturlandsskap</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Verdifull naturtype">
+            <annotation>
+               <documentation>16945: Ensartet type natur som er verdifull og omfatter alle levende organismer (planter og dyr), og de miljøfaktorene som virker der, eller spesielle typer naturforekomster som dammer, åkerholmer eller lignende, samt spesielle typer geologiske forekomster.Kilde: Naturmangfoldloven/Artsdatabanken</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16945</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Verdifull naturtype</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeNaturområdeOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+</schema>

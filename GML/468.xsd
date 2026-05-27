@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>468: Reservestrømskilde bl.a. i forbindelse med tunneler.</documentation>
    </annotation>
@@ -33,6 +33,15 @@
          </appinfo>
       </annotation>
       <restriction base="string">
+         <enumeration value="An">
+            <annotation>
+               <documentation>16364: UPS brukes til annet formål. Informasjon om bruksområde skal angis under egenskapstype "Tilleggsinformasjon" (ET 11616).</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16364</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annet, se Tilleggsinfo</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
          <enumeration value="NN">
             <annotation>
                <documentation>19681: UPS brukes til nødnett.</documentation>
@@ -48,15 +57,6 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">16363</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Nødstrøm</sc:taggedValue>
-               </appinfo>
-            </annotation>
-         </enumeration>
-         <enumeration value="res">
-            <annotation>
-               <documentation>16364: UPS brukes til reservestrøm.</documentation>
-               <appinfo>
-                  <sc:taggedValue tag="NVDB_ID">16364</sc:taggedValue>
-                  <sc:taggedValue tag="NVDB_navn">Reservestrøm</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
@@ -180,6 +180,137 @@
       </restriction>
    </simpleType>
    <simpleType name="IntegrerteBatterierUPSOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ProdusentUPSType">
+      <annotation>
+         <documentation>13411: Angir navn på hovedprodusent/fabrikant av UPS. Merknad: Egenskapstypen erstatter egenskapstype 10042 i forbindelse med at vi går over til å benytte tillatte verdier framfor fritekst.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13411</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ProdusentUPSEnumerationType nvdb:ProdusentUPSOtherType"/>
+   </simpleType>
+   <simpleType name="ProdusentUPSEnumerationType">
+      <annotation>
+         <documentation>13411: Angir navn på hovedprodusent/fabrikant av UPS. Merknad: Egenskapstypen erstatter egenskapstype 10042 i forbindelse med at vi går over til å benytte tillatte verdier framfor fritekst.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13411</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="AB">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23464</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">ABB</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="An">
+            <annotation>
+               <documentation>23471: Verdi skal benyttes om aktuell produsent ikke finnes i nedtrekksliste.  Navn på produsent skal legges til i egenskapstype "Tilleggsinformsjon" slik: "Navn på produsent = xxxxxx". Verdi kan bli lagt til i Datakatalogen på seinere tidspunkt.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23471</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Annen, se tilleggsinfo</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="CO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23547</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Coromatic</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="EA">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23465</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Eaton</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="EM">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23466</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Emerson</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="FSP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23548</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">FSP</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="HW">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23549</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Huawei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="LI">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23467</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Liebert</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ME">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23468</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Metric</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="PO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23550</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Powersource</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="RI">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23469</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Riello</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SE">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23551</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Scheider Electric</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SO">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23470</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Socomec</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ProdusentUPSOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -360,11 +491,11 @@
                      </appinfo>
                   </annotation>
                </element>
-               <element name="produsent" type="string">
+               <element name="produsent" type="nvdb:ProdusentUPSType">
                   <annotation>
-                     <documentation>10042: Angir navn på produsent/fabrikant av UPS-enheten.</documentation>
+                     <documentation>13411: Angir navn på hovedprodusent/fabrikant av UPS. Merknad: Egenskapstypen erstatter egenskapstype 10042 i forbindelse med at vi går over til å benytte tillatte verdier framfor fritekst.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">10042</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">13411</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Produsent</sc:taggedValue>
                      </appinfo>
                   </annotation>
@@ -449,6 +580,51 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4985</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fabrikant" type="string">
+                  <annotation>
+                     <documentation>3541: Angir hvem som har fabrikkert vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3541</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fabrikant</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3631: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3631</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="leverandør" type="string">
+                  <annotation>
+                     <documentation>3674: Angir hvem som har levert vegobjekt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3674</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="produktnavn" type="string">
+                  <annotation>
+                     <documentation>3804: Angir produktnavn/typebetegnelse, kan også ta med typenummer</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3804</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Produktnavn</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="sistSkiftetBatteri" type="date">
+                  <annotation>
+                     <documentation>3883: Angir dato for forrige batteriskifte</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3883</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Sist skiftet batteri</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

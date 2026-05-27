@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>459: Utstyr for å måle lys.</documentation>
    </annotation>
@@ -232,6 +232,51 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="IP_Klasse" type="string">
+                  <annotation>
+                     <documentation>4031: Angir IP-klasse for et objekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4031</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">IP-klasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="typeIO">
+                  <annotation>
+                     <documentation>4057: Angir om det er digital eller analog tilkopling</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4057</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type I/O</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="installeringsår" type="string">
+                  <annotation>
+                     <documentation>4071: Angir hvilket år utstyret ble installert</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4071</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Installeringsår</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3622: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3622</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="leverandør" type="string">
+                  <annotation>
+                     <documentation>3665: Angir hvem som har levert vegobjekt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3665</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -251,6 +296,48 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="TypeIOLysmålerType">
+      <annotation>
+         <documentation>4057: Angir om det er digital eller analog tilkopling</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4057</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type I/O</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeIOLysmålerEnumerationType nvdb:TypeIOLysmålerOtherType"/>
+   </simpleType>
+   <simpleType name="TypeIOLysmålerEnumerationType">
+      <annotation>
+         <documentation>4057: Angir om det er digital eller analog tilkopling</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">4057</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type I/O</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="a">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5066</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Analog</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="d">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">5072</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Digital</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeIOLysmålerOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="TypeLysmålerType">
       <annotation>
          <documentation>11818: Angir hvilken type lysmåler det er tale om.</documentation>

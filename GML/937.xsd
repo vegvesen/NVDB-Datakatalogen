@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>937: Apparat som omdanner elektriske vekselstrømsignaler til hørbare lydbølger. Benyttes bl.a. i tunneler for å gi beskjeder til trafikanter i tilknytning til nødsituajoner.</documentation>
    </annotation>
@@ -223,6 +223,23 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element name="type" type="nvdb:TypeHøyttalerType">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11482</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="effekt" type="integer">
+                  <annotation>
+                     <documentation>11484: Angir maks effekt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">11484</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Effekt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -242,6 +259,62 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="TypeHøyttalerType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11482</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeHøyttalerEnumerationType nvdb:TypeHøyttalerOtherType"/>
+   </simpleType>
+   <simpleType name="TypeHøyttalerEnumerationType">
+      <annotation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">11482</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="D">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19514</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Diskant</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="H">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19513</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Horn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="IP">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19515</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">IP-Høyttaler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sh">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">19516</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Søylehøyttaler</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeHøyttalerOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="VedlikeholdsansvarligHøyttalerType">
       <annotation>
          <documentation>12816: Angir hvem som er ansvarlig for vedlikehold.</documentation>

@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>836: Vegoppmerking som er forsterket med fresing i asfaltdekket. Fresingen skal gi vibrasjon i kjøretøyet.</documentation>
    </annotation>
@@ -60,6 +60,68 @@
       </restriction>
    </simpleType>
    <simpleType name="FresemetodeVegoppmerking, forsterketOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="ProfileringVegoppmerking, forsterketType">
+      <annotation>
+         <documentation>10410: Angir form på strukturene i selve merkingen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10410</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Profilering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:ProfileringVegoppmerking, forsterketEnumerationType nvdb:ProfileringVegoppmerking, forsterketOtherType"/>
+   </simpleType>
+   <simpleType name="ProfileringVegoppmerking, forsterketEnumerationType">
+      <annotation>
+         <documentation>10410: Angir form på strukturene i selve merkingen</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10410</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Profilering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="drko">
+            <annotation>
+               <documentation>16769: Struktur i merkingen har dråpeform nedfelt</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16769</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dråpe kombi</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="drfl">
+            <annotation>
+               <documentation>16767: Struktur i merkingen har dråpeform oppbygd</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16767</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Dråpeflex</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="kafl">
+            <annotation>
+               <documentation>16771: Struktur i merkingen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16771</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kamflex</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="lofl">
+            <annotation>
+               <documentation>16770: Struktur i merkingen har striper på tvers av linjen</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">16770</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Longflex</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="ProfileringVegoppmerking, forsterketOtherType">
       <restriction base="string">
          <pattern value="other: \w{2,}"/>
       </restriction>
@@ -221,6 +283,17 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">10258</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, linje</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="profilering"
+                        type="nvdb:ProfileringVegoppmerking, forsterketType">
+                  <annotation>
+                     <documentation>10410: Angir form på strukturene i selve merkingen</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10410</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Profilering</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

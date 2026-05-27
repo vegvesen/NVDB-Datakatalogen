@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>891: Gjeldende bruksklasse for 12/65 - mobilkran m.m. i vegliste.</documentation>
    </annotation>
@@ -149,6 +149,24 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="kravOmVegfølge">
+                  <annotation>
+                     <documentation>10748: Angir hvorvidt det tillates kjørt over bruene med eller uten vegfølge</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">10748</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Krav om vegfølge</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="aksellastTeleløsning_Utgått" type="integer">
+                  <annotation>
+                     <documentation>12883: Angir største tillatte aksellast for periode med aksellastrestriksjoner pga teleløsning.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">12883</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Aksellast teleløsning_Utgått</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
             </sequence>
          </extension>
       </complexContent>
@@ -160,4 +178,48 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="KravOmVegfølgeBruksklasse, 1265 mobilkran m.m.Type">
+      <annotation>
+         <documentation>10748: Angir hvorvidt det tillates kjørt over bruene med eller uten vegfølge</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10748</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Krav om vegfølge</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:KravOmVegfølgeBruksklasse, 1265 mobilkran m.m.EnumerationType nvdb:KravOmVegfølgeBruksklasse, 1265 mobilkran m.m.OtherType"/>
+   </simpleType>
+   <simpleType name="KravOmVegfølgeBruksklasse, 1265 mobilkran m.m.EnumerationType">
+      <annotation>
+         <documentation>10748: Angir hvorvidt det tillates kjørt over bruene med eller uten vegfølge</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">10748</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Krav om vegfølge</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="J">
+            <annotation>
+               <documentation>17399: Krav om vegfølge over bru</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17399</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Ja</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="N">
+            <annotation>
+               <documentation>17400: Det er ikke krav om vegfølge over bru</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">17400</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nei</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="KravOmVegfølgeBruksklasse, 1265 mobilkran m.m.OtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

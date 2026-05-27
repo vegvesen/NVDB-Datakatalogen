@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>72: Område/felt i tunnel eller bergskjæring i dagen som er sikra med nett, bolter etc.</documentation>
    </annotation>
@@ -282,6 +282,35 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7646: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7646</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="bruksområde"
+                        type="nvdb:BruksområdeBergsikringType">
+                  <annotation>
+                     <documentation>9672: Angir bruksområdet for vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">9672</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3571: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3571</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -301,6 +330,59 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="BruksområdeBergsikringType">
+      <annotation>
+         <documentation>9672: Angir bruksområdet for vegobjektet</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9672</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeBergsikringEnumerationType nvdb:BruksområdeBergsikringOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeBergsikringEnumerationType">
+      <annotation>
+         <documentation>9672: Angir bruksområdet for vegobjektet</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">9672</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="nt">
+            <annotation>
+               <documentation>13941: Naturlig terreng</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13941</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Naturlig terreng</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="sk">
+            <annotation>
+               <documentation>13940: Skjæring</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13940</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Skjæring</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="tu">
+            <annotation>
+               <documentation>13939: Tunnel</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13939</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Tunnel</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeBergsikringOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="EierBergsikringType">
       <annotation>
          <documentation>9676: Angir hvem som er eier av vegobjektet.</documentation>
@@ -630,6 +712,14 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22300</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Selvborende stag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Knotteplast">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">13101</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Knotteplast</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>

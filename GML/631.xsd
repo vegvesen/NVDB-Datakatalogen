@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>631: Kommentar rettet mot et konkret sted på vegen.</documentation>
    </annotation>
@@ -14,6 +14,72 @@
    <import namespace="http://www.opengis.net/gml/3.2"
            schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
+   <simpleType name="RegionVegkommentarType">
+      <annotation>
+         <documentation>5788: Region</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5788</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Region</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:RegionVegkommentarEnumerationType nvdb:RegionVegkommentarOtherType"/>
+   </simpleType>
+   <simpleType name="RegionVegkommentarEnumerationType">
+      <annotation>
+         <documentation>5788: Region</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">5788</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Region</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="m">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8180</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Midt</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="n">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8179</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Nord</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8182</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sør</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="v">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8181</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Vest</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="0">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">8183</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Øst</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="RegionVegkommentarOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Vegkommentar"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:VegkommentarType">
@@ -62,6 +128,78 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11518</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, flate</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="region" type="nvdb:RegionVegkommentarType">
+                  <annotation>
+                     <documentation>5788: Region</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5788</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Region</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="besøksadresse" type="string">
+                  <annotation>
+                     <documentation>5781: Gir besøksadresse</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5781</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Besøksadresse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="postadresse" type="string">
+                  <annotation>
+                     <documentation>5782: Gir postadresse</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5782</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Postadresse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="E_Post" type="string">
+                  <annotation>
+                     <documentation>5783: E-post - adresse</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5783</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">E-post</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="telefonnummer" type="string">
+                  <annotation>
+                     <documentation>5784: Telefonnummer</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5784</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Telefonnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="telefaksnummer" type="string">
+                  <annotation>
+                     <documentation>5785: Telefaksnummer</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5785</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Telefaksnummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="linkTilInfosider" type="string">
+                  <annotation>
+                     <documentation>5787: Link til infosider</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">5787</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Link til infosider</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7813: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7813</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

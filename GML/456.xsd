@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>456: Apparatur i tilknytning til teknisk utstyr. Apparatur står vanligvis i skap. Inneholder f.eks. PLS, modem, batteri/strøm, telefon med mer. Benyttes f.eks. i tilknytning til signalanlegg.</documentation>
    </annotation>
@@ -334,6 +334,48 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="StatusStyreapparatType">
+      <annotation>
+         <documentation>3905: Angir status på apparatur i forhold til systemet det inngår i</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3905</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:StatusStyreapparatEnumerationType nvdb:StatusStyreapparatOtherType"/>
+   </simpleType>
+   <simpleType name="StatusStyreapparatEnumerationType">
+      <annotation>
+         <documentation>3905: Angir status på apparatur i forhold til systemet det inngår i</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">3905</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="p">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4890</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Primær</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="s">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">4891</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Sekundær</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="StatusStyreapparatOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <element name="Styreapparat"
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:StyreapparatType">
@@ -546,6 +588,69 @@
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">4974</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Geometri, punkt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7776: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7776</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="fabrikant" type="string">
+                  <annotation>
+                     <documentation>3530: Angir hvem som har fabrikkert vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3530</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Fabrikant</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <documentation>3620: Felt reservert til internt nummersystem. Benyttes f.eks ifbm tunneler</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3620</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="IP_Klasse" type="string">
+                  <annotation>
+                     <documentation>4026: Angir IP-klasse for et objekt.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4026</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">IP-klasse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="korrosjonsbeskyttelse" type="string">
+                  <annotation>
+                     <documentation>4040: Angir hvilken type korrosjonsbeskyttelse som er benyttet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">4040</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Korrosjonsbeskyttelse</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="leverandør" type="string">
+                  <annotation>
+                     <documentation>3663: Angir hvem som har levert vegobjekt</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3663</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Leverandør</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="status" type="nvdb:StatusStyreapparatType">
+                  <annotation>
+                     <documentation>3905: Angir status på apparatur i forhold til systemet det inngår i</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3905</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Status</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>

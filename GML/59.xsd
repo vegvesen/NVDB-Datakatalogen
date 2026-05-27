@@ -5,9 +5,9 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
-      <documentation>59: Permeabel duk som hovedsakelig brukes til filter og til separasjon av gode og dårlige masser. Visse duker har også en armeringsfunksjon. Betegnelsen geotekstil og fiberduk benyttes ofte om hverandre (2).</documentation>
+      <documentation>59: Permeabel duk som hovedsakelig brukes til filter og til separasjon av gode og dårlige masser. Visse duker har også en armeringsfunksjon. Betegnelsen geotekstil og fiberduk benyttes ofte om hverandre. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
    </annotation>
    <import namespace="http://www.interactive-instruments.de/ShapeChange/AppInfo"
            schemaLocation="https://shapechange.net/resources/schema/ShapeChangeAppinfo.xsd"/>
@@ -16,7 +16,7 @@
    <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
    <simpleType name="BruksklasseFiberdukType">
       <annotation>
-         <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 fig 521.1." til "Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
+         <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">11455</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Bruksklasse</sc:taggedValue>
@@ -26,7 +26,7 @@
    </simpleType>
    <simpleType name="BruksklasseFiberdukEnumerationType">
       <annotation>
-         <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 fig 521.1." til "Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
+         <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">11455</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Bruksklasse</sc:taggedValue>
@@ -80,6 +80,58 @@
          <pattern value="other: \w{2,}"/>
       </restriction>
    </simpleType>
+   <simpleType name="BruksområdeFiberdukType">
+      <annotation>
+         <documentation>13451: Angir hvilken bruksområde fiberduken har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13451</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:BruksområdeFiberdukEnumerationType nvdb:BruksområdeFiberdukOtherType"/>
+   </simpleType>
+   <simpleType name="BruksområdeFiberdukEnumerationType">
+      <annotation>
+         <documentation>13451: Angir hvilken bruksområde fiberduken har.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13451</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ar">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23572</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="fi">
+            <annotation>
+               <documentation>23571: Angir at fiberduken brukes for å filtrere vann fra masser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23571</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Filtrering</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="se">
+            <annotation>
+               <documentation>23570: Angir at fiberduken brukes for å separere gode og dårlige masser.</documentation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23570</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Separasjon</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="BruksområdeFiberdukOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
    <simpleType name="BudsjettFiberdukType">
       <annotation>
          <documentation>5536: Angir hvilket budsjett utlegging går over.</documentation>
@@ -126,7 +178,7 @@
             substitutionGroup="gml:AbstractFeature"
             type="nvdb:FiberdukType">
       <annotation>
-         <documentation>59: Permeabel duk som hovedsakelig brukes til filter og til separasjon av gode og dårlige masser. Visse duker har også en armeringsfunksjon. Betegnelsen geotekstil og fiberduk benyttes ofte om hverandre (2).</documentation>
+         <documentation>59: Permeabel duk som hovedsakelig brukes til filter og til separasjon av gode og dårlige masser. Visse duker har også en armeringsfunksjon. Betegnelsen geotekstil og fiberduk benyttes ofte om hverandre. (Kilde: Vegnormaler, Statens vegvesen).</documentation>
          <appinfo>
             <sc:taggedValue tag="NVDB_ID">59</sc:taggedValue>
             <sc:taggedValue tag="NVDB_navn">Fiberduk</sc:taggedValue>
@@ -137,22 +189,29 @@
       <complexContent>
          <extension base="gml:AbstractFeatureType">
             <sequence>
-               <element minOccurs="0"
-                        name="bruksklasse"
-                        type="nvdb:BruksklasseFiberdukType">
+               <element name="bruksområde" type="nvdb:BruksområdeFiberdukType">
                   <annotation>
-                     <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 fig 521.1." til "Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
+                     <documentation>13451: Angir hvilken bruksområde fiberduken har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">13451</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element name="bruksklasse" type="nvdb:BruksklasseFiberdukType">
+                  <annotation>
+                     <documentation>11455: Angir fiberdukens bruksklasse. Jfr. Håndbok N200 Tabell 4.4.3-1.</documentation>
                      <appinfo>
                         <sc:taggedValue tag="NVDB_ID">11455</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Bruksklasse</sc:taggedValue>
                      </appinfo>
                   </annotation>
                </element>
-               <element name="plassering" type="string">
+               <element name="plassering" type="nvdb:PlasseringFiberdukType">
                   <annotation>
-                     <documentation>8750: Angir hvor i en konstruksjon fiberduken er plassert. Kan f.eks. være "på planering", med mer.</documentation>
+                     <documentation>13453: Angir hvor i kontruksjonen fiberduk er plassert.</documentation>
                      <appinfo>
-                        <sc:taggedValue tag="NVDB_ID">8750</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_ID">13453</sc:taggedValue>
                         <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
                      </appinfo>
                   </annotation>
@@ -274,6 +333,42 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="bruksområde_IkkeIBruk" type="string">
+                  <annotation>
+                     <documentation>1262: Angir hva vegobjektet brukes til, hvilken funksjon det har</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1262</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Bruksområde (Ikke i bruk)</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="type" type="nvdb:TypeFiberdukType">
+                  <annotation>
+                     <documentation>1123: Angir hvilken type vegobjektet er av</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1123</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="VDB_id" type="integer">
+                  <annotation>
+                     <documentation>7636: Gir objektets id i VDB</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">7636</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">VDB_id</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="materialtype" type="string">
+                  <annotation>
+                     <documentation>1403: Angir primær materialtype for vegobjektet</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">1403</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Materialtype</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -293,4 +388,128 @@
       <attributeGroup ref="gml:AssociationAttributeGroup"/>
       <attributeGroup ref="gml:OwnershipAttributeGroup"/>
    </complexType>
+   <simpleType name="PlasseringFiberdukType">
+      <annotation>
+         <documentation>13453: Angir hvor i kontruksjonen fiberduk er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13453</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:PlasseringFiberdukEnumerationType nvdb:PlasseringFiberdukOtherType"/>
+   </simpleType>
+   <simpleType name="PlasseringFiberdukEnumerationType">
+      <annotation>
+         <documentation>13453: Angir hvor i kontruksjonen fiberduk er plassert.</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">13453</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Plassering</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ofo">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23573</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Over forsterkningslag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ofr">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23574</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Over frostsikringslag</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="ptb">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">23575</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">På traubunn</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="PlasseringFiberdukOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFiberdukType">
+      <annotation>
+         <documentation>1123: Angir hvilken type vegobjektet er av</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1123</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:TypeFiberdukEnumerationType nvdb:TypeFiberdukOtherType"/>
+   </simpleType>
+   <simpleType name="TypeFiberdukEnumerationType">
+      <annotation>
+         <documentation>1123: Angir hvilken type vegobjektet er av</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">1123</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Type</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="ad">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3079</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armeringsduk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ar">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3078</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armeringsnett</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Arg">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6711</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armeringsnett, glassfiber</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Arp">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6712</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armeringsnett, plast</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Ars">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">6713</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Armeringsnett, stål</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="Fd">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">3080</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Fiberduk</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="TypeFiberdukOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
 </schema>

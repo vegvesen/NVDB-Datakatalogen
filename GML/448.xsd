@@ -5,7 +5,7 @@
         xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo"
         elementFormDefault="qualified"
         targetNamespace="https://raw.githubusercontent.com/vegvesen/NVDB-Datakatalogen/master/GML"
-        version="2.44">
+        version="2.45">
    <annotation>
       <documentation>448: Synk eller stigort, vertikalt eller sterkt skrånende rom i berg med stor utstrekning i lengdeaksen (Prosesskode-1). Sjakter som benyttes for utslipp av tunnelluft skal registreres. Det inkluderes også informasjon om eventuelle tårn/konstruksjoner på stedet der sjakt kommer ut i dagen.</documentation>
    </annotation>
@@ -258,6 +258,34 @@
                      </appinfo>
                   </annotation>
                </element>
+               <element minOccurs="0" name="interntNummer" type="string">
+                  <annotation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3104</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Internt nummer</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0" name="basistverrsnitt" type="string">
+                  <annotation>
+                     <documentation>3103: Angir hvilken type basistverrsnitt tunnelsjakten har.</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">3103</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Basistverrsnitt</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
+               <element minOccurs="0"
+                        name="vedlikeholdsansvarlig"
+                        type="nvdb:VedlikeholdsansvarligTunnelsjakttårnType">
+                  <annotation>
+                     <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+                     <appinfo>
+                        <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+                        <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+                     </appinfo>
+                  </annotation>
+               </element>
                <element maxOccurs="unbounded"
                         minOccurs="0"
                         name="lineærPosisjon"
@@ -349,6 +377,56 @@
                <appinfo>
                   <sc:taggedValue tag="NVDB_ID">22136</sc:taggedValue>
                   <sc:taggedValue tag="NVDB_navn">Uavklart</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnOtherType">
+      <restriction base="string">
+         <pattern value="other: \w{2,}"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnType">
+      <annotation>
+         <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <union memberTypes="nvdb:VedlikeholdsansvarligTunnelsjakttårnEnumerationType nvdb:VedlikeholdsansvarligTunnelsjakttårnOtherType"/>
+   </simpleType>
+   <simpleType name="VedlikeholdsansvarligTunnelsjakttårnEnumerationType">
+      <annotation>
+         <documentation>8091: Angir hvem som er ansvarlig for vedlikehold</documentation>
+         <appinfo>
+            <sc:taggedValue tag="NVDB_ID">8091</sc:taggedValue>
+            <sc:taggedValue tag="NVDB_navn">Vedlikeholdsansvarlig</sc:taggedValue>
+         </appinfo>
+      </annotation>
+      <restriction base="string">
+         <enumeration value="K">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10563</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Kommune</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="P">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10641</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Privat</sc:taggedValue>
+               </appinfo>
+            </annotation>
+         </enumeration>
+         <enumeration value="SvV">
+            <annotation>
+               <appinfo>
+                  <sc:taggedValue tag="NVDB_ID">10485</sc:taggedValue>
+                  <sc:taggedValue tag="NVDB_navn">Statens vegvesen</sc:taggedValue>
                </appinfo>
             </annotation>
          </enumeration>
